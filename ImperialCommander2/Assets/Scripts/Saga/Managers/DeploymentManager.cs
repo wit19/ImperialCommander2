@@ -353,9 +353,19 @@ namespace Saga
 				if ( adp != Guid.Empty )
 				{
 					FindObjectOfType<SagaEventManager>().toggleVisButton.SetActive( true );
-					//FindObjectOfType<SagaController>().ToggleNavAndEntitySelection( false );
-					FindObjectOfType<MapEntityManager>().ToggleHighlightDeploymentPoint( adp, true );
-					FindObjectOfType<CameraController>().MoveToEntity( adp );
+					// TACTICAL AI (concept 4.2.5 'secret'): the planner picks the DP
+					// silently - no highlight reveal. Default OFF keeps the legacy
+					// highlight + camera move VERBATIM.
+					bool tacSecret = TacticalAI.TacticalAISettings.Enabled
+						&& TacticalAI.TacticalAISettings.DeploymentMode == "secret";
+					if ( !tacSecret )
+					{
+						//FindObjectOfType<SagaController>().ToggleNavAndEntitySelection( false );
+						FindObjectOfType<MapEntityManager>().ToggleHighlightDeploymentPoint( adp, true );
+						FindObjectOfType<CameraController>().MoveToEntity( adp );
+					}
+					else
+						Debug.Log( "HandleMapDeployment()::TACTICAL secret DP - no reveal highlight" );
 					//string enemyName = ovrd.useGenericMugshot ? "Rebel" : enemyToAdd.name;
 					FindObjectOfType<SagaEventManager>().ShowTextBox( $"{DataStore.uiLanguage.sagaMainApp.deployMessageUC}:\n\n<color=white>{enemyToAdd.name}</color>", () =>
 					{

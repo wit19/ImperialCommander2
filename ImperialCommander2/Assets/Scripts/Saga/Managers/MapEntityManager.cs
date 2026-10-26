@@ -465,7 +465,16 @@ namespace Saga
 			}
 			//if more than 1 active DP, choose one randomly
 			if ( dps.Count > 0 )
+			{
+				// TACTICAL AI (concept 4.2.5): deterministic DP choice, no hidden RNG.
+				// Switch OFF (the Default) or an empty pick keeps the legacy random
+				// line below VERBATIM.
+				if ( TacticalAI.TacticalAISettings.Enabled
+				&& TacticalAI.TacticalAIBridge.TryChooseDeploymentPoint( enemyToAdd, dps, out Guid tacticalGuid ) )
+					return tacticalGuid;
+
 				return dps[GlowEngine.GenerateRandomNumbers( dps.Count )[0]].GUID;
+			}
 			else
 				return Guid.Empty;
 		}

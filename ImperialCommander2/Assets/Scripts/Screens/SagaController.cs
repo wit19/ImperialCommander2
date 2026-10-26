@@ -731,19 +731,29 @@ namespace Saga
 			var groups = dgManager.GetNonExhaustedGroups();
 			if ( groups.Count > 0 )
 			{
-				var p1 = groups.Where( x => x.priority == 1 ).ToList();
-				var others = groups.Where( x => x.priority != 1 ).ToList();
-				var all = p1.Concat( others ).ToList();
-				//70% chance to priority 1 groups
-				if ( p1.Count > 0 && GlowEngine.RandomBool( 70 ) )
-				{
-					rnd = GlowEngine.GenerateRandomNumbers( p1.Count );
-					toActivate = p1[rnd[0]];
-				}
+				// TACTICAL AI action queue (concept 4.2.4): next group in the
+				// planner's round order instead of the 70%-priority random draw.
+				// Default OFF (or unplanned group): the legacy random draw below
+				// runs VERBATIM.
+				if ( TacticalAI.TacticalAISettings.Enabled
+				&& TacticalAI.TacticalAIBridge.TryPeekNextActivation( groups, out toActivate ) )
+					Debug.Log( $"OnActivateImperial()::TACTICAL order -> {toActivate.name}" );
 				else
 				{
-					rnd = GlowEngine.GenerateRandomNumbers( all.Count );
-					toActivate = all[rnd[0]];
+					var p1 = groups.Where( x => x.priority == 1 ).ToList();
+					var others = groups.Where( x => x.priority != 1 ).ToList();
+					var all = p1.Concat( others ).ToList();
+					//70% chance to priority 1 groups
+					if ( p1.Count > 0 && GlowEngine.RandomBool( 70 ) )
+					{
+						rnd = GlowEngine.GenerateRandomNumbers( p1.Count );
+						toActivate = p1[rnd[0]];
+					}
+					else
+					{
+						rnd = GlowEngine.GenerateRandomNumbers( all.Count );
+						toActivate = all[rnd[0]];
+					}
 				}
 
 				DataStore.sagaSessionData.gameVars.activatedGroup = toActivate;
@@ -991,6 +1001,13 @@ namespace Saga
 			UpdateRoundNumberUI();
 
 			Debug.Log( $"IncreaseRound()::Current round: {DataStore.sagaSessionData.gameVars.round}" );
+
+			// TACTICAL AI round planner (concept 4.2.4): the nearest existing
+			// equivalent of the concept's round-end 'deployment_finished' event
+			// trigger (that event type does not exist in this codebase - see
+			// PR draft deviations). Default OFF: no planner call, no behaviour.
+			if ( TacticalAI.TacticalAISettings.Enabled )
+				TacticalAI.TacticalAIBridge.OnNewRound( DataStore.sagaSessionData.gameVars.round );
 		}
 
 		public void OnPauseThreat( Toggle t )

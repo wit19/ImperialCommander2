@@ -101,7 +101,26 @@ public class EnemyActivationPopup : MonoBehaviour
 		}
 
 		//rebel target
-		if ( cardDescriptor.hasActivated && cardDescriptor.rebelName != null )
+		// TACTICAL AI (concept 4.2.1): when the global switch is ON and the
+		// bridge can plan, the printed order-deck card + a deterministic
+		// target replace the random instruction option, the hidden bonus
+		// roll and the random hero pick. tacPlan == null (Default: switch
+		// OFF, or planner data unavailable) keeps ALL legacy blocks verbatim.
+		TacticalAI.ActivationPlanData tacPlan = null;
+		// only a FRESH activation gets a tactical plan; re-showing an already
+		// activated group must keep the legacy "RE-USING PREVIOUS ACTIVATION
+		// DATA" replay below (otherwise a mere re-view would consume a deck card).
+		if ( TacticalAI.TacticalAISettings.Enabled && !cardDescriptor.hasActivated )
+			TacticalAI.TacticalAIBridge.TryBuildActivationPlan( cd, out tacPlan );
+
+		if ( tacPlan != null && tacPlan.HasTarget )
+		{
+			//TACTICAL AI: deterministic focus target from the bridge (no hidden RNG)
+			rebel1 = tacPlan.TargetName;
+			cardDescriptor.rebelName = rebel1;
+			Debug.Log( $"ShowSaga()::TACTICAL target -> {rebel1}" );
+		}
+		else if ( cardDescriptor.hasActivated && cardDescriptor.rebelName != null )
 		{
 			Debug.Log( "***RE-USING PREVIOUS ACTIVATION DATA::rebelName***" );
 			rebel1 = cardDescriptor.rebelName;
@@ -126,7 +145,22 @@ public class EnemyActivationPopup : MonoBehaviour
 		}
 
 		//instruction
-		if ( cardDescriptor.hasActivated && cardDescriptor.instructionOption != null )
+		if ( tacPlan != null )
+		{
+			//TACTICAL AI (concept 4.2.1/4.2.2): the PRINTED order-deck card blocks
+			//replace the random instruction option - no random option pick, no
+			//GetModifiedRepositioning rewrite. Mission event instruction overrides
+			//still apply (they are scenario rules, not hidden enemy knowledge).
+			Debug.Log( $"ShowSaga()::TACTICAL order card {tacPlan.DeckCardId} ({tacPlan.Blocks.Length} blocks)" );
+			List<string> tacInstructions = new List<string>( tacPlan.Blocks ?? new string[0] );
+			tacInstructions = GetModifiedInstructions( cd.id, tacInstructions );
+			if ( !string.IsNullOrEmpty( tacPlan.ExplainLine ) )
+				tacInstructions.Add( tacPlan.ExplainLine );
+			ParseInstructions( tacInstructions );
+			//store activation data
+			cardDescriptor.instructionOption = new InstructionOption() { instruction = tacInstructions };
+		}
+		else if ( cardDescriptor.hasActivated && cardDescriptor.instructionOption != null )
 		{
 			Debug.Log( "***RE-USING PREVIOUS ACTIVATION DATA::instructionOption***" );
 			ParseInstructions( cardDescriptor.instructionOption.instruction );
@@ -158,7 +192,17 @@ public class EnemyActivationPopup : MonoBehaviour
 		}
 
 		//bonus
-		if ( cardDescriptor.hasActivated
+		if ( tacPlan != null )
+		{
+			//TACTICAL AI fairness rule (concept section 2): hidden bonuseffects.json
+			//rolls NEVER fire in Tactical AI mode - the printed stat card is the
+			//only source of enemy power. Boxes stay empty, nothing is stored.
+			bonusNameText.text = "";
+			bonusText.text = "";
+			cardDescriptor.bonusName = "";
+			cardDescriptor.bonusText = "";
+		}
+		else if ( cardDescriptor.hasActivated
 			&& cardDescriptor.bonusName != null
 			&& cardDescriptor.bonusText != null )
 		{

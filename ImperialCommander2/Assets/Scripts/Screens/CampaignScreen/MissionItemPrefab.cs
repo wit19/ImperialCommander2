@@ -15,6 +15,10 @@ namespace Saga
 		public Text threatLevelText;
 		public Toggle itemToggle;
 		public TextMeshProUGUI missionType, missionName, itemText, agendaIcon, modMissionNameText, modifyText, removeText;
+		// TACTICAL AI (concept 4.2.7): optional per-mission 3-state label - wire it
+		// in the mission card prefab (editor step). Null-safe: cards without the
+		// field keep working unchanged.
+		public TextMeshProUGUI aiModeIcon;
 		public GameObject removeForcedButton, agendaButton, dummyAgenda, dummyItemToggle, modifyMissionPanel;
 		public Image bgImage, nameButtonImage, chevronImage;
 		public CanvasGroup buttonGroup;
@@ -73,6 +77,16 @@ namespace Saga
 					agendaIcon.text = "U";
 					agendaIcon.color = new Vector3( 1f, 0.1568628f, 0f ).ToColor();
 				}
+			}
+
+			// TACTICAL AI (concept 4.2.7): mission card 3-state selector. Hidden
+			// while the feature is not globally allowed; visible = click cycles
+			// AI:OFF (legacy) -> AI:REF (reference) -> AI:ORD (overlord).
+			// Default OFF: no icon, and every planner hook runs the original path.
+			if ( aiModeIcon != null )
+			{
+				aiModeIcon.gameObject.SetActive( TacticalAI.TacticalAISettings.Enabled );
+				aiModeIcon.text = AiModeLabel( cs.aiMode );
 			}
 
 			//set translated expansion name based on mission source (official, custom, embedded)
@@ -211,6 +225,38 @@ namespace Saga
 				campaignStructure.agendaType = AgendaType.Imperial;
 			}
 			GlowEngine.FindUnityObject<CampaignMessagePopup>().Show( DataStore.uiLanguage.uiCampaign.agendaMission, msg );
+		}
+
+		/// <summary>
+		/// TACTICAL AI (concept 4.2.7): cycle this campaign mission's planner level
+		/// "legacy" -&gt; "reference" -&gt; "overlord" -&gt; "legacy". A no-op while the
+		/// global switch is OFF (the Default) - aiMode stays "legacy" everywhere
+		/// and all planner hooks run their original code path.
+		/// </summary>
+		public void OnAiModeClicked()
+		{
+			if ( !TacticalAI.TacticalAISettings.Enabled )
+				return;
+
+			EventSystem.current.SetSelectedGameObject( null );
+			FindObjectOfType<Sound>().PlaySound( FX.Click );
+
+			if ( string.IsNullOrEmpty( campaignStructure.aiMode ) || campaignStructure.aiMode == "legacy" )
+				campaignStructure.aiMode = "reference";
+			else if ( campaignStructure.aiMode == "reference" )
+				campaignStructure.aiMode = "overlord";
+			else
+				campaignStructure.aiMode = "legacy";
+
+			if ( aiModeIcon != null )
+				aiModeIcon.text = AiModeLabel( campaignStructure.aiMode );
+		}
+
+		string AiModeLabel( string mode )
+		{
+			if ( mode == "reference" ) return "AI:REF";
+			if ( mode == "overlord" ) return "AI:ORD";
+			return "AI:OFF";
 		}
 
 		public void OnMissionNameClick()

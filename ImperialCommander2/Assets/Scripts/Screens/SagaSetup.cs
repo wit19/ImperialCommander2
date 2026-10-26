@@ -137,6 +137,10 @@ namespace Saga
 
 			setupOptions = new SagaSetupOptions();
 			DataStore.StartNewSagaSession( setupOptions );
+			// TACTICAL AI: a fresh session resets planner state (round order,
+			// deck manager). Default OFF: nothing to reset, no-op gate.
+			if ( TacticalAI.TacticalAISettings.Enabled )
+				TacticalAI.TacticalAIBridge.ResetSession();
 			//check if we're loading in from  the campaign manager
 			//single shot mission, not from a campaign
 			if ( RunningCampaign.sagaCampaignGUID != Guid.Empty )
@@ -252,6 +256,12 @@ namespace Saga
 			setupOptions.projectItem.expansion = structure.expansionCode;
 			//used by SetNextStoryMission() to find the index of the current mission in play (both official and custom campaigns)
 			setupOptions.projectItem.missionID = structure.missionID;
+
+			// TACTICAL AI (concept 4.2.7): carry the mission card's planner level
+			// into the session. Default OFF: aiMode stays "legacy" and every hook
+			// runs its original code path.
+			if ( TacticalAI.TacticalAISettings.Enabled && !string.IsNullOrEmpty( structure.aiMode ) )
+				setupOptions.aiMode = structure.aiMode;
 
 			//deactivate mission picker
 			rightPanel.SetActive( false );
@@ -397,6 +407,11 @@ namespace Saga
 			setupOptions.threatLevel = threatValue.wheelValue;
 			setupOptions.addtlThreat = addtlThreatValue.wheelValue;
 			setupOptions.projectItem = missionPicker.selectedMission;
+			// TACTICAL AI (concept 4.2.7): single missions inherit the global mode
+			// preference unless the player picked a level for this mission.
+			// Default OFF: no-op, aiMode stays "legacy".
+			if ( TacticalAI.TacticalAISettings.Enabled && setupOptions.aiMode == "legacy" )
+				setupOptions.aiMode = TacticalAI.TacticalAISettings.Mode;
 			DataStore.sagaSessionData.setupOptions = setupOptions;
 
 			missionPicker.isBusy = true;
@@ -691,6 +706,23 @@ namespace Saga
 			//cb.selectedColor = new Color( .6f, .4f, .1f );
 			//thisButton.colors = cb;
 			adaptiveText.color = setupOptions.useAdaptiveDifficulty ? greenBlock.normalColor : redBlock.normalColor;
+		}
+
+		/// <summary>
+		/// TACTICAL AI (concept 4.2.7): per-mission 3-state selector for the setup
+		/// screen - wire a Button to this handler (editor step) and optionally the
+		/// label to aiModeText. While the global switch is OFF this only prints
+		/// LEGACY; no planner behaviour is enabled anywhere (Default OFF rule).
+		/// </summary>
+		public Text aiModeText;
+
+		public void OnAiMode( Button thisButton )
+		{
+			sound.PlaySound( FX.Click );
+			string label = setupOptions.ToggleAiMode();
+			if ( aiModeText != null )
+				aiModeText.text = label;
+			Debug.Log( $"OnAiMode()::aiMode = {setupOptions.aiMode}" );
 		}
 
 		public void OnViewMissionCard()
