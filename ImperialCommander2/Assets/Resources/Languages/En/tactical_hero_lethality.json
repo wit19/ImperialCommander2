@@ -1,0 +1,32 @@
+{
+  "schema": "tacai.hero_lethality/1",
+  "source": "sim units/heroes_core.json (printed card values) via sim.dice Grey-Dice model",
+  "disclaimer": "Kuratierte Priors, KEINE gedruckten App-Werte: die App-Datei heroes.json fuehrt fuer unsere Helden nur Indexfelder. Reichweiten-Baender und Schadens-EWs sind aus den GEDRUCKTEN Wuerfelseiten ueber dasselbe Grey-Dice-Modell abgeleitet, das die Sim auch sonst nutzt (dice.py); Rollenprior neutral = 1. Bewusste Naherung, dokumentiert in docs/balance_sim.md (M2a.3).",
+  "band_semantics": "range_band = [minR, maxR] in spaces; maxR = Acc-Gate der gedruckten Wuerfel (max Distanz mit Trefferchance); minR = 1 (angrenzend)",
+  "heroes": [
+    {
+      "name": "Han Solo",
+      "source_id": "A005",
+      "role": "ranged",
+      "attack_type": "Ranged",
+      "range_band": [
+        1,
+        7
+      ],
+      "printed_damage_ev": "7/2",
+      "lethality_prior": "1"
+    },
+    {
+      "name": "Wookiee Warrior (Elite)",
+      "source_id": "A024",
+      "role": "melee",
+      "attack_type": "Melee",
+      "range_band": [
+        1,
+        2
+      ],
+      "printed_damage_ev": "10/3",
+      "lethality_prior": "1"
+    }
+  ]
+}
