@@ -29,6 +29,12 @@ namespace Saga
 		public bool canModify = true;
 		public bool threatModifiedByMission = false;
 
+		// TACTICAL AI (concept 4.2.7): per-mission planner level shown on the
+		// campaign mission card: "legacy" (default, untouched original
+		// behaviour) | "reference" | "overlord". Null/legacy-safe: older
+		// campaign saves deserialize with the default "legacy".
+		public string aiMode = "legacy";
+
 		public CampaignStructure()
 		{
 			structureGUID = Guid.NewGuid();

@@ -115,6 +115,11 @@ public class SettingsPanel : MonoBehaviour
 		gfxPanel.SetActive( false );
 		uiPanel.SetActive( false );
 		colorPanel.SetActive( false );
+
+		// TACTICAL AI settings rows (concept 4.2 "Settings"). The installer
+		// only builds UI: master switch defaults OFF, submenu hidden while
+		// off. No planner behaviour changes here (TacticalAISettings gate).
+		TacticalAI.TacticalAISettingsUI.TryInstall( uiPanel );
 	}
 
 	public void OnOK()
