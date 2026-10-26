@@ -55,6 +55,7 @@ namespace TacticalAI
         static List<Tac.OrderSlot> _slots = new List<Tac.OrderSlot>();
         static string _publicLine = "";
         static ulong _sessionSeed;
+        static string _sessionKey;   // campaign|mission identity of the loaded session
 
         public static void ResetSession()
         {
@@ -64,6 +65,50 @@ namespace TacticalAI
             _slots = new List<Tac.OrderSlot>();
             _publicLine = "";
             _sessionSeed = 0;
+            _sessionKey = null;
+        }
+
+        /// <summary>Identity of the loaded session (same material SessionSeed
+        /// hashes). Null when no saga session is up.</summary>
+        static string SessionKey()
+        {
+            try
+            {
+                return Saga.RunningCampaign.sagaCampaignGUID + "|" +
+                       (DataStore.sagaSessionData?.setupOptions?.projectItem?.missionID ?? "solo");
+            }
+            catch { return null; }
+        }
+
+        /// <summary>Save-resume and mission switches bypass SagaSetup, so the
+        /// static planner state would leak the previous mission's decks/plan.
+        /// Every hook entry revalidates the campaign|mission identity and
+        /// resets when it changed (audit FINAL-QA).</summary>
+        /// <summary>FNV-1a string ordinal -> ulong (deterministic, locale-free).</summary>
+        static ulong OrdinalOf(string text)
+        {
+            ulong h = 1469598103934665603UL;
+            foreach (var c in text ?? "") { h ^= c; h *= 1099511628211UL; }
+            return h == 0 ? 0x9E3779B97F4A7C15UL : h;
+        }
+
+        /// <summary>Hook gate: master switch on AND the loaded mission's
+        /// effective mode is not "legacy" (concept 4.2.7). The mode frozen
+        /// into setupOptions at mission start decides - mid-mission global
+        /// toggles do not silently re-plan a legacy mission (FINAL-QA audit).</summary>
+        static bool ActiveNow()
+        {
+            if (!TacticalAISettings.Enabled) return false;
+            var mission = DataStore.sagaSessionData?.setupOptions?.aiMode;
+            return TacticalAISettingsUnity.MissionMode(mission) != "legacy";
+        }
+
+        static void EnsureSessionFresh()
+        {
+            var k = SessionKey();
+            if (k == null) return;                 // no session context yet
+            if (_sessionKey != null && k != _sessionKey) ResetSession();
+            _sessionKey = k;
         }
 
         // ---------------------------------------------------------------- plan
@@ -75,14 +120,19 @@ namespace TacticalAI
         /// round start (concept 3.4.1: deal-all-first, never at activation).</summary>
         public static void OnNewRound(int roundNo)
         {
-            if (!TacticalAISettings.Enabled) return;   // belt and braces
+            if (!ActiveNow()) return;   // master off OR this mission is legacy
+            EnsureSessionFresh();
+            // post_hoc explain: summary of the round we just played - capture the
+            // PREVIOUS plan before EnsureRound rebuilds it for the new round,
+            // otherwise this leaks the upcoming activation order (concept 3.7:
+            // post_hoc is after-the-fact only).
+            var lastRoundLine = _publicLine;
             EnsureRound(roundNo);
-            // post_hoc explain: summary of the round we just played
             if (TacticalAISettings.ExplainLevel == "post_hoc" && roundNo > 1
-                && !string.IsNullOrEmpty(_publicLine))
+                && !string.IsNullOrEmpty(lastRoundLine))
             {
                 var qm = GlowEngine.FindUnityObject<QuickMessage>();
-                if (qm != null) qm.Show(_publicLine);
+                if (qm != null) qm.Show(lastRoundLine);
             }
         }
 
@@ -122,7 +172,16 @@ namespace TacticalAI
             if (_deckMgr != null)
             {
                 _deckMgr.ReapUnused(roundNo);
-                _deckMgr.DrawRoundAll(roundNo, figures, (int)(SessionSeed() & 0x7FFFFFFF));
+                // custom/embedded cards (DataStore.AddEmbeddedImportsToPools) have no
+                // order deck: deal them nothing (their popup falls back to legacy) and
+                // never let a missing deck abort the round flow (KeyNotFound previously
+                // escaped into SagaController.IncreaseRound and hung the mission).
+                var dealt = figures.FindAll(f => f != null && _deckMgr.DecksByCard.ContainsKey(f.Card.Id));
+                try { _deckMgr.DrawRoundAll(roundNo, dealt, (int)(SessionSeed() & 0x7FFFFFFF)); }
+                catch (Exception e)
+                {
+                    Debug.LogError("TacticalAIBridge::deal failed - legacy this round: " + e.Message);
+                }
             }
         }
 
@@ -137,6 +196,7 @@ namespace TacticalAI
                                                  out global::DeploymentCard next)
         {
             next = null;
+            EnsureSessionFresh();
             if (!TacticalAISettings.Enabled || candidates == null || candidates.Count == 0)
                 return false;
             EnsureRound(CurrentRound());
@@ -155,6 +215,7 @@ namespace TacticalAI
         public static bool TryBuildActivationPlan(global::DeploymentCard cd, out ActivationPlanData plan)
         {
             plan = null;
+            EnsureSessionFresh();
             if (!TacticalAISettings.Enabled || cd == null) return false;
             EnsureRound(CurrentRound());
             EnsureDecks();
@@ -165,8 +226,19 @@ namespace TacticalAI
                 // group joined mid-round: it was not part of the round-start
                 // deal; draw its card now (documented reinforcements delta).
                 var fig = MakeFigure(cd, Math.Max(0, IndexOf(cd)));
-                if (fig != null) _deckMgr.DrawRoundAll(_planRound, new List<Tac.Figure> { fig },
-                                                       (int)(SessionSeed() & 0x7FFFFFFF));
+                if (fig != null && _deckMgr.DecksByCard.ContainsKey(cd.id))
+                {
+                    try
+                    {
+                        _deckMgr.DrawRoundAll(_planRound, new List<Tac.Figure> { fig },
+                                              (int)(SessionSeed() & 0x7FFFFFFF));
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogWarning("TacticalAIBridge::delta draw failed, legacy popup: " + e.Message);
+                        return false;
+                    }
+                }
                 if (!_deckMgr.RoundCards.TryGetValue(cd.id, out card)) return false;
             }
             var blocks = card.Blocks ?? Array.Empty<string>();
@@ -197,9 +269,18 @@ namespace TacticalAI
                                                     List<Saga.IMapEntity> dps, out Guid chosen)
         {
             chosen = Guid.Empty;
-            if (!TacticalAISettings.Enabled || dps == null || dps.Count == 0) return false;
+            if (dps == null || dps.Count == 0 || !ActiveNow()) return false;
+            // Mission-EVENT deployments call this with card == null (the shared
+            // GetActiveDeploymentPoint helper). Those were never part of the
+            // planner's contract and must keep the legacy random line - a fixed
+            // point here would cluster every reinforcement wave (audit FINAL-QA).
+            if (card == null) return false;
             var best = dps
-                .OrderBy(x => x.name ?? "", StringComparer.Ordinal)
+                // round-varying deterministic pick: seeded by the campaign|mission
+                // key + round (all public/campaign-scoped info), so it is neither
+                // hidden RNG nor a constant the players can farm (audit FINAL-QA).
+                .OrderBy(x => OrdinalOf(x.name ?? "") ^ (SessionSeed() ^ (ulong)Math.Max(1, CurrentRound()) * 0x2545F4914F6CDD1DUL))
+                .ThenBy(x => x.name ?? "", StringComparer.Ordinal)
                 .ThenBy(x => x.GUID.ToString(), StringComparer.Ordinal)
                 .First();
             chosen = best.GUID;
@@ -272,8 +353,7 @@ namespace TacticalAI
         static ulong SessionSeed()
         {
             if (_sessionSeed != 0) return _sessionSeed;
-            var key = Saga.RunningCampaign.sagaCampaignGUID + "|" +
-                      (DataStore.sagaSessionData?.setupOptions?.projectItem?.missionID ?? "solo");
+            var key = SessionKey() ?? "solo";
             ulong h = 1469598103934665603UL;
             foreach (var c in key) { h ^= c; h *= 1099511628211UL; }
             if (h == 0) h = 0xA5A5A5A5A5A5A5A5UL;
@@ -297,10 +377,13 @@ namespace TacticalAI
         static void EnsureCatalog()
         {
             if (_catalog != null) return;
+            EnsureDecks();   // known-deck ids decide villain inclusion (DG071-DG090 ship decks)
             _catalog = new Dictionary<string, Tac.DeploymentCard>();
             foreach (var cd in DataStore.deploymentCards)
             {
-                if (cd.characterType != Saga.CharacterType.Imperial || cd.isDummy) continue;
+                if (cd.isDummy) continue;
+                bool hasDeck = _deckMgr != null && _deckMgr.DecksByCard.ContainsKey(cd.id);
+                if (cd.characterType != Saga.CharacterType.Imperial && !hasDeck) continue;
                 if (_catalog.ContainsKey(cd.id)) continue;
                 try { _catalog[cd.id] = Tac.DeploymentCard.FromRecord(ToRecord(cd)); }
                 catch (Exception e) { Debug.LogWarning("TacticalAIBridge::catalog skip " + cd.id + ": " + e.Message); }

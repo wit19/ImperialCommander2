@@ -410,7 +410,10 @@ namespace Saga
 			// TACTICAL AI (concept 4.2.7): single missions inherit the global mode
 			// preference unless the player picked a level for this mission.
 			// Default OFF: no-op, aiMode stays "legacy".
-			if ( TacticalAI.TacticalAISettings.Enabled && setupOptions.aiMode == "legacy" )
+			// Inherit the global preference ONLY when the mission did not choose
+			// a mode itself - an explicit per-mission "legacy" must survive
+			// (concept 4.2.7 three-state; FINAL-QA audit).
+			if ( TacticalAI.TacticalAISettings.Enabled && string.IsNullOrEmpty( setupOptions.aiMode ) )
 				setupOptions.aiMode = TacticalAI.TacticalAISettings.Mode;
 			DataStore.sagaSessionData.setupOptions = setupOptions;
 
