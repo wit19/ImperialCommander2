@@ -66,12 +66,13 @@ NUnit mirror suite:
 | `Assets/Tests/TacticalAI/VectorRowTests.cs` | One **Focus tie-break row byte-exact** (`focus.json`/`counter_bearer`, incl. `tiebreak_trace` + `why`) and one **doctrine card-text row byte-exact** (`doctrine.json`/`eliminate_duel` r1, all 6 patterns). |
 | `Assets/Tests/TacticalAI/DeckThreatAssetTests.cs` | Shipped `order_decks.json`: every deck card passes `ValidateCard`; `OrderDeckManager.Load` path identical to the Unity bridge; `decks.json` violation rows; **ThreatLedger** full replay byte-exact + conservation assertion. |
 | `Assets/Tests/TacticalAI/PlannerTests.cs` | `OrderPlanner` permutation law for every posture × skill band, seed-invariance, first golden row byte-exact; **LegacyPlanner pass-through** (identity, null-safe); settings Default-OFF gate tests. |
+| `Assets/Tests/TacticalAI/HeroProfileTests.cs` | M3.1: curated `hero_profiles.json` loader rows byte-exact; disengage flag-rule grid; `risk.json` `profile_cases` full replay; `hero_w.json` variant `none` = store-empty regression pin (T1/T2 parity); campaign loadouts scored against the app's OWN `CampaignData/{items,skills}.json`. |
 
 The repo has **no test framework wired** (no asmdef, no NUnit package —
 verified), so all fixtures carry
 `[Explicit("Requires Test Framework")]` and ship for later CI. Honesty note:
 they were executed locally by building a throwaway NUnitLite runner in a
-scratch directory against the real fixtures: **19 / 19 passed** (the
+scratch directory against the real fixtures: **24 / 24 passed** (the
 `[Explicit]` attributes were stripped only in the scratch copies; shipping
 files are untouched).
 
@@ -85,7 +86,10 @@ New:
   deterministic DP/target selection, explain strings, `WorldProvider` seam
   for the future hex adapter.
 * `Assets/Scripts/TacticalAI/TacticalAIAssets.cs` — lazy loaders for the two
-  public data assets (M4).
+  public data assets (M4); since M3.1 also `HeroProfilesRoot` +
+  `CampaignItemsRoot`/`CampaignSkillsRoot` (the app's OWN CampaignData
+  tables, trailing-comma tolerant) and the pure `ProfileFor(heroName, hero)`
+  store seam (curated table + campaign loadout, concept 3.3.1a v3.11).
 
 Hook diffs (each: gate + new branch + untouched legacy path as else):
 
@@ -106,6 +110,24 @@ Editor wiring steps (cannot be done from code, prefab YAML untouched):
    with a Button → `OnAiModeClicked`.
 Both are null-safe: unwired prefabs behave exactly as before.
 
+## M3.1 — HeroThreatProfile C# port (concept 3.3.1a v3.10/v3.11, opt-in)
+
+Port of the M2a.4 Python layer (`sim/hero_profiles.py`) — small cut: profile
+loader + score function + disengage-flag rule + golden-vector tests.
+Default OFF everywhere: `World.HeroProfiles` null/empty ⇒ every W tuple and
+every RiskPosture decision stays **byte-identical to the T1/T2/M2 pins**
+(re-run of all pre-existing harness sections proves it).
+
+| File | Role |
+|---|---|
+| `Assets/Scripts/TacticalAI/Core/HeroProfiles.cs` | `HeroThreatProfile` (+ `ChipKey`/`RunnerValue`/`AsDict`), asset doc loader/cache, `ProfileFocusKey` (branch order verbatim from the sim), `CoverIsWorthless` (disengage utility = 0 vs `ignoreLos`/range over `cover_shelter_max_range`), `ProfilesToInference` (lethality prior → profile rings/weights), `ApplyCampaignLoadouts`/`ApplyLoadout` (Thomas proxies: tier×cost type-weighted, xp-cost investment index, `teure-faehigkeit`/`lastout-unvollstaendig` flags, knowledge flips to `bestaetigt`). |
+| `Assets/Scripts/TacticalAI/Core/World.cs` | `HeroProfiles` store seam (`{figure_id: profile}`, null = reference path). |
+| `Assets/Scripts/TacticalAI/Core/Victory.cs` | 5 insertion hooks: profile component lands BEHIND bearer/killable/healthy/arrival semantics, never before (woundAll chip below healthy-first; runner value between arrival and terrain terms; attrition ev in the plain hunt; surviveRounds/capture/incapacitate variants). |
+| `Assets/Scripts/TacticalAI/Core/RiskPosture.cs` | `RiskFacts.ThreatIgnoreLos/ThreatRangeMax` + cover-worthless branch (rho-1 press clause + dedicated `hold` rationale "Deckung wertlos gegen die bekannte Bedrohung"); melee heroes keep disengage at full value bit-identically. |
+| `Assets/Resources/Languages/En/tactical_hero_profiles.json` | curated public table — **byte-identical** to the sim asset (sha256 pinned in `hero_profiles.json` vectors and asserted by the harness). |
+| `Assets/Tests/Fixtures/tacai/{hero_profiles,hero_w,campaign_loadouts}.json` + `risk.json` `profile_cases` | golden vectors exported by the sim (`tools/export_csharp_vectors.py`, M3.1 sections): loader rows, cover grid, focus-key branch rows, inference rows, loadout rows (incl. the hero_id-only-skip parity), `W` rows with variants `none`/`synth`/`asset`, 1920 risk profile rows. |
+| `tools/TacticalAiHarness/SectionsC.cs` (+ Program/SectionsA) | harness sections `hero_profiles.json` + `hero_w.json` + `profile_cases` replay; Languages-dir discovery for the app's own CampaignData tables; asset doc primed before all sections (sim `_doc()` parity). |
+
 ## M4 — Public data assets + this draft
 
 * `ImperialCommander2/Assets/Resources/TacticalAI/order_decks.json` — copy of
@@ -119,6 +141,10 @@ Both are null-safe: unwired prefabs behave exactly as before.
   the disclaimer is the public fairness statement ("kuratierte Priors, keine
   App-Werte"), and the loader reads the file generically through Core `Json`.
 * `docs/PR_draft.md` — this document.
+* `ImperialCommander2/Assets/Resources/Languages/En/tactical_hero_profiles.json`
+  — M3.1 curated HeroThreatProfile table (`tacai.hero_profiles/1`), byte-
+  identical copy of the sim asset including the fairness-disclaimer head
+  (same honesty policy as the lethality priors; a human reads the same cards).
 
 ## Verification
 
@@ -134,7 +160,7 @@ PASS dice.json (37 checks)
 PASS threat.json (27 checks)
 PASS decks.json (469 checks)
 PASS skill.json (20 checks)
-PASS risk.json (27669 checks)
+PASS risk.json (29589 checks)
 PASS focus.json (270 checks)
 PASS victory.json (135 checks)
 PASS belief.json (52 checks)
@@ -142,12 +168,14 @@ PASS rings.json (28 checks)
 PASS doctrine.json (75 checks)
 PASS order_plan.json (100 checks)
 PASS action_plan.json (159 checks)
-== summary: ALL PASS | checks=34509 fails=0
+PASS hero_profiles.json (76 checks)
+PASS hero_w.json (125 checks)
+== summary: ALL PASS | checks=36630 fails=0
 ```
 
 NUnit mirror suite (`Assets/Tests/TacticalAI`): executed via a scratch
 NUnitLite runner (Core sources + test sources, `[Explicit]` stripped only in
-scratch copies) → `Test Count: 19, Passed: 19, Failed: 0`.
+scratch copies) → `Test Count: 24, Passed: 24, Failed: 0`.
 
 **Compile status honesty:** the console harness + NUnit suite build with
 `dotnet` and pass. The Unity-side files (`TacticalAIAssets.cs`,

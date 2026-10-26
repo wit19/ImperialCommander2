@@ -29,6 +29,13 @@ namespace TacticalAI.Core
         public int LedgerBalance = 0;
         public bool MetaBonus = false;       // optional campaign vitality bonus
         public bool VictoryBlocker = false;  // target could block rebel victory
+        // HeroThreatProfile-Kopplung (§3.3.1a, M2a.4/M3.1): Bedrohungswissen
+        // aus dem Helden-Profil. Defaults = kein Profilwissen -> exakt
+        // M2a.3-Verhalten (Hash-Pins). disengage-Nutzen = 0 gegen ignoreLos
+        // oder rangeMax ueber der kuratierten Deckungsreichweite
+        // (Pflichttest 3/4).
+        public bool ThreatIgnoreLos = false;
+        public int ThreatRangeMax = 0;       // 0 = unknown (no profile)
     }
 
     public sealed class RiskDecision
@@ -230,7 +237,7 @@ namespace TacticalAI.Core
             bool hurt = f.Vitality < Hurt;
             if (rho == 1)
             {
-                if (f.Vitality > ExtremeAt || !f.RingNear)
+                if (f.Vitality > ExtremeAt || !f.RingNear || CoverWorthless(f))
                     return DecidePress(f, "rho 1: nur extreme Verwundung bricht den Angriff");
                 return DecideDisengage(f, "rho 1: nur extreme Verwundung bricht den Angriff");
             }
@@ -238,6 +245,17 @@ namespace TacticalAI.Core
             if (f.RingNear && !LossOkPostures.Contains(f.Posture)
                 && f.Vitality <= (!f.MetaBonus ? DisengageAt : GuardHoldAt))
             {
+                if (CoverWorthless(f))
+                {
+                    // §3.3.1a: disengage-Nutzen = 0 gegen ignoreLos / grosse
+                    // rangeMax — Ausweichen hinter Deckungskanten bringt
+                    // nichts, wenn die Bedrohung LOS-Regeln aushebelt oder
+                    // ausserhalb des Deckungsspiels feuert. Feuerlinie halten.
+                    return Decide(f, "hold", "verwundet, Gegner geortet — Deckung " +
+                                             "wertlos gegen die bekannte Bedrohung " +
+                                             "(LOS-Aushebler / Reichweite über " +
+                                             "Deckungsspiel): Feuerlinie halten");
+                }
                 if (rho >= 3 && f.ReplacesAt is { } rc)
                 {
                     if (rc >= EconomyCost && f.LedgerBalance >= rc)
@@ -263,6 +281,12 @@ namespace TacticalAI.Core
         static RiskDecision DecidePress(RiskFacts f, string reason) =>
             new RiskDecision("press", "Press: " + reason,
                 "falls außer Reichweite: auf Konten-Punkt vorrücken");
+
+        /// disengage-Nutzen gegen die bekannte Bedrohung (§3.3.1a,
+        /// Pflichttest 3/4): gegen ignoreLos / Reichweite ueber der
+        /// kuratierten Deckungsspiel-Reichweite ist Deckung wertlos.
+        static bool CoverWorthless(RiskFacts f) =>
+            HeroProfiles.CoverIsWorthless(f.ThreatIgnoreLos, f.ThreatRangeMax);
 
         static RiskDecision Decide(RiskFacts f, string pos, string reason)
         {

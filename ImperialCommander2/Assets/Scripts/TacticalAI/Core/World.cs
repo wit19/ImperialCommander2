@@ -73,6 +73,10 @@ namespace TacticalAI.Core
         public ObjectiveRuntime Objectives;
         public MissionVictoryModel Victory;            // null = pure GH cascade
         public HashSet<string> FocusCandidates;        // null = no doctrine filter
+        // M2a.4/M3.1 HeroThreatProfile store (§3.3.1a): {figure_id: profile}.
+        // null/empty = reference path — every W tuple byte-identical to the
+        // M2a.1/M2a.2 pins (default OFF, same seam as Python world.hero_profiles).
+        public Dictionary<string, HeroThreatProfile> HeroProfiles;
         public Func<Figure, double> RoleWeight;        // null => 0
         public SkillProfile Skill;                     // null = reference path
         public IRandom SkillRng;

@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace TacticalAI.Core
@@ -325,6 +326,9 @@ namespace TacticalAI.Core
             int bearer = VictoryHelpers.VictoryBearer(world, target) ? 1 : 0;
             int heal = VictoryHelpers.HealContribution(target);
             double dmg = Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven);
+            // §3.3.1a profil-Anteil: wird hinter die fuehrenden
+            /// Counter-Semantiken eingefuegt, NIE davor (leer ohne Profil).
+            var pk = HeroProfiles.ProfileFocusKey(world, target, "eliminate", CounterType);
             switch (CounterType)
             {
                 case "incapacitateAll":
@@ -338,26 +342,26 @@ namespace TacticalAI.Core
                             killable ? 1 : 0,
                             killable ? -target.Vitality : 0,
                             meta,
-                            heal,
-                            dmg,
-                        };
+                        }.Concat(pk).Concat(new List<object> { heal, dmg }).ToList();
                     }
                 case "woundAll":
                     {
                         // woundAll law: healthy BEATS wounded — every hit
-                        // counts and counter progress is irreversible.
+                        // counts and counter progress is irreversible. The
+                        // §3.3.1a chip value (non-healer/support > healer,
+                        // then mobility*rangeMax, then ev) sits BELOW
+                        // healthy-first — never overrides it.
                         int healthy = VictoryHelpers.IsWounded(target) ? 0 : 1;
                         return new List<object>
                         {
                             bearer,
                             healthy,
-                            heal,
-                            dmg,
-                            -target.Vitality,
-                        };
+                        }.Concat(pk).Concat(new List<object> { heal, dmg, -target.Vitality }).ToList();
                     }
                 default:   // surviveRounds: touch-and-run
-                    return new List<object> { bearer, 0, heal, dmg };
+                    return new List<object> { bearer, 0 }
+                        .Concat(pk)
+                        .Concat(new List<object> { heal, dmg }).ToList();
             }
         }
     }
@@ -585,7 +589,11 @@ namespace TacticalAI.Core
                         int killable = target.Vitality <= VictoryHelpers.PrintedDamageEv(attacker) ? 1 : 0;
                         double dmg = Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven);
                         int heal = VictoryHelpers.HealContribution(target);
-                        return new List<object> { killable, killable != 0 ? -target.Vitality : 0, heal, dmg };
+                        // attrition rule (§3.3.1a): among equally killable/
+                        // wounded targets of the plain hunt, ev hoch zuerst
+                        return new List<object> { killable, killable != 0 ? -target.Vitality : 0 }
+                            .Concat(HeroProfiles.ProfileFocusKey(world, target, "eliminate", null))
+                            .Concat(new List<object> { heal, dmg }).ToList();
                     }
                 case "stall":
                     {
@@ -596,12 +604,15 @@ namespace TacticalAI.Core
                             bestA = Math.Min(bestA, VictoryHelpers.ArrivalRounds(world, target, cs, left));
                             bestC = Math.Min(bestC, (int)VictoryHelpers.TerrainCost(world, target.Cells(), cs));
                         }
+                        // §3.3.1a protect/stall: Laeuferwert mobility x
+                        // rangeMax gewichtet ZWISCHEN Ankunfts- und Terrainterm
                         return new List<object>
                         {
                             bestA <= rem ? 1 : 0,
                             -Math.Min(bestA, 1000000),
-                            -Math.Min(bestC, 1000000),
-                        };
+                        }
+                            .Concat(HeroProfiles.ProfileFocusKey(world, target, "stall", null))
+                            .Concat(new List<object> { -Math.Min(bestC, 1000000) }).ToList();
                     }
                 case "protect":
                     {
@@ -614,13 +625,18 @@ namespace TacticalAI.Core
                             bestC = Math.Min(bestC, c);
                             if (c < INF) bestA = Math.Min(bestA, CeilDiv(c, Math.Max(1, target.Card.Speed)));
                         }
+                        // §3.3.1a: runner value between arrival and terrain
                         return new List<object>
                         {
                             menaced,
                             -Math.Min(bestA, 1000000),
-                            -Math.Min(bestC, 1000000),
-                            Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven),
-                        };
+                        }
+                            .Concat(HeroProfiles.ProfileFocusKey(world, target, "protect", null))
+                            .Concat(new List<object>
+                            {
+                                -Math.Min(bestC, 1000000),
+                                Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven),
+                            }).ToList();
                     }
                 case "deny":
                     {

@@ -49,6 +49,18 @@ namespace TacticalAiHarness
                 Console.Error.WriteLine("fixtures dir not found: " + FIX);
                 return 2;
             }
+            // M3.1: prime the curated HeroThreatProfile asset BEFORE any
+            // section runs — the sim's cover_shelter_max_range (4) differs
+            // from the code default (5), and risk.json profile_cases were
+            // exported against the asset (parity with Python _doc()).
+            try
+            {
+                var langDir = LanguagesDir();
+                var assetPath = Path.Combine(langDir, "En", "tactical_hero_profiles.json");
+                if (File.Exists(assetPath))
+                    HeroProfiles.PrimeDoc(Json.AsDict(Json.Parse(File.ReadAllText(assetPath))));
+            }
+            catch { /* sections that need the doc fail loudly on their own */ }
 
             Run("geometry.json", SecGeometry);
             Run("board.json", SecBoard);
@@ -67,6 +79,8 @@ namespace TacticalAiHarness
             Run("doctrine.json", SecDoctrine);
             Run("order_plan.json", SecOrderPlan);
             Run("action_plan.json", SecActionPlan);
+            Run("hero_profiles.json", SecHeroProfiles);
+            Run("hero_w.json", SecHeroW);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);

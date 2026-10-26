@@ -1,0 +1,370 @@
+{
+  "schema": "tacai.hero_profiles/1",
+  "source": "Kuratierung: sim units/heroes_core.json + sim/data/hero_lethality.json (unsere Sim-Helden, ueber dasselbe Grey-Dice-Modell wie dice.py abgeleitet) und App-Referenz CardData/heroes.json (id/traits, Indexfelder). Konzept v3.10 Abschnitt 3.3.1a.",
+  "disclaimer": "Kuratierte oeffentliche Profil-Tabelle, KEINE kopierten App-Werte: die App fuehrt fuer Kampagnen-Helden nur Indexfelder (id/name/traits). Rollen kommen aus den oeffentlich gedruckten Karten/Trait-Liste; numerische Basiswerte (evDamagePerRound, rangeMax, mobility) sind fuer die zwei Sim-Helden aus den GEDRUCKTEN Wuerfelseiten abgeleitet, fuer Kampagnen-Helden GILT null = neutraler Kuraten-Prior (ev 1, rangeMax 5, mobility 2) bis zur Kuratur aus den gedruckten Heldenkarten. keine Heldin ignoriert in den geprueften Daten LOS (ignoreLos immer false, Flag bleibt Stellschraube fuer Wanderer/Belagerer). Loadouts aus dem Kampagnen-State der App (campaignItems/campaignSkills) werden ZUR Basis addiert (Thomas-Proxies: Ausruestung tier x cost typ-gewichtet, Faehigkeiten xpCost-Index).",
+  "band_semantics": "rangeMax = Reichweiten-Obergrenze in Feldern (Acc-Gate der gedruckten Wuerfel); mobility-Stufen: 1 = speed <= 3, 2 = speed 4, 3 = speed >= 5; evDamagePerRound = exakter Bruch (Basis-Angriff ohne Lastout-Beitraege).",
+  "role_vocabulary": [
+    "melee",
+    "ranged",
+    "support",
+    "healer"
+  ],
+  "trait_role_table": {
+    "melee": [
+      "Brawler",
+      "Guardian",
+      "Wookiee"
+    ],
+    "support": [
+      "Leader"
+    ],
+    "ranged": [
+      "Trooper",
+      "Hunter",
+      "Smuggler",
+      "Spy",
+      "Droid",
+      "Heavy Weapon",
+      "Force User"
+    ]
+  },
+  "type_table": {
+    "O": "weapon_ranged",
+    "P": "weapon_melee",
+    "S": "support",
+    "R": "armor"
+  },
+  "type_weights": {
+    "weapon_ranged": "1",
+    "weapon_melee": "1",
+    "support": "1/2",
+    "armor": "1/4"
+  },
+  "ev_model": {
+    "weapon_ev_per_1000_cost": "1/1000",
+    "xp_point_ev": "1/10",
+    "special_xp_cost": 4,
+    "support_item_sets_self_heal": true
+  },
+  "cover_shelter_max_range": 4,
+  "heroes": [
+    {
+      "name": "Han Solo",
+      "source_id": "A005",
+      "app_hero_id": null,
+      "role": "ranged",
+      "evDamagePerRound": "7/2",
+      "rangeMax": 7,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": 2,
+      "flags": []
+    },
+    {
+      "name": "Wookiee Warrior (Elite)",
+      "source_id": "A024",
+      "app_hero_id": null,
+      "role": "melee",
+      "evDamagePerRound": "10/3",
+      "rangeMax": 2,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": 2,
+      "flags": []
+    },
+    {
+      "name": "Diala Passil",
+      "source_id": null,
+      "app_hero_id": "H1",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Fenn Signis",
+      "source_id": null,
+      "app_hero_id": "H2",
+      "role": "support",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Gaarkhan",
+      "source_id": null,
+      "app_hero_id": "H3",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Gideon Argus",
+      "source_id": null,
+      "app_hero_id": "H4",
+      "role": "support",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Jyn Odan",
+      "source_id": null,
+      "app_hero_id": "H5",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Mak Eshka'rey",
+      "source_id": null,
+      "app_hero_id": "H6",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Biv Bodhrik",
+      "source_id": null,
+      "app_hero_id": "H7",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Saska Teft",
+      "source_id": null,
+      "app_hero_id": "H8",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Loku Kanoloa",
+      "source_id": null,
+      "app_hero_id": "H9",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "MHD-19",
+      "source_id": null,
+      "app_hero_id": "H10",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Verena Talos",
+      "source_id": null,
+      "app_hero_id": "H11",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Davith Elso",
+      "source_id": null,
+      "app_hero_id": "H12",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Murne Rin",
+      "source_id": null,
+      "app_hero_id": "H13",
+      "role": "support",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Onar Koma",
+      "source_id": null,
+      "app_hero_id": "H14",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Shyla Varad",
+      "source_id": null,
+      "app_hero_id": "H15",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Vinto Hreeda",
+      "source_id": null,
+      "app_hero_id": "H16",
+      "role": "ranged",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Drokkatta",
+      "source_id": null,
+      "app_hero_id": "H17",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Jarrod Kelvin",
+      "source_id": null,
+      "app_hero_id": "H18",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Ko-Tun Feralo",
+      "source_id": null,
+      "app_hero_id": "H19",
+      "role": "support",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "CT-1701",
+      "source_id": null,
+      "app_hero_id": "H20",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    },
+    {
+      "name": "Tress Hacnua",
+      "source_id": null,
+      "app_hero_id": "H21",
+      "role": "melee",
+      "evDamagePerRound": null,
+      "rangeMax": null,
+      "ignoreLos": false,
+      "selfHealPossible": false,
+      "mobility": null,
+      "flags": [
+        "basis-prior-neutral"
+      ]
+    }
+  ]
+}

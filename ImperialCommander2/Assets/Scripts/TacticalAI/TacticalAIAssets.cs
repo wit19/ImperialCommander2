@@ -17,10 +17,17 @@ namespace TacticalAI
     {
         const string ORDER_DECKS_PATH = "TacticalAI/order_decks";
         const string HERO_LETHALITY_PATH = "Languages/En/tactical_hero_lethality";
+        const string HERO_PROFILES_PATH = "Languages/En/tactical_hero_profiles";
+        const string CAMPAIGN_ITEMS_PATH = "Languages/En/CampaignData/items";
+        const string CAMPAIGN_SKILLS_PATH = "Languages/En/CampaignData/skills";
 
         static object _orderDecksRoot;
         static object _heroLethalityRoot;
-        static bool _orderDecksFailed, _lethalityFailed;
+        static object _heroProfilesRoot;
+        static object _campaignItemsRoot;
+        static object _campaignSkillsRoot;
+        static bool _orderDecksFailed, _lethalityFailed, _heroProfilesFailed,
+                    _campaignItemsFailed, _campaignSkillsFailed;
 
         /// <summary>tacai.order_decks/1 root object (Core Json) or null when
         /// the asset is missing/unparsable - hooks then fall back to the
@@ -43,6 +50,105 @@ namespace TacticalAI
                 if (_heroLethalityRoot == null && !_lethalityFailed)
                     _heroLethalityRoot = LoadJson(HERO_LETHALITY_PATH, ref _lethalityFailed);
                 return _heroLethalityRoot;
+            }
+        }
+
+        /// <summary>M3.1 (concept 3.3.1a): tacai.hero_profiles/1 curated
+        /// public threat table or null. Primeing the Core doc cache is the
+        /// caller's job (Tac.HeroProfiles.PrimeDoc) - this stays a loader.</summary>
+        public static object HeroProfilesRoot
+        {
+            get
+            {
+                if (_heroProfilesRoot == null && !_heroProfilesFailed)
+                    _heroProfilesRoot = LoadJson(HERO_PROFILES_PATH, ref _heroProfilesFailed);
+                return _heroProfilesRoot;
+            }
+        }
+
+        /// <summary>App's OWN campaign tables (v3.11: the AI reads what the
+        /// app manages - sagaCampaign/hero.campaignItems). Legacy JS export
+        /// format: trailing commas must be stripped before Json.Parse.</summary>
+        public static object CampaignItemsRoot
+        {
+            get
+            {
+                if (_campaignItemsRoot == null && !_campaignItemsFailed)
+                    _campaignItemsRoot = LoadCampaignJson(CAMPAIGN_ITEMS_PATH, ref _campaignItemsFailed);
+                return _campaignItemsRoot;
+            }
+        }
+
+        /// <summary>App's OWN campaign skills table (xp-cost investment).</summary>
+        public static object CampaignSkillsRoot
+        {
+            get
+            {
+                if (_campaignSkillsRoot == null && !_campaignSkillsFailed)
+                    _campaignSkillsRoot = LoadCampaignJson(CAMPAIGN_SKILLS_PATH, ref _campaignSkillsFailed);
+                return _campaignSkillsRoot;
+            }
+        }
+
+        /// <summary>M3.1 store seam: builds {figure-or-hero id: profile}
+        /// from the curated table + the campaign loadouts of ONE mission
+        /// roster. Pure read of app-managed public data (no state, no
+        /// hidden info - leak invariant per concept 3.3.1a). Returns null
+        /// when the asset is unavailable -> callers keep the reference
+        /// path (Default OFF everywhere).</summary>
+        public static Tac.HeroThreatProfile ProfileFor(
+            string heroName, Saga.CampaignHero hero)
+        {
+            var doc = HeroProfilesRoot as System.Collections.Generic.Dictionary<string, object>;
+            if (doc == null) return null;
+            var baseProfiles = Tac.HeroProfiles.ProfilesFromDoc(doc);
+            if (!baseProfiles.TryGetValue(heroName ?? "", out var b)) return null;
+            var items = CampaignItemsRoot as System.Collections.Generic.List<object>;
+            var skills = CampaignSkillsRoot as System.Collections.Generic.List<object>;
+            if (items == null || skills == null) return b;   // curated-only
+            var loadout = new System.Collections.Generic.Dictionary<string, object>
+            {
+                { "hero", heroName },
+                { "items", hero == null ? new System.Collections.Generic.List<object>()
+                    : new System.Collections.Generic.List<object>(
+                        hero.campaignItems.ConvertAll(i => (object)i.id)) },
+                { "skills", hero == null ? new System.Collections.Generic.List<object>()
+                    : new System.Collections.Generic.List<object>(
+                        hero.campaignSkills.ConvertAll(s => (object)s.id)) },
+            };
+            var refs = new System.Collections.Generic.Dictionary<string, object>
+            {
+                { "items", items },
+                { "skills", skills },
+            };
+            var merged = Tac.HeroProfiles.ApplyCampaignLoadouts(
+                baseProfiles,
+                new System.Collections.Generic.List<object> { loadout }, refs);
+            return merged.TryGetValue(heroName, out var p) ? p : b;
+        }
+
+        static object LoadCampaignJson(string resourcePath, ref bool failedFlag)
+        {
+            var ta = Resources.Load<TextAsset>(resourcePath);
+            if (ta == null)
+            {
+                Debug.LogError($"TacticalAIAssets::missing Resources/{resourcePath}.json");
+                failedFlag = true;
+                return null;
+            }
+            try
+            {
+                // legacy JS export: trailing commas before } / ] (the sim
+                // strips them identically in load_reference_tables)
+                var txt = System.Text.RegularExpressions.Regex.Replace(
+                    ta.text, @",\s*([}\]])", "$1");
+                return Tac.Json.Parse(txt);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"TacticalAIAssets::cannot parse {resourcePath}: {e.Message}");
+                failedFlag = true;
+                return null;
             }
         }
 

@@ -1,0 +1,24 @@
+{
+  "_comment": "M2a.4 (Konzept v3.10 §3.3.1a, v3.11): exportierbare Kampagnen-Zuordnungen — Sim-Input-Fixtures fuer das HeroThreatProfile-Lastout. Format je Eintrag: 'hero' (Sim-/Kartenname) und/oder 'hero_id' (App-H-Id aus CardData/heroes.json), 'items': item-ids, 'skills': skill-ids. Aufloesung gegen die ORIGINAL-Referenztabellen sim/data/reference/<Lang>/items.json|skills.json (nur ids zaehlen, Sprache austauschbar — Pflichttest 11). Produziert wird diese Zuordnung aus dem Kampagnen-State der App (sagaCampaign.campaignItems, hero.campaignItems, hero.campaignSkills) ueber tools/export_campaign_loadouts.py.",
+  "schema": "tacai.campaign_loadouts/1",
+  "loadouts": [
+    {
+      "hero": "Han Solo",
+      "source": "Kampagnen-Zuordnung Core: 'Valken-38 Carbine' als Primaerwaffe",
+      "items": ["item328"],
+      "skills": []
+    },
+    {
+      "hero": "Wookiee Warrior (Elite)",
+      "source": "Kampagnen-Zuordnung Core: Nahwaffe + Unterstuetzungsausruestung (loest selfHealPossible aus, Support-Träger-Naeherung)",
+      "items": ["item203", "item102"],
+      "skills": []
+    },
+    {
+      "hero_id": "H5",
+      "source": "Jyn Odan: eigene Skills (xpCost 4 = Flag-Besonderheit) + Ruestung",
+      "items": ["item106"],
+      "skills": ["jyn01", "jyn07"]
+    }
+  ]
+}

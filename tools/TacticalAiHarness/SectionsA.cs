@@ -563,6 +563,41 @@ namespace TacticalAiHarness
                                             ci++;
                                         }
             if (ci != rows.Count) Fail("risk.cases", "python rows=" + rows.Count + " but harness generated " + ci);
+
+            // M3.1: disengage-utility vs HeroThreatProfile knowledge. The
+            // rho loop is INNERMOST in both languages (vec_hero_risk).
+            if (v.ContainsKey("profile_cases"))
+            {
+                int pj = 0;
+                foreach (var caseO in Json.AsList(v["profile_cases"]).Select(Json.AsDict))
+                {
+                    var cse = Json.AsDict(caseO);
+                    var fct = Json.AsDict(cse["facts"]);
+                    var f = new RiskFacts
+                    {
+                        GroupId = "G1",
+                        Pattern = Json.AsStr(fct["pattern"]),
+                        Posture = Json.AsStr(fct["posture"]),
+                        Counter = fct["counter"] == null ? null : Json.AsStr(fct["counter"]),
+                        Vitality = Rational.Parse(Json.AsStr(fct["vitality"])),
+                        RingNear = Json.AsBool(fct["ring"]),
+                        OnAnchor = true,
+                        ReplacesAt = 4,
+                        LedgerBalance = 6,
+                        VictoryBlocker = Json.AsBool(fct["vb"]),
+                        ThreatIgnoreLos = Json.AsBool(fct["ignore_los"]),
+                        ThreatRangeMax = Json.AsInt(fct["range_max"]),
+                    };
+                    var got = new List<object>();
+                    foreach (var rho in new[] { 0, 1, 2, 3 })
+                        got.Add(RiskPosture.RiskPosition(f, rho).AsDict());
+                    Check("risk.profile_cases[" + pj + "]", cse["rho_rows"], got);
+                    pj++;
+                }
+                if (pj != Json.AsList(v["profile_cases"]).Count)
+                    Fail("risk.profile_cases", "python rows=" +
+                        Json.AsList(v["profile_cases"]).Count + " harness=" + pj);
+            }
             var rhoMap = Json.AsDict(v["rho_map"]);
             foreach (var kv in OrdKeys(rhoMap))
                 Check("risk.rho_map." + kv.Key, kv.Value, RiskPosture.RhoOf(kv.Key));
