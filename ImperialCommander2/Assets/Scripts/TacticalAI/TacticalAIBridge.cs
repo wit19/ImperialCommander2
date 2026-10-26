@@ -217,7 +217,7 @@ namespace TacticalAI
         static bool TrySelectTarget(global::DeploymentCard cd, out string heroName, out string why)
         {
             heroName = null; why = null;
-            var heroes = Saga.DataStore.deployedHeroes;
+            var heroes = DataStore.deployedHeroes;
             if (heroes == null || heroes.Count == 0) return false;
             var living = heroes.Where(h => h.heroState == null || !h.heroState.isDefeated).ToList();
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
@@ -256,7 +256,7 @@ namespace TacticalAI
         static string EffectiveMissionMode()
         {
             string aiMode = null;
-            try { aiMode = Saga.DataStore.sagaSessionData?.setupOptions?.aiMode; }
+            try { aiMode = DataStore.sagaSessionData?.setupOptions?.aiMode; }
             catch { /* session not up yet */ }
             return TacticalAISettingsUnity.MissionMode(aiMode);
         }
@@ -265,7 +265,7 @@ namespace TacticalAI
 
         static int CurrentRound()
         {
-            try { return Math.Max(1, Saga.DataStore.sagaSessionData?.gameVars?.round ?? 1); }
+            try { return Math.Max(1, DataStore.sagaSessionData?.gameVars?.round ?? 1); }
             catch { return 1; }
         }
 
@@ -273,7 +273,7 @@ namespace TacticalAI
         {
             if (_sessionSeed != 0) return _sessionSeed;
             var key = Saga.RunningCampaign.sagaCampaignGUID + "|" +
-                      (Saga.DataStore.sagaSessionData?.setupOptions?.projectItem?.missionID ?? "solo");
+                      (DataStore.sagaSessionData?.setupOptions?.projectItem?.missionID ?? "solo");
             ulong h = 1469598103934665603UL;
             foreach (var c in key) { h ^= c; h *= 1099511628211UL; }
             if (h == 0) h = 0xA5A5A5A5A5A5A5A5UL;
@@ -298,7 +298,7 @@ namespace TacticalAI
         {
             if (_catalog != null) return;
             _catalog = new Dictionary<string, Tac.DeploymentCard>();
-            foreach (var cd in Saga.DataStore.deploymentCards)
+            foreach (var cd in DataStore.deploymentCards)
             {
                 if (cd.characterType != Saga.CharacterType.Imperial || cd.isDummy) continue;
                 if (_catalog.ContainsKey(cd.id)) continue;
@@ -340,7 +340,7 @@ namespace TacticalAI
             figures = new List<Tac.Figure>();
             var seen = new HashSet<string>();
             int idx = 0;
-            foreach (var cd in Saga.DataStore.deployedEnemies)
+            foreach (var cd in DataStore.deployedEnemies)
             {
                 if (cd == null || cd.isDummy) continue;
                 if (cd.currentSize <= 0) continue;             // wiped group
@@ -378,7 +378,7 @@ namespace TacticalAI
 
         static int IndexOf(global::DeploymentCard cd)
         {
-            var list = Saga.DataStore.deployedEnemies;
+            var list = DataStore.deployedEnemies;
             for (int i = 0; i < list.Count; i++) if (list[i] == cd) return i;
             return -1;
         }

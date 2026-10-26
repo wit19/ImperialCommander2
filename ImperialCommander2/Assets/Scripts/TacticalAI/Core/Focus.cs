@@ -523,7 +523,7 @@ namespace TacticalAI.Core
             if (double.IsNaN(d)) return "nan";
             if (double.IsPositiveInfinity(d)) return "inf";
             if (double.IsNegativeInfinity(d)) return "-inf";
-            bool neg = d < 0 || (d == 0 && double.IsNegative(d));   // -0.0 -> "-0.0"
+            bool neg = d < 0 || (d == 0 && System.BitConverter.DoubleToInt64Bits(d) < 0);   // -0.0 -> "-0.0"
             double x = Math.Abs(d);
             // shortest fixed-point roundtrip (game-scale magnitudes)
             string fixedStr = null;

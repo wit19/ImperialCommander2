@@ -57,7 +57,7 @@ namespace TacticalAI
             }
 
             var existing = panel.transform.Find("tacaiRoot");
-            if (existing != null) { Refresh(existing); return true; }
+            if (existing != null) { Refresh(existing.gameObject); return true; }
 
             var go = new GameObject("tacaiRoot", typeof(RectTransform));
             go.transform.SetParent(panel.transform, false);
@@ -153,7 +153,7 @@ namespace TacticalAI
             b.colors = redBlock;
             b.onClick.AddListener(() =>
             {
-                FindObjectOfType<Sound>()?.PlaySound(FX.Click);
+                GameObject.FindObjectOfType<Sound>()?.PlaySound(FX.Click);
                 onClick();
             });
             var le = bg.AddComponent<LayoutElement>();
