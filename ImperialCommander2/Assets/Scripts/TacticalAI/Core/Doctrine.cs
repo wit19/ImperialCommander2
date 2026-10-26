@@ -344,7 +344,7 @@ namespace TacticalAI.Core
 
             string stance = StanceText.TryGetValue(pattern, out var st) ? st : StanceText["aggressive"];
             var denyList = new List<string>(denyIds ?? Array.Empty<string>());
-            if (denyList.Count == 0) denyList = view.DenyIds is { Count: > 0 } ? view.DenyIds : denyList;
+            if (denyList.Count == 0) denyList = (view.DenyIds != null && view.DenyIds.Count > 0) ? view.DenyIds : denyList;
             var why = "Doktrin-Auswahl Runde " + view.RoundNo.ToString(CultureInfo.InvariantCulture)
                       + ": Posture " + posture + " (" + PyStr(view.PostureReason) + "), Zähler " + counter
                       + (meta ? " mit Kampagnen-Meta" : "")

@@ -187,7 +187,7 @@ namespace TacticalAI.Core
                             {
                                 zones.Add(cu);
                                 var (pz, pl) = prev[cu];
-                                if (pl is not null) doors.Add(pl);
+                                if (pl != null) doors.Add(pl);
                                 cur = pz;
                             }
                             doors.Reverse();
@@ -660,7 +660,7 @@ namespace TacticalAI.Core
         /// The type boundary (compile-time in C#; runtime for dynamic callers).
         public static void AssertAppView(object x)
         {
-            if (x is not AppView)
+            if (!(x is AppView))
                 throw new InvalidCastException("doctrine layer may only see AppView, got "
                     + (x?.GetType().Name ?? "null")
                     + " — WorldFeed/world truth is metrics-side only");
@@ -969,7 +969,7 @@ namespace TacticalAI.Core
                     };
                 List<string> doorList = null;
                 List<int> zoneList = null;
-                if (own is not null && Adj.ContainsKey(zone.Value))
+                if (own != null && Adj.ContainsKey(zone.Value))
                 {
                     var (doors2, zones2) = BS.ZonePath(Adj, own.Value, zone.Value);
                     doorList = doors2;
@@ -981,7 +981,7 @@ namespace TacticalAI.Core
                 return new Dictionary<string, object>
                 {
                     { "zone", Labels[zone.Value] },
-                    { "door", doorList is { Count: > 0 } ? doorList[0] : null },
+                    { "door", (doorList != null && doorList.Count > 0) ? doorList[0] : null },
                     { "path", path },
                     { "targets", new List<string>(targets) },
                 };
@@ -989,7 +989,7 @@ namespace TacticalAI.Core
 
             bool OpenObj(ObjectiveDef o)
             {
-                if (rt is not null) return !rt.ById(o.Id).Done;
+                if (rt != null) return !rt.ById(o.Id).Done;
                 return true;
             }
 
@@ -1005,7 +1005,7 @@ namespace TacticalAI.Core
             foreach (var o in openObjs)
             {
                 int z = MinZone(o.Cells);
-                if (focus is not null && z == focus) elimTargets.Add(o.Id);
+                if (focus != null && z == focus) elimTargets.Add(o.Id);
             }
             if (elimTargets.Count == 0 && openObjs.Count > 0)
             {
@@ -1331,7 +1331,7 @@ namespace TacticalAI.Core
                 foreach (var lab in r.Zones)
                 {
                     int? z = zidOfLabel(lab);
-                    if (z is not null) outp.Add(z.Value);
+                    if (z != null) outp.Add(z.Value);
                 }
             return outp;
         }
