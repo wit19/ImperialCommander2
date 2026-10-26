@@ -1,0 +1,18 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a1_eliminate_duel",
+  "width": 10, "height": 5,
+  "flags": { "interior": [], "difficult": [], "blocking": [], "impassable": [] },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,2]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "obj-terminal", "role": "terminal", "cells": [[9,4]], "weight": 2 }
+  ],
+
+  "_comment": "M2a.1 scenario a) Eliminate: NO roundLimit, NO triggers -> the derivation table gives Eliminate. Two wounded rebels (1 vs 5 vitality), the tough one closer to the stormtrooper: the posture W-function must still always pick the 1-vitality rebel (killable via visible vitality <= expected damage of the printed Blue+Green dice ~2.17)."
+}

@@ -1,0 +1,676 @@
+{
+ "adjacency": [
+  {
+   "a": [
+    [
+     0,
+     0
+    ]
+   ],
+   "adjacent": true,
+   "b": [
+    [
+     0,
+     1
+    ]
+   ],
+   "gap": 1
+  },
+  {
+   "a": [
+    [
+     0,
+     0
+    ]
+   ],
+   "adjacent": false,
+   "b": [
+    [
+     1,
+     1
+    ]
+   ],
+   "gap": 1
+  },
+  {
+   "a": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "adjacent": true,
+   "b": [
+    [
+     1,
+     1
+    ]
+   ],
+   "gap": 1
+  },
+  {
+   "a": [
+    [
+     2,
+     2
+    ]
+   ],
+   "adjacent": false,
+   "b": [
+    [
+     2,
+     2
+    ]
+   ],
+   "gap": 0
+  },
+  {
+   "a": [
+    [
+     0,
+     0
+    ]
+   ],
+   "adjacent": false,
+   "b": [
+    [
+     5,
+     5
+    ]
+   ],
+   "gap": 5
+  },
+  {
+   "a": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "adjacent": false,
+   "b": [
+    [
+     0,
+     0
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "gap": 1
+  }
+ ],
+ "cardinal": [
+  {
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    0,
+    1
+   ],
+   "ok": true
+  },
+  {
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    1,
+    1
+   ],
+   "ok": false
+  },
+  {
+   "a": [
+    2,
+    3
+   ],
+   "b": [
+    2,
+    2
+   ],
+   "ok": true
+  },
+  {
+   "a": [
+    0,
+    0
+   ],
+   "b": [
+    0,
+    0
+   ],
+   "ok": false
+  }
+ ],
+ "cases": [
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "dims": [
+    1,
+    1
+   ],
+   "is_large": false,
+   "mini": "Small1x1",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ]
+   ],
+   "dims": [
+    1,
+    1
+   ],
+   "is_large": false,
+   "mini": "Small1x1",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "dims": [
+    1,
+    1
+   ],
+   "is_large": false,
+   "mini": "Small1x1",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ]
+   ],
+   "dims": [
+    1,
+    1
+   ],
+   "is_large": false,
+   "mini": "Small1x1",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "dims": [
+    1,
+    2
+   ],
+   "is_large": true,
+   "mini": "Medium1x2",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "dims": [
+    1,
+    2
+   ],
+   "is_large": true,
+   "mini": "Medium1x2",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "dims": [
+    2,
+    1
+   ],
+   "is_large": true,
+   "mini": "Medium1x2",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "dims": [
+    2,
+    1
+   ],
+   "is_large": true,
+   "mini": "Medium1x2",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 1
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "dims": [
+    2,
+    2
+   ],
+   "is_large": true,
+   "mini": "Large2x2",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 2
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "dims": [
+    2,
+    2
+   ],
+   "is_large": true,
+   "mini": "Large2x2",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 2
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "dims": [
+    2,
+    2
+   ],
+   "is_large": true,
+   "mini": "Large2x2",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 2
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "dims": [
+    2,
+    2
+   ],
+   "is_large": true,
+   "mini": "Large2x2",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 2
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "dims": [
+    2,
+    3
+   ],
+   "is_large": true,
+   "mini": "Huge2x3",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 3
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "dims": [
+    2,
+    3
+   ],
+   "is_large": true,
+   "mini": "Huge2x3",
+   "op": "footprint_cells",
+   "orient": 0,
+   "rot_overlap": 3
+  },
+  {
+   "anchor": [
+    0,
+    0
+   ],
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "dims": [
+    3,
+    2
+   ],
+   "is_large": true,
+   "mini": "Huge2x3",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 3
+  },
+  {
+   "anchor": [
+    2,
+    3
+   ],
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "dims": [
+    3,
+    2
+   ],
+   "is_large": true,
+   "mini": "Huge2x3",
+   "op": "footprint_cells",
+   "orient": 1,
+   "rot_overlap": 3
+  }
+ ],
+ "dirs": [
+  [
+   0,
+   1
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   0,
+   -1
+  ],
+  [
+   -1,
+   0
+  ]
+ ],
+ "footprint_sizes": {
+  "Huge2x3": [
+   2,
+   3
+  ],
+  "Large2x2": [
+   2,
+   2
+  ],
+  "Medium1x2": [
+   1,
+   2
+  ],
+  "Small1x1": [
+   1,
+   1
+  ]
+ }
+}

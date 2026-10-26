@@ -1,0 +1,1590 @@
+[
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_toucher",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_toucher",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_woundall",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_toucher",
+    "count": 8
+   },
+   {
+    "a": "s1",
+    "b": "r_healthy",
+    "count": 4
+   },
+   {
+    "a": "r_toucher",
+    "b": "s1",
+    "count": 8
+   },
+   {
+    "a": "r_toucher",
+    "b": "r_healthy",
+    "count": 4
+   },
+   {
+    "a": "r_healthy",
+    "b": "s1",
+    "count": 4
+   },
+   {
+    "a": "r_healthy",
+    "b": "r_toucher",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 8,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_toucher",
+    "tiebreak_trace": [
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       1,
+       0,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     0,
+     0,
+     2.666667,
+     -2
+    ],
+    "why": "posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   }
+  ],
+  "scenario": "counter_bearer"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_5hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_5hp",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_1hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_1hp",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_woundall",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_5hp",
+    "count": 2
+   },
+   {
+    "a": "s1",
+    "b": "r_1hp",
+    "count": 6
+   },
+   {
+    "a": "r_5hp",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "r_5hp",
+    "b": "r_1hp",
+    "count": 4
+   },
+   {
+    "a": "r_1hp",
+    "b": "s1",
+    "count": 6
+   },
+   {
+    "a": "r_1hp",
+    "b": "r_5hp",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 6,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_1hp",
+    "tiebreak_trace": [
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     -1,
+     0,
+     0,
+     2.666667
+    ],
+    "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "counter_capture"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_5hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_5hp",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_1hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_1hp",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_woundall",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_5hp",
+    "count": 2
+   },
+   {
+    "a": "s1",
+    "b": "r_1hp",
+    "count": 6
+   },
+   {
+    "a": "r_5hp",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "r_5hp",
+    "b": "r_1hp",
+    "count": 4
+   },
+   {
+    "a": "r_1hp",
+    "b": "s1",
+    "count": 6
+   },
+   {
+    "a": "r_1hp",
+    "b": "r_5hp",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 6,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_1hp",
+    "tiebreak_trace": [
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     -1,
+     0,
+     0,
+     2.666667
+    ],
+    "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "counter_incapacitate"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_woundall",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_wounded",
+    "count": 2
+   },
+   {
+    "a": "s1",
+    "b": "r_healthy",
+    "count": 6
+   },
+   {
+    "a": "r_wounded",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "r_wounded",
+    "b": "r_healthy",
+    "count": 4
+   },
+   {
+    "a": "r_healthy",
+    "b": "s1",
+    "count": 6
+   },
+   {
+    "a": "r_healthy",
+    "b": "r_wounded",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 6,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ],
+    "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 6), r_wounded(dist 2); tiebreak dist: r_healthy wins (shorter counting-space distance = 6)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "counter_woundall"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_deny_item",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r1",
+    "count": 4
+   },
+   {
+    "a": "r1",
+    "b": "s1",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "posture": "deny",
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       1,
+       -1,
+       -4
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -1,
+     -4
+    ],
+    "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   }
+  ],
+  "scenario": "deny_item"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r5hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r5hp",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1hp",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1hp",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_eliminate_duel",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r5hp",
+    "count": 2
+   },
+   {
+    "a": "s1",
+    "b": "r1hp",
+    "count": 4
+   },
+   {
+    "a": "r5hp",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "r5hp",
+    "b": "r1hp",
+    "count": 2
+   },
+   {
+    "a": "r1hp",
+    "b": "s1",
+    "count": 4
+   },
+   {
+    "a": "r1hp",
+    "b": "r5hp",
+    "count": 2
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r1hp",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -1,
+     0,
+     2.666667
+    ],
+    "why": "posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "eliminate_duel"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_low",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_low",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_wache",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_wache",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_protect_npc",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "h_low",
+    "count": 3
+   },
+   {
+    "a": "s1",
+    "b": "h_wache",
+    "count": 2
+   },
+   {
+    "a": "h_low",
+    "b": "s1",
+    "count": 3
+   },
+   {
+    "a": "h_low",
+    "b": "h_wache",
+    "count": 5
+   },
+   {
+    "a": "h_wache",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "h_wache",
+    "b": "h_low",
+    "count": 5
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "h_low",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -1,
+     0,
+     2.666667
+    ],
+    "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "protect_npc"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_stall_terminal",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r1",
+    "count": 2
+   },
+   {
+    "a": "r1",
+    "b": "s1",
+    "count": 2
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "posture": "stall",
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       1,
+       -2,
+       -3
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -2,
+     -3
+    ],
+    "why": "posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   }
+  ],
+  "scenario": "stall_terminal"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_battle_bridge",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_wounded",
+    "count": 3
+   },
+   {
+    "a": "s1",
+    "b": "r_healthy",
+    "count": 12
+   },
+   {
+    "a": "r_wounded",
+    "b": "s1",
+    "count": 3
+   },
+   {
+    "a": "r_wounded",
+    "b": "r_healthy",
+    "count": 11
+   },
+   {
+    "a": "r_healthy",
+    "b": "s1",
+    "count": 12
+   },
+   {
+    "a": "r_healthy",
+    "b": "r_wounded",
+    "count": 11
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 12,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ],
+    "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   }
+  ],
+  "scenario": "theater_bearer"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_runner",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_runner",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_battle_bridge",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_runner",
+    "count": 11
+   },
+   {
+    "a": "s1",
+    "b": "r_healthy",
+    "count": 12
+   },
+   {
+    "a": "r_runner",
+    "b": "s1",
+    "count": 11
+   },
+   {
+    "a": "r_runner",
+    "b": "r_healthy",
+    "count": 1
+   },
+   {
+    "a": "r_healthy",
+    "b": "s1",
+    "count": 12
+   },
+   {
+    "a": "r_healthy",
+    "b": "r_runner",
+    "count": 1
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 12,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ],
+    "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   }
+  ],
+  "scenario": "theater_carry"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r1",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_deny_item",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r1",
+    "count": 4
+   },
+   {
+    "a": "r1",
+    "b": "s1",
+    "count": 4
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "posture": "deny",
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "w": [
+       1,
+       -1,
+       -4
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -1,
+     -4
+    ],
+    "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   }
+  ],
+  "scenario": "theater_deny"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_low",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_low",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_wache",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "h_wache",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a1_protect_npc",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "h_low",
+    "count": 3
+   },
+   {
+    "a": "s1",
+    "b": "h_wache",
+    "count": 2
+   },
+   {
+    "a": "h_low",
+    "b": "s1",
+    "count": 3
+   },
+   {
+    "a": "h_low",
+    "b": "h_wache",
+    "count": 5
+   },
+   {
+    "a": "h_wache",
+    "b": "s1",
+    "count": 2
+   },
+   {
+    "a": "h_wache",
+    "b": "h_low",
+    "count": 5
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "h_low",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     1,
+     -1,
+     0,
+     2.666667
+    ],
+    "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   }
+  ],
+  "scenario": "theater_protect"
+ },
+ {
+  "attack_geom": [
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_wounded",
+    "with_los": true
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": false
+   },
+   {
+    "a": "s1",
+    "ok": true,
+    "r": "r_healthy",
+    "with_los": true
+   }
+  ],
+  "fixture": "m2a2_battle_bridge",
+  "metric": [
+   {
+    "a": "s1",
+    "b": "r_wounded",
+    "count": 3
+   },
+   {
+    "a": "s1",
+    "b": "r_healthy",
+    "count": 12
+   },
+   {
+    "a": "r_wounded",
+    "b": "s1",
+    "count": 3
+   },
+   {
+    "a": "r_wounded",
+    "b": "r_healthy",
+    "count": 11
+   },
+   {
+    "a": "r_healthy",
+    "b": "s1",
+    "count": 12
+   },
+   {
+    "a": "r_healthy",
+    "b": "r_wounded",
+    "count": 11
+   }
+  ],
+  "posture": [
+   {
+    "count_dist": 12,
+    "focus_cost_mp": 0,
+    "posture": "eliminate",
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ],
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     }
+    ],
+    "w": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ],
+    "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   }
+  ],
+  "pure": [
+   {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   }
+  ],
+  "scenario": "theater_woundall"
+ }
+]

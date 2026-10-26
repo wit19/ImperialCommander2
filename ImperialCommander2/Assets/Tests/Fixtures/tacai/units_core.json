@@ -1,0 +1,267 @@
+{
+ "source": "IC2 CardData/enemies.json (exact card values)",
+ "cards": [
+  {
+   "id": "DG001",
+   "name": "Stormtrooper",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 4,
+   "health": 3,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Green"
+   ],
+   "keywords": [],
+   "isElite": false
+  },
+  {
+   "id": "DG003",
+   "name": "Stormtrooper (Elite)",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 4,
+   "health": 5,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Green"
+   ],
+   "keywords": [],
+   "isElite": true
+  },
+  {
+   "id": "DG007",
+   "name": "E-Web Engineer",
+   "subname": "",
+   "miniSize": "Medium1x2",
+   "speed": 2,
+   "health": 5,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Red",
+    "Yellow"
+   ],
+   "keywords": [
+    "+3 Accuracy"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG009",
+   "name": "Royal Guard",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 5,
+   "health": 8,
+   "attackType": "Melee",
+   "attacks": [
+    "Red",
+    "Yellow"
+   ],
+   "keywords": [
+    "Reach"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG011",
+   "name": "Probe Droid",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 3,
+   "health": 5,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Yellow",
+    "Yellow"
+   ],
+   "keywords": [
+    "Mobile"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG014",
+   "name": "AT-ST",
+   "subname": "",
+   "miniSize": "Huge2x3",
+   "speed": 4,
+   "health": 15,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Red",
+    "Red"
+   ],
+   "keywords": [
+    "Massive",
+    "+3 Accuracy"
+   ],
+   "isElite": true
+  },
+  {
+   "id": "DG017",
+   "name": "Nexu",
+   "subname": "",
+   "miniSize": "Large2x2",
+   "speed": 6,
+   "health": 6,
+   "attackType": "Melee",
+   "attacks": [
+    "Red",
+    "Green"
+   ],
+   "keywords": [
+    "Mobile",
+    "Bleed"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG019",
+   "name": "Heavy Stormtrooper",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 3,
+   "health": 6,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Red"
+   ],
+   "keywords": [
+    "+2 Accuracy"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG021",
+   "name": "Tusken Raider",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 4,
+   "health": 4,
+   "attackType": "Melee",
+   "attacks": [
+    "Red",
+    "Green"
+   ],
+   "keywords": [
+    "Habitat: Desert"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG028",
+   "name": "Wampa",
+   "subname": "",
+   "miniSize": "Medium1x2",
+   "speed": 3,
+   "health": 9,
+   "attackType": "Melee",
+   "attacks": [
+    "Red",
+    "Red"
+   ],
+   "keywords": [
+    "+1 {H}",
+    "Habitat: Snow"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG045",
+   "name": "Rancor",
+   "subname": "",
+   "miniSize": "Huge2x3",
+   "speed": 4,
+   "health": 15,
+   "attackType": "Melee",
+   "attacks": [
+    "Red",
+    "Green",
+    "Green"
+   ],
+   "keywords": [
+    "Massive",
+    "Reach",
+    "+1 {G}"
+   ],
+   "isElite": true
+  },
+  {
+   "id": "DG046",
+   "name": "AT-DP",
+   "subname": "",
+   "miniSize": "Huge2x3",
+   "speed": 3,
+   "health": 16,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Red",
+    "Yellow"
+   ],
+   "keywords": [
+    "Massive",
+    "+1 {G}",
+    "+3 Accuracy"
+   ],
+   "isElite": true
+  },
+  {
+   "id": "DG050",
+   "name": "Sentry Droid",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 4,
+   "health": 5,
+   "attackType": "Ranged",
+   "attacks": [
+    "Green",
+    "Green"
+   ],
+   "keywords": [],
+   "isElite": false
+  },
+  {
+   "id": "DG056",
+   "name": "Death Trooper",
+   "subname": "",
+   "miniSize": "Small1x1",
+   "speed": 4,
+   "health": 5,
+   "attackType": "Ranged",
+   "attacks": [
+    "Red",
+    "Yellow"
+   ],
+   "keywords": [
+    "+3 Accuracy"
+   ],
+   "isElite": false
+  },
+  {
+   "id": "DG065",
+   "name": "Bantha Rider (Elite)",
+   "subname": "",
+   "miniSize": "Huge2x3",
+   "speed": 5,
+   "health": 21,
+   "attackType": "Ranged",
+   "attacks": [
+    "Blue",
+    "Red"
+   ],
+   "keywords": [
+    "Massive",
+    "Habitat: Desert"
+   ],
+   "isElite": true
+  }
+ ]
+}

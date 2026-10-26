@@ -1,0 +1,24 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a1_stall_terminal",
+  "width": 10, "height": 5,
+  "flags": {
+    "interior": [],
+    "difficult": [],
+    "blocking": [],
+    "impassable": [[8,1],[8,3],[9,1],[9,2],[9,3],[7,1],[7,3]]
+  },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,0]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "obj-terminal", "role": "terminal", "cells": [[8,2]], "weight": 2 }
+  ],
+  "roundLimit": 6,
+
+  "_comment": "M2a.1 scenario b) Stall (roundLimit 6, startRound 5): the terminal cell (8,2) is sealed on every side by impassable cells except the choke node (7,2). The rebel stands 3 spaces from the terminal at (5,2); the Reach stormtrooper at (6,1) is closer to the node (1 vs 2 MP). Stall doctrine: attack only while the target presently obstructs (arrival 2 rounds > 1) -> the plan must MOVE onto the node instead of attacking the rebel. Round 6: rebel arrival 2 > remaining 1 -> timer race lost -> deterministic Posture switch to Eliminate with a public log line."
+}

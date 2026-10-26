@@ -1,0 +1,32 @@
+{
+  "schema": "tacai.board/1",
+  "name": "open_map_two_entrances",
+  "width": 13, "height": 9,
+  "flags": {
+    "interior": [],
+    "difficult": [[5,6],[6,6],[7,6]],
+    "blocking": [[4,3],[8,5],[3,6]],
+    "impassable": [[9,2]]
+  },
+  "edges": {
+    "wall": [
+      [[7,1],[8,1]], [[7,2],[8,2]]
+    ],
+    "blocking": [[[2,4],[3,4]]],
+    "impassable": [[[10,7],[11,7]]]
+  },
+  "doors": [],
+  "hazards": [
+    {"id": "mine-1", "kind": "mine", "cells": [[6,3]], "damage": 2}
+  ],
+  "deployment_points": [
+    {"id": "DP-NW", "cells": [[0,7],[1,7]], "colors": ["green"],
+     "massive_allowed": false, "description": "northwest entrance"},
+    {"id": "DP-SE", "cells": [[12,1],[11,1]], "colors": ["green"],
+     "massive_allowed": false, "description": "southeast entrance"}
+  ],
+  "objectives": [
+    {"id": "relay", "role": "terminal", "cells": [[6,4],[6,5]], "weight": 3},
+    {"id": "cache", "role": "item", "cells": [[2,2]], "weight": 1}
+  ]
+}

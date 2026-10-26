@@ -1,0 +1,25 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a2_battle_bridge",
+  "width": 14, "height": 6,
+  "flags": {
+    "interior": [], "difficult": [], "blocking": [],
+    "impassable": [[6,0],[7,0],[6,1],[7,1],[6,3],[7,3],[6,4],[7,4],[6,5],[7,5]]
+  },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [
+    { "cells": [[5,2],[6,2]], "locked": false, "initially_open": false },
+    { "cells": [[7,2],[8,2]], "locked": false, "initially_open": false }
+  ],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,0]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "obj-terminal", "role": "terminal", "cells": [[12,3]], "weight": 2 },
+    { "id": "item-relic", "role": "item", "cells": [[2,4]], "weight": 2 },
+    { "id": "exit-side", "role": "escape", "cells": [[13,0]], "weight": 3 }
+  ],
+  "_comment": "M2a.2 theater board: three zones (arrival room with DP-A + item, corridor between the two doors, terminal room with terminal + escape). Doors start closed; scripts open them to generate the public door_opened belief event. Impassable wall column keeps LOS (IA rule) but cuts movement, so the corridor doors are the geographic contest points the doctrine text names ('Tuer A/B'). Hero entrances are public mission setup, passed per scenario."
+}

@@ -1,0 +1,3232 @@
+{
+ "cases": [
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G0",
+     "G2",
+     "G3",
+     "G4",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive)"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker)"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G4",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 0 > Group 2 > Group 3 > Group 4 > Group 5 > Group 1 | Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive); Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker); Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G0",
+     "G2",
+     "G3",
+     "G4",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive)"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker)"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G4",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 0 > Group 2 > Group 3 > Group 4 > Group 5 > Group 1 | Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive); Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker); Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G0",
+     "G3",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 4 > Group 2 > Group 0 > Group 3 > Group 5 > Group 1 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive); Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G0",
+     "G3",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 4 > Group 2 > Group 0 > Group 3 > Group 5 > Group 1 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive); Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 4 > Group 2 > Group 3 > Group 5 > Group 1 > Group 0 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard); Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 4 > Group 2 > Group 3 > Group 5 > Group 1 > Group 0 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard); Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 4 > Group 2 > Group 3 > Group 5 > Group 1 > Group 0 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard); Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.15 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.82 (W eliminate, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 4 > Group 2 > Group 3 > Group 5 > Group 1 > Group 0 | Group 4: Staerke-Effizienz 6.56 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 2: Staerke-Effizienz 8.43 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten; Group 3: Staerke-Effizienz 7.15 (W eliminate, Muster hunter); Group 5: Staerke-Effizienz 5.61 (W eliminate, Muster ambusher); Group 1: Staerke-Effizienz 2.82 (W eliminate, Muster guard); Group 0: Staerke-Effizienz 11.50 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 13.13 (W stall, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W stall, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.57 (W stall, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.61 (W stall, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W stall, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "stall",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 13.13 (W stall, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W stall, Muster support); Group 1: Staerke-Effizienz 6.57 (W stall, Muster guard); Group 5: Staerke-Effizienz 5.61 (W stall, Muster ambusher); Group 3: Staerke-Effizienz 4.59 (W stall, Muster hunter); Group 0: Staerke-Effizienz 6.13 (W stall, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G0",
+     "G5",
+     "G3"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 1 > Group 0 > Group 5 > Group 3 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G1",
+     "G5",
+     "G3",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 11.79 (W protect, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.48 (W protect, Muster support)"
+     },
+     {
+      "group": "G1",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.04 (W protect, Muster guard)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.59 (W protect, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W protect, Muster hunter)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "protect",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 1 > Group 5 > Group 3 > Group 0 | Group 2: Staerke-Effizienz 11.79 (W protect, Muster blocker); Group 4: Staerke-Effizienz 9.48 (W protect, Muster support); Group 1: Staerke-Effizienz 7.04 (W protect, Muster guard); Group 5: Staerke-Effizienz 4.59 (W protect, Muster ambusher); Group 3: Staerke-Effizienz 4.08 (W protect, Muster hunter); Group 0: Staerke-Effizienz 5.37 (W protect, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "ref",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe ref): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": null
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S1",
+    "miss": "",
+    "order": [
+     "G0",
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5"
+    ],
+    "reasons": [
+     {
+      "group": "G0",
+      "rank": 0,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G1",
+      "rank": 1,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G2",
+      "rank": 2,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G4",
+      "rank": 4,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     },
+     {
+      "group": "G5",
+      "rank": 5,
+      "tags": [],
+      "why": "Standardreihenfolge (Aufstellung)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S1): Group 0 > Group 1 > Group 2 > Group 3 > Group 4 > Group 5 | Group 0: Standardreihenfolge (Aufstellung); Group 1: Standardreihenfolge (Aufstellung); Group 2: Standardreihenfolge (Aufstellung); Group 3: Standardreihenfolge (Aufstellung); Group 4: Standardreihenfolge (Aufstellung); Group 5: Standardreihenfolge (Aufstellung)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S1"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G0",
+     "G3",
+     "G4",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G0",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G4",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 0 > Group 3 > Group 4 > Group 5 > Group 1 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive); Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S2",
+    "miss": "",
+    "order": [
+     "G2",
+     "G0",
+     "G3",
+     "G4",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G0",
+      "rank": 1,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G4",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S2): Group 2 > Group 0 > Group 3 > Group 4 > Group 5 > Group 1 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive); Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S2"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G0",
+     "G3",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 0 > Group 3 > Group 5 > Group 1 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive); Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S3",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G0",
+     "G3",
+     "G5",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive)"
+     },
+     {
+      "group": "G3",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S3): Group 2 > Group 4 > Group 0 > Group 3 > Group 5 > Group 1 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive); Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S3"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 3 > Group 5 > Group 1 > Group 0 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S4): Group 2 > Group 4 > Group 3 > Group 5 > Group 1 > Group 0 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S4"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 3 > Group 5 > Group 1 > Group 0 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 7,
+   "skill": "S5"
+  },
+  {
+   "plan": {
+    "level": "S5",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 9.10 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 7.66 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.64 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.70 (W deny, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "public": "Reihenfolge-Karte (Stufe S5): Group 2 > Group 4 > Group 3 > Group 5 > Group 1 > Group 0 | Group 2: Staerke-Effizienz 9.10 (W deny, Muster blocker); Group 4: Staerke-Effizienz 7.29 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde; Group 3: Staerke-Effizienz 7.66 (W deny, Muster hunter); Group 5: Staerke-Effizienz 6.64 (W deny, Muster ambusher); Group 1: Staerke-Effizienz 4.70 (W deny, Muster guard); Group 0: Staerke-Effizienz 8.43 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu (Zaehler will frischen Schaden)",
+   "rng_u": null,
+   "seed": 13,
+   "skill": "S5"
+  }
+ ],
+ "trace": [
+  {
+   "below": [
+    [
+     5,
+     3
+    ]
+   ],
+   "plan": {
+    "level": "S3",
+    "miss": "Aussetzer (Stufe S3): Rang 4/5 vertauscht",
+    "order": [
+     "G4",
+     "G2",
+     "G0",
+     "G5",
+     "G3",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 5.25 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 7.73 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.75 (W eliminate, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [
+       "missa_step"
+      ],
+      "why": "Staerke-Effizienz 4.49 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [
+       "missa_step"
+      ],
+      "why": "Staerke-Effizienz 5.72 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.45 (W eliminate, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "skill": "S3",
+   "u_stream": [
+    0.08744638362113721
+   ]
+  },
+  {
+   "below": [],
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G4",
+     "G2",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G4",
+      "rank": 0,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 5.25 (W eliminate, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G2",
+      "rank": 1,
+      "tags": [
+       "blocker_before_attached_attack"
+      ],
+      "why": "Staerke-Effizienz 7.73 (W eliminate, Muster blocker) | Blockade vor dem angehängten Angriff halten"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.72 (W eliminate, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.49 (W eliminate, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 2.45 (W eliminate, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 8.75 (W eliminate, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "eliminate",
+   "skill": "S4",
+   "u_stream": [
+    0.08744638362113721
+   ]
+  },
+  {
+   "below": [
+    [
+     5,
+     3
+    ]
+   ],
+   "plan": {
+    "level": "S3",
+    "miss": "Aussetzer (Stufe S3): Rang 4/5 vertauscht",
+    "order": [
+     "G2",
+     "G4",
+     "G0",
+     "G5",
+     "G3",
+     "G1"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.32 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 5.83 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G0",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.42 (W deny, Muster aggressive)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [
+       "missa_step"
+      ],
+      "why": "Staerke-Effizienz 5.31 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G3",
+      "rank": 4,
+      "tags": [
+       "missa_step"
+      ],
+      "why": "Staerke-Effizienz 6.12 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G1",
+      "rank": 5,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W deny, Muster guard)"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "skill": "S3",
+   "u_stream": [
+    0.08744638362113721
+   ]
+  },
+  {
+   "below": [],
+   "plan": {
+    "level": "S4",
+    "miss": "",
+    "order": [
+     "G2",
+     "G4",
+     "G3",
+     "G5",
+     "G1",
+     "G0"
+    ],
+    "reasons": [
+     {
+      "group": "G2",
+      "rank": 0,
+      "tags": [],
+      "why": "Staerke-Effizienz 8.32 (W deny, Muster blocker)"
+     },
+     {
+      "group": "G4",
+      "rank": 1,
+      "tags": [
+       "buff_before_receiver"
+      ],
+      "why": "Staerke-Effizienz 5.83 (W deny, Muster support) | Buff zuerst: Staerkt die Angreifer dieser Runde"
+     },
+     {
+      "group": "G3",
+      "rank": 2,
+      "tags": [],
+      "why": "Staerke-Effizienz 6.12 (W deny, Muster hunter)"
+     },
+     {
+      "group": "G5",
+      "rank": 3,
+      "tags": [],
+      "why": "Staerke-Effizienz 5.31 (W deny, Muster ambusher)"
+     },
+     {
+      "group": "G1",
+      "rank": 4,
+      "tags": [],
+      "why": "Staerke-Effizienz 4.08 (W deny, Muster guard)"
+     },
+     {
+      "group": "G0",
+      "rank": 5,
+      "tags": [
+       "finisher_last"
+      ],
+      "why": "Staerke-Effizienz 6.42 (W deny, Muster aggressive) | Finisher zuletzt: sieht die Vorsaeden und stoest zu"
+     }
+    ],
+    "round": 3,
+    "ts_round": 3,
+    "ts_turn": 1
+   },
+   "posture": "deny",
+   "skill": "S4",
+   "u_stream": [
+    0.08744638362113721
+   ]
+  }
+ ]
+}

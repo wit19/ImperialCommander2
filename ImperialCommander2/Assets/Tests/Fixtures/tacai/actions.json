@@ -1,0 +1,6977 @@
+{
+ "plans": [
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_healthy"
+     },
+     "type": "attack",
+     "why": "attack r_healthy (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_bearer",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_bearer",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {
+      "target_id": "r_healthy"
+     },
+     "type": "attack",
+     "why": "attack r_healthy (slot attack, legal from ((5, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_bearer",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_healthy"
+     },
+     "type": "attack",
+     "why": "attack r_healthy (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_bearer",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_bearer",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_bearer",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_bearer",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_bearer",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_healthy"
+     },
+     "type": "attack",
+     "why": "attack r_healthy (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_healthy"
+     },
+     "type": "attack",
+     "why": "attack r_healthy (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r_healthy",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 8,
+      "id": "r_toucher",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_healthy(dist 4), r_toucher(dist 8); tiebreak dist: r_healthy wins (shorter counting-space distance = 4)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_bearer",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_capture",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_capture",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((5, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_capture",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_capture",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_capture",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_capture",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_capture",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_capture",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_capture",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((5, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_5hp"
+     },
+     "type": "attack",
+     "why": "attack r_5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_incapacitate",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_woundall",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_woundall",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((5, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_woundall",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_woundall",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_woundall",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_woundall",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_woundall",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "counter_woundall",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 2), r_healthy(dist 6); tiebreak dist: r_wounded wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "counter_woundall",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "deny_item",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "deny_item",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((4, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "deny_item",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "deny_item",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "deny_item",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "deny_item",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "deny_item",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "deny_item",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "deny_item",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r5hp"
+     },
+     "type": "attack",
+     "why": "attack r5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "r5hp"
+     },
+     "type": "attack",
+     "why": "attack r5hp (slot attack, legal from ((5, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r5hp"
+     },
+     "type": "attack",
+     "why": "attack r5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r5hp"
+     },
+     "type": "attack",
+     "why": "attack r5hp (slot attack, legal from ((3, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r5hp"
+     },
+     "type": "attack",
+     "why": "attack r5hp (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r5hp",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r5hp",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "eliminate_duel",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "protect_npc",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "protect_npc",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 4), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "protect_npc",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "protect_npc",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "protect_npc",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "protect_npc",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "protect_npc",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "protect_npc",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "protect_npc",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 1), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "stall_terminal",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         1
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "stall_terminal",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         1
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((5, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "stall_terminal",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 1), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         1
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "stall_terminal",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "stall_terminal",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         1
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "stall_terminal",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "stall_terminal",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         1
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "stall_terminal",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 1), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 1), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "stall_terminal",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_bearer",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_bearer",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_bearer",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_bearer",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_bearer",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_bearer",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_bearer",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_bearer",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_bearer",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_runner"
+     },
+     "type": "attack",
+     "why": "attack r_runner (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_carry",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 4,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 7"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 4,
+   "scenario": "theater_carry",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 4,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 7"
+    },
+    {
+     "params": {
+      "target_id": "r_runner"
+     },
+     "type": "attack",
+     "why": "attack r_runner (slot attack, legal from ((4, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 4,
+   "scenario": "theater_carry",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_runner"
+     },
+     "type": "attack",
+     "why": "attack r_runner (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 4,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 7"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 4,
+   "scenario": "theater_carry",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_carry",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 4,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 7"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 4,
+   "scenario": "theater_carry",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_carry",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 4,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         3
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 7"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 4,
+   "scenario": "theater_carry",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_runner"
+     },
+     "type": "attack",
+     "why": "attack r_runner (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_runner"
+     },
+     "type": "attack",
+     "why": "attack r_runner (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 11,
+    "focus_cost_mp": 0,
+    "target": "r_runner",
+    "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_carry",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_deny",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_deny",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((4, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_deny",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_deny",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_deny",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_deny",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_deny",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         6,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         6,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         4,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_deny",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r1"
+     },
+     "type": "attack",
+     "why": "attack r1 (slot attack, legal from ((6, 3), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 4,
+    "focus_cost_mp": 0,
+    "target": "r1",
+    "tiebreak_trace": [
+     {
+      "dist": 4,
+      "id": "r1",
+      "mp": 0,
+      "order": 1,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "can attack r1 from current position (0 MP)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_deny",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_protect",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_protect",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 4), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_protect",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_protect",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_protect",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 0"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_protect",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_protect",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 3,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         3
+        ],
+        0
+       ],
+       [
+        [
+         1,
+         4
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 0"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 3,
+   "scenario": "theater_protect",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "h_wache"
+     },
+     "type": "attack",
+     "why": "attack h_wache (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 2,
+    "focus_cost_mp": 0,
+    "target": "h_wache",
+    "tiebreak_trace": [
+     {
+      "dist": 2,
+      "id": "h_wache",
+      "mp": 0,
+      "order": 3,
+      "vitality": 5,
+      "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_protect",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_woundall",
+   "slots": [
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_woundall",
+   "slots": [
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((3, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_woundall",
+   "slots": [
+    "move",
+    "attack"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,attack"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_woundall",
+   "slots": [
+    "attack",
+    "move"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: attack,move"
+  },
+  {
+   "actions": [
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_woundall",
+   "slots": [
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no special on card -> no path to attack cell; reduce distance 1"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_woundall",
+   "slots": [
+    "special"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: special"
+  },
+  {
+   "actions": [],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_woundall",
+   "slots": [
+    "interact"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: interact"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "hillclimb": true,
+      "mp": 2,
+      "purpose": "approach",
+      "states": [
+       [
+        [
+         1,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         2,
+         2
+        ],
+        0
+       ],
+       [
+        [
+         3,
+         2
+        ],
+        0
+       ]
+      ]
+     },
+     "type": "move",
+     "why": "no path to attack cell; reduce distance 1"
+    },
+    {
+     "params": {},
+     "type": "rest",
+     "why": "slot rest"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 2,
+   "scenario": "theater_woundall",
+   "slots": [
+    "move",
+    "rest"
+   ],
+   "violations": [],
+   "why": "deck-constrained plan: move,rest"
+  },
+  {
+   "actions": [
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    },
+    {
+     "params": {
+      "target_id": "r_wounded"
+     },
+     "type": "attack",
+     "why": "attack r_wounded (slot attack, legal from ((1, 2), orient 0))"
+    }
+   ],
+   "fig": "s1",
+   "focus": {
+    "count_dist": 3,
+    "focus_cost_mp": 0,
+    "target": "r_wounded",
+    "tiebreak_trace": [
+     {
+      "dist": 3,
+      "id": "r_wounded",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "weight": 0.0
+     },
+     {
+      "dist": 12,
+      "id": "r_healthy",
+      "mp": 0,
+      "order": 2,
+      "vitality": 5,
+      "weight": 0.0
+     }
+    ],
+    "why": "2 targets tied at 0 MP: r_wounded(dist 3), r_healthy(dist 12); tiebreak dist: r_wounded wins (shorter counting-space distance = 3)"
+   },
+   "mp_planned": 0,
+   "scenario": "theater_woundall",
+   "slots": [
+    "attack",
+    "attack"
+   ],
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ],
+   "why": "deck-constrained plan: attack,attack"
+  }
+ ],
+ "specials": {
+  "DG001": [],
+  "DG003": [],
+  "DG007": [],
+  "DG009": [],
+  "DG011": [],
+  "DG014": [],
+  "DG017": [],
+  "DG019": [],
+  "DG021": [],
+  "DG028": [],
+  "DG045": [],
+  "DG046": [],
+  "DG050": [],
+  "DG056": [],
+  "DG065": []
+ },
+ "validate": [
+  {
+   "case": 0,
+   "mp": 0,
+   "violations": []
+  },
+  {
+   "case": 1,
+   "mp": 2,
+   "violations": []
+  },
+  {
+   "case": 2,
+   "mp": 0,
+   "violations": [
+    "attack_actions 2>1 (non-hero limit)"
+   ]
+  },
+  {
+   "case": 3,
+   "mp": 5,
+   "violations": [
+    "mp_overflow 5>4"
+   ]
+  },
+  {
+   "case": 4,
+   "mp": 4,
+   "violations": [
+    "actions_overflow 3>2"
+   ]
+  },
+  {
+   "case": 5,
+   "mp": 0,
+   "violations": [
+    "special_not_on_card Overwatch"
+   ]
+  },
+  {
+   "case": 6,
+   "mp": 0,
+   "violations": [
+    "special_not_on_card Nonsense",
+    "special_unknown Nonsense"
+   ]
+  },
+  {
+   "case": 7,
+   "mp": 0,
+   "violations": [
+    "interact_without_door"
+   ]
+  }
+ ]
+}

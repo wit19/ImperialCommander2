@@ -1,0 +1,12390 @@
+[
+ {
+  "card": "DG003",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG007",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ],
+     [
+      13,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG045",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      0
+     ],
+     [
+      13,
+      1
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "ok": false,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG009",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG001",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG003",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG007",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "blocking_or_impassable_space"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "cells": [
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "cells": [
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "cells": [
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "cells": [
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "cells": [
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     1
+    ],
+    "cells": [
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     1
+    ],
+    "cells": [
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      1
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     2
+    ],
+    "cells": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     2
+    ],
+    "cells": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": false,
+    "reason": "blocking_or_impassable_space"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     1
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     2
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG045",
+  "enter": [
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "ally",
+    "ok": false,
+    "reason": "two_massive_same_space"
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "ally",
+    "ok": false,
+    "reason": "two_massive_same_space"
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "massive": [
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "nearest_empty": [
+     10,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      0
+     ],
+     [
+      13,
+      1
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "cells": [
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      10,
+      3
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "cells": [
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "cells": [
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      12,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "cells": [
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      13,
+      1
+     ],
+     [
+      13,
+      2
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "cells": [
+     [
+      10,
+      2
+     ],
+     [
+      10,
+      3
+     ],
+     [
+      10,
+      4
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "cells": [
+     [
+      10,
+      2
+     ],
+     [
+      10,
+      3
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      12,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "cells": [
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      12,
+      4
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "cells": [
+     [
+      11,
+      2
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      13,
+      2
+     ],
+     [
+      13,
+      3
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     3
+    ],
+    "cells": [
+     [
+      10,
+      3
+     ],
+     [
+      10,
+      4
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     3
+    ],
+    "cells": [
+     [
+      10,
+      3
+     ],
+     [
+      10,
+      4
+     ],
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      12,
+      4
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     3
+    ],
+    "cells": [
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      12,
+      4
+     ],
+     [
+      12,
+      5
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     3
+    ],
+    "cells": [
+     [
+      11,
+      3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      12,
+      4
+     ],
+     [
+      13,
+      3
+     ],
+     [
+      13,
+      4
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     4
+    ],
+    "cells": [
+     [
+      10,
+      4
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      10,
+      6
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      11,
+      6
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     4
+    ],
+    "cells": [
+     [
+      10,
+      4
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      12,
+      4
+     ],
+     [
+      12,
+      5
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     4
+    ],
+    "cells": [
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      11,
+      6
+     ],
+     [
+      12,
+      4
+     ],
+     [
+      12,
+      5
+     ],
+     [
+      12,
+      6
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     4
+    ],
+    "cells": [
+     [
+      11,
+      4
+     ],
+     [
+      11,
+      5
+     ],
+     [
+      12,
+      4
+     ],
+     [
+      12,
+      5
+     ],
+     [
+      13,
+      4
+     ],
+     [
+      13,
+      5
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "rebel",
+    "victims": [
+     "r1"
+    ]
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "occ": "ally",
+    "victims": [
+     "r2"
+    ]
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "rebel",
+    "victims": [
+     "r1"
+    ]
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "occ": "ally",
+    "victims": [
+     "r2"
+    ]
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     1
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     2
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     2
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     3
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     3
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     10,
+     4
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     4
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   }
+  ]
+ },
+ {
+  "card": "DG009",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG001",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG003",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG007",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ],
+     [
+      13,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG045",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      11,
+      2
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      12,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      0
+     ],
+     [
+      13,
+      1
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG009",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG001",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     11,
+     0
+    ],
+    "cells": [
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     12,
+     0
+    ],
+    "cells": [
+     [
+      12,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG003",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "terminal_two_room",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG007",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "terminal_two_room",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ],
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ],
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ],
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ],
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ],
+     [
+      11,
+      0
+     ]
+    ],
+    "ok": false,
+    "orient": 1,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 1,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "ok": false,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "ok": false,
+    "reason": "footprint_over_wall"
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "ok": false,
+    "reason": "out_of_bounds"
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "ok": true,
+    "reason": ""
+   }
+  ]
+ },
+ {
+  "card": "DG009",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "terminal_two_room",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ },
+ {
+  "card": "DG001",
+  "enter": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "ok": true,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "ok": true,
+    "reason": ""
+   }
+  ],
+  "fixture": "terminal_two_room",
+  "massive": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "nearest_empty": [
+     0,
+     0
+    ]
+   }
+  ],
+  "place": [
+   {
+    "anchor": [
+     0,
+     0
+    ],
+    "cells": [
+     [
+      0,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     0
+    ],
+    "cells": [
+     [
+      1,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "cells": [
+     [
+      2,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "cells": [
+     [
+      3,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "cells": [
+     [
+      4,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "cells": [
+     [
+      5,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     6,
+     0
+    ],
+    "cells": [
+     [
+      6,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     7,
+     0
+    ],
+    "cells": [
+     [
+      7,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     8,
+     0
+    ],
+    "cells": [
+     [
+      8,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     9,
+     0
+    ],
+    "cells": [
+     [
+      9,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     10,
+     0
+    ],
+    "cells": [
+     [
+      10,
+      0
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     0,
+     1
+    ],
+    "cells": [
+     [
+      0,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     1,
+     1
+    ],
+    "cells": [
+     [
+      1,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   },
+   {
+    "anchor": [
+     2,
+     1
+    ],
+    "cells": [
+     [
+      2,
+      1
+     ]
+    ],
+    "ok": true,
+    "orient": 0,
+    "reason": ""
+   }
+  ],
+  "push": [
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     2,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     3,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     4,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "empty",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "rebel",
+    "victims": []
+   },
+   {
+    "anchor": [
+     5,
+     0
+    ],
+    "occ": "ally",
+    "victims": []
+   }
+  ],
+  "rotate": []
+ }
+]

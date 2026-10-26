@@ -1,0 +1,18 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a2_woundall",
+  "width": 10, "height": 5,
+  "flags": { "interior": [], "difficult": [], "blocking": [], "impassable": [] },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,2]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "obj-terminal", "role": "terminal", "cells": [[9,4]], "weight": 2 }
+  ],
+  "victoryCounter": "woundAll",
+  "_comment": "M2a.2 VictoryCounter board. Declares victoryCounter woundAll explicitly (custom mission, concept 3.3.0 v3.5): the win is 'every hero wounded at least once', progress irreversible. Scenario variants may override the counter per scenario JSON (scenarios_m2a2.json 'victoryCounter'). No roundLimit, no triggers -> posture class Eliminate; the W value function then IS the counter delta."
+}

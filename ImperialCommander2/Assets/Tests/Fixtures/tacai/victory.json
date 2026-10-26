@@ -1,0 +1,1468 @@
+[
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "woundAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_toucher",
+      "v": [
+       1,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "v": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": true,
+      "tgt": "r_toucher"
+     },
+     {
+      "imm": false,
+      "tgt": "r_healthy"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": null,
+      "tgt": "r_toucher"
+     },
+     {
+      "node": [
+       8,
+       3
+      ],
+      "tgt": "r_healthy"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "woundAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_toucher",
+      "w": [
+       1,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "counter_bearer",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_toucher",
+    "v": [
+     1,
+     0,
+     0,
+     2.666667,
+     -2
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_healthy",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "capture"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_5hp",
+      "v": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_1hp",
+      "v": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r_5hp"
+     },
+     {
+      "imm": true,
+      "tgt": "r_1hp"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": [
+       8,
+       4
+      ],
+      "tgt": "r_5hp"
+     },
+     {
+      "node": null,
+      "tgt": "r_1hp"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "capture",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_5hp",
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_1hp",
+      "w": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "counter_capture",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_5hp",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_1hp",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -1
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "incapacitateAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_5hp",
+      "v": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_1hp",
+      "v": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r_5hp"
+     },
+     {
+      "imm": true,
+      "tgt": "r_1hp"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": [
+       8,
+       4
+      ],
+      "tgt": "r_5hp"
+     },
+     {
+      "node": null,
+      "tgt": "r_1hp"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "incapacitateAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_5hp",
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_1hp",
+      "w": [
+       0,
+       1,
+       -1,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "counter_incapacitate",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_5hp",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_1hp",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -1
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "woundAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "v": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "v": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r_wounded"
+     },
+     {
+      "imm": true,
+      "tgt": "r_healthy"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": [
+       8,
+       4
+      ],
+      "tgt": "r_wounded"
+     },
+     {
+      "node": null,
+      "tgt": "r_healthy"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "woundAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "counter_woundall",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_wounded",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -2
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_healthy",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "deny",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: Verwehrziel noch umkämpft",
+    "round": 1,
+    "to": "deny"
+   }
+  ],
+  "public": {
+   "denyTriggers": [
+    "item-relic"
+   ],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r1"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       7,
+       2
+      ]
+     },
+     {
+      "node": [
+       7,
+       2
+      ],
+      "tgt": "r1"
+     }
+    ],
+    "posture": "deny",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r1",
+      "w": [
+       1,
+       -1,
+       -4
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "deny_item",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r1",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r5hp"
+     },
+     {
+      "imm": false,
+      "tgt": "r1hp"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": [
+       8,
+       3
+      ],
+      "tgt": "r5hp"
+     },
+     {
+      "node": [
+       8,
+       3
+      ],
+      "tgt": "r1hp"
+     }
+    ],
+    "posture": "eliminate",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r5hp",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r1hp",
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "eliminate_duel",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r5hp",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r1hp",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -1
+    ]
+   }
+  ]
+ },
+ {
+  "class": "protect",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [
+    "npc-wache"
+   ],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "h_low"
+     },
+     {
+      "imm": true,
+      "tgt": "h_wache"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       0,
+       3
+      ]
+     },
+     {
+      "node": [
+       0,
+       3
+      ],
+      "tgt": "h_low"
+     },
+     {
+      "node": null,
+      "tgt": "h_wache"
+     }
+    ],
+    "posture": "eliminate",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "h_low",
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "h_wache",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "protect_npc",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "h_low",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -1
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "h_wache",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "stall",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: Timer-Rennen live (Rest 6/6)",
+    "round": 1,
+    "to": "stall"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": 6
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r1"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       7,
+       2
+      ]
+     },
+     {
+      "node": [
+       7,
+       2
+      ],
+      "tgt": "r1"
+     }
+    ],
+    "posture": "stall",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r1",
+      "w": [
+       1,
+       -2,
+       -3
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "stall_terminal",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r1",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "woundAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "v": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "v": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": true,
+      "tgt": "r_wounded"
+     },
+     {
+      "imm": true,
+      "tgt": "r_healthy"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       1,
+       3
+      ]
+     },
+     {
+      "node": [
+       1,
+       3
+      ],
+      "tgt": "r_wounded"
+     },
+     {
+      "node": null,
+      "tgt": "r_healthy"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "woundAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "theater_bearer",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_wounded",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -2
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_healthy",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "woundAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_runner",
+      "v": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "v": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": true,
+      "tgt": "r_runner"
+     },
+     {
+      "imm": true,
+      "tgt": "r_healthy"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": null
+     },
+     {
+      "node": null,
+      "tgt": "r_runner"
+     },
+     {
+      "node": null,
+      "tgt": "r_healthy"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "woundAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_runner",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "theater_carry",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_runner",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -2
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_healthy",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "deny",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: Verwehrziel noch umkämpft",
+    "round": 1,
+    "to": "deny"
+   }
+  ],
+  "public": {
+   "denyTriggers": [
+    "item-relic"
+   ],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "r1"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       7,
+       2
+      ]
+     },
+     {
+      "node": [
+       7,
+       2
+      ],
+      "tgt": "r1"
+     }
+    ],
+    "posture": "deny",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r1",
+      "w": [
+       1,
+       -1,
+       -4
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "theater_deny",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r1",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "protect",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [
+    "npc-wache"
+   ],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": [],
+    "immediate": [
+     {
+      "imm": false,
+      "tgt": "h_low"
+     },
+     {
+      "imm": true,
+      "tgt": "h_wache"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       0,
+       3
+      ]
+     },
+     {
+      "node": [
+       0,
+       3
+      ],
+      "tgt": "h_low"
+     },
+     {
+      "node": null,
+      "tgt": "h_wache"
+     }
+    ],
+    "posture": "eliminate",
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "h_low",
+      "w": [
+       1,
+       -1,
+       0,
+       2.666667
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "h_wache",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "theater_protect",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "h_low",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -1
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "h_wache",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ },
+ {
+  "class": "eliminate",
+  "events": [
+   {
+    "from": "-",
+    "reason": "Ausgangslage: keine Timer-/Schutz-/Verwehrbedingung live",
+    "round": 1,
+    "to": "eliminate"
+   }
+  ],
+  "public": {
+   "denyTriggers": [],
+   "postureOverride": null,
+   "protectTriggers": [],
+   "roundLimit": null
+  },
+  "rounds": [
+   {
+    "counter": {
+     "campaignMetaBonus": false,
+     "victoryCounter": "woundAll"
+    },
+    "cv": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "v": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "v": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ],
+    "immediate": [
+     {
+      "imm": true,
+      "tgt": "r_wounded"
+     },
+     {
+      "imm": true,
+      "tgt": "r_healthy"
+     }
+    ],
+    "node": [
+     {
+      "fig": "s1",
+      "node": [
+       1,
+       3
+      ]
+     },
+     {
+      "node": [
+       1,
+       3
+      ],
+      "tgt": "r_wounded"
+     },
+     {
+      "node": null,
+      "tgt": "r_healthy"
+     }
+    ],
+    "posture": "eliminate",
+    "progress": {
+     "counter": "woundAll",
+     "healthy": 1,
+     "incapacitated": 0,
+     "wounded": 1
+    },
+    "round": 1,
+    "w": [
+     {
+      "att": "s1",
+      "tgt": "r_wounded",
+      "w": [
+       0,
+       0,
+       0,
+       2.666667,
+       -2
+      ]
+     },
+     {
+      "att": "s1",
+      "tgt": "r_healthy",
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -5
+      ]
+     }
+    ]
+   }
+  ],
+  "scenario": "theater_woundall",
+  "woundall": [
+   {
+    "att": "s1",
+    "tgt": "r_wounded",
+    "v": [
+     0,
+     0,
+     0,
+     2.666667,
+     -2
+    ]
+   },
+   {
+    "att": "s1",
+    "tgt": "r_healthy",
+    "v": [
+     0,
+     1,
+     0,
+     2.666667,
+     -5
+    ]
+   }
+  ]
+ }
+]

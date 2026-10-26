@@ -1,0 +1,1742 @@
+{
+ "board_hash": {
+  "m2a1_deny_item": "2086a0143bda5fd97ed457293a08f5db86d2f87d7d180f56bd43197f91144cee",
+  "m2a1_eliminate_duel": "992066b7207f9e290d3e4049f766a613e33a424a6d5d1a6f23a7f37bf0706e1d",
+  "m2a1_protect_npc": "bd34b576f08eb43a39870dd024b77b58d97f78c013b8b6a5f9adc483367038ae",
+  "m2a1_stall_terminal": "f8fe934946e7277af367cb01065225addea96dd0c7623cb85f948bc518d48cd0",
+  "m2a2_battle_bridge": "7607e98b04afdc3ccbabbf6037ba1c7082066a743f04375eb00b13e1aabdf7c8",
+  "m2a2_woundall": "3f95a4a3b5866c946bf9b4b7db3050de51586f12d97d752c77d10efbac2323d1",
+  "open_map_two_entrances": "023f45a04f321304f2faf46ff00b1e11bb142a876c8b84b41aa28832d1e9f018",
+  "rancor_corridor": "3f7113b27e8b5040511d9552a54bacce145f7388d44acac22a8b4737d6b1e86d",
+  "scenarios_m2a1": "05361233a2db7a6635f0f4cd0533338f1753af3a5e8428983ab9b727f983d744",
+  "scenarios_m2a2": "600130d56ae96f9fcc7b6b3e9916d26a2b14aea0fc117e4500658b30dc3ad46d",
+  "siege_courtyard": "ffa4f4a986c49949a82dfb6afa6ba5b3265ab08721f491f2be2e659b6677e34b",
+  "terminal_two_room": "f707c2f79ab3d6a2af848bc53710660a7a7416c203d0daa108f5fb267e846a6b"
+ },
+ "generated": "sim/action_builder.plan_activation + sim/victory.posture_plan/validate_posture_plan",
+ "plan_hash_alg": "sha256(json.dumps(plan.as_dict(), sort_keys=True, separators=(',',':'), ensure_ascii=True))",
+ "rng": "unused: plan_activation/posture_plan draw no randomness",
+ "round": "per-scenario startRound (world.round_no = startRound - 1)",
+ "rows": [
+  {
+   "base_hash": "a63fea9138640f16b416ea6cb5ca22b035e4ca5de642be0c25bde6a5a955b674",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "hazards_avoided": null,
+       "mp": 1,
+       "states": [
+        [
+         [
+          3,
+          2
+         ],
+         0
+        ],
+        [
+         [
+          2,
+          1
+         ],
+         0
+        ]
+       ]
+      },
+      "type": "move",
+      "why": "move 1 MP to legal attack position against r_toucher"
+     },
+     {
+      "params": {
+       "target_id": "r_toucher"
+      },
+      "type": "attack",
+      "why": "attack r_toucher after repositioning"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 8,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_toucher",
+     "tiebreak_trace": [
+      {
+       "dist": 8,
+       "id": "r_toucher",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        1,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 4,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      0,
+      0,
+      2.666667,
+      -2
+     ],
+     "why": "posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 1,
+    "why": "move-then-attack. focus: posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+   },
+   "base_violations": [],
+   "board": "m2a2_woundall",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "hazards_avoided": null,
+       "mp": 1,
+       "states": [
+        [
+         [
+          3,
+          2
+         ],
+         0
+        ],
+        [
+         [
+          2,
+          1
+         ],
+         0
+        ]
+       ]
+      },
+      "type": "move",
+      "why": "move 1 MP to legal attack position against r_toucher"
+     },
+     {
+      "params": {
+       "target_id": "r_toucher"
+      },
+      "type": "attack",
+      "why": "attack r_toucher after repositioning"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 8,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_toucher",
+     "tiebreak_trace": [
+      {
+       "dist": 8,
+       "id": "r_toucher",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        1,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 4,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      0,
+      0,
+      2.666667,
+      -2
+     ],
+     "why": "posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 1,
+    "why": "move-then-attack. focus: posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+   },
+   "plan_hash": "a63fea9138640f16b416ea6cb5ca22b035e4ca5de642be0c25bde6a5a955b674",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "counter_bearer",
+   "violations": []
+  },
+  {
+   "base_hash": "c146608ac3c730b2285ce0adf15c17cfb4fff585d12b91a7b24f728f7b80ecce",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_1hp"
+      },
+      "type": "attack",
+      "why": "attack r_1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      -1,
+      0,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   },
+   "base_violations": [],
+   "board": "m2a2_woundall",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_1hp"
+      },
+      "type": "attack",
+      "why": "attack r_1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      -1,
+      0,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   },
+   "plan_hash": "c146608ac3c730b2285ce0adf15c17cfb4fff585d12b91a7b24f728f7b80ecce",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "counter_capture",
+   "violations": []
+  },
+  {
+   "base_hash": "c146608ac3c730b2285ce0adf15c17cfb4fff585d12b91a7b24f728f7b80ecce",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_1hp"
+      },
+      "type": "attack",
+      "why": "attack r_1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      -1,
+      0,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   },
+   "base_violations": [],
+   "board": "m2a2_woundall",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_1hp"
+      },
+      "type": "attack",
+      "why": "attack r_1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        0,
+        1,
+        -1,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      -1,
+      0,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+   },
+   "plan_hash": "c146608ac3c730b2285ce0adf15c17cfb4fff585d12b91a7b24f728f7b80ecce",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "counter_incapacitate",
+   "violations": []
+  },
+  {
+   "base_hash": "81c833edfc2c4d4c91e9a9b06d5dd8c164c69bdbb338597bb356e0ef5ffc3ee9",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 6), r_wounded(dist 2); tiebreak dist: r_healthy wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 6), r_wounded(dist 2); tiebreak dist: r_healthy wins (shorter counting-space distance = 6)"
+   },
+   "base_violations": [],
+   "board": "m2a2_woundall",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 6,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 6,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 6), r_wounded(dist 2); tiebreak dist: r_healthy wins (shorter counting-space distance = 6)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 6), r_wounded(dist 2); tiebreak dist: r_healthy wins (shorter counting-space distance = 6)"
+   },
+   "plan_hash": "81c833edfc2c4d4c91e9a9b06d5dd8c164c69bdbb338597bb356e0ef5ffc3ee9",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "counter_woundall",
+   "violations": []
+  },
+  {
+   "base_hash": "87431928605dc3e6c6c08ed8ec75177e33db5a24b7d72bdbe086f4df2795b029",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r1"
+      },
+      "type": "attack",
+      "why": "attack r1: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "deny",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -1,
+        -4
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      -4
+     ],
+     "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+   },
+   "base_violations": [],
+   "board": "m2a1_deny_item",
+   "fig": "s1",
+   "overlaid": true,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "mp": 1,
+       "states": [
+        [
+         [
+          6,
+          3
+         ],
+         0
+        ],
+        [
+         [
+          7,
+          2
+         ],
+         0
+        ]
+       ]
+      },
+      "type": "move",
+      "why": "Posture deny: Blockadeknoten [7, 2] vor Rebelle r1 besetzen (1 MP)"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "deny",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -1,
+        -4
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      -4
+     ],
+     "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 1,
+    "why": "attack now. focus: posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP) || Posture deny: Blockadeknoten [7, 2] vor Rebelle r1 besetzen"
+   },
+   "plan_hash": "c210c2aced31d1736e26e226b1e0522b21fb799f3db652348c5f0f528369df2c",
+   "posture": "deny",
+   "posture_violations": [],
+   "scenario": "deny_item",
+   "violations": []
+  },
+  {
+   "base_hash": "359710214e286e32e4ed53d13fbfebc3afdf561850ebaec3e072c16d1b930591",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r1hp"
+      },
+      "type": "attack",
+      "why": "attack r1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+   },
+   "base_violations": [],
+   "board": "m2a1_eliminate_duel",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r1hp"
+      },
+      "type": "attack",
+      "why": "attack r1hp: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r1hp",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1hp",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "r5hp",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+   },
+   "plan_hash": "359710214e286e32e4ed53d13fbfebc3afdf561850ebaec3e072c16d1b930591",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "eliminate_duel",
+   "violations": []
+  },
+  {
+   "base_hash": "96ad499a18085ee0699cc321414fc3695ae6733e35f14494e3454700be018d4d",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "h_low"
+      },
+      "type": "attack",
+      "why": "attack h_low: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 3,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "h_low",
+     "tiebreak_trace": [
+      {
+       "dist": 3,
+       "id": "h_low",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "h_wache",
+       "mp": 0,
+       "order": 3,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   },
+   "base_violations": [],
+   "board": "m2a1_protect_npc",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "h_low"
+      },
+      "type": "attack",
+      "why": "attack h_low: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 3,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "h_low",
+     "tiebreak_trace": [
+      {
+       "dist": 3,
+       "id": "h_low",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "h_wache",
+       "mp": 0,
+       "order": 3,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   },
+   "plan_hash": "96ad499a18085ee0699cc321414fc3695ae6733e35f14494e3454700be018d4d",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "protect_npc",
+   "violations": []
+  },
+  {
+   "base_hash": "227989dc8d70f5e799eb8f5219ead6d9884f25388449bce35bab453fb378ec8a",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r1"
+      },
+      "type": "attack",
+      "why": "attack r1: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 2,
+     "focus_cost_mp": 0,
+     "posture": "stall",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 2,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -2,
+        -3
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -2,
+      -3
+     ],
+     "why": "posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 5,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP)"
+   },
+   "base_violations": [],
+   "board": "m2a1_stall_terminal",
+   "fig": "s1",
+   "overlaid": true,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "mp": 1,
+       "states": [
+        [
+         [
+          6,
+          1
+         ],
+         0
+        ],
+        [
+         [
+          7,
+          2
+         ],
+         0
+        ]
+       ]
+      },
+      "type": "move",
+      "why": "Posture stall: Blockadeknoten [7, 2] vor Rebelle r1 besetzen (1 MP)"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 2,
+     "focus_cost_mp": 0,
+     "posture": "stall",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 2,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -2,
+        -3
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -2,
+      -3
+     ],
+     "why": "posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 5,
+    "mp_planned": 1,
+    "why": "attack now. focus: posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP) || Posture stall: Blockadeknoten [7, 2] vor Rebelle r1 besetzen"
+   },
+   "plan_hash": "48ec2852ae4ff7897035a52c1dd24b4a1268539ad487b7d348186265ae314efb",
+   "posture": "stall",
+   "posture_violations": [],
+   "scenario": "stall_terminal",
+   "violations": []
+  },
+  {
+   "base_hash": "70b66e59b32ba00bffafa11a7a8068c049149e76db15ebc2acd0d01f4792d942",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 3,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "base_violations": [],
+   "board": "m2a2_battle_bridge",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 3,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "plan_hash": "70b66e59b32ba00bffafa11a7a8068c049149e76db15ebc2acd0d01f4792d942",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "theater_bearer",
+   "violations": []
+  },
+  {
+   "base_hash": "afbc861879ef84168c94acb7a8e31e791177c2a2619e8fe18ae452ddfb1de569",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 11,
+       "id": "r_runner",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "base_violations": [],
+   "board": "m2a2_battle_bridge",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 11,
+       "id": "r_runner",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "plan_hash": "afbc861879ef84168c94acb7a8e31e791177c2a2619e8fe18ae452ddfb1de569",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "theater_carry",
+   "violations": []
+  },
+  {
+   "base_hash": "87431928605dc3e6c6c08ed8ec75177e33db5a24b7d72bdbe086f4df2795b029",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r1"
+      },
+      "type": "attack",
+      "why": "attack r1: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "deny",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -1,
+        -4
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      -4
+     ],
+     "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+   },
+   "base_violations": [],
+   "board": "m2a1_deny_item",
+   "fig": "s1",
+   "overlaid": true,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "mp": 1,
+       "states": [
+        [
+         [
+          6,
+          3
+         ],
+         0
+        ],
+        [
+         [
+          7,
+          2
+         ],
+         0
+        ]
+       ]
+      },
+      "type": "move",
+      "why": "Posture deny: Blockadeknoten [7, 2] vor Rebelle r1 besetzen (1 MP)"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 4,
+     "focus_cost_mp": 0,
+     "posture": "deny",
+     "target": "r1",
+     "tiebreak_trace": [
+      {
+       "dist": 4,
+       "id": "r1",
+       "mp": 0,
+       "order": 1,
+       "vitality": 5,
+       "w": [
+        1,
+        -1,
+        -4
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      -4
+     ],
+     "why": "posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 1,
+    "why": "attack now. focus: posture deny: W-argmax r1 [r1:W[1, -1, -4]]; can attack r1 from current position (0 MP) || Posture deny: Blockadeknoten [7, 2] vor Rebelle r1 besetzen"
+   },
+   "plan_hash": "c210c2aced31d1736e26e226b1e0522b21fb799f3db652348c5f0f528369df2c",
+   "posture": "deny",
+   "posture_violations": [],
+   "scenario": "theater_deny",
+   "violations": []
+  },
+  {
+   "base_hash": "96ad499a18085ee0699cc321414fc3695ae6733e35f14494e3454700be018d4d",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "h_low"
+      },
+      "type": "attack",
+      "why": "attack h_low: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 3,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "h_low",
+     "tiebreak_trace": [
+      {
+       "dist": 3,
+       "id": "h_low",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "h_wache",
+       "mp": 0,
+       "order": 3,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   },
+   "base_violations": [],
+   "board": "m2a1_protect_npc",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "h_low"
+      },
+      "type": "attack",
+      "why": "attack h_low: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 3,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "h_low",
+     "tiebreak_trace": [
+      {
+       "dist": 3,
+       "id": "h_low",
+       "mp": 0,
+       "order": 2,
+       "vitality": 1,
+       "w": [
+        1,
+        -1,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 2,
+       "id": "h_wache",
+       "mp": 0,
+       "order": 3,
+       "vitality": 5,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      1,
+      -1,
+      0,
+      2.666667
+     ],
+     "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+   },
+   "plan_hash": "96ad499a18085ee0699cc321414fc3695ae6733e35f14494e3454700be018d4d",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "theater_protect",
+   "violations": []
+  },
+  {
+   "base_hash": "70b66e59b32ba00bffafa11a7a8068c049149e76db15ebc2acd0d01f4792d942",
+   "base_plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 3,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "base_violations": [],
+   "board": "m2a2_battle_bridge",
+   "fig": "s1",
+   "overlaid": false,
+   "plan": {
+    "actions": [
+     {
+      "params": {
+       "target_id": "r_healthy"
+      },
+      "type": "attack",
+      "why": "attack r_healthy: in range and LOS from current position"
+     }
+    ],
+    "fig": "s1",
+    "focus": {
+     "count_dist": 12,
+     "focus_cost_mp": 0,
+     "posture": "eliminate",
+     "target": "r_healthy",
+     "tiebreak_trace": [
+      {
+       "dist": 12,
+       "id": "r_healthy",
+       "mp": 0,
+       "order": 2,
+       "vitality": 5,
+       "w": [
+        0,
+        1,
+        0,
+        2.666667,
+        -5
+       ],
+       "weight": 0.0
+      },
+      {
+       "dist": 3,
+       "id": "r_wounded",
+       "mp": 0,
+       "order": 1,
+       "vitality": 2,
+       "w": [
+        0,
+        0,
+        0,
+        2.666667,
+        -2
+       ],
+       "weight": 0.0
+      }
+     ],
+     "w": [
+      0,
+      1,
+      0,
+      2.666667,
+      -5
+     ],
+     "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    },
+    "mp_budget": 4,
+    "mp_planned": 0,
+    "why": "attack now. focus: posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_wounded:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_wounded(dist 3); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+   },
+   "plan_hash": "70b66e59b32ba00bffafa11a7a8068c049149e76db15ebc2acd0d01f4792d942",
+   "posture": "eliminate",
+   "posture_violations": [],
+   "scenario": "theater_woundall",
+   "violations": []
+  }
+ ],
+ "seed": 1,
+ "units_hash": "224483b8bddf2a683d5f7fe3397a85467c159a9971263908ca6a6591b4fe7be0"
+}

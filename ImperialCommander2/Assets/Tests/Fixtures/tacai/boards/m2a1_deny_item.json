@@ -1,0 +1,26 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a1_deny_item",
+  "width": 10, "height": 5,
+  "flags": {
+    "interior": [],
+    "difficult": [],
+    "blocking": [],
+    "impassable": [[8,1],[8,3],[9,1],[9,2],[9,3],[7,1],[7,3]]
+  },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,0]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "item-relic", "role": "item", "cells": [[8,2]], "weight": 2 }
+  ],
+  "triggers": [
+    { "event": "item_taken", "entity": "item-relic", "effect": "defeat" }
+  ],
+
+  "_comment": "M2a.1 deny scenario: defeat trigger bound to an objective -> Posture Deny. The relic cell (8,2) has the single entry node (7,2); the imperial wins the intercept race (1 MP vs 4 MP) and body-blocks the node (legal movement). Round 2: the scripted rebel grabs the relic; round 3 the threshold 'Item aufgenommen' deterministically flips the posture to Eliminate with a public log line."
+}

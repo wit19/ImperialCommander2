@@ -1,0 +1,479 @@
+[
+ {
+  "active": [
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "hero_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "2",
+    "zones": [
+     "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+    ]
+   },
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "counter_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "3",
+    "zones": [
+     "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+    ]
+   }
+  ],
+  "fixture": "open_map_two_entrances",
+  "heat": {
+   "0": "7"
+  },
+  "seq": [
+   {
+    "hero": "R1",
+    "op": "hero_activated"
+   },
+   {
+    "op": "damage",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "hero_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "1",
+     "zones": [
+      "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+     ]
+    }
+   },
+   {
+    "op": "wound_flip",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "counter_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "3/2",
+     "zones": [
+      "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+     ]
+    }
+   },
+   {
+    "op": "on_defeat",
+    "ring": null
+   },
+   {
+    "op": "tap",
+    "rings": [
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "hero_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "2",
+      "zones": [
+       "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+      ]
+     },
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "counter_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "3",
+      "zones": [
+       "Ankunftszone 1 + Ankunftszone 2 + Objektraum cache + Terminalraum relay"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "active": [
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "hero_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "2",
+    "zones": [
+     "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+    ]
+   },
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "counter_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "3",
+    "zones": [
+     "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+    ]
+   }
+  ],
+  "fixture": "rancor_corridor",
+  "heat": {
+   "0": "7"
+  },
+  "seq": [
+   {
+    "hero": "R1",
+    "op": "hero_activated"
+   },
+   {
+    "op": "damage",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "hero_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "1",
+     "zones": [
+      "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+     ]
+    }
+   },
+   {
+    "op": "wound_flip",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "counter_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "3/2",
+     "zones": [
+      "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+     ]
+    }
+   },
+   {
+    "op": "on_defeat",
+    "ring": null
+   },
+   {
+    "op": "tap",
+    "rings": [
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "hero_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "2",
+      "zones": [
+       "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+      ]
+     },
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "counter_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "3",
+      "zones": [
+       "Ankunftszone + Fluchtraum escape + Terminalraum terminal"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "active": [
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "hero_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "2",
+    "zones": [
+     "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+    ]
+   },
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "counter_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "3",
+    "zones": [
+     "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+    ]
+   }
+  ],
+  "fixture": "siege_courtyard",
+  "heat": {
+   "0": "7"
+  },
+  "seq": [
+   {
+    "hero": "R1",
+    "op": "hero_activated"
+   },
+   {
+    "op": "damage",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "hero_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "1",
+     "zones": [
+      "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+     ]
+    }
+   },
+   {
+    "op": "wound_flip",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "counter_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "3/2",
+     "zones": [
+      "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+     ]
+    }
+   },
+   {
+    "op": "on_defeat",
+    "ring": null
+   },
+   {
+    "op": "tap",
+    "rings": [
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "hero_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "2",
+      "zones": [
+       "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+      ]
+     },
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "counter_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "3",
+      "zones": [
+       "Ankunftszone 1 + Ankunftszone 2 + Ankunftszone 3 + Ankunftszone 4 + Objektraum crate + Terminalraum terminal"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "active": [
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "hero_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "2",
+    "zones": [
+     "Ankunftszone"
+    ]
+   },
+   {
+    "group": "G1",
+    "heroes": [
+     "R1"
+    ],
+    "kind": "counter_ring",
+    "max_dist": 5,
+    "min_dist": 1,
+    "round": 1,
+    "sharpened": true,
+    "weight": "3",
+    "zones": [
+     "Ankunftszone"
+    ]
+   }
+  ],
+  "fixture": "terminal_two_room",
+  "heat": {
+   "0": "7",
+   "1": "0"
+  },
+  "seq": [
+   {
+    "hero": "R1",
+    "op": "hero_activated"
+   },
+   {
+    "op": "damage",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "hero_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "1",
+     "zones": [
+      "Ankunftszone"
+     ]
+    }
+   },
+   {
+    "op": "wound_flip",
+    "ring": {
+     "group": "G1",
+     "heroes": [
+      "R1"
+     ],
+     "kind": "counter_ring",
+     "max_dist": 5,
+     "min_dist": 1,
+     "round": 1,
+     "sharpened": false,
+     "weight": "3/2",
+     "zones": [
+      "Ankunftszone"
+     ]
+    }
+   },
+   {
+    "op": "on_defeat",
+    "ring": null
+   },
+   {
+    "op": "tap",
+    "rings": [
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "hero_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "2",
+      "zones": [
+       "Ankunftszone"
+      ]
+     },
+     {
+      "group": "G1",
+      "heroes": [
+       "R1"
+      ],
+      "kind": "counter_ring",
+      "max_dist": 5,
+      "min_dist": 1,
+      "round": 1,
+      "sharpened": true,
+      "weight": "3",
+      "zones": [
+       "Ankunftszone"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,45 @@
+{
+  "schema": "tacai.board/1",
+  "name": "siege_courtyard",
+  "width": 13, "height": 11,
+  "flags": {
+    "interior": [
+      [3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[9,7],
+      [3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],
+      [3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[9,9],
+      [3,10],[4,10],[5,10],[6,10],[7,10],[8,10],[9,10]
+    ],
+    "difficult": [[2,3],[3,3]],
+    "blocking": [[9,3]],
+    "impassable": []
+  },
+  "edges": {
+    "wall": [
+      [[3,6],[3,7]], [[5,6],[5,7]], [[7,6],[7,7]], [[8,6],[8,7]], [[9,6],[9,7]],
+      [[5,4],[5,5]], [[6,4],[6,5]]
+    ],
+    "blocking": [],
+    "impassable": []
+  },
+  "doors": [
+    {"cells": [[6,6],[6,7]], "locked": true,  "initially_open": false},
+    {"cells": [[4,6],[4,7]], "locked": false, "initially_open": false}
+  ],
+  "hazards": [
+    {"id": "ow-wall", "kind": "overwatch", "cells": [[5,6]], "damage": 2}
+  ],
+  "deployment_points": [
+    {"id": "DP-YARD", "cells": [[6,0],[7,0]], "colors": ["green"],
+     "massive_allowed": false, "description": "courtyard south entrance"},
+    {"id": "DP-ATZ-W", "cells": [[1,0],[1,1]], "colors": ["green"],
+     "massive_allowed": true, "description": "AT walker deploy zone west"},
+    {"id": "DP-ATZ-E", "cells": [[11,0],[11,1]], "colors": ["green"],
+     "massive_allowed": true, "description": "AT walker deploy zone east"},
+    {"id": "DP-HALL", "cells": [[5,8]], "colors": ["red"],
+     "massive_allowed": false, "description": "interior garrison point (mission-unlocked red DP)"}
+  ],
+  "objectives": [
+    {"id": "terminal", "role": "terminal", "cells": [[6,9]], "weight": 3},
+    {"id": "crate", "role": "item", "cells": [[2,5]], "weight": 1}
+  ]
+}

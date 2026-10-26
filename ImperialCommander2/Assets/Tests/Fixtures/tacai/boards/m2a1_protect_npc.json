@@ -1,0 +1,24 @@
+{
+  "schema": "tacai.board/1",
+  "name": "m2a1_protect_npc",
+  "width": 12, "height": 5,
+  "flags": { "interior": [], "difficult": [], "blocking": [], "impassable": [] },
+  "edges": { "wall": [], "blocking": [], "impassable": [] },
+  "doors": [],
+  "hazards": [],
+  "deployment_points": [
+    { "id": "DP-A", "cells": [[0,0]], "colors": ["green"],
+      "massive_allowed": false, "description": "imperial arrival" }
+  ],
+  "objectives": [
+    { "id": "obj-terminal", "role": "terminal", "cells": [[0,4]], "weight": 1 }
+  ],
+  "triggers": [
+    { "event": "entity_death", "entity": "npc-wache", "effect": "defeat" }
+  ],
+  "protectedEntities": [
+    { "id": "npc-wache", "cells": [[10,2]], "vitality": 6 }
+  ],
+
+  "_comment": "M2a.1 scenario c) Protect: trigger 'Wache NPC tot = defeat' (mission class Protect per the derivation table), no roundLimit. While nothing menaces the guard the effective posture is Eliminate and the killable 1-vitality rebel holds the focus. Once a rebel enters the threat range of the Wache (terrain cost <= speed+1), the threshold 'Objekt unter Angriff' flips the posture with a public log entry and the focus tilts onto that rebel."
+}

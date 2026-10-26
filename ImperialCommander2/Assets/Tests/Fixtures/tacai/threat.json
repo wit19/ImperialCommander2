@@ -1,0 +1,308 @@
+[
+ {
+  "final": {
+   "balance": 6,
+   "earned": 20,
+   "events": [
+    {
+     "balance_after": 2,
+     "card": "DG021",
+     "cost": 2,
+     "forced": true,
+     "release": "gB",
+     "round": 2
+    },
+    {
+     "balance_after": 4,
+     "card": "DG021",
+     "cost": 2,
+     "forced": true,
+     "release": "gD",
+     "round": 4
+    },
+    {
+     "balance_after": 6,
+     "card": "DG001",
+     "cost": 4,
+     "forced": true,
+     "release": "gA",
+     "round": 6
+    },
+    {
+     "balance_after": 6,
+     "card": "DG009",
+     "cost": 6,
+     "forced": true,
+     "release": "gC",
+     "round": 8
+    }
+   ],
+   "spent": 14
+  },
+  "idle": 2,
+  "save": 2,
+  "seq": [
+   {
+    "balance": 2,
+    "income": 2,
+    "pick": null,
+    "round": 1,
+    "wait": true
+   },
+   {
+    "balance": 2,
+    "income": 2,
+    "pick": "gB",
+    "round": 2,
+    "wait": true
+   },
+   {
+    "balance": 4,
+    "income": 2,
+    "pick": null,
+    "round": 3,
+    "wait": true
+   },
+   {
+    "balance": 4,
+    "income": 2,
+    "pick": "gD",
+    "round": 4,
+    "wait": true
+   },
+   {
+    "balance": 7,
+    "income": 3,
+    "pick": null,
+    "round": 5,
+    "wait": true
+   },
+   {
+    "balance": 6,
+    "income": 3,
+    "pick": "gA",
+    "round": 6,
+    "wait": true
+   },
+   {
+    "balance": 9,
+    "income": 3,
+    "pick": null,
+    "round": 7,
+    "wait": true
+   },
+   {
+    "balance": 6,
+    "income": 3,
+    "pick": "gC",
+    "round": 8,
+    "wait": false
+   }
+  ],
+  "tag": "ref"
+ },
+ {
+  "final": {
+   "balance": 10,
+   "earned": 24,
+   "events": [
+    {
+     "balance_after": 0,
+     "card": "DG021",
+     "cost": 2,
+     "forced": true,
+     "release": "gB",
+     "round": 1
+    },
+    {
+     "balance_after": 0,
+     "card": "DG021",
+     "cost": 2,
+     "forced": true,
+     "release": "gD",
+     "round": 2
+    },
+    {
+     "balance_after": 2,
+     "card": "DG001",
+     "cost": 4,
+     "forced": true,
+     "release": "gA",
+     "round": 4
+    },
+    {
+     "balance_after": 2,
+     "card": "DG009",
+     "cost": 6,
+     "forced": true,
+     "release": "gC",
+     "round": 6
+    }
+   ],
+   "spent": 14
+  },
+  "idle": 1,
+  "save": 0,
+  "seq": [
+   {
+    "balance": 0,
+    "income": 2,
+    "pick": "gB",
+    "round": 1,
+    "wait": false
+   },
+   {
+    "balance": 0,
+    "income": 2,
+    "pick": "gD",
+    "round": 2,
+    "wait": false
+   },
+   {
+    "balance": 3,
+    "income": 3,
+    "pick": null,
+    "round": 3,
+    "wait": false
+   },
+   {
+    "balance": 2,
+    "income": 3,
+    "pick": "gA",
+    "round": 4,
+    "wait": false
+   },
+   {
+    "balance": 5,
+    "income": 3,
+    "pick": null,
+    "round": 5,
+    "wait": false
+   },
+   {
+    "balance": 2,
+    "income": 3,
+    "pick": "gC",
+    "round": 6,
+    "wait": false
+   },
+   {
+    "balance": 6,
+    "income": 4,
+    "pick": null,
+    "round": 7,
+    "wait": false
+   },
+   {
+    "balance": 10,
+    "income": 4,
+    "pick": null,
+    "round": 8,
+    "wait": false
+   }
+  ],
+  "tag": "S1dump"
+ },
+ {
+  "final": {
+   "balance": 8,
+   "earned": 22,
+   "events": [
+    {
+     "balance_after": 2,
+     "card": "DG021",
+     "cost": 2,
+     "forced": true,
+     "release": "gB",
+     "round": 2
+    },
+    {
+     "balance_after": 2,
+     "card": "DG021",
+     "cost": 2,
+     "forced": false,
+     "release": "gD",
+     "round": 3
+    },
+    {
+     "balance_after": 4,
+     "card": "DG001",
+     "cost": 4,
+     "forced": true,
+     "release": "gA",
+     "round": 5
+    },
+    {
+     "balance_after": 4,
+     "card": "DG009",
+     "cost": 6,
+     "forced": true,
+     "release": "gC",
+     "round": 7
+    }
+   ],
+   "spent": 14
+  },
+  "idle": 2,
+  "save": 1,
+  "seq": [
+   {
+    "balance": 2,
+    "income": 2,
+    "pick": null,
+    "round": 1,
+    "wait": true
+   },
+   {
+    "balance": 2,
+    "income": 2,
+    "pick": "gB",
+    "round": 2,
+    "wait": true
+   },
+   {
+    "balance": 2,
+    "income": 2,
+    "pick": "gD",
+    "round": 3,
+    "wait": false
+   },
+   {
+    "balance": 5,
+    "income": 3,
+    "pick": null,
+    "round": 4,
+    "wait": true
+   },
+   {
+    "balance": 4,
+    "income": 3,
+    "pick": "gA",
+    "round": 5,
+    "wait": false
+   },
+   {
+    "balance": 7,
+    "income": 3,
+    "pick": null,
+    "round": 6,
+    "wait": true
+   },
+   {
+    "balance": 4,
+    "income": 3,
+    "pick": "gC",
+    "round": 7,
+    "wait": false
+   },
+   {
+    "balance": 8,
+    "income": 4,
+    "pick": null,
+    "round": 8,
+    "wait": false
+   }
+  ],
+  "tag": "S2"
+ }
+]

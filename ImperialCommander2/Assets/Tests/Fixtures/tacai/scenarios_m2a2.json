@@ -1,0 +1,409 @@
+{
+  "_comment": "M2a.2 scenarios. Counter scenarios run through the M2a.1 posture harness (victory.run_scenario) with a per-scenario victoryCounter override on top of the fixture field; theater scenarios run through the two-level doctrine harness (doctrine.run_theater_scenario): doctrine selection sees ONLY the AppView (belief feed + posture + geometry), execution resolves the card on board truth. Rebels act only via script -> seed-independent hashes.",
+  "counter_woundall": {
+    "board": "m2a2_woundall",
+    "rounds": 1,
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "r_wounded",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          5,
+          2
+        ],
+        "vitality": 2
+      },
+      {
+        "id": "r_healthy",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          8,
+          3
+        ],
+        "vitality": 5
+      }
+    ],
+    "script": []
+  },
+  "counter_incapacitate": {
+    "board": "m2a2_woundall",
+    "victoryCounter": "incapacitateAll",
+    "rounds": 1,
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "r_5hp",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          5,
+          2
+        ],
+        "vitality": 5
+      },
+      {
+        "id": "r_1hp",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          8,
+          3
+        ],
+        "vitality": 1
+      }
+    ],
+    "script": []
+  },
+  "counter_capture": {
+    "board": "m2a2_woundall",
+    "victoryCounter": "capture",
+    "rounds": 1,
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "r_5hp",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          5,
+          2
+        ],
+        "vitality": 5
+      },
+      {
+        "id": "r_1hp",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          8,
+          3
+        ],
+        "vitality": 1
+      }
+    ],
+    "script": []
+  },
+  "counter_bearer": {
+    "board": "m2a2_woundall",
+    "rounds": 1,
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "r_toucher",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          9,
+          4
+        ],
+        "vitality": 2
+      },
+      {
+        "id": "r_healthy",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          6,
+          3
+        ],
+        "vitality": 5
+      }
+    ],
+    "script": []
+  },
+  "theater_woundall": {
+    "board": "m2a2_battle_bridge",
+    "victoryCounter": "woundAll",
+    "rounds": 3,
+    "entrances": [
+      [
+        13,
+        5
+      ],
+      [
+        12,
+        5
+      ]
+    ],
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "r_wounded",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          3,
+          1
+        ],
+        "vitality": 2
+      },
+      {
+        "id": "r_healthy",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          11,
+          4
+        ],
+        "vitality": 5
+      }
+    ],
+    "script": [
+      {
+        "round": 2,
+        "open": [
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "theater_bearer": {
+    "board": "m2a2_battle_bridge",
+    "victoryCounter": "woundAll",
+    "rounds": 2,
+    "entrances": [
+      [
+        13,
+        5
+      ]
+    ],
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "r_wounded",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          3,
+          1
+        ],
+        "vitality": 2
+      },
+      {
+        "id": "r_healthy",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          11,
+          4
+        ],
+        "vitality": 5
+      }
+    ],
+    "script": [
+      {
+        "round": 2,
+        "fig": "r_wounded",
+        "move_to": [
+          12,
+          3
+        ]
+      }
+    ]
+  },
+  "theater_carry": {
+    "board": "m2a2_battle_bridge",
+    "victoryCounter": "woundAll",
+    "rounds": 2,
+    "entrances": [
+      [
+        13,
+        5
+      ]
+    ],
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "r_runner",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          11,
+          3
+        ],
+        "vitality": 2
+      },
+      {
+        "id": "r_healthy",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          11,
+          4
+        ],
+        "vitality": 5
+      }
+    ],
+    "script": [
+      {
+        "round": 1,
+        "take": "obj-terminal"
+      },
+      {
+        "round": 2,
+        "fig": "r_runner",
+        "move_to": [
+          12,
+          0
+        ]
+      }
+    ]
+  },
+  "theater_deny": {
+    "board": "m2a1_deny_item",
+    "rounds": 2,
+    "entrances": [
+      [
+        1,
+        2
+      ]
+    ],
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          6,
+          3
+        ]
+      },
+      {
+        "id": "r1",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          3,
+          2
+        ]
+      }
+    ],
+    "script": [
+      {
+        "round": 2,
+        "take": "item-relic"
+      }
+    ]
+  },
+  "theater_protect": {
+    "board": "m2a1_protect_npc",
+    "rounds": 2,
+    "entrances": [
+      [
+        11,
+        2
+      ]
+    ],
+    "figures": [
+      {
+        "id": "s1",
+        "card": "DG001",
+        "team": "imperial",
+        "at": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "npc-wache",
+        "card": "DG003",
+        "team": "npc"
+      },
+      {
+        "id": "h_low",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          4,
+          2
+        ],
+        "vitality": 1
+      },
+      {
+        "id": "h_wache",
+        "card": "DG050",
+        "team": "rebel",
+        "at": [
+          1,
+          4
+        ]
+      }
+    ],
+    "script": [
+      {
+        "round": 2,
+        "fig": "h_wache",
+        "move_to": [
+          8,
+          2
+        ]
+      }
+    ]
+  }
+}

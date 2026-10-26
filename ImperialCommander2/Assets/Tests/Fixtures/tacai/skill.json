@@ -1,0 +1,315 @@
+{
+ "notes": {
+  "S1": " | Skill S1 am Steuer: Timer-Rennrechnung ohne Horizont — nur reagiert; Counter-Regeln ungelesen",
+  "S2": " | Skill S2 am Steuer: Counter-Regeln ungelesen",
+  "S3": " | Skill S3 am Steuer",
+  "S4": " | Skill S4 am Steuer: Timer-Rennrechnung proaktiv (Fenster 2 Runden)",
+  "S5": " | Skill S5 am Steuer: Timer-Rennrechnung proaktiv (Fenster 2 Runden)"
+ },
+ "profiles": {
+  "S1": {
+   "counter_blind": true,
+   "delta_miss": [
+    0.0,
+    1
+   ],
+   "delta_rank_band": [
+    2,
+    4
+   ],
+   "econ_dump": true,
+   "econ_idle": 1,
+   "econ_noise": 0.0,
+   "econ_save": 0,
+   "feed_delay": 2,
+   "feed_halve": true,
+   "horizon": 1,
+   "level": "S1",
+   "positioning": "first",
+   "rho": 0
+  },
+  "S2": {
+   "counter_blind": true,
+   "delta_miss": [
+    0.3,
+    3
+   ],
+   "delta_rank_band": [
+    1,
+    2
+   ],
+   "econ_dump": false,
+   "econ_idle": 2,
+   "econ_noise": 0.0,
+   "econ_save": 1,
+   "feed_delay": 2,
+   "feed_halve": false,
+   "horizon": 2,
+   "level": "S2",
+   "positioning": "hillclimb",
+   "rho": 1
+  },
+  "S3": {
+   "counter_blind": false,
+   "delta_miss": [
+    0.1,
+    3
+   ],
+   "delta_rank_band": [
+    1,
+    2
+   ],
+   "econ_dump": false,
+   "econ_idle": 2,
+   "econ_noise": 0.12,
+   "econ_save": 2,
+   "feed_delay": 1,
+   "feed_halve": false,
+   "horizon": 2,
+   "level": "S3",
+   "positioning": "noavoid",
+   "rho": 2
+  },
+  "S4": {
+   "counter_blind": false,
+   "delta_miss": [
+    0.05,
+    2
+   ],
+   "delta_rank_band": [
+    1,
+    1
+   ],
+   "econ_dump": false,
+   "econ_idle": 2,
+   "econ_noise": 0.0,
+   "econ_save": 2,
+   "feed_delay": 0,
+   "feed_halve": false,
+   "horizon": 3,
+   "level": "S4",
+   "positioning": "full",
+   "rho": 2
+  },
+  "S5": {
+   "counter_blind": false,
+   "delta_miss": [
+    0.0,
+    1
+   ],
+   "delta_rank_band": [
+    1,
+    1
+   ],
+   "econ_dump": false,
+   "econ_idle": 2,
+   "econ_noise": 0.0,
+   "econ_save": 2,
+   "feed_delay": 0,
+   "feed_halve": false,
+   "horizon": 3,
+   "level": "S5",
+   "positioning": "full",
+   "rho": 3
+  }
+ },
+ "rank": {
+  "S1": {
+   "below": [
+    [
+     3,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     1
+    ]
+   ],
+   "draws": [
+    2,
+    3,
+    2,
+    1,
+    3
+   ],
+   "u": [
+    0.2726412567469936,
+    0.018872786967078614,
+    0.4573258503152706,
+    0.29614633961208026,
+    0.6663815003740128
+   ]
+  },
+  "S2": {
+   "below": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "draws": [
+    1,
+    1,
+    1,
+    1,
+    2
+   ],
+   "u": [
+    0.9969708668971122,
+    0.7833869331764515,
+    0.13259843399217586,
+    0.8924771858180537,
+    0.6938535294538757
+   ]
+  },
+  "S3": {
+   "below": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "draws": [
+    2,
+    2,
+    1,
+    1,
+    2
+   ],
+   "u": [
+    0.1468804989630622,
+    0.6583281498186493,
+    0.8679622907922185,
+    0.010157321392120222,
+    0.8545464861055708
+   ]
+  },
+  "S4": {
+   "below": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "draws": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "u": [
+    0.82285527527491,
+    0.7106990368343005,
+    0.29233597688902446,
+    0.362336784012935,
+    0.8673349106746044
+   ]
+  },
+  "S5": {
+   "below": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "draws": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "u": [
+    0.18755674947194023,
+    0.7378247774178393,
+    0.3877812726968345,
+    0.29348391735605084,
+    0.03123957375520836
+   ]
+  }
+ },
+ "timer": {
+  "S1": null,
+  "S2": 1,
+  "S3": 1,
+  "S4": 2,
+  "S5": 2
+ }
+}
