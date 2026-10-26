@@ -99,6 +99,19 @@ damit ausgeschlossen.
 - Heldenschaden muss wie gehabt manuell in die Figuren-Tracker eingetragen werden;
   die KI nutzt die Deltas (Schadensherd → Angreifer-Vermutung) und Heldenschaden
   als Threat-Gewicht (HeroThreatProfile).
-- Der Fokus nutzt ausschließlich **gedruckte** Kartenwerte (Waffen, Fähigkeitstier,
-  EP-Kosten) — keine Hausregelwerte.
+- Der in-App-Fokus nutzt aktuell **gedruckte Vorzugziele + Aufstellungsreihenfolge**;
+  die volle ThreatScore-/Doktrinen-Rechnung (HeroThreatProfile über Weltmodell) greift
+  erst mit dem Hex-Adapter (M5). Der ThreatScore in `reference`/`overlord` ist daher
+  im Playtest noch gleichauf — die EXPLAIN-Texte zeigen, was die KI wirklich nutzt.
+- **Nicht dieselbe Gegner-Karte zweimal als eigene Gruppe aufstellen** (z. B. zwei
+  eigenständige Sturmtruppen-Gruppen mit identischer Karte): Planner-Status ist
+  pro Karten-ID geführt, die zweite Instanz zieht eine zweite Ordnerkarte (bekannt,
+  M5-Instanz-Keying). Gruppengröße 2+3 derselben Karte ist wie immer okay.
+- Master-Schalter **nicht mitten in einer laufenden Mission umschalten** — geplant
+  wird ohnehin nur rundenweise, aber ein Umschalten ist kein sauberer Moduswechsel.
+- Die angezeigte Ordnerkarte zeigt abstrakte Blöcke (`move`/`attack`) statt des
+  gedruckten Instruktionstextes (Platzhalter-UX, vor dem PR gemappt).
 - Side-Missions ohne Order-Deck fallen auf die Zufallsreihenfolge zurück (dokumentiert).
+- Custom-Missionen mit Embedded-Karten (eigene Karten-IDs): diese Gruppen laufen
+  automatisch auf dem Legacy-Pfad (kein Order-Deck = kein Plan), der Rest der Mission
+  bleibt taktisch.
