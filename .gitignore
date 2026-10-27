@@ -69,3 +69,6 @@ crashlytics-build.properties
 
 # macOS Finder files
 .DS_Store
+# M8/F3: dotnet tool projects (harness/core/live-gate) MUST be versioned -
+# without them a fresh checkout cannot rebuild the gates at all.
+!tools/**/*.csproj

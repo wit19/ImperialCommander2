@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>TacticalAI.Core</AssemblyName>
+    <RootNamespace>TacticalAI.Core</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\ImperialCommander2\Assets\Scripts\TacticalAI\Core\**\*.cs" />
+  </ItemGroup>
+</Project>
