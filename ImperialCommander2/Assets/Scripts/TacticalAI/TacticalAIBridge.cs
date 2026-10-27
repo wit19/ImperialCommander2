@@ -15,11 +15,15 @@
 //
 // Documented deviations (see docs/PR_draft.md): the IC2 Saga map is a
 // tilemap of deployment points, NOT a hex grid with figure positions - there
-// is no hex world model in the Unity code to snapshot. So the spatial Core
-// Focus/belief pipeline is exposed through the WorldProvider seam below and
-// "overlord" currently plans like "reference" until a hex adapter registers
-// a provider. Posture is fixed to "eliminate" until the mission objective
-// mapping lands; group pattern defaults to "aggressive" until the M4 pattern
+// is no hex world model in the Unity code to snapshot. Per concept v4.0
+// (3.3.1b, Thomas 27.10) the planned "hex adapter" is REPLACED by a PASSIVE
+// world feed: tile graph + token-to-region reading + event stream + mission
+// properties, all read-only, zero manual position entry (canon rule: a
+// feature may never make a human report positions/state to the app). The
+// WorldProvider seam below stays as the registration point; until a passive
+// feed registers, "overlord" plans like "reference" (announced in-game).
+// Posture is fixed to "eliminate" until the mission-property posture mapper
+// lands; group pattern defaults to "aggressive" until the pattern
 // classification asset ships. None of these degrade the legacy path.
 using System;
 using System.Collections.Generic;
@@ -170,10 +174,12 @@ namespace TacticalAI
             }
 
             var mode = EffectiveMissionMode();
-            var posture = "eliminate";                 // TODO(world adapter): mission posture
+            var posture = "eliminate";                 // TODO(M5 feed): posture from mission properties
             var skill = Tac.SkillProfile.For(TacticalAISettings.SkillLevel);
-            // NOTE(overlord): full belief/doctrine needs the hex World adapter
-            // (WorldProvider seam). Until it registers, overlord plans like the
+            // NOTE(overlord): the ORD optimization goal needs the PASSIVE world
+            // feed (concept v4.0 3.3.1b) behind the WorldProvider seam - tile
+            // graph, token-to-region, event stream; NEVER manual position
+            // entry. Until the feed registers, overlord plans like the
             // reference level; the difference is only logged, never hidden.
             if (mode == "overlord" && WorldProvider == null)
             {

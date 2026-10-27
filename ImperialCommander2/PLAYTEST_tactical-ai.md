@@ -225,13 +225,16 @@ damit ausgeschlossen.
 
 
 - **OVERLORD zeigt jetzt sichtbar**, wenn es wie REFERENCE plant: der
-  Brett-Adapter (Weltmodell, M5) existiert noch nicht, deshalb fällt
-  Overlord-Planung automatisch auf den Referenz-Regelsatz zurück. Das war
-  bisher nur im Log sichtbar und hat im Playtest zu Verwirrung geführt
-  (27.10). Jetzt kommt einmal pro Mission ein Hinweistext im Bildschirm:
-  „Taktische KI – Overlord: Brett-Adapter noch nicht verfügbar. Planung
-  erfolgt nach den Referenz-Regeln." Wenn der M5-Adapter registriert ist,
-  erscheint der Hinweis nicht mehr und Overlord plant wirklich anders.
+  passive Welt-Feed (M5, Konzept v4.0 §3.3.1b) ist noch nicht aktiv,
+  deshalb fällt Overlord-Planung automatisch auf den Referenz-Regelsatz
+  zurück. Das war bisher nur im Log sichtbar und hat im Playtest zu
+  Verwirrung geführt (27.10). Jetzt kommt einmal pro Mission ein
+  Hinweistext im Bildschirm: „Taktische KI – Overlord: taktischer
+  Welt-Feed noch nicht aktiv. Planung erfolgt nach den Referenz-Regeln."
+  Wenn der Welt-Feed aktiv ist, erscheint der Hinweis nicht mehr und
+  Overlord plant wirklich anders. (Wichtig: Es wird NIEMALS manuelle
+  Positionsmeldung geben — der Feed liest nur, was die App ohnehin
+  automatisch weiß.)
 
 
 ## 5. Bekannte Grenzen (bewusst so entschieden)
