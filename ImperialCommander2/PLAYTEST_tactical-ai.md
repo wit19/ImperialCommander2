@@ -57,26 +57,41 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
 
 ## 4. Windows-Version bauen (Compile-Anleitung)
 
-Die App ist ein Unity-Projekt (Unity **2020.3.48f1**, URP). Windows-Build:
+Die App ist ein Unity-Projekt (Unity **2020.3.48f1**, URP; der Hub erzwingt
+mittlerweile den Sicherheits-Patch **2020.3.49f1** — der ist innerhalb derselben
+LTS-Serie unproblematisch, einfach annehmen). Windows-Build, verifiziert auf
+einem Windows-Laptop am 27.10.2026:
 
 1. **Unity Hub** installieren: <https://unity.com/download> (kostenlos, Personal-Lizenz).
-2. Im Hub → *Instanzen* → *Installieren* → **Unity 2020.3.48f1** (exakt diese Version,
-   sie steht in `ProjectSettings/ProjectVersion.txt`).
-   Beim Haken-Dialog zusätzlich anhaken:
-   - **Windows Build Support (Mono)** und **(IL2CPP)** + **Windows SDK & Compiler**.
-3. Repository holen: `git clone https://github.com/wit19/ImperialCommander2`
-   und im Hub das Verzeichnis `ImperialCommander2/ImperialCommander2` als Projekt öffnen
-   (Branch `feature/tactical-ai` checkouten).
-4. Package-Restore abwarten (Öffnen dauert beim ersten Mal mehrere Minuten — Addressables
-   und URP werden aus dem Lockfile `Packages/packages-lock.json` geladen).
-5. `File → Build Settings` → Platform **Windows, Mac, Linux → PC, Mac & Linux Standalone**,
-   Target Platform **Windows**, Architecture **x86_64**.
-   Szenen: die in Build Settings eingetragenen Szenen bleiben unverändert.
-   (Vor dem Build: `Assets → Addressables → Build → New Build → Default Build Script`,
-   sonst fehlen die Adressable-Assets im Player.)
-6. **Build** → Ordner wählen → `Imperial Commander.exe` starten. Test unter
-   `Edit → Project Settings → Player`: IL2CPP nur testen, wenn IL2CPP-Support
-   (`AotTypeEnforcer`, Android) mit angefasst wurde — Mono ist der Standard.
+2. Im Hub → *Instanzen* → *Installieren* → **Unity 2020.3.48f1** (bzw. neuester
+   2020.3.4x-Patch, steht in `ProjectSettings/ProjectVersion.txt`).
+   Beim Modul-Dialog anhaken: **Windows Build Support (Mono)** und **(IL2CPP)**.
+   *Hinweis:* Ein Modul „Windows SDK & Compiler" existiert im 2020.3-Hub
+   **nicht** (2017er-Name) — der Mono-Build braucht kein SDK und kein Visual
+   Studio. Nur IL2CPP-Anwendungen würden ein Visual Studio 2019 mit
+   C++-Arbeitsauslastung verlangen. Language Packs/VS Community abwählbar.
+3. Repository holen: `git clone https://github.com/wit19/ImperialCommander2`,
+   `git checkout feature/tactical-ai`, und im Hub das Verzeichnis
+   `ImperialCommander2/ImperialCommander2` (die Ebene mit `Assets/`) öffnen.
+4. Package-Restore/First Import abwarten (5–15 min — Addressables und URP
+   werden aus `Packages/packages-lock.json` geladen). Beim Erstimport sind
+   folgende Meldungen **harmlos** (Originalspiel-Altlasten/Import-Reihenfolge):
+   vereinzelte „Broken text PPtr"- und verwaiste `.meta`-Meldungen,
+   „FSBTool … truncated" bei drei MP3-Sounds, TMP-Shader-Fehler
+   „Distance Field SSD / TMPro_Properties.cginc" (verschwindet nach
+   Editor-Neustart, betrifft nur eine Text-Schatten-Sondervariante).
+   **Rote `error CS…`-Zeilen** sind es dagegen nicht — die bitte melden.
+5. **Addressables einmalig bauen** (sonst fehlen Karten-/Figuren-Assets im
+   Player): Menü **Window → Asset Management → Addressables → Groups**
+   (Adresse für Addressables 1.19.19; nicht unter *Panels*!), dort
+   **Build → New Build → Default Build Script**, 2–10 min bis `Build succeeded`.
+   Falls „Asset Management" im Window-Menü fehlt: der Editor blendet die
+   Menüpunkte aus, solange Skriptfehler vorliegen — erst Fehler beheben
+   (`git pull`), Editor neu starten, dann erscheint der Punkt.
+6. `File → Build Settings` → Platform **PC, Mac & Linux Standalone**
+   (ggf. *Switch Platform*), Target Platform **Windows**, Architecture **x86_64**.
+   Szenenliste unverändert lassen. **Build** → Ordner wählen →
+   `Imperial Commander 2.exe` starten. Mono ist der Standard; IL2CPP hier nicht testen.
 
 ### Kann man die Windows-Version auf Linux cross-compilieren?
 
