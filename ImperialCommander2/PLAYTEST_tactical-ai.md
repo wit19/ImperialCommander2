@@ -21,7 +21,9 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
 
 1. Kampagne wie immer konfigurieren (Helden, Ausrüstung, Fähigkeiten — alles wie gehabt).
    Die KI braucht **keine** Änderungen an der Kampagnenverwaltung.
-2. Im Spiel erscheint das schwebende Panel **TACTICAL AI**. Die Buttons schalten
+2. Die KI-Optionen sitzen im normalen **Optionen-Fenster → Reiter „UI"** ganz unten
+   (unterhalb der bestehenden Optionen, mitscrollbar; Playtest-Feedback 27.10:
+   vorher schwamm das Panel über dem Dialog). Die Buttons schalten
    (jeder klickt sich zyklisch durch seine Werte):
    - *TACTICAL AI* — Master: **off** (Default = App verhält sich exakt wie vorher) / **on**.
    - *AI MODE* — `legacy` (Vanilla-Zufall) → `reference` (Inferenz-Aktivierung +

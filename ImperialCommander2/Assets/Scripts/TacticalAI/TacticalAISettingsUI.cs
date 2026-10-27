@@ -60,18 +60,37 @@ namespace TacticalAI
             if (existing != null) { Refresh(existing.gameObject); return true; }
 
             var go = new GameObject("tacaiRoot", typeof(RectTransform));
-            go.transform.SetParent(panel.transform, false);
+            // Playtest feedback (27.10, Thomas): the old anchor floated the block
+            // over the settings dialog. Install INSIDE the tab's scroll content
+            // instead, so the rows continue the existing option list directly.
+            var sr = panel.GetComponentInChildren<UnityEngine.UI.ScrollRect>(true);
+            var host = (sr != null && sr.content != null) ? sr.content : panel.transform;
+            go.transform.SetParent(host, false);
             var rt = go.GetComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0.5f, 0f);
-            rt.anchorMax = new Vector2(0.5f, 0f);
-            rt.pivot = new Vector2(0.5f, 0f);
-            rt.anchoredPosition = new Vector2(0f, 20f);
+            rt.anchorMin = new Vector2(0f, 1f);
+            rt.anchorMax = new Vector2(0f, 1f);
+            rt.pivot = new Vector2(0.5f, 1f);
+            rt.anchoredPosition = new Vector2(0f, 0f);
             rt.sizeDelta = new Vector2(420f, 200f);
 
             var vlg = go.AddComponent<VerticalLayoutGroup>();
             vlg.childControlWidth = true;
             vlg.childControlHeight = true;
+            vlg.childForceExpandWidth = true;
             vlg.spacing = 6f;
+            var le = go.AddComponent<LayoutElement>();
+            le.minHeight = 34f;      // master toggle alone (submenu hidden)
+            le.preferredHeight = 160f; // all rows visible
+            if (host.GetComponent<LayoutGroup>() == null)
+            {
+                // scroll content without an auto-layout: pin our block just
+                // under the last positioned row so it still reads as appended.
+                float lowest = rt.anchoredPosition.y;
+                foreach (Transform row in host)
+                    if (row != go.transform && row.localPosition.y < lowest)
+                        lowest = row.localPosition.y;
+                rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, lowest - 110f);
+            }
 
             _root = go.transform;
             _subRows.Clear();
