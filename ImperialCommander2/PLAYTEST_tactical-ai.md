@@ -25,20 +25,26 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    (unterhalb der bestehenden Optionen, mitscrollbar; Playtest-Feedback 27.10:
    vorher schwamm das Panel über dem Dialog). Die Buttons schalten
    (jeder klickt sich zyklisch durch seine Werte):
-   - *TACTICAL AI* — Master: **off** (Default = App verhält sich exakt wie vorher) / **on**.
+   - *TACTICAL AI* — Master: **off** (Default = App verhält sich exakt wie vorher) / **on**
+     (= Erlaubnis; den eigentlichen Modus stellt man **pro Missionskarte** ein, siehe 3.).
    - *AI MODE* — `legacy` (Vanilla-Zufall) → `reference` (Inferenz-Aktivierung +
      taktische Zielauswahl) → `overlord` (zusätzlich harte Doktrinen: Rückzugs-/Fokusregeln).
    - *SKILL* — S1…S5 (Kompetenzkurve der Truppen).
    - *DEPLOYMENT* — `secret` / `open` (verrät die Aufstellung dem Blick aufs Brett).
    - *EXPLAIN* — `none` → `post_hoc` → `full` (Erklärtexte unter den Entscheidungen).
-   Der globale Schalter ist pro Spiel speicherfest; pro Mission kann `aiMode` in den
-   Missionsdaten zusätzlich übersteuern (Konzept §4.2.7, für uns im Playtest egal).
-3. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
+3. **Zwei-Stufen-Aktivierung (wichtig, Playtest 27.10):** Im Kampagnenbildschirm trägt
+   jede Missionskarte oben links ein Badge **AI:OFF / AI:REF / AI:ORD** (erscheint nur,
+   wenn der Master ON ist). Das Badge ist der *wahre* Schalter der Mission: Ein Klick
+   schaltet AI:OFF → AI:REF → AI:ORD → AI:OFF. Solange es auf AI:OFF steht, läuft die
+   Mission in Legacy — auch wenn global „reference" gewählt ist. (Das Badge war bis
+   v.2.2.16 unsichtbar, weil das Prefab-Objekt fehlte; seither wird es zur Laufzeit
+   erzeugt.) Der globale Schalter ist pro Spiel speicherfest (Konzept §4.2.7).
+4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
-4. Fürs Protokoll: **EXPLAIN** mindestens auf `post_hoc` — dann erscheinen die „Why"-Texte
+5. Fürs Protokoll: **EXPLAIN** mindestens auf `post_hoc` — dann erscheinen die „Why"-Texte
    (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
    im Aktivierungsablauf. Screenshots davon sind das wichtigste Playtest-Material.
-5. Alle Entscheidungen werden zusätzlich in die **Unity-Entwickler-Konsole** geloggt
+6. Alle Entscheidungen werden zusätzlich in die **Unity-Entwickler-Konsole** geloggt
    (`TacticalAIBridge::…`, deterministisch, kein Zufall). Beim Build über den Editor:
    Konsole offen lassen und am Ende als Textdatei sichern (Rechtsklick → Save).
    Für Android-Builds: Logcat-Export (`adb logcat > playtest.log`) beim Mitspielen.
@@ -48,7 +54,7 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
 - **Aktivierungsreihenfolge:** Wirkt sie „vernünftig" (Gefährliches/Gesichtetes früher),
   ohne vorhersehbar-mechanisch zu sein?
 - **Zielauswahl:** Schießt die KI nie bewusst auf einen bereits verwundeten Helden,
-  wenn ein frischer同等 gefährlich ist? (Fairness-Axiom)
+  wenn ein frischer gleichwertig gefährlich ist? (Fairness-Axiom)
 - **Rückzug/Positionierung:** Verwundete Truppen sollten sich sichtbar zurückziehen
   („Ansonsten"-Ast), gesunde vorrücken. Kein „Body-Blocking" von Türen.
 - **Kompetenz ohne Gemeinheit:** Die KI darf den Helden ruhig schlagen — aber nur mit

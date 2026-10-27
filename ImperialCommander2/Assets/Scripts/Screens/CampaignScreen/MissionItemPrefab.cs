@@ -88,6 +88,15 @@ namespace Saga
 				aiModeIcon.gameObject.SetActive( TacticalAI.TacticalAISettings.Enabled );
 				aiModeIcon.text = AiModeLabel( cs.aiMode );
 			}
+			else if ( TacticalAI.TacticalAISettings.Enabled && TMP_Settings.defaultFontAsset != null )
+			{
+				// First real UI check (playtest 27.10): the prefab never got the
+				// wired icon, so the 3-state selector was invisible. Build it at
+				// runtime instead: top-left card badge, click cycles the mode.
+				var icon = EnsureRuntimeAiModeIcon();
+				icon.gameObject.SetActive( true );
+				aiModeIcon.text = AiModeLabel( cs.aiMode );
+			}
 
 			//set translated expansion name based on mission source (official, custom, embedded)
 			if ( cs.missionSource == MissionSource.Official && !string.IsNullOrEmpty( cs.missionID ) )
@@ -257,6 +266,42 @@ namespace Saga
 			if ( mode == "reference" ) return "AI:REF";
 			if ( mode == "overlord" ) return "AI:ORD";
 			return "AI:OFF";
+		}
+
+		/// <summary>Builds the missing mission-card AI badge at runtime
+		/// (playtest 27.10): small button top-left of the card; clicking calls
+		/// OnAiModeClicked(), so the existing 3-state cycle does the rest.</summary>
+		TMP_Text EnsureRuntimeAiModeIcon()
+		{
+			var go = new GameObject( "tacaiCardBadge", typeof( RectTransform ) );
+			go.transform.SetParent( transform, false );
+			var rt = go.GetComponent<RectTransform>();
+			rt.anchorMin = new Vector2( 0f, 1f );
+			rt.anchorMax = new Vector2( 0f, 1f );
+			rt.pivot = new Vector2( 0f, 1f );
+			rt.anchoredPosition = new Vector2( 8f, -6f );
+			rt.sizeDelta = new Vector2( 78f, 24f );
+
+			var img = go.AddComponent<Image>();
+			img.color = new Color( 0f, 0.55f, 0.45f, 0.9f );
+			var btn = go.AddComponent<Button>();
+			btn.targetGraphic = img;
+			btn.onClick.AddListener( OnAiModeClicked );
+
+			var textGo = new GameObject( "Text (TMP)", typeof( RectTransform ) );
+			textGo.transform.SetParent( go.transform, false );
+			var trt = textGo.GetComponent<RectTransform>();
+			trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
+			trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
+			var t = textGo.AddComponent<TextMeshProUGUI>();
+			t.font = TMP_Settings.defaultFontAsset;
+			t.text = "AI:OFF";
+			t.fontSize = 14;
+			t.alignment = TextAlignmentOptions.Center;
+			t.color = Color.white;
+
+			aiModeIcon = t;
+			return t;
 		}
 
 		public void OnMissionNameClick()
