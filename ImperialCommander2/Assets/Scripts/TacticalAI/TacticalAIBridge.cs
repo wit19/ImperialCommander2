@@ -314,19 +314,21 @@ namespace TacticalAI
                     case "attack":
                         if (priorAttack)
                         {
-                            // IC2 rule (Thomas' review, dev 13): ONE attack per
-                            // activation - a second attack block is a MOVE
-                            // block, said out loud in the order text so the
-                            // human cannot misread the card as two shots.
-                            if (pat == "guard")
-                                outp.Add(act(TF(L.attack2MoveGuard, speed)));
-                            else if (pat == "ambusher")
-                                outp.Add(act(TF(L.attack2MoveAmbush, speed)));
-                            else if (pat == "blocker")
-                                outp.Add(act(TF(L.attack2MoveBlocker, speed, t)));
-                            else
-                                outp.Add(act(t != null ? TF(L.attack2Move, speed, t)
-                                                       : TF(L.attack2MoveNoTarget, speed)));
+                            // Thomas round 10: the SECOND attack block does not
+                            // assert anything - it CHECKS: already attacked?
+                            // second shot forbidden unless the unit's own card
+                            // prints multi-attack explicitly (printed card text
+                            // the human reads; not a machine keyword) -> then
+                            // this block repeats Aktion 1. Never attacked?
+                            // block plays like an Aktion-1 attack. The move
+                            // body is the doctrine's disengage/hold logic.
+                            string body;
+                            if (pat == "guard") body = TF(L.attack2MoveGuard, speed);
+                            else if (pat == "ambusher") body = TF(L.attack2MoveAmbush, speed);
+                            else if (pat == "blocker") body = TF(L.attack2MoveBlocker, speed, t);
+                            else body = t != null ? TF(L.attack2Move, speed, t)
+                                                   : TF(L.attack2MoveNoTarget, speed);
+                            outp.Add(act(TF(L.attackSecondIntro, body) + " " + TF(L.attackSecondTail)));
                             break;
                         }
                         priorAttack = true;

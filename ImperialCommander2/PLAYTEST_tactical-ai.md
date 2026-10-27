@@ -61,9 +61,21 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    **So liest du eine Anweisung (Schema nach Thomas' Playtest-Runde 6):**
    Jede Aktion ist eine Wenn-Dann-Entscheidung, nummeriert wie die zwei Aktionen
    einer Aktivierung. Beispiel Angriffs-Karte:
-   **Regel-Festhalt: pro Aktivierung darf eine Imperiale Figur genau EINEN
-   Angriff ausführen — ein zweiter Angriffsblock der Karte ist immer Bewegung.**
-   (Genau so sagen es auch die Anweisungstexte selbst aus.)
+   **Regel-Festhalt: pro Aktivierung darf eine Imperiale Figur genau EINEN Angriff
+   ausführen — außer ihre eigene Imperielle-Karte druckt ausdrücklich mehrere
+   Angriffe. Beide Aktionsblöcke tragen deshalb dieselbe Wenn-Dann-Prüfung; der
+   zweite Block prüft zusätzlich, ob schon geschossen wurde.** Beispiel
+   Angriffs-Karte (2 Angriffsblöcke):
+   ```
+   Fokusziel: Held X
+   Aktion 1: Noch nicht angegriffen? Dann: X, wenn Reichweite und freie
+             Sichtlinie. Keine Sichtlinie / zu weit: 4 Felder auf X zubewegen.
+             Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese angreifen.
+   Aktion 2: Prüfung – schon angegriffen? Dann KEIN zweiter Schuss (außer deine
+             Karte erlaubt es ausdrücklich) — dieser Block ist Bewegung: X noch in
+             Reichweite? Deckung halten. Sonst bis 4 Felder von X entfernen und im
+             Auge behalten. Noch nicht angegriffen? Dann gilt dieser Block wie
+             Aktion 1.
    ```
    Fokusziel: Held X
    Aktion 1: Dein einziger Angriff dieser Aktivierung: X, wenn Reichweite und
