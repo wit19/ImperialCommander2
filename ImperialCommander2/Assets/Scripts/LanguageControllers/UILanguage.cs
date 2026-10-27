@@ -13,9 +13,23 @@ public class UILanguage
 	public List<MissionCard> uiMissionCards;
 	public UICampaign uiCampaign;
 	public UILogger uiLogger;
+	public UITacticalAI uiTacticalAI;
 	public UIHelpOverlay uiHelpOverlay;
 
 	public UIHelpOverlay uiHelpOverlayBackup;//the English version to fall back to for missing entries in translations
+}
+
+// Player-facing texts of the tactical AI layer (activation popups, doctrine
+// orders, focus explanations). All keys live in Languages/<Lang>/ui.json.
+public class UITacticalAI
+{
+	public string actionFormat, doctrineHeader, docAggressive, docGuard, docBlocker, docHunter, docSupport, docAmbusher;
+	public string moveFocus, moveFocusNoTarget, moveGuard, moveBlocker, moveSupport, moveAmbusher;
+	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
+	public string specialAsPrinted, restLine, interactLine, shuffleNote;
+	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
+	public string whyPrefix, whyRank;
+	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;
 }
 
 public class UISettings

@@ -277,100 +277,64 @@ namespace TacticalAI
             return true;
         }
 
-        static bool IsGerman => DataStore.languageCode != 0;
-        static string T(string de, string en) => IsGerman ? de : en;
-
         static string[] RenderBlocks(string[] tokens, ActivationPlanData plan, int speed)
         {
+            var toks = tokens ?? Array.Empty<string>();
+            var L = UIx;                    // Languages/<Lang>/ui.json: uiTacticalAI
+            if (L == null) return toks;     // broken language asset -> legacy path
             var outp = new List<string>();
             var t = plan.HasTarget ? plan.TargetName : null;
-            var toks = tokens ?? Array.Empty<string>();
-            // Doctrine header (dev 11): every order NAMES its doctrine, so the
-            // human always knows which book of war rules a group follows.
-            // Texts from Core Doctrine.StanceText; unknown/legacy patterns
-            // render as Vorstoß (the shipped default - all live groups are
-            // 'aggressive' until the M4 pattern assignment lands).
+            // Doctrine header (dev 11): every order NAMES its doctrine. All
+            // texts come from the language files (PR convention after Thomas'
+            // review 27.10: zero hardcoded player strings in the bridge).
             var pat = plan.Pattern ?? "aggressive";
-            outp.Add(T("Doktrin: " + DoctrineName(pat) + " — nach dieser Vorschrift spielst du diese Aktivierung",
-                       "Doctrine: " + DoctrineNameEn(pat) + " — this rulebook governs your activation"));
+            outp.Add(TF(L.doctrineHeader, DoctrineName(pat, L)));
             for (int n = 0; n < toks.Length; n++)
             {
                 var tok = toks[n];
-                // Thomas' doctrine template (27.10): every action is a
-                // readable decision tree, numbered like the two actions of
-                // an Imperial activation. The IMPERIAL PLAYER evaluates the
+                // Thomas' doctrine template: every action is a numbered
+                // Wenn-Dann decision tree; the IMPERIAL PLAYER evaluates the
                 // conditions at the public board (only they see positions).
-                string act = "Aktion " + (n + 1);
-                System.Func<string, string, string> Act =
-                    (de, en) => T(act + " – " + de, "Action " + (n + 1) + " – " + en);
+                System.Func<string, string> act = txt => TF(L.actionFormat, n + 1, txt);
                 switch (tok)
                 {
                     case "move":
-                        if (pat == "guard")
-                            outp.Add(Act($"Bewegung {speed}: Halte deine Stellung in der Wachzone (das Missionsziel, das du verteidigst, samt Umkreis). Ein Held betritt sie: stelle dich ihm entgegen — deine Bewegung endet aber IMMER in der Wachzone. Lass dich nicht herauslocken",
-                                         $"Move {speed}: hold your position inside your guard zone (the mission objective you defend, plus its rim). A hero enters it: face him - but your move ALWAYS ends back inside the guard zone. Never be lured out"));
-                        else if (pat == "blocker")
-                            outp.Add(Act($"Bewegung {speed}: Suche das Feld zwischen dem Missionsziel und dem nächsten Helden - sein kürzester Weg zum Ziel soll über dein Feld führen. Kein solches Feld erreichbar: halte die nächste Engstelle auf seinem Weg",
-                                         $"Move {speed}: take the field between the mission objective and the nearest hero - his shortest route to the objective must cross your tile. Not reachable: hold the next chokepoint on his route"));
-                        else if (pat == "support")
-                            outp.Add(Act($"Bewegung {speed}: Distanz halten. Schon angegriffen? Dann bis zu {speed} Felder Abstand vom nächsten Helden, dabei siehst du ihn weiter. Noch nicht angegriffen? Nähere {t} nur, wenn danach kein Held in Nahkampfreichweite von dir steht",
-                                         $"Move {speed}: keep your distance. Already attacked? Back off up to {speed} spaces from the nearest hero while keeping him in sight. Not attacked yet: close in on {t} only if no hero would end up in melee reach of you"));
-                        else if (pat == "ambusher")
-                            outp.Add(Act($"Bewegung {speed}: Bewege dich nur auf Feldern, die kein Held sehen kann - zeig dich nicht, bis ein Ziel in deiner Reichweite steht. Erster Held in Reichweite: greife an",
-                                         $"Move {speed}: only step onto tiles no hero can see - stay hidden until a target stands inside your range. First hero in range: attack"));
+                        if (pat == "guard") outp.Add(act(TF(L.moveGuard, speed)));
+                        else if (pat == "blocker") outp.Add(act(TF(L.moveBlocker, speed)));
+                        else if (pat == "support") outp.Add(act(TF(L.moveSupport, speed, t)));
+                        else if (pat == "ambusher") outp.Add(act(TF(L.moveAmbusher, speed)));
                         else
-                            // aggressive + hunter: hunter = aggressive tree, the
-                            // sweep IS the advance on the focus target.
-                            outp.Add(t != null
-                                ? Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: In dieser Aktivierung bereits angegriffen? Dann entferne dich bis zu {speed} Felder von {t} und behalte ihn im Auge. Noch nicht angegriffen? Dann nähere {t}",
-                                      $"Move {speed}: If a hero already stands inside your attack range: hold your ground and ready your fire. Otherwise: if this activation already attacked, back off up to {speed} spaces from {t} while keeping him in sight; if it has not attacked yet, close in on {t}")
-                                : Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: Nach einem Angriff entferne dich vom nächsten Helden; vor jedem Angriff nähere ihm",
-                                      $"Move {speed}: If a hero already stands inside your attack range: hold and ready fire. Otherwise: after an attack, back off from the nearest hero; before any attack, close in on it"));
+                            // aggressive + hunter (the sweep IS the advance on
+                            // the focus target): hit&run tree with the
+                            // stand-and-shoot anti-pin guard (dev 10).
+                            outp.Add(act(t != null ? TF(L.moveFocus, speed, t)
+                                                   : TF(L.moveFocusNoTarget, speed)));
                         break;
                     case "attack":
-                        // Thomas' Wenn-Dann-Schema (dev 9) per doctrine (dev 11).
                         if (pat == "guard")
-                            outp.Add(t != null
-                                ? Act($"Angriff: der nächste Held IN deiner Wachzone (Reichweite + freie Linie). Keiner drin, aber {t} ist schießbar: {t}. Trifft beides nicht zu: kein Schuss, Stellung halten",
-                                      $"Attack: the nearest hero INSIDE your guard zone (range + clear line). None inside but {t} is shootable: {t}. Neither: hold your ground, no shot")
-                                : Act("Angriff: der nächste Held in deiner Wachzone (Reichweite + freie Linie). Keiner drin: kein Schuss, Stellung halten",
-                                      "Attack: the nearest hero inside your guard zone (range + clear line). None inside: hold, no shot"));
+                            outp.Add(act(t != null ? TF(L.attackGuard, t) : TF(L.attackGuardNoTarget)));
                         else if (pat == "ambusher")
-                            outp.Add(t != null
-                                ? Act($"Angriff aus dem Versteck: der erste Held, den du von hier schießen kannst (Reichweite + freie Linie) - Überraschung schlägt Zielwahl, auch gegen {t}. Danach: nicht weiter enttarnen",
-                                      $"Ambush shot: the first hero you can shoot from here (range + clear line) - surprise beats target choice, even over {t}. Afterwards: do not unmask further")
-                                : Act("Angriff aus dem Versteck: der erste Held, den du von hier schießen kannst (Reichweite + freie Linie). Danach: nicht weiter enttarnen",
-                                      "Ambush shot: the first hero you can shoot from here (range + clear line). Afterwards: stay masked"));
+                            outp.Add(act(t != null ? TF(L.attackAmbush, t) : TF(L.attackAmbushNoTarget)));
                         else if (pat == "support")
-                            outp.Add(t != null
-                                ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie - bevorzuge weiche Ziele aus der Deckung. Keine Sichtlinie / zu weit: weiche zurück statt vorzudrängen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
-                                      $"Attack {t} if in range with a clear line - prefer soft targets from cover. No line / out of range: back off instead of pushing in. Line blocked by ANOTHER hero: attack that blocking hero")
-                                : Act("Angriff: das weichste Ziel, das du aus Deckung schießen kannst (Reichweite + freie Linie). Kein Ziel: zurückweichen",
-                                      "Attack: the softest target you can shoot from cover (range + clear line). No target: back off"));
+                            outp.Add(act(t != null ? TF(L.attackSupport, t) : TF(L.attackSupportNoTarget)));
                         else
-                            // aggressive / hunter / blocker: blocker's job is delay,
-                            // so nearest-shootable is doctrinally correct here.
-                            outp.Add(t != null
-                                ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: {speed} Felder auf {t} zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
-                                      $"Attack {t} if in range with a clear line. No line / out of range: move up to {speed} spaces toward {t}. Line blocked by ANOTHER hero: attack that blocking hero")
-                                : Act("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Kein Zugriff: nähere dem nächsten Helden",
-                                      "Attack: the nearest hero you can shoot (range + clear line). No access: close in on the nearest hero"));
+                            // aggressive/hunter/blocker: Thomas' Wenn-Dann-Schema
+                            // (focus if engaged, close in via the action, shoot
+                            // the line-blocker).
+                            outp.Add(act(t != null ? TF(L.attackFocus, t, speed)
+                                                   : TF(L.attackNoTarget)));
                         break;
                     case "special":
-                        outp.Add(Act("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
-                                     "Special: execute exactly as printed on the card"));
+                        outp.Add(act(TF(L.specialAsPrinted)));
                         break;
                     case "rest":
-                        outp.Add(Act("Rasten: 1 Schaden regenerieren",
-                                     "Rest: recover 1 damage"));
+                        outp.Add(act(TF(L.restLine)));
                         break;
                     case "interact":
-                        outp.Add(Act("Interaktion: dein eigenes Positionierungsziel erfüllen",
-                                     "Interact: fulfill this unit's own placement objective"));
+                        outp.Add(act(TF(L.interactLine)));
                         break;
                     case "shuffle":
-                        outp.Add(T("(Danach: Gruppen-Deck mischen)",
-                                   "(afterwards: shuffle this group's deck)"));
+                        outp.Add(TF(L.shuffleNote));
                         break;
                     default:
                         outp.Add(tok);   // unknown token: verbatim, never silently dropped
@@ -380,32 +344,37 @@ namespace TacticalAI
             return outp.ToArray();
         }
 
-        // Doctrine display names (dev 11). Short forms of Core
-        // Doctrine.StanceText - the header line must fit one popup row; the
-        // per-action text carries the full behaviour, so no information is
-        // lost. Unknown patterns display as Vorstoß (the shipped default).
-        static readonly Dictionary<string, string> DoctrineDe = new Dictionary<string, string>
+        // ------------------------------------------------------- language files
+        // PR convention (Thomas' review 27.10): every player-facing string of
+        // this layer lives in Resources/Languages/<Lang>/ui.json under
+        // uiTacticalAI; code only holds format keys and calls TF().
+        // NOTE: slot.Why (activation ranking) is Core text - Core is the
+        // vector-verified mirror of the Python sim, so its why-strings ship
+        // German-first (documented deviation in the PR draft, sim i18n is a
+        // separate work item).
+
+        static UITacticalAI UIx =>
+            DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+
+        static string TF(string fmt, params object[] args)
         {
-            { "aggressive", "Vorstoß (Kontaktpunkt erreichen)" },
-            { "guard",      "Wachschutz (Zone halten, nie herauslocken)" },
-            { "blocker",    "Blockierer (Engstelle halten)" },
-            { "hunter",     "Jäger (Schwerpunktzone abkämmen)" },
-            { "support",    "Support (Distanz halten, aus der Deckung)" },
-            { "ambusher",   "Hinterhalt (ungesehen bis zum ersten Schuss)" },
-        };
-        static readonly Dictionary<string, string> DoctrineEn = new Dictionary<string, string>
+            if (string.IsNullOrEmpty(fmt)) return "";
+            try { return args.Length > 0 ? string.Format(fmt, args) : fmt; }
+            catch (System.FormatException) { return fmt; }
+        }
+
+        static string DoctrineName(string p, UITacticalAI L)
         {
-            { "aggressive", "Advance (reach the contact point)" },
-            { "guard",      "Guard (hold the zone, never be lured out)" },
-            { "blocker",    "Blocker (hold the chokepoint)" },
-            { "hunter",     "Hunter (sweep the priority zone)" },
-            { "support",    "Support (keep distance, shoot from cover)" },
-            { "ambusher",   "Ambush (stay unseen until the first shot)" },
-        };
-        static string DoctrineName(string p) =>
-            DoctrineDe.TryGetValue(p ?? "", out var v) ? v : DoctrineDe["aggressive"];
-        static string DoctrineNameEn(string p) =>
-            DoctrineEn.TryGetValue(p ?? "", out var v) ? v : DoctrineEn["aggressive"];
+            switch (p)
+            {
+                case "guard":    return L.docGuard;
+                case "blocker":  return L.docBlocker;
+                case "hunter":   return L.docHunter;
+                case "support":  return L.docSupport;
+                case "ambusher": return L.docAmbusher;
+                default:         return L.docAggressive;
+            }
+        }
 
         // ------------------------------------------------------- deployment hook
 
@@ -473,20 +442,14 @@ namespace TacticalAI
                 .ThenBy(x => x.i)          // squad row left-to-right
                 .First().h;
 
-            // player-facing reason chain (only the rules that actually fired)
+            var L = UIx;
+            if (L == null) return false;    // broken language asset -> legacy popup
             var parts = new List<string>();
-            if (Wounded(pick))
-                parts.Add(T("er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett)",
-                            "he is wounded - finish him first (table damage tracker)"));
-            parts.Add(T("größte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte)",
-                        "highest firepower among the remaining heroes (attack dice, then health)"));
-            parts.Add(T("kein Zufall", "no chance"));
-
+            if (Wounded(pick)) parts.Add(TF(L.focusWounded));
+            parts.Add(TF(L.focusFirepower));
+            parts.Add(TF(L.focusNoChance));
             heroName = pick.name;
-            why = (DataStore.languageCode != 0
-                    ? "Fokus-Ziel: "
-                    : "focus target: ")
-                  + heroName + " — " + string.Join("; ", parts);
+            why = TF(L.focusPrefix) + heroName + " \u2014 " + string.Join("; ", parts);
             return true;
         }
 
@@ -498,7 +461,8 @@ namespace TacticalAI
             if (TacticalAISettings.ExplainLevel == "full")
             {
                 var slot = _slots.FirstOrDefault(s => s.GroupId == groupId);
-                if (slot != null) return "Warum jetzt: " + slot.Why + " (Rang " + (slot.Rank + 1) + ")";
+                if (slot != null && UIx != null)
+                    return TF(UIx.whyPrefix) + slot.Why + " " + TF(UIx.whyRank, slot.Rank + 1);
             }
             // post_hoc: printed at round end via OnNewRound quick message
             return null;

@@ -138,16 +138,29 @@ namespace TacticalAI
                 bool master = kind == "master";
                 bool on = TacticalAISettings.Enabled;
                 string value;
+                var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
                 switch (kind)
                 {
-                    case "master": value = on ? "ON" : "OFF"; break;
+                    case "master": value = on ? (tl != null ? tl.setOn : "ON") : (tl != null ? tl.setOff : "OFF"); break;
                     case "mode": value = TacticalAISettings.Mode.ToUpperInvariant(); break;
                     case "skill": value = TacticalAISettings.SkillLevel; break;
                     case "deployment": value = TacticalAISettings.DeploymentMode.ToUpperInvariant(); break;
                     case "explain": value = TacticalAISettings.ExplainLevel.ToUpperInvariant(); break;
                     default: continue;
                 }
-                if (label != null) label.text = (master ? "Tactical AI" : kind.ToUpperInvariant()) + ":  " + value;
+                // PR convention (Thomas' review 27.10): labels from the language
+                // files. Enum VALUES stay uppercase developer tokens (LEGACY/
+                // REFERENCE/OVERLORD, S1-S4, ...) - they match the docs and the
+                // console log; translating them is a translator follow-up.
+                string heading;
+                if (tl == null) heading = master ? "Tactical AI" : kind.ToUpperInvariant();
+                else if (master) heading = tl.setHeading;
+                else if (kind == "mode") heading = tl.setMode;
+                else if (kind == "skill") heading = tl.setSkill;
+                else if (kind == "deployment") heading = tl.setDeployment;
+                else heading = tl.setExplain;
+                if (label != null) label.text = (tl != null ? tl.setRowFormat : "{0}:  {1}")
+                                                    .Replace("{0}", heading).Replace("{1}", value);
                 var colors = child.colors;
                 colors.normalColor = on ? greenBlock.normalColor : redBlock.normalColor;
                 colors.selectedColor = colors.normalColor;
