@@ -22,15 +22,11 @@ namespace TacticalAI
             _booted = true;
             TacticalAISettings.SetSaveHook(PlayerPrefsHook);
             TacticalAISettings.Load();
-            // Dev 15 (Thomas): 'legacy' is no longer a selectable global mode -
-            // master ON + LEGACY is indistinguishable from Tactical AI OFF.
-            // Migrate persisted saves; per-mission 'legacy' (badge OFF) stays legal.
-            if (TacticalAISettings.Enabled && TacticalAISettings.Mode == "legacy")
-            {
-                TacticalAISettings.Mode = "reference";
-                Debug.Log("TacticalAISettingsUnity::mode 'legacy' with master ON migrated to 'reference'");
-            }
-            Debug.Log($"TacticalAISettingsUnity::mode={TacticalAISettings.Mode} enabled={TacticalAISettings.Enabled} " +
+            // Dev 20 (option A, Thomas): the mode is derived from the
+            // difficulty ladder (S1-S3 reference, S4-S5 overlord) - a stored
+            // legacy/reference/overlord "mode" from old saves is ignored by
+            // the loader, so no migration is needed any more.
+            Debug.Log($"TacticalAISettingsUnity::mode={TacticalAISettings.Mode}{(TacticalAISettings.HasModeOverride ? " (OVERRIDE)" : "")} enabled={TacticalAISettings.Enabled} " +
                       $"skill={TacticalAISettings.SkillLevel} deploy={TacticalAISettings.DeploymentMode} " +
                       $"explain={TacticalAISettings.ExplainLevel}");
         }

@@ -29,13 +29,19 @@ namespace TacticalAI
 
         // ---- defaults: OFF, legacy, printed rules only -------------------
         public const bool DefaultEnabled = false;
+        // dev 20: no stored mode dial; kept as legacy token for missions/tests.
         public const string DefaultMode = "legacy";
         public const string DefaultSkillLevel = "S1";
         public const string DefaultDeploymentMode = "secret";
         public const string DefaultExplainLevel = "post_hoc";
 
         static bool _enabled = DefaultEnabled;
-        static string _mode = DefaultMode;
+        // Dev 20 (option A, Thomas): the procedural mode is DERIVED from the
+        // difficulty ladder - two switches for one screw was the flaw he
+        // named. S1-S3 = reference (book execution, growing discretion
+        // quality), S4-S5 = overlord (score optimisation on top). The Mode
+        // setter survives only as an explicit test/console override seam.
+        static string _modeOverride;
         static string _skillLevel = DefaultSkillLevel;
         static string _deploymentMode = DefaultDeploymentMode;
         static string _explainLevel = DefaultExplainLevel;
@@ -50,11 +56,32 @@ namespace TacticalAI
             set { _enabled = value; Save(); }
         }
 
-        /// <summary>"legacy" (default) | "reference" | "overlord".</summary>
+        /// <summary>Derived from the difficulty ladder (dev 20): "reference"
+        /// for Rekrut..Veteran (S1-S3), "overlord" for Kommandant/General
+        /// (S4-S5) - unless a test/console override is set. Never "legacy":
+        /// legacy-ness is decided by Enabled/EffectiveMode.</summary>
         public static string Mode
         {
-            get { return _mode; }
-            set { _mode = Validate(value, ModeValues, DefaultMode); Save(); }
+            get { return _modeOverride ?? (SkillRank >= 4 ? "overlord" : "reference"); }
+        }
+
+        /// <summary>Test/console seam: force a procedural mode independent of
+        /// the ladder; null/empty restores derivation. Unknown values are
+        /// ignored (never throw). "legacy" here is accepted for the mission-
+        /// badge test paths only - the settings UI cannot produce it.</summary>
+        public static void SetModeOverride(string mode)
+        {
+            if (string.IsNullOrEmpty(mode)) { _modeOverride = null; Save(); return; }
+            _modeOverride = Validate(mode, ModeValues, null);
+            Save();
+        }
+
+        public static bool HasModeOverride { get { return _modeOverride != null; } }
+
+        /// <summary>1..5 for "S1".."S5" (unknown -> 1).</summary>
+        public static int SkillRank
+        {
+            get { int i = IndexOf(_skillLevel, SkillValues); return i < 0 ? 1 : i + 1; }
         }
 
         /// <summary>"S1".."S5" - the error-band skill of the reference level
@@ -105,7 +132,9 @@ namespace TacticalAI
             {
                 var d = Core.Json.AsDict(Core.Json.Parse(json));
                 _enabled = Core.Json.AsBool(Core.Json.Get(d, "enabled", (object)DefaultEnabled));
-                _mode = Validate(Core.Json.AsStr(Core.Json.Get(d, "mode", DefaultMode)), ModeValues, DefaultMode);
+                // "mode" is no longer a stored dial (dev 20 derivation); only
+                // an explicit override round-trips, and only when valid.
+                _modeOverride = Validate(Core.Json.AsStr(Core.Json.Get(d, "modeOverride", "")), ModeValues, null);
                 _skillLevel = Validate(Core.Json.AsStr(Core.Json.Get(d, "skill", DefaultSkillLevel)), SkillValues, DefaultSkillLevel);
                 _deploymentMode = Validate(Core.Json.AsStr(Core.Json.Get(d, "deployment", DefaultDeploymentMode)), DeploymentModeValues, DefaultDeploymentMode);
                 _explainLevel = Validate(Core.Json.AsStr(Core.Json.Get(d, "explain", DefaultExplainLevel)), ExplainLevelValues, DefaultExplainLevel);
@@ -119,7 +148,7 @@ namespace TacticalAI
         public static void ResetDefaults()
         {
             _enabled = DefaultEnabled;
-            _mode = DefaultMode;
+            _modeOverride = null;
             _skillLevel = DefaultSkillLevel;
             _deploymentMode = DefaultDeploymentMode;
             _explainLevel = DefaultExplainLevel;
@@ -133,8 +162,8 @@ namespace TacticalAI
         public static string EffectiveMode(string missionAiMode)
         {
             if (!_enabled) return "legacy";
-            if (string.IsNullOrEmpty(missionAiMode)) return _mode;
-            return Validate(missionAiMode, ModeValues, _mode);
+            if (string.IsNullOrEmpty(missionAiMode)) return Mode;
+            return Validate(missionAiMode, ModeValues, Mode);
         }
 
         public static bool IsTactical(string mode)
@@ -149,7 +178,8 @@ namespace TacticalAI
             var sb = new StringBuilder();
             sb.Append('{');
             sb.Append("\"enabled\":").Append(_enabled ? "true" : "false").Append(',');
-            Kv(sb, "mode", _mode); Kv(sb, "skill", _skillLevel);
+            Kv(sb, "mode", Mode); Kv(sb, "skill", _skillLevel);
+            if (_modeOverride != null) Kv(sb, "modeOverride", _modeOverride);
             Kv(sb, "deployment", _deploymentMode);
             sb.Append("\"explain\":\"").Append(_explainLevel).Append('"');
             sb.Append('}');

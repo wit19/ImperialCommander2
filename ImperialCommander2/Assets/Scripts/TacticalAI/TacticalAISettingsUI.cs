@@ -41,10 +41,6 @@ namespace TacticalAI
             fadeDuration = 0.05f
         };
 
-        // 'legacy' deliberately NOT offered (see header). Next() falls back to
-        // [0] for unknown values, so a persisted 'legacy' cycles to reference.
-        static readonly string[] ModeChoices = { "reference", "overlord" };
-
         class Row
         {
             public GameObject go;
@@ -143,13 +139,8 @@ namespace TacticalAI
                 svlg.childForceExpandWidth = true;
                 svlg.spacing = 2f;
                 var sle = _subPanel.AddComponent<LayoutElement>();
-                sle.preferredHeight = 4 * 32f;
+                sle.preferredHeight = 3 * 32f;
 
-                MakeRow(_subPanel.transform, "mode", () =>
-                {
-                    TacticalAISettings.Mode = Next(TacticalAISettings.Mode, ModeChoices);
-                    Refresh();
-                });
                 MakeRow(_subPanel.transform, "skill", () =>
                 {
                     TacticalAISettings.SkillLevel = Next(TacticalAISettings.SkillLevel, TacticalAISettings.SkillValues);
@@ -173,11 +164,6 @@ namespace TacticalAI
                 MakeButton(go.transform, "TACTICAL AI", "master", () =>
                 {
                     TacticalAISettings.Enabled = !TacticalAISettings.Enabled;
-                    Refresh();
-                });
-                MakeButton(go.transform, "AI MODE", "mode", () =>
-                {
-                    TacticalAISettings.Mode = Next(TacticalAISettings.Mode, ModeChoices);
                     Refresh();
                 });
                 MakeButton(go.transform, "SKILL", "skill", () =>
@@ -306,7 +292,7 @@ namespace TacticalAI
 
             var rootLe = _root.GetComponent<LayoutElement>();
             if (rootLe != null)
-                rootLe.preferredHeight = 42f + 32f + 8f + (on ? 4 * 32f + 3 * 2f + 8f : 0f);
+                rootLe.preferredHeight = 42f + 32f + 8f + (on ? 3 * 32f + 2 * 2f + 8f : 0f);
         }
 
         static string RowText(string kind, UITacticalAI tl, bool on)

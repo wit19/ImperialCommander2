@@ -130,7 +130,8 @@ namespace TacticalAI.Tests
         {
             TacticalAISettings.ResetDefaults();
             Assert.IsFalse(TacticalAISettings.Enabled, "Default MUST be off");
-            Assert.AreEqual("legacy", TacticalAISettings.Mode);
+            Assert.AreEqual("reference", TacticalAISettings.Mode,
+                "dev 20: mode is DERIVED from the ladder (default S1 -> reference)");
             Assert.AreEqual("secret", TacticalAISettings.DeploymentMode);
             Assert.IsFalse(TacticalAISettings.IsTactical("reference"),
                 "no tactical behaviour while the global switch is off");
@@ -143,13 +144,22 @@ namespace TacticalAI.Tests
         {
             TacticalAISettings.ResetDefaults();
             TacticalAISettings.Enabled = true;
-            TacticalAISettings.Mode = "reference";
-            Assert.AreEqual("reference", TacticalAISettings.Mode);
-            Assert.AreEqual("overlord", TacticalAISettings.EffectiveMode("overlord"));
-            Assert.AreEqual("reference", TacticalAISettings.EffectiveMode("bogus"),
-                "unknown values fall back to the global mode, never crash");
-            TacticalAISettings.Mode = "nonsense";
-            Assert.AreEqual("legacy", TacticalAISettings.Mode, "bad writes reset to default");
+            // dev 20 (option A, Thomas): single difficulty dial. The ladder
+            // derives the procedural mode; only tests/console may override.
+            TacticalAISettings.SkillLevel = "S3";
+            Assert.AreEqual("reference", TacticalAISettings.Mode, "Veteran = book execution");
+            TacticalAISettings.SkillLevel = "S4";
+            Assert.AreEqual("overlord", TacticalAISettings.Mode, "Kommandant = optimiser");
+            Assert.AreEqual("overlord", TacticalAISettings.EffectiveMode("bogus"),
+                "unknown mission values fall back to the derived mode, never crash");
+            TacticalAISettings.SetModeOverride("bogus");
+            Assert.AreEqual("overlord", TacticalAISettings.Mode, "bogus override ignored, derivation stands");
+            TacticalAISettings.SetModeOverride("reference");
+            Assert.AreEqual("reference", TacticalAISettings.Mode, "console override wins");
+            TacticalAISettings.SetModeOverride(null);
+            Assert.AreEqual("overlord", TacticalAISettings.Mode, "null override restores derivation");
+            Assert.AreEqual("legacy", TacticalAISettings.EffectiveMode("legacy"),
+                "per-mission badge OFF survives the ladder");
 
             TacticalAISettings.ResetDefaults();
         }
