@@ -301,5 +301,10 @@
     "setOn": "AN",
     "setOff": "AUS",
     "setRowFormat": "{0}:  {1}"
-  }
+  },
+  "skillS1": "Rekrut",
+  "skillS2": "Stormtrooper",
+  "skillS3": "Veteran",
+  "skillS4": "Kommandant",
+  "skillS5": "5-Sterne-General"
 }

@@ -301,5 +301,10 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}"
-  }
+  },
+  "skillS1": "Rekrut",
+  "skillS2": "Stormtrooper",
+  "skillS3": "Veterán",
+  "skillS4": "Parancsnok",
+  "skillS5": "Ötcsillagos tábornok"
 }

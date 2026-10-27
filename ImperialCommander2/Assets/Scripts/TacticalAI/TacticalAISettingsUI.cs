@@ -1,23 +1,26 @@
-// M1 settings UI for the SettingsPanel (concept 4.2 "UI (SettingsPanel):
-// global switch 'Use Tactical AI'; sub-menu deployment mode (hidden when
-// off)"). Builds its rows at runtime under a supplied panel - the same
-// dynamic-UI pattern the game already uses in EnemyActivationPopup
-// (.ParseInstructions/FindOrCreateBlock instantiate TMP texts at runtime),
-// so no prefab surgery is needed.
+// M1 settings UI for the settings dialog (concept 4.2 "Settings"): global
+// switch + sub-menu (deployment mode hidden while off). Built at runtime -
+// the same dynamic-UI pattern the game already uses elsewhere, so no prefab
+// surgery is needed.
 //
-// Dev 15 restyle (Thomas playtest 27.10: "die Darstellung sieht anders aus
-// als der Rest des Screens"): the old self-built TMP buttons with green/red
-// blocks stuck out like a debug panel. The screen's own look (Rundenlimit
-// group) is serialized in the prefab with the game font, so instead of
-// inventing widgets we CLONE the real ones at runtime: the group title text,
-// the bordered group panel (found via SettingsPanel.roundLimitToggleOn's
-// ancestor chain) and one option-label text. That inherits font, colour and
-// panel art with zero prefab surgery. If any template is missing the old
-// TMP-button block remains as fallback.
+// Dev 18 restyle v2 (Thomas playtest 27.10, screenshot: clone v1 overlapped
+// into a mess). Root causes fixed:
+//  * v1 cloned an ANCESTOR panel found by walking up from a toggle - that
+//    ancestor was the whole dialog background (huge frame art). v2 clones
+//    ONLY leaf widgets addressed BY NAME inside the settings prefab:
+//    "round limit Label" (the yellow group title) and the toggles' "Label"
+//    (yellow option text). Both are leaf Text GOs - nothing can overlap.
+//  * every clone is sanitized: children destroyed, non-text graphics
+//    stripped, explicit LayoutElement - serialized leftovers (Checkmark,
+//    Outline, stale language text) cannot survive.
+//  * no per-group panel art: one title + flat text rows - exactly how the
+//    Rundenlimit group reads: same font, same color, same rhythm.
 //
-// Dev 15 mode list (Thomas): 'legacy' is no longer offered in the global
-// selector - master ON + LEGACY is indistinguishable from Tactical AI OFF.
-// Per-mission 'legacy' (badge OFF) stays legal and is unaffected.
+// Dev 15: 'legacy' is NOT offered globally (master ON + legacy == off);
+// per-mission badge OFF stays legal. Dev 18: skill shows themed names
+// (Rekrut .. 5-Sterne-General) from the language files; stored/log values
+// stay the developer tokens s1..s5 (PR convention: display via language
+// files, tokens in docs/console).
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,16 +30,6 @@ namespace TacticalAI
 {
     public static class TacticalAISettingsUI
     {
-        static readonly ColorBlock greenBlock = new ColorBlock
-        {
-            normalColor = new Color32(0, 162, 0, 255),
-            selectedColor = new Color32(0, 162, 0, 192),
-            highlightedColor = new Color32(0, 255, 0, 255),
-            pressedColor = new Color32(0, 192, 0, 255),
-            disabledColor = new Color32(0, 64, 0, 192),
-            colorMultiplier = 1f,
-            fadeDuration = 0.05f
-        };
         static readonly ColorBlock redBlock = new ColorBlock
         {
             normalColor = new Color32(162, 0, 0, 255),
@@ -52,35 +45,21 @@ namespace TacticalAI
         // [0] for unknown values, so a persisted 'legacy' cycles to reference.
         static readonly string[] ModeChoices = { "reference", "overlord" };
 
-        /// <summary>A row label may be a cloned legacy Text or - in the TMP
-        /// fallback path - a TextMeshProUGUI. One of both is set.</summary>
         class Row
         {
             public GameObject go;
             public Text legacy;
             public TMPro.TextMeshProUGUI tmp;
             public void Set(string s) { if (legacy != null) legacy.text = s; else if (tmp != null) tmp.text = s; }
-            public bool Interactable(bool b)
-            {
-                var btn = go.GetComponent<Button>();
-                if (btn != null) btn.interactable = b;
-                return b;
-            }
         }
 
         static Transform _root;
         static GameObject _subPanel;
-        static LayoutElement _subPanelLe;
         static readonly Dictionary<string, Row> _rows = new Dictionary<string, Row>();
 
-        // cloned style templates (null => TMP fallback)
-        static GameObject _labelTemplate;
-        static GameObject _titleTemplate;
-        static GameObject _panelTemplate;
+        static GameObject _labelTemplate;   // leaf yellow option text ("Label")
+        static GameObject _titleTemplate;   // leaf yellow group title ("round limit Label")
 
-        /// <summary>Installs (or refreshes) the Tactical AI rows under the
-        /// given panel. Safe to call on every SettingsPanel.Show(). Returns
-        /// false when the panel cannot host UI (missing TMP font etc.).</summary>
         public static bool TryInstall(GameObject panel)
         {
             if (panel == null) return false;
@@ -90,21 +69,21 @@ namespace TacticalAI
                 return false;
             }
 
-            var existing = panel.transform.Find("tacaiRoot");
-            if (existing != null) { Refresh(existing.gameObject); return true; }
+            var existing = FindDeep(panel.transform, "tacaiRoot");
+            if (existing != null) { Refresh(); return true; }
 
-            var go = new GameObject("tacaiRoot", typeof(RectTransform));
-            // Playtest feedback (27.10, Thomas): the old anchor floated the block
-            // over the settings dialog. Install INSIDE the tab's scroll content
-            // instead, so the rows continue the existing option list directly.
+            // host: the tab's scroll content if it has one, else the panel
+            // itself (the new settings screen hosts its rows directly).
             var sr = panel.GetComponentInChildren<ScrollRect>(true);
             var host = (sr != null && sr.content != null) ? sr.content : panel.transform;
+
+            var go = new GameObject("tacaiRoot", typeof(RectTransform));
             go.transform.SetParent(host, false);
             var rt = go.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0f, 1f);
             rt.anchorMax = new Vector2(0f, 1f);
             rt.pivot = new Vector2(0.5f, 1f);
-            rt.anchoredPosition = new Vector2(0f, 0f);
+            rt.anchoredPosition = Vector2.zero;
             float width = 420f;
             if (host is RectTransform hostRT && hostRT.rect.width > 80f)
                 width = hostRT.rect.width;
@@ -112,263 +91,214 @@ namespace TacticalAI
 
             var vlg = go.AddComponent<VerticalLayoutGroup>();
             vlg.childControlWidth = true;
-            vlg.childControlHeight = true;
+            vlg.childControlHeight = false;
             vlg.childForceExpandWidth = true;
-            vlg.spacing = 8f;
+            vlg.spacing = 4f;
             var le = go.AddComponent<LayoutElement>();
+
+            // Host without an auto-layout (old scroll variant): pin the root
+            // under the lowest existing row so it reads as appended.
             if (host.GetComponent<LayoutGroup>() == null)
             {
-                // scroll content without an auto-layout: pin our block just
-                // under the last positioned row so it still reads as appended.
                 float lowest = rt.anchoredPosition.y;
                 foreach (Transform row in host)
                     if (row != go.transform && row.localPosition.y < lowest)
                         lowest = row.localPosition.y;
-                rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, lowest - 110f);
+                rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, lowest - 140f);
             }
 
             _root = go.transform;
             _rows.Clear();
             _subPanel = null;
-
+            _labelTemplate = null;
+            _titleTemplate = null;
             FindStyleTemplates(panel);
 
-            if (_labelTemplate != null && _panelTemplate != null)
+            if (_labelTemplate != null && _titleTemplate != null)
             {
-                // native-clone layout: section title + panel(Master) +
-                // panel(Mode/Skill/Deployment/Explain) like the Rundenlimit group
-                MakeTitle();
-                var masterPanel = MakePanel(go.transform, 1);
-                MakeRow(masterPanel, "master", () =>
+                var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+                var title = CloneText(_titleTemplate, _root,
+                    tl != null ? tl.setHeading : "TACTICAL AI", 42f);
+                title.name = "tacai_title";
+                foreach (var b in title.GetComponentsInChildren<Button>(true)) b.interactable = false;
+
+                MakeRow(go.transform, "master", () =>
                 {
                     TacticalAISettings.Enabled = !TacticalAISettings.Enabled;
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
-                _subPanel = MakePanel(go.transform, ModeChoices.Length > 0 ? 4 : 0);
-                _subPanelLe = _subPanel.GetComponent<LayoutElement>();
-                _subPanelLe.preferredHeight = 4 * 36f + 16f;
-                MakeRow(_subPanel, "mode", () =>
+
+                _subPanel = new GameObject("tacai_sub", typeof(RectTransform));
+                _subPanel.transform.SetParent(go.transform, false);
+                var svlg = _subPanel.AddComponent<VerticalLayoutGroup>();
+                svlg.childControlWidth = true;
+                svlg.childControlHeight = false;
+                svlg.childForceExpandWidth = true;
+                svlg.spacing = 2f;
+                var sle = _subPanel.AddComponent<LayoutElement>();
+                sle.preferredHeight = 4 * 32f;
+
+                MakeRow(_subPanel.transform, "mode", () =>
                 {
                     TacticalAISettings.Mode = Next(TacticalAISettings.Mode, ModeChoices);
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
-                MakeRow(_subPanel, "skill", () =>
+                MakeRow(_subPanel.transform, "skill", () =>
                 {
                     TacticalAISettings.SkillLevel = Next(TacticalAISettings.SkillLevel, TacticalAISettings.SkillValues);
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
-                MakeRow(_subPanel, "deployment", () =>
+                MakeRow(_subPanel.transform, "deployment", () =>
                 {
                     TacticalAISettings.DeploymentMode = Next(TacticalAISettings.DeploymentMode, TacticalAISettings.DeploymentModeValues);
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
-                MakeRow(_subPanel, "explain", () =>
+                MakeRow(_subPanel.transform, "explain", () =>
                 {
                     TacticalAISettings.ExplainLevel = Next(TacticalAISettings.ExplainLevel, TacticalAISettings.ExplainLevelValues);
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
             }
             else
             {
-                // fallback: the old TMP-button block (works without templates)
+                // fallback: old TMP-button block when the name templates are
+                // missing (unexpected dialog prefab) - ugly but functional
                 MakeButton(go.transform, "TACTICAL AI", "master", () =>
                 {
                     TacticalAISettings.Enabled = !TacticalAISettings.Enabled;
-                    Refresh(_root.parent.gameObject);
+                    Refresh();
                 });
                 MakeButton(go.transform, "AI MODE", "mode", () =>
                 {
                     TacticalAISettings.Mode = Next(TacticalAISettings.Mode, ModeChoices);
-                    Refresh(_root.parent.gameObject);
-                }, true);
+                    Refresh();
+                });
                 MakeButton(go.transform, "SKILL", "skill", () =>
                 {
                     TacticalAISettings.SkillLevel = Next(TacticalAISettings.SkillLevel, TacticalAISettings.SkillValues);
-                    Refresh(_root.parent.gameObject);
-                }, true);
+                    Refresh();
+                });
                 MakeButton(go.transform, "DEPLOYMENT", "deployment", () =>
                 {
                     TacticalAISettings.DeploymentMode = Next(TacticalAISettings.DeploymentMode, TacticalAISettings.DeploymentModeValues);
-                    Refresh(_root.parent.gameObject);
-                }, true);
+                    Refresh();
+                });
                 MakeButton(go.transform, "EXPLAIN", "explain", () =>
                 {
                     TacticalAISettings.ExplainLevel = Next(TacticalAISettings.ExplainLevel, TacticalAISettings.ExplainLevelValues);
-                    Refresh(_root.parent.gameObject);
-                }, true);
+                    Refresh();
+                });
             }
 
-            Refresh(go);
+            Refresh();
             return true;
         }
 
-        /// <summary>Grab the Rundenlimit group's real widgets as style
-        /// templates: its bordered panel background (ancestor Image), one of
-        /// its option labels (legacy Text) and the group title text.</summary>
-        static void FindStyleTemplates(GameObject panel)
+        static Transform FindDeep(Transform root, string name)
         {
-            _labelTemplate = null; _titleTemplate = null; _panelTemplate = null;
-            var sp = panel.GetComponentInParent<SettingsPanel>();
-            if (sp == null || sp.roundLimitToggleOn == null) return;
-
-            // panel background: first ancestor with an Image below the tab panel
-            Transform bg = null;
-            var t = sp.roundLimitToggleOn.transform.parent;
-            while (t != null && t != panel.transform && t.parent != panel.transform)
-            {
-                if (t.GetComponent<Image>() != null) { bg = t; break; }
-                t = t.parent;
-            }
-            if (bg == null) return;
-            _panelTemplate = bg.gameObject;
-
-            // label: any Text inside the toggle's row container, else any
-            // Text inside the panel, else any Text in the tab
-            var lbl = FirstTextInChildren(sp.roundLimitToggleOn.transform.parent != null
-                ? sp.roundLimitToggleOn.transform.parent : sp.roundLimitToggleOn.transform);
-            if (lbl == null) lbl = FirstTextInChildren(bg);
-            if (lbl == null) lbl = FirstTextInChildren(panel.transform);
-            if (lbl != null) _labelTemplate = lbl.gameObject;
-
-            // title: a Text on the panel's wrapper but NOT inside the panel bg
-            var wrapper = bg.parent as RectTransform;
-            if (wrapper != null)
-            {
-                foreach (var txt in wrapper.GetComponentsInChildren<Text>(true))
-                {
-                    if (!txt.transform.IsChildOf(bg.transform)) { _titleTemplate = txt.gameObject; break; }
-                }
-            }
-            if (_titleTemplate == null) _titleTemplate = _labelTemplate;
-        }
-
-        static Text FirstTextInChildren(Transform root)
-        {
-            if (root == null) return null;
-            foreach (var txt in root.GetComponentsInChildren<Text>(true))
-                return txt;
+            foreach (var t in root.GetComponentsInChildren<Transform>(true))
+                if (t.name == name) return t;
             return null;
         }
 
-        static void MakeTitle()
+        /// <summary>Templates are leaf Text widgets addressed by prefab name -
+        /// no ancestor walking, no container cloning (dev 18 lesson).</summary>
+        static void FindStyleTemplates(GameObject panel)
         {
-            var go = UnityEngine.Object.Instantiate(_titleTemplate, _root);
-            go.name = "tacai_title";
-            var le = EnsureLayout(go);
-            le.preferredHeight = 44f; le.minHeight = 44f;
-            var txt = go.GetComponentInChildren<Text>();
-            if (txt != null)
+            var title = FindDeep(panel.transform, "round limit Label");
+            _titleTemplate = title != null ? title.gameObject : null;
+
+            Transform lbl = null;
+            var row = FindDeep(panel.transform, "round limit on");
+            if (row != null)
             {
-                txt.text = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI.setHeading : "TACTICAL AI";
-                var rt = go.GetComponent<RectTransform>();
-                rt.anchorMin = new Vector2(0f, 1f); rt.anchorMax = new Vector2(1f, 1f);
-                rt.sizeDelta = Vector2.zero;
+                var l = FindDeep(row, "Label");
+                if (l != null) lbl = l;
             }
-            // strip any language-controller-driven children we do not own
-            foreach (var b in go.GetComponentsInChildren<Button>(true)) b.interactable = false;
+            if (lbl == null) lbl = FindDeep(panel.transform, "Label");
+            _labelTemplate = lbl != null ? lbl.gameObject : null;
         }
 
-        static GameObject MakePanel(Transform parent, int rowCount)
+        /// <summary>Instantiate a leaf text template, destroy its children,
+        /// strip every non-text graphic/interactable, stretch the Text -
+        /// serialized leftovers can never render (dev 18 lesson).</summary>
+        static GameObject CloneText(GameObject template, Transform parent, string text, float height)
         {
-            var go = UnityEngine.Object.Instantiate(_panelTemplate, parent);
-            go.name = "tacai_panel";
-            // strip the template's serialized children (toggles, outlines...)
+            var go = UnityEngine.Object.Instantiate(template, parent);
             for (int i = go.transform.childCount - 1; i >= 0; i--)
                 UnityEngine.Object.Destroy(go.transform.GetChild(i).gameObject);
-            var vlg = go.AddComponent<VerticalLayoutGroup>();
-            vlg.padding = new RectOffset(10, 10, 6, 6);
-            vlg.spacing = 2f;
-            vlg.childControlWidth = true;
-            vlg.childControlHeight = false;
-            vlg.childForceExpandWidth = true;
-            var le = go.AddComponent<LayoutElement>();
-            le.preferredHeight = rowCount * 36f + 16f;
+
+            var t = go.GetComponentInChildren<Text>(true);
+            foreach (var c in go.GetComponents<Component>())
+            {
+                if (c == null || c is RectTransform) continue;
+                if (c == t) continue;
+                if (c is CanvasRenderer) continue;
+                if (c is Graphic || c is Selectable || c is ILayoutElement
+                    || c is ILayoutSelfController || c is Outline)
+                    UnityEngine.Object.Destroy(c);
+            }
+
+            if (t != null)
+            {
+                t.text = text;
+                t.alignment = TextAnchor.MiddleCenter;
+                t.horizontalOverflow = HorizontalWrapMode.Overflow;
+                t.verticalOverflow = VerticalWrapMode.Overflow;
+                t.raycastTarget = false;
+                var trf = t.rectTransform;
+                trf.anchorMin = Vector2.zero;
+                trf.anchorMax = Vector2.one;
+                trf.offsetMin = Vector2.zero;
+                trf.offsetMax = Vector2.zero;
+            }
+            var le = go.GetComponent<LayoutElement>();
+            if (le == null) le = go.AddComponent<LayoutElement>();
+            le.preferredHeight = height;
+            le.minHeight = height;
             return go;
         }
 
-        static void MakeRow(GameObject panel, string kind, Action onClick)
+        static void MakeRow(Transform parent, string kind, Action onClick)
         {
             var rowGo = new GameObject("tacai_row_" + kind, typeof(RectTransform));
-            rowGo.transform.SetParent(panel.transform, false);
-            var b = rowGo.AddComponent<Button>();
+            rowGo.transform.SetParent(parent, false);
             var le = rowGo.AddComponent<LayoutElement>();
-            le.preferredHeight = 36f; le.minHeight = 36f;
+            le.preferredHeight = 32f; le.minHeight = 32f;
+            var b = rowGo.AddComponent<Button>();
+            b.transition = Selectable.Transition.None;
 
-            var lbl = UnityEngine.Object.Instantiate(_labelTemplate, rowGo.transform);
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            var lbl = CloneText(_labelTemplate, rowGo.transform,
+                RowText(kind, tl, TacticalAISettings.Enabled), 32f);
             lbl.name = "label";
-            var lrt = lbl.GetComponent<RectTransform>();
-            lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one;
-            lrt.offsetMin = Vector2.zero; lrt.offsetMax = Vector2.zero;
-            var txt = lbl.GetComponentInChildren<Text>(true);
-            if (txt != null) txt.alignment = TextAnchor.MiddleCenter;
 
             b.onClick.AddListener(() =>
             {
                 GameObject.FindObjectOfType<Sound>()?.PlaySound(FX.Click);
                 onClick();
             });
-
-            var row = new Row { go = rowGo, legacy = txt };
-            _rows[kind] = row;
+            _rows[kind] = new Row { go = rowGo, legacy = lbl.GetComponentInChildren<Text>(true) };
         }
 
-        static LayoutElement EnsureLayout(GameObject go)
-        {
-            var le = go.GetComponent<LayoutElement>();
-            if (le == null) le = go.AddComponent<LayoutElement>();
-            return le;
-        }
-
-        static void Refresh(GameObject panelOrRoot)
+        static void Refresh()
         {
             if (_root == null) return;
             var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
             bool on = TacticalAISettings.Enabled;
 
-            // clone-layout
-            if (_rows.Count > 0)
+            if (_subPanel != null) _subPanel.SetActive(on);
+
+            foreach (var kv in _rows)
             {
-                foreach (var kv in _rows)
-                {
-                    kv.Value.Set(RowText(kv.Key, tl, on));
-                    if (kv.Key != "master") kv.Value.Interactable(on);
-                }
-                if (_subPanel != null)
-                {
-                    _subPanel.SetActive(on);
-                    if (_subPanelLe != null)
-                        _subPanelLe.preferredHeight = on ? 4 * 36f + 16f : 0f;
-                }
-                var rootLe = _root.GetComponent<LayoutElement>();
-                if (rootLe != null)
-                    rootLe.preferredHeight = 44f + (36f + 16f) + 8f + (on ? 4 * 36f + 16f + 8f : 0f);
-                return;
+                kv.Value.Set(RowText(kv.Key, tl, on));
+                var btn = kv.Value.go.GetComponent<Button>();
+                if (btn != null && kv.Key != "master") btn.interactable = on;
             }
 
-            // TMP-fallback layout
-            foreach (var child in _root.GetComponentsInChildren<UnityEngine.UI.Button>(true))
-            {
-                var label = child.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                string kind = child.name.Replace("tacai_", "");
-                bool master = kind == "master";
-                Row r = new Row { go = child.gameObject, tmp = label };
-                string s = RowText(kind, tl, on);
-                if (!master && kind != "title")
-                {
-                    child.gameObject.SetActive(on);
-                }
-                if (kind == "master" || on)
-                {
-                    var colors = child.colors;
-                    colors.normalColor = on ? greenBlock.normalColor : redBlock.normalColor;
-                    colors.selectedColor = colors.normalColor;
-                    colors.highlightedColor = Color.Lerp(colors.normalColor, Color.white, 0.5f);
-                    colors.pressedColor = colors.normalColor;
-                    child.colors = colors;
-                    child.interactable = master || on;
-                    if (label != null) label.text = s;
-                }
-            }
+            var rootLe = _root.GetComponent<LayoutElement>();
+            if (rootLe != null)
+                rootLe.preferredHeight = 42f + 32f + 8f + (on ? 4 * 32f + 3 * 2f + 8f : 0f);
         }
 
         static string RowText(string kind, UITacticalAI tl, bool on)
@@ -378,7 +308,7 @@ namespace TacticalAI
             {
                 case "master": value = on ? (tl != null ? tl.setOn : "ON") : (tl != null ? tl.setOff : "OFF"); break;
                 case "mode": value = TacticalAISettings.Mode.ToUpperInvariant(); break;
-                case "skill": value = TacticalAISettings.SkillLevel; break;
+                case "skill": value = SkillDisplay(TacticalAISettings.SkillLevel, tl); break;
                 case "deployment": value = TacticalAISettings.DeploymentMode.ToUpperInvariant(); break;
                 case "explain": value = TacticalAISettings.ExplainLevel.ToUpperInvariant(); break;
                 default: return kind;
@@ -390,14 +320,28 @@ namespace TacticalAI
             else if (kind == "skill") heading = tl.setSkill;
             else if (kind == "deployment") heading = tl.setDeployment;
             else heading = tl.setExplain;
-            // PR convention (Thomas' review 27.10): labels from the language
-            // files. Enum VALUES stay uppercase developer tokens (REFERENCE/
-            // OVERLORD, S1-S5, ...) - they match the docs and console log.
             return (tl != null ? tl.setRowFormat : "{0}:  {1}")
                    .Replace("{0}", heading).Replace("{1}", value);
         }
 
-        static void MakeButton(Transform parent, string title, string kind, Action onClick, bool sub = false)
+        /// <summary>PR convention: DISPLAY via language files (themed ladder
+        /// Rekrut..5-Sterne-General, Thomas' suggestion 27.10); the stored and
+        /// logged token stays s1..s5 (docs/console unchanged).</summary>
+        static string SkillDisplay(string token, UITacticalAI tl)
+        {
+            if (tl == null) return token.ToUpperInvariant();
+            switch (token)
+            {
+                case "s1": return string.IsNullOrEmpty(tl.skillS1) ? "S1" : tl.skillS1;
+                case "s2": return string.IsNullOrEmpty(tl.skillS2) ? "S2" : tl.skillS2;
+                case "s3": return string.IsNullOrEmpty(tl.skillS3) ? "S3" : tl.skillS3;
+                case "s4": return string.IsNullOrEmpty(tl.skillS4) ? "S4" : tl.skillS4;
+                case "s5": return string.IsNullOrEmpty(tl.skillS5) ? "S5" : tl.skillS5;
+                default: return token.ToUpperInvariant();
+            }
+        }
+
+        static void MakeButton(Transform parent, string title, string kind, Action onClick)
         {
             var bg = new GameObject("Button_tacai_" + kind, typeof(RectTransform));
             bg.transform.SetParent(parent, false);
@@ -425,7 +369,6 @@ namespace TacticalAI
             trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
             trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
             _rows[kind] = new Row { go = bg, tmp = t };
-            if (sub) { } // sub-rows are gated centrally in Refresh()
         }
 
         static string Next(string current, string[] values)

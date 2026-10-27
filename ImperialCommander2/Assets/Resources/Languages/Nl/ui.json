@@ -321,5 +321,10 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}"
-  }
+  },
+  "skillS1": "Rekrut",
+  "skillS2": "Stormtrooper",
+  "skillS3": "Veteraan",
+  "skillS4": "Commandant",
+  "skillS5": "5-sterren-generaal"
 }

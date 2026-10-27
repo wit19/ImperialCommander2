@@ -33,6 +33,10 @@ public class UITacticalAI
 	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;
+	// skill ladder DISPLAY names (dev 18: recruit..5-star general, Thomas).
+	// Stored/logged token stays s1..s5 - these are labels only (PR rule:
+	// display via language files).
+	public string skillS1, skillS2, skillS3, skillS4, skillS5;
 }
 
 public class UISettings

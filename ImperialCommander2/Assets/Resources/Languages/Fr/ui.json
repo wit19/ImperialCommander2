@@ -56,7 +56,7 @@
     "heroAllyChooser": "EN CHOISIR UN",
     "adaptiveInfoUC": "Difficulté Adaptative: Plus vous arrivez à vaincre de groupes impériaux, plus l'Empire tentera de vous en empêcher, mais meilleures seront les récompenses.",
     "chooseHeroesHeading": "CHOISIR VOS HÉROS",
-	"appMissionFormat": "Format de la Mission :"
+    "appMissionFormat": "Format de la Mission :"
   },
   "sagaUISetup": {
     "groupsText": "GROUPES",
@@ -306,5 +306,10 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}"
-  }
+  },
+  "skillS1": "Recrue",
+  "skillS2": "Stormtrooper",
+  "skillS3": "Vétéran",
+  "skillS4": "Commandant",
+  "skillS5": "Général 5 étoiles"
 }
