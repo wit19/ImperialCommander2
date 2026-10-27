@@ -165,6 +165,34 @@ namespace TacticalAI.Tests
         }
 
         [Test]
+        public void Mission_Badge_Cycles_The_Ladder_Dev21()
+        {
+            TacticalAISettings.ResetDefaults();
+            TacticalAISettings.Enabled = true;
+            TacticalAISettings.SkillLevel = "S3";
+            // AUTO -> OFF -> S1..S5 -> AUTO
+            string t = "";
+            var seen = new System.Collections.Generic.List<string>();
+            for (int i = 0; i < 8; i++) { t = TacticalAISettings.NextMissionToken(t); seen.Add(t); }
+            Assert.AreEqual("off", seen[0]);
+            Assert.AreEqual("S1", seen[1]);
+            Assert.AreEqual("S5", seen[5]);
+            Assert.AreEqual("", seen[6], "S5 wraps to AUTO");
+            // semantics
+            Assert.AreEqual("legacy", TacticalAISettings.EffectiveMode("off"), "OFF badge = legacy play");
+            Assert.AreEqual("reference", TacticalAISettings.EffectiveMode("S2"), "mission rung derives mode");
+            Assert.AreEqual("overlord", TacticalAISettings.EffectiveMode("S5"), "Thrawn rung = optimiser");
+            Assert.AreEqual("S2", TacticalAISettings.EffectiveSkill("S2"), "rung pins skill");
+            Assert.AreEqual("S3", TacticalAISettings.EffectiveSkill(""), "AUTO follows global ladder");
+            Assert.AreEqual("S3", TacticalAISettings.EffectiveSkill("legacy"), "OFF uses global skill (irrelevant, legacy plays)");
+            // deprecated tokens stay playable (old saves), never crash
+            Assert.AreEqual("overlord", TacticalAISettings.EffectiveMode("overlord"));
+            Assert.AreEqual("reference", TacticalAISettings.EffectiveMode("reference"));
+
+            TacticalAISettings.ResetDefaults();
+        }
+
+        [Test]
         public void Corrupt_Save_Data_Cannot_Enable_The_Mode()
         {
             TacticalAISettings.ResetDefaults();

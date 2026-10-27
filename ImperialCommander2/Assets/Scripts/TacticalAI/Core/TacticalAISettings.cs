@@ -163,7 +163,48 @@ namespace TacticalAI
         {
             if (!_enabled) return "legacy";
             if (string.IsNullOrEmpty(missionAiMode)) return Mode;
+            if (missionAiMode == "off") return "legacy";
+            if (IsMissionSkillToken(missionAiMode))
+                return RankOfToken(missionAiMode) >= 4 ? "overlord" : "reference";
             return Validate(missionAiMode, ModeValues, Mode);
+        }
+
+        // ------------------------------------------------- mission badges (dev 21)
+        // The per-mission badge cycles the difficulty LADDER: "" (AUTO:
+        // follow the global settings) -> "off" -> S1..S5 -> AUTO (Thomas:
+        // after the dev 20 merge the badge must offer the same knob the
+        // settings do). "off" (not "legacy") is the deliberate-OFF token,
+        // because untouched old campaigns carry "legacy" as a field default
+        // and SagaCampaign normalizes that to AUTO on load - reusing it
+        // would silently erase a chosen OFF on every campaign reload.
+        public static readonly string[] MissionSkillTokens = { "S1", "S2", "S3", "S4", "S5" };
+
+        /// <summary>Badge cycle order: AUTO -> OFF -> S1..S5 -> AUTO.</summary>
+        public static string NextMissionToken(string current)
+        {
+            if (string.IsNullOrEmpty(current)) return "off";
+            if (current == "off") return "S1";
+            int i = IndexOf(current, MissionSkillTokens);
+            if (i < 0) return "off";                  // legacy/ref/ord -> OFF
+            return i + 1 >= MissionSkillTokens.Length ? "" : MissionSkillTokens[i + 1];
+        }
+
+        public static bool IsMissionSkillToken(string token)
+        {
+            return IndexOf(token, MissionSkillTokens) >= 0;
+        }
+
+        /// <summary>Skill the mission plays at: its own ladder rung if the
+        /// badge picked one, else the global ladder ("" AUTO or legacy tokens).</summary>
+        public static string EffectiveSkill(string missionAiMode)
+        {
+            return IsMissionSkillToken(missionAiMode) ? missionAiMode : _skillLevel;
+        }
+
+        public static int RankOfToken(string token)
+        {
+            int i = IndexOf(token, MissionSkillTokens);
+            return i < 0 ? 0 : i + 1;
         }
 
         public static bool IsTactical(string mode)

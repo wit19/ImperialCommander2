@@ -250,14 +250,9 @@ namespace Saga
 			EventSystem.current.SetSelectedGameObject( null );
 			FindObjectOfType<Sound>().PlaySound( FX.Click );
 
-			if ( string.IsNullOrEmpty( campaignStructure.aiMode ) )
-				campaignStructure.aiMode = "reference";
-			else if ( campaignStructure.aiMode == "reference" )
-				campaignStructure.aiMode = "overlord";
-			else if ( campaignStructure.aiMode == "overlord" )
-				campaignStructure.aiMode = "legacy";
-			else
-				campaignStructure.aiMode = "";
+			// dev 21 (Thomas): the badge cycles the difficulty LADDER -
+			// AUTO -> OFF -> Rekrut..Thrawn -> AUTO, same knob as the settings.
+			campaignStructure.aiMode = TacticalAI.TacticalAISettings.NextMissionToken( campaignStructure.aiMode );
 
 			if ( aiModeIcon != null )
 				aiModeIcon.text = AiModeLabel( campaignStructure.aiMode );
@@ -265,10 +260,7 @@ namespace Saga
 
 		string AiModeLabel( string mode )
 		{
-			if ( string.IsNullOrEmpty( mode ) ) return "AI:AUTO";
-			if ( mode == "reference" ) return "AI:REF";
-			if ( mode == "overlord" ) return "AI:ORD";
-			return "AI:OFF";
+			return TacticalAI.TacticalAISettingsUnity.MissionBadgeLabel( mode );
 		}
 
 		/// <summary>Builds the missing mission-card AI badge at runtime
@@ -283,7 +275,7 @@ namespace Saga
 			rt.anchorMax = new Vector2( 0f, 1f );
 			rt.pivot = new Vector2( 0f, 1f );
 			rt.anchoredPosition = new Vector2( 8f, -6f );
-			rt.sizeDelta = new Vector2( 78f, 24f );
+			rt.sizeDelta = new Vector2( 150f, 24f ); // dev 21: ladder names are longer
 
 			var img = go.AddComponent<Image>();
 			img.color = new Color( 0f, 0.55f, 0.45f, 0.9f );
@@ -299,7 +291,7 @@ namespace Saga
 			var t = textGo.AddComponent<TextMeshProUGUI>();
 			t.font = TMP_Settings.defaultFontAsset;
 			t.text = "AI:OFF";
-			t.fontSize = 14;
+			t.enableAutoSizing = true; t.fontSizeMax = 14; t.fontSizeMin = 8; // dev 21
 			t.alignment = TextAlignmentOptions.Center;
 			t.color = Color.white;
 

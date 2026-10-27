@@ -306,5 +306,7 @@
   "skillS2": "Stormtrooper",
   "skillS3": "Veterano",
   "skillS4": "Comandante",
-  "skillS5": "General de 5 estrellas"
+  "skillS5": "Gran Almirante Thrawn",
+  "badgeAuto": "AUTO",
+  "badgeOff": "OFF"
 }

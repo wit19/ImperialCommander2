@@ -190,7 +190,7 @@ namespace Saga
 			rt.anchoredPosition = dRT != null
 				? new Vector2( dRT.anchoredPosition.x, dRT.anchoredPosition.y - dRT.rect.height - 10f )
 				: new Vector2( 12f, -160f );
-			rt.sizeDelta = new Vector2( 92f, 26f );
+			rt.sizeDelta = new Vector2( 170f, 26f ); // dev 21: ladder names
 			var img = go.AddComponent<UnityEngine.UI.Image>();
 			img.color = new Color( 0f, .55f, .45f, .9f );
 			var btn = go.AddComponent<Button>();
@@ -204,7 +204,7 @@ namespace Saga
 			trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
 			setupAiBadgeText = textGo.AddComponent<TMPro.TextMeshProUGUI>();
 			setupAiBadgeText.font = TMPro.TMP_Settings.defaultFontAsset;
-			setupAiBadgeText.fontSize = 15;
+			setupAiBadgeText.enableAutoSizing = true; setupAiBadgeText.fontSizeMax = 15; setupAiBadgeText.fontSizeMin = 8;
 			setupAiBadgeText.alignment = TMPro.TextAlignmentOptions.Center;
 			setupAiBadgeText.color = Color.white;
 			setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
@@ -212,10 +212,7 @@ namespace Saga
 
 		string SetupAiLabel( string mode )
 		{
-			if ( string.IsNullOrEmpty( mode ) ) return "AI:AUTO";
-			if ( mode == "reference" ) return "AI:REF";
-			if ( mode == "overlord" ) return "AI:ORD";
-			return "AI:OFF";
+			return TacticalAI.TacticalAISettingsUnity.MissionBadgeLabel( mode );
 		}
 
 		void OnSetupAiClicked()
@@ -223,10 +220,8 @@ namespace Saga
 			if ( setupOptions == null ) return;
 			// AUTO("") -> reference -> overlord -> legacy -> AUTO (same cycle
 			// as the campaign-list badge and SagaSetupOptions.ToggleAiMode)
-			if ( string.IsNullOrEmpty( setupOptions.aiMode ) ) setupOptions.aiMode = "reference";
-			else if ( setupOptions.aiMode == "reference" ) setupOptions.aiMode = "overlord";
-			else if ( setupOptions.aiMode == "overlord" ) setupOptions.aiMode = "legacy";
-			else setupOptions.aiMode = "";
+			// dev 21 (Thomas): ladder cycle, shared with the campaign badge
+			setupOptions.aiMode = TacticalAI.TacticalAISettings.NextMissionToken( setupOptions.aiMode );
 			if ( setupAiBadgeText != null ) setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
 			//persist for campaign missions (structure is saved with SaveCampaignState)
 			if ( RunningCampaign.campaignStructure != null )

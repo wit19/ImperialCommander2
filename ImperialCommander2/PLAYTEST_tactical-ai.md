@@ -1,7 +1,8 @@
 # Playtest-Paket: Faire Imperiale KI (feature/tactical-ai)
 
-Stand: dev 20, 27.10.2026 — Assembly-CSharp (249 Dateien inkl. KI) kompiliert fehlerfrei;
-Settings zeigen jetzt EINE Schwierigkeits-Leiter (Rekrut..5-Sterne-General) statt Modus+Skill;
+Stand: dev 21, 27.10.2026 — Assembly-CSharp (249 Dateien inkl. KI) kompiliert fehlerfrei;
+Settings + Missions-Badges zeigen EINE Leiter (Rekrut, Stormtrooper, Veteran, Kommandant,
+Großadmiral Thrawn); Missions-Badge zyklert AUTO -> AUS -> Leiter -> AUTO;
 Layout der KI-Zeilen wie Rundenlimit (gelb, linksbündig) — Build dev 20 noetig
 (geprüft mit der Mono-Version von Unity 2020.3.48, inkl. aller Paket-Referenzen).
 Branch: `feature/tactical-ai` (Fork wit19/ImperialCommander2,_commits bis `e39c0ae`_).

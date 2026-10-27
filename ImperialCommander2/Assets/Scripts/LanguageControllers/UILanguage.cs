@@ -37,6 +37,7 @@ public class UITacticalAI
 	// Stored/logged token stays s1..s5 - these are labels only (PR rule:
 	// display via language files).
 	public string skillS1, skillS2, skillS3, skillS4, skillS5;
+	public string badgeAuto, badgeOff;
 }
 
 public class UISettings

@@ -53,5 +53,38 @@ namespace TacticalAI
         {
             return TacticalAISettings.EffectiveMode(missionAiMode);
         }
-    }
+    
+        /// <summary>Badge text for the per-mission cycle (dev 21, Thomas):
+        /// AUTO / OFF / the ladder names from the language files. Deprecated
+        /// mission tokens (legacy/reference/overlord from old saves) still
+        /// render, so old campaigns never show raw internals.</summary>
+        public static string MissionBadgeLabel(string token)
+        {
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            string auto = (tl != null && !string.IsNullOrEmpty(tl.badgeAuto)) ? tl.badgeAuto : "AUTO";
+            string off = (tl != null && !string.IsNullOrEmpty(tl.badgeOff)) ? tl.badgeOff : "OFF";
+            if (string.IsNullOrEmpty(token)) return "AI:" + auto;
+            if (token == "off" || token == "legacy") return "AI:" + off;
+            if (token == "reference") return "AI:REF";
+            if (token == "overlord") return "AI:ORD";
+            if (TacticalAISettings.IsMissionSkillToken(token))
+                return "AI:" + SkillDisplayName(tl, token);
+            return "AI:" + token.ToUpperInvariant();
+        }
+
+        static string SkillDisplayName(UITacticalAI tl, string token)
+        {
+            if (tl == null) return token;
+            string v;
+            switch (token)
+            {
+                case "S1": v = tl.skillS1; break;
+                case "S2": v = tl.skillS2; break;
+                case "S3": v = tl.skillS3; break;
+                case "S4": v = tl.skillS4; break;
+                default: v = tl.skillS5; break;
+            }
+            return string.IsNullOrEmpty(v) ? token : v;
+        }
+}
 }

@@ -38,12 +38,10 @@
 			if ( !TacticalAI.TacticalAISettings.Enabled )
 				return "AUTO";
 
-			if ( string.IsNullOrEmpty( aiMode ) ) aiMode = "reference";
-			else if ( aiMode == "reference" ) aiMode = "overlord";
-			else if ( aiMode == "overlord" ) aiMode = "legacy";
-			else aiMode = "";
+			// dev 21 (Thomas): ladder cycle shared with both other badges
+			aiMode = TacticalAI.TacticalAISettings.NextMissionToken( aiMode );
 
-			return string.IsNullOrEmpty( aiMode ) ? "AUTO" : aiMode.ToUpperInvariant();
+			return TacticalAI.TacticalAISettingsUnity.MissionBadgeLabel( aiMode );
 		}
 
 		public SagaSetupOptions()

@@ -175,7 +175,9 @@ namespace TacticalAI
 
             var mode = EffectiveMissionMode();
             var posture = "eliminate";                 // TODO(M5 feed): posture from mission properties
-            var skill = Tac.SkillProfile.For(TacticalAISettings.SkillLevel);
+            // dev 21: a mission badge can pin its OWN ladder rung (S1..S5);
+            // AUTO/OFF fall back to the global ladder.
+            var skill = Tac.SkillProfile.For(TacticalAISettings.EffectiveSkill(CurrentMissionAiMode()));
             // NOTE(overlord): the ORD optimization goal needs the PASSIVE world
             // feed (concept v4.0 3.3.1b) behind the WorldProvider seam - tile
             // graph, token-to-region, event stream; NEVER manual position
@@ -525,12 +527,15 @@ namespace TacticalAI
             return null;
         }
 
+        static string CurrentMissionAiMode()
+        {
+            try { return DataStore.sagaSessionData?.setupOptions?.aiMode; }
+            catch { return null; /* session not up yet */ }
+        }
+
         static string EffectiveMissionMode()
         {
-            string aiMode = null;
-            try { aiMode = DataStore.sagaSessionData?.setupOptions?.aiMode; }
-            catch { /* session not up yet */ }
-            return TacticalAISettingsUnity.MissionMode(aiMode);
+            return TacticalAISettingsUnity.MissionMode(CurrentMissionAiMode());
         }
 
         // ------------------------------------------------------------- plumbing
