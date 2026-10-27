@@ -80,11 +80,15 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    2. **Der Blocker-Fall ist eingebaut:** verbaut eine andere Heldenfigur die
       Sichtlinie auf X, ist sie das Ziel — nicht X, und auch kein unnützes
       Further-Running an ihr vorbei.
-   3. **Reine Bewegungskarten:** nähere X; führt kein Weg zu X (zu weit oder
-      total geblockt): nähere dem nächsten Helden. Welche Felder ihr nehmt,
-      entscheidet der imperiale Spieler am Brett — Entfernungen und Linien sind
-      dort öffentliche Information (die App-Skriptebene sieht die Feldnummern
-      selbst nicht; M5-Hex-Adapter lässt die KI-Geometrie selbst rechnen).
+   3. **Bewegungskarten (Hit&Run, Thomas' Runde 7):** Steht schon ein Held in
+      eurer eigenen Angriffreichweite: **stehen bleiben, Feuer vorbereiten**
+      (Sonst könnte ein einziger schneller Meuchler unser Fernkampf-Korps per
+      Spazierenfahren durch die halbe Karte pinnten). Kein Held in Reichweite:
+      war der Angriff schon dran → **max. Speed Felder vom Ziel entfernen und
+      es im Auge behalten**; noch kein Angriff → dem Ziel nähere. Reine
+      Bewegungskarten ohne je erreichbares Ziel: nächste Heldenfigur.
+      Aktionspunkte gibt es in IC2 nicht — „übrig" heißt: der Bewegungsblock
+      der Karte wurde noch nicht als Angriff verplant.
    4. Warum ein Mensch so spielen würde: Zielfeuer auf Verwundete und die
       gefährlichsten Helden, Zugriff notfalls ueber Bewegung, Blocker abschießen —
       Standardtaktik. Standort-Köder ändern nichts an der Rangliste, sie ändern

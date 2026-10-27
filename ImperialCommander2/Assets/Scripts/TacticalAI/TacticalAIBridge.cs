@@ -283,11 +283,21 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
+                        // Thomas round 7 (dev 10): hit&run clause + anti-kiting
+                        // guard. IC2 has no AP pool - 'left' movement = the
+                        // card's move block not yet spent, so the disengage
+                        // lives INSIDE the move action (otherwise it would
+                        // contradict the 'no line -> close in' branch).
+                        // Guard: if a hero already stands inside this unit's
+                        // attack range, HOLD and fire-prepare - an
+                        // unconditional backstep would let one fast melee
+                        // hero pin the whole ranged corps by escorting it
+                        // (the dev-7 decoy disease, new variant).
                         outp.Add(t != null
-                            ? Act($"Bewegung {speed}: nähere {t}. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden",
-                                  $"Move {speed}: close in on {t}. If no route to him (too far or blocked): close in on the nearest hero")
-                            : Act($"Bewegung {speed}: nähere dem nächsten Helden",
-                                  $"Move {speed}: close in on the nearest hero"));
+                            ? Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: In dieser Aktivierung bereits angegriffen? Dann entferne dich bis zu {speed} Felder von {t} und behalte ihn im Auge. Noch nicht angegriffen? Dann nähere {t}",
+                                  $"Move {speed}: If a hero already stands inside your attack range: hold your ground and ready your fire. Otherwise: if this activation already attacked, back off up to {speed} spaces from {t} while keeping him in sight; if it has not attacked yet, close in on {t}")
+                            : Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: Nach einem Angriff entferne dich vom nächsten Helden; vor jedem Angriff nähere ihm",
+                                  $"Move {speed}: If a hero already stands inside your attack range: hold and ready fire. Otherwise: after an attack, back off from the nearest hero; before any attack, close in on it"));
                         break;
                     case "attack":
                         // Thomas' Wenn-Dann-Schema (dev 9): focus if engaged;
