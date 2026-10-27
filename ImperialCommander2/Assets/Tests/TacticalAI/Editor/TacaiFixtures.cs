@@ -17,6 +17,10 @@ using TacticalAI.Core;
 
 namespace TacticalAI.Tests
 {
+// The shipping game declares a global `DeploymentCard`; inside this namespace
+// the global type would win over using TacticalAI.Core (CS0029/CS0117 flood in
+// the real editor). The alias inside the namespace scope hides it.
+using DeploymentCard = TacticalAI.Core.DeploymentCard;
     /// <summary>Fixture discovery + the harness' normalization/equality core,
     /// ported 1:1 from tools/TacticalAiHarness/Program.cs.</summary>
     public static class TacaiFixtures
@@ -98,9 +102,10 @@ namespace TacticalAI.Tests
             var t = v.GetType();
             if (t.IsGenericType && t.Name.StartsWith("ValueTuple"))
             {
-                var tup = (ITuple)v;
+                // ITuple does not exist on Unity's netstandard2.0 API surface;
+                // ValueTuple exposes Item1..ItemN as public fields in metadata order.
                 var o = new List<object>();
-                for (int k = 0; k < tup.Length; k++) o.Add(Norm(tup[k]));
+                foreach (var f in t.GetFields()) o.Add(Norm(f.GetValue(v)));
                 return o;
             }
             if (v is IList list)
