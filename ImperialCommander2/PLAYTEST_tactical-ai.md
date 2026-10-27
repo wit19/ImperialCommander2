@@ -60,18 +60,22 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
    **Vorrang-Regel der Zielauswahl (Konzept §3.5.1, determiniert):**
    1. Das **Fokus-Ziel** hat immer Vorrang — auch wenn es gerade nicht angreifbar ist.
-   2. Fokus-Ziel = zuerst der gedruckte Vorzugziel-Trait der Karte (z. B. Schurke);
-      lebt kein passender Held, zählt die **Aufstellungsreihenfolge** der Heldenliste
-      (erster lebender Held) — kein Zufall, keine Nächstenwahl.
-   3. **Angriff außer Reichweite ⇒ kein Zielwechsel.** Der Angriffs-Block wird zu
-      Vorrücken auf das Fokus-Ziel („außer Reichweite: NICHT umschalten").
+   2. Wer ist das Fokus-Ziel? Zuerst der Held, dessen Merkmal auf der
+      Vorzugziel-Zeile der Imperiellen-Karte steht (z. B. „Schurke"). Gibt es
+      keinen solchen Helden: der **erste lebende Held ganz links in eurer
+      Heldenreihe** (die Anordnung, die ihr auf dem Aufstellungsbild seht).
+      Kein Zufall, keine Entfernungsrechnung.
+   3. **Kann das Fokus-Ziel nicht angegriffen werden, wird gar nicht
+      angegriffen** — es wird auch kein anderes Ziel „mitgenommen". Die Einheit
+      bewegt sich stattdessen weiter auf ihr Fokus-Ziel zu.
    4. Bewegung bewegt **auf das Fokus-Ziel zu**; die exakte Feldwahl bleibt beim
       Menschen am Brett (Fairness: die KI rechnet keine verdeckten Positionen).
    Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
    Roh-Tokens, z. B.:
-   `Bewegung 4: nähere dich CT-1701` · `Angriff: CT-1701 (Fokus-Ziel); außer Reichweite: NICHT umschalten — stattdessen auf CT-1701 vorrücken` ·
+   `Bewegung 4: bewege dich auf CT-1701 zu` ·
+   `Angriff: nur CT-1701. Ist CT-1701 nicht in Reichweite: gar nicht angreifen und weiter auf CT-1701 zubewegen` ·
    `Warum jetzt: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive) (Rang 1) |
-   Fokus-Ziel: CT-1701 — gedrucktes Vorzugziel Schurke hat Vorrang; Rest folgt Aufstellungsreihenfolge (kein Zufall)`
+   Fokus-Ziel: CT-1701 — seine Karte zielt gedruckt auf „Schurke" — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)`
    (Bewegung *wohin genau* = auf das Fokus-Ziel zu; das Brett mit Feldnummern bleibt
    die Domäne des Spielers — die KI kennt bewusst keine verdeckten Positionen.)
 5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte

@@ -274,30 +274,33 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
+                        // Playtest 27.10 (Thomas): phrase orders ONLY in terms a
+                        // player can see on screen - the hero row on the setup
+                        // panel, the focus target's name. No rule jargon.
                         outp.Add(t != null
-                            ? T($"Bewegung {speed}: nähere dich {t}",
-                                $"Move {speed}: close in on {t}")
-                            : T($"Bewegung {speed}: nähere der nächsten Rebellinie",
-                                $"Move {speed}: approach the nearest rebel line"));
+                            ? T($"Bewegung {speed}: bewege dich auf {t} zu",
+                                $"Move {speed}: move toward {t}")
+                            : T($"Bewegung {speed}: bewege dich auf deinen Fokus zu",
+                                $"Move {speed}: move toward your focus"));
                         break;
                     case "attack":
                         outp.Add(t != null
-                            ? T($"Angriff: {t} (Fokus-Ziel); außer Reichweite: NICHT umschalten — stattdessen auf {t} vorrücken",
-                                $"Attack: {t} (focus target); if out of range do NOT retarget — advance on {t} instead")
-                            : T("Angriff: nur gegen das Fokus-Ziel; außer Reichweite: vorrücken statt angreifen",
-                                "Attack: focus target only; if out of range: advance instead of attacking"));
+                            ? T($"Angriff: nur {t}. Ist {t} nicht in Reichweite: gar nicht angreifen und weiter auf {t} zubewegen",
+                                $"Attack: {t} only. If {t} is out of range: do not attack at all and keep moving toward {t}")
+                            : T("Angriff: nur gegen deinen Fokus; außer Reichweite: nicht angreifen, weiter zubewegen",
+                                "Attack: focus target only; out of range: don't attack, keep advancing"));
                         break;
                     case "special":
-                        outp.Add(T("Sonderaktion: gedruckte Sonderaktion der Karte ausführen",
-                                   "Special: execute the card's printed special action"));
+                        outp.Add(T("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
+                                   "Special: execute exactly as printed on the card"));
                         break;
                     case "rest":
                         outp.Add(T("Rasten: 1 Schaden regenerieren",
                                    "Rest: recover 1 damage"));
                         break;
                     case "interact":
-                        outp.Add(T("Interaktion: eigenes Positionierungsziel anstreben",
-                                   "Interact: pursue this unit's own placement objective"));
+                        outp.Add(T("Interaktion: dein eigenes Positionierungsziel erfüllen",
+                                   "Interact: fulfill this unit's own placement objective"));
                         break;
                     case "shuffle":
                         outp.Add(T("(Danach: Gruppen-Deck mischen)",
@@ -358,21 +361,25 @@ namespace TacticalAI
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
 
             global::DeploymentCard pick = null;
+            // Player-facing wording (playtest 27.10): describe the rule by what
+            // the player SEES - the hero row on the setup screen, left to right.
             string pickedWhy = DataStore.languageCode != 0
-                ? "kein gedrucktes Vorzugziel lebt: höchster Held der Aufstellungsreihenfolge (Liste, kein Zufall)"
-                : "no printed preferred target alive: top hero of deployment order (list order, no chance)";
+                ? "seine Karte hat kein passendes gedrucktes Vorzugziel unter deinen Helden — "
+                  + "daher dein erster lebender Held von links in der Heldenauswahl (kein Zufall)"
+                : "its card has no matching printed preferred target among your heroes — "
+                  + "so it takes the first living hero from the left of your squad row (no chance)";
             if (cd.preferredTargets != null && cd.preferredTargets.Length > 0)
             {
                 pick = living.FirstOrDefault(h => h.traits != null &&
                     cd.preferredTargets.Any(t => h.traits.Contains(t.ToString())));
                 if (pick != null)
                     pickedWhy = DataStore.languageCode != 0
-                        ? "gedrucktes Vorzugziel " +
-                          string.Join("/", cd.preferredTargets.Select(t => t.ToString())) +
-                          " hat Vorrang; Rest folgt Aufstellungsreihenfolge (kein Zufall)"
-                        : "printed preferred target " +
-                          string.Join("/", cd.preferredTargets.Select(t => t.ToString())) +
-                          " comes first; the rest follows deployment order (no chance)";
+                        ? "seine Karte zielt gedruckt auf „" +
+                          string.Join("“/„", cd.preferredTargets.Select(t => t.ToString())) +
+                          "“ — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)"
+                        : "its card is printed to target “" +
+                          string.Join("”/“", cd.preferredTargets.Select(t => t.ToString())) +
+                          "” — first of your heroes with that trait (no chance)";
             }
             if (pick == null) pick = living[0];
             heroName = pick.name;
