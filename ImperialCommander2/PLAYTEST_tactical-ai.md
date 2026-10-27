@@ -58,11 +58,20 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
+   **Vorrang-Regel der Zielauswahl (Konzept §3.5.1, determiniert):**
+   1. Das **Fokus-Ziel** hat immer Vorrang — auch wenn es gerade nicht angreifbar ist.
+   2. Fokus-Ziel = zuerst der gedruckte Vorzugziel-Trait der Karte (z. B. Schurke);
+      lebt kein passender Held, zählt die **Aufstellungsreihenfolge** der Heldenliste
+      (erster lebender Held) — kein Zufall, keine Nächstenwahl.
+   3. **Angriff außer Reichweite ⇒ kein Zielwechsel.** Der Angriffs-Block wird zu
+      Vorrücken auf das Fokus-Ziel („außer Reichweite: NICHT umschalten").
+   4. Bewegung bewegt **auf das Fokus-Ziel zu**; die exakte Feldwahl bleibt beim
+      Menschen am Brett (Fairness: die KI rechnet keine verdeckten Positionen).
    Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
    Roh-Tokens, z. B.:
-   `Bewegung 4: nähere dich CT-1701` · `Angriff: CT-1701 (Fokus-Ziel)` ·
+   `Bewegung 4: nähere dich CT-1701` · `Angriff: CT-1701 (Fokus-Ziel); außer Reichweite: NICHT umschalten — stattdessen auf CT-1701 vorrücken` ·
    `Warum jetzt: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive) (Rang 1) |
-   Fokus-Ziel: CT-1701 — Focus: gedrucktes Vorzugziel …`
+   Fokus-Ziel: CT-1701 — gedrucktes Vorzugziel Schurke hat Vorrang; Rest folgt Aufstellungsreihenfolge (kein Zufall)`
    (Bewegung *wohin genau* = auf das Fokus-Ziel zu; das Brett mit Feldnummern bleibt
    die Domäne des Spielers — die KI kennt bewusst keine verdeckten Positionen.)
 5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte

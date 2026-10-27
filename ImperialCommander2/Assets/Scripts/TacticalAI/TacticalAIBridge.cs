@@ -282,10 +282,10 @@ namespace TacticalAI
                         break;
                     case "attack":
                         outp.Add(t != null
-                            ? T($"Angriff: {t} (Fokus-Ziel)",
-                                $"Attack: {t} (focus target)")
-                            : T("Angriff: nur falls das Fokus-Ziel in Reichweite liegt",
-                                "Attack: only if the focus target is in range"));
+                            ? T($"Angriff: {t} (Fokus-Ziel); außer Reichweite: NICHT umschalten — stattdessen auf {t} vorrücken",
+                                $"Attack: {t} (focus target); if out of range do NOT retarget — advance on {t} instead")
+                            : T("Angriff: nur gegen das Fokus-Ziel; außer Reichweite: vorrücken statt angreifen",
+                                "Attack: focus target only; if out of range: advance instead of attacking"));
                         break;
                     case "special":
                         outp.Add(T("Sonderaktion: gedruckte Sonderaktion der Karte ausführen",
@@ -358,15 +358,21 @@ namespace TacticalAI
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
 
             global::DeploymentCard pick = null;
-            string pickedWhy = "Focus: gedruckte Vorzugziele, dann Aufstellungsreihenfolge (kein Zufall)";
+            string pickedWhy = DataStore.languageCode != 0
+                ? "kein gedrucktes Vorzugziel lebt: höchster Held der Aufstellungsreihenfolge (Liste, kein Zufall)"
+                : "no printed preferred target alive: top hero of deployment order (list order, no chance)";
             if (cd.preferredTargets != null && cd.preferredTargets.Length > 0)
             {
                 pick = living.FirstOrDefault(h => h.traits != null &&
                     cd.preferredTargets.Any(t => h.traits.Contains(t.ToString())));
                 if (pick != null)
-                    pickedWhy = "Focus: gedrucktes Vorzugziel " +
-                                string.Join("/", cd.preferredTargets.Select(t => t.ToString())) +
-                                ", dann Aufstellungsreihenfolge (kein Zufall)";
+                    pickedWhy = DataStore.languageCode != 0
+                        ? "gedrucktes Vorzugziel " +
+                          string.Join("/", cd.preferredTargets.Select(t => t.ToString())) +
+                          " hat Vorrang; Rest folgt Aufstellungsreihenfolge (kein Zufall)"
+                        : "printed preferred target " +
+                          string.Join("/", cd.preferredTargets.Select(t => t.ToString())) +
+                          " comes first; the rest follows deployment order (no chance)";
             }
             if (pick == null) pick = living[0];
             heroName = pick.name;
