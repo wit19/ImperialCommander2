@@ -49,13 +49,24 @@ namespace TacticalAI.Core
             public int FiguresSeen;              // distinct figure indices in wheel events
             public readonly Dictionary<int, long> Wheels = new Dictionary<int, long>();
 
-            /// <summary>Remaining group vitality as exact Rational: alive HP
-            /// over full card health of every figure the group deployed with
-            /// (FINAL-QA audit #10 group-granularity semantics). A group
-            /// without ANY wheel event is UNTOUCHED -> 1 (never guessed from
-            /// absence). Wheels are the human's damage wheels: absolute
-            /// wheel values are public facts; the health denominator is the
-            /// printed card health that the event itself carries.</summary>
+            /// <summary>Remaining group vitality as exact Rational (M9-F6/A0,
+            /// closes M7-F4): the wound dials show ERLITTENER Schaden per
+            /// figure — a fresh group reads 0 (Thomas board fact 2026-10-27;
+            /// DeploymentCard.cs:55 fresh {0,0,0}, HPTracker.cs:43-48
+            /// double-click reset to 0, label groupWoundNumber). Remaining
+            /// HP per figure is therefore health - min(health, dial); the
+            /// old reading summed the dials AS life and inverted every
+            /// partially damaged group. A figure with NO wheel event never
+            /// moved its dial -> damage 0 -> full HP (same "never guessed
+            /// from absence" invariant that keeps an untouched group at 1).
+            /// Denominator: printed card health of EVERY figure the group
+            /// deployed with (FINAL-QA audit #10 group granularity); the
+            /// result is capped by the alive figures' HP so a Death event
+            /// with dials not yet clicked down cannot inflate vitality.
+            /// Dials are absolute public facts; health rides the event.
+            /// Known public blind spot: a group deployed PRE-DAMAGED at the
+            /// baseline sees its starting dials invisible (no event) - same
+            /// class as the M5 baseline rule, documented, not guessed.</summary>
             public Rational VitalityFrac
             {
                 get
@@ -63,11 +74,11 @@ namespace TacticalAI.Core
                     if (Wheels.Count == 0 || Health <= 0) return Rational.One;
                     int n = Math.Max(1, Math.Max(Size, FiguresSeen));
                     long hp = (long)Health * n;
-                    long sum = 0;
-                    foreach (var kv in Wheels) sum += Math.Max(0, Math.Min(Health, kv.Value));
+                    long dmg = 0;
+                    foreach (var kv in Wheels) dmg += Math.Max(0, Math.Min(Health, kv.Value));
                     long alive = Math.Max(0, Math.Min(n, Alive));
-                    long cap = (long)Health * alive;
-                    return new Rational(Math.Min(sum, cap), hp <= 0 ? 1 : hp);
+                    long rem = Math.Min(Math.Max(0, hp - dmg), (long)Health * alive);
+                    return new Rational(rem, hp <= 0 ? 1 : hp);
                 }
             }
         }

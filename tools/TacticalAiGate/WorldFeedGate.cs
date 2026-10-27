@@ -38,7 +38,10 @@ public static class WorldFeedGate
         Eq(fullHash, feed.Hash(), "resync.hash_restored");
         Eq(1L, (long)feed.ResyncCount, "resync.counted");
         var view = WorldEventVector.Project(feed.Events, "gapcase", feed.Hash());
-        Eq("1/4", view.FindGroup("DG001").VitalityFrac.ToString(), "resync.view_vitality");
+        // M9-F6/A0 (closes M7-F4): dial = damage SUFFERED (fresh = 0). Figure 0:
+        // dial 2 of health 4 -> 2 remaining; figure 1 unseen -> dial 0 -> FULL.
+        // 6 of printed 8 = 3/4 (the old wheel-as-life reading said 1/4 - the bug).
+        Eq("3/4", view.FindGroup("DG001").VitalityFrac.ToString(), "resync.view_vitality");
         threw = false;
         try { feed.Resync(new List<WorldEvent> { full[0], full[2] }); }
         catch (InvalidOperationException) { threw = true; }

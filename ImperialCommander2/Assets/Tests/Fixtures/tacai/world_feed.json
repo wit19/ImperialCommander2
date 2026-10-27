@@ -195,7 +195,7 @@
     }
    ],
    "expect": {
-    "canon": "mission=vector|wounded_vitality\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|13/15\n",
+    "canon": "mission=vector|wounded_vitality\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|2/15\n",
     "hash": "d29946bbb0ceabc2975c2820bea1ff30ed914a5e6043042fb72b10d0348c7b97",
     "objective": "Destroy the rebel cell in the sector",
     "posture": "eliminate",
@@ -258,7 +258,7 @@
     }
    ],
    "expect": {
-    "canon": "mission=vector|wounded_vitality_shuffled_keys\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|13/15\n",
+    "canon": "mission=vector|wounded_vitality_shuffled_keys\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|2/15\n",
     "hash": "d29946bbb0ceabc2975c2820bea1ff30ed914a5e6043042fb72b10d0348c7b97",
     "objective": "Destroy the rebel cell in the sector",
     "posture": "eliminate",
@@ -266,6 +266,104 @@
     "seq": 5,
     "threat": 0
    }
+  },
+  {
+   "name": "wheels_unseen_figures_full",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "missionType": "Story",
+      "mission": "core1",
+      "roundLimit": -1,
+      "priorityTarget": "Hero",
+      "objective": "Destroy the rebel cell in the sector"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG002",
+      "size": 3
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "group": "DG002",
+      "figure": 0,
+      "wheel": 2,
+      "health": 4
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|wheels_unseen_figures_full\nround=2\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=3\nG|DG002|DG002|1|0|3|3|1|4|5/6\n",
+    "hash": "6f5c44ce9c296b4a28eb48e0fb857835111603b4a081ce314171d2abc301d700",
+    "objective": "Destroy the rebel cell in the sector",
+    "posture": "eliminate",
+    "round": 2,
+    "seq": 3,
+    "threat": 0
+   },
+   "_arith": "M9-F6/A0 ground truth: 3 figures printed health 4 -> hp 12; only figure 0 moved its dial (2 damage suffered); unseen figures 1+2 keep FULL HP (no dial event = dial 0, never guessed from absence). remaining = 12-2 = 10 -> 10/12 = 5/6. The OLD wheel-as-life reading would have said 2/12 = 1/6. Canon group line expects G|DG002|DG002|1|0|3|3|1|4|5/6."
+  },
+  {
+   "name": "wheels_dial_clamped_over_health",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "missionType": "Story",
+      "mission": "core1",
+      "roundLimit": -1,
+      "priorityTarget": "Hero",
+      "objective": "Destroy the rebel cell in the sector"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG003",
+      "size": 2
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "group": "DG003",
+      "figure": 0,
+      "wheel": 3,
+      "health": 2
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "group": "DG003",
+      "figure": 1,
+      "wheel": 1,
+      "health": 2
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|wheels_dial_clamped_over_health\nround=2\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nthreatseen=0\nseq=4\nG|DG003|DG003|1|0|2|2|1|2|1/4\n",
+    "hash": "20609d89d13bd9e76bb85047f866f6bd578a87edd3e3578b9fd2410690fd4ae7",
+    "objective": "Destroy the rebel cell in the sector",
+    "posture": "eliminate",
+    "round": 2,
+    "seq": 4,
+    "threat": 0
+   },
+   "_arith": "M9-F6/A0 ground truth (Karten-Beispiel '2er-Gruppe health4+Rad[3,1]=1/4'): 2 figures printed health 2 (printed group HP 4); dial 3 EXCEEDS health and clamps to 2 (dead figure, floor 0 remaining), dial 1 -> 1 remaining. remaining = 0+1 = 1 -> 1/4. Canon group line expects G|DG003|DG003|1|0|2|2|1|2|1/4."
   },
   {
    "name": "death_and_removal",

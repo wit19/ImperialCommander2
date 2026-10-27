@@ -72,3 +72,5 @@ crashlytics-build.properties
 # M8/F3: dotnet tool projects (harness/core/live-gate) MUST be versioned -
 # without them a fresh checkout cannot rebuild the gates at all.
 !tools/**/*.csproj
+# M9: --record side products are regenerated, never committed
+ImperialCommander2/Assets/Tests/Fixtures/tacai/*_record.json

@@ -148,7 +148,12 @@ namespace TacticalAI.Tests
             TacaiFixtures.Check("resync.counted", 1L, (long)feed.ResyncCount);
             // the resynced stream projects again - no partial state, no guess
             var view = WorldEventVector.Project(feed.Events, "gapcase", feed.Hash());
-            TacaiFixtures.Check("resync.view_vitality", "1/4",
+            // M9-F6/A0 (closes M7-F4): dial = damage SUFFERED (fresh = 0).
+            // Figure 0 shows dial 2 of health 4 -> 2 remaining; figure 1 has
+            // no dial event -> dial 0 -> FULL 4 (absence never guessed).
+            // Remaining 6 of printed 8 = 3/4. The old wheel-as-life reading
+            // said 2/8 = 1/4 — that reading was the bug.
+            TacaiFixtures.Check("resync.view_vitality", "3/4",
                 view.FindGroup("DG001").VitalityFrac.ToString());
 
             // a broken re-log is refused (fail-loud, never auto-repair)
