@@ -378,6 +378,263 @@
      "wounded": false
     }
    ]
+  },
+  {
+   "name": "m10a_placeholder_loadout_breaks_row_queue",
+   "posture": "stall",
+   "counter": null,
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "row": 0,
+     "profile": "Biv Bodhrik",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Davith Elso",
+     "row": 1,
+     "profile": "Davith Elso",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    },
+    {
+     "hero": "CT-1701",
+     "row": 2,
+     "profile": "CT-1701",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Drokkatta",
+     "row": 3,
+     "profile": "Drokkatta",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [
+       "item328"
+      ],
+      "skills": [
+       "drokkata05"
+      ]
+     }
+    }
+   ],
+   "expect": [
+    {
+     "basis": "economy",
+     "hero": "Drokkatta",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "Biv Bodhrik",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "Davith Elso",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "CT-1701",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m10a_wounded_beats_investment",
+   "posture": "stall",
+   "counter": null,
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "row": 0,
+     "profile": "Biv Bodhrik",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Davith Elso",
+     "row": 1,
+     "profile": "Davith Elso",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [
+       "item328"
+      ],
+      "skills": []
+     }
+    },
+    {
+     "hero": "CT-1701",
+     "row": 2,
+     "profile": "CT-1701",
+     "wounded": true,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Drokkatta",
+     "row": 3,
+     "profile": "Drokkatta",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [],
+      "skills": []
+     }
+    }
+   ],
+   "expect": [
+    {
+     "basis": "economy",
+     "hero": "CT-1701",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": true
+    },
+    {
+     "basis": "economy",
+     "hero": "Davith Elso",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "Biv Bodhrik",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "Drokkatta",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m10a_equal_investment_keeps_row",
+   "posture": "stall",
+   "counter": null,
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "row": 0,
+     "profile": "Biv Bodhrik",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [
+       "item328"
+      ],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Davith Elso",
+     "row": 1,
+     "profile": "Davith Elso",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 0,
+     "health": 0,
+     "loadout": {
+      "items": [
+       "item328"
+      ],
+      "skills": []
+     }
+    }
+   ],
+   "expect": [
+    {
+     "basis": "economy",
+     "hero": "Biv Bodhrik",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    },
+    {
+     "basis": "economy",
+     "hero": "Davith Elso",
+     "marked": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "wounded": false
+    }
+   ]
   }
  ]
 }

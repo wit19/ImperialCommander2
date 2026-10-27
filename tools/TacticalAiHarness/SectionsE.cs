@@ -1,6 +1,7 @@
 // M6 overlord-focus vectors: overlord_focus.json pins the DETERMINISTIC
 // target ranking of the OverlordFocus layer (aim marks > counter chip law >
-// threat economy > reference proxy > stable tie chain) over the SAME curated
+// threat economy > wounded > M10a campaign investment > reference proxy >
+// stable tie chain) over the SAME curated
 // public hero table the reference path uses. Like world_feed.json this is a
 // C#-side canonical vector (the sim has no app feed); its W components are
 // sim-vectored via hero_profiles.json / hero_w.json. Expect blocks were
@@ -35,13 +36,45 @@ namespace TacticalAiHarness
 
                 List<FocusCandidate> Build()
                 {
+                    // M10a: a case hero may carry a campaign "loadout"
+                    // ({items, skills}); it is merged into the curated/
+                    // placeholder profile EXACTLY like the live bridge's
+                    // ProfileFor does (ApplyCampaignLoadouts on the app's
+                    // own CampaignData items/skills tables).
+                    var merged = profiles;
+                    var loEntries = new List<object>();
+                    foreach (var rawH in Json.AsList(c["heroes"]))
+                    {
+                        var h = Json.AsDict(rawH);
+                        if (h.ContainsKey("loadout") && h["loadout"] != null)
+                        {
+                            var lo = Json.AsDict(h["loadout"]);
+                            loEntries.Add(new Dictionary<string, object>
+                            {
+                                { "hero", Json.AsStr(h["hero"]) },
+                                { "items", Json.Get(lo, "items", null) },
+                                { "skills", Json.Get(lo, "skills", null) },
+                            });
+                        }
+                    }
+                    if (loEntries.Count > 0)
+                    {
+                        var refs = new Dictionary<string, object>
+                        {
+                            { "items", LoadLangJson("En", "CampaignData/items.json") },
+                            { "skills", LoadLangJson("En", "CampaignData/skills.json") },
+                        };
+                        merged = HeroProfiles.ApplyCampaignLoadouts(
+                            profiles, loEntries, refs);
+                    }
+
                     var list = new List<FocusCandidate>();
                     foreach (var rawH in Json.AsList(c["heroes"]))
                     {
                         var h = Json.AsDict(rawH);
                         HeroThreatProfile p = null;
                         if (h.ContainsKey("profile") && h["profile"] != null)
-                            profiles.TryGetValue(Json.AsStr(h["profile"]), out p);
+                            merged.TryGetValue(Json.AsStr(h["profile"]), out p);
                         list.Add(new FocusCandidate
                         {
                             HeroId = Json.AsStr(h["hero"]),

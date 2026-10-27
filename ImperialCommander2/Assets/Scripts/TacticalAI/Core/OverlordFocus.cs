@@ -180,8 +180,23 @@ namespace TacticalAI.Core
                 if (e != 0) return e;
             }
             // 4. reference parity (no curated profile): wounded first, then
-            //    printed attack dice, then printed health - the S1-S3 proxy.
+            //    M10a CAMPAIGN INVESTMENT (Thomas playtest 27.10): four
+            //    expansion heroes share the neutral prior 10, so keys 1-3
+            //    tie and the old chain fell straight to squad row - a
+            //    predictable top-to-bottom kill queue. Items+skills from the
+            //    campaign table are PUBLIC board data the Imperial player
+            //    reads off the hero sheets: the better-equipped hero is
+            //    objectively the bigger threat, so EquipmentIndex (weighted
+            //    tier x cost) then AbilityIndex (xp sum) break the tie BEFORE
+            //    any row order. Wounded keeps priority (finisher doctrine).
             if (a.C.Wounded != b.C.Wounded) return a.C.Wounded ? -1 : 1;
+            var eqA = a.C.Profile != null ? a.C.Profile.EquipmentIndex : Rational.Zero;
+            var eqB = b.C.Profile != null ? b.C.Profile.EquipmentIndex : Rational.Zero;
+            int eq = eqB.CompareTo(eqA);                                   // desc
+            if (eq != 0) return eq;
+            int ab = (b.C.Profile != null ? b.C.Profile.AbilityIndex : 0)
+                   .CompareTo(a.C.Profile != null ? a.C.Profile.AbilityIndex : 0);
+            if (ab != 0) return ab;                                       // desc
             int ad = b.C.AttackDice.CompareTo(a.C.AttackDice);
             if (ad != 0) return ad;
             int hp = b.C.Health.CompareTo(a.C.Health);
