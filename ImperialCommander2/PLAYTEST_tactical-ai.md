@@ -32,28 +32,36 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    vorher schwamm das Panel über dem Dialog). Die Buttons schalten
    (jeder klickt sich zyklisch durch seine Werte):
    - *TACTICAL AI* — Master: **off** (Default = App verhält sich exakt wie vorher) / **on**
-     (= Erlaubnis; den eigentlichen Modus stellt man **pro Missionskarte** ein, siehe 3.).
+     (= alles Taktische an; die Missionen folgen automatisch dem AI MODE, außer man
+     stellt einzelne Missionen bewusst um, siehe 3.).
    - *AI MODE* — `legacy` (Vanilla-Zufall) → `reference` (Inferenz-Aktivierung +
      taktische Zielauswahl) → `overlord` (zusätzlich harte Doktrinen: Rückzugs-/Fokusregeln).
+     Das ist der **global Default** —missionsweit wirksam, solange keine Mission
+     per Badge übersteuert.
    - *SKILL* — S1…S5 (Kompetenzkurve der Truppen).
    - *DEPLOYMENT* — `secret` / `open` (verrät die Aufstellung dem Blick aufs Brett).
-   - *EXPLAIN* — `none` → `post_hoc` → `full` (Erklärtexte unter den Entscheidungen).
-3. **Zwei-Stufen-Aktivierung (wichtig, Playtest 27.10):** Im Kampagnenbildschirm trägt
-   jede Missionskarte oben links ein Badge **AI:OFF / AI:REF / AI:ORD** (erscheint nur,
-   wenn der Master ON ist), dasselbe Badge erscheint zusätzlich **auf dem
-   EINSATZKARTE-Panel direkt vor dem Missionsstart**, unterhalb des
-   Schwierigkeits-Buttons (seit dev 1 — dort sitzt es praktisch, weil man dort
-   ohnehin auf START drückt). Das Badge ist der *wahre* Schalter der Mission: Ein Klick
-   schaltet AI:OFF → AI:REF → AI:ORD → AI:OFF. Solange es auf AI:OFF steht, läuft die
-   Mission in Legacy — auch wenn global „reference" gewählt ist. (Das Badge war bis
-   v.2.2.16 unsichtbar, weil das Prefab-Objekt fehlte; seither wird es zur Laufzeit
-   erzeugt.) Der globale Schalter ist pro Spiel speicherfest (Konzept §4.2.7).
-   Klick-Erfolg im Log: `SagaSetup::AI badge -> reference`.
+   - *EXPLAIN* — `none` → `post_hoc` → `full` (Erklärtexte unter den Entscheidungen;
+     **für sichtbare „Warum jetzt"-Zeilen auf den Anweisungskarten ist `full` nötig**).
+3. **Missions-Badges (seit dev 2 mit AUTO):** Sowohl jede Missionskarte der
+   Kampagnenliste (oben links) als auch das EINSATZKARTE-Setup-Panel (unter dem
+   Schwierigkeits-Button) tragen einen teal-farbenen Badge, der nur bei Master ON
+   sichtbar ist. Klick-Zyklus: **AI:AUTO → AI:REF → AI:ORD → AI:OFF → AI:AUTO**.
+   * `AI:AUTO` (Default): die Mission folgt dem globalen *AI MODE*. Master AN +
+     `reference` genügt also — **keine Mission braucht eine manuelle Umstellung**,
+     um die taktische KI zu aktivieren.
+   * `AI:REF` / `AI:ORD`: bewusste Override pro Mission, unabhängig vom Globalwert.
+   * `AI:OFF`: diese Mission läuft immer in Legacy (z. B. für Vergleichsrunden).
+   Alte Kampagnen-Speicherstände mit dem 3-Zustands-Default „legacy" werden beim
+   Laden automatisch auf AUTO migriert (dev 2). Klick-Erfolg im Log:
+   `SagaSetup::AI badge -> reference`. Der globale Schalter ist pro Spiel
+   speicherfest (Konzept §4.2.7); ein laufende Mission wechselt den Modus nicht
+   mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
-5. Fürs Protokoll: **EXPLAIN** mindestens auf `post_hoc` — dann erscheinen die „Why"-Texte
+5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte
    (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
-   im Aktivierungsablauf. Screenshots davon sind das wichtigste Playtest-Material.
+   direkt auf den Anweisungs-Popups. `post_hoc` zeigt nur eine Kurz-Zusammenfassung der
+   letzten Runde zu Rundenbeginn. Screenshots davon sind das wichtigste Playtest-Material.
 6. Alle Entscheidungen werden zusätzlich in die **Unity-Entwickler-Konsole** geloggt
    (`TacticalAIBridge::…`, deterministisch, kein Zufall). Beim Build über den Editor:
    Konsole offen lassen und am Ende als Textdatei sichern (Rechtsklick → Save).

@@ -188,6 +188,15 @@ namespace Saga
 				//skip loading custom/import structure template, only translate official Mission data
 				state.LoadCampaignData( true );
 
+				// TACTICAL AI (AUTO rework dev 2): campaign saves from before the
+				// AUTO badge stored "legacy" as an untouched default, which would
+				// silently outvote the global AI MODE. Nobody could have chosen
+				// legacy deliberately yet (the per-mission switch is new), so
+				// normalize it to "" = AUTO (follow the global setting).
+				if ( state.campaignStructure != null )
+					foreach ( var cs in state.campaignStructure )
+						if ( cs.aiMode == "legacy" ) cs.aiMode = "";
+
 				Debug.Log( "***CAMPAIGN LOADED***" );
 				return state;
 			}

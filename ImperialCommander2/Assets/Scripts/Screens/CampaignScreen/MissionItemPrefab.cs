@@ -250,12 +250,14 @@ namespace Saga
 			EventSystem.current.SetSelectedGameObject( null );
 			FindObjectOfType<Sound>().PlaySound( FX.Click );
 
-			if ( string.IsNullOrEmpty( campaignStructure.aiMode ) || campaignStructure.aiMode == "legacy" )
+			if ( string.IsNullOrEmpty( campaignStructure.aiMode ) )
 				campaignStructure.aiMode = "reference";
 			else if ( campaignStructure.aiMode == "reference" )
 				campaignStructure.aiMode = "overlord";
-			else
+			else if ( campaignStructure.aiMode == "overlord" )
 				campaignStructure.aiMode = "legacy";
+			else
+				campaignStructure.aiMode = "";
 
 			if ( aiModeIcon != null )
 				aiModeIcon.text = AiModeLabel( campaignStructure.aiMode );
@@ -263,6 +265,7 @@ namespace Saga
 
 		string AiModeLabel( string mode )
 		{
+			if ( string.IsNullOrEmpty( mode ) ) return "AI:AUTO";
 			if ( mode == "reference" ) return "AI:REF";
 			if ( mode == "overlord" ) return "AI:ORD";
 			return "AI:OFF";

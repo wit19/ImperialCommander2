@@ -22,26 +22,28 @@
 		public bool isRoundLimitDisabled;
 
 		// TACTICAL AI (concept 4.2.7): per-mission planner level,
-		// "legacy" (default = untouched original behaviour) | "reference" |
-		// "overlord". Only consulted when TacticalAI.TacticalAISettings.Enabled
+		// "" (default = AUTO: follow the global AI MODE) | "legacy" |
+		// "reference" | "overlord". Only consulted when TacticalAI.TacticalAISettings.Enabled
 		// is true; persisted with the session state like every other option.
-		public string aiMode = "legacy";
+		public string aiMode = "";
 
 		/// <summary>
-		/// Cycles the per-mission AI mode (setup screen button). Returns the
+		/// Cycles the per-mission AI mode (setup screen button):
+		/// AUTO("") -> reference -> overlord -> legacy -> AUTO. Returns the
 		/// display text. No-op display while the global Tactical AI switch is
-		/// OFF: the label then stays LEGACY and hooks run the original code.
+		/// OFF: hooks run the original code regardless of this value.
 		/// </summary>
 		public string ToggleAiMode()
 		{
 			if ( !TacticalAI.TacticalAISettings.Enabled )
-				return "LEGACY";
+				return "AUTO";
 
-			if ( aiMode == "legacy" ) aiMode = "reference";
+			if ( string.IsNullOrEmpty( aiMode ) ) aiMode = "reference";
 			else if ( aiMode == "reference" ) aiMode = "overlord";
-			else aiMode = "legacy";
+			else if ( aiMode == "overlord" ) aiMode = "legacy";
+			else aiMode = "";
 
-			return aiMode.ToUpperInvariant();
+			return string.IsNullOrEmpty( aiMode ) ? "AUTO" : aiMode.ToUpperInvariant();
 		}
 
 		public SagaSetupOptions()
@@ -60,7 +62,7 @@
 			isDebugging = false;
 			tutorialIndex = 0;
 			isRoundLimitDisabled = false;
-			aiMode = "legacy";
+			aiMode = "";
 		}
 
 		public string ToggleDifficulty()

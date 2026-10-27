@@ -212,7 +212,7 @@ namespace Saga
 
 		string SetupAiLabel( string mode )
 		{
-			if ( string.IsNullOrEmpty( mode ) ) mode = TacticalAI.TacticalAISettings.Mode;
+			if ( string.IsNullOrEmpty( mode ) ) return "AI:AUTO";
 			if ( mode == "reference" ) return "AI:REF";
 			if ( mode == "overlord" ) return "AI:ORD";
 			return "AI:OFF";
@@ -221,15 +221,17 @@ namespace Saga
 		void OnSetupAiClicked()
 		{
 			if ( setupOptions == null ) return;
-			var current = string.IsNullOrEmpty( setupOptions.aiMode )
-				? TacticalAI.TacticalAISettings.Mode : setupOptions.aiMode;
-			setupOptions.aiMode = current == "legacy" ? "reference"
-				: current == "reference" ? "overlord" : "legacy";
+			// AUTO("") -> reference -> overlord -> legacy -> AUTO (same cycle
+			// as the campaign-list badge and SagaSetupOptions.ToggleAiMode)
+			if ( string.IsNullOrEmpty( setupOptions.aiMode ) ) setupOptions.aiMode = "reference";
+			else if ( setupOptions.aiMode == "reference" ) setupOptions.aiMode = "overlord";
+			else if ( setupOptions.aiMode == "overlord" ) setupOptions.aiMode = "legacy";
+			else setupOptions.aiMode = "";
 			if ( setupAiBadgeText != null ) setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
 			//persist for campaign missions (structure is saved with SaveCampaignState)
 			if ( RunningCampaign.campaignStructure != null )
 				RunningCampaign.campaignStructure.aiMode = setupOptions.aiMode;
-			Debug.Log( "SagaSetup::AI badge -> " + setupOptions.aiMode );
+			Debug.Log( "SagaSetup::AI badge -> " + ( string.IsNullOrEmpty( setupOptions.aiMode ) ? "AUTO" : setupOptions.aiMode ) );
 		}
 
 		/// <summary>
