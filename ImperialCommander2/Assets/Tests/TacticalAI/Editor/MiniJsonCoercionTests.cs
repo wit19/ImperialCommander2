@@ -39,5 +39,28 @@ namespace TacticalAI.Tests
             var ex = Assert.Throws<System.FormatException>(() => Json.AsLong("x,y"));
             StringAssert.Contains("String", ex.Message);
         }
+
+        [Test]
+        public void AsList_Accepts_DotNetArrays_From_Game_Adapter()
+        {
+            // live playtest 27.10 round 2: bridge ToRecord passes string[]
+            // (keywords/surges) and ToArray() results (attacks/defense);
+            // the strict List<object> cast skipped all 69 catalog cards
+            // ("JSON: not an array") and the planner degraded to legacy.
+            object kw = new[] { "Big", "Reach" };
+            var list = Json.AsList(kw);
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual("Big", list[0]);
+
+            var sysList = new System.Collections.Generic.List<string> { "a" };
+            Assert.AreEqual(1, Json.AsList(sysList).Count);
+        }
+
+        [Test]
+        public void AsList_Still_Rejects_Scalar_With_TypeHint()
+        {
+            var ex = Assert.Throws<System.FormatException>(() => Json.AsList(7));
+            StringAssert.Contains("Int32", ex.Message);
+        }
     }
 }

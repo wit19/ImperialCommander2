@@ -141,7 +141,19 @@ namespace TacticalAI.Core
         }
         public static List<object> AsList(object v)
         {
-            return v as List<object> ?? throw new FormatException("JSON: not an array");
+            if (v is List<object> lo) return lo;
+            // Runtime records come from the GAME's DataStore and carry .NET
+            // arrays / typed lists (string[] keywords, ToArray() attacks) -
+            // only this parser's own output is List<object>. All 69 cards were
+            // skipped in the live playtest 27.10 because of the strict cast
+            // (same adapter lesson as AsLong). Accept any enumerable.
+            if (v is System.Collections.IEnumerable en && !(v is string))
+            {
+                var list = new List<object>();
+                foreach (var item in en) list.Add(item);
+                return list;
+            }
+            throw new FormatException("JSON: not an array" + (v == null ? ": null" : ": " + v.GetType().Name));
         }
         public static string AsStr(object v) { return (string)v; }
         public static bool AsBool(object v) { return (bool)v; }
