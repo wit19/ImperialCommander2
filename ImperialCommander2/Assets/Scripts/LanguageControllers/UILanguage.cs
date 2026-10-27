@@ -26,6 +26,7 @@ public class UITacticalAI
 	public string actionFormat, doctrineHeader, docAggressive, docGuard, docBlocker, docHunter, docSupport, docAmbusher;
 	public string moveFocus, moveFocusNoTarget, moveGuard, moveBlocker, moveSupport, moveAmbusher;
 	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
+	public string attack2Move, attack2MoveNoTarget, attack2MoveGuard, attack2MoveAmbush, attack2MoveBlocker;
 	public string specialAsPrinted, restLine, interactLine, shuffleNote;
 	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
 	public string whyPrefix, whyRank;

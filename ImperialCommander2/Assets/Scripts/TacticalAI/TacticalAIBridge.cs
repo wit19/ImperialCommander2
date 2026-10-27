@@ -288,6 +288,7 @@ namespace TacticalAI
             // texts come from the language files (PR convention after Thomas'
             // review 27.10: zero hardcoded player strings in the bridge).
             var pat = plan.Pattern ?? "aggressive";
+            bool priorAttack = false;   // one-attack-per-activation rule tracker
             outp.Add(TF(L.doctrineHeader, DoctrineName(pat, L)));
             for (int n = 0; n < toks.Length; n++)
             {
@@ -311,6 +312,24 @@ namespace TacticalAI
                                                    : TF(L.moveFocusNoTarget, speed)));
                         break;
                     case "attack":
+                        if (priorAttack)
+                        {
+                            // IC2 rule (Thomas' review, dev 13): ONE attack per
+                            // activation - a second attack block is a MOVE
+                            // block, said out loud in the order text so the
+                            // human cannot misread the card as two shots.
+                            if (pat == "guard")
+                                outp.Add(act(TF(L.attack2MoveGuard, speed)));
+                            else if (pat == "ambusher")
+                                outp.Add(act(TF(L.attack2MoveAmbush, speed)));
+                            else if (pat == "blocker")
+                                outp.Add(act(TF(L.attack2MoveBlocker, speed, t)));
+                            else
+                                outp.Add(act(t != null ? TF(L.attack2Move, speed, t)
+                                                       : TF(L.attack2MoveNoTarget, speed)));
+                            break;
+                        }
+                        priorAttack = true;
                         if (pat == "guard")
                             outp.Add(act(t != null ? TF(L.attackGuard, t) : TF(L.attackGuardNoTarget)));
                         else if (pat == "ambusher")

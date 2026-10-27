@@ -61,12 +61,18 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    **So liest du eine Anweisung (Schema nach Thomas' Playtest-Runde 6):**
    Jede Aktion ist eine Wenn-Dann-Entscheidung, nummeriert wie die zwei Aktionen
    einer Aktivierung. Beispiel Angriffs-Karte:
+   **Regel-Festhalt: pro Aktivierung darf eine Imperiale Figur genau EINEN
+   Angriff ausführen — ein zweiter Angriffsblock der Karte ist immer Bewegung.**
+   (Genau so sagen es auch die Anweisungstexte selbst aus.)
    ```
    Fokusziel: Held X
-   Aktion 1: Angriff auf X, wenn Reichweite und freie Sichtlinie.
-             Keine Sichtlinie / zu weit: 4 Felder auf X zubewegen.
+   Aktion 1: Dein einziger Angriff dieser Aktivierung: X, wenn Reichweite und
+             freie Sichtlinie. Keine Sichtlinie / zu weit: 4 Felder auf X zubewegen.
              Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese angreifen.
-   Aktion 2: (wie Aktion 1, aus der neuen Position)
+   Aktion 2 (zweiter Angriffsblock => Bewegung, denn pro Aktivierung darf nur
+   EINMAL angegriffen werden): X noch in Reichweite? Deckung halten.
+             Sonst bis 4 Felder von X entfernen und ihn im Auge behalten.
+   ```
    ```
    1. Das **Fokus-Ziel X** wird **positionsunabhängig** von der App berechnet —
       ein Köder, den man neben einen Imperialen stellt, zieht es nicht ab.
