@@ -54,14 +54,22 @@ namespace TacticalAI
         }
 
         /// <summary>M3.1 (concept 3.3.1a): tacai.hero_profiles/1 curated
-        /// public threat table or null. Primeing the Core doc cache is the
-        /// caller's job (Tac.HeroProfiles.PrimeDoc) - this stays a loader.</summary>
+        /// public threat table or null. Loads AND primes the Core doc cache
+        /// (Tac.HeroProfiles.PrimeDoc) in one step: ApplyCampaignLoadouts
+        /// reads that cache, and the Unity player has no other loader -
+        /// priming here means every caller (bridge, cover-range) sees the
+        /// same doc the harness loads from file (dev 30 playtest hotfix:
+        /// unprimed doc threw 'no doc loaded' on every campaign click).</summary>
         public static object HeroProfilesRoot
         {
             get
             {
                 if (_heroProfilesRoot == null && !_heroProfilesFailed)
+                {
                     _heroProfilesRoot = LoadJson(HERO_PROFILES_PATH, ref _heroProfilesFailed);
+                    if (_heroProfilesRoot is System.Collections.Generic.Dictionary<string, object> d)
+                        Tac.HeroProfiles.PrimeDoc(d);
+                }
                 return _heroProfilesRoot;
             }
         }

@@ -223,5 +223,19 @@ namespace TacticalAI.Tests
                                     loaded[target.Name].VectorRow(probe));
             }
         }
+
+        // dev 30 playtest regression guard (Thomas, EMPIRE6 crash): the Unity
+        // player has NO other loader for the Core doc cache - if the app-side
+        // asset loader stops priming, EVERY campaign activation throws
+        // 'HeroProfiles.ApplyCampaignLoadouts: no doc loaded' in the live game
+        // while harness and gate keep passing (they prime from file).
+        [Test]
+        public void AppAssetLoaderPrimesCoreDocCache()
+        {
+            var root = TacticalAI.TacticalAIAssets.HeroProfilesRoot;
+            if (root == null) { Assert.Ignore("hero_profiles asset unavailable"); return; }
+            Assert.IsNotNull(HeroProfiles.DocOrNull(),
+                "TacticalAIAssets.HeroProfilesRoot must prime HeroProfiles doc cache");
+        }
     }
 }
