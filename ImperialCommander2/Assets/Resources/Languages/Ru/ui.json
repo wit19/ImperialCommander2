@@ -295,18 +295,23 @@
     "whyRank": "(rank {0})",
     "setHeading": "Tactical AI",
     "setMode": "MODE",
-    "setSkill": "SKILL",
+    "setSkill": "СЛОЖНОСТЬ",
     "setDeployment": "DEPLOYMENT",
     "setExplain": "EXPLAIN",
     "setOn": "ON",
     "setOff": "OFF",
-    "setRowFormat": "{0}:  {1}"
-  },
-  "skillS1": "Рекрут",
-  "skillS2": "Штурмовик",
-  "skillS3": "Ветеран",
-  "skillS4": "Командир",
-  "skillS5": "Гранд-адмирал Траун",
-  "badgeAuto": "АВТО",
-  "badgeOff": "ВЫКЛ"
+    "setRowFormat": "{0}:  {1}",
+    "skillS1": "Рекрут",
+    "skillS2": "Штурмовик",
+    "skillS3": "Ветеран",
+    "skillS4": "Командир",
+    "skillS5": "Гранд-адмирал Траун",
+    "badgeAuto": "АВТО",
+    "badgeOff": "ВЫКЛ",
+    "depSecret": "СКРЫТО",
+    "depOpen": "ОТКРЫТО",
+    "expNone": "НЕТ",
+    "expPostHoc": "ПОСЛЕ БОЯ",
+    "expFull": "ПОЛНО"
+  }
 }

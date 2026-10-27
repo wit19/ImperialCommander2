@@ -117,10 +117,14 @@ namespace TacticalAI
             Debug.Log("TacticalAISettingsUI::install panel='" + panel.name + "' host='"
                       + host.name + "' title=" + (_titleTemplate != null) + " label=" + (_labelTemplate != null));
 
-            if (_labelTemplate != null && _titleTemplate != null)
+            // ONLY the label template is required (dev 22): the OLD
+            // Settings Panel prefab has the row Labels but NO title widget -
+            // demanding both templates aborted the styled branch there and
+            // the ugly TMP fallback rendered instead (Thomas' S4 screenshot).
+            if (_labelTemplate != null)
             {
                 var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
-                var title = CloneText(_titleTemplate, _root,
+                var title = CloneText(_titleTemplate != null ? _titleTemplate : _labelTemplate, _root,
                     tl != null ? tl.setHeading : "TACTICAL AI", 42f);
                 title.name = "tacai_title";
                 foreach (var b in title.GetComponentsInChildren<Button>(true)) b.interactable = false;
@@ -303,8 +307,18 @@ namespace TacticalAI
                 case "master": value = on ? (tl != null ? tl.setOn : "ON") : (tl != null ? tl.setOff : "OFF"); break;
                 case "mode": value = TacticalAISettings.Mode.ToUpperInvariant(); break;
                 case "skill": value = SkillDisplay(TacticalAISettings.SkillLevel, tl); break;
-                case "deployment": value = TacticalAISettings.DeploymentMode.ToUpperInvariant(); break;
-                case "explain": value = TacticalAISettings.ExplainLevel.ToUpperInvariant(); break;
+                case "deployment":
+                    value = TacticalAISettings.DeploymentMode == "open"
+                        ? Pick(tl != null ? tl.depOpen : null, "OPEN")
+                        : Pick(tl != null ? tl.depSecret : null, "SECRET");
+                    break;
+                case "explain":
+                    value = TacticalAISettings.ExplainLevel == "none"
+                        ? Pick(tl != null ? tl.expNone : null, "NONE")
+                        : TacticalAISettings.ExplainLevel == "full"
+                            ? Pick(tl != null ? tl.expFull : null, "FULL")
+                            : Pick(tl != null ? tl.expPostHoc : null, "POST-HOC");
+                    break;
                 default: return kind;
             }
             bool master = kind == "master";
@@ -314,23 +328,29 @@ namespace TacticalAI
             else if (kind == "skill") heading = tl.setSkill;
             else if (kind == "deployment") heading = tl.setDeployment;
             else heading = tl.setExplain;
+            // dialog rows render in caps like the Rundenlimit neighbours
             return (tl != null ? tl.setRowFormat : "{0}:  {1}")
-                   .Replace("{0}", heading).Replace("{1}", value);
+                   .Replace("{0}", heading).Replace("{1}", value.ToUpperInvariant());
         }
 
         /// <summary>PR convention: DISPLAY via language files (themed ladder
         /// Rekrut..5-Sterne-General, Thomas' suggestion 27.10); the stored and
         /// logged token stays s1..s5 (docs/console unchanged).</summary>
+        static string Pick(string localized, string fallback)
+        {
+            return string.IsNullOrEmpty(localized) ? fallback : localized;
+        }
+
         static string SkillDisplay(string token, UITacticalAI tl)
         {
             if (tl == null) return token.ToUpperInvariant();
             switch (token)
             {
-                case "s1": return string.IsNullOrEmpty(tl.skillS1) ? "S1" : tl.skillS1;
-                case "s2": return string.IsNullOrEmpty(tl.skillS2) ? "S2" : tl.skillS2;
-                case "s3": return string.IsNullOrEmpty(tl.skillS3) ? "S3" : tl.skillS3;
-                case "s4": return string.IsNullOrEmpty(tl.skillS4) ? "S4" : tl.skillS4;
-                case "s5": return string.IsNullOrEmpty(tl.skillS5) ? "S5" : tl.skillS5;
+                case "s1": return Pick(tl.skillS1, "S1");
+                case "s2": return Pick(tl.skillS2, "S2");
+                case "s3": return Pick(tl.skillS3, "S3");
+                case "s4": return Pick(tl.skillS4, "S4");
+                case "s5": return Pick(tl.skillS5, "S5");
                 default: return token.ToUpperInvariant();
             }
         }
@@ -357,8 +377,10 @@ namespace TacticalAI
             textGo.transform.SetParent(bg.transform, false);
             var t = textGo.AddComponent<TMPro.TextMeshProUGUI>();
             t.text = title;
-            t.fontSize = 16f;
-            t.alignment = TMPro.TextAlignmentOptions.Center;
+            t.fontSize = 20f;
+            t.color = new Color(0.92f, 0.78f, 0.16f); // dev 22: dialog-yellow fallback
+            t.alignment = TMPro.TextAlignmentOptions.MidlineLeft;
+            t.margin = new Vector4(16f, 0f, 0f, 0f);
             var trt = textGo.GetComponent<RectTransform>();
             trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
             trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;

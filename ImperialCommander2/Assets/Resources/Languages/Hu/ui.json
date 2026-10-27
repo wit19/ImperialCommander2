@@ -295,18 +295,23 @@
     "whyRank": "(rank {0})",
     "setHeading": "Tactical AI",
     "setMode": "MODE",
-    "setSkill": "SKILL",
+    "setSkill": "NEHÉZSÉG",
     "setDeployment": "DEPLOYMENT",
     "setExplain": "EXPLAIN",
     "setOn": "ON",
     "setOff": "OFF",
-    "setRowFormat": "{0}:  {1}"
-  },
-  "skillS1": "Rekrut",
-  "skillS2": "Stormtrooper",
-  "skillS3": "Veterán",
-  "skillS4": "Parancsnok",
-  "skillS5": "Nagyadmirális Thrawn",
-  "badgeAuto": "AUTO",
-  "badgeOff": "KI"
+    "setRowFormat": "{0}:  {1}",
+    "skillS1": "Rekrut",
+    "skillS2": "Stormtrooper",
+    "skillS3": "Veterán",
+    "skillS4": "Parancsnok",
+    "skillS5": "Nagyadmirális Thrawn",
+    "badgeAuto": "AUTO",
+    "badgeOff": "KI",
+    "depSecret": "TITKOS",
+    "depOpen": "NYILVÁNOS",
+    "expNone": "NINCS",
+    "expPostHoc": "A CSATA UTÁN",
+    "expFull": "TELJES"
+  }
 }

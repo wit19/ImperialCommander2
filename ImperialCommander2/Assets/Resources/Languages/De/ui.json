@@ -295,18 +295,23 @@
     "whyRank": "(Rang {0})",
     "setHeading": "Taktische KI",
     "setMode": "MODUS",
-    "setSkill": "STUFE",
+    "setSkill": "SCHWIERIGKEIT",
     "setDeployment": "AUFSTELLUNG",
     "setExplain": "ERKLÄRUNG",
     "setOn": "AN",
     "setOff": "AUS",
-    "setRowFormat": "{0}:  {1}"
-  },
-  "skillS1": "Rekrut",
-  "skillS2": "Stormtrooper",
-  "skillS3": "Veteran",
-  "skillS4": "Kommandant",
-  "skillS5": "Großadmiral Thrawn",
-  "badgeAuto": "AUTO",
-  "badgeOff": "AUS"
+    "setRowFormat": "{0}:  {1}",
+    "skillS1": "Rekrut",
+    "skillS2": "Stormtrooper",
+    "skillS3": "Veteran",
+    "skillS4": "Kommandant",
+    "skillS5": "Großadmiral Thrawn",
+    "badgeAuto": "AUTO",
+    "badgeOff": "AUS",
+    "depSecret": "GEHEIM",
+    "depOpen": "OFFEN",
+    "expNone": "KEINE",
+    "expPostHoc": "NACHHER",
+    "expFull": "AUSFÜHRLICH"
+  }
 }

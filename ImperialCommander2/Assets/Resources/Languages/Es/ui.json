@@ -295,18 +295,23 @@
     "whyRank": "(rank {0})",
     "setHeading": "Tactical AI",
     "setMode": "MODE",
-    "setSkill": "SKILL",
+    "setSkill": "DIFICULTAD",
     "setDeployment": "DEPLOYMENT",
     "setExplain": "EXPLAIN",
     "setOn": "ON",
     "setOff": "OFF",
-    "setRowFormat": "{0}:  {1}"
-  },
-  "skillS1": "Recluta",
-  "skillS2": "Stormtrooper",
-  "skillS3": "Veterano",
-  "skillS4": "Comandante",
-  "skillS5": "Gran Almirante Thrawn",
-  "badgeAuto": "AUTO",
-  "badgeOff": "OFF"
+    "setRowFormat": "{0}:  {1}",
+    "skillS1": "Recluta",
+    "skillS2": "Stormtrooper",
+    "skillS3": "Veterano",
+    "skillS4": "Comandante",
+    "skillS5": "Gran Almirante Thrawn",
+    "badgeAuto": "AUTO",
+    "badgeOff": "OFF",
+    "depSecret": "SECRETA",
+    "depOpen": "ABIERTA",
+    "expNone": "NINGUNA",
+    "expPostHoc": "DESPUÉS",
+    "expFull": "COMPLETA"
+  }
 }

@@ -38,6 +38,7 @@ public class UITacticalAI
 	// display via language files).
 	public string skillS1, skillS2, skillS3, skillS4, skillS5;
 	public string badgeAuto, badgeOff;
+	public string depSecret, depOpen, expNone, expPostHoc, expFull;
 }
 
 public class UISettings

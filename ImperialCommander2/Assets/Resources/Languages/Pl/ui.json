@@ -295,18 +295,23 @@
     "whyRank": "(rank {0})",
     "setHeading": "Tactical AI",
     "setMode": "MODE",
-    "setSkill": "SKILL",
+    "setSkill": "TRUDNOŚĆ",
     "setDeployment": "DEPLOYMENT",
     "setExplain": "EXPLAIN",
     "setOn": "ON",
     "setOff": "OFF",
-    "setRowFormat": "{0}:  {1}"
-  },
-  "skillS1": "Rekrut",
-  "skillS2": "Szturmowiec",
-  "skillS3": "Weteran",
-  "skillS4": "Komendant",
-  "skillS5": "Wielki Admirał Thrawn",
-  "badgeAuto": "AUTO",
-  "badgeOff": "WYŁ"
+    "setRowFormat": "{0}:  {1}",
+    "skillS1": "Rekrut",
+    "skillS2": "Szturmowiec",
+    "skillS3": "Weteran",
+    "skillS4": "Komendant",
+    "skillS5": "Wielki Admirał Thrawn",
+    "badgeAuto": "AUTO",
+    "badgeOff": "WYŁ",
+    "depSecret": "TAJNE",
+    "depOpen": "JAWNE",
+    "expNone": "BRAK",
+    "expPostHoc": "PO WALCE",
+    "expFull": "PEŁNE"
+  }
 }
