@@ -112,7 +112,14 @@ namespace TacticalAI
             _subPanel = null;
             _labelTemplate = null;
             _titleTemplate = null;
-            FindStyleTemplates(panel);
+            // Template search starts at the DIALOG ROOT, not the installed-in
+            // panel: the only caller (old SettingsPanel.cs) passes a panel that
+            // may itself be nested inside the newer settings screen which owns
+            // the Rundenlimit widgets (dev 19, Thomas' red-bars screenshot).
+            var scope = panel.transform.root != null ? panel.transform.root : panel.transform;
+            FindStyleTemplates(scope.gameObject);
+            Debug.Log("TacticalAISettingsUI::install panel='" + panel.name + "' host='"
+                      + host.name + "' title=" + (_titleTemplate != null) + " label=" + (_labelTemplate != null));
 
             if (_labelTemplate != null && _titleTemplate != null)
             {
@@ -222,7 +229,8 @@ namespace TacticalAI
         /// <summary>Instantiate a leaf text template, destroy its children,
         /// strip every non-text graphic/interactable, stretch the Text -
         /// serialized leftovers can never render (dev 18 lesson).</summary>
-        static GameObject CloneText(GameObject template, Transform parent, string text, float height)
+        static GameObject CloneText(GameObject template, Transform parent, string text,
+            float height, TextAnchor align = TextAnchor.MiddleCenter)
         {
             var go = UnityEngine.Object.Instantiate(template, parent);
             for (int i = go.transform.childCount - 1; i >= 0; i--)
@@ -242,14 +250,14 @@ namespace TacticalAI
             if (t != null)
             {
                 t.text = text;
-                t.alignment = TextAnchor.MiddleCenter;
+                t.alignment = align;
                 t.horizontalOverflow = HorizontalWrapMode.Overflow;
                 t.verticalOverflow = VerticalWrapMode.Overflow;
                 t.raycastTarget = false;
                 var trf = t.rectTransform;
                 trf.anchorMin = Vector2.zero;
                 trf.anchorMax = Vector2.one;
-                trf.offsetMin = Vector2.zero;
+                trf.offsetMin = new Vector2(align == TextAnchor.MiddleLeft ? 16f : 0f, 0f);
                 trf.offsetMax = Vector2.zero;
             }
             var le = go.GetComponent<LayoutElement>();
@@ -270,7 +278,7 @@ namespace TacticalAI
 
             var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
             var lbl = CloneText(_labelTemplate, rowGo.transform,
-                RowText(kind, tl, TacticalAISettings.Enabled), 32f);
+                RowText(kind, tl, TacticalAISettings.Enabled), 32f, TextAnchor.MiddleLeft);
             lbl.name = "label";
 
             b.onClick.AddListener(() =>
@@ -348,7 +356,7 @@ namespace TacticalAI
             var b = bg.AddComponent<Button>();
             b.name = "tacai_" + kind;
             var img = bg.AddComponent<Image>();
-            img.color = redBlock.normalColor;
+            img.color = new Color(0f, 0f, 0f, 0.55f); // dev 19: neutral, red looked broken (Thomas)
             b.targetGraphic = img;
             b.colors = redBlock;
             b.onClick.AddListener(() =>
