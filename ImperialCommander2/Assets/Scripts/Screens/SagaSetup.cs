@@ -162,6 +162,76 @@ namespace Saga
 			DataStore.InitData();
 		}
 
+		// TACTICAL AI (playtest 27.10): runtime mode badge on the mission-card
+		// panel (next to the difficulty toggle). Shown only when the global
+		// master switch is ON; click cycles OFF -> REF -> ORD -> OFF. Empty
+		// aiMode follows the global mode (concept 4.2.7 fallback semantics).
+		TMPro.TextMeshProUGUI setupAiBadgeText;
+
+		void EnsureAiBadge()
+		{
+			var show = TacticalAI.TacticalAISettings.Enabled;
+			if ( setupAiBadgeText != null )
+			{
+				setupAiBadgeText.gameObject.SetActive( show );
+				if ( show && setupOptions != null )
+					setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+				return;
+			}
+			if ( !show || setupOptions == null || difficultyButton == null ) return;
+
+			var go = new GameObject( "tacaiSetupBadge", typeof( RectTransform ) );
+			go.transform.SetParent( difficultyButton.transform.parent, false );
+			var rt = go.GetComponent<RectTransform>();
+			rt.anchorMin = new Vector2( 0f, 1f );
+			rt.anchorMax = new Vector2( 0f, 1f );
+			rt.pivot = new Vector2( 0f, 1f );
+			var dRT = difficultyButton.transform as RectTransform;
+			rt.anchoredPosition = dRT != null
+				? new Vector2( dRT.anchoredPosition.x, dRT.anchoredPosition.y - dRT.rect.height - 10f )
+				: new Vector2( 12f, -160f );
+			rt.sizeDelta = new Vector2( 92f, 26f );
+			var img = go.AddComponent<UnityEngine.UI.Image>();
+			img.color = new Color( 0f, .55f, .45f, .9f );
+			var btn = go.AddComponent<Button>();
+			btn.targetGraphic = img;
+			btn.onClick.AddListener( OnSetupAiClicked );
+
+			var textGo = new GameObject( "Text (TMP)", typeof( RectTransform ) );
+			textGo.transform.SetParent( go.transform, false );
+			var trt = textGo.GetComponent<RectTransform>();
+			trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
+			trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
+			setupAiBadgeText = textGo.AddComponent<TMPro.TextMeshProUGUI>();
+			setupAiBadgeText.font = TMPro.TMP_Settings.defaultFontAsset;
+			setupAiBadgeText.fontSize = 15;
+			setupAiBadgeText.alignment = TMPro.TextAlignmentOptions.Center;
+			setupAiBadgeText.color = Color.white;
+			setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+		}
+
+		string SetupAiLabel( string mode )
+		{
+			if ( string.IsNullOrEmpty( mode ) ) mode = TacticalAI.TacticalAISettings.Mode;
+			if ( mode == "reference" ) return "AI:REF";
+			if ( mode == "overlord" ) return "AI:ORD";
+			return "AI:OFF";
+		}
+
+		void OnSetupAiClicked()
+		{
+			if ( setupOptions == null ) return;
+			var current = string.IsNullOrEmpty( setupOptions.aiMode )
+				? TacticalAI.TacticalAISettings.Mode : setupOptions.aiMode;
+			setupOptions.aiMode = current == "legacy" ? "reference"
+				: current == "reference" ? "overlord" : "legacy";
+			if ( setupAiBadgeText != null ) setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+			//persist for campaign missions (structure is saved with SaveCampaignState)
+			if ( RunningCampaign.campaignStructure != null )
+				RunningCampaign.campaignStructure.aiMode = setupOptions.aiMode;
+			Debug.Log( "SagaSetup::AI badge -> " + setupOptions.aiMode );
+		}
+
 		/// <summary>
 		/// set default mission options, add default ignored groups, add included global imports
 		/// </summary>
@@ -175,6 +245,7 @@ namespace Saga
 			//cb.selectedColor = new Color( .6f, .4f, .1f );
 			//adaptiveButton.colors = cb;
 			adaptiveText.color = setupOptions.useAdaptiveDifficulty ? greenBlock.normalColor : redBlock.normalColor;
+			EnsureAiBadge(); // TACTICAL AI panel switch (playtest 27.10)
 
 			//clear hero panel if not loading from campaign
 			if ( heroContainer.childCount > 0 )
@@ -709,6 +780,7 @@ namespace Saga
 			//cb.selectedColor = new Color( .6f, .4f, .1f );
 			//thisButton.colors = cb;
 			adaptiveText.color = setupOptions.useAdaptiveDifficulty ? greenBlock.normalColor : redBlock.normalColor;
+			EnsureAiBadge(); // TACTICAL AI panel switch (playtest 27.10)
 		}
 
 		/// <summary>

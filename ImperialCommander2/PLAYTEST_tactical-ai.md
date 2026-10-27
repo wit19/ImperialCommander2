@@ -34,11 +34,15 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    - *EXPLAIN* — `none` → `post_hoc` → `full` (Erklärtexte unter den Entscheidungen).
 3. **Zwei-Stufen-Aktivierung (wichtig, Playtest 27.10):** Im Kampagnenbildschirm trägt
    jede Missionskarte oben links ein Badge **AI:OFF / AI:REF / AI:ORD** (erscheint nur,
-   wenn der Master ON ist). Das Badge ist der *wahre* Schalter der Mission: Ein Klick
+   wenn der Master ON ist), dasselbe Badge erscheint zusätzlich **auf dem
+   EINSATZKARTE-Panel direkt vor dem Missionsstart**, unterhalb des
+   Schwierigkeits-Buttons (seit v.2.2.18 — dort sitzt es praktisch, weil man dort
+   ohnehin auf START drückt). Das Badge ist der *wahre* Schalter der Mission: Ein Klick
    schaltet AI:OFF → AI:REF → AI:ORD → AI:OFF. Solange es auf AI:OFF steht, läuft die
    Mission in Legacy — auch wenn global „reference" gewählt ist. (Das Badge war bis
    v.2.2.16 unsichtbar, weil das Prefab-Objekt fehlte; seither wird es zur Laufzeit
    erzeugt.) Der globale Schalter ist pro Spiel speicherfest (Konzept §4.2.7).
+   Klick-Erfolg im Log: `SagaSetup::AI badge -> reference`.
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
 5. Fürs Protokoll: **EXPLAIN** mindestens auf `post_hoc` — dann erscheinen die „Why"-Texte
