@@ -68,6 +68,30 @@ namespace TacticalAiHarness
             }
         }
 
+        // M8/F1: the logger seam. Inputs are VERBATIM MissionLogger.LogEvent
+        // outputs (DE+EN label variants as string constants in the fixture),
+        // the expectation is the RAW card name the adapter must hand to the
+        // feed as GroupId. Pinned by hand (not --record): the expected names
+        // are the ground truth, recorded outputs would only mirror the code.
+        static void SecLoggerExtract()
+        {
+            var v = LoadJson("logger_extract.json");
+            foreach (var raw in Json.AsList(v["cases"]))
+            {
+                var c = Json.AsDict(raw);
+                var name = Json.AsStr(c["name"]);
+                var msg = Json.AsStr(c["message"]);
+                var exp = Json.AsDict(c["expect"]);
+                var got = MissionLogText.ExtractRawName(msg) ?? "";
+                Check(name + ".raw", Json.AsStr(exp["raw"]), got);
+                // the adapter's GroupId law: resolved deployment id when
+                // known, else the raw name verbatim (pass-through). The
+                // fixture names no real cards -> pass-through is the law
+                // under test here, matching Json group_id expectation.
+                Check(name + ".group_id", Json.AsStr(exp["group_id"]), got);
+            }
+        }
+
         static List<WorldEvent> BuildEvents(List<object> raws)
         {
             var list = new List<WorldEvent>();

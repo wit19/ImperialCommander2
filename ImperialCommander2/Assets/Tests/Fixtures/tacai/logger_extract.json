@@ -1,0 +1,53 @@
+{
+ "_comment": "M8/F1 golden vectors (C#-side canonical: harness AND NUnit mirror the same file). Inputs are VERBATIM MissionLogger.LogEvent outputs (format strings from Assets/Scripts/Saga/Managers/MissionLogger.cs, labels copied from Languages/En/ui.json + Languages/De/ui.json logger block) - the seam M5 fixtures never covered: events scripted straight through the adapter skipped the real logger formatting. Law under test: the raw card name is the LAST non-empty <color=...>...</color> span (MissionLogText.ExtractRawName); group_id pins what reaches the feed as GroupId (unknown names pass through by the adapter's documented IdForName law).",
+ "cases": [
+  {
+   "name": "defeat_en",
+   "event": "GroupDefeated",
+   "message": "<b><color=red>Group Defeated:</color></b> <color=orange>IG-88 Death Cube</color>\n\n",
+   "expect": { "raw": "IG-88 Death Cube", "group_id": "IG-88 Death Cube" }
+  },
+  {
+   "name": "defeat_de",
+   "event": "GroupDefeated",
+   "message": "<b><color=red>Gruppe besiegt:</color></b> <color=orange>IG-88 Death Cube</color>\n\n",
+   "expect": { "raw": "IG-88 Death Cube", "group_id": "IG-88 Death Cube" }
+  },
+  {
+   "name": "removal_de_colon_in_name",
+   "event": "GroupRemoved",
+   "message": "<b><color=red>Gruppe entfernt:</color></b> <color=orange>Sturmtrupp: Staffel 2</color>\n\n",
+   "expect": { "raw": "Sturmtrupp: Staffel 2", "group_id": "Sturmtrupp: Staffel 2" }
+  },
+  {
+   "name": "activation_en",
+   "event": "GroupActivation",
+   "message": "<b><color=red>Group Activation:</color></b> <color=yellow>Wookiee Krieger</color>\n\n",
+   "expect": { "raw": "Wookiee Krieger", "group_id": "Wookiee Krieger" }
+  },
+  {
+   "name": "activation_de_whitespace_pad",
+   "event": "GroupActivation",
+   "message": "<b><color=red>Gruppenaktivierung:</color></b> <color=yellow>  Rebellen-Saboteure  </color>\n\n",
+   "expect": { "raw": "Rebellen-Saboteure", "group_id": "Rebellen-Saboteure" }
+  },
+  {
+   "name": "no_color_span",
+   "event": "GroupDefeated",
+   "message": "plain text without any rich text",
+   "expect": { "raw": "", "group_id": "" }
+  },
+  {
+   "name": "inputbox_two_value_spans",
+   "event": "InputBox",
+   "message": "<b><color=orange>Eingabeaufforderung:</color></b>\n<color=white>Lass die Gruppe ziehen</color>\n<color=#00FFA0>Eingabe-Wert:</color> <color=yellow>DG001</color>\n\n",
+   "expect": { "raw": "DG001", "group_id": "DG001" }
+  },
+  {
+   "name": "defeat_de_named_deployed_target",
+   "event": "GroupDefeated",
+   "message": "<b><color=red>Gruppe besiegt:</color></b> <color=orange>Boba Fett</color>\n\n",
+   "expect": { "raw": "Boba Fett", "group_id": "Boba Fett" }
+  }
+ ]
+}

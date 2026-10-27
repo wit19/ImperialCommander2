@@ -196,7 +196,12 @@ namespace TacticalAI
                 var it = items[_drainedLog++];
                 if (it == null || string.IsNullOrEmpty(it.message)) continue;
                 int r = Math.Max(1, it.round);
-                var name = it.message.Trim();
+                // M8/F1: LogItem.message is the LOCALIZED rich-text piece
+                // (label + colored NAME); the raw card name is the last
+                // color span - the raw-text compare of M5 never matched in
+                // the shipping game and leaked labels into GroupId/hash.
+                var name = Tac.MissionLogText.ExtractRawName(it.message);
+                if (string.IsNullOrEmpty(name)) continue;
                 switch (it.missionLogType)
                 {
                     case Saga.MissionLogType.GroupDefeated:

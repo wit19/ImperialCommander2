@@ -220,5 +220,65 @@ namespace TacticalAI.Tests
             TacaiFixtures.Check("posture.stronghold_is_not_hold", "eliminate",
                 WorldEventVector.DerivePosture("Storm the rebel stronghold", "Rebel", -1));
         }
+
+        // M8/F5: the mission clock is a live input, not only a start
+        // snapshot - a RoundLimitChanged event re-derives the posture the
+        // same fresh MissionStart would (mirrors world_feed.json cases
+        // clock_* whose full expect blocks the harness pins via --record).
+        [Test]
+        public void Clock_Change_ReDerives_Posture()
+        {
+            TacaiFixtures.Check("clock.start_eliminate", "eliminate",
+                WorldEventVector.Project(new List<WorldEvent>
+                {
+                    new WorldEvent("MissionStart", 1, new Dictionary<string, object>
+                    { { "objective", "Engage the rebels" }, { "priorityTarget", "Rebel" },
+                      { "roundLimit", -1L }, { "mission", "clock1" } }),
+                }).Posture);
+            TacaiFixtures.Check("clock.runtime_on_gives_stall", "stall",
+                WorldEventVector.Project(new List<WorldEvent>
+                {
+                    new WorldEvent("MissionStart", 1, new Dictionary<string, object>
+                    { { "objective", "Engage the rebels" }, { "priorityTarget", "Rebel" },
+                      { "roundLimit", -1L }, { "mission", "clock1" } }),
+                    new WorldEvent("RoundLimitChanged", 2, new Dictionary<string, object>
+                    { { "roundLimit", 8L } }),
+                }).Posture);
+            TacaiFixtures.Check("clock.runtime_off_clears_stall", "eliminate",
+                WorldEventVector.Project(new List<WorldEvent>
+                {
+                    new WorldEvent("MissionStart", 1, new Dictionary<string, object>
+                    { { "objective", "Engage the rebels" }, { "priorityTarget", "Rebel" },
+                      { "roundLimit", 8L }, { "mission", "clock2" } }),
+                    new WorldEvent("RoundLimitChanged", 3, new Dictionary<string, object>
+                    { { "roundLimit", -1L } }),
+                }).Posture);
+            TacaiFixtures.Check("clock.protect_beats_late_clock", "protect",
+                WorldEventVector.Project(new List<WorldEvent>
+                {
+                    new WorldEvent("MissionStart", 1, new Dictionary<string, object>
+                    { { "objective", "Hold the gate until the convoy departs" },
+                      { "priorityTarget", "Rebel" }, { "roundLimit", -1L }, { "mission", "clock3" } }),
+                    new WorldEvent("RoundLimitChanged", 2, new Dictionary<string, object>
+                    { { "roundLimit", 6L } }),
+                }).Posture);
+        }
+
+        // M8/F1 mirror: raw-name extraction over VERBATIM MissionLogger
+        // outputs (DE+EN label variants) - same fixture as the harness.
+        [Test]
+        public void Fixture_LoggerExtract_Matches_Harness()
+        {
+            var doc = Json.AsDict(TacaiFixtures.Load("logger_extract.json"));
+            foreach (var raw in Json.AsList(doc["cases"]))
+            {
+                var c = Json.AsDict(raw);
+                var name = Json.AsStr(c["name"]);
+                var exp = Json.AsDict(c["expect"]);
+                var got = MissionLogText.ExtractRawName(Json.AsStr(c["message"])) ?? "";
+                TacaiFixtures.Check(name + ".raw", Json.AsStr(exp["raw"]), got);
+                TacaiFixtures.Check(name + ".group_id", Json.AsStr(exp["group_id"]), got);
+            }
+        }
     }
 }
