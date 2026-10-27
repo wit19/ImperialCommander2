@@ -254,7 +254,61 @@ namespace TacticalAI
             plan.ExplainLine = ExplainFor(cd.id);
             if (plan.ExplainLine != null && plan.HasTarget)
                 plan.ExplainLine += " | " + plan.TargetWhy;
+            // Playtest 27.10 (Thomas): raw deck tokens ('move', 'attack') are
+            // not an instruction a human Imperial player can execute. Render
+            // every block as a concrete, localized order naming the focus
+            // target (which names are PUBLIC once dealt - fairness unaffected).
+            plan.Blocks = RenderBlocks(blocks, plan, cd.speed);
             return true;
+        }
+
+        static bool IsGerman => DataStore.languageCode != 0;
+        static string T(string de, string en) => IsGerman ? de : en;
+
+        static string[] RenderBlocks(string[] tokens, ActivationPlanData plan, int speed)
+        {
+            var outp = new List<string>();
+            var t = plan.HasTarget ? plan.TargetName : null;
+            foreach (var tok in tokens ?? Array.Empty<string>())
+            {
+                switch (tok)
+                {
+                    case "move":
+                        outp.Add(t != null
+                            ? T($"Bewegung {speed}: nähere dich {t}",
+                                $"Move {speed}: close in on {t}")
+                            : T($"Bewegung {speed}: nähere der nächsten Rebellinie",
+                                $"Move {speed}: approach the nearest rebel line"));
+                        break;
+                    case "attack":
+                        outp.Add(t != null
+                            ? T($"Angriff: {t} (Fokus-Ziel)",
+                                $"Attack: {t} (focus target)")
+                            : T("Angriff: nur falls das Fokus-Ziel in Reichweite liegt",
+                                "Attack: only if the focus target is in range"));
+                        break;
+                    case "special":
+                        outp.Add(T("Sonderaktion: gedruckte Sonderaktion der Karte ausführen",
+                                   "Special: execute the card's printed special action"));
+                        break;
+                    case "rest":
+                        outp.Add(T("Rasten: 1 Schaden regenerieren",
+                                   "Rest: recover 1 damage"));
+                        break;
+                    case "interact":
+                        outp.Add(T("Interaktion: eigenes Positionierungsziel anstreben",
+                                   "Interact: pursue this unit's own placement objective"));
+                        break;
+                    case "shuffle":
+                        outp.Add(T("(Danach: Gruppen-Deck mischen)",
+                                   "(afterwards: shuffle this group's deck)"));
+                        break;
+                    default:
+                        outp.Add(tok);   // unknown token: verbatim, never silently dropped
+                        break;
+                }
+            }
+            return outp.ToArray();
         }
 
         // ------------------------------------------------------- deployment hook
@@ -316,7 +370,10 @@ namespace TacticalAI
             }
             if (pick == null) pick = living[0];
             heroName = pick.name;
-            why = pickedWhy;
+            // name the focus target up front (playtest 27.10: 'who IS the
+            // focus target' must be answerable from the popup alone)
+            why = (DataStore.languageCode != 0 ? "Fokus-Ziel: " : "Focus target: ")
+                  + heroName + " — " + pickedWhy;
             return true;
         }
 

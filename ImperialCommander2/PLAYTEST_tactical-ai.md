@@ -58,6 +58,13 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
+   Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
+   Roh-Tokens, z. B.:
+   `Bewegung 4: nähere dich CT-1701` · `Angriff: CT-1701 (Fokus-Ziel)` ·
+   `Warum jetzt: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive) (Rang 1) |
+   Fokus-Ziel: CT-1701 — Focus: gedrucktes Vorzugziel …`
+   (Bewegung *wohin genau* = auf das Fokus-Ziel zu; das Brett mit Feldnummern bleibt
+   die Domäne des Spielers — die KI kennt bewusst keine verdeckten Positionen.)
 5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte
    (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
    direkt auf den Anweisungs-Popups. `post_hoc` zeigt nur eine Kurz-Zusammenfassung der
