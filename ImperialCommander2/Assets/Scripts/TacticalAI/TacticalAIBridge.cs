@@ -239,6 +239,10 @@ namespace TacticalAI
         public static void OnNewRound(int roundNo)
         {
             if (!ActiveNow()) return;   // master off OR this mission is legacy
+            // Playtest hotfix 27.10: round rollover must never die on a
+            // planning exception (same fail-open as the activation hooks).
+            try
+            {
             EnsureSessionFresh();
             // post_hoc explain: summary of the round we just played - capture the
             // PREVIOUS plan before EnsureRound rebuilds it for the new round,
@@ -251,6 +255,12 @@ namespace TacticalAI
             {
                 var qm = GlowEngine.FindUnityObject<QuickMessage>();
                 if (qm != null) qm.Show(lastRoundLine);
+            }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("TacticalAIBridge::OnNewRound failed (plan rebuilt on next hook): " + e);
+                _planRound = -1;
             }
         }
 
@@ -386,17 +396,29 @@ namespace TacticalAI
                                                  out global::DeploymentCard next)
         {
             next = null;
-            EnsureSessionFresh();
-            // M8/F2: ActiveNow() carries the per-mission override semantics
-            // (mission badge "off" => legacy) - Enabled alone must never plan
-            // an activation order for a mission the user switched OFF.
-            if (!ActiveNow() || candidates == null || candidates.Count == 0)
-                return false;
-            EnsureRound(CurrentRound());
-            foreach (var slot in _slots)
+            try
             {
-                var cd = candidates.FirstOrDefault(x => x.id == slot.GroupId);
-                if (cd != null) { next = cd; return true; }
+                EnsureSessionFresh();
+                // M8/F2: ActiveNow() carries the per-mission override semantics
+                // (mission badge "off" => legacy) - Enabled alone must never plan
+                // an activation order for a mission the user switched OFF.
+                if (!ActiveNow() || candidates == null || candidates.Count == 0)
+                    return false;
+                EnsureRound(CurrentRound());
+                foreach (var slot in _slots)
+                {
+                    var cd = candidates.FirstOrDefault(x => x.id == slot.GroupId);
+                    if (cd != null) { next = cd; return true; }
+                }
+            }
+            catch (Exception e)
+            {
+                // Playtest hotfix 27.10 (Thomas): ANY planning exception must
+                // never swallow the activation click - fail-open to the legacy
+                // dice draw, loudly. Root cause stays in the log for diagnosis.
+                Debug.LogWarning("TacticalAIBridge::peek failed -> legacy draw: " + e);
+                _planRound = -1;
+                _slots = new List<Tac.OrderSlot>();
             }
             return false;
         }
@@ -406,6 +428,24 @@ namespace TacticalAI
         /// instruction option, hidden bonus roll and random hero pick.
         /// False => popup keeps its legacy blocks verbatim.</summary>
         public static bool TryBuildActivationPlan(global::DeploymentCard cd, out ActivationPlanData plan)
+        {
+            // Playtest hotfix 27.10 (Thomas): the activation popup must NEVER
+            // die on a planning exception - fail-open to the legacy blocks,
+            // loudly. Root cause stays in the log for diagnosis.
+            try
+            {
+                return TryBuildActivationPlanInner(cd, out plan);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("TacticalAIBridge::plan failed -> legacy popup: " + e);
+                _planRound = -1;
+                plan = null;
+                return false;
+            }
+        }
+
+        static bool TryBuildActivationPlanInner(global::DeploymentCard cd, out ActivationPlanData plan)
         {
             plan = null;
             EnsureSessionFresh();
