@@ -312,14 +312,17 @@ namespace TacticalAI
         /// Admiral Thrawn); stored/logged token stays s1..s5.</summary>
         static string SkillDisplay(string token, UITacticalAI tl)
         {
-            if (tl == null) return token.ToUpperInvariant();
-            switch (token)
+            if (string.IsNullOrEmpty(token)) return "";
+            // dev 24 fix: stored tokens are UPPERCASE "S1".."S5" (Core
+            // SkillValues) - the original lowercase cases never matched and
+            // the row showed the raw token instead of the themed name.
+            switch (token.ToUpperInvariant())
             {
-                case "s1": return Pick(tl.skillS1, "S1");
-                case "s2": return Pick(tl.skillS2, "S2");
-                case "s3": return Pick(tl.skillS3, "S3");
-                case "s4": return Pick(tl.skillS4, "S4");
-                case "s5": return Pick(tl.skillS5, "S5");
+                case "S1": return Pick(tl != null ? tl.skillS1 : null, "S1");
+                case "S2": return Pick(tl != null ? tl.skillS2 : null, "S2");
+                case "S3": return Pick(tl != null ? tl.skillS3 : null, "S3");
+                case "S4": return Pick(tl != null ? tl.skillS4 : null, "S4");
+                case "S5": return Pick(tl != null ? tl.skillS5 : null, "S5");
                 default: return token.ToUpperInvariant();
             }
         }
