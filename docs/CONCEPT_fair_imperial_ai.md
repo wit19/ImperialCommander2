@@ -594,7 +594,7 @@ Sichtlinien, keine Deckungs-Felder am Tisch. Lösung: Die Abwägung passiert **o
 Sichtlinien-Wissen, auf AppView-Größen, und die Ausführung bekommt **Fallback-Zweige**, die
 der Mensch mit echten Sichtlinien auflöst.
 
-**Eingaben (alle verifiziert AppView):** Restvitalität je Figur (woundTrackerValue, §3.3.3-2b);
+**Eingaben (alle verifiziert AppView):** Schadensstand je Figur (woundTrackerValue = Wundrad-Wert = **erlittener Schaden**, 0 = unbeschädigt — Thomas-Brettwissen 2026-10-27, schließt M7-F4; abgeleitete Restvitalität = gedruckte Health − Schadensstand, §3.3.3-2b);
 Helden-Ring-Beliefs (Nähe-Band); **Letalitätsprior** je Held (kuratierte Prior-Tabelle aus
 gedruckten Kartenwerten — `heroes.json` enthält nur Indexfelder, also gleiche Ehrlichkeit wie
 der Grey-Dice-Proxy bei Villains, dokumentiert); Posture + VictoryCounter (§3.3.0);
