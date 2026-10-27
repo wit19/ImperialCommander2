@@ -949,11 +949,20 @@ namespace Saga
 			//medpacks
 			if ( acr.medpacsToModify != 0 )
 			{
+				// TACTICAL REF/ORD: MedPacs do not exist in the printed
+				// reference rules - crates do not hand them out (dev 15).
+				if ( TacticalAI.TacticalAIBridge.TacticalMissionActive() )
+				{
+					Debug.Log( $"SagaEventManager()::TACTICAL mode::MedPac reward SKIPPED ({acr.medpacsToModify:+#;-#})" );
+				}
+				else
+				{
 				string mod = acr.medpacsToModify > 0 ? "+" : "-";
 				DataStore.sagaSessionData.gameVars.medPacCount = Math.Max( 0, DataStore.sagaSessionData.gameVars.medPacCount + acr.medpacsToModify );
 				FindObjectOfType<SagaController>().UpdateMedPacCountUI();
 				sagaController.toastManager.ShowToast( $"Medpac: {mod}{acr.medpacsToModify}" );
 				Debug.Log( $"SagaEventManager()::AddCampaignRewards::Modify MedPacs: {acr.medpacsToModify}, new MedPac count: {DataStore.sagaSessionData.gameVars.medPacCount}" );
+				}
 			}
 
 			NextEventAction();

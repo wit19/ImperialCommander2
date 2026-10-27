@@ -607,6 +607,10 @@ namespace Saga
 
 			//medpac count
 			medPacText.text = DataStore.sagaSessionData.gameVars.medPacCount.ToString();
+			//TACTICAL REF/ORD missions replace app healing with the printed
+			//reference rules (wounded stays wounded until mission end) - the
+			//MedPac HUD element and its button are switched off there (dev 15).
+			ApplyTacticalMedPacPolicy();
 			//restore deployed enemies and heroes/allies
 			dgManager.RestoreState();
 			//fame button
@@ -910,6 +914,10 @@ namespace Saga
 
 		public void OnMedPac()
 		{
+			// TACTICAL REF/ORD: healing follows the printed reference rules -
+			// the MedPac mechanic is switched off for this mission (dev 15).
+			if ( TacticalAI.TacticalAIBridge.TacticalMissionActive() )
+				return;
 			sound.PlaySound( FX.Click );
 			EventSystem.current.SetSelectedGameObject( null );
 			if ( !eventManager.IsUIHidden )
@@ -924,6 +932,23 @@ namespace Saga
 		public void UpdateMedPacCountUI()
 		{
 			medPacText.text = DataStore.sagaSessionData.gameVars.medPacCount.ToString();
+		}
+
+		/// <summary>Hides the MedPac HUD icon+counter in tactical (REF/ORD)
+		/// missions. The button is located through its persistent onClick
+		/// binding (name "OnMedPac") so no prefab wiring is needed.</summary>
+		void ApplyTacticalMedPacPolicy()
+		{
+			if ( !TacticalAI.TacticalAIBridge.TacticalMissionActive() )
+				return;
+			medPacText.gameObject.SetActive( false );
+			// the HUD icon carries the serialized TooltipHandler key "MedPac"
+			// (same GameObject as the OnMedPac button) - stable scene identity,
+			// no fragile scan of persistent onClick names.
+			foreach ( var th in GetComponentsInChildren<TooltipHandler>( true ) )
+				if ( th.tooltip == "MedPac" )
+					th.gameObject.SetActive( false );
+			Debug.Log( "SagaController()::TACTICAL mode - MedPac UI off (reference rules: wounded until end of mission)" );
 		}
 
 		public void OnImperialPopup()

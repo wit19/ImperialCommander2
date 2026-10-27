@@ -207,6 +207,23 @@ kompiliert fehlerfrei gegen die Unity-2020.3-Mono-Referenzen (Harness:
 `compile_check/build.sh`, rc=0, 249 Dateien) — Build-Fehler durch unser KI-Feature sind
 damit ausgeschlossen.
 
+## 4b. dev 15 — MedPacks, Modus-Auswahl, Optik
+
+- **MedPacks im Tactical-Modus (REF/ORD) abgeschaltet.** Nach den Referenz-
+  Regeln bleibt ein verwundeter Held bis Missionsende verwundet — der
+  MedPac-Knopf im Spiel-Screen, das Zähler-Popup und MedPac-Belohnungen aus
+  Kisten entfallen in taktischen Missionen komplett (Legacy-Missionen unverändert).
+  Im Log prüfbar: `TACTICAL mode - MedPac UI off` bzw. `MedPac reward SKIPPED`.
+- **LEGACY ist im globalen Modus-Auswahl nicht mehr wählbar** (war identisch
+  mit „Tactical AI aus"). Der Modus-Zyklus ist jetzt REFERENCE ⇄ OVERLORD; ein
+  gespeicherter LEGACY-Wert wird beim Start automatisch auf REFERENCE migriert.
+  Das missionsweise „Aus" am Badge pro Mission bleibt wie gehabt möglich.
+- **Einstellungen-Optik:** Die Tactical-AI-Zeilen nutzen jetzt dieselben
+  Bausteine wie die Rundenlimit-Gruppe (gleiche Schrift, gleiche Panel-
+  Grafik): Überschrift „Taktische KI", Panel mit Schalter-Zeile, Panel mit
+  MODUS/STUFE/AUFSTELLUNG/ERKLÄRUNG.
+
+
 ## 5. Bekannte Grenzen (bewusst so entschieden)
 
 - Die KI sieht keine Sichtlinien — Angriffe „durch Wände" verhindert sie über

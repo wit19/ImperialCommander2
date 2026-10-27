@@ -109,6 +109,17 @@ namespace TacticalAI
             return TacticalAISettingsUnity.MissionMode(mission) != "legacy";
         }
 
+        /// <summary>Public gate for game-side features that the Reference
+        /// Rules replace outright (dev 15, Thomas): MedPacs are the app's
+        /// healing shortcut - printed rules keep a hero wounded until the
+        /// mission ends, so Saga hides the whole MedPac mechanic in REF/ORD
+        /// missions. Same mission-frozen semantics as ActiveNow().</summary>
+        public static bool TacticalMissionActive()
+        {
+            try { return ActiveNow(); }
+            catch { return false; }
+        }
+
         static void EnsureSessionFresh()
         {
             var k = SessionKey();
