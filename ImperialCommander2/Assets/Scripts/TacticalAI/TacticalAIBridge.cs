@@ -274,22 +274,23 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
-                        // Doctrine rework after Thomas' playtest 27.10:
-                        // proximity-first, focus as tie-break. A human Imperial
-                        // player at the PUBLIC board evaluates "nexter Held"
-                        // deterministically (the app's script layer has no tile
-                        // distance API - see M5 hex adapter for AI-computed
-                        // geometry; until then the board IS the world model).
+                        // Doctrine after Thomas' playtest 27.10 (rounds 4-5):
+                        // focus = wounded > printed trait > firepower (position
+                        // independent, so a decoy cannot pull it); proximity is
+                        // the ORDER-level fallback only (board decides: the
+                        // Imperial player sees distances/lines, the app script
+                        // layer has no tile API - M5 hex adapter will compute
+                        // geometry AI-side).
                         outp.Add(t != null
-                            ? T($"Bewegung {speed}: bewege dich auf den nächsten Helden zu; bei gleichem Abstand: auf {t}",
-                                $"Move {speed}: advance on the nearest hero; if tied: on {t}")
-                            : T($"Bewegung {speed}: bewege dich auf den nächsten Helden zu",
-                                $"Move {speed}: advance on the nearest hero"));
+                            ? T($"Bewegung {speed}: nähere {t}. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden",
+                                $"Move {speed}: close in on {t}. If no route to him (too far or blocked): close in on the nearest hero")
+                            : T($"Bewegung {speed}: nähere dem nächsten Helden",
+                                $"Move {speed}: close in on the nearest hero"));
                         break;
                     case "attack":
                         outp.Add(t != null
-                            ? T($"Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Ist dein Fokus {t} genauso nah wie der nächste: {t}",
-                                $"Attack: the nearest hero you can shoot (range + clear line). If your focus {t} is exactly as near as the nearest one: {t}")
+                            ? T($"Angriff: {t}, wenn du ihn schießen kannst (Reichweite + freie Linie). Sonst: der nächste Held, den du schießen kannst",
+                                $"Attack: {t} if you can shoot him (range + clear line). Otherwise: the nearest hero you can shoot")
                             : T("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie)",
                                 "Attack: the nearest hero you can shoot (range + clear line)"));
                         break;
@@ -350,10 +351,19 @@ namespace TacticalAI
 
         // ---------------------------------------------------------- targeting
 
-        /// <summary>Deterministic focus WITHOUT the hex board: printed
-        /// preferred-target traits first, then original deployment order,
-        /// wounded/defeated skipped, NO random draw and no hidden state. The
-        /// WorldProvider seam replaces this with the Core FocusResolver as
+        /// <summary>Deterministic focus WITHOUT the hex board (playtest 27.10
+        /// round 5, Thomas: pure proximity = farmable decoy pattern; pure
+        /// squad-order = inhuman). Ranking over ALL living heroes, public
+        /// information only: (1) wounded heroes first - the manual damage
+        /// tracker is shared table knowledge and finishing a wounded hero is
+        /// what a human Imperial always does; (2) the activating card's
+        /// PRINTED preferred-target trait (printed rules outrank heuristics);
+        /// (3) printed firepower proxy: attack dice, then health (exact loadout
+        /// EV via HeroThreatProfile/campaignItems is the M5 upgrade, the
+        /// plumbing exists); (4) squad row left-to-right. No chance, no
+        /// hidden state. Proximity stays only as order-level fallback so a
+        /// decoy parked next to an Imperial cannot pull focus across the map.
+        /// The WorldProvider seam replaces this with the Core FocusResolver as
         /// soon as a hex adapter exists (documented deviation).</summary>
         static bool TrySelectTarget(global::DeploymentCard cd, out string heroName, out string why)
         {
@@ -363,34 +373,42 @@ namespace TacticalAI
             var living = heroes.Where(h => h.heroState == null || !h.heroState.isDefeated).ToList();
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
 
-            global::DeploymentCard pick = null;
-            // Player-facing wording (playtest 27.10): describe the rule by what
-            // the player SEES - the hero row on the setup screen, left to right.
-            string pickedWhy = DataStore.languageCode != 0
-                ? "seine Karte hat kein passendes gedrucktes Vorzugziel unter deinen Helden — "
-                  + "daher dein erster lebender Held von links in der Heldenauswahl (kein Zufall)"
-                : "its card has no matching printed preferred target among your heroes — "
-                  + "so it takes the first living hero from the left of your squad row (no chance)";
-            if (cd.preferredTargets != null && cd.preferredTargets.Length > 0)
-            {
-                pick = living.FirstOrDefault(h => h.traits != null &&
-                    cd.preferredTargets.Any(t => h.traits.Contains(t.ToString())));
-                if (pick != null)
-                    pickedWhy = DataStore.languageCode != 0
-                        ? "seine Karte zielt gedruckt auf „" +
-                          string.Join("“/„", cd.preferredTargets.Select(t => t.ToString())) +
-                          "“ — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)"
-                        : "its card is printed to target “" +
-                          string.Join("”/“", cd.preferredTargets.Select(t => t.ToString())) +
-                          "” — first of your heroes with that trait (no chance)";
-            }
-            if (pick == null) pick = living[0];
+            bool Wounded(global::DeploymentCard h) => h.heroState != null && h.heroState.isWounded;
+            bool Trait(global::DeploymentCard h) =>
+                cd.preferredTargets != null && cd.preferredTargets.Length > 0 &&
+                h.traits != null && cd.preferredTargets.Any(t => h.traits.Contains(t.ToString()));
+
+            // ranking is total + deterministic (see doc-comment)
+            var pick = living.Select((h, i) => new { h, i })
+                .OrderBy(x => Wounded(x.h) ? 0 : 1)
+                .ThenBy(x => Trait(x.h) ? 0 : 1)
+                .ThenByDescending(x => x.h.attacks?.Length ?? 0)
+                .ThenByDescending(x => x.h.health)
+                .ThenBy(x => x.i)          // squad row left-to-right
+                .First().h;
+
+            // player-facing reason chain (only the rules that actually fired)
+            var parts = new List<string>();
+            if (Wounded(pick))
+                parts.Add(DataStore.languageCode != 0
+                    ? "er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett)"
+                    : "he is wounded - finish him first (table damage tracker)");
+            if (Trait(pick))
+                parts.Add(DataStore.languageCode != 0
+                    ? "seine Karte zielt gedruckt auf „" +
+                      string.Join("“/„", cd.preferredTargets.Select(t => t.ToString())) + "“"
+                    : "its card is printed to target “" +
+                      string.Join("”/“", cd.preferredTargets.Select(t => t.ToString())) + "“");
+            parts.Add(DataStore.languageCode != 0
+                ? "größte gedruckte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte)"
+                : "highest printed firepower among the remaining heroes (attack dice, then health)");
+            parts.Add(DataStore.languageCode != 0 ? "kein Zufall" : "no chance");
+
             heroName = pick.name;
-            // name the focus target up front (playtest 27.10: 'who IS the
-            // focus target' must be answerable from the popup alone)
-            why = (DataStore.languageCode != 0 ? "Fokus-Ziel (nur bei Gleichstand + als Bewegungsfallback): "
-                                               : "focus target (tie-break + movement fallback only): ")
-                  + heroName + " — " + pickedWhy;
+            why = (DataStore.languageCode != 0
+                    ? "Fokus-Ziel: "
+                    : "focus target: ")
+                  + heroName + " — " + string.Join("; ", parts);
             return true;
         }
 

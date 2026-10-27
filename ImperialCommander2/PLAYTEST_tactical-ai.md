@@ -58,29 +58,34 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
-   **Vorrang-Regel der Zielauswahl (Playtest-Overrule 27.10: Nähe zuerst):**
-   1. **Angegriffen wird der nächste Held, den man schießen kann** (Reichweite +
-      freie Schusslinie). Ein Blocker, der die Linie zum weiter entfernten Ziel
-      hält, ist dann selbst das nächste schießbare Ziel — er wird abgeschossen.
-   2. **Bei exakt gleichem Abstand** entscheidet das **Fokus-Ziel**: der Held,
-      dessen Merkmal auf der Vorzugziel-Zeile der Imperiellen-Karte steht
-      (z. B. „Schurke"); gibt es keinen, der erste lebende Held von links in
-      eurer Heldenreihe. Kein Zufall.
-   3. **Bewegung ohne Angriff:** auf den nächsten Helden zu (bei Gleichstand:
-      auf das Fokus-Ziel). Die exakte Feldwahl bleibt beim Menschen am Brett.
-   4. Warum so formuliert? Das Brett ist öffentliche Information — Entfernungen
-      und Linien seht ihr beide. Die KI-App kennt die Feldnummern zur Laufzeit
-      selbst nicht (Brettgeometrie rechnet die Engine, nicht das Skript; ein
-      KI-eigener Geometrie-Layer ist als M5-Hex-Adapter geplant). Bis dahin ist
-      die Regel so determiniert, dass **jeder** am Brett dieselbe Antwort
-      bekommt — Vorhersagbarkeit bleibt erhalten, die Regel wird nur von euch
-      am Brett ausgelesen statt von der KI.
+   **Vorrang-Regel der Zielauswahl (Playtest-Runde 5, Thomas' Anti-Köder-Overrule):**
+   1. Das **Fokus-Ziel** wird **positionsunabhängig** berechnet — ein Köder, den
+      man neben einen Imperialen stellt, zieht es nicht ab. Reihenfolge:
+      **verwundete Helden zuerst** (der Hand-Schadenszähler am Brett ist
+      gemeinsame Information — wer verwundet ist, wird erledigt), dann das
+      **gedruckte Vorzugziel** der Imperiellen-Karte (z. B. „Schurke"), dann die
+      **größte gedruckte Feuerkraft** (Angriffswürfel, dann Lebenspunkte), bei
+      allem Gleichstand der erste lebende Held von links in eurer Heldenreihe.
+      Kein Zufall. (Feiner noch: exakte Ausrüstungs-Bedrohung aus euren
+      Campaign-Items statt Würfel-Näherung — M5-Ausbau, Technik steht schon.)
+   2. **Angriff:** Fokus-Ziel, wenn du es schießen kannst (Reichweite + freie
+      Linie). **Sonst: der nächste Held, den du schießen kannst** — damit ist
+      auch der Blocker-Fall abgedeckt: verbaut ein Held die Linie zum Fokus, ist
+      er das nächste schießbare Ziel und wird abgeschossen.
+   3. **Bewegung ohne Angriff:** nähere dem Fokus-Ziel; führt kein Weg dorthin
+      (zu weit/geblockt): nähere dem nächsten Helden. Feldwahl bleibt beim
+      Menschen am Brett — Entfernungen und Linien sind öffentliche
+      Brettinformation, die App-Skriptebene kennt die Feldnummern selbst nicht
+      (M5-Hex-Adapter lässt die KI-Geometrie rechnen).
+   4. Warum ein Mensch so spielen würde: Zielfeuer auf Verwundete und die
+      gefährlichsten Helden ist Standard-Taktik; Standort-Köder ändern nichts an
+      der Rangliste, sie ändern nur, wer zufällig gerade schießbar ist.
    Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
    Roh-Tokens, z. B.:
-   `Bewegung 4: bewege dich auf den nächsten Helden zu; bei gleichem Abstand: auf CT-1701` ·
-   `Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Ist dein Fokus CT-1701 genauso nah wie der nächste: CT-1701` ·
+   `Bewegung 4: nähere Drokkatta. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden` ·
+   `Angriff: Drokkatta, wenn du ihn schießen kannst (Reichweite + freie Linie). Sonst: der nächste Held, den du schießen kannst` ·
    `Warum jetzt: Stärke-Effizienz 6.50 (Rang 1) |
-   Fokus-Ziel (nur bei Gleichstand + als Bewegungsfallback): CT-1701 — seine Karte zielt gedruckt auf „Schurke" — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)`
+   Fokus-Ziel: Drokkatta — er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett); größte gedruckte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte); kein Zufall`
 5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte
    (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
    direkt auf den Anweisungs-Popups. `post_hoc` zeigt nur eine Kurz-Zusammenfassung der
