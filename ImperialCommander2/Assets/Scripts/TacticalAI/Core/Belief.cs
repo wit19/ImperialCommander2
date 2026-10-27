@@ -1145,6 +1145,10 @@ namespace TacticalAI.Core
 
         int _seq;
         readonly Dictionary<int, List<(string, int)>> _activations = new Dictionary<int, List<(string, int)>>();
+        // FINAL-QA audit #8 (sim belief.py imperial_activation_start): the
+        // IMPERIAL group's own round start is command authority — the core
+        // knows exactly which of ITS activations preceded a HP change.
+        readonly Dictionary<int, List<int>> _imperialMarks = new Dictionary<int, List<int>>();
         public readonly Dictionary<string, Cell> Soll = new Dictionary<string, Cell>();   // Instruktions-Ledger
         public readonly List<Dictionary<string, object>> WoundFlips = new List<Dictionary<string, object>>();
 
@@ -1185,6 +1189,22 @@ namespace TacticalAI.Core
             return seq;
         }
 
+        /// Marks the start of one imperial activation in the flip stream.
+        /// FINAL-QA audit #8: the damage-attribution WINDOW is (previous
+        /// imperial activation, this one] — the App knows its own activation
+        /// order (command authority, not hero knowledge). Without marks
+        /// Damage() keeps the legacy single-flip behaviour.
+        public void ImperialActivationStart(int? roundNo = null)
+        {
+            int rnd = roundNo ?? RoundNo;
+            if (!_imperialMarks.TryGetValue(rnd, out var l))
+            {
+                l = new List<int>();
+                _imperialMarks[rnd] = l;
+            }
+            l.Add(_seq);
+        }
+
         /// woundTrackerValue delta on one of OUR groups. Attribution -> hero
         /// ring or none (no window => real overwatch token, no hero ring).
         public RingBelief Damage(string victimGroup, int amount, int? roundNo = null)
@@ -1195,10 +1215,28 @@ namespace TacticalAI.Core
             var earlier = new List<(string, int)>();
             foreach (var (h, s) in acts) if (s <= seq) earlier.Add((h, s));
             if (earlier.Count == 0) return null;   // kein Fenster => kein Held-Ring
-            int maxS = int.MinValue;
-            foreach (var (_, s) in earlier) maxS = Math.Max(maxS, s);
-            var cands = new List<string>();        // window occupants
-            foreach (var (h, s) in earlier) if (s == maxS) cands.Add(h);
+            var marks = _imperialMarks.TryGetValue(rnd, out var mk) ? mk : new List<int>();
+            List<string> cands;
+            if (marks.Count >= 2)
+            {
+                // FINAL-QA audit #8: window = (previous imperial activation,
+                // this one] — EVERY hero activated in it shares ONE ring,
+                // lethality-weighted, band = span of their range bands
+                // (v3.8b 3.3.3-2b). One-hero windows reproduce the old exact
+                // single-hero ring.
+                int prevMark = marks[marks.Count - 2];
+                cands = new List<string>();
+                foreach (var (h, s) in earlier) if (s > prevMark) cands.Add(h);
+                if (cands.Count == 0) return null;   // kein Held im Fenster => kein Held-Ring
+            }
+            else
+            {
+                // no imperial marks (legacy flip stream): keep M2a.3 semantics
+                int maxS = int.MinValue;
+                foreach (var (_, s) in earlier) maxS = Math.Max(maxS, s);
+                cands = new List<string>();          // window occupants
+                foreach (var (h, s) in earlier) if (s == maxS) cands.Add(h);
+            }
             return MakeRing("hero_ring", victimGroup, cands, BandFor(cands), rnd);
         }
 

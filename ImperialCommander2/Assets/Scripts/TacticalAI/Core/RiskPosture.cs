@@ -237,13 +237,23 @@ namespace TacticalAI.Core
             bool hurt = f.Vitality < Hurt;
             if (rho == 1)
             {
-                if (f.Vitality > ExtremeAt || !f.RingNear || CoverWorthless(f))
+                // FINAL-QA audit #3: a loss-forbidding doctrine outranks the
+                // skill ladder even at rho==1 (stall/hurt: a chancelosing
+                // trade is forbidden). rho1 was INVERTED against S3+ here.
+                if (f.Vitality > ExtremeAt || !f.RingNear
+                    || LossOkPostures.Contains(f.Posture) || CoverWorthless(f))
                     return DecidePress(f, "rho 1: nur extreme Verwundung bricht den Angriff");
                 return DecideDisengage(f, "rho 1: nur extreme Verwundung bricht den Angriff");
             }
             if (!hurt) return DecidePress(f, "Vitalität voll: voller Angriff");
+
+            // FINAL-QA audit #3: the break requires the posture to FORBID the
+            // loss (loss-permissive doctrines press at every rho >= 2).
+            // Audit #7: the campaign meta_bonus threshold (guard_hold_at)
+            // only exists at rho==3 (modul doc: "optional Kampagnen-Vitalität
+            // (S5)") — S2 must break like S3+, the S2<S3 inversion was a bug.
             if (f.RingNear && !LossOkPostures.Contains(f.Posture)
-                && f.Vitality <= (!f.MetaBonus ? DisengageAt : GuardHoldAt))
+                && f.Vitality <= ((!f.MetaBonus || rho < 3) ? DisengageAt : GuardHoldAt))
             {
                 if (CoverWorthless(f))
                 {

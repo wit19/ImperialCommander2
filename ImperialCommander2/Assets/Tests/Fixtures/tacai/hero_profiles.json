@@ -113,7 +113,7 @@
   {
    "counter": "woundAll",
    "key": [
-    1,
+    2,
     6,
     "1/2"
    ],
@@ -615,7 +615,7 @@
   "Fenn Signis": {
    "ability_index": 0,
    "chip_key": [
-    1,
+    2,
     10,
     "1"
    ],
@@ -663,7 +663,7 @@
   "Gideon Argus": {
    "ability_index": 0,
    "chip_key": [
-    1,
+    2,
     10,
     "1"
    ],
@@ -757,7 +757,7 @@
   "Ko-Tun Feralo": {
    "ability_index": 0,
    "chip_key": [
-    1,
+    2,
     10,
     "1"
    ],
@@ -853,7 +853,7 @@
   "Murne Rin": {
    "ability_index": 0,
    "chip_key": [
-    1,
+    2,
     10,
     "1"
    ],

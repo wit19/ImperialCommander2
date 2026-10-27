@@ -55,7 +55,9 @@ namespace TacticalAI.Core
         {
             return new List<object>
             {
-                Role == "healer" ? 0 : 1,
+                // FINAL-QA audit #5: SUPPORT ranks first among NON-healers
+                // (concept 3.3.1a chip_key); healer still leads overall.
+                Role == "healer" ? 0 : Role == "support" ? 2 : 1,
                 RunnerValue,
                 EvDamagePerRound,
             };

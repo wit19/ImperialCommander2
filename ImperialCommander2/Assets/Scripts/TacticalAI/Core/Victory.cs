@@ -34,6 +34,21 @@ namespace TacticalAI.Core
         /// per-die float sum on every pinned card.
         public static double PrintedDamageEv(Figure fig) => Dice.PrintedEv(fig.Card).ToDouble();
 
+        /// Exact (Rational) damage EV — the killable gate must not ride on
+        /// float rounding (FINAL-QA audit #6: float sums land 1 ULP under the
+        /// exact value for e.g. Red+Green+Yellow = 4, dropping exactly-that-
+        /// vitality heroes). Mirror of sim/victory.py printed_damage_ev_exact.
+        public static Rational PrintedDamageEvExact(Figure fig)
+        {
+            Rational tot = Rational.Zero;
+            foreach (var color in fig.Card.Attacks ?? Array.Empty<string>())
+            {
+                try { tot += Dice.DieExpectations(color)["dmg"]; }
+                catch (KeyNotFoundException) { continue; }
+            }
+            return tot;
+        }
+
         /// Attack EV with printed dice + printed surge-flat keyword damage.
         /// Python tries world.stats_of FIRST (MissionWorld seam); the plain
         /// runner.World used by the vectors KeyErrors there, so the printed
@@ -58,10 +73,46 @@ namespace TacticalAI.Core
             return Regex.Matches(text, "heal").Count + Regex.Matches(text, "support").Count;
         }
 
-        /// True when the figure can reach an entity cell within speed+1 MP.
+        /// Printed ranged floor: every Ranged weapon prints a short value of
+        /// >= 1 space (core cards read "Range X-1"); hero-specific longer
+        /// ranges are opt-in profile knowledge (3.3.1a rangeMax). Melee
+        /// attacks likewise reach 1 space. (FINAL-QA audit #2.)
+        public const int PrintedRangedFloor = 1;
+
+        /// All cells within `reach` board spaces of `cells`, expanding like
+        /// focus.count_spaces (pure space adjacency, no terrain filter).
+        /// Mirror of sim/victory.py _space_ring.
+        public static HashSet<Cell> SpaceRing(IEnumerable<Cell> cells, int reach)
+        {
+            var ring = new HashSet<Cell>(cells);
+            var q = new Queue<(Cell C, int D)>();
+            foreach (var c in new List<Cell>(ring)) q.Enqueue((c, 0));
+            while (q.Count > 0)
+            {
+                var (cur, d) = q.Dequeue();
+                if (d >= reach) continue;
+                foreach (var v in Geometry.DirVectors)
+                {
+                    var n = new Cell(cur.X + v.X, cur.Y + v.Y);
+                    if (!ring.Contains(n)) { ring.Add(n); q.Enqueue((n, d + 1)); }
+                }
+            }
+            return ring;
+        }
+
+        /// Can this rebel damage something standing on `cells` this
+        /// activation? Public metric only (FINAL-QA audit #2): the
+        /// attackable space-ring around `cells` (printed floor: melee 1
+        /// space, Ranged PrintedRangedFloor — exact per-weapon ranges stay
+        /// in the opt-in profile layer, 3.3.1a) must be enterable this
+        /// activation, i.e. terrain cost <= speed. The old `speed + 1`
+        /// slack counted cells the hero could not even move to
+        /// (arrival_rounds semantics use budget = speed).
         public static bool Threatens(World world, Figure fig, IEnumerable<Cell> cells)
         {
-            return TerrainCost(world, fig.Cells(), cells) <= fig.Card.Speed + 1;
+            int speed = Math.Max(1, fig.Card.Speed);
+            int reach = fig.Card.AttackType == "Ranged" ? PrintedRangedFloor : 1;
+            return TerrainCost(world, fig.Cells(), SpaceRing(cells, reach)) <= speed;
         }
 
         /// Targets that could TRIGGER or BLOCK a rebel victory this round:
@@ -334,7 +385,9 @@ namespace TacticalAI.Core
                 case "incapacitateAll":
                 case "capture":
                     {
-                        bool killable = target.Vitality <= VictoryHelpers.PrintedDamageEv(attacker);
+                        // FINAL-QA audit #6: exact Fraction EV (float sum
+                        // dropped exactly-that-vitality heroes).
+                        bool killable = target.Vitality <= VictoryHelpers.PrintedDamageEvExact(attacker);
                         int meta = (MetaBonus && killable && VictoryHelpers.IsWounded(target)) ? 1 : 0;
                         return new List<object>
                         {
@@ -586,7 +639,8 @@ namespace TacticalAI.Core
                 case "eliminate":
                     {
                         if (Counter is { } c) return c.TargetValue(world, attacker, target);
-                        int killable = target.Vitality <= VictoryHelpers.PrintedDamageEv(attacker) ? 1 : 0;
+                        // FINAL-QA audit #6: exact Fraction EV (hunt gate).
+                        int killable = target.Vitality <= VictoryHelpers.PrintedDamageEvExact(attacker) ? 1 : 0;
                         double dmg = Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven);
                         int heal = VictoryHelpers.HealContribution(target);
                         // attrition rule (§3.3.1a): among equally killable/
@@ -698,7 +752,16 @@ namespace TacticalAI.Core
                         if (fig != null)
                         {
                             mc = fField.TryGetValue(c, out var mv) ? mv : INF;
-                            if (mc >= rc || mc > fig.Card.Speed) continue;
+                            // FINAL-QA audit #1: the race is in ARRIVAL ROUNDS,
+                            // not raw terrain costs - a speed-6 rebel 2 MP away
+                            // arrives in the same round as a speed-3 figure 1 MP
+                            // away. Equality belongs to the figure NOWHERE: the
+                            // activation queue interleaves rebels ahead of
+                            // imperials, so the figure must be STRICTLY faster.
+                            if (mc >= INF) continue;
+                            int fRounds = CeilDiv(mc, Math.Max(1, fig.Card.Speed));
+                            int rRounds = CeilDiv(rc, Math.Max(1, rebel.Card.Speed));
+                            if (fRounds >= rRounds) continue;
                         }
                         var key = (mc, fc, c.X, c.Y);
                         if (best is null || CompareKey(key, best.Value) < 0)

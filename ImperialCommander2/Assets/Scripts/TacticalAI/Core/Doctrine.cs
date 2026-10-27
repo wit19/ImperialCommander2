@@ -243,8 +243,9 @@ namespace TacticalAI.Core
         static bool FWounded(World w, Figure fig, Figure r, Doctrine d) =>
             VictoryHelpers.IsWounded(r);
 
+        // FINAL-QA audit #6: exact Fraction EV (killable gate, doctrine side).
         static bool FKillable(World w, Figure fig, Figure r, Doctrine d) =>
-            r.Vitality <= VictoryHelpers.PrintedDamageEv(fig);
+            r.Vitality <= VictoryHelpers.PrintedDamageEvExact(fig);
 
         static bool FTimerImmediate(World w, Figure fig, Figure r, Doctrine d)
         {

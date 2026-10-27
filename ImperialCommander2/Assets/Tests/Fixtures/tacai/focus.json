@@ -896,13 +896,13 @@
   "attack_geom": [
    {
     "a": "s1",
-    "ok": true,
+    "ok": false,
     "r": "r1",
     "with_los": false
    },
    {
     "a": "s1",
-    "ok": true,
+    "ok": false,
     "r": "r1",
     "with_los": true
    }
@@ -912,31 +912,31 @@
    {
     "a": "s1",
     "b": "r1",
-    "count": 2
+    "count": 5
    },
    {
     "a": "r1",
     "b": "s1",
-    "count": 2
+    "count": 5
    }
   ],
   "posture": [
    {
-    "count_dist": 2,
-    "focus_cost_mp": 0,
+    "count_dist": 5,
+    "focus_cost_mp": 2,
     "posture": "stall",
     "target": "r1",
     "tiebreak_trace": [
      {
-      "dist": 2,
+      "dist": 5,
       "id": "r1",
-      "mp": 0,
+      "mp": 2,
       "order": 1,
       "vitality": 5,
       "w": [
        1,
        -2,
-       -3
+       -6
       ],
       "weight": 0.0
      }
@@ -944,27 +944,27 @@
     "w": [
      1,
      -2,
-     -3
+     -6
     ],
-    "why": "posture stall: W-argmax r1 [r1:W[1, -2, -3]]; can attack r1 from current position (0 MP)"
+    "why": "posture stall: W-argmax r1 [r1:W[1, -2, -6]]; reachable target r1 at 2 MP (others: )"
    }
   ],
   "pure": [
    {
-    "count_dist": 2,
-    "focus_cost_mp": 0,
+    "count_dist": 5,
+    "focus_cost_mp": 2,
     "target": "r1",
     "tiebreak_trace": [
      {
-      "dist": 2,
+      "dist": 5,
       "id": "r1",
-      "mp": 0,
+      "mp": 2,
       "order": 1,
       "vitality": 5,
       "weight": 0.0
      }
     ],
-    "why": "can attack r1 from current position (0 MP)"
+    "why": "reachable target r1 at 2 MP (others: )"
    }
   ],
   "scenario": "stall_terminal"

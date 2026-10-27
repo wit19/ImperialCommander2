@@ -2368,10 +2368,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -2512,10 +2512,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -4672,10 +4672,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -4816,10 +4816,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -6976,10 +6976,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -7120,10 +7120,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -9280,10 +9280,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -9424,10 +9424,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -11584,10 +11584,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -11728,10 +11728,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -13888,10 +13888,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -14032,10 +14032,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -30016,10 +30016,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -30160,10 +30160,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -32320,10 +32320,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -32464,10 +32464,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -34624,10 +34624,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -34768,10 +34768,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -36928,10 +36928,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -37072,10 +37072,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -39232,10 +39232,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -39376,10 +39376,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -41536,10 +41536,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": false,
@@ -41680,10 +41680,10 @@
   },
   {
    "d": {
-    "anchor": "Deckungskante",
-    "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-    "risk": "disengage",
-    "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+    "anchor": "",
+    "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+    "risk": "press",
+    "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
    },
    "facts": {
     "anchor": true,
@@ -168901,10 +168901,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
@@ -168939,10 +168939,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
@@ -168977,10 +168977,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
@@ -171941,120 +171941,6 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": null,
-    "ignore_los": false,
-    "pattern": "defensive",
-    "posture": "eliminate",
-    "range_max": 1,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": null,
-    "ignore_los": false,
-    "pattern": "defensive",
-    "posture": "eliminate",
-    "range_max": 4,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": null,
-    "ignore_los": false,
-    "pattern": "defensive",
-    "posture": "eliminate",
-    "range_max": 5,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
      "anchor": "",
      "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
      "risk": "press",
@@ -172077,10 +171963,10 @@
   {
    "facts": {
     "counter": null,
-    "ignore_los": true,
+    "ignore_los": false,
     "pattern": "defensive",
     "posture": "eliminate",
-    "range_max": 3,
+    "range_max": 1,
     "ring": true,
     "vb": false,
     "vitality": "1/4"
@@ -172118,6 +172004,120 @@
     "ignore_los": false,
     "pattern": "defensive",
     "posture": "eliminate",
+    "range_max": 4,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": null,
+    "ignore_los": false,
+    "pattern": "defensive",
+    "posture": "eliminate",
+    "range_max": 5,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": null,
+    "ignore_los": true,
+    "pattern": "defensive",
+    "posture": "eliminate",
+    "range_max": 3,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": null,
+    "ignore_los": false,
+    "pattern": "defensive",
+    "posture": "eliminate",
     "range_max": 0,
     "ring": true,
     "vb": true,
@@ -181061,120 +181061,6 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": "incapacitateAll",
-    "ignore_los": false,
-    "pattern": "aggressive",
-    "posture": "eliminate",
-    "range_max": 1,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": "incapacitateAll",
-    "ignore_los": false,
-    "pattern": "aggressive",
-    "posture": "eliminate",
-    "range_max": 4,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    },
-    {
-     "anchor": "Objektkante",
-     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
-     "risk": "hold",
-     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
-    }
-   ]
-  },
-  {
-   "facts": {
-    "counter": "incapacitateAll",
-    "ignore_los": false,
-    "pattern": "aggressive",
-    "posture": "eliminate",
-    "range_max": 5,
-    "ring": true,
-    "vb": false,
-    "vitality": "1/4"
-   },
-   "rho_rows": [
-    {
-     "anchor": "",
-     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
-     "risk": "press",
-     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
-    },
-    {
      "anchor": "",
      "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
      "risk": "press",
@@ -181197,10 +181083,10 @@
   {
    "facts": {
     "counter": "incapacitateAll",
-    "ignore_los": true,
+    "ignore_los": false,
     "pattern": "aggressive",
     "posture": "eliminate",
-    "range_max": 3,
+    "range_max": 1,
     "ring": true,
     "vb": false,
     "vitality": "1/4"
@@ -181238,6 +181124,120 @@
     "ignore_los": false,
     "pattern": "aggressive",
     "posture": "eliminate",
+    "range_max": 4,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": "incapacitateAll",
+    "ignore_los": false,
+    "pattern": "aggressive",
+    "posture": "eliminate",
+    "range_max": 5,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": "incapacitateAll",
+    "ignore_los": true,
+    "pattern": "aggressive",
+    "posture": "eliminate",
+    "range_max": 3,
+    "ring": true,
+    "vb": false,
+    "vitality": "1/4"
+   },
+   "rho_rows": [
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: vorrücken auf Konten-Punkt",
+     "risk": "press",
+     "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
+    },
+    {
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    },
+    {
+     "anchor": "Objektkante",
+     "fallback": "falls Ziel gleich außer Feuerlinie: Kurzer Vorstoß auf die nächste Objektkante",
+     "risk": "hold",
+     "why": "hold: verwundet, Gegner geortet — Feuerlinie halten, sicherer Treffer"
+    }
+   ]
+  },
+  {
+   "facts": {
+    "counter": "incapacitateAll",
+    "ignore_los": false,
+    "pattern": "aggressive",
+    "posture": "eliminate",
     "range_max": 0,
     "ring": true,
     "vb": true,
@@ -184101,10 +184101,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
@@ -184139,10 +184139,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
@@ -184177,10 +184177,10 @@
      "why": "Stufe rho 0: kein Risiko-Urteil — immer Angriff"
     },
     {
-     "anchor": "Deckungskante",
-     "fallback": "hinter der nächsten Deckungskante in Feuerhaltung; falls blockiert: eigene Zone halten bis Verbündete naht",
-     "risk": "disengage",
-     "why": "disengage: rho 1: nur extreme Verwundung bricht den Angriff"
+     "anchor": "",
+     "fallback": "falls außer Reichweite: auf Konten-Punkt vorrücken",
+     "risk": "press",
+     "why": "Press: rho 1: nur extreme Verwundung bricht den Angriff"
     },
     {
      "anchor": "Objektkante",
