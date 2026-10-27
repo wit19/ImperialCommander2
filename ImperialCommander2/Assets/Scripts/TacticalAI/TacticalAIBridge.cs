@@ -40,6 +40,7 @@ namespace TacticalAI
         public string TargetWhy;
         public string ExplainLine;      // printed why-string (ExplainLevel)
         public bool HasTarget;
+        public string Pattern;          // doctrine pattern (dev 11); null = aggressive
     }
 
     public static class TacticalAIBridge
@@ -51,6 +52,10 @@ namespace TacticalAI
 
         static Tac.OrderDeckManager _deckMgr;
         static Dictionary<string, Tac.DeploymentCard> _catalog;
+        // dev 11: card id -> doctrine pattern for the CURRENT round (fed from
+        // the Core Figure records; 'aggressive' everywhere until M4 assigns
+        // per-mission roles - the renderer is ready for all six patterns).
+        static Dictionary<string, string> _patternByCard;
         static int _planRound = -1;
         static List<Tac.OrderSlot> _slots = new List<Tac.OrderSlot>();
         static string _publicLine = "";
@@ -61,6 +66,7 @@ namespace TacticalAI
         {
             _deckMgr = null;
             _catalog = null;
+            _patternByCard = null;
             _planRound = -1;
             _slots = new List<Tac.OrderSlot>();
             _publicLine = "";
@@ -140,6 +146,8 @@ namespace TacticalAI
         {
             if (_planRound == roundNo && _deckMgr != null) return;
             BuildGroups(out var facts, out var figures);
+            _patternByCard = new Dictionary<string, string>();
+            foreach (var f in figures) if (f != null) _patternByCard[f.Id] = f.Pattern;
             if (facts.Count == 0)
             {
                 _planRound = roundNo;
@@ -254,6 +262,13 @@ namespace TacticalAI
             plan.ExplainLine = ExplainFor(cd.id);
             if (plan.ExplainLine != null && plan.HasTarget)
                 plan.ExplainLine += " | " + plan.TargetWhy;
+            // Doctrine pattern from the card's Core catalog record (dev 11).
+            // All shipped cards are 'aggressive' until M4 assigns per-mission
+            // roles - but the renderer already carries full action-tree text
+            // for ALL six patterns, so no future doctrine ships as bare tokens.
+            EnsureCatalog();
+            plan.Pattern = _patternByCard != null && _patternByCard.TryGetValue(cd.id, out var pat)
+                           && !string.IsNullOrEmpty(pat) ? pat : "aggressive";
             // Playtest 27.10 (Thomas): raw deck tokens ('move', 'attack') are
             // not an instruction a human Imperial player can execute. Render
             // every block as a concrete, localized order naming the focus
@@ -270,6 +285,14 @@ namespace TacticalAI
             var outp = new List<string>();
             var t = plan.HasTarget ? plan.TargetName : null;
             var toks = tokens ?? Array.Empty<string>();
+            // Doctrine header (dev 11): every order NAMES its doctrine, so the
+            // human always knows which book of war rules a group follows.
+            // Texts from Core Doctrine.StanceText; unknown/legacy patterns
+            // render as Vorstoß (the shipped default - all live groups are
+            // 'aggressive' until the M4 pattern assignment lands).
+            var pat = plan.Pattern ?? "aggressive";
+            outp.Add(T("Doktrin: " + DoctrineName(pat) + " — nach dieser Vorschrift spielst du diese Aktivierung",
+                       "Doctrine: " + DoctrineNameEn(pat) + " — this rulebook governs your activation"));
             for (int n = 0; n < toks.Length; n++)
             {
                 var tok = toks[n];
@@ -283,31 +306,55 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
-                        // Thomas round 7 (dev 10): hit&run clause + anti-kiting
-                        // guard. IC2 has no AP pool - 'left' movement = the
-                        // card's move block not yet spent, so the disengage
-                        // lives INSIDE the move action (otherwise it would
-                        // contradict the 'no line -> close in' branch).
-                        // Guard: if a hero already stands inside this unit's
-                        // attack range, HOLD and fire-prepare - an
-                        // unconditional backstep would let one fast melee
-                        // hero pin the whole ranged corps by escorting it
-                        // (the dev-7 decoy disease, new variant).
-                        outp.Add(t != null
-                            ? Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: In dieser Aktivierung bereits angegriffen? Dann entferne dich bis zu {speed} Felder von {t} und behalte ihn im Auge. Noch nicht angegriffen? Dann nähere {t}",
-                                  $"Move {speed}: If a hero already stands inside your attack range: hold your ground and ready your fire. Otherwise: if this activation already attacked, back off up to {speed} spaces from {t} while keeping him in sight; if it has not attacked yet, close in on {t}")
-                            : Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: Nach einem Angriff entferne dich vom nächsten Helden; vor jedem Angriff nähere ihm",
-                                  $"Move {speed}: If a hero already stands inside your attack range: hold and ready fire. Otherwise: after an attack, back off from the nearest hero; before any attack, close in on it"));
+                        if (pat == "guard")
+                            outp.Add(Act($"Bewegung {speed}: Halte deine Stellung in der Wachzone (das Missionsziel, das du verteidigst, samt Umkreis). Ein Held betritt sie: stelle dich ihm entgegen — deine Bewegung endet aber IMMER in der Wachzone. Lass dich nicht herauslocken",
+                                         $"Move {speed}: hold your position inside your guard zone (the mission objective you defend, plus its rim). A hero enters it: face him - but your move ALWAYS ends back inside the guard zone. Never be lured out"));
+                        else if (pat == "blocker")
+                            outp.Add(Act($"Bewegung {speed}: Suche das Feld zwischen dem Missionsziel und dem nächsten Helden - sein kürzester Weg zum Ziel soll über dein Feld führen. Kein solches Feld erreichbar: halte die nächste Engstelle auf seinem Weg",
+                                         $"Move {speed}: take the field between the mission objective and the nearest hero - his shortest route to the objective must cross your tile. Not reachable: hold the next chokepoint on his route"));
+                        else if (pat == "support")
+                            outp.Add(Act($"Bewegung {speed}: Distanz halten. Schon angegriffen? Dann bis zu {speed} Felder Abstand vom nächsten Helden, dabei siehst du ihn weiter. Noch nicht angegriffen? Nähere {t} nur, wenn danach kein Held in Nahkampfreichweite von dir steht",
+                                         $"Move {speed}: keep your distance. Already attacked? Back off up to {speed} spaces from the nearest hero while keeping him in sight. Not attacked yet: close in on {t} only if no hero would end up in melee reach of you"));
+                        else if (pat == "ambusher")
+                            outp.Add(Act($"Bewegung {speed}: Bewege dich nur auf Feldern, die kein Held sehen kann - zeig dich nicht, bis ein Ziel in deiner Reichweite steht. Erster Held in Reichweite: greife an",
+                                         $"Move {speed}: only step onto tiles no hero can see - stay hidden until a target stands inside your range. First hero in range: attack"));
+                        else
+                            // aggressive + hunter: hunter = aggressive tree, the
+                            // sweep IS the advance on the focus target.
+                            outp.Add(t != null
+                                ? Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: In dieser Aktivierung bereits angegriffen? Dann entferne dich bis zu {speed} Felder von {t} und behalte ihn im Auge. Noch nicht angegriffen? Dann nähere {t}",
+                                      $"Move {speed}: If a hero already stands inside your attack range: hold your ground and ready your fire. Otherwise: if this activation already attacked, back off up to {speed} spaces from {t} while keeping him in sight; if it has not attacked yet, close in on {t}")
+                                : Act($"Bewegung {speed}: Steht schon ein Held in deiner Angriffreichweite: stehen bleiben und Feuer vorbereiten. Sonst gilt: Nach einem Angriff entferne dich vom nächsten Helden; vor jedem Angriff nähere ihm",
+                                      $"Move {speed}: If a hero already stands inside your attack range: hold and ready fire. Otherwise: after an attack, back off from the nearest hero; before any attack, close in on it"));
                         break;
                     case "attack":
-                        // Thomas' Wenn-Dann-Schema (dev 9): focus if engaged;
-                        // no access -> use the action to close in; a hero
-                        // holding the line -> that hero is the target.
-                        outp.Add(t != null
-                            ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: {speed} Felder auf {t} zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
-                                  $"Attack {t} if in range with a clear line. No line / out of range: move up to {speed} spaces toward {t}. Line blocked by ANOTHER hero: attack that blocking hero")
-                            : Act("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Kein Zugriff: nähere dem nächsten Helden",
-                                  "Attack: the nearest hero you can shoot (range + clear line). No access: close in on the nearest hero"));
+                        // Thomas' Wenn-Dann-Schema (dev 9) per doctrine (dev 11).
+                        if (pat == "guard")
+                            outp.Add(t != null
+                                ? Act($"Angriff: der nächste Held IN deiner Wachzone (Reichweite + freie Linie). Keiner drin, aber {t} ist schießbar: {t}. Trifft beides nicht zu: kein Schuss, Stellung halten",
+                                      $"Attack: the nearest hero INSIDE your guard zone (range + clear line). None inside but {t} is shootable: {t}. Neither: hold your ground, no shot")
+                                : Act("Angriff: der nächste Held in deiner Wachzone (Reichweite + freie Linie). Keiner drin: kein Schuss, Stellung halten",
+                                      "Attack: the nearest hero inside your guard zone (range + clear line). None inside: hold, no shot"));
+                        else if (pat == "ambusher")
+                            outp.Add(t != null
+                                ? Act($"Angriff aus dem Versteck: der erste Held, den du von hier schießen kannst (Reichweite + freie Linie) - Überraschung schlägt Zielwahl, auch gegen {t}. Danach: nicht weiter enttarnen",
+                                      $"Ambush shot: the first hero you can shoot from here (range + clear line) - surprise beats target choice, even over {t}. Afterwards: do not unmask further")
+                                : Act("Angriff aus dem Versteck: der erste Held, den du von hier schießen kannst (Reichweite + freie Linie). Danach: nicht weiter enttarnen",
+                                      "Ambush shot: the first hero you can shoot from here (range + clear line). Afterwards: stay masked"));
+                        else if (pat == "support")
+                            outp.Add(t != null
+                                ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie - bevorzuge weiche Ziele aus der Deckung. Keine Sichtlinie / zu weit: weiche zurück statt vorzudrängen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
+                                      $"Attack {t} if in range with a clear line - prefer soft targets from cover. No line / out of range: back off instead of pushing in. Line blocked by ANOTHER hero: attack that blocking hero")
+                                : Act("Angriff: das weichste Ziel, das du aus Deckung schießen kannst (Reichweite + freie Linie). Kein Ziel: zurückweichen",
+                                      "Attack: the softest target you can shoot from cover (range + clear line). No target: back off"));
+                        else
+                            // aggressive / hunter / blocker: blocker's job is delay,
+                            // so nearest-shootable is doctrinally correct here.
+                            outp.Add(t != null
+                                ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: {speed} Felder auf {t} zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
+                                      $"Attack {t} if in range with a clear line. No line / out of range: move up to {speed} spaces toward {t}. Line blocked by ANOTHER hero: attack that blocking hero")
+                                : Act("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Kein Zugriff: nähere dem nächsten Helden",
+                                      "Attack: the nearest hero you can shoot (range + clear line). No access: close in on the nearest hero"));
                         break;
                     case "special":
                         outp.Add(Act("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
@@ -332,6 +379,33 @@ namespace TacticalAI
             }
             return outp.ToArray();
         }
+
+        // Doctrine display names (dev 11). Short forms of Core
+        // Doctrine.StanceText - the header line must fit one popup row; the
+        // per-action text carries the full behaviour, so no information is
+        // lost. Unknown patterns display as Vorstoß (the shipped default).
+        static readonly Dictionary<string, string> DoctrineDe = new Dictionary<string, string>
+        {
+            { "aggressive", "Vorstoß (Kontaktpunkt erreichen)" },
+            { "guard",      "Wachschutz (Zone halten, nie herauslocken)" },
+            { "blocker",    "Blockierer (Engstelle halten)" },
+            { "hunter",     "Jäger (Schwerpunktzone abkämmen)" },
+            { "support",    "Support (Distanz halten, aus der Deckung)" },
+            { "ambusher",   "Hinterhalt (ungesehen bis zum ersten Schuss)" },
+        };
+        static readonly Dictionary<string, string> DoctrineEn = new Dictionary<string, string>
+        {
+            { "aggressive", "Advance (reach the contact point)" },
+            { "guard",      "Guard (hold the zone, never be lured out)" },
+            { "blocker",    "Blocker (hold the chokepoint)" },
+            { "hunter",     "Hunter (sweep the priority zone)" },
+            { "support",    "Support (keep distance, shoot from cover)" },
+            { "ambusher",   "Ambush (stay unseen until the first shot)" },
+        };
+        static string DoctrineName(string p) =>
+            DoctrineDe.TryGetValue(p ?? "", out var v) ? v : DoctrineDe["aggressive"];
+        static string DoctrineNameEn(string p) =>
+            DoctrineEn.TryGetValue(p ?? "", out var v) ? v : DoctrineEn["aggressive"];
 
         // ------------------------------------------------------- deployment hook
 

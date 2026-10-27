@@ -93,6 +93,23 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
       gefährlichsten Helden, Zugriff notfalls ueber Bewegung, Blocker abschießen —
       Standardtaktik. Standort-Köder ändern nichts an der Rangliste, sie ändern
       nur, wer gerade zufällig schießbar ist.
+   **Doktrin-Kopfzeile und die sechs Vorschriften (dev 11):** Jede Anweisung beginnt
+   mit `Doktrin: <Name> — nach dieser Vorschrift spielst du diese Aktivierung`.
+   Der Kern kennt sechs Vorschriften; aktuell spielt IMMER alle Gruppen
+   „Vorstoß" (Rollen-Vergabe je Mission ist der nächste Ausbildungsschritt M4),
+   aber die Wenn-Dann-Texte aller sechs sind bereits einsatzfertig:
+   - **Vorstoß** — das Schema oben (Angriff/Fokus, Zugriff über Bewegung, Blocker
+     abschießen, Hit&Run mit Standfeuer-Guard).
+   - **Wachschutz** — Bewegung endet immer in der Wachzone (Missionsziel + Umkreis);
+     Angriff nur auf Helden IN der Zone; sonst kein Schuss, nie herauslocken lassen.
+   - **Blockierer** — Bewegung auf das Feld zwischen Missionsziel und nächstem
+     Helden (seine Route muss über euer Feld); Angriff: nächster Schussbarer.
+   - **Jäger** — wie Vorstoß; das Vorrücken auf das Fokus-Ziel IST das Abkämmen.
+   - **Support** — Distanz halten: nach Angriff zurück, vor Angriff nur vorrücken,
+     wenn kein Held in Nahkampfreichweite endet; Feuer aus der Deckung.
+   - **Hinterhalt** — Bewegung nur auf unsehbare Felder, erster Schuss aus dem
+     Versteck auf den ersten Helden in Reichweite; danach nicht weiter enttarnen.
+
    Das Anweisungs-Popup (explain=full) zeigt genau dieses Schema, z. B.:
    `Aktion 1 – Angriff auf Drokkatta, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: 4 Felder auf Drokkatta zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen` ·
    `Warum jetzt: Stärke-Effizienz 6.50 (Rang 1) |
