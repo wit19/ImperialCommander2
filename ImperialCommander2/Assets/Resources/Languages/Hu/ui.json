@@ -282,6 +282,7 @@
     "attack2MoveBlocker": "pick a new blocking tile between the mission objective and {1} (up to {0} spaces); no target: hold the chokepoint against the nearest hero",
     "attackSecondIntro": "Check: if you already attacked this activation - a second attack is forbidden UNLESS your Imperial card explicitly allows multiple attacks (then repeat Aktion 1) - this block is a move: {0}",
     "attackSecondTail": "If no attack has happened yet, this block counts as an Aktion-1 attack: shoot the target if possible; otherwise close in; shoot the line-blocker.",
+    "overlordFallback": "Taktikai AI – Overlord: a tábla-adapter még nem érhető el – a tervezés a referenciaszabályok szerint.",
     "specialAsPrinted": "Special: execute exactly as printed on the card",
     "restLine": "Rest: recover 1 damage",
     "interactLine": "Interact: fulfill this unit's own placement objective",

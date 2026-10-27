@@ -61,6 +61,7 @@ namespace TacticalAI
         static string _publicLine = "";
         static ulong _sessionSeed;
         static string _sessionKey;   // campaign|mission identity of the loaded session
+        static bool _overlordNoticeShown;  // one-shot visible ORD->REF degradation notice
 
         public static void ResetSession()
         {
@@ -72,6 +73,7 @@ namespace TacticalAI
             _publicLine = "";
             _sessionSeed = 0;
             _sessionKey = null;
+            _overlordNoticeShown = false;
         }
 
         /// <summary>Identity of the loaded session (same material SessionSeed
@@ -174,7 +176,24 @@ namespace TacticalAI
             // (WorldProvider seam). Until it registers, overlord plans like the
             // reference level; the difference is only logged, never hidden.
             if (mode == "overlord" && WorldProvider == null)
+            {
                 Debug.Log("TacticalAIBridge::overlord without WorldProvider - planning at reference ruleset");
+                // ...and once per mission ALSO visibly, not just in the log
+                // (Thomas playtest 27.10: he selected OVERLORD and correctly
+                // observed reference behaviour - the degradation must not be
+                // silent in the player's face).
+                if (!_overlordNoticeShown)
+                {
+                    _overlordNoticeShown = true;
+                    try
+                    {
+                        var line = DataStore.uiLanguage?.uiTacticalAI?.overlordFallback;
+                        var qm = GlowEngine.FindUnityObject<QuickMessage>();
+                        if (qm != null && !string.IsNullOrEmpty(line)) qm.Show(line);
+                    }
+                    catch { /* notice is cosmetic; never break planning */ }
+                }
+            }
 
             var rng = new Tac.DeterministicRandom(SessionSeed() ^ (ulong)roundNo * 0x9E3779B97F4A7C15UL);
             var plan = Tac.OrderPlanner.PlanRound(roundNo, facts, _catalog, posture, skill, rng,

@@ -224,6 +224,16 @@ damit ausgeschlossen.
   MODUS/STUFE/AUFSTELLUNG/ERKLÄRUNG.
 
 
+- **OVERLORD zeigt jetzt sichtbar**, wenn es wie REFERENCE plant: der
+  Brett-Adapter (Weltmodell, M5) existiert noch nicht, deshalb fällt
+  Overlord-Planung automatisch auf den Referenz-Regelsatz zurück. Das war
+  bisher nur im Log sichtbar und hat im Playtest zu Verwirrung geführt
+  (27.10). Jetzt kommt einmal pro Mission ein Hinweistext im Bildschirm:
+  „Taktische KI – Overlord: Brett-Adapter noch nicht verfügbar. Planung
+  erfolgt nach den Referenz-Regeln." Wenn der M5-Adapter registriert ist,
+  erscheint der Hinweis nicht mehr und Overlord plant wirklich anders.
+
+
 ## 5. Bekannte Grenzen (bewusst so entschieden)
 
 - Die KI sieht keine Sichtlinien — Angriffe „durch Wände" verhindert sie über

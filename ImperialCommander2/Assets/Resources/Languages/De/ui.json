@@ -282,6 +282,7 @@
     "attack2MoveBlocker": "wähle ein neues Blockierfeld zwischen Missionsziel und {1} (max. {0} Felder); ohne Ziel: halte die Engstelle gegen den nächsten Helden",
     "attackSecondIntro": "Prüfung: Falls du in dieser Aktivierung schon angegriffen hast – ein zweiter Angriff ist verboten, AUSSER deiner Imperiellen-Karte erlaubt ausdrücklich mehrere Angriffe (dann erneut wie bei Aktion 1) –, dann ist dieser Block Bewegung: {0}",
     "attackSecondTail": "Falls noch kein Angriff erfolgt ist, gilt dieser Block wie einer von Aktion 1: Ziel, wenn schießbar; sonst Zugriff über Bewegung; Blocker beschießen.",
+    "overlordFallback": "Taktische KI - Overlord: Brett-Adapter noch nicht verfügbar. Planung erfolgt nach den Referenz-Regeln.",
     "specialAsPrinted": "Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
     "restLine": "Rasten: 1 Schaden regenerieren",
     "interactLine": "Interaktion: dein eigenes Positionierungsziel erfüllen",

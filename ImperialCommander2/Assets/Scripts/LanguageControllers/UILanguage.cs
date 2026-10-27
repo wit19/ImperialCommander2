@@ -28,6 +28,7 @@ public class UITacticalAI
 	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
 	public string attack2Move, attack2MoveNoTarget, attack2MoveGuard, attack2MoveAmbush, attack2MoveBlocker;
 	public string attackSecondIntro, attackSecondTail;
+	public string overlordFallback;
 	public string specialAsPrinted, restLine, interactLine, shuffleNote;
 	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
 	public string whyPrefix, whyRank;
