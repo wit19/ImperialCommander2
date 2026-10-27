@@ -107,6 +107,11 @@ namespace TacticalAI.Core
         public int Index;            // activation/initiative order
         public bool Alive = true;
         public string Pattern = "aggressive";
+        // M9-F6 hero three-state model: the isWounded STATUS (public app
+        // flag). Hero damage itself is physical table state the app never
+        // sees - a hero becomes wounded when he loses a FULL bar and
+        // fights on a fresh second one (runner.Figure.take_damage mirror).
+        public bool Wounded;
 
         public List<Cell> Cells() => Geometry.FootprintCells(Anchor, Card.MiniSize, Orientation);
     }

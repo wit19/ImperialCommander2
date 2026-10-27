@@ -74,7 +74,7 @@
       "vitality": 2,
       "w": [
        1,
-       0,
+       1,
        0,
        2.666667,
        -2
@@ -99,12 +99,12 @@
     ],
     "w": [
      1,
-     0,
+     1,
      0,
      2.666667,
      -2
     ],
-    "why": "posture eliminate: W-argmax r_toucher [r_toucher:W[1, 0, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
+    "why": "posture eliminate: W-argmax r_toucher [r_toucher:W[1, 1, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_toucher(dist 8), r_healthy(dist 4); tiebreak dist: r_toucher wins (shorter counting-space distance = 8)"
    }
   ],
   "pure": [
@@ -197,27 +197,11 @@
   ],
   "posture": [
    {
-    "count_dist": 6,
+    "count_dist": 2,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "r_1hp",
+    "target": "r_5hp",
     "tiebreak_trace": [
-     {
-      "dist": 6,
-      "id": "r_1hp",
-      "mp": 0,
-      "order": 2,
-      "vitality": 1,
-      "w": [
-       0,
-       1,
-       -1,
-       0,
-       0,
-       2.666667
-      ],
-      "weight": 0.0
-     },
      {
       "dist": 2,
       "id": "r_5hp",
@@ -233,17 +217,33 @@
        2.666667
       ],
       "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
      }
     ],
     "w": [
      0,
-     1,
-     -1,
+     0,
+     0,
      0,
      0,
      2.666667
     ],
-    "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    "why": "posture eliminate: W tie of 2 targets [r_5hp:W[0, 0, 0, 0, 0, 2.666667], r_1hp:W[0, 0, 0, 0, 0, 2.666667]] -> cascade decides; 2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
    }
   ],
   "pure": [
@@ -336,27 +336,11 @@
   ],
   "posture": [
    {
-    "count_dist": 6,
+    "count_dist": 2,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "r_1hp",
+    "target": "r_5hp",
     "tiebreak_trace": [
-     {
-      "dist": 6,
-      "id": "r_1hp",
-      "mp": 0,
-      "order": 2,
-      "vitality": 1,
-      "w": [
-       0,
-       1,
-       -1,
-       0,
-       0,
-       2.666667
-      ],
-      "weight": 0.0
-     },
      {
       "dist": 2,
       "id": "r_5hp",
@@ -372,17 +356,33 @@
        2.666667
       ],
       "weight": 0.0
+     },
+     {
+      "dist": 6,
+      "id": "r_1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
      }
     ],
     "w": [
      0,
-     1,
-     -1,
+     0,
+     0,
      0,
      0,
      2.666667
     ],
-    "why": "posture eliminate: W-argmax r_1hp [r_1hp:W[0, 1, -1, 0, 0, 2.666667], r_5hp:W[0, 0, 0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r_1hp(dist 6), r_5hp(dist 2); tiebreak dist: r_1hp wins (shorter counting-space distance = 6)"
+    "why": "posture eliminate: W tie of 2 targets [r_5hp:W[0, 0, 0, 0, 0, 2.666667], r_1hp:W[0, 0, 0, 0, 0, 2.666667]] -> cascade decides; 2 targets tied at 0 MP: r_5hp(dist 2), r_1hp(dist 6); tiebreak dist: r_5hp wins (shorter counting-space distance = 2)"
    }
   ],
   "pure": [
@@ -688,25 +688,11 @@
   ],
   "posture": [
    {
-    "count_dist": 4,
+    "count_dist": 2,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "r1hp",
+    "target": "r5hp",
     "tiebreak_trace": [
-     {
-      "dist": 4,
-      "id": "r1hp",
-      "mp": 0,
-      "order": 2,
-      "vitality": 1,
-      "w": [
-       1,
-       -1,
-       0,
-       2.666667
-      ],
-      "weight": 0.0
-     },
      {
       "dist": 2,
       "id": "r5hp",
@@ -720,15 +706,29 @@
        2.666667
       ],
       "weight": 0.0
+     },
+     {
+      "dist": 4,
+      "id": "r1hp",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
      }
     ],
     "w": [
-     1,
-     -1,
+     0,
+     0,
      0,
      2.666667
     ],
-    "why": "posture eliminate: W-argmax r1hp [r1hp:W[1, -1, 0, 2.666667], r5hp:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: r1hp(dist 4), r5hp(dist 2); tiebreak dist: r1hp wins (shorter counting-space distance = 4)"
+    "why": "posture eliminate: W tie of 2 targets [r5hp:W[0, 0, 0, 2.666667], r1hp:W[0, 0, 0, 2.666667]] -> cascade decides; 2 targets tied at 0 MP: r5hp(dist 2), r1hp(dist 4); tiebreak dist: r5hp wins (shorter counting-space distance = 2)"
    }
   ],
   "pure": [
@@ -821,25 +821,11 @@
   ],
   "posture": [
    {
-    "count_dist": 3,
+    "count_dist": 2,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "h_low",
+    "target": "h_wache",
     "tiebreak_trace": [
-     {
-      "dist": 3,
-      "id": "h_low",
-      "mp": 0,
-      "order": 2,
-      "vitality": 1,
-      "w": [
-       1,
-       -1,
-       0,
-       2.666667
-      ],
-      "weight": 0.0
-     },
      {
       "dist": 2,
       "id": "h_wache",
@@ -853,15 +839,29 @@
        2.666667
       ],
       "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
      }
     ],
     "w": [
-     1,
-     -1,
+     0,
+     0,
      0,
      2.666667
     ],
-    "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    "why": "posture eliminate: W tie of 2 targets [h_wache:W[0, 0, 0, 2.666667], h_low:W[0, 0, 0, 2.666667]] -> cascade decides; 2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
    }
   ],
   "pure": [
@@ -1167,11 +1167,26 @@
   ],
   "posture": [
    {
-    "count_dist": 12,
+    "count_dist": 11,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "r_healthy",
+    "target": "r_runner",
     "tiebreak_trace": [
+     {
+      "dist": 11,
+      "id": "r_runner",
+      "mp": 0,
+      "order": 1,
+      "vitality": 2,
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -2
+      ],
+      "weight": 0.0
+     },
      {
       "dist": 12,
       "id": "r_healthy",
@@ -1186,21 +1201,6 @@
        -5
       ],
       "weight": 0.0
-     },
-     {
-      "dist": 11,
-      "id": "r_runner",
-      "mp": 0,
-      "order": 1,
-      "vitality": 2,
-      "w": [
-       0,
-       0,
-       0,
-       2.666667,
-       -2
-      ],
-      "weight": 0.0
      }
     ],
     "w": [
@@ -1208,9 +1208,9 @@
      1,
      0,
      2.666667,
-     -5
+     -2
     ],
-    "why": "posture eliminate: W-argmax r_healthy [r_healthy:W[0, 1, 0, 2.666667, -5], r_runner:W[0, 0, 0, 2.666667, -2]]; 2 targets tied at 0 MP: r_healthy(dist 12), r_runner(dist 11); tiebreak dist: r_healthy wins (shorter counting-space distance = 12)"
+    "why": "posture eliminate: W-argmax r_runner [r_runner:W[0, 1, 0, 2.666667, -2], r_healthy:W[0, 1, 0, 2.666667, -5]]; 2 targets tied at 0 MP: r_runner(dist 11), r_healthy(dist 12); tiebreak dist: r_runner wins (shorter counting-space distance = 11)"
    }
   ],
   "pure": [
@@ -1380,25 +1380,11 @@
   ],
   "posture": [
    {
-    "count_dist": 3,
+    "count_dist": 2,
     "focus_cost_mp": 0,
     "posture": "eliminate",
-    "target": "h_low",
+    "target": "h_wache",
     "tiebreak_trace": [
-     {
-      "dist": 3,
-      "id": "h_low",
-      "mp": 0,
-      "order": 2,
-      "vitality": 1,
-      "w": [
-       1,
-       -1,
-       0,
-       2.666667
-      ],
-      "weight": 0.0
-     },
      {
       "dist": 2,
       "id": "h_wache",
@@ -1412,15 +1398,29 @@
        2.666667
       ],
       "weight": 0.0
+     },
+     {
+      "dist": 3,
+      "id": "h_low",
+      "mp": 0,
+      "order": 2,
+      "vitality": 1,
+      "w": [
+       0,
+       0,
+       0,
+       2.666667
+      ],
+      "weight": 0.0
      }
     ],
     "w": [
-     1,
-     -1,
+     0,
+     0,
      0,
      2.666667
     ],
-    "why": "posture eliminate: W-argmax h_low [h_low:W[1, -1, 0, 2.666667], h_wache:W[0, 0, 0, 2.666667]]; 2 targets tied at 0 MP: h_low(dist 3), h_wache(dist 2); tiebreak dist: h_low wins (shorter counting-space distance = 3)"
+    "why": "posture eliminate: W tie of 2 targets [h_wache:W[0, 0, 0, 2.666667], h_low:W[0, 0, 0, 2.666667]] -> cascade decides; 2 targets tied at 0 MP: h_wache(dist 2), h_low(dist 3); tiebreak dist: h_wache wins (shorter counting-space distance = 2)"
    }
   ],
   "pure": [

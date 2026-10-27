@@ -258,7 +258,11 @@ namespace TacticalAI.Core
         public static bool Armed(World world, Figure fig,
                                  Func<Figure, List<Figure>> heroesKnown = null)
         {
-            if (fig.Vitality < fig.Card.Health) return true;   // being hit always wakes an ambusher
+            // M9-F6: an open wound token wakes an ambusher too - a hero's
+            // second bar may still be full right after the reset
+            // (mirror of sim patterns._armed).
+            if (fig.Vitality < fig.Card.Health || fig.Wounded)
+                return true;   // being hit always wakes an ambusher
             var self = new List<Cell>(SpaceLegality.FigureCells(fig));
             return HeroGap(world, self, fig, heroesKnown) <= AmbushRadius;
         }

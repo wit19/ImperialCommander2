@@ -31,7 +31,8 @@
      6,
      3
     ],
-    "vitality": 1
+    "vitality": 1,
+    "wounded": true
    }
   ],
   "script": []

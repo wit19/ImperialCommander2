@@ -23,8 +23,25 @@ namespace TacticalAI.Core
     // ------------------------------------------------------------------ public helpers
     public static class VictoryHelpers
     {
-        /// Wounded = vitality below printed health (RefGuide WOUNDED).
-        public static bool IsWounded(Figure fig) => fig.Vitality < fig.Card.Health;
+        /// M9-F6 (Fix-Pin, closes the single-bar reading): wounded is the
+        /// STATUS (heroState.isWounded / HeroView.Wounded), never a damage
+        /// proxy. The old `Vitality &lt; Card.Health` made one damage point
+        /// "wounded" while the app cannot see hero damage at all - partial
+        /// bar damage is physical table state. Mirrors sim _is_wounded.
+        public static bool IsWounded(Figure fig) => fig.Wounded;
+
+        /// M9-F6 killbar gate - 'erledbar', not 'verwundbar': an activation
+        /// takes a hero OUT only if he is wounded (STATUS) and the printed
+        /// dice EV covers a full printed bar (EV >= health, drain the
+        /// second bar). A healthy hero with EV >= health merely becomes
+        /// wounded (resets, stays active) - slot stays 0. The target's
+        /// current bar damage never enters the gate (invisible to the app;
+        /// fairness canon). Mirror of sim/victory.py killable().
+        public static bool Killable(Figure attacker, Figure target)
+        {
+            return IsWounded(target)
+                && PrintedDamageEvExact(attacker) >= target.Card.Health;
+        }
 
         static readonly Regex KwFlatRe = new Regex(@"\+(\d+)\s*\{H\}");
 
@@ -346,8 +363,14 @@ namespace TacticalAI.Core
                 if (f.Team != "rebel" || f.Card.IsMassive) continue;
                 rebels.Add(f);
                 if (!f.Alive) continue;
-                if (f.Vitality >= f.Card.Health) healthy++;
-                else wounded++;
+                // M9-F6: buckets follow the isWounded STATUS, not the
+                // (invisible) bar damage. A hero at partial bar damage is
+                // HEALTHY for every app-facing count. wounded-or-worse
+                // satisfies a woundAll end (the App keeps isWounded up on
+                // defeat - WorldEventVector HeroDefeated handling), so a
+                // 'wounded' mission end trigger reads healthy == 0.
+                if (VictoryHelpers.IsWounded(f)) wounded++;
+                else healthy++;
             }
             return new Dictionary<string, object>
             {
@@ -385,10 +408,16 @@ namespace TacticalAI.Core
                 case "incapacitateAll":
                 case "capture":
                     {
-                        // FINAL-QA audit #6: exact Fraction EV (float sum
-                        // dropped exactly-that-vitality heroes).
-                        bool killable = target.Vitality <= VictoryHelpers.PrintedDamageEvExact(attacker);
-                        int meta = (MetaBonus && killable && VictoryHelpers.IsWounded(target)) ? 1 : 0;
+                        // M9-F6: killable slot = ERLEDBAR (wounded status +
+                        // exact-Fraction EV >= printed bar, see
+                        // VictoryHelpers.Killable). The old reading
+                        // `Vitality <= EV` was up to factor 2 optimistic
+                        // about hero removal (healthy hero merely became
+                        // wounded); FINAL-QA audit #6 exact EV stays.
+                        bool killable = VictoryHelpers.Killable(attacker, target);
+                        // meta bonus now means TRUE elimineerbarkeit this
+                        // round (killable implies wounded under M9-F6).
+                        int meta = (MetaBonus && killable) ? 1 : 0;
                         return new List<object>
                         {
                             bearer,
@@ -639,8 +668,11 @@ namespace TacticalAI.Core
                 case "eliminate":
                     {
                         if (Counter is { } c) return c.TargetValue(world, attacker, target);
-                        // FINAL-QA audit #6: exact Fraction EV (hunt gate).
-                        int killable = target.Vitality <= VictoryHelpers.PrintedDamageEvExact(attacker) ? 1 : 0;
+                        // M9-F6 hunt gate: 'erledbar' only (wounded status +
+                        // EV >= printed bar; healthy-EV>=bar is merely
+                        // 'verwundbar' - slot 0). Exact Fraction EV per
+                        // FINAL-QA audit #6 stays inside Killable().
+                        int killable = VictoryHelpers.Killable(attacker, target) ? 1 : 0;
                         double dmg = Math.Round(VictoryHelpers.PrintedAttackEv(world, target), 6, MidpointRounding.ToEven);
                         int heal = VictoryHelpers.HealContribution(target);
                         // attrition rule (§3.3.1a): among equally killable/

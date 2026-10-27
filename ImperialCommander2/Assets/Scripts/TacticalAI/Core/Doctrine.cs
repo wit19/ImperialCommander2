@@ -243,9 +243,12 @@ namespace TacticalAI.Core
         static bool FWounded(World w, Figure fig, Figure r, Doctrine d) =>
             VictoryHelpers.IsWounded(r);
 
-        // FINAL-QA audit #6: exact Fraction EV (killable gate, doctrine side).
+        // M9-F6: 'killbare' = ERLEDBAR this activation (wounded STATUS +
+        // printed EV >= printed bar). Healthy-EV>=bar heroes are only
+        // 'verwundbar' and no longer match. FINAL-QA audit #6 exact EV
+        // stays inside VictoryHelpers.Killable (mirror of sim _f_killable).
         static bool FKillable(World w, Figure fig, Figure r, Doctrine d) =>
-            r.Vitality <= VictoryHelpers.PrintedDamageEvExact(fig);
+            VictoryHelpers.Killable(fig, r);
 
         static bool FTimerImmediate(World w, Figure fig, Figure r, Doctrine d)
         {

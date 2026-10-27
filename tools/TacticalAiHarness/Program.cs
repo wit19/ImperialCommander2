@@ -443,11 +443,17 @@ namespace TacticalAiHarness
                 figs.Add(f);
                 idx++;
             }
-            // scenario vitality overrides (mirrors zip(world.figures, specs))
+            // scenario vitality/wounded overrides (mirrors zip(figures, specs))
             var specFigs = Json.AsList(spec["figures"]);
             for (int i = 0; i < figs.Count && i < specFigs.Count; i++)
             {
                 var fs = Json.AsDict(specFigs[i]);
+                // M9-F6 mirror of sim _build_scenario_world: "wounded" is
+                // the isWounded STATUS; "vitality" is the CURRENT bar
+                // (second bar after a wound reset). Partial bar damage
+                // without the status is INVISIBLE damage - healthy.
+                if (fs.ContainsKey("wounded"))
+                    figs[i].Wounded = Json.AsBool(fs["wounded"]);
                 if (fs.ContainsKey("vitality"))
                     figs[i].Vitality = Json.AsInt(fs["vitality"]);
             }

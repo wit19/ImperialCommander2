@@ -21,7 +21,8 @@
           5,
           2
         ],
-        "vitality": 2
+        "vitality": 2,
+        "wounded": true
       },
       {
         "id": "r_healthy",
@@ -68,7 +69,8 @@
           8,
           3
         ],
-        "vitality": 1
+        "vitality": 1,
+        "wounded": true
       }
     ],
     "script": []
@@ -105,7 +107,8 @@
           8,
           3
         ],
-        "vitality": 1
+        "vitality": 1,
+        "wounded": true
       }
     ],
     "script": []
@@ -178,7 +181,8 @@
           3,
           1
         ],
-        "vitality": 2
+        "vitality": 2,
+        "wounded": true
       },
       {
         "id": "r_healthy",
@@ -235,7 +239,8 @@
           3,
           1
         ],
-        "vitality": 2
+        "vitality": 2,
+        "wounded": true
       },
       {
         "id": "r_healthy",
