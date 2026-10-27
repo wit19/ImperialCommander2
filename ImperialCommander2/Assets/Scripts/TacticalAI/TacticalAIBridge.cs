@@ -387,7 +387,10 @@ namespace TacticalAI
         {
             next = null;
             EnsureSessionFresh();
-            if (!TacticalAISettings.Enabled || candidates == null || candidates.Count == 0)
+            // M8/F2: ActiveNow() carries the per-mission override semantics
+            // (mission badge "off" => legacy) - Enabled alone must never plan
+            // an activation order for a mission the user switched OFF.
+            if (!ActiveNow() || candidates == null || candidates.Count == 0)
                 return false;
             EnsureRound(CurrentRound());
             foreach (var slot in _slots)
@@ -406,7 +409,7 @@ namespace TacticalAI
         {
             plan = null;
             EnsureSessionFresh();
-            if (!TacticalAISettings.Enabled || cd == null) return false;
+            if (!ActiveNow() || cd == null) return false;   // M8/F2: mission badge OFF => legacy popup
             EnsureRound(CurrentRound());
             EnsureDecks();
             if (_deckMgr == null) return false;    // asset failed -> legacy + error already logged
