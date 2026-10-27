@@ -51,6 +51,36 @@ namespace TacticalAI
         readonly HashSet<string> _heroDefeated = new HashSet<string>();
         readonly HashSet<string> _heroActivated = new HashSet<string>();
 
+        // M8/F5 mission-clock watch: the authored/runtime roundLimit only
+        // EXIST if the player's roundLimitToggle setting lets the app show
+        // and enforce it (Utils.IsRoundLimitReachedWithSetting: the limit
+        // event fires at setting==1, the 'dangerous' demo at setting==2,
+        // NEVER at setting==0). Emitting the start snapshot anyway gave the
+        // planner a stall posture with a clock that will never run.
+        long _lastRoundLimit = -2;      // -2 = never read yet
+        bool _runtimeDirty;             // event rewired the clock mid-mission
+
+        /// <summary>M8/F5 seam: MissionEventHandler calls this when a
+        /// ModifyRoundLimit event actually changed gameVars.roundLimit - the
+        /// feed re-reads the clock on the next poll (the start snapshot
+        /// alone would leave the planner on a stale clock).</summary>
+        public void MarkRuntimeDirty() { _runtimeDirty = true; }
+
+        /// <summary>The clock as the GAME will treat it: -1 (no clock) when
+        /// the user switched the round limit off, else runtime value, else
+        /// authored value (runtime wins once the session booted).</summary>
+        static long EffectiveRoundLimit(Saga.SagaGameVars gv, Saga.MissionProperties mp)
+        {
+            try
+            {
+                if (PlayerPrefs.GetInt("roundLimitToggle", 1) == 0) return -1;   // user: clock OFF
+            }
+            catch { }
+            long rt = gv != null ? gv.roundLimit : -1;
+            if (rt >= 0) return rt;
+            return mp != null && mp.roundLimit >= 0 ? mp.roundLimit : -1;
+        }
+
         const float PollInterval = 0.25f;    // seconds; UI-speed state, no game coupling
 
         void Awake()
@@ -113,6 +143,18 @@ namespace TacticalAI
                 _round = round;
             }
 
+            // M8/F5 clock watch: ModifyRndLimit events (MarkRuntimeDirty)
+            // surface here as the public event RoundLimitChanged - the feed
+            // gate re-derives posture; a start snapshot alone went stale.
+            if (_runtimeDirty || _lastRoundLimit == -2)
+            {
+                _runtimeDirty = false;
+                long lim = EffectiveRoundLimit(gv, TryMissionProperties());
+                if (_lastRoundLimit != -2 && lim != _lastRoundLimit)
+                    Append("RoundLimitChanged", round, P("roundLimit", lim));
+                _lastRoundLimit = lim;
+            }
+
             // threat + objective (public HUD state)
             long threat = gv.currentThreat;
             if (threat != _threat)
@@ -159,14 +201,15 @@ namespace TacticalAI
             _objective = objective;
             _round = Math.Max(1, sd.gameVars.round);
             _threat = sd.gameVars.currentThreat;
+            _lastRoundLimit = EffectiveRoundLimit(sd.gameVars, mp);
             Append("MissionStart", _round, new Dictionary<string, object>
             {
                 { "objective", objective },
                 { "priorityTarget", mp != null ? mp.priorityTargetType.ToString() : "Rebel" },
-                // runtime roundLimit wins (-1 = no clock); authored value
-                // is the fallback while the session boots.
-                { "roundLimit", (long)(sd.gameVars.roundLimit >= 0 ? sd.gameVars.roundLimit
-                                          : mp != null ? mp.roundLimit : -1) },
+                // M8/F5: the user's roundLimitToggle decides whether a clock
+                // exists at all (setting 0 = off: the game never runs the
+                // limit event); runtime value wins over authored (-1 = none).
+                { "roundLimit", _lastRoundLimit },
                 { "mission", mission },
                 { "missionType", mp != null ? mp.missionType.ToString() : "Story" },
             });
@@ -315,9 +358,8 @@ namespace TacticalAI
             {
                 { "objective", objective },
                 { "priorityTarget", mp != null ? mp.priorityTargetType.ToString() : "Rebel" },
-                { "roundLimit", (long)(sd != null && sd.gameVars != null && sd.gameVars.roundLimit >= 0
-                                       ? sd.gameVars.roundLimit
-                                       : mp != null ? mp.roundLimit : -1) },
+                // M8/F5: re-log must state the clock the GAME will honour.
+                { "roundLimit", EffectiveRoundLimit(sd != null ? sd.gameVars : null, mp) },
                 { "mission", mission },
                 { "missionType", mp != null ? mp.missionType.ToString() : "Story" },
                 { "resync", true },
@@ -349,6 +391,9 @@ namespace TacticalAI
             foreach (var h in _heroDefeated) log.Add(Mk(seq++, "HeroDefeated", round, P("hero", h)));
             log.Add(Mk(seq++, "ThreatSpend", round, P("balance", (long)(sd?.gameVars?.currentThreat ?? 0))));
             Feed.Resync(log);
+            // M8/F5: clock watch re-based on the re-log's own snapshot
+            _lastRoundLimit = EffectiveRoundLimit(sd != null ? sd.gameVars : null, mp);
+            _runtimeDirty = false;
             _drainedLog = 0;
             var logger = sd == null ? null : sd.missionLogger;
             if (logger != null && logger.logItems != null) _drainedLog = logger.logItems.Count;
