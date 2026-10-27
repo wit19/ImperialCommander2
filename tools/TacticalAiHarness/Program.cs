@@ -86,6 +86,7 @@ namespace TacticalAiHarness
             Run("hero_profiles.json", SecHeroProfiles);
             Run("hero_w.json", SecHeroW);
             Run("world_feed.json", SecWorldFeed);
+            Run("overlord_focus.json", SecOverlordFocus);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);
