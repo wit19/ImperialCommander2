@@ -274,21 +274,24 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
-                        // Playtest 27.10 (Thomas): phrase orders ONLY in terms a
-                        // player can see on screen - the hero row on the setup
-                        // panel, the focus target's name. No rule jargon.
+                        // Doctrine rework after Thomas' playtest 27.10:
+                        // proximity-first, focus as tie-break. A human Imperial
+                        // player at the PUBLIC board evaluates "nexter Held"
+                        // deterministically (the app's script layer has no tile
+                        // distance API - see M5 hex adapter for AI-computed
+                        // geometry; until then the board IS the world model).
                         outp.Add(t != null
-                            ? T($"Bewegung {speed}: bewege dich auf {t} zu",
-                                $"Move {speed}: move toward {t}")
-                            : T($"Bewegung {speed}: bewege dich auf deinen Fokus zu",
-                                $"Move {speed}: move toward your focus"));
+                            ? T($"Bewegung {speed}: bewege dich auf den nächsten Helden zu; bei gleichem Abstand: auf {t}",
+                                $"Move {speed}: advance on the nearest hero; if tied: on {t}")
+                            : T($"Bewegung {speed}: bewege dich auf den nächsten Helden zu",
+                                $"Move {speed}: advance on the nearest hero"));
                         break;
                     case "attack":
                         outp.Add(t != null
-                            ? T($"Angriff: nur {t}. Ist {t} nicht in Reichweite: gar nicht angreifen und weiter auf {t} zubewegen",
-                                $"Attack: {t} only. If {t} is out of range: do not attack at all and keep moving toward {t}")
-                            : T("Angriff: nur gegen deinen Fokus; außer Reichweite: nicht angreifen, weiter zubewegen",
-                                "Attack: focus target only; out of range: don't attack, keep advancing"));
+                            ? T($"Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Ist dein Fokus {t} genauso nah wie der nächste: {t}",
+                                $"Attack: the nearest hero you can shoot (range + clear line). If your focus {t} is exactly as near as the nearest one: {t}")
+                            : T("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie)",
+                                "Attack: the nearest hero you can shoot (range + clear line)"));
                         break;
                     case "special":
                         outp.Add(T("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
@@ -385,7 +388,8 @@ namespace TacticalAI
             heroName = pick.name;
             // name the focus target up front (playtest 27.10: 'who IS the
             // focus target' must be answerable from the popup alone)
-            why = (DataStore.languageCode != 0 ? "Fokus-Ziel: " : "Focus target: ")
+            why = (DataStore.languageCode != 0 ? "Fokus-Ziel (nur bei Gleichstand + als Bewegungsfallback): "
+                                               : "focus target (tie-break + movement fallback only): ")
                   + heroName + " — " + pickedWhy;
             return true;
         }

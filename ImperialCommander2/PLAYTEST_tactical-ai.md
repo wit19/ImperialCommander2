@@ -58,26 +58,29 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
-   **Vorrang-Regel der Zielauswahl (Konzept §3.5.1, determiniert):**
-   1. Das **Fokus-Ziel** hat immer Vorrang — auch wenn es gerade nicht angreifbar ist.
-   2. Wer ist das Fokus-Ziel? Zuerst der Held, dessen Merkmal auf der
-      Vorzugziel-Zeile der Imperiellen-Karte steht (z. B. „Schurke"). Gibt es
-      keinen solchen Helden: der **erste lebende Held ganz links in eurer
-      Heldenreihe** (die Anordnung, die ihr auf dem Aufstellungsbild seht).
-      Kein Zufall, keine Entfernungsrechnung.
-   3. **Kann das Fokus-Ziel nicht angegriffen werden, wird gar nicht
-      angegriffen** — es wird auch kein anderes Ziel „mitgenommen". Die Einheit
-      bewegt sich stattdessen weiter auf ihr Fokus-Ziel zu.
-   4. Bewegung bewegt **auf das Fokus-Ziel zu**; die exakte Feldwahl bleibt beim
-      Menschen am Brett (Fairness: die KI rechnet keine verdeckten Positionen).
+   **Vorrang-Regel der Zielauswahl (Playtest-Overrule 27.10: Nähe zuerst):**
+   1. **Angegriffen wird der nächste Held, den man schießen kann** (Reichweite +
+      freie Schusslinie). Ein Blocker, der die Linie zum weiter entfernten Ziel
+      hält, ist dann selbst das nächste schießbare Ziel — er wird abgeschossen.
+   2. **Bei exakt gleichem Abstand** entscheidet das **Fokus-Ziel**: der Held,
+      dessen Merkmal auf der Vorzugziel-Zeile der Imperiellen-Karte steht
+      (z. B. „Schurke"); gibt es keinen, der erste lebende Held von links in
+      eurer Heldenreihe. Kein Zufall.
+   3. **Bewegung ohne Angriff:** auf den nächsten Helden zu (bei Gleichstand:
+      auf das Fokus-Ziel). Die exakte Feldwahl bleibt beim Menschen am Brett.
+   4. Warum so formuliert? Das Brett ist öffentliche Information — Entfernungen
+      und Linien seht ihr beide. Die KI-App kennt die Feldnummern zur Laufzeit
+      selbst nicht (Brettgeometrie rechnet die Engine, nicht das Skript; ein
+      KI-eigener Geometrie-Layer ist als M5-Hex-Adapter geplant). Bis dahin ist
+      die Regel so determiniert, dass **jeder** am Brett dieselbe Antwort
+      bekommt — Vorhersagbarkeit bleibt erhalten, die Regel wird nur von euch
+      am Brett ausgelesen statt von der KI.
    Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
    Roh-Tokens, z. B.:
-   `Bewegung 4: bewege dich auf CT-1701 zu` ·
-   `Angriff: nur CT-1701. Ist CT-1701 nicht in Reichweite: gar nicht angreifen und weiter auf CT-1701 zubewegen` ·
-   `Warum jetzt: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive) (Rang 1) |
-   Fokus-Ziel: CT-1701 — seine Karte zielt gedruckt auf „Schurke" — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)`
-   (Bewegung *wohin genau* = auf das Fokus-Ziel zu; das Brett mit Feldnummern bleibt
-   die Domäne des Spielers — die KI kennt bewusst keine verdeckten Positionen.)
+   `Bewegung 4: bewege dich auf den nächsten Helden zu; bei gleichem Abstand: auf CT-1701` ·
+   `Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Ist dein Fokus CT-1701 genauso nah wie der nächste: CT-1701` ·
+   `Warum jetzt: Stärke-Effizienz 6.50 (Rang 1) |
+   Fokus-Ziel (nur bei Gleichstand + als Bewegungsfallback): CT-1701 — seine Karte zielt gedruckt auf „Schurke" — er ist der erste deiner Helden mit diesem Merkmal (kein Zufall)`
 5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte
    (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
    direkt auf den Anweisungs-Popups. `post_hoc` zeigt nur eine Kurz-Zusammenfassung der
