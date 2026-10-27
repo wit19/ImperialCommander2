@@ -58,37 +58,44 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    mehr (er wird beim Missionsstart einmal eingelesen).
 4. Normal spielen. Die KI-Entscheidungen laufen über die bestehenden App-Dialoge
    (Aktivierungsfenster, Zielauswahl-Popup) — nichts Neues zu lernen.
-   **Vorrang-Regel der Zielauswahl (Playtest-Runde 5, Thomas' Anti-Köder-Overrule):**
-   1. Das **Fokus-Ziel** wird **positionsunabhängig** berechnet — ein Köder, den
-      man neben einen Imperialen stellt, zieht es nicht ab. Reihenfolge:
-      **verwundete Helden zuerst** (der Hand-Schadenszähler am Brett ist
-      gemeinsame Information — wer verwundet ist, wird erledigt), dann das
-      **gedruckte Vorzugziel** der Imperiellen-Karte (z. B. „Schurke"), dann die
-      **größte gedruckte Feuerkraft** (Angriffswürfel, dann Lebenspunkte), bei
-      allem Gleichstand der erste lebende Held von links in eurer Heldenreihe.
-      Kein Zufall. (Feiner noch: exakte Ausrüstungs-Bedrohung aus euren
-      Campaign-Items statt Würfel-Näherung — M5-Ausbau, Technik steht schon.)
-   2. **Angriff:** Fokus-Ziel, wenn du es schießen kannst (Reichweite + freie
-      Linie). **Sonst: der nächste Held, den du schießen kannst** — damit ist
-      auch der Blocker-Fall abgedeckt: verbaut ein Held die Linie zum Fokus, ist
-      er das nächste schießbare Ziel und wird abgeschossen.
-   3. **Bewegung ohne Angriff:** nähere dem Fokus-Ziel; führt kein Weg dorthin
-      (zu weit/geblockt): nähere dem nächsten Helden. Feldwahl bleibt beim
-      Menschen am Brett — Entfernungen und Linien sind öffentliche
-      Brettinformation, die App-Skriptebene kennt die Feldnummern selbst nicht
-      (M5-Hex-Adapter lässt die KI-Geometrie rechnen).
+   **So liest du eine Anweisung (Schema nach Thomas' Playtest-Runde 6):**
+   Jede Aktion ist eine Wenn-Dann-Entscheidung, nummeriert wie die zwei Aktionen
+   einer Aktivierung. Beispiel Angriffs-Karte:
+   ```
+   Fokusziel: Held X
+   Aktion 1: Angriff auf X, wenn Reichweite und freie Sichtlinie.
+             Keine Sichtlinie / zu weit: 4 Felder auf X zubewegen.
+             Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese angreifen.
+   Aktion 2: (wie Aktion 1, aus der neuen Position)
+   ```
+   1. Das **Fokus-Ziel X** wird **positionsunabhängig** von der App berechnet —
+      ein Köder, den man neben einen Imperialen stellt, zieht es nicht ab.
+      Reihenfolge: **verwundet zuerst** (euer Hand-Schadenszähler am Brett ist
+      gemeinsame Information — wer verwundet ist, wird erledigt), dann die
+      **größte Feuerkraft** (Angriffswürfel, dann Lebenspunkte), bei Gleichstand
+      der erste lebende Held von links in eurer Heldenreihe. Kein Zufall, kein
+      Wurf. (Feiner noch: exakte Ausrüstungs-Bedrohung aus euren Campaign-Items
+      — M5-Ausbau, Technik steht schon.) Die Regel „gedrucktes Vorzugziel" gibt
+      es NICHT mehr — echte Imperiellen-Karten drucken kein Vorzugsziel.
+   2. **Der Blocker-Fall ist eingebaut:** verbaut eine andere Heldenfigur die
+      Sichtlinie auf X, ist sie das Ziel — nicht X, und auch kein unnützes
+      Further-Running an ihr vorbei.
+   3. **Reine Bewegungskarten:** nähere X; führt kein Weg zu X (zu weit oder
+      total geblockt): nähere dem nächsten Helden. Welche Felder ihr nehmt,
+      entscheidet der imperiale Spieler am Brett — Entfernungen und Linien sind
+      dort öffentliche Information (die App-Skriptebene sieht die Feldnummern
+      selbst nicht; M5-Hex-Adapter lässt die KI-Geometrie selbst rechnen).
    4. Warum ein Mensch so spielen würde: Zielfeuer auf Verwundete und die
-      gefährlichsten Helden ist Standard-Taktik; Standort-Köder ändern nichts an
-      der Rangliste, sie ändern nur, wer zufällig gerade schießbar ist.
-   Bei explain=full zeigt das Anweisungs-Popup jetzt **ausführbare Befehle** statt
-   Roh-Tokens, z. B.:
-   `Bewegung 4: nähere Drokkatta. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden` ·
-   `Angriff: Drokkatta, wenn du ihn schießen kannst (Reichweite + freie Linie). Sonst: der nächste Held, den du schießen kannst` ·
+      gefährlichsten Helden, Zugriff notfalls ueber Bewegung, Blocker abschießen —
+      Standardtaktik. Standort-Köder ändern nichts an der Rangliste, sie ändern
+      nur, wer gerade zufällig schießbar ist.
+   Das Anweisungs-Popup (explain=full) zeigt genau dieses Schema, z. B.:
+   `Aktion 1 – Angriff auf Drokkatta, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: 4 Felder auf Drokkatta zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen` ·
    `Warum jetzt: Stärke-Effizienz 6.50 (Rang 1) |
-   Fokus-Ziel: Drokkatta — er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett); größte gedruckte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte); kein Zufall`
-5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die „Why"-Texte
-   (z. B. `Focus: gedrucktes Vorzugziel …`, `ThreatScore … = Waffe 7 + Offensiv-Tools 3.6 …`)
-   direkt auf den Anweisungs-Popups. `post_hoc` zeigt nur eine Kurz-Zusammenfassung der
+   Fokus-Ziel: Drokkatta — er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett); größte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte); kein Zufall`
+5. Fürs Protokoll: **EXPLAIN** auf `full` — nur dann erscheinen die Why-Texte
+   (z. B. `Fokus-Ziel: …`, `Stärke-Effizienz …`)
+   direkt auf den Anweisungs-Popups.
    letzten Runde zu Rundenbeginn. Screenshots davon sind das wichtigste Playtest-Material.
 6. Alle Entscheidungen werden zusätzlich in die **Unity-Entwickler-Konsole** geloggt
    (`TacticalAIBridge::…`, deterministisch, kein Zufall). Beim Build über den Editor:
@@ -168,10 +175,11 @@ damit ausgeschlossen.
 - Heldenschaden muss wie gehabt manuell in die Figuren-Tracker eingetragen werden;
   die KI nutzt die Deltas (Schadensherd → Angreifer-Vermutung) und Heldenschaden
   als Threat-Gewicht (HeroThreatProfile).
-- Der in-App-Fokus nutzt aktuell **gedruckte Vorzugziele + Aufstellungsreihenfolge**;
-  die volle ThreatScore-/Doktrinen-Rechnung (HeroThreatProfile über Weltmodell) greift
-  erst mit dem Hex-Adapter (M5). Der ThreatScore in `reference`/`overlord` ist daher
-  im Playtest noch gleichauf — die EXPLAIN-Texte zeigen, was die KI wirklich nutzt.
+- Der in-App-Fokus nutzt aktuell **verwundet zuerst → größte Feuerkraft → Aufstellung
+  von links** (bei jeder Aktivierung neu berechnet, positionsunabhängig); die volle
+  ThreatScore-/Doktrinen-Rechnung über Weltmodell (HeroThreatProfile aus euren
+  Campaign-Items) greift erst mit dem Hex-Adapter (M5). Die EXPLAIN-Texte zeigen
+  durchgehend, was die KI wirklich nutzt.
 - **Nicht dieselbe Gegner-Karte zweimal als eigene Gruppe aufstellen** (z. B. zwei
   eigenständige Sturmtruppen-Gruppen mit identischer Karte): Planner-Status ist
   pro Karten-ID geführt, die zweite Instanz zieht eine zweite Ordnerkarte (bekannt,

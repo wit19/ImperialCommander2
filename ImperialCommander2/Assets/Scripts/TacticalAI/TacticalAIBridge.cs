@@ -269,42 +269,47 @@ namespace TacticalAI
         {
             var outp = new List<string>();
             var t = plan.HasTarget ? plan.TargetName : null;
-            foreach (var tok in tokens ?? Array.Empty<string>())
+            var toks = tokens ?? Array.Empty<string>();
+            for (int n = 0; n < toks.Length; n++)
             {
+                var tok = toks[n];
+                // Thomas' doctrine template (27.10): every action is a
+                // readable decision tree, numbered like the two actions of
+                // an Imperial activation. The IMPERIAL PLAYER evaluates the
+                // conditions at the public board (only they see positions).
+                string act = "Aktion " + (n + 1);
+                System.Func<string, string, string> Act =
+                    (de, en) => T(act + " – " + de, "Action " + (n + 1) + " – " + en);
                 switch (tok)
                 {
                     case "move":
-                        // Doctrine after Thomas' playtest 27.10 (rounds 4-5):
-                        // focus = wounded > printed trait > firepower (position
-                        // independent, so a decoy cannot pull it); proximity is
-                        // the ORDER-level fallback only (board decides: the
-                        // Imperial player sees distances/lines, the app script
-                        // layer has no tile API - M5 hex adapter will compute
-                        // geometry AI-side).
                         outp.Add(t != null
-                            ? T($"Bewegung {speed}: nähere {t}. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden",
-                                $"Move {speed}: close in on {t}. If no route to him (too far or blocked): close in on the nearest hero")
-                            : T($"Bewegung {speed}: nähere dem nächsten Helden",
-                                $"Move {speed}: close in on the nearest hero"));
+                            ? Act($"Bewegung {speed}: nähere {t}. Führt kein Weg zu ihm (zu weit oder geblockt): nähere dem nächsten Helden",
+                                  $"Move {speed}: close in on {t}. If no route to him (too far or blocked): close in on the nearest hero")
+                            : Act($"Bewegung {speed}: nähere dem nächsten Helden",
+                                  $"Move {speed}: close in on the nearest hero"));
                         break;
                     case "attack":
+                        // Thomas' Wenn-Dann-Schema (dev 9): focus if engaged;
+                        // no access -> use the action to close in; a hero
+                        // holding the line -> that hero is the target.
                         outp.Add(t != null
-                            ? T($"Angriff: {t}, wenn du ihn schießen kannst (Reichweite + freie Linie). Sonst: der nächste Held, den du schießen kannst",
-                                $"Attack: {t} if you can shoot him (range + clear line). Otherwise: the nearest hero you can shoot")
-                            : T("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie)",
-                                "Attack: the nearest hero you can shoot (range + clear line)"));
+                            ? Act($"Angriff auf {t}, wenn Reichweite und freie Sichtlinie. Keine Sichtlinie / zu weit: {speed} Felder auf {t} zubewegen. Sichtlinie durch eine ANDERE Heldenfigur blockiert: diese blockierende Heldenfigur angreifen",
+                                  $"Attack {t} if in range with a clear line. No line / out of range: move up to {speed} spaces toward {t}. Line blocked by ANOTHER hero: attack that blocking hero")
+                            : Act("Angriff: der nächste Held, den du schießen kannst (Reichweite + freie Linie). Kein Zugriff: nähere dem nächsten Helden",
+                                  "Attack: the nearest hero you can shoot (range + clear line). No access: close in on the nearest hero"));
                         break;
                     case "special":
-                        outp.Add(T("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
-                                   "Special: execute exactly as printed on the card"));
+                        outp.Add(Act("Sonderaktion: genau so ausführen, wie auf der Karte gedruckt steht",
+                                     "Special: execute exactly as printed on the card"));
                         break;
                     case "rest":
-                        outp.Add(T("Rasten: 1 Schaden regenerieren",
-                                   "Rest: recover 1 damage"));
+                        outp.Add(Act("Rasten: 1 Schaden regenerieren",
+                                     "Rest: recover 1 damage"));
                         break;
                     case "interact":
-                        outp.Add(T("Interaktion: dein eigenes Positionierungsziel erfüllen",
-                                   "Interact: fulfill this unit's own placement objective"));
+                        outp.Add(Act("Interaktion: dein eigenes Positionierungsziel erfüllen",
+                                     "Interact: fulfill this unit's own placement objective"));
                         break;
                     case "shuffle":
                         outp.Add(T("(Danach: Gruppen-Deck mischen)",
@@ -352,19 +357,20 @@ namespace TacticalAI
         // ---------------------------------------------------------- targeting
 
         /// <summary>Deterministic focus WITHOUT the hex board (playtest 27.10
-        /// round 5, Thomas: pure proximity = farmable decoy pattern; pure
-        /// squad-order = inhuman). Ranking over ALL living heroes, public
-        /// information only: (1) wounded heroes first - the manual damage
-        /// tracker is shared table knowledge and finishing a wounded hero is
-        /// what a human Imperial always does; (2) the activating card's
-        /// PRINTED preferred-target trait (printed rules outrank heuristics);
-        /// (3) printed firepower proxy: attack dice, then health (exact loadout
-        /// EV via HeroThreatProfile/campaignItems is the M5 upgrade, the
-        /// plumbing exists); (4) squad row left-to-right. No chance, no
-        /// hidden state. Proximity stays only as order-level fallback so a
-        /// decoy parked next to an Imperial cannot pull focus across the map.
-        /// The WorldProvider seam replaces this with the Core FocusResolver as
-        /// soon as a hex adapter exists (documented deviation).</summary>
+        /// rounds 4-6). Ranking over ALL living heroes, public information
+        /// only: (1) wounded heroes first - the manual damage tracker is
+        /// shared table knowledge and finishing a wounded hero is what a human
+        /// Imperial always does; (2) printed firepower proxy: attack dice, then
+        /// health (exact loadout EV via HeroThreatProfile/campaignItems is the
+        /// M5 upgrade, the plumbing exists); (3) squad row left-to-right.
+        /// NO printed preferred-target rule (Thomas round 6: real Imperial
+        /// cards print no target preference - the internal preferredTargets
+        /// field is legacy engine data and must never surface to players).
+        /// No chance, no hidden state. Proximity stays only as order-level
+        /// fallback so a decoy parked next to an Imperial cannot pull focus
+        /// across the map. The WorldProvider seam replaces this with the Core
+        /// FocusResolver as soon as a hex adapter exists (documented
+        /// deviation).</summary>
         static bool TrySelectTarget(global::DeploymentCard cd, out string heroName, out string why)
         {
             heroName = null; why = null;
@@ -374,14 +380,10 @@ namespace TacticalAI
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
 
             bool Wounded(global::DeploymentCard h) => h.heroState != null && h.heroState.isWounded;
-            bool Trait(global::DeploymentCard h) =>
-                cd.preferredTargets != null && cd.preferredTargets.Length > 0 &&
-                h.traits != null && cd.preferredTargets.Any(t => h.traits.Contains(t.ToString()));
 
             // ranking is total + deterministic (see doc-comment)
             var pick = living.Select((h, i) => new { h, i })
                 .OrderBy(x => Wounded(x.h) ? 0 : 1)
-                .ThenBy(x => Trait(x.h) ? 0 : 1)
                 .ThenByDescending(x => x.h.attacks?.Length ?? 0)
                 .ThenByDescending(x => x.h.health)
                 .ThenBy(x => x.i)          // squad row left-to-right
@@ -390,19 +392,11 @@ namespace TacticalAI
             // player-facing reason chain (only the rules that actually fired)
             var parts = new List<string>();
             if (Wounded(pick))
-                parts.Add(DataStore.languageCode != 0
-                    ? "er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett)"
-                    : "he is wounded - finish him first (table damage tracker)");
-            if (Trait(pick))
-                parts.Add(DataStore.languageCode != 0
-                    ? "seine Karte zielt gedruckt auf „" +
-                      string.Join("“/„", cd.preferredTargets.Select(t => t.ToString())) + "“"
-                    : "its card is printed to target “" +
-                      string.Join("”/“", cd.preferredTargets.Select(t => t.ToString())) + "“");
-            parts.Add(DataStore.languageCode != 0
-                ? "größte gedruckte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte)"
-                : "highest printed firepower among the remaining heroes (attack dice, then health)");
-            parts.Add(DataStore.languageCode != 0 ? "kein Zufall" : "no chance");
+                parts.Add(T("er ist verwundet – zuerst erledigen (Wunden-Tracker am Brett)",
+                            "he is wounded - finish him first (table damage tracker)"));
+            parts.Add(T("größte Feuerkraft unter den übrigen Helden (Angriffswürfel, dann Lebenspunkte)",
+                        "highest firepower among the remaining heroes (attack dice, then health)"));
+            parts.Add(T("kein Zufall", "no chance"));
 
             heroName = pick.name;
             why = (DataStore.languageCode != 0
