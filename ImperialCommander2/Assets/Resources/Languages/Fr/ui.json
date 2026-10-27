@@ -317,6 +317,14 @@
     "depOpen": "OUVERTE",
     "expNone": "AUCUNE",
     "expPostHoc": "APRÈS COUP",
-    "expFull": "DÉTAILLÉE"
+    "expFull": "DÉTAILLÉE",
+    "ordThreat": "menace {0} par tour (table des menaces publique)",
+    "ordMarked": "marqueur de cible : l’objectif de mission le nomme",
+    "ordRoundFocus": "tous les groupes convergent vers la même cible prioritaire",
+    "ordRiskLabel": "posture de risque : {0}",
+    "ordRiskPress": "attaque",
+    "ordRiskHold": "tenir la ligne de feu",
+    "ordRiskGuardHold": "couverture en tenant l’objectif",
+    "ordRiskDisengage": "repli vers la couverture"
   }
 }

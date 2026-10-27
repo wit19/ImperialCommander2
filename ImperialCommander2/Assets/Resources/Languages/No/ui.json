@@ -312,6 +312,14 @@
     "depOpen": "ÅPEN",
     "expNone": "INGEN",
     "expPostHoc": "ETTER",
-    "expFull": "FULL"
+    "expFull": "FULL",
+    "ordThreat": "trussel {0} per runde (offentlig trusselstabell)",
+    "ordMarked": "målmerke: oppdraret nevner ham",
+    "ordRoundFocus": "alle grupper samler seg om samme fokusmål",
+    "ordRiskLabel": "risikoposisjon: {0}",
+    "ordRiskPress": "angrep",
+    "ordRiskHold": "hold ildlinjen",
+    "ordRiskGuardHold": "dekning mens målet holdes",
+    "ordRiskDisengage": "trekk tilbake til dekning"
   }
 }

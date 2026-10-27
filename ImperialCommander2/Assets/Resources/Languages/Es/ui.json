@@ -312,6 +312,14 @@
     "depOpen": "ABIERTA",
     "expNone": "NINGUNA",
     "expPostHoc": "DESPUÉS",
-    "expFull": "COMPLETA"
+    "expFull": "COMPLETA",
+    "ordThreat": "amenaza {0} por turno (tabla pública de amenazas)",
+    "ordMarked": "marca de objetivo: el objetivo de la misión lo nombra",
+    "ordRoundFocus": "todos los grupos convergen en el mismo objetivo focal",
+    "ordRiskLabel": "postura de riesgo: {0}",
+    "ordRiskPress": "ataque",
+    "ordRiskHold": "mantener la línea de fuego",
+    "ordRiskGuardHold": "cúbrete manteniendo el objetivo",
+    "ordRiskDisengage": "retirarse a la cobertura"
   }
 }

@@ -332,6 +332,14 @@
     "depOpen": "OPEN",
     "expNone": "GEEN",
     "expPostHoc": "NADERHAND",
-    "expFull": "VOLLEDIG"
+    "expFull": "VOLLEDIG",
+    "ordThreat": "dreiging {0} per beurt (openbare dreigingstabel)",
+    "ordMarked": "doelmarkering: het missiedoel noemt hem",
+    "ordRoundFocus": "alle groepen richten zich op hetzelfde focudoel",
+    "ordRiskLabel": "risicopositie: {0}",
+    "ordRiskPress": "aanval",
+    "ordRiskHold": "vuurlijn houden",
+    "ordRiskGuardHold": "dekking houden bij het doel",
+    "ordRiskDisengage": "terugtrekken naar dekking"
   }
 }

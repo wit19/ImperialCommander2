@@ -24,6 +24,7 @@ namespace TacticalAI.Core
         public string Posture = "eliminate";
         public string Objective = "";
         public long ThreatBalance;
+        public bool ThreatSeen;            // at least one public ThreatSpend event
         public int Seq;
         public string HistoryHash = "";
 
@@ -74,6 +75,15 @@ namespace TacticalAI.Core
             public bool Defeated;
             public int Activations;
             public int LastActivatedRound;
+            // M6 aim tokens (concept 3.3.1b FocusChange vocabulary + public
+            // designation): a PUBLIC mission designation - the current
+            // objective text naming a hero ("kill Jabba", "escort Han") is
+            // table text every player reads; the FocusChange vocabulary slot
+            // carries an explicit designation the moment the app grows a
+            // focus UI. Marks NAME heroes, never positions, and every player
+            // sees the same designation - not extra sight.
+            public int Marks;                  // how often the mark hit (cumulative)
+            public int MarkedRound;            // round of the LAST mark, 0 = never
         }
 
         public GroupView FindGroup(string id)
@@ -92,6 +102,7 @@ namespace TacticalAI.Core
             sb.Append("posture=").Append(Posture).Append('\n');
             sb.Append("objective=").Append(Objective).Append('\n');
             sb.Append("threat=").Append(ThreatBalance.ToString(CultureInfo.InvariantCulture)).Append('\n');
+            sb.Append("threatseen=").Append(ThreatSeen ? 1 : 0).Append('\n');
             sb.Append("seq=").Append(Seq.ToString(CultureInfo.InvariantCulture)).Append('\n');
             foreach (var g in Groups)
                 sb.Append("G|").Append(g.GroupId).Append('|').Append(g.Name).Append('|')
@@ -101,7 +112,8 @@ namespace TacticalAI.Core
             foreach (var h in Heroes)
                 sb.Append("H|").Append(h.HeroId).Append('|').Append(h.Name).Append('|')
                   .Append(h.Wounded ? 1 : 0).Append('|').Append(h.Defeated ? 1 : 0).Append('|')
-                  .Append(h.Activations).Append('|').Append(h.LastActivatedRound).Append('\n');
+                  .Append(h.Activations).Append('|').Append(h.LastActivatedRound).Append('|')
+                  .Append(h.Marks).Append('|').Append(h.MarkedRound).Append('\n');
             return sb.ToString();
         }
     }
@@ -136,12 +148,15 @@ namespace TacticalAI.Core
                         v.Posture = DerivePosture(e.Str("objective"),
                                                   e.Str("priorityTarget"),
                                                   e.Long("roundLimit", -1));
+                        ApplyDesignation(v, v.Objective, e.Round);   // initial public designation
                         break;
                     case "ObjectiveChange":
                         v.Objective = e.Str("objective") ?? v.Objective;
+                        ApplyDesignation(v, v.Objective, e.Round);
                         break;
                     case "ThreatSpend":
                         v.ThreatBalance = e.Long("balance");
+                        v.ThreatSeen = true;
                         break;
                     case "Spawn":
                         {
@@ -191,7 +206,22 @@ namespace TacticalAI.Core
                             h.LastActivatedRound = e.Round;
                             break;
                         }
-                    // ActivationStart/End, Move, TileChange, FocusChange,
+                    // M6 aim tokens: the focus marker the human sets in the
+                    // existing focus panel (public designation, read passively
+                    // from the click - ZERO new input). The mark names a hero;
+                    // it never claims sight, position or hidden state.
+                    case "FocusChange":
+                        {
+                            var focus = e.Str("focus");
+                            if (!string.IsNullOrEmpty(focus))
+                            {
+                                var h = Hero(v, focus);
+                                h.Marks++;
+                                h.MarkedRound = e.Round;
+                            }
+                            break;
+                        }
+                    // ActivationStart/End, Move, TileChange,
                     // RoundEnd: recorded history for the audit trail and for
                     // consumers that DO have a belief layer; the view itself
                     // only exposes the state facts above.
@@ -255,7 +285,70 @@ namespace TacticalAI.Core
             var x = new FeedWorldView.HeroView { HeroId = id, Name = id };
             v.Heroes.Add(x);
             v.Heroes.Sort((a, b) => string.CompareOrdinal(a.HeroId, b.HeroId));
+            // M6 retro mark: a designation can exist BEFORE the hero first
+            // appears in the stream (healthy heroes emit nothing until they
+            // act or bleed) - the standing designation names every hero.
+            if (NamesHero(v.Objective, id))
+            {
+                x.Marks++;
+                x.MarkedRound = v.Round;
+            }
             return x;
+        }
+
+        /// <summary>M6 public designation: the current objective text names
+        /// this hero as a whole word / whole name (same deterministic
+        /// word-splitting law as DerivePosture: 'smuggler' must NOT hit
+        /// 'smuggle', 'Han' must not hit 'Hans').</summary>
+        static void ApplyDesignation(FeedWorldView v, string text, int round)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            foreach (var h in v.Heroes)
+                if (NamesHero(text, h.HeroId))
+                {
+                    h.Marks++;
+                    h.MarkedRound = round;
+                }
+        }
+
+        static bool NamesHero(string text, string heroId)
+        {
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(heroId) || heroId == "?")
+                return false;
+            var words = SplitWords(text);
+            var name = SplitWords(heroId);
+            if (name.Count == 0 || words.Count == 0) return false;
+            // full-name sequence first (covers names whose parts are all short)
+            if (words.Count >= name.Count)
+                for (int i = 0; i + name.Count <= words.Count; i++)
+                {
+                    bool hit = true;
+                    for (int j = 0; j < name.Count; j++)
+                        if (string.Compare(words[i + j], name[j], StringComparison.OrdinalIgnoreCase) != 0)
+                        { hit = false; break; }
+                    if (hit) return true;
+                }
+            // single name part as a word ("kill Jabba" names 'Jabba the Hutt');
+            // length>=3 guard: stray 1-2 letter tokens must not designate.
+            foreach (var n in name)
+                if (n.Length >= 3)
+                    foreach (var w in words)
+                        if (string.Compare(w, n, StringComparison.OrdinalIgnoreCase) == 0)
+                            return true;
+            return false;
+        }
+
+        static List<string> SplitWords(string text)
+        {
+            var words = new List<string>();
+            var cur = new StringBuilder();
+            foreach (var ch in text.ToLowerInvariant())
+            {
+                if (char.IsLetterOrDigit(ch)) cur.Append(ch);
+                else { if (cur.Length > 0) { words.Add(cur.ToString()); cur.Length = 0; } }
+            }
+            if (cur.Length > 0) words.Add(cur.ToString());
+            return words;
         }
     }
 }

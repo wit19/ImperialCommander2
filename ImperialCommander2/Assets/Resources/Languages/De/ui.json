@@ -312,6 +312,14 @@
     "depOpen": "OFFEN",
     "expNone": "KEINE",
     "expPostHoc": "NACHHER",
-    "expFull": "AUSFÜHRLICH"
+    "expFull": "AUSFÜHRLICH",
+    "ordThreat": "Bedrohung {0} pro Runde (öffentliche Bedrohungstabelle)",
+    "ordMarked": "Zielmarke: das Missionsziel nennt ihn",
+    "ordRoundFocus": "alle Gruppen richten sich auf dasselbe Fokusziel",
+    "ordRiskLabel": "Risikoposition: {0}",
+    "ordRiskPress": "Angriff",
+    "ordRiskHold": "Feuerlinie halten",
+    "ordRiskGuardHold": "in Deckung, Objekt halten",
+    "ordRiskDisengage": "Rückzug zur Deckung"
   }
 }

@@ -312,6 +312,14 @@
     "depOpen": "NYILVÁNOS",
     "expNone": "NINCS",
     "expPostHoc": "A CSATA UTÁN",
-    "expFull": "TELJES"
+    "expFull": "TELJES",
+    "ordThreat": "fenyegetés {0} körönként (nyilvános fenyegetési táblázat)",
+    "ordMarked": "cél-jelölő: a küldetéscélnél nevén van",
+    "ordRoundFocus": "minden csoport ugyanarra a fókuszcelra fordul",
+    "ordRiskLabel": "kockázati állás: {0}",
+    "ordRiskPress": "támadás",
+    "ordRiskHold": "tűzvonal tartása",
+    "ordRiskGuardHold": "takarásban, célt tartva",
+    "ordRiskDisengage": "vissza vonulás takarásba"
   }
 }

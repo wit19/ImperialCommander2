@@ -332,6 +332,14 @@
     "depOpen": "OPEN",
     "expNone": "NONE",
     "expPostHoc": "AFTER ACTION",
-    "expFull": "FULL"
+    "expFull": "FULL",
+    "ordThreat": "threat {0} per round (public threat table)",
+    "ordMarked": "aim marker: the mission objective names him",
+    "ordRoundFocus": "all groups converge on the same focus target",
+    "ordRiskLabel": "risk posture: {0}",
+    "ordRiskPress": "attack",
+    "ordRiskHold": "keep the fire line",
+    "ordRiskGuardHold": "cover while holding the objective",
+    "ordRiskDisengage": "fall back to cover"
   }
 }

@@ -312,6 +312,14 @@
     "depOpen": "JAWNE",
     "expNone": "BRAK",
     "expPostHoc": "PO WALCE",
-    "expFull": "PEŁNE"
+    "expFull": "PEŁNE",
+    "ordThreat": "zagrożenie {0} na rundę (publicna tabela zagrożeń)",
+    "ordMarked": "znacznik celu: cel misji go wymienia",
+    "ordRoundFocus": "wszystkie grupy skupiają się na tym samym celu",
+    "ordRiskLabel": "postawa ryzyka: {0}",
+    "ordRiskPress": "atak",
+    "ordRiskHold": "utrzymać linię ognia",
+    "ordRiskGuardHold": "osłona przy utrzymaniu celu",
+    "ordRiskDisengage": "odwrót do osłony"
   }
 }

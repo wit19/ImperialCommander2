@@ -79,6 +79,18 @@ namespace TacticalAI
         static string _sessionKey;   // campaign|mission identity of the loaded session
         static bool _overlordNoticeShown;  // one-shot visible ORD->REF degradation notice
         static int _postureLogRound = -1;  // M5: one posture log per round (feed provenance)
+        // M6 overlord layer on the world feed: last projected view, the
+        // round's focus designation (focus fire across groups), per-group
+        // risk positions and the threat-economy mirror. ALL overlord-mode +
+        // feed gated; reference/legacy paths never read these fields.
+        static Tac.FeedWorldView _lastFeedView;
+        static string _roundFocusHero;
+        static Tac.FocusPick _roundFocus;
+        static int _roundFocusRound = -1;
+        static Dictionary<string, Tac.RiskDecision> _riskByGroup;
+        static Dictionary<string, Tac.HeroThreatProfile> _profileByName;
+        static Tac.ThreatLedger _threatLedger;
+        static int _ledgerRound = -1;
 
         public static void ResetSession()
         {
@@ -92,6 +104,13 @@ namespace TacticalAI
             _sessionKey = null;
             _overlordNoticeShown = false;
             _postureLogRound = -1;
+            _lastFeedView = null;
+            _roundFocusHero = null;
+            _roundFocus = null;
+            _roundFocusRound = -1;
+            _riskByGroup = null;
+            _threatLedger = null;
+            _ledgerRound = -1;
             // M5: the adapter may live on (DontDestroyOnLoad) and re-registers
             // its new-mission Feed itself; allow the lookup to run again.
             _feedTried = false;
@@ -199,7 +218,9 @@ namespace TacticalAI
                 var v = _feedAdapter.ProjectNow();
                 if (v == null) return null;
                 var k = SessionKey();
-                return k != null && v.MissionKey != k ? null : v;
+                if (k != null && v.MissionKey != k) return null;
+                _lastFeedView = v;      // M6: overlord focus reads this
+                return v;
             }
             catch (Exception e)
             {
@@ -274,7 +295,11 @@ namespace TacticalAI
             // registered feed the S4/S5 plan is honest ORD and NO notice is
             // shown. Only without any feed does overlord fall back to the
             // reference ruleset - visibly, not silently (Thomas playtest 27.10).
-            if (mode == "overlord" && WorldProvider == null && Feed == null)
+            // M6 A.7: the condition is on the PROJECTED VIEW, not the Feed
+            // object - a registered-but-unusable feed (stale mission key,
+            // failed pull) warns exactly like a missing one; with an active
+            // feed the projection exists and this branch can never fire.
+            if (mode == "overlord" && WorldProvider == null && feedView == null)
             {
                 Debug.Log("TacticalAIBridge::overlord without world feed - planning at reference ruleset");
                 // ...and once per mission ALSO visibly, not just in the log
@@ -292,6 +317,34 @@ namespace TacticalAI
                     }
                     catch { /* notice is cosmetic; never break planning */ }
                 }
+            }
+
+            // ------------------------------------------------------------------
+            // M6: the overlord layer ON the world feed (concept 3.3/3.5).
+            // Gated on overlord-mode AND a live feed projection - reference and
+            // legacy paths never read a single field filled here. The inputs
+            // are EXACTLY the feed projection + the curated public threat
+            // table: never more, never better information than a human GM
+            // (fairness canon 3.3.1/12). Threat-economy mirror (calibrated
+            // save/idle levers from the skill profile), round focus
+            // (focus fire across groups) and the per-group risk position
+            // (coverage <-> fire-line trade, concept 3.5.1) all live here.
+            _riskByGroup = null;
+            _roundFocus = null;
+            _roundFocusHero = null;
+            _roundFocusRound = -1;
+            if (mode == "overlord" && WorldProvider == null && feedView != null)
+            {
+                EnsureThreatMirror(skill, feedView, roundNo);
+                ComputeRoundFocus(feedView, posture);
+                BuildRiskPositions(skill, posture, feedView, facts);
+                if (_roundFocus != null)
+                    Debug.Log("TacticalAIBridge::ORD focus r" + roundNo + " -> \"" + _roundFocusHero +
+                              "\" basis=" + _roundFocus.Basis +
+                              " threat=" + (_roundFocus.Threat.HasValue ? _roundFocus.Threat.Value.ToString() : "-") +
+                              " marked=" + (_roundFocus.Marked ? 1 : 0) +
+                              " feedSeq=" + feedView.Seq +
+                              " risk=" + (_riskByGroup != null ? _riskByGroup.Count : 0) + " groups");
             }
 
             var rng = new Tac.DeterministicRandom(SessionSeed() ^ (ulong)roundNo * 0x9E3779B97F4A7C15UL);
@@ -582,6 +635,37 @@ namespace TacticalAI
             var living = heroes.Where(h => h.heroState == null || !h.heroState.isDefeated).ToList();
             if (living.Count == 0) living = heroes;    // all defeated: legacy would find none either
 
+            // ---------------------------------------------------- M6 overlord
+            // On overlord missions WITH the feed the focus layer ranks the
+            // SAME living heroes (permutation only - identical legal target
+            // set, fairness canon) on public threat economy + aim marks.
+            // Without a feed the branch below keeps the reference ranking -
+            // bit-compatible, exactly like the planning fallback.
+            var ordView = EffectiveMissionMode() == "overlord" && WorldProvider == null
+                ? (_lastFeedView ?? PullFeedView()) : null;
+            if (ordView != null)
+            {
+                var cands = BuildFocusCandidates(ordView, living);
+                if (cands.Count > 0)
+                {
+                    var ranked = Tac.OverlordFocus.Rank(cands,
+                        string.IsNullOrEmpty(ordView.Posture) ? "eliminate" : ordView.Posture,
+                        null);                      // the app has no victory counter
+                    var dec = ranked[0];
+                    _roundFocus = dec;
+                    _roundFocusHero = dec.HeroId;
+                    _roundFocusRound = ordView.Round;
+                    var L0 = UIx;
+                    if (L0 != null)     // broken language asset -> reference path (legacy popup)
+                    {
+                        heroName = dec.HeroId;
+                        why = BuildOverlordWhy(L0, dec, heroName);
+                        return true;
+                    }
+                }
+                // no candidate could be built (asset missing) -> reference path
+            }
+
             bool Wounded(global::DeploymentCard h) => h.heroState != null && h.heroState.isWounded;
 
             // ranking is total + deterministic (see doc-comment)
@@ -603,6 +687,175 @@ namespace TacticalAI
             return true;
         }
 
+        // ------------------------------------------------- M6 overlord helpers
+
+        /// <summary>Build the overlord's candidate rows from the SAME living
+        /// heroes the reference path ranks (permutation-only - fairness test
+        /// pins this). Inputs: the feed projection (wounded, aim marks) and
+        /// the curated public threat table via the M3.1 asset seam. No
+        /// positions, no hidden state, no dice.</summary>
+        static List<Tac.FocusCandidate> BuildFocusCandidates(
+            Tac.FeedWorldView view, List<global::DeploymentCard> living)
+        {
+            var outp = new List<Tac.FocusCandidate>();
+            _profileByName = new Dictionary<string, Tac.HeroThreatProfile>();
+            var heroViews = new Dictionary<string, Tac.FeedWorldView.HeroView>();
+            foreach (var hv in view.Heroes) heroViews[hv.HeroId] = hv;
+            int row = 0;
+            foreach (var h in living)
+            {
+                var id = h.name ?? h.id;
+                Tac.FeedWorldView.HeroView hv;
+                heroViews.TryGetValue(id, out hv);
+                var prof = TacticalAIAssets.ProfileFor(id, CampaignHeroFor(id));
+                _profileByName[id] = prof;
+                outp.Add(new Tac.FocusCandidate
+                {
+                    HeroId = id,
+                    SquadRow = row++,
+                    Profile = prof,
+                    // feed fact first (deterministic public history); the live
+                    // hero state is the fallback for heroes the feed never saw
+                    Wounded = hv != null ? hv.Wounded : (h.heroState != null && h.heroState.isWounded),
+                    Marks = hv != null ? hv.Marks : 0,
+                    MarkedRound = hv != null ? hv.MarkedRound : 0,
+                    AttackDice = h.attacks?.Length ?? 0,
+                    Health = h.health,
+                });
+            }
+            return outp;
+        }
+
+        /// <summary>Campaign loadout lookup (app-managed public data, concept
+        /// 3.3.1a). Solo missions / missing campaign -> null -> curated-only
+        /// profile, which is exactly the documented fallback.</summary>
+        static Saga.CampaignHero CampaignHeroFor(string heroName)
+        {
+            try
+            {
+                var camp = Saga.RunningCampaign.sagaCampaign;
+                if (camp == null || camp.campaignHeroes == null || string.IsNullOrEmpty(heroName))
+                    return null;
+                return camp.campaignHeroes.FirstOrDefault(x => x.heroID == heroName);
+            }
+            catch { return null; }
+        }
+
+        /// <summary>Round-level designation on the feed state (focus fire:
+        /// every group plans towards the SAME target; the order plan decides
+        /// WHO walks it first - Mehrgruppenzug). Recomputed on activation when
+        /// the feed moved (a hero falling wounded re-ranks chip-first).</summary>
+        static void ComputeRoundFocus(Tac.FeedWorldView view, string posture)
+        {
+            var heroes = DataStore.deployedHeroes;
+            if (heroes == null) return;
+            var living = heroes.Where(h => h.heroState == null || !h.heroState.isDefeated).ToList();
+            if (living.Count == 0) return;
+            var cands = BuildFocusCandidates(view, living);
+            if (cands.Count == 0) return;
+            var ranked = Tac.OverlordFocus.Rank(cands, posture ?? "eliminate", null);
+            _roundFocus = ranked.Count > 0 ? ranked[0] : null;
+            _roundFocusHero = _roundFocus != null ? _roundFocus.HeroId : null;
+            _roundFocusRound = view.Round;
+        }
+
+        /// <summary>Threat-economy mirror (concept 3.9, the calibrated
+        /// save/idle levers come from the skill profile - "wie in der Sim
+        /// kalibriert"). Fed ONLY by feed facts: per-round income tick with
+        /// the feed's own living-count, no estimation. The public HUD balance
+        /// (first observed ThreatSpend) stays ground truth; the ledger model
+        /// is the economic context BEFORE the first spend.</summary>
+        static void EnsureThreatMirror(Tac.SkillProfile skill, Tac.FeedWorldView view, int roundNo)
+        {
+            if (_threatLedger == null)
+                _threatLedger = new Tac.ThreatLedger(skill != null ? skill.EconSave : 2,
+                                                     skill != null ? skill.EconIdle : 2);
+            if (_ledgerRound >= roundNo) return;
+            int alive = 0;
+            foreach (var g in view.Groups)
+                if (g.Deployed && !g.Removed) alive += Math.Max(0, g.Alive);
+            var from = _ledgerRound < 0 ? 1 : _ledgerRound + 1;
+            for (var r = from; r <= roundNo; r++) _threatLedger.Tick(r, alive);
+            _ledgerRound = roundNo;
+        }
+
+        static int RiskLedgerBalance(Tac.FeedWorldView view)
+        {
+            long b = view.ThreatSeen ? view.ThreatBalance
+                   : (_threatLedger != null ? _threatLedger.Balance : view.ThreatBalance);
+            if (b < 0) b = 0;
+            return b > int.MaxValue ? int.MaxValue : (int)b;
+        }
+
+        /// <summary>Threat-weighted positioning (concept 3.5.1, A.4): the
+        /// sim-calibrated RiskPosture press/hold/guard_hold/disengage per
+        /// group - the coverage <-> fire-line trade runs on AppView facts
+        /// (wheel vitality, printed replace cost vs threat balance, the focus
+        /// hero's printed range band). rho = the skill profile's bändigung
+        /// lever. The German sim Why strings stay in the log (vectors pin
+        /// them); the player surface is the localized position label only.</summary>
+        static void BuildRiskPositions(Tac.SkillProfile skill, string posture,
+                                       Tac.FeedWorldView view, List<Tac.GroupFacts> facts)
+        {
+            _riskByGroup = new Dictionary<string, Tac.RiskDecision>();
+            Tac.HeroThreatProfile focusProf = null;
+            if (_roundFocusHero != null && _profileByName != null)
+                _profileByName.TryGetValue(_roundFocusHero, out focusProf);
+            foreach (var f in facts)
+            {
+                var gv = view.FindGroup(f.GroupId);
+                int? replaces = null;
+                if (_catalog != null && _catalog.TryGetValue(f.CardId, out var core))
+                    replaces = core.Cost;
+                var rf = new Tac.RiskFacts
+                {
+                    GroupId = f.GroupId,
+                    Pattern = f.Pattern ?? "aggressive",
+                    Posture = posture ?? "eliminate",
+                    Counter = null,          // the app carries no victory counter
+                    Vitality = gv != null ? gv.VitalityFrac : Tac.Rational.One,
+                    RingNear = false,        // belief layer needs the tile graph (open)
+                    OnAnchor = false,        // anchors need mission geometry (open)
+                    ReplacesAt = replaces,
+                    LedgerBalance = RiskLedgerBalance(view),
+                    ThreatIgnoreLos = focusProf != null && focusProf.IgnoreLos,
+                    ThreatRangeMax = focusProf != null ? focusProf.RangeMax : 0,
+                };
+                try { _riskByGroup[f.GroupId] = Tac.RiskPosture.RiskPosition(rf, skill != null ? skill.Rho : 3); }
+                catch (Exception e) { Debug.LogWarning("TacticalAIBridge::risk " + f.GroupId + ": " + e.Message); }
+            }
+        }
+
+        /// <summary>The public WHY line (A.6): every part names a fact a
+        /// human GM also has - mark, printed threat, wound state, the shared
+        /// focus. Localized via ui.json; no numbers the table cannot see.</summary>
+        static string BuildOverlordWhy(UITacticalAI L, Tac.FocusPick dec, string heroName)
+        {
+            var parts = new List<string>();
+            if (dec.Marked) parts.Add(TF(L.ordMarked));
+            if (dec.Threat.HasValue)
+                parts.Add(TF(L.ordThreat, Tac.Py.F2(dec.Threat.Value.ToDouble())));
+            else parts.Add(TF(L.focusFirepower));
+            if (dec.Wounded) parts.Add(TF(L.focusWounded));
+            parts.Add(TF(L.ordRoundFocus));
+            parts.Add(TF(L.focusNoChance));
+            return TF(L.focusPrefix) + heroName + " — " + string.Join("; ", parts);
+        }
+
+        static string RiskLabel(UITacticalAI L, string position)
+        {
+            string v;
+            switch (position)
+            {
+                case "press": v = L.ordRiskPress; break;
+                case "hold": v = L.ordRiskHold; break;
+                case "guard_hold": v = L.ordRiskGuardHold; break;
+                case "disengage": v = L.ordRiskDisengage; break;
+                default: return null;
+            }
+            return string.IsNullOrEmpty(v) ? null : v;
+        }
+
         // ------------------------------------------------------------- explain
 
         static string ExplainFor(string groupId)
@@ -610,9 +863,25 @@ namespace TacticalAI
             if (TacticalAISettings.ExplainLevel == "none") return null;
             if (TacticalAISettings.ExplainLevel == "full")
             {
+                string line = null;
                 var slot = _slots.FirstOrDefault(s => s.GroupId == groupId);
                 if (slot != null && UIx != null)
-                    return TF(UIx.whyPrefix) + slot.Why + " " + TF(UIx.whyRank, slot.Rank + 1);
+                    line = TF(UIx.whyPrefix) + slot.Why + " " + TF(UIx.whyRank, slot.Rank + 1);
+                // M6: the threat-weighted risk POSITION for this group
+                // (concept 3.5.1). Localized label only - the sim-pinned
+                // German Why/Fallback texts stay in the Debug log, never in
+                // the player surface (no hardcoded game text, ui.json law).
+                if (_riskByGroup != null && UIx != null &&
+                    _riskByGroup.TryGetValue(groupId, out var rd))
+                {
+                    var label = RiskLabel(UIx, rd.Position);
+                    if (label != null)
+                        line = (line == null ? "" : line + "\n") + TF(UIx.ordRiskLabel, label);
+                    Debug.Log("TacticalAIBridge::risk " + groupId + ": " + rd.Position +
+                              " why: " + rd.Why + " | fallback: " + rd.Fallback +
+                              (string.IsNullOrEmpty(rd.Anchor) ? "" : " anchor: " + rd.Anchor));
+                }
+                return line;
             }
             // post_hoc: printed at round end via OnNewRound quick message
             return null;

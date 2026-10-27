@@ -31,6 +31,9 @@ public class UITacticalAI
 	public string overlordFallback;
 	public string specialAsPrinted, restLine, interactLine, shuffleNote;
 	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
+	// M6 overlord explain parts (public threat economy + aim marks + risk)
+	public string ordThreat, ordMarked, ordRoundFocus;
+	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;
 	// skill ladder DISPLAY names (dev 18: recruit..5-star general, Thomas).
