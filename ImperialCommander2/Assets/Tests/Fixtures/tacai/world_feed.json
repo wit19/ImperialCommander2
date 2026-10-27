@@ -1,0 +1,470 @@
+{
+ "_comment": "M5 world-feed golden vectors (C#-side canonical: console harness AND NUnit editor suite read this file). Events carry seq by array position; expect blocks were recorded once via `dotnet run -- <fixtures> --record` from Core WorldEventVector.Project and reviewed. Payloads are public information only (see WorldEventFeed.PayloadKeys).",
+ "cases": [
+  {
+   "name": "eliminate_mission",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Destroy the rebel cell in the sector",
+      "priorityTarget": "Hero",
+      "roundLimit": -1,
+      "mission": "core1",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG001",
+      "size": 2
+     }
+    },
+    {
+     "kind": "ThreatSpend",
+     "round": 2,
+     "payload": {
+      "balance": 12
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|eliminate_mission\nround=2\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=12\nseq=3\nG|DG001|DG001|1|0|2|2|1|0|1\n",
+    "hash": "99605a8abc38d2c9f8b457c6ba909a1ea1d855ddc564627b7329b743913528c7",
+    "objective": "Destroy the rebel cell in the sector",
+    "posture": "eliminate",
+    "round": 2,
+    "seq": 3,
+    "threat": 12
+   }
+  },
+  {
+   "name": "protect_mission",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Defend the supply outpost from sabotage",
+      "priorityTarget": "Other",
+      "roundLimit": -1,
+      "mission": "core4",
+      "missionType": "Story"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|protect_mission\nround=1\nposture=protect\nobjective=Defend the supply outpost from sabotage\nthreat=0\nseq=1\n",
+    "hash": "77b001510093f98265677aa5c80a27d99e3e014ffeb3d88b3438e9f52f6de6bf",
+    "objective": "Defend the supply outpost from sabotage",
+    "posture": "protect",
+    "round": 1,
+    "seq": 1,
+    "threat": 0
+   }
+  },
+  {
+   "name": "stall_clock",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Engage the rebels in the courtyard",
+      "priorityTarget": "Rebel",
+      "roundLimit": 8,
+      "mission": "core7",
+      "missionType": "Story"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|stall_clock\nround=1\nposture=stall\nobjective=Engage the rebels in the courtyard\nthreat=0\nseq=1\n",
+    "hash": "f7a85f9863c51b90c59e2b9e30013e1c3a885da9ed4cb605f7c246dd0fcc736a",
+    "objective": "Engage the rebels in the courtyard",
+    "posture": "stall",
+    "round": 1,
+    "seq": 1,
+    "threat": 0
+   }
+  },
+  {
+   "name": "stall_escape",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "The rebels must reach the shuttle and escape",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "core9",
+      "missionType": "Side"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|stall_escape\nround=1\nposture=stall\nobjective=The rebels must reach the shuttle and escape\nthreat=0\nseq=1\n",
+    "hash": "1c10fbb24fd54d597b1bbbb26bd7a0eb30c32d4a18f04bd155ac2584d2e748ca",
+    "objective": "The rebels must reach the shuttle and escape",
+    "posture": "stall",
+    "round": 1,
+    "seq": 1,
+    "threat": 0
+   }
+  },
+  {
+   "name": "protect_beats_clock",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Hold the gate until the convoy departs",
+      "priorityTarget": "Rebel",
+      "roundLimit": 6,
+      "mission": "core12",
+      "missionType": "Story"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|protect_beats_clock\nround=1\nposture=protect\nobjective=Hold the gate until the convoy departs\nthreat=0\nseq=1\n",
+    "hash": "907144e421268b7092a6438f7ea71fff20c39e3d7c99877305a96958a8be85c6",
+    "objective": "Hold the gate until the convoy departs",
+    "posture": "protect",
+    "round": 1,
+    "seq": 1,
+    "threat": 0
+   }
+  },
+  {
+   "name": "wounded_vitality",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "missionType": "Story",
+      "mission": "core1",
+      "roundLimit": -1,
+      "priorityTarget": "Hero",
+      "objective": "Destroy the rebel cell in the sector"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG001",
+      "size": 3
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "group": "DG001",
+      "figure": 0,
+      "wheel": 3,
+      "health": 5
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "group": "DG001",
+      "figure": 1,
+      "wheel": 5,
+      "health": 5
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 3,
+     "payload": {
+      "figure": 2,
+      "health": 5,
+      "wheel": 5,
+      "group": "DG001"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|wounded_vitality\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|13/15\n",
+    "hash": "d29946bbb0ceabc2975c2820bea1ff30ed914a5e6043042fb72b10d0348c7b97",
+    "objective": "Destroy the rebel cell in the sector",
+    "posture": "eliminate",
+    "round": 3,
+    "seq": 5,
+    "threat": 0
+   }
+  },
+  {
+   "name": "wounded_vitality_shuffled_keys",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "priorityTarget": "Hero",
+      "objective": "Destroy the rebel cell in the sector",
+      "mission": "core1",
+      "roundLimit": -1,
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "size": 3,
+      "group": "DG001"
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "health": 5,
+      "figure": 0,
+      "wheel": 3,
+      "group": "DG001"
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 2,
+     "payload": {
+      "wheel": 5,
+      "health": 5,
+      "group": "DG001",
+      "figure": 1
+     }
+    },
+    {
+     "kind": "GroupDamage",
+     "round": 3,
+     "payload": {
+      "health": 5,
+      "wheel": 5,
+      "figure": 2,
+      "group": "DG001"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|wounded_vitality_shuffled_keys\nround=3\nposture=eliminate\nobjective=Destroy the rebel cell in the sector\nthreat=0\nseq=5\nG|DG001|DG001|1|0|3|3|1|5|13/15\n",
+    "hash": "d29946bbb0ceabc2975c2820bea1ff30ed914a5e6043042fb72b10d0348c7b97",
+    "objective": "Destroy the rebel cell in the sector",
+    "posture": "eliminate",
+    "round": 3,
+    "seq": 5,
+    "threat": 0
+   }
+  },
+  {
+   "name": "death_and_removal",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Destroy the rebel cell",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "core2",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG010",
+      "size": 2
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG011",
+      "size": 1
+     }
+    },
+    {
+     "kind": "Death",
+     "round": 4,
+     "payload": {
+      "group": "DG010"
+     }
+    },
+    {
+     "kind": "Removal",
+     "round": 5,
+     "payload": {
+      "group": "DG011"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|death_and_removal\nround=5\nposture=eliminate\nobjective=Destroy the rebel cell\nthreat=0\nseq=5\nG|DG010|DG010|1|0|1|2|1|0|1\nG|DG011|DG011|1|1|1|1|1|0|1\n",
+    "hash": "bb73fe8b5bd4d0f012803fdc752a409dec07015d0c92026241856cfd8ef385cf",
+    "objective": "Destroy the rebel cell",
+    "posture": "eliminate",
+    "round": 5,
+    "seq": 5,
+    "threat": 0
+   }
+  },
+  {
+   "name": "hero_track",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Hunt the smuggler gang",
+      "priorityTarget": "Hero",
+      "roundLimit": -1,
+      "mission": "core3",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "HeroActivated",
+     "round": 1,
+     "payload": {
+      "hero": "Luke"
+     }
+    },
+    {
+     "kind": "HeroActivated",
+     "round": 2,
+     "payload": {
+      "hero": "Luke"
+     }
+    },
+    {
+     "kind": "HeroWounded",
+     "round": 3,
+     "payload": {
+      "hero": "Leia"
+     }
+    },
+    {
+     "kind": "HeroDefeated",
+     "round": 4,
+     "payload": {
+      "hero": "Han"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|hero_track\nround=4\nposture=eliminate\nobjective=Hunt the smuggler gang\nthreat=0\nseq=5\nH|Han|Han|1|1|0|0\nH|Leia|Leia|1|0|0|0\nH|Luke|Luke|0|0|2|2\n",
+    "hash": "6618f95b860fe68ab61989c96f03aed7a3d5458f15597b6a2432b228385aba80",
+    "objective": "Hunt the smuggler gang",
+    "posture": "eliminate",
+    "round": 4,
+    "seq": 5,
+    "threat": 0
+   }
+  },
+  {
+   "name": "objective_shift",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Destroy the rebel cell",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "core5",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "ObjectiveChange",
+     "round": 3,
+     "payload": {
+      "objective": "Secure the terminal and escort the convoy out"
+     }
+    },
+    {
+     "kind": "RoundEnd",
+     "round": 3,
+     "payload": {}
+    },
+    {
+     "kind": "ThreatSpend",
+     "round": 4,
+     "payload": {
+      "balance": 0
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|objective_shift\nround=4\nposture=eliminate\nobjective=Secure the terminal and escort the convoy out\nthreat=0\nseq=4\n",
+    "hash": "bcb8195d2c3f165d1d04978f75b0373750f915c8afb7cb4c3ef4794a909ad9d0",
+    "objective": "Secure the terminal and escort the convoy out",
+    "posture": "eliminate",
+    "round": 4,
+    "seq": 4,
+    "threat": 0
+   }
+  },
+  {
+   "name": "activation_stream",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Destroy the rebel cell",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "core6",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "Spawn",
+     "round": 1,
+     "payload": {
+      "group": "DG002",
+      "size": 1
+     }
+    },
+    {
+     "kind": "ActivationStart",
+     "round": 2,
+     "payload": {
+      "group": "DG002"
+     }
+    },
+    {
+     "kind": "ActivationEnd",
+     "round": 2,
+     "payload": {
+      "group": "DG002"
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|activation_stream\nround=2\nposture=eliminate\nobjective=Destroy the rebel cell\nthreat=0\nseq=4\nG|DG002|DG002|1|0|1|1|1|0|1\n",
+    "hash": "2eccd75c19f8d9f4ad7b414d95b0030ada1c5deb87d814c6069f0e8b62b9eef3",
+    "objective": "Destroy the rebel cell",
+    "posture": "eliminate",
+    "round": 2,
+    "seq": 4,
+    "threat": 0
+   }
+  }
+ ]
+}

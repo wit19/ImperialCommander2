@@ -44,6 +44,10 @@ namespace TacticalAiHarness
                 return 2;
             }
             FIX = Path.GetFullPath(args[0]);
+            // M5: `--record` regenerates the world_feed expect blocks from
+            // the Core projection (golden-vector record step; the pinned file
+            // then governs harness AND NUnit - vectors stay canonical).
+            foreach (var a in args) if (a == "--record") Record = true;
             if (!Directory.Exists(FIX))
             {
                 Console.Error.WriteLine("fixtures dir not found: " + FIX);
@@ -81,6 +85,7 @@ namespace TacticalAiHarness
             Run("action_plan.json", SecActionPlan);
             Run("hero_profiles.json", SecHeroProfiles);
             Run("hero_w.json", SecHeroW);
+            Run("world_feed.json", SecWorldFeed);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);

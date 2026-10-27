@@ -210,21 +210,28 @@ namespace TacticalAI.Core
         //   3. everything else -> eliminate (legacy fallback, honest default)
         // Text matching runs on the ENGLISH authored mission data strings
         // (ui.json localisation happens later; the authored objective text is
-        // public table text).
+        // public table text). Matching is WORD-prefix based: a token matches
+        // when it starts with a keyword ("escorted" yes, "stronghold" does
+        // NOT match "hold") - deterministic, documented heuristic; every
+        // non-match honestly falls back to eliminate.
         static readonly string[] ProtectKeywords =
-            { "defend", "hold", "protect", "guard", "escort", "secure" };
+            { "defend", "protect", "guard", "escort", "hold" };
         static readonly string[] StallKeywords =
             { "escape", "flee", "survive", "reach", "activate", "recover",
-              "steal", "deliver", "open", "smuggle", "evacuate" };
+              "steal", "deliver", "evacuate" };
 
         public static string DerivePosture(string objective, string priorityTarget, long roundLimit)
         {
-            var text = ((objective ?? "") + " " + (priorityTarget ?? "")).ToLowerInvariant();
+            var words = ((objective ?? "") + " " + (priorityTarget ?? "")).ToLowerInvariant()
+                        .Split(new[] { ' ', '\t', '\n', '\r', '-', ',', ';', ':', '.', '!', '?' },
+                               StringSplitOptions.RemoveEmptyEntries);
             foreach (var k in ProtectKeywords)
-                if (text.Contains(k)) return "protect";
+                foreach (var w in words)
+                    if (w.StartsWith(k, StringComparison.Ordinal)) return "protect";
             if (roundLimit >= 0) return "stall";
             foreach (var k in StallKeywords)
-                if (text.Contains(k)) return "stall";
+                foreach (var w in words)
+                    if (w.StartsWith(k, StringComparison.Ordinal)) return "stall";
             return "eliminate";
         }
 
