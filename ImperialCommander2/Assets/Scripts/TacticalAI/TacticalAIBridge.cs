@@ -51,8 +51,20 @@ namespace TacticalAI
     {
         /// <summary>Seam for a future hex-map adapter: when a World provider is
         /// registered, overlord mode runs the full Core belief/focus loop.
-        /// Null in this repo state (no hex world model in the Unity runtime).</summary>
+        /// Null in this repo state (no hex world model in the Unity runtime).
+        /// M5 (concept 3.3.1b): the hex-adapter plan is REPLACED by the
+        /// passive world feed - the feed below is the sanctioned producer;
+        /// until a full board World exists behind this seam, the bridge
+        /// consumes the projected FeedWorldView (posture + wheel vitality).</summary>
         public static Func<Tac.World> WorldProvider;
+
+        /// <summary>M5 passive world feed (concept 3.3.1b). Registered by
+        /// WorldEventsUnity at session start (runtime AddComponent through
+        /// EnsureFeed) - the ONLY sanctioned source of world state; the canon
+        /// rule forbids any manual position/state entry (zero new inputs).</summary>
+        public static Tac.WorldEventFeed Feed;
+        static WorldEventsUnity _feedAdapter;
+        static bool _feedTried;
 
         static Tac.OrderDeckManager _deckMgr;
         static Dictionary<string, Tac.DeploymentCard> _catalog;
@@ -66,6 +78,7 @@ namespace TacticalAI
         static ulong _sessionSeed;
         static string _sessionKey;   // campaign|mission identity of the loaded session
         static bool _overlordNoticeShown;  // one-shot visible ORD->REF degradation notice
+        static int _postureLogRound = -1;  // M5: one posture log per round (feed provenance)
 
         public static void ResetSession()
         {
@@ -78,6 +91,10 @@ namespace TacticalAI
             _sessionSeed = 0;
             _sessionKey = null;
             _overlordNoticeShown = false;
+            _postureLogRound = -1;
+            // M5: the adapter may live on (DontDestroyOnLoad) and re-registers
+            // its new-mission Feed itself; allow the lookup to run again.
+            _feedTried = false;
         }
 
         /// <summary>Identity of the loaded session (same material SessionSeed
@@ -132,6 +149,63 @@ namespace TacticalAI
             if (k == null) return;                 // no session context yet
             if (_sessionKey != null && k != _sessionKey) ResetSession();
             _sessionKey = k;
+            // M5 (concept 3.3.1b): every hook entry is a decision point - the
+            // bridge pulls the CURRENT passive-feed state here (adapter polls
+            // App state it already maintains; zero human input). Stale views
+            // from another mission never cross the session boundary.
+            PullFeedView();
+        }
+
+        /// <summary>M5: install the passive world-feed adapter at runtime
+        /// (AddComponent through the bridge's session start - NO prefab
+        /// surgery, NO scene edits). Inside the Enabled gate only: legacy
+        /// play never creates the component.</summary>
+        static void EnsureFeed()
+        {
+            if (_feedTried) return;
+            _feedTried = true;
+            try
+            {
+                if (!TacticalAISettings.Enabled) return;
+                _feedAdapter = UnityEngine.Object.FindObjectOfType<WorldEventsUnity>();
+                if (_feedAdapter == null)
+                {
+                    var go = new GameObject("TacticalAI_WorldFeed");
+                    UnityEngine.Object.DontDestroyOnLoad(go);
+                    _feedAdapter = go.AddComponent<WorldEventsUnity>();
+                }
+                Feed = _feedAdapter.Feed;
+                Debug.Log("TacticalAIBridge::world feed adapter installed (passive, zero input)");
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("TacticalAIBridge::feed install failed, legacy paths stay: " + e.Message);
+                _feedAdapter = null;
+                Feed = null;
+            }
+        }
+
+        /// <summary>Feed state for the CURRENT decision, or null when no feed
+        /// is registered (overlord then honestly degrades to reference rules
+        /// WITH the visible notice). Only the adapter's own MissionKey can
+        /// match the live session - never plan on a stale mission's history.</summary>
+        static Tac.FeedWorldView PullFeedView()
+        {
+            EnsureFeed();
+            try
+            {
+                if (!TacticalAISettings.Enabled) return null;
+                if (_feedAdapter == null || Feed == null) return null;
+                var v = _feedAdapter.ProjectNow();
+                if (v == null) return null;
+                var k = SessionKey();
+                return k != null && v.MissionKey != k ? null : v;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("TacticalAIBridge::feed pull failed (planning without feed): " + e.Message);
+                return null;
+            }
         }
 
         // ---------------------------------------------------------------- plan
@@ -162,7 +236,9 @@ namespace TacticalAI
         static void EnsureRound(int roundNo)
         {
             if (_planRound == roundNo && _deckMgr != null) return;
-            BuildGroups(out var facts, out var figures);
+            // M5: fresh feed state BEFORE building this round's plan
+            var feedView = PullFeedView();
+            BuildGroups(out var facts, out var figures, feedView);
             _patternByCard = new Dictionary<string, string>();
             foreach (var f in figures) if (f != null) _patternByCard[f.Id] = f.Pattern;
             if (facts.Count == 0)
@@ -174,18 +250,33 @@ namespace TacticalAI
             }
 
             var mode = EffectiveMissionMode();
-            var posture = "eliminate";                 // TODO(M5 feed): posture from mission properties
+            // M5 (concept 3.3.1b item 4): posture is DERIVED from mission
+            // properties via the passive feed (WorldEventVector.DerivePosture:
+            // objective text, round clock, priority target). "eliminate" is
+            // now only the honest fallback when no feed is registered.
+            var posture = "eliminate";
+            if (feedView != null && !string.IsNullOrEmpty(feedView.Posture))
+                posture = feedView.Posture;
+            if (feedView != null && _postureLogRound != roundNo)
+            {
+                _postureLogRound = roundNo;
+                Debug.Log("TacticalAIBridge::posture=" + posture + " round=" + roundNo +
+                          " [feed seq=" + feedView.Seq + " hash=" +
+                          (feedView.HistoryHash ?? "").Substring(0, Math.Min(12, (feedView.HistoryHash ?? "").Length)) +
+                          " objective=\"" + feedView.Objective + "\"]");
+            }
             // dev 21: a mission badge can pin its OWN ladder rung (S1..S5);
             // AUTO/OFF fall back to the global ladder.
             var skill = Tac.SkillProfile.For(TacticalAISettings.EffectiveSkill(CurrentMissionAiMode()));
-            // NOTE(overlord): the ORD optimization goal needs the PASSIVE world
-            // feed (concept v4.0 3.3.1b) behind the WorldProvider seam - tile
-            // graph, token-to-region, event stream; NEVER manual position
-            // entry. Until the feed registers, overlord plans like the
-            // reference level; the difference is only logged, never hidden.
-            if (mode == "overlord" && WorldProvider == null)
+            // NOTE(overlord): the ORD optimization goal runs on the PASSIVE
+            // world feed (concept v4.0 3.3.1b) - event stream + derived
+            // posture + wheel vitality, NEVER manual position entry. With a
+            // registered feed the S4/S5 plan is honest ORD and NO notice is
+            // shown. Only without any feed does overlord fall back to the
+            // reference ruleset - visibly, not silently (Thomas playtest 27.10).
+            if (mode == "overlord" && WorldProvider == null && Feed == null)
             {
-                Debug.Log("TacticalAIBridge::overlord without WorldProvider - planning at reference ruleset");
+                Debug.Log("TacticalAIBridge::overlord without world feed - planning at reference ruleset");
                 // ...and once per mission ALSO visibly, not just in the log
                 // (Thomas playtest 27.10: he selected OVERLORD and correctly
                 // observed reference behaviour - the degradation must not be
@@ -611,8 +702,12 @@ namespace TacticalAI
 
         /// <summary>Group facts + Core figures (round-deal order) from the
         /// deployed enemy list. One GroupFacts per group id (= card id), the
-        /// same identity the legacy group manager uses.</summary>
-        static void BuildGroups(out List<Tac.GroupFacts> facts, out List<Tac.Figure> figures)
+        /// same identity the legacy group manager uses. The M5 feed view, when
+        /// present, fills vitalityFrac from the human's damage WHEELS
+        /// (concept 3.3.3 Nr. 2b: real attrition strength for the OrderPlanner
+        /// strength-efficiency matrix); groups the feed never saw stay 1.</summary>
+        static void BuildGroups(out List<Tac.GroupFacts> facts, out List<Tac.Figure> figures,
+                                Tac.FeedWorldView feedView = null)
         {
             EnsureCatalog();
             facts = new List<Tac.GroupFacts>();
@@ -625,11 +720,13 @@ namespace TacticalAI
                 if (cd.currentSize <= 0) continue;             // wiped group
                 if (!seen.Add(cd.id)) continue;                // first instance = the group
                 if (!_catalog.TryGetValue(cd.id, out var core)) continue;  // unknown card: legacy fallback
+                var gv = feedView != null ? feedView.FindGroup(cd.id) : null;
+                var vitality = gv != null ? gv.VitalityFrac : Tac.Rational.One;
                 facts.Add(new Tac.GroupFacts(
                     cd.id, idx, cd.id, cd.name,
                     pattern: "aggressive",                     // TODO(M4): printed-trait classification
                     nAlive: Math.Max(1, cd.currentSize),
-                    vitalityFrac: Tac.Rational.One,            // TODO(world adapter): wheel state
+                    vitalityFrac: vitality,
                     zone: null, arrivedRound: null,
                     isHeavy: core.IsLargeBase, isSwarm: false));
                 var fig = new Tac.Figure
