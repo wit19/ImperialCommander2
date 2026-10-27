@@ -85,6 +85,9 @@ namespace TacticalAiHarness
                             MarkedRound = (int)Json.AsLong(h["marked_round"]),
                             AttackDice = (int)Json.AsLong(h["attack_dice"]),
                             Health = Json.AsInt(h["health"]),
+                            // M10b: optional per-hero flag (default false).
+                            ObjectiveActor = h.ContainsKey("objective_actor")
+                                && Json.AsBool(h["objective_actor"]),
                         });
                     }
                     return list;

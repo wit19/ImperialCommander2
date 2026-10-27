@@ -52,6 +52,11 @@ namespace TacticalAI.Core
         public int MarkedRound;
         public int AttackDice;              // printed card values (reference parity)
         public int Health;
+        // M10b (Thomas revision 27.10): NO hero cell positions - the app
+        // cannot see where a hero stands. The objective attribution is built
+        // from public events only: objective progress happened, then a hero
+        // finished his activation -> he gets the credit (feed vector).
+        public bool ObjectiveActor;
 
         public bool Marked { get { return Marks > 0; } }
     }
@@ -131,6 +136,38 @@ namespace TacticalAI.Core
                 Chip = woundAll && c.Profile != null ? c.Profile.ChipKey() : null,
             }).ToList();
 
+            // M10b BASE PURITY (Thomas revision 27.10): the 16 curated rows
+            // are values from plain REBEL cards (a different mode's scale,
+            // usable as a guideline), the expansion heroes carry the neutral
+            // prior, profile-less rows the reference proxy. Comparing a
+            // curated 7/2 against a neutral prior EV of 1 mixes data bases
+            // and silently skews the race - in a MIXED round nobody competes
+            // on printed values: the economic/chip keys go to common ground
+            // (null) and the objective actor, wounds, campaign investment
+            // and the proxy keys decide. A pure curated round keeps its
+            // full ranking. Honesty over precision, per doctrine.
+            bool pure = rows.TrueForAll(r => RealCurated(r.C.Profile));
+            if (!pure)
+                foreach (var r in rows)
+                {
+                    r.Threat = null; r.Econ = null;
+                    // The chip CLASS (healer/support/combat) is curated on
+                    // every row - keep that doctrine; only the runner/ev
+                    // sub-keys mix data bases -> common neutral prior.
+                    if (r.Chip != null) r.Chip = CommonGroundChip(r.Chip);
+                }
+            else
+                // M10b OBJECTIVE ACTOR (pure rounds): the hero credited with
+                // the last objective progress raises his threat by EXACTLY
+                // +1 - "die Bedrohung erhöht sich leicht", exact integer,
+                // public-event-derived, never a hidden stat.
+                foreach (var r in rows)
+                    if (r.C.ObjectiveActor && r.Econ.HasValue)
+                    {
+                        r.Threat = r.Threat.Value + Rational.One;
+                        r.Econ = r.Econ.Value + Rational.One;
+                    }
+
             var ranked = StableSort(rows, Compare);
 
             return ranked.Select(x => new FocusPick
@@ -166,6 +203,12 @@ namespace TacticalAI.Core
                 if (mr != 0) return mr;
             }
             // 2. counter law (woundAll): sim ChipKey verbatim, higher first.
+            //    M10b: an objective actor OUTRANKS the static role doctrine
+            //    below - a hero who just did real mission damage is the live
+            //    threat, ahead of any printed-role preference (only the
+            //    human's aim mark, key 1, still overrides him).
+            if (a.C.ObjectiveActor != b.C.ObjectiveActor)
+                return a.C.ObjectiveActor ? -1 : 1;
             if (a.Chip != null || b.Chip != null)
             {
                 int ck = CompareChip(a.Chip, b.Chip);
@@ -174,6 +217,8 @@ namespace TacticalAI.Core
             // 3. threat economy: posture-keyed printed value x wound economy,
             //    exact rationals. No-profile rows carry null -> they rank
             //    BELOW profiled rows on this key (unknown is not better).
+            //    M10b OBJECTIVE ACTOR (pure curated rounds): the +1 above
+            //    already moved him up this key; the tie-break fired at key 2.
             if (a.Econ != null || b.Econ != null)
             {
                 int e = CompareEcon(a.Econ, b.Econ);
@@ -205,6 +250,29 @@ namespace TacticalAI.Core
             int row = a.C.SquadRow.CompareTo(b.C.SquadRow);
             if (row != 0) return row;
             return string.CompareOrdinal(a.C.HeroId ?? "", b.C.HeroId ?? "");
+        }
+
+        /// <summary>M10b purity test: only a profile WITHOUT the
+        /// basis-prior-neutral placeholder flag carries a real curated
+        /// basis - neutral priors and reference proxies are NOT comparable
+        /// with curated values (mixed-basis law, Thomas 27.10).</summary>
+        static bool RealCurated(HeroThreatProfile p)
+        {
+            return p != null && p.Flags != null && !p.Flags.Contains("basis-prior-neutral");
+        }
+
+        /// <summary>M10b: chip key on common ground for mixed-basis rounds -
+        /// class survives, runner/ev sub-keys become the documented neutral
+        /// prior for EVERY row (HeroProfiles.cs NeutralMobility x NeutralRange
+        /// / NeutralEv), so no curated value competes against a prior.</summary>
+        static List<object> CommonGroundChip(List<object> chip)
+        {
+            return new List<object>
+            {
+                chip[0],
+                HeroProfiles.NeutralMobility * HeroProfiles.NeutralRange,
+                HeroProfiles.NeutralEv,
+            };
         }
 
         /// ChipKey = [int class, int runner, Rational ev] (HeroProfiles.cs

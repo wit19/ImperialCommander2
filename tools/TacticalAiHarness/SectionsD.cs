@@ -42,6 +42,7 @@ namespace TacticalAiHarness
                 {
                     { "posture", view1.Posture },
                     { "objective", view1.Objective },
+                    { "objective_actor", view1.ObjectiveActor },
                     { "round", (long)view1.Round },
                     { "threat", view1.ThreatBalance },
                     { "seq", (long)view1.Seq },
@@ -57,7 +58,7 @@ namespace TacticalAiHarness
                     continue;
                 }
                 var exp = Json.AsDict(c["expect"]);
-                foreach (var k in new[] { "posture", "objective", "round", "threat", "seq", "hash", "canon" })
+                foreach (var k in new[] { "posture", "objective", "objective_actor", "round", "threat", "seq", "hash", "canon" })
                     Check(name + "." + k, exp[k], got[k]);
             }
             if (Record)

@@ -353,6 +353,7 @@ namespace TacticalAI
                               "\" basis=" + _roundFocus.Basis +
                               " threat=" + (_roundFocus.Threat.HasValue ? _roundFocus.Threat.Value.ToString() : "-") +
                               " marked=" + (_roundFocus.Marked ? 1 : 0) +
+                              " objActor=" + (string.IsNullOrEmpty(feedView.ObjectiveActor) ? "-" : feedView.ObjectiveActor) +
                               " feedSeq=" + feedView.Seq +
                               " risk=" + (_riskByGroup != null ? _riskByGroup.Count : 0) + " groups");
             }
@@ -764,6 +765,10 @@ namespace TacticalAI
                     MarkedRound = hv != null ? hv.MarkedRound : 0,
                     AttackDice = h.attacks?.Length ?? 0,
                     Health = h.health,
+                    // M10b: event-derived objective credit (view-level, the
+                    // feed names the hero - never a cell/position read).
+                    ObjectiveActor = view != null && !string.IsNullOrEmpty(view.ObjectiveActor)
+                        && System.StringComparer.Ordinal.Equals(view.ObjectiveActor, id),
                 });
             }
             return outp;

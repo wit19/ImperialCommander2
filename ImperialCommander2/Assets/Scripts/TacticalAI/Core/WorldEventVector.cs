@@ -23,6 +23,10 @@ namespace TacticalAI.Core
         public int Round;
         public string Posture = "eliminate";
         public string Objective = "";
+        // M10b: hero credited with the LAST objective progress (public
+        // activation-order attribution, "" = unknown/none). Event-derived,
+        // never a position read - the app cannot see hero cells.
+        public string ObjectiveActor = "";
         // M8/F5: MissionStart clock inputs, kept so a runtime RoundLimitChanged
         // can re-derive the posture exactly like a fresh MissionStart would.
         // (Canon text unchanged - posture, not its inputs, is the decision.)
@@ -117,6 +121,7 @@ namespace TacticalAI.Core
             sb.Append("round=").Append(Round.ToString(CultureInfo.InvariantCulture)).Append('\n');
             sb.Append("posture=").Append(Posture).Append('\n');
             sb.Append("objective=").Append(Objective).Append('\n');
+            sb.Append("objective_actor=").Append(ObjectiveActor).Append('\n');
             sb.Append("threat=").Append(ThreatBalance.ToString(CultureInfo.InvariantCulture)).Append('\n');
             sb.Append("threatseen=").Append(ThreatSeen ? 1 : 0).Append('\n');
             sb.Append("seq=").Append(Seq.ToString(CultureInfo.InvariantCulture)).Append('\n');
@@ -154,6 +159,15 @@ namespace TacticalAI.Core
                 HistoryHash = historyHash ?? WorldEventFeed.HashOf(events),
             };
 
+            // M10b objective attribution (Thomas revision 27.10): the feed
+            // knows objective PROGRESS (ObjectiveChange) and WHO ACTIVATED
+            // (HeroActivated) - never cell positions. The captor of the last
+            // objective step is the hero whose activation FOLLOWS the change
+            // ("im Anschluss seine Aktivierung beendet"); if nobody acted
+            // after it, the hero who activated just before keeps the credit.
+            // Pure replay state - same events, same attribution, resync-safe.
+            string lastActivator = null;
+            bool attributionPending = false;
             foreach (var e in events)
             {
                 if (e.Round > v.Round) v.Round = e.Round;
@@ -171,6 +185,12 @@ namespace TacticalAI.Core
                     case "ObjectiveChange":
                         v.Objective = e.Str("objective") ?? v.Objective;
                         ApplyDesignation(v, v.Objective, e.Round);
+                        // M10b: provisional credit = last activator before
+                        // the change; a later HeroActivated overwrites it
+                        // (the hero who finishes his turn AFTER the capture
+                        // is the one who did it - public activation order).
+                        v.ObjectiveActor = lastActivator ?? "";
+                        attributionPending = true;
                         break;
                     case "RoundLimitChanged":
                         // M8/F5: the mission clock is a posture input (clock ->
@@ -230,6 +250,12 @@ namespace TacticalAI.Core
                             var h = Hero(v, e.Str("hero"));
                             h.Activations++;
                             h.LastActivatedRound = e.Round;
+                            lastActivator = e.Str("hero");
+                            if (attributionPending)
+                            {
+                                v.ObjectiveActor = lastActivator;
+                                attributionPending = false;
+                            }
                             break;
                         }
                     // M6 aim tokens: the focus marker the human sets in the
