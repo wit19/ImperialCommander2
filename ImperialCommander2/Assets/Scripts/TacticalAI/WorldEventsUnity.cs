@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayerPrefs = UnityEngine.PlayerPrefs;
 using Tac = TacticalAI.Core;
 
 namespace TacticalAI

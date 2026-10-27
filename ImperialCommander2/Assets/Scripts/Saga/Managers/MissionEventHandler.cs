@@ -206,6 +206,16 @@ namespace Saga
 				Debug.Log( $"Round limit [{old}] SET to [{DataStore.sagaSessionData.gameVars.roundLimit}]" );
 			}
 
+			// TACTICAL AI M8/F5: the mission clock is public table info - when
+			// an event rewires it mid-mission the passive world feed re-reads
+			// the value each poll and emits RoundLimitChanged (a start
+			// snapshot alone would leave the planner on a stale clock).
+			if ( DataStore.sagaSessionData.gameVars.roundLimit != old )
+			{
+				var feedAdapter = FindObjectOfType<TacticalAI.WorldEventsUnity>();
+				if ( feedAdapter != null ) feedAdapter.MarkRuntimeDirty();
+			}
+
 			var sc = FindObjectOfType<SagaController>();
 			sc.UpdateRoundNumberUI();
 

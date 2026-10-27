@@ -610,6 +610,141 @@
     "seq": 4,
     "threat": 0
    }
+  },
+  {
+   "name": "clock_off_user",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Engage the rebels",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "clock1",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "RoundLimitChanged",
+     "round": 2,
+     "payload": {
+      "roundLimit": 8
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|clock_off_user\nround=2\nposture=stall\nobjective=Engage the rebels\nthreat=0\nthreatseen=0\nseq=2\n",
+    "hash": "2e1f6b619bf59d084c0a6fd3613f1886930bca9d5adba9c618306eaedca7db2e",
+    "objective": "Engage the rebels",
+    "posture": "stall",
+    "round": 2,
+    "seq": 2,
+    "threat": 0
+   }
+  },
+  {
+   "name": "clock_disabled_runtime",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Engage the rebels",
+      "priorityTarget": "Rebel",
+      "roundLimit": 8,
+      "mission": "clock2",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "RoundLimitChanged",
+     "round": 3,
+     "payload": {
+      "roundLimit": -1
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|clock_disabled_runtime\nround=3\nposture=eliminate\nobjective=Engage the rebels\nthreat=0\nthreatseen=0\nseq=2\n",
+    "hash": "ea59ff7c466b60462fe3d1301e621706fbb8bcbf2dfad8a1969df3d8c5e07125",
+    "objective": "Engage the rebels",
+    "posture": "eliminate",
+    "round": 3,
+    "seq": 2,
+    "threat": 0
+   }
+  },
+  {
+   "name": "protect_survives_clock_change",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Hold the gate until the convoy departs",
+      "priorityTarget": "Rebel",
+      "roundLimit": -1,
+      "mission": "clock3",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "RoundLimitChanged",
+     "round": 2,
+     "payload": {
+      "roundLimit": 6
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|protect_survives_clock_change\nround=2\nposture=protect\nobjective=Hold the gate until the convoy departs\nthreat=0\nthreatseen=0\nseq=2\n",
+    "hash": "5b743075b372db7f29f7f34ca16712765873582d7a56d9c90d7e91bd066a65d2",
+    "objective": "Hold the gate until the convoy departs",
+    "posture": "protect",
+    "round": 2,
+    "seq": 2,
+    "threat": 0
+   }
+  },
+  {
+   "name": "clock_change_after_objective",
+   "events": [
+    {
+     "kind": "MissionStart",
+     "round": 1,
+     "payload": {
+      "objective": "Destroy the rebel cell",
+      "priorityTarget": "Hero",
+      "roundLimit": -1,
+      "mission": "clock4",
+      "missionType": "Story"
+     }
+    },
+    {
+     "kind": "ObjectiveChange",
+     "round": 2,
+     "payload": {
+      "objective": "Escape to the shuttle"
+     }
+    },
+    {
+     "kind": "RoundLimitChanged",
+     "round": 3,
+     "payload": {
+      "roundLimit": 5
+     }
+    }
+   ],
+   "expect": {
+    "canon": "mission=vector|clock_change_after_objective\nround=3\nposture=stall\nobjective=Escape to the shuttle\nthreat=0\nthreatseen=0\nseq=3\n",
+    "hash": "019486f23983988166af377dff46bf5d0f25c2e437f9381ca38ff50b32d4f6b9",
+    "objective": "Escape to the shuttle",
+    "posture": "stall",
+    "round": 3,
+    "seq": 3,
+    "threat": 0
+   }
   }
  ]
 }

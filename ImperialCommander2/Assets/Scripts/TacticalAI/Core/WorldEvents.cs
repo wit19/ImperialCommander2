@@ -64,6 +64,10 @@ namespace TacticalAI.Core
             "ActivationStart", "ActivationEnd",
             "HeroActivated", "HeroWounded", "HeroDefeated",
             "GroupDamage", "RoundEnd",
+            // M8/F5: mission clock re-wired at runtime (ModifyRndLimit event
+            // or the roundLimitToggle flip) - public table info, the feed
+            // gate re-derives posture from it.
+            "RoundLimitChanged",
         };
 
         // The COMPLETE payload surface. Anything else (a die value, a hero
@@ -95,6 +99,7 @@ namespace TacticalAI.Core
             { "HeroDefeated",     new[] { "hero" } },
             { "GroupDamage",      new[] { "group", "figure", "wheel", "health" } },
             { "RoundEnd",         new string[0] },
+            { "RoundLimitChanged", new[] { "roundLimit" } },
         };
 
         public readonly string MissionKey;

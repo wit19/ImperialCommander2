@@ -23,6 +23,11 @@ namespace TacticalAI.Core
         public int Round;
         public string Posture = "eliminate";
         public string Objective = "";
+        // M8/F5: MissionStart clock inputs, kept so a runtime RoundLimitChanged
+        // can re-derive the posture exactly like a fresh MissionStart would.
+        // (Canon text unchanged - posture, not its inputs, is the decision.)
+        public string PriorityTarget = "";
+        public long RoundLimit = -1;
         public long ThreatBalance;
         public bool ThreatSeen;            // at least one public ThreatSpend event
         public int Seq;
@@ -145,6 +150,8 @@ namespace TacticalAI.Core
                 {
                     case "MissionStart":
                         v.Objective = e.Str("objective") ?? "";
+                        v.PriorityTarget = e.Str("priorityTarget") ?? "";
+                        v.RoundLimit = e.Long("roundLimit", -1);
                         v.Posture = DerivePosture(e.Str("objective"),
                                                   e.Str("priorityTarget"),
                                                   e.Long("roundLimit", -1));
@@ -153,6 +160,14 @@ namespace TacticalAI.Core
                     case "ObjectiveChange":
                         v.Objective = e.Str("objective") ?? v.Objective;
                         ApplyDesignation(v, v.Objective, e.Round);
+                        break;
+                    case "RoundLimitChanged":
+                        // M8/F5: the mission clock is a posture input (clock ->
+                        // stall unless protect wins). Re-wire = re-derive with
+                        // the MissionStart priority target, exactly the way a
+                        // fresh MissionStart would decide.
+                        v.RoundLimit = e.Long("roundLimit", -1);
+                        v.Posture = DerivePosture(v.Objective, v.PriorityTarget, v.RoundLimit);
                         break;
                     case "ThreatSpend":
                         v.ThreatBalance = e.Long("balance");
