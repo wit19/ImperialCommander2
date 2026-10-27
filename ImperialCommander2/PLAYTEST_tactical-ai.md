@@ -19,6 +19,12 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
 
 ## 2. Playtest-Setup
 
+> **Version prüfen:** Für diese Testphase ist die Versionsnummer fest auf
+> **`v.2.2.16 dev N`** gesetzt (die Nummer ändert sich nicht; nur das
+> `dev`-Zählwerk steigt mit jedem Auslieferungsbuild). Titelbildschirm und
+> Start-Log müssen dasselbe `dev N` zeigen wie die Release-Ansage — sonst
+> läuft eine veraltete App.
+
 1. Kampagne wie immer konfigurieren (Helden, Ausrüstung, Fähigkeiten — alles wie gehabt).
    Die KI braucht **keine** Änderungen an der Kampagnenverwaltung.
 2. Die KI-Optionen sitzen im normalen **Optionen-Fenster → Reiter „UI"** ganz unten
@@ -36,7 +42,7 @@ RiskPosture „Ansonsten" (v3.9 §3.5.1), Doktrinen-Axiome (v3.9.1 §4.5).
    jede Missionskarte oben links ein Badge **AI:OFF / AI:REF / AI:ORD** (erscheint nur,
    wenn der Master ON ist), dasselbe Badge erscheint zusätzlich **auf dem
    EINSATZKARTE-Panel direkt vor dem Missionsstart**, unterhalb des
-   Schwierigkeits-Buttons (seit v.2.2.18 — dort sitzt es praktisch, weil man dort
+   Schwierigkeits-Buttons (seit dev 1 — dort sitzt es praktisch, weil man dort
    ohnehin auf START drückt). Das Badge ist der *wahre* Schalter der Mission: Ein Klick
    schaltet AI:OFF → AI:REF → AI:ORD → AI:OFF. Solange es auf AI:OFF steht, läuft die
    Mission in Legacy — auch wenn global „reference" gewählt ist. (Das Badge war bis
