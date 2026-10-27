@@ -145,18 +145,33 @@ namespace TacticalAI.Core
         }
         public static string AsStr(object v) { return (string)v; }
         public static bool AsBool(object v) { return (bool)v; }
+        // Runtime records come from the GAME's DataStore (boxed int/float/string
+        // values), not only from this parser's own long/double output - first
+        // live playtest skipped all 69 cards because AsLong only accepted
+        // long/double. Accept every numeric shape + invariant strings.
         public static long AsLong(object v)
         {
             if (v is long l) return l;
+            if (v is int i) return i;
+            if (v is uint ui) return ui;
             if (v is double d) return (long)d;
-            throw new FormatException("JSON: not a number");
+            if (v is float f) return (long)f;
+            if (v is decimal m) return (long)m;
+            if (v is string s && long.TryParse(s, System.Globalization.NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture, out var p)) return p;
+            throw new FormatException("JSON: not a number" + (v == null ? ": null" : ": " + v.GetType().Name));
         }
         public static int AsInt(object v) { return (int)AsLong(v); }
         public static double AsDouble(object v)
         {
             if (v is double d) return d;
             if (v is long l) return l;
-            throw new FormatException("JSON: not a number");
+            if (v is int i) return i;
+            if (v is float f) return f;
+            if (v is decimal m) return (double)m;
+            if (v is string s && double.TryParse(s, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out var p)) return p;
+            throw new FormatException("JSON: not a number" + (v == null ? ": null" : ": " + v.GetType().Name));
         }
         public static Cell AsCell(object v)
         {
