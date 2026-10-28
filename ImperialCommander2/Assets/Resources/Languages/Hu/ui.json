@@ -194,7 +194,15 @@
     "imperialMenu": "IMPERIAL MENU",
     "medpacInfoUC": "Egy hős használhat Medpac-ot, amikor pihenő akciót hajt végre, és egy szövetséges figura használhat Medpac-ot akcióként.\n\nAmikor egy figura Medpac-ot használ, akkor 5 {H} kap vissza. Medpacs megtalálható a ládákban.",
     "cannotDefeatUC": "Ezt a csoportot nem lehet legyőzni.",
-    "missionLogTitle": "MISSION LOG"
+    "missionLogTitle": "MISSION LOG",
+    "optionalDeployTitleUC": "Opcionális telepítés",
+    "optionalDeployPickGroupUC": "Válassz egy csoportot:",
+    "optionalDeployPickDpUC": "Kattints most egy telepítési pontra a térképen:",
+    "optionalDeployNoGroupsUC": "Nincs elérhető csoport az opcionális telepítéshez.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Telepítési pont: {0}",
+    "optionalDeployConfirmUC": "Telepítés",
+    "optionalTacticalAnnounceUC": "{0} itt települ: {1}. Tedd rá az alakjait a telepítési pontra."
   },
   "uiCampaign": {
     "threatInfoUC": "A fenyegetettségi szint egyenlő a legutóbb játszott küldetéssével.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Rekrut",
     "skillS2": "Stormtrooper",
     "skillS3": "Veterán",

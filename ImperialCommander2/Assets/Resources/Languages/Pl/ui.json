@@ -194,7 +194,15 @@
     "imperialMenu": "MENU IMPERIUM",
     "medpacInfoUC": "Bohater może użyć Medpaca, kiedy wykonuje Akcję Odpoczynku, a figurka Sojusznika może użyć Medpaca jako Akcji.\n\nKiedy figurka używa Medpaca, odzyskuje 5 {H}. Medpaki można znaleźć w skrzyniach.",
     "cannotDefeatUC": "Tej grupy nie da się pokonać.",
-    "missionLogTitle": "REJESTR MISJI"
+    "missionLogTitle": "REJESTR MISJI",
+    "optionalDeployTitleUC": "Opcjonalne rozmieszczenie",
+    "optionalDeployPickGroupUC": "Wybierz grupę:",
+    "optionalDeployPickDpUC": "Kliknij teraz punkt rozmieszczenia na mapie:",
+    "optionalDeployNoGroupsUC": "Brak grupy dostępnej do opcjonalnego rozmieszczenia.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Punkt rozmieszczenia: {0}",
+    "optionalDeployConfirmUC": "Rozmieść",
+    "optionalTacticalAnnounceUC": "{0} rozmieszcza się w {1}. Ustaw jego figurki na punkcie rozmieszczenia."
   },
   "uiCampaign": {
     "threatInfoUC": "Poziom zagrożenia jest równy ostatnio rozegranej misji.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Rekrut",
     "skillS2": "Szturmowiec",
     "skillS3": "Weteran",

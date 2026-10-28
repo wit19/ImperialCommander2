@@ -194,7 +194,15 @@
     "imperialMenu": "ИМПЕРСКОЕ МЕНЮ",
     "medpacInfoUC": "Герой может использовать медпак, когда выполняет действие «Отдых», а фигурка союзника может использовать медпак в качестве действия.\n\nКогда фигурка использует медпак, она восстанавливает 5 {H}. Медпаки можно найти в ящиках.",
     "cannotDefeatUC": "Эту группу невозможно победить.",
-    "missionLogTitle": "ЖУРНАЛ ЗАДАНИЯ"
+    "missionLogTitle": "ЖУРНАЛ ЗАДАНИЯ",
+    "optionalDeployTitleUC": "Опциональное развертывание",
+    "optionalDeployPickGroupUC": "Выберите группу:",
+    "optionalDeployPickDpUC": "Теперь выберите точку развертывания на карте:",
+    "optionalDeployNoGroupsUC": "Нет групп, доступных для опционального развертывания.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Точка развертывания: {0}",
+    "optionalDeployConfirmUC": "Развернуть",
+    "optionalTacticalAnnounceUC": "{0} развертывается в {1}. Разместите его фигуры на точке развертывания."
   },
   "uiCampaign": {
     "threatInfoUC": "Уровень угрозы равен уровню угрозы последнего сыгранного задания.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Рекрут",
     "skillS2": "Штурмовик",
     "skillS3": "Ветеран",

@@ -194,7 +194,15 @@
     "mmBespinTileNameUC": "{3}",
     "mmJabbaTileNameUC": "{4}",
     "mmEmpireTileNameUC": "{5}",
-    "mmLothalTileNameUC": "{6}"
+    "mmLothalTileNameUC": "{6}",
+    "optionalDeployTitleUC": "Posicionamento opcional",
+    "optionalDeployPickGroupUC": "Escolha um grupo:",
+    "optionalDeployPickDpUC": "Agora clique em um ponto de posicionamento no mapa:",
+    "optionalDeployNoGroupsUC": "Nenhum grupo disponível para posicionamento opcional.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Ponto de posicionamento: {0}",
+    "optionalDeployConfirmUC": "Posicionar",
+    "optionalTacticalAnnounceUC": "{0} se posiciona em {1}. Coloque suas figuras no ponto de posicionamento."
   },
   "uiCampaign": {
     "threatInfoUC": "O nível de ameaça é igual ao da missão jogada mais recentemente.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recruta",
     "skillS2": "Stormtrooper",
     "skillS3": "Veterano",

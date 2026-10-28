@@ -139,6 +139,7 @@ namespace TacticalAiHarness
             Run("agenda.json", SecAgenda);
             Run("imperial_card_effects.json", SecImperialCardEffects);
             Run("action_tree.json", SecActionTree);
+            Run("optional_deploy.json", SecOptionalDeploy);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);

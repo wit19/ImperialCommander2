@@ -199,7 +199,15 @@
     "imperialMenu": "MENU IMPÉRIAL",
     "medpacInfoUC": "Un héros peut utiliser un Médipack lorsqu'il effectue une Action de Repos, et une figurine alliée peut utiliser un Médipack en tant qu'Action.\r\n\r\nLorsqu'une figurine utilise un Médipack, elle élimine 5 {H}. Les Médipacks peuvent être trouvés dans les Caisses.",
     "cannotDefeatUC": "Ce groupe ne peut pas être vaincu.",
-    "missionLogTitle": "JOURNAL DE MISSION"
+    "missionLogTitle": "JOURNAL DE MISSION",
+    "optionalDeployTitleUC": "Déploiement optionnel",
+    "optionalDeployPickGroupUC": "Choisis un groupe :",
+    "optionalDeployPickDpUC": "Clique maintenant sur un point de déploiement sur la carte :",
+    "optionalDeployNoGroupsUC": "Aucun groupe disponible pour un déploiement optionnel.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Point de déploiement : {0}",
+    "optionalDeployConfirmUC": "Déployer",
+    "optionalTacticalAnnounceUC": "{0} se déploie en {1}. Place ses figurines sur le point de déploiement."
   },
   "uiCampaign": {
     "threatInfoUC": "Le niveau de menace est égal à la dernière mission jouée.",
@@ -308,7 +316,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recrue",
     "skillS2": "Stormtrooper",
     "skillS3": "Vétéran",

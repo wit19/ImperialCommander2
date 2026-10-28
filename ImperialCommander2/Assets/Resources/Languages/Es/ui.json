@@ -194,7 +194,15 @@
     "imperialMenu": "MENÚ IMPERIAL",
     "medpacInfoUC": "Un héroe puede usar un Medpac cuando realiza una Acción de descansar, y una figura aliada puede usar un Medpac como Acción.\r\n\r\nCuando una figura usa un Medpac, recupera 5 {H}. Los Medpacs se pueden encontrar en cajas de suministros.",
     "cannotDefeatUC": "Este grupo no puede ser derrotado.",
-    "missionLogTitle": "REGISTRO DE LA MISIÓN"
+    "missionLogTitle": "REGISTRO DE LA MISIÓN",
+    "optionalDeployTitleUC": "Despliegue opcional",
+    "optionalDeployPickGroupUC": "Elige un grupo:",
+    "optionalDeployPickDpUC": "Ahora haz clic en un punto de despliegue del mapa:",
+    "optionalDeployNoGroupsUC": "No hay ningún grupo disponible para el despliegue opcional.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Punto de despliegue: {0}",
+    "optionalDeployConfirmUC": "Desplegar",
+    "optionalTacticalAnnounceUC": "{0} se despliega en {1}. Coloca sus figuras en el punto de despliegue."
   },
   "uiCampaign": {
     "threatInfoUC": "El nivel de amenaza es igual al de la última misión jugada.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recluta",
     "skillS2": "Stormtrooper",
     "skillS3": "Veterano",

@@ -214,7 +214,15 @@
     "imperialMenu": "KEIZERLIJKE MENU",
     "medpacInfoUC": "Een held kan een medpac gebruiken wanneer hij een rustactie uitvoert, en een bondgenootfiguur kan een medpac gebruiken als actie.\n\nWanneer een figuur een medpac gebruikt, herstelt hij 5 {H}. Medpacs zijn te vinden in kratten.",
     "cannotDefeatUC": "Deze groep kan niet verslagen worden.",
-    "missionLogTitle": "MISSIELOG"
+    "missionLogTitle": "MISSIELOG",
+    "optionalDeployTitleUC": "Optionele opstelling",
+    "optionalDeployPickGroupUC": "Kies een groep:",
+    "optionalDeployPickDpUC": "Klik nu een opstelplaats op de kaart:",
+    "optionalDeployNoGroupsUC": "Geen groep beschikbaar voor optionele opstelling.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Opstelplaats: {0}",
+    "optionalDeployConfirmUC": "Opschonen",
+    "optionalTacticalAnnounceUC": "{0} plaatst zich bij {1}. Zet zijn figuren op de opstelplaats."
   },
   "uiCampaign": {
     "threatInfoUC": "Het dreigingsniveau is gelijk aan de meest recent gespeelde missie.",
@@ -323,7 +331,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Rekrut",
     "skillS2": "Stormtrooper",
     "skillS3": "Veteraan",

@@ -41,12 +41,35 @@ namespace Saga
 		DeploymentGroupOverride deploymentOverride;
 		bool acceptInput = true;
 
-		public void Show( DeployMode mode, bool skipThreatIncrease, bool isOptionalDeployment, Action callback = null, DeploymentGroupOverride ovrd = null )
+		//M13c: tactical optional deployment -> the chosen DP marker is revealed
+		//even in "secret" deployment mode (Thomas 28.10: the marker IS the
+		//placement instruction for the human Imperator at the open screen; the
+		//suppression stays for all NON-optional deployments).
+		bool tacticalOptionalReveal = false;
+
+		//M13c: manual (legacy-mode) optional placement window state.
+		GameObject manualPanel;
+		TextMeshProUGUI manualHint, manualDpLabel;
+		Button manualConfirm;
+		List<DeploymentCard> manualCandidates;
+		List<DeploymentPoint> manualDps;
+		DeploymentCard manualGroup;
+		DeploymentPoint manualPickedDp;
+		//True only for the DM-button optional flows (manual window or tactical
+		//path). Event-sourced optional deployments (Aufstellungs-Ereignis) are
+		//NOT touched: no extra save, no announce - their chain calls
+		//NextEventAction itself.
+		bool isOptionalFlow = false;
+
+		public void Show( DeployMode mode, bool skipThreatIncrease, bool isOptionalDeployment, Action callback = null, DeploymentGroupOverride ovrd = null, bool manual = false )
 		{
 			acceptInput = true;
 			gameObject.SetActive( true );
 			fader.color = new Color( 0, 0, 0, 0 );
-			fader.DOFade( .75f, 1 );//.95
+			//M13c: in the manual placement window the DM must be able to CLICK
+			//the map behind the popup - the fader stays visual-only there.
+			fader.raycastTarget = !manual;
+			fader.DOFade( manual ? .25f : .75f, 1 );//.95
 			cg.DOFade( 1, .5f );
 			transform.GetChild( 1 ).localScale = new Vector3( .85f, .85f, .85f );
 			transform.GetChild( 1 ).DOScale( 1, .5f ).SetEase( Ease.OutExpo );
@@ -60,6 +83,11 @@ namespace Saga
 			postAction = callback;
 			groupsToDeploy = new List<DeploymentCard>();
 			warning.gameObject.SetActive( false );
+			//M13c: reset the manual-mode state + marker-reveal flag on every Show.
+			tacticalOptionalReveal = isOptionalDeployment && manual == false
+				&& TacticalAI.TacticalAIBridge.OptionalDeployPath() == TacticalAI.Core.OptionalDeploy.PathTactical;
+			isOptionalFlow = isOptionalDeployment && ovrd == null;//DM-button flows only
+			ResetManual();
 
 			//reset reinforce
 			topPanel.SetActive( false );
@@ -97,7 +125,10 @@ namespace Saga
 					landingMessageText.text = DataStore.uiLanguage.uiMainApp.threatIncreasedUC;
 					if ( isOptionalDeployment )
 						depTypeText.text = DataStore.uiLanguage.uiSetup.deploymentHeading;
-					HandleLanding( skipThreatIncrease, isOptionalDeployment );
+					if ( manual )
+						HandleManual( ovrd );
+					else
+						HandleLanding( skipThreatIncrease, isOptionalDeployment );
 					break;
 				case DeployMode.Onslaught:
 					onslaughtPanel.SetActive( true );
@@ -124,6 +155,8 @@ namespace Saga
 			transform.GetChild( 1 ).DOScale( .85f, .5f ).SetEase( Ease.OutExpo );
 			fader.DOFade( 0, .5f ).OnComplete( () =>
 			{
+				//M13c: restore the modal default for the next Show()
+				fader.raycastTarget = true;
 				//destroy onslaught group icons
 				foreach ( Transform tf in depGrid.transform )
 					Destroy( tf.gameObject );
@@ -141,6 +174,18 @@ namespace Saga
 					postAction?.Invoke();
 				}
 				FindObjectOfType<DeploymentManager>().UpdateGroups();
+
+				//M13c: the optional-deployment flows (manual window and the
+				//tactical fuzzy path) persist the mission + announce the
+				//placement instruction. GroupDeployment log lines are already
+				//written by DeploymentManager on deploy.
+				if ( isOptionalFlow )
+				{
+					DataStore.sagaSessionData.SaveState();
+					if ( tacticalOptionalReveal )
+						AnnounceTacticalLandings();
+				}
+				isOptionalFlow = false;
 
 				//save state
 				//DataStore.sagaSessionData.SaveSession( "Session" );
@@ -376,6 +421,291 @@ namespace Saga
 			{
 				onslaughtDWarning.gameObject.SetActive( true );
 			}
+		}
+
+		// ---------------------------------------------------------------- M13c
+
+		/// <summary>
+		/// M13c Scope B: tactical-mode optional deployment announcement. The
+		/// DP shown here is resolved by the SAME deterministic picker the
+		/// deployment path uses right afterwards (GetActiveDeploymentPoint ->
+		/// TacticalAIBridge.TryChooseDeploymentPoint, seeded by the campaign
+		/// key + round) - one DP truth, no second pick. The pulsing marker
+		/// (HandleMapDeployment highlight) stays visible exactly as long as
+		/// the instruction TextBox is on screen.
+		/// </summary>
+		void AnnounceTacticalLandings()
+		{
+			var scm = FindObjectOfType<SagaController>();
+			if ( scm == null ) return;
+			foreach ( var card in groupsToDeploy )
+			{
+				Guid dp = scm.mapEntityManager.GetActiveDeploymentPoint( card );
+				string dpName = dp == Guid.Empty ? "" : (scm.mapEntityManager.GetEntity( dp )?.name ?? "");
+				string line = TacticalAI.Core.OptionalDeploy.AnnounceLine(
+					OptionalDeployUi.AnnounceFormat, card.name, dpName );
+				if ( string.IsNullOrEmpty( line ) ) continue;
+				var em = FindObjectOfType<SagaEventManager>();
+				if ( em != null )
+					em.ShowTextBox( line );
+			}
+		}
+
+		/// <summary>
+		/// M13c Scope C: the revived manual placement window for legacy-mode
+		/// campaigns (Thomas 28.10). Compact strip (the map must stay visible
+		/// and clickable - no dark fader): pick a group, the valid DPs of the
+		/// card light up via the existing highlight mechanism, click one, pay
+		/// the printed cost on confirm. Built at runtime exactly like the
+		/// established tacai badges/panels (new GameObject + Button + TMP),
+		/// so no scene edit is needed.
+		/// </summary>
+		void HandleManual( DeploymentGroupOverride ovrd )
+		{
+			landingPanel.SetActive( false );//the strip replaces the fuzzy landing panel
+			//the shared `warning` label is a sibling of the panels, not a child
+			//of Landing - it stays usable for both manual failure states
+
+			//fuzzy candidate pool for the DM button = deployment hand (first,
+			//printed-cost groups) + manual deploy list, minus deployed - the
+			//same pools the legacy popup already treats as deployable now.
+			var deployedIds = new List<string>();
+			foreach ( var d in DataStore.deployedEnemies ) deployedIds.Add( d.id );
+			var handIds = new List<string>();
+			foreach ( var c in DataStore.deploymentHand ) handIds.Add( c.id );
+			var manualIds = new List<string>();
+			foreach ( var c in DataStore.manualDeploymentList ) manualIds.Add( c.id );
+			var ids = TacticalAI.Core.OptionalDeploy.CandidateIds( handIds, manualIds, deployedIds );
+
+			manualCandidates = new List<DeploymentCard>();
+			foreach ( var id in ids )
+			{
+				var card = DataStore.deploymentHand.GetDeploymentCard( id )
+					?? DataStore.manualDeploymentList.GetDeploymentCard( id );
+				if ( card != null ) manualCandidates.Add( card );
+			}
+
+			//strip background (blocks stray clicks, unlike the full-screen fader)
+			manualPanel = new GameObject( "OptionalDeployStrip", typeof( RectTransform ) );
+			manualPanel.transform.SetParent( transform, false );
+			var pRect = (RectTransform)manualPanel.transform;
+			pRect.anchorMin = new Vector2( .5f, .5f );
+			pRect.anchorMax = new Vector2( .5f, .5f );
+			pRect.sizeDelta = new Vector2( 660, 580 );
+			pRect.anchoredPosition = new Vector2( 0, -40 );
+			var bg = manualPanel.AddComponent<Image>();
+			bg.color = new Color( .04f, .04f, .06f, .95f );
+
+			MakeLabel( manualPanel.transform, "OptionalDeployHeading", OptionalDeployUi.Title.ToUpperInvariant(),
+				26, new Vector2( 0, 258 ), new Vector2( 620, 40 ), true );
+			manualHint = MakeLabel( manualPanel.transform, "OptionalDeployHint", OptionalDeployUi.PickGroup,
+				20, new Vector2( 0, 214 ), new Vector2( 620, 34 ), false );
+
+			//scrollable group list
+			var svGo = new GameObject( "OptionalDeployScroll", typeof( RectTransform ),
+				typeof( ScrollRect ), typeof( Image ), typeof( RectMask2D ) );
+			svGo.transform.SetParent( manualPanel.transform, false );
+			var svRect = (RectTransform)svGo.transform;
+			svRect.anchorMin = new Vector2( .5f, .5f );
+			svRect.anchorMax = new Vector2( .5f, .5f );
+			svRect.sizeDelta = new Vector2( 620, 340 );
+			svRect.anchoredPosition = new Vector2( 0, 24 );
+			svGo.GetComponent<Image>().color = new Color( 1, 1, 1, .04f );
+			var scroll = svGo.GetComponent<ScrollRect>();
+			scroll.horizontal = false;
+
+			var viewGo = new GameObject( "Viewport", typeof( RectTransform ), typeof( RectMask2D ) );
+			viewGo.transform.SetParent( svGo.transform, false );
+			var viewRect = (RectTransform)viewGo.transform;
+			viewRect.anchorMin = Vector2.zero;
+			viewRect.anchorMax = Vector2.one;
+			viewRect.sizeDelta = Vector2.zero;
+
+			var contentGo = new GameObject( "Content", typeof( RectTransform ), typeof( VerticalLayoutGroup ) );
+			contentGo.transform.SetParent( viewGo.transform, false );
+			var cRect = (RectTransform)contentGo.transform;
+			cRect.anchorMin = new Vector2( 0, 1 );
+			cRect.anchorMax = new Vector2( 0, 1 );
+			cRect.pivot = new Vector2( .5f, 1 );
+			cRect.sizeDelta = new Vector2( 610, 0 );
+			var vlg = contentGo.AddComponent<VerticalLayoutGroup>();
+			vlg.spacing = 6;
+			vlg.childControlHeight = true;
+			vlg.childControlWidth = true;
+			vlg.childForceExpandWidth = true;
+			contentGo.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+			scroll.viewport = viewRect;
+			scroll.content = cRect;
+
+			if ( manualCandidates.Count == 0 )
+			{
+				ShowWarning( OptionalDeployUi.NoGroups );
+			}
+			else
+			{
+				foreach ( var card in manualCandidates )
+				{
+					var row = MakeButton( contentGo.transform, card.name,
+						string.Format( OptionalDeployUi.CostFormat,
+							DataStore.uiLanguage.uiMainApp.depCostUC,
+							TacticalAI.Core.OptionalDeploy.DisplayedCost( card.cost ) ) );
+					row.GetComponent<Button>().onClick.AddListener( () => OnManualGroupPicked( card ) );
+				}
+			}
+
+			manualDpLabel = MakeLabel( manualPanel.transform, "OptionalDeployDp", "",
+				20, new Vector2( 0, -162 ), new Vector2( 620, 34 ), false );
+
+			manualConfirm = MakeButton( manualPanel.transform, DataStore.uiLanguage.uiMainApp.deploy, "" );
+			var cRect2 = (RectTransform)manualConfirm.transform;
+			cRect2.sizeDelta = new Vector2( 300, 48 );
+			manualConfirm.onClick.AddListener( ConfirmManual );
+
+			var closeBtn = MakeButton( manualPanel.transform, DataStore.uiLanguage.uiMainApp.close, "" );
+			var clRect = (RectTransform)closeBtn.transform;
+			clRect.sizeDelta = new Vector2( 300, 48 );
+			closeBtn.onClick.AddListener( OnClose );
+
+			//both buttons at the strip bottom, side by side
+			cRect2.anchoredPosition = new Vector2( -155, -240 );
+			clRect.anchoredPosition = new Vector2( 155, -240 );
+			manualConfirm.interactable = false;
+		}
+
+		TextMeshProUGUI MakeLabel( Transform parent, string name, string text, int size, Vector2 pos, Vector2 sizeDelta, bool bold )
+		{
+			var go = new GameObject( name, typeof( RectTransform ) );
+			go.transform.SetParent( parent, false );
+			var r = (RectTransform)go.transform;
+			r.anchorMin = new Vector2( .5f, .5f );
+			r.anchorMax = new Vector2( .5f, .5f );
+			r.sizeDelta = sizeDelta;
+			r.anchoredPosition = pos;
+			var t = go.AddComponent<TextMeshProUGUI>();
+			t.text = text;
+			t.fontSize = size;
+			t.alignment = TextAlignmentOptions.Center;
+			t.color = Color.white;
+			t.fontStyle = bold ? FontStyles.Bold : FontStyles.Normal;
+			return t;
+		}
+
+		Button MakeButton( Transform parent, string line1, string line2 )
+		{
+			var go = new GameObject( "OptionalDeployButton", typeof( RectTransform ), typeof( Image ), typeof( Button ) );
+			go.transform.SetParent( parent, false );
+			var r = (RectTransform)go.transform;
+			r.sizeDelta = new Vector2( 590, 44 );
+			go.GetComponent<Image>().color = new Color( .18f, .22f, .30f, .96f );
+			var lbl = MakeLabel( go.transform, "Text (TMP)", string.IsNullOrEmpty( line2 ) ? line1 : $"{line1}\n<size=70%>{line2}</size>",
+				20, Vector2.zero, new Vector2( 580, 42 ), false );
+			lbl.enableWordWrapping = true;
+			lbl.overflowMode = TextOverflowModes.Ellipsis;
+			return go.GetComponent<Button>();
+		}
+
+		void ShowWarning( string msg )
+		{
+			warning.gameObject.SetActive( true );
+			warning.text = msg;
+		}
+
+		void OnManualGroupPicked( DeploymentCard card )
+		{
+			if ( !acceptInput ) return;
+			ClearManualMarkers();
+			manualGroup = card;
+			manualPickedDp = null;
+			manualConfirm.interactable = false;
+			manualDpLabel.text = "";
+			warning.gameObject.SetActive( false );
+
+			manualDps = new List<DeploymentPoint>();
+			var valid = FindObjectOfType<SagaController>().mapEntityManager.GetValidDeploymentPoints( card );
+			foreach ( var e in valid )
+			{
+				var dp = e as DeploymentPoint;
+				if ( dp != null ) manualDps.Add( dp );
+			}
+			if ( manualDps.Count == 0 )
+			{
+				//existing warning key, reused verbatim (Scope C)
+				ShowWarning( DataStore.uiLanguage.sagaMainApp.noDPWarningUC );
+				manualHint.text = OptionalDeployUi.PickGroup;
+				return;
+			}
+			//valid DPs light up = exactly what the DM may click, for exactly
+			//as long as this picking phase lasts
+			FindObjectOfType<SagaController>().mapEntityManager.ShowDeploymentPoints(
+				System.Linq.Enumerable.Select( manualDps, d => d.GUID ), true );
+			var mem = FindObjectOfType<SagaController>().mapEntityManager;
+			mem.OnDeploymentPointPicked = OnManualDpPicked;
+			manualHint.text = OptionalDeployUi.PickDp;
+		}
+
+		void OnManualDpPicked( DeploymentPoint dp )
+		{
+			if ( !acceptInput || dp == null || manualGroup == null ) return;
+			//still-valid check: only DPs from the filtered list may confirm
+			if ( manualDps == null || !manualDps.Contains( dp ) ) return;
+			manualPickedDp = dp;
+			manualDpLabel.text = string.Format( OptionalDeployUi.DpFormat, dp.name ?? "" );
+			manualConfirm.interactable = TacticalAI.Core.OptionalDeploy.CanConfirmManual(
+				manualGroup.id, manualGroup.cost, true, true );
+			FindObjectOfType<Sound>().PlaySound( FX.Click );
+		}
+
+		void ConfirmManual()
+		{
+			if ( !acceptInput ) return;
+			if ( manualGroup == null || manualPickedDp == null ) return;
+			//Core confirm law (pinned): group + printed cost + picked, valid DP
+			if ( !TacticalAI.Core.OptionalDeploy.CanConfirmManual(
+				manualGroup.id, manualGroup.cost, true, manualDps.Contains( manualPickedDp ) ) )
+				return;
+
+			int spend = TacticalAI.Core.OptionalDeploy.ThreatSpend( manualGroup.cost,
+				deploymentOverride != null ? deploymentOverride.threatCost : 0 );
+			Debug.Log( $"M13c manual optional deploy::{manualGroup.name} @ {manualPickedDp.name}::threat -{spend}" );
+
+			//pay the printed cost (EnemyDeployment cost law)
+			DataStore.sagaSessionData.ModifyThreat( -spend );
+			manualGroup.ResetWoundTracker();
+			DataStore.deploymentHand.Remove( manualGroup );
+
+			//specific-DP override, passed inline (like the event-sourced
+			//RandomDeployment path) - no permanent override registered
+			deploymentOverride = new DeploymentGroupOverride( "" );
+			deploymentOverride.deploymentPoint = DeploymentSpot.Specific;
+			deploymentOverride.specificDeploymentPoint = manualPickedDp.GUID;
+			deploymentOverride.pointList.Clear();
+			deploymentOverride.pointList.Add( new DPData { GUID = manualPickedDp.GUID } );
+			groupsToDeploy.Add( manualGroup );
+			OnClose();
+		}
+
+		void ClearManualMarkers()
+		{
+			var scm = FindObjectOfType<SagaController>();
+			if ( scm != null && manualDps != null && manualDps.Count > 0 )
+				scm.mapEntityManager.ShowDeploymentPoints(
+					System.Linq.Enumerable.Select( manualDps, d => d.GUID ), false );
+		}
+
+		void ResetManual()
+		{
+			ClearManualMarkers();
+			var mem = FindObjectOfType<SagaController>()?.mapEntityManager;
+			if ( mem != null ) mem.OnDeploymentPointPicked = null;
+			manualGroup = null;
+			manualPickedDp = null;
+			manualDps = null;
+			manualCandidates = null;
+			manualHint = null;
+			manualDpLabel = null;
+			manualConfirm = null;
+			if ( manualPanel != null ) Destroy( manualPanel );
+			manualPanel = null;
 		}
 
 		private void Update()

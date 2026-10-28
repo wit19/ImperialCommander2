@@ -194,7 +194,15 @@
     "imperialMenu": "IMPERIALES MENÜ",
     "medpacInfoUC": "Ein Held kann ein Medpac verwenden, sobald er die Aktion „Ausruhen“ durchführt. Verbündete können ein Medpac als Aktion nutzen. \r\n\r\nSobald eine Figur ein Medpac verwendet, regeneriert sie 5 {H}. Medpacs können in Kisten gefunden werden.",
     "cannotDefeatUC": "Diese Gruppe kann nicht besiegt werden.",
-    "missionLogTitle": "MISSIONS-LOGBUCH"
+    "missionLogTitle": "MISSIONS-LOGBUCH",
+    "optionalDeployTitleUC": "Optionale Aufstellung",
+    "optionalDeployPickGroupUC": "Wähle eine Gruppe:",
+    "optionalDeployPickDpUC": "Klicke jetzt einen Aufstellungspunkt auf der Karte:",
+    "optionalDeployNoGroupsUC": "Keine Gruppe für eine optionale Aufstellung verfügbar.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Aufstellungspunkt: {0}",
+    "optionalDeployConfirmUC": "Aufstellen",
+    "optionalTacticalAnnounceUC": "{0} stellt sich bei {1} auf. Stelle seine Figuren auf dem Aufstellungspunkt auf."
   },
   "uiCampaign": {
     "threatInfoUC": "Der Bedrohungsgrad entspricht der Höhe des zuletzt gespielten Einsatzes.",
@@ -303,7 +311,7 @@
     "setOn": "AN",
     "setOff": "AUS",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "Ab S4 spielt die KI die aufgedruckten Kartenfähigkeiten (z. B. Stativ: in einer Aktivierung nie bewegen und angreifen)",
+    "setCardSkills": "Ab S4 spielt die KI die aufgedruckten Kartenfähigkeiten (z. B. Stativ: in einer Aktivierung nie bewegen und angreifen)",
     "skillS1": "Rekrut",
     "skillS2": "Stormtrooper",
     "skillS3": "Veteran",

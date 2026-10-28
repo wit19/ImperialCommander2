@@ -162,6 +162,25 @@ namespace TacticalAI
             catch { return false; }
         }
 
+        /// <summary>M13c: the optional-deployment path fork (Scope D) fed
+        /// with the live, mission-frozen mode - same gate semantics as
+        /// ActiveNow(). The pure decision lives in Core
+        /// (OptionalDeploy.Path, fixture optional_deploy.json); this is the
+        /// Unity seam the ImperialPopup button calls so both the UI and the
+        /// pinned law share ONE truth.</summary>
+        public static string OptionalDeployPath()
+        {
+            try
+            {
+                var mission = DataStore.sagaSessionData?.setupOptions?.aiMode;
+                return Core.OptionalDeploy.Path(
+                    TacticalAISettings.Enabled,
+                    TacticalAISettings.EffectiveMode(null),   // global mode, mission token passed below
+                    mission);
+            }
+            catch { return Core.OptionalDeploy.PathManual; }
+        }
+
         static void EnsureSessionFresh()
         {
             var k = SessionKey();

@@ -214,7 +214,15 @@
     "imperialMenu": "IMPERIAL MENU",
     "medpacInfoUC": "A hero can use a Medpac when they perform a Rest Action, and an Ally figure can use a Medpac as an Action.\n\nWhen a figure uses a Medpac, it recovers 5 {H}. Medpacs can be found in Crates.",
     "cannotDefeatUC": "This group cannot be defeated.",
-    "missionLogTitle": "MISSION LOG"
+    "missionLogTitle": "MISSION LOG",
+    "optionalDeployTitleUC": "Optional Deployment",
+    "optionalDeployPickGroupUC": "Choose a group:",
+    "optionalDeployPickDpUC": "Now click a deployment point on the map:",
+    "optionalDeployNoGroupsUC": "No group available for optional deployment.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Deployment point: {0}",
+    "optionalDeployConfirmUC": "Deploy",
+    "optionalTacticalAnnounceUC": "{0} deploys at {1}. Place its figures on the deployment point."
   },
   "uiCampaign": {
     "threatInfoUC": "Threat level is equal to the most recently played mission.",
@@ -323,7 +331,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recruit",
     "skillS2": "Stormtrooper",
     "skillS3": "Veteran",

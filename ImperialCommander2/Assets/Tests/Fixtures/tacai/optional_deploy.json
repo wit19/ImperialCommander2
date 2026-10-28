@@ -1,0 +1,56 @@
+{
+  "_comment": "M13c optional-deployment revival decisions (hand-pinned ground truth, NOT --record; same route as action_tree.json / logger_extract.json). TacticalAI.Core.OptionalDeploy carries the PURE fork/law behind the revived flow (Thomas 28.10: tactical missions -> AI places + DP marked + announced; legacy missions -> manual DM window). Path() mirrors the mission-frozen gate of TacticalAIBridge.ActiveNow; CandidateIds() is the manual window's pool order (deployment hand first, then manual deploy list, deduplicated, minus deployed); DisplayedCost/ThreatSpend mirror the alive EnemyDeployment cost law (clamp(cost+modifier,0,100)); CanConfirmManual is the confirm gate; AnnounceLine renders the ui.json optionalTacticalAnnounceUC template. Presentation/branching only: no planning behaviour, Canon vectors untouched, no Python sim twin.",
+  "path_cases": [
+    { "name": "switch_off_is_manual",            "enabled": false, "mode": "overlord",   "missionAiMode": "",           "expect": "manual" },
+    { "name": "switch_off_legacy_mission",        "enabled": false, "mode": "reference",  "missionAiMode": "legacy",     "expect": "manual" },
+    { "name": "auto_global_overlord",             "enabled": true,  "mode": "overlord",   "missionAiMode": "",           "expect": "tactical" },
+    { "name": "auto_global_reference",            "enabled": true,  "mode": "reference",  "missionAiMode": "",           "expect": "tactical" },
+    { "name": "auto_global_legacy",               "enabled": true,  "mode": "legacy",     "missionAiMode": "",           "expect": "manual" },
+    { "name": "badge_off_beats_global_overlord",  "enabled": true,  "mode": "overlord",   "missionAiMode": "off",        "expect": "manual" },
+    { "name": "badge_legacy_old_campaign_field",  "enabled": true,  "mode": "overlord",   "missionAiMode": "legacy",     "expect": "manual" },
+    { "name": "badge_S1_is_tactical",             "enabled": true,  "mode": "legacy",     "missionAiMode": "S1",         "expect": "tactical" },
+    { "name": "badge_S4_is_tactical",             "enabled": true,  "mode": "legacy",     "missionAiMode": "S4",         "expect": "tactical" },
+    { "name": "badge_reference_token",            "enabled": true,  "mode": "legacy",     "missionAiMode": "reference",  "expect": "tactical" },
+    { "name": "badge_overlord_token",             "enabled": true,  "mode": "legacy",     "missionAiMode": "overlord",   "expect": "tactical" },
+    { "name": "unknown_token_follows_global_on",  "enabled": true,  "mode": "reference",  "missionAiMode": "bogus",      "expect": "tactical" },
+    { "name": "unknown_token_follows_global_off", "enabled": true,  "mode": "legacy",     "missionAiMode": "bogus",      "expect": "manual" }
+  ],
+  "candidate_cases": [
+    { "name": "hand_first_then_manual",
+      "hand": ["DG012", "DG005"], "manual": ["DG039"], "deployed": [],
+      "expect": ["DG012", "DG005", "DG039"] },
+    { "name": "dedup_manual_copy_of_hand_card",
+      "hand": ["DG005"], "manual": ["DG005", "DG040"], "deployed": [],
+      "expect": ["DG005", "DG040"] },
+    { "name": "deployed_removed_even_from_hand",
+      "hand": ["DG005", "DG012"], "manual": ["DG039"], "deployed": ["DG012"],
+      "expect": ["DG005", "DG039"] },
+    { "name": "empty_pools",
+      "hand": [], "manual": [], "deployed": [],
+      "expect": [] },
+    { "name": "blank_ids_skipped",
+      "hand": ["", "DG005"], "manual": [""], "deployed": [],
+      "expect": ["DG005"] }
+  ],
+  "cost_cases": [
+    { "cost": 0,   "modifier": 0,  "expect": { "display": 0,  "spend": 0 } },
+    { "cost": 3,   "modifier": 0,  "expect": { "display": 3,  "spend": 3 } },
+    { "cost": 7,   "modifier": 2,  "expect": { "display": 7,  "spend": 9 } },
+    { "cost": 98,  "modifier": 5,  "expect": { "display": 98, "spend": 100 } },
+    { "cost": -1,  "modifier": 0,  "expect": { "display": 0,  "spend": 0 } }
+  ],
+  "confirm_cases": [
+    { "name": "nothing_picked",        "group": "",       "cost": 4, "dpPicked": false, "dpValid": false, "expect": false },
+    { "name": "group_no_dp",           "group": "DG005",  "cost": 4, "dpPicked": false, "dpValid": true,  "expect": false },
+    { "name": "dp_but_group_gone",     "group": "",       "cost": 4, "dpPicked": true,  "dpValid": true,  "expect": false },
+    { "name": "zero_cost_defensive",   "group": "DG005",  "cost": 0, "dpPicked": true,  "dpValid": true,  "expect": false },
+    { "name": "dp_invalidated",        "group": "DG005",  "cost": 4, "dpPicked": true,  "dpValid": false, "expect": false },
+    { "name": "happy_path",            "group": "DG005",  "cost": 4, "dpPicked": true,  "dpValid": true,  "expect": true }
+  ],
+  "announce_cases": [
+    { "name": "en_template",  "template": "{0} deploys at {1}. Place its figures on the deployment point.", "group": "Gamorrean Guard", "dp": "D1", "expect": "Gamorrean Guard deploys at D1. Place its figures on the deployment point." },
+    { "name": "de_template",  "template": "{0} stellt sich bei {1} auf. Stelle seine Figuren auf dem Aufstellungspunkt auf.", "group": "Trandosha", "dp": "A2", "expect": "Trandosha stellt sich bei A2 auf. Stelle seine Figuren auf dem Aufstellungspunkt auf." },
+    { "name": "no_dp_known",  "template": "{0} deploys at {1}.", "group": "Gamorrean Guard", "dp": "", "expect": "Gamorrean Guard deploys at ." },
+    { "name": "missing_template_yields_empty", "template": "", "group": "X", "dp": "D1", "expect": "" }
+  ]
+}

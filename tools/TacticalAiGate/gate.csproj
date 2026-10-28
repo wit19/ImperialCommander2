@@ -15,6 +15,7 @@
     <Compile Include="ImperialCardEffectsGate.cs" />
     <Compile Include="AgendaGate.cs" />
     <Compile Include="ActionTreeGate.cs" />
+    <Compile Include="OptionalDeployGate.cs" />
     <Compile Include="..\..\ImperialCommander2\Assets\Scripts\Screens\CampaignScreen\Models\ImperialDeckState.cs" />
     <Compile Include="..\..\ImperialCommander2\Assets\Scripts\Screens\CampaignScreen\Models\AgendaState.cs" />
   </ItemGroup>

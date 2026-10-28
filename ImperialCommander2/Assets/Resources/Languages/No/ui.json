@@ -194,7 +194,15 @@
     "imperialMenu": "IMPERIEMENY",
     "medpacInfoUC": "En helt kan bruke en Medpac når de utfører en hvilehandling, og en alliert figur kan bruke en Medpac som en handling.\n\nNår en figur bruker en Medpac, gjenoppretter den 5 {H}. Medpacs finnes i Crates.",
     "cannotDefeatUC": "Denne gruppen kan ikke beseires.",
-    "missionLogTitle": "MISSION LOG"
+    "missionLogTitle": "MISSION LOG",
+    "optionalDeployTitleUC": "Valgfri utplassering",
+    "optionalDeployPickGroupUC": "Velg en gruppe:",
+    "optionalDeployPickDpUC": "Klikk nå et utplasseringspunkt på kartet:",
+    "optionalDeployNoGroupsUC": "Ingen gruppe tilgjengelig for valgfri utplassering.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Utplasseringspunkt: {0}",
+    "optionalDeployConfirmUC": "Utplasser",
+    "optionalTacticalAnnounceUC": "{0} utplasseres ved {1}. Plasser figurene på utplasseringspunktet."
   },
   "uiCampaign": {
     "threatInfoUC": "Trusselnivået er lik som i det sist spilte oppdraget.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Rekrutt",
     "skillS2": "Stormtrooper",
     "skillS3": "Veteran",

@@ -391,6 +391,18 @@ namespace Saga
 							inputTimer = 2;
 						}
 					}
+					// M13c: optional-deployment manual window - DPs are only
+					// hit while the window deliberately shows them, and the
+					// callback below is only set during the picking phase.
+					else if ( objectHit.name.StartsWith( "DPSpotPrefab" ) )
+					{
+						var dp = objectHit.GetComponentInParent<DPointPrefab>();
+						if ( dp != null && !dp.isAnimationBusy && OnDeploymentPointPicked != null )
+						{
+							OnDeploymentPointPicked.Invoke( dp.mapEntity as DeploymentPoint );
+							inputTimer = 2;
+						}
+					}
 				}
 			}
 
@@ -439,6 +451,48 @@ namespace Saga
 		public IMapEntity GetEntity( Guid guid )
 		{
 			return mapEntities.Where( x => x.GUID == guid ).FirstOr( null );
+		}
+
+		/// <summary>
+		/// M13c: the DP the player/DM clicked while the optional-deployment
+		/// manual window is open (Scope C). Set by SagaDeploymentPopup for the
+		/// lifetime of the picking phase, cleared on close — MapEntityManager
+		/// owns no opinion about it, it just routes the raycast hit below.
+		/// </summary>
+		public System.Action<DeploymentPoint> OnDeploymentPointPicked;
+
+		/// <summary>
+		/// M13c: the SAME list GetActiveDeploymentPoint would pick from
+		/// (active DP + active section + the card-specific FilterDP law),
+		/// exposed for the manual placement window so there is no second
+		/// DP-validity truth.
+		/// </summary>
+		public List<IMapEntity> GetValidDeploymentPoints( DeploymentCard enemyToAdd )
+		{
+			List<IMapEntity> dps = new List<IMapEntity>();
+			foreach ( var e in mapEntities )
+			{
+				if ( e.entityType == EntityType.DeploymentPoint && e.entityProperties.isActive
+				&& FindObjectOfType<TileManager>().IsMapSectionActive( e.mapSectionOwner ) )
+					dps.Add( e );
+			}
+			if ( enemyToAdd != null && dps.Count > 0 )
+				dps = FilterDP( dps, enemyToAdd );
+			return dps;
+		}
+
+		/// <summary>
+		/// M13c: show/hide ALL DPs of the given GUIDs via the existing
+		/// highlight mechanism (pulsing sprite). The manual window uses this
+		/// while the DM picks a spot: the valid DPs are exactly what the DM
+		/// may click, and they are visible exactly as long as the picking
+		/// phase lasts (Thomas 28.10 marker rule).
+		/// </summary>
+		public void ShowDeploymentPoints( IEnumerable<Guid> guids, bool visible )
+		{
+			if ( guids == null ) return;
+			foreach ( var g in guids )
+				ToggleHighlightDeploymentPoint( g, visible );
 		}
 
 		/// <summary>

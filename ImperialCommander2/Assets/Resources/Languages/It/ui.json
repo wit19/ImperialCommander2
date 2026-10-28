@@ -194,7 +194,15 @@
     "imperialMenu": "IMPERIAL MENU",
     "medpacInfoUC": "Un eroe può usare un Medpac quando esegue un'Azione Riposo, e un alleato può usare un Medpac come Azione.\n\nQuando una miniatura usa un Medpac, recupera 5 {H}. I medpac possono essere trovati nelle casse.",
     "cannotDefeatUC": "Questo gruppo non può essere sconfitto.",
-    "missionLogTitle": "MISSION LOG"
+    "missionLogTitle": "MISSION LOG",
+    "optionalDeployTitleUC": "Schieramento opzionale",
+    "optionalDeployPickGroupUC": "Scegli un gruppo:",
+    "optionalDeployPickDpUC": "Ora clicca un punto di schieramento sulla mappa:",
+    "optionalDeployNoGroupsUC": "Nessun gruppo disponibile per lo schieramento opzionale.",
+    "optionalDeployCostFormatUC": "{0} - {1}",
+    "optionalDeployDpFormatUC": "Punto di schieramento: {0}",
+    "optionalDeployConfirmUC": "Schiera",
+    "optionalTacticalAnnounceUC": "{0} si schiera in {1}. Piazza le sue figurine sul punto di schieramento."
   },
   "uiCampaign": {
     "threatInfoUC": "Il livello di minaccia è uguale all'ultima missione giocata.",
@@ -303,7 +311,7 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-		"setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
+    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recluta",
     "skillS2": "Stormtrooper",
     "skillS3": "Veterano",
