@@ -316,6 +316,7 @@
     "expFull": "COMPLETA",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
+    "ordOptionPrinted": "Card special action: {0} - {1}",
     "ordMarked": "segnamarcato: l’obiettivo della missione lo nomina",
     "ordRoundFocus": "tutti i gruppi convergono sullo stesso obiettivo di fuoco",
     "ordRiskLabel": "postura di rischio: {0}",

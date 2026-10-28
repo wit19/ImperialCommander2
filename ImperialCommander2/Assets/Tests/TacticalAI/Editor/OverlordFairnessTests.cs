@@ -302,6 +302,65 @@ using DeploymentCard = TacticalAI.Core.DeploymentCard;
             return OverlordFocus.Rank(cands, v.Posture, null);
         }
 
+        // ---- M11e: the printed {A} villain-option layer -------------------
+        // Fairness canon mirrors: the option table is PUBLIC card-table data
+        // (cards lie open), the pick is a pure function of the attacker's own
+        // printed card + the public threat balance, and the S-gate is the
+        // exact CardKeywords law (S4/S5 read printed abilities, S1..S3 never).
+
+        [Test]
+        public void Villain_Options_Table_Is_Public_Card_Data()
+        {
+            foreach (var cls in new[] { VillainOptions.AttackLike,
+                                        VillainOptions.OrderLike,
+                                        VillainOptions.Utility })
+            {
+                var ids = VillainOptions.CardsWith(cls);
+                // stable lookup (determinism), and every carrier is a SINGLE
+                // villain id inside the printed villain range DG071..DG090.
+                Assert.AreEqual(string.Join(",", ids),
+                                string.Join(",", VillainOptions.CardsWith(cls)));
+                foreach (var id in ids)
+                {
+                    int n = int.Parse(id.Substring(2));
+                    Assert.GreaterOrEqual(n, 71, cls + " " + id);
+                    Assert.LessOrEqual(n, 90, cls + " " + id);
+                }
+            }
+            // gate: same S4/S5 law as CardKeywords; no option on non-villains
+            Assert.IsFalse(VillainOptions.ActiveFor(SkillProfile.For("S3"), "DG072"));
+            Assert.IsTrue(VillainOptions.ActiveFor(SkillProfile.For("S4"), "DG072"));
+            Assert.IsTrue(VillainOptions.ActiveFor(SkillProfile.For("S5"), "DG072"));
+            Assert.IsFalse(VillainOptions.ActiveFor(SkillProfile.For("S4"), "DG001"));
+        }
+
+        [Test]
+        public void Villain_Options_Pick_Is_Pure_And_Never_Invents_Anything()
+        {
+            var vader = DeploymentCard.FromRecord(new Dictionary<string, object>
+            {
+                { "id", "DG072" }, { "attackType", "Melee" },
+                { "attacks", new List<object> { "Red", "Red", "Yellow" } },
+            });
+            var p1 = VillainOptions.PickLive(vader, 0);
+            var p2 = VillainOptions.PickLive(vader, 0);
+            Assert.AreEqual(p1.Option == null ? null : p1.Option.Key,
+                            p2.Option == null ? null : p2.Option.Key);
+            Assert.AreEqual(p1.AttackValue.ToString(), p2.AttackValue.ToString());
+            Assert.AreEqual("14/3", p1.AttackValue.ToString());
+            // the pick only ever returns a table entry of THIS card's id
+            Assert.IsNotNull(p1.Option);
+            Assert.AreEqual("DG072", p1.Option.CardId);
+            // an unknown threat balance never SHOWS a utility option
+            var blaise = DeploymentCard.FromRecord(new Dictionary<string, object>
+            {
+                { "id", "DG079" }, { "attackType", "Ranged" },
+                { "attacks", new List<object> { "Green", "Yellow", "Yellow" } },
+            });
+            Assert.IsNull(VillainOptions.PickLive(blaise, null).Option);
+            Assert.IsNotNull(VillainOptions.PickLive(blaise, 5).Option);
+        }
+
         static Dictionary<string, object> Row(string kind, int round, params object[] kv)
         {
             var payload = new Dictionary<string, object>();

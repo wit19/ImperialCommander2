@@ -1,0 +1,1349 @@
+{
+ "_comment": "M11e villain-option golden vectors (C#-side pin, --record cast; see SectionsOptions.cs header). Villain card records carry the EXACT IC2 CardData/villains.json values (same override law as keyword_rules.json); figures reference existing units_core.json placeholder cards and the case swaps the printed villain card in after the world build. The rebel target is the DG050 stand-in (yardstick law: option and attack values read ONLY the attacker's printed card, never a defender value - so the stand-in's stats cannot move a number). Boards are inline helpers: m11e_open is an empty room, m11e_wall copies the keyword_wall proven blocking column at x=4 (it demonstrably hides (6,2) from (2,2)).",
+ "cards": {
+  "source": "IC2 CardData/villains.json (exact card values)",
+  "cards": [
+   {
+    "id": "DG072",
+    "name": "Darth Vader",
+    "subname": "LORD OF THE SITH",
+    "miniSize": "Small1x1",
+    "speed": 4,
+    "health": 16,
+    "attackType": "Melee",
+    "attacks": [
+     "Red",
+     "Red",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black",
+     "Black"
+    ],
+    "surges": [
+     "{B}: Pierce 3",
+     "{B}: +2 {H}"
+    ],
+    "cost": 13,
+    "isElite": true
+   },
+   {
+    "id": "DG075",
+    "name": "Kayn Somos",
+    "subname": "TROOPER COMMANDER",
+    "miniSize": "Small1x1",
+    "speed": 4,
+    "health": 12,
+    "attackType": "Ranged",
+    "attacks": [
+     "Blue",
+     "Blue",
+     "Green"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: +1 {H}",
+     "{B}: Pierce 1"
+    ],
+    "cost": 8,
+    "isElite": true
+   },
+   {
+    "id": "DG078",
+    "name": "General Sorin",
+    "subname": "VICIOUS TACTICIAN",
+    "miniSize": "Small1x1",
+    "speed": 4,
+    "health": 7,
+    "attackType": "Ranged",
+    "attacks": [
+     "Blue",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: Stun",
+     "{B}: +1 {H}",
+     "{B}: Focus"
+    ],
+    "cost": 5,
+    "isElite": true
+   },
+   {
+    "id": "DG079",
+    "name": "Agent Blaise",
+    "subname": "ISB INTERROGATOR",
+    "miniSize": "Small1x1",
+    "speed": 4,
+    "health": 8,
+    "attackType": "Ranged",
+    "attacks": [
+     "Green",
+     "Yellow",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: +3 Accuracy",
+     "{B}: Pierce 2",
+     "{B}: +1 {H}",
+     "{B}: +1 {H}"
+    ],
+    "cost": 6,
+    "isElite": true
+   },
+   {
+    "id": "DG081",
+    "name": "Jabba the Hutt",
+    "subname": "VILE GANGSTER",
+    "miniSize": "Large2x2",
+    "speed": 2,
+    "health": 10,
+    "attackType": "Melee",
+    "attacks": [
+     "Red",
+     "Green"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [],
+    "cost": 6,
+    "isElite": true
+   },
+   {
+    "id": "DG082",
+    "name": "Captain Terro",
+    "subname": "WASTELAND ENFORCER",
+    "miniSize": "Medium1x2",
+    "speed": 5,
+    "health": 13,
+    "attackType": "Ranged",
+    "attacks": [
+     "Blue",
+     "Green",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: +2 {H}",
+     "{B}: Pierce 2"
+    ],
+    "cost": 7,
+    "isElite": true
+   },
+   {
+    "id": "DG083",
+    "name": "Emperor Palpatine",
+    "subname": "SITH MASTER",
+    "miniSize": "Small1x1",
+    "speed": 3,
+    "health": 13,
+    "attackType": "Melee",
+    "attacks": [
+     "Red",
+     "Green"
+    ],
+    "keywords": [
+     "Pierce 3"
+    ],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: +1 {H}"
+    ],
+    "cost": 8,
+    "isElite": true
+   },
+   {
+    "id": "DG087",
+    "name": "The Grand Inquisitor",
+    "subname": "SITH LOYALIST",
+    "miniSize": "Small1x1",
+    "speed": 5,
+    "health": 15,
+    "attackType": "Melee",
+    "attacks": [
+     "Red",
+     "Green",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "White"
+    ],
+    "surges": [
+     "{B} -1 {E}",
+     "{B}: Pierce 3",
+     "{B}: Cleave 3 {H}",
+     "{B}: +1 {H}"
+    ],
+    "cost": 8,
+    "isElite": true
+   },
+   {
+    "id": "DG088",
+    "name": "0-0-0",
+    "subname": "SPECIALIZED IN PAIN",
+    "miniSize": "Small1x1",
+    "speed": 4,
+    "health": 8,
+    "attackType": "Melee",
+    "attacks": [
+     "Red",
+     "Yellow"
+    ],
+    "keywords": [],
+    "defense": [
+     "Black"
+    ],
+    "surges": [
+     "{B}: Pierce 2",
+     "{B}: Recover 2 {H}"
+    ],
+    "cost": 4,
+    "isElite": true
+   }
+  ]
+ },
+ "boards": [
+  {
+   "schema": "tacai.board/1",
+   "name": "m11e_open",
+   "width": 12,
+   "height": 5,
+   "flags": {
+    "interior": [],
+    "difficult": [],
+    "blocking": [],
+    "impassable": []
+   },
+   "edges": {
+    "wall": [],
+    "blocking": [],
+    "impassable": []
+   },
+   "doors": [],
+   "hazards": [],
+   "deployment_points": [],
+   "objectives": [],
+   "victoryCounter": "woundAll",
+   "_comment": "M11e helper board: empty 12x5 room, all pairs have LOS."
+  },
+  {
+   "schema": "tacai.board/1",
+   "name": "m11e_wall",
+   "width": 12,
+   "height": 5,
+   "flags": {
+    "interior": [],
+    "difficult": [],
+    "blocking": [
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "impassable": []
+   },
+   "edges": {
+    "wall": [],
+    "blocking": [],
+    "impassable": []
+   },
+   "doors": [],
+   "hazards": [],
+   "deployment_points": [],
+   "objectives": [],
+   "victoryCounter": "woundAll",
+   "_comment": "M11e helper board: m11e_open plus the keyword_wall blocking column at x=4 (y=2..4) - it hides (6,2) and (8,2) from (2,2)."
+  }
+ ],
+ "scenarios": {
+  "v_far": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      6,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "v_adj": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      3,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "v_far7": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      9,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "v_wall": {
+   "board": "m11e_wall",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      6,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "gi_far": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      4,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "k_wall": {
+   "board": "m11e_wall",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      8,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "j_far": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      5,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "b_mid": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      4,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "d_adj": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      3,
+      2
+     ]
+    }
+   ],
+   "script": []
+  },
+  "t_mid": {
+   "board": "m11e_open",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "v",
+     "card": "DG001",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "h",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      4,
+      2
+     ]
+    }
+   ],
+   "script": []
+  }
+ },
+ "cases": [
+  {
+   "name": "table",
+   "kind": "table",
+   "expect": {
+    "active_levels": [
+     "S4",
+     "S5"
+    ],
+    "cards_with": {
+     "attack_like": [
+      "DG072",
+      "DG081",
+      "DG082",
+      "DG083",
+      "DG087",
+      "DG088"
+     ],
+     "order_like": [
+      "DG073",
+      "DG075",
+      "DG078",
+      "DG081"
+     ],
+     "utility": [
+      "DG079",
+      "DG081"
+     ]
+    },
+    "table": {
+     "DG072": [
+      {
+       "ability_index": 1,
+       "balance_needed": 0,
+       "card": "DG072",
+       "class": "attack_like",
+       "dice": null,
+       "key": "dg072_force_choke",
+       "needs_los": true,
+       "reach": 99,
+       "value": "2"
+      }
+     ],
+     "DG073": [
+      {
+       "ability_index": 0,
+       "balance_needed": 0,
+       "card": "DG073",
+       "class": "order_like",
+       "dice": null,
+       "key": "dg073_generals_orders",
+       "needs_los": false,
+       "reach": 1,
+       "value": "1"
+      }
+     ],
+     "DG075": [
+      {
+       "ability_index": 0,
+       "balance_needed": 0,
+       "card": "DG075",
+       "class": "order_like",
+       "dice": null,
+       "key": "dg075_firing_squad",
+       "needs_los": false,
+       "reach": 1,
+       "value": "3"
+      }
+     ],
+     "DG078": [
+      {
+       "ability_index": 1,
+       "balance_needed": 0,
+       "card": "DG078",
+       "class": "order_like",
+       "dice": null,
+       "key": "dg078_bombardment",
+       "needs_los": false,
+       "reach": 1,
+       "value": "2"
+      }
+     ],
+     "DG079": [
+      {
+       "ability_index": 0,
+       "balance_needed": 2,
+       "card": "DG079",
+       "class": "utility",
+       "dice": null,
+       "key": "dg079_activate_agent",
+       "needs_los": false,
+       "reach": 1,
+       "value": "0"
+      }
+     ],
+     "DG081": [
+      {
+       "ability_index": 0,
+       "balance_needed": 0,
+       "card": "DG081",
+       "class": "attack_like",
+       "dice": null,
+       "key": "dg081_bully",
+       "needs_los": false,
+       "reach": 3,
+       "value": "0"
+      },
+      {
+       "ability_index": 1,
+       "balance_needed": 0,
+       "card": "DG081",
+       "class": "order_like",
+       "dice": null,
+       "key": "dg081_execution_order",
+       "needs_los": false,
+       "reach": 1,
+       "value": "2"
+      },
+      {
+       "ability_index": 2,
+       "balance_needed": 0,
+       "card": "DG081",
+       "class": "utility",
+       "dice": null,
+       "key": "dg081_financial_incentive",
+       "needs_los": false,
+       "reach": 1,
+       "value": "0"
+      },
+      {
+       "ability_index": 3,
+       "balance_needed": 0,
+       "card": "DG081",
+       "class": "utility",
+       "dice": null,
+       "key": "dg081_plot",
+       "needs_los": false,
+       "reach": 1,
+       "value": "0"
+      }
+     ],
+     "DG082": [
+      {
+       "ability_index": 0,
+       "balance_needed": 0,
+       "card": "DG082",
+       "class": "attack_like",
+       "dice": null,
+       "key": "dg082_flamethrower",
+       "needs_los": false,
+       "reach": 2,
+       "value": "1"
+      }
+     ],
+     "DG083": [
+      {
+       "ability_index": 2,
+       "balance_needed": 0,
+       "card": "DG083",
+       "class": "attack_like",
+       "dice": null,
+       "key": "dg083_force_lightning",
+       "needs_los": true,
+       "reach": 4,
+       "value": "3"
+      }
+     ],
+     "DG087": [
+      {
+       "ability_index": 1,
+       "balance_needed": 0,
+       "card": "DG087",
+       "class": "attack_like",
+       "dice": [
+        "Red",
+        "Yellow"
+       ],
+       "key": "dg087_lightsaber_throw",
+       "needs_los": true,
+       "reach": 4,
+       "value": "8/3"
+      }
+     ],
+     "DG088": [
+      {
+       "ability_index": 2,
+       "balance_needed": 0,
+       "card": "DG088",
+       "class": "attack_like",
+       "dice": null,
+       "key": "dg088_invasive_procedure",
+       "needs_los": false,
+       "reach": 1,
+       "value": "1"
+      }
+     ]
+    },
+    "unused": [
+     [
+      "DG072",
+      "{A} Brutality",
+      "multi_attack_schema_cap"
+     ],
+     [
+      "DG074",
+      "{A} Brutality",
+      "multi_attack_schema_cap"
+     ],
+     [
+      "DG080",
+      "{A} Indiscriminate Fire",
+      "new_dice_mechanic"
+     ],
+     [
+      "DG089",
+      "{A} Missile Salvo",
+      "multi_attack_schema_cap"
+     ]
+    ]
+   }
+  },
+  {
+   "name": "live_vader_s4",
+   "kind": "live",
+   "card": "DG072",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Machtwuergegriff reaches by LOS beyond any melee reach -> reach-surplus clause; the printed Vader card carries Force Choke, the fixed-3 Machtblitz prints on Palpatine DG083",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "14/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG072",
+      "class": "attack_like",
+      "dice": null,
+      "key": "dg072_force_choke",
+      "needs_los": true,
+      "reach": 99,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_vader_s3_gate",
+   "kind": "live",
+   "card": "DG072",
+   "skill": "S3",
+   "balance": 0,
+   "_why": "S3 never reads printed abilities (M11c2 gate law)",
+   "expect": {
+    "active": false,
+    "pick": null
+   }
+  },
+  {
+   "name": "live_kayn_s4_tie",
+   "kind": "live",
+   "card": "DG075",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "pressure 3 == printed attack EV 3 -> strict gate keeps the dice attack",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "live_sorin_s4",
+   "kind": "live",
+   "card": "DG078",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Bombardment pressure 2 > printed 3/2",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "3/2",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG078",
+      "class": "order_like",
+      "dice": null,
+      "key": "dg078_bombardment",
+      "needs_los": false,
+      "reach": 1,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_gi_s4",
+   "kind": "live",
+   "card": "DG087",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Lichtschwertwurf 8/3 < printed 4 but its range is a reach surplus",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "4",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG087",
+      "class": "attack_like",
+      "dice": [
+       "Red",
+       "Yellow"
+      ],
+      "key": "dg087_lightsaber_throw",
+      "needs_los": true,
+      "reach": 4,
+      "value": "8/3"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_palpatine_s4",
+   "kind": "live",
+   "card": "DG083",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Machtblitz (fixed 3) reach 4 vs melee reach 1 -> reach-surplus clause",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "10/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 2,
+      "balance_needed": 0,
+      "card": "DG083",
+      "class": "attack_like",
+      "dice": null,
+      "key": "dg083_force_lightning",
+      "needs_los": true,
+      "reach": 4,
+      "value": "3"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_ddd_s4",
+   "kind": "live",
+   "card": "DG088",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Invasive reaches 1 = melee reach -> no surplus, 1 < 8/3 -> no block",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "live_blaise_bal5",
+   "kind": "live",
+   "card": "DG079",
+   "skill": "S4",
+   "balance": 5,
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 0,
+      "balance_needed": 2,
+      "card": "DG079",
+      "class": "utility",
+      "dice": null,
+      "key": "dg079_activate_agent",
+      "needs_los": false,
+      "reach": 1,
+      "value": "0"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_blaise_bal1",
+   "kind": "live",
+   "card": "DG079",
+   "skill": "S4",
+   "balance": 1,
+   "_why": "Activate Agent needs balance >= 2",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "live_blaise_balnull",
+   "kind": "live",
+   "card": "DG079",
+   "skill": "S4",
+   "balance": null,
+   "_why": "unknown balance -> utility stays hidden",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "live_jabba_bal0",
+   "kind": "live",
+   "card": "DG081",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "attack legal (10/3): Bully 0 and Execution Order 2 fail the strict gate; utility tie 0 -> key ordinal",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "10/3",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": {
+      "ability_index": 2,
+      "balance_needed": 0,
+      "card": "DG081",
+      "class": "utility",
+      "dice": null,
+      "key": "dg081_financial_incentive",
+      "needs_los": false,
+      "reach": 1,
+      "value": "0"
+     }
+    }
+   }
+  },
+  {
+   "name": "live_terro_s4",
+   "kind": "live",
+   "card": "DG082",
+   "skill": "S4",
+   "balance": 0,
+   "_why": "Flamethrower floor 1 < printed 17/6; its reach 2 < attack gate -> no block",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "17/6",
+     "distance": -1,
+     "los": "unknown",
+     "mode": "live",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "pos_vader_far_choke",
+   "kind": "position",
+   "scenario": "v_far",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG072",
+   "balance": 0,
+   "_why": "hero at 4 + LOS, melee illegal -> Machtwuergegriff 2 > attack 0 (task case 'option erscheint'; the fixed-3 Machtblitz prints on Palpatine DG083, his twin case is live/pos palpatine)",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 4,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG072",
+      "class": "attack_like",
+      "dice": null,
+      "key": "dg072_force_choke",
+      "needs_los": true,
+      "reach": 99,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_vader_far_choke_s5",
+   "kind": "position",
+   "scenario": "v_far",
+   "fig": "v",
+   "target": "h",
+   "skill": "S5",
+   "card_override": "DG072",
+   "balance": 0,
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 4,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG072",
+      "class": "attack_like",
+      "dice": null,
+      "key": "dg072_force_choke",
+      "needs_los": true,
+      "reach": 99,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_vader_adj_attack",
+   "kind": "position",
+   "scenario": "v_adj",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG072",
+   "balance": 0,
+   "_why": "adjacent: printed melee 14/3 > Machtwuergegriff 2 -> dice attack stays in front (task case)",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "14/3",
+     "distance": 1,
+     "los": true,
+     "mode": "position",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "pos_vader_far7_choke",
+   "kind": "position",
+   "scenario": "v_far7",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG072",
+   "balance": 0,
+   "_why": "beyond Machtblitz range: Machtwuergegriff (unbounded LOS) 2 > 0",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 7,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG072",
+      "class": "attack_like",
+      "dice": null,
+      "key": "dg072_force_choke",
+      "needs_los": true,
+      "reach": 99,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_vader_wall_nolos",
+   "kind": "position",
+   "scenario": "v_wall",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG072",
+   "balance": 0,
+   "_why": "no LOS: both LOS options illegal, melee out of reach -> no block (the blocking column also lengthens the counted path to 6)",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 6,
+     "los": false,
+     "mode": "position",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "pos_vader_far_s3_unchanged",
+   "kind": "position",
+   "scenario": "v_far",
+   "fig": "v",
+   "target": "h",
+   "skill": "S3",
+   "card_override": "DG072",
+   "balance": 0,
+   "_why": "S3-Fall unveraendert: gate closed",
+   "expect": {
+    "active": false,
+    "pick": null
+   }
+  },
+  {
+   "name": "pos_gi_far_lightning",
+   "kind": "position",
+   "scenario": "gi_far",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG087",
+   "balance": 0,
+   "_why": "melee illegal at 2 -> Lichtschwertwurf 8/3 > 0",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 2,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG087",
+      "class": "attack_like",
+      "dice": [
+       "Red",
+       "Yellow"
+      ],
+      "key": "dg087_lightsaber_throw",
+      "needs_los": true,
+      "reach": 4,
+      "value": "8/3"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_kayn_wall_firing_squad",
+   "kind": "position",
+   "scenario": "k_wall",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG075",
+   "balance": 0,
+   "_why": "attack illegal (no LOS) -> order pressure 3 > 0; orders are position-free",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 8,
+     "los": false,
+     "mode": "position",
+     "option": {
+      "ability_index": 0,
+      "balance_needed": 0,
+      "card": "DG075",
+      "class": "order_like",
+      "dice": null,
+      "key": "dg075_firing_squad",
+      "needs_los": false,
+      "reach": 1,
+      "value": "3"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_jabba_far_execution",
+   "kind": "position",
+   "scenario": "j_far",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG081",
+   "balance": 3,
+   "_why": "melee illegal at 3: Execution Order 2 > 0 beats utility; Bully 0 never enters",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "0",
+     "distance": 2,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 1,
+      "balance_needed": 0,
+      "card": "DG081",
+      "class": "order_like",
+      "dice": null,
+      "key": "dg081_execution_order",
+      "needs_los": false,
+      "reach": 1,
+      "value": "2"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_blaise_bal2",
+   "kind": "position",
+   "scenario": "b_mid",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG079",
+   "balance": 2,
+   "_why": "utility at balance 2 (no attack/order option on the card)",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": 2,
+     "los": true,
+     "mode": "position",
+     "option": {
+      "ability_index": 0,
+      "balance_needed": 2,
+      "card": "DG079",
+      "class": "utility",
+      "dice": null,
+      "key": "dg079_activate_agent",
+      "needs_los": false,
+      "reach": 1,
+      "value": "0"
+     }
+    }
+   }
+  },
+  {
+   "name": "pos_ddd_adj_attack",
+   "kind": "position",
+   "scenario": "d_adj",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG088",
+   "balance": 0,
+   "_why": "adjacent: printed 8/3 > Invasive 1 -> dice attack stays",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "8/3",
+     "distance": 1,
+     "los": true,
+     "mode": "position",
+     "option": null
+    }
+   }
+  },
+  {
+   "name": "pos_terro_mid_attack",
+   "kind": "position",
+   "scenario": "t_mid",
+   "fig": "v",
+   "target": "h",
+   "skill": "S4",
+   "card_override": "DG082",
+   "balance": 0,
+   "_why": "attack legal 5/2 > Flamethrower floor 1",
+   "expect": {
+    "active": true,
+    "pick": {
+     "attack_value": "17/6",
+     "distance": 2,
+     "los": true,
+     "mode": "position",
+     "option": null
+    }
+   }
+  }
+ ]
+}

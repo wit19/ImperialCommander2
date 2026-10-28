@@ -500,7 +500,57 @@ namespace TacticalAI
             // every block as a concrete, localized order naming the focus
             // target (which names are PUBLIC once dealt - fairness unaffected).
             plan.Blocks = RenderBlocks(blocks, plan, cd.speed);
+
+            // M11e: a printed {A} special action of the villain card as the
+            // THIRD block next to move/attack - but only when the VillainOptions
+            // law says it beats the plain dice attack (S4+ gate exactly like
+            // CardKeywords; the ladder comes from the same resolution the
+            // round planner uses). The block text is the card's own localized
+            // ability line: the printed condition ("within 4 spaces and line
+            // of sight" ...) rides along verbatim, and reading the live board
+            // stays the human Imperial player's job - the same doctrine that
+            // makes every other block a printed Wenn-Dann template. The
+            // Overlord may take the block or leave it (scope: the ORD blocks
+            // above remain the planned proposal); without a focus target the
+            // option would name nobody -> no block.
+            plan.Blocks = WithVillainOption(plan, cd);
             return true;
+        }
+
+        /// M11e: append the qualifying {A} option block to a rendered plan
+        /// (no-op unless gate + law + localized ability text all hold).
+        static string[] WithVillainOption(ActivationPlanData plan, global::DeploymentCard cd)
+        {
+            if (plan == null || !plan.HasTarget || cd == null) return plan?.Blocks;
+            var ladder = TacticalAISettings.EffectiveSkill(CurrentMissionAiMode());
+            var profile = string.IsNullOrEmpty(ladder) ? null : Tac.SkillProfile.For(ladder);
+            if (profile == null || !Tac.VillainOptions.ActiveFor(profile, cd.id))
+                return plan.Blocks;
+            Tac.DeploymentCard villainCard;
+            if (!_catalog.TryGetValue(cd.id, out villainCard)) return plan.Blocks;
+            var opt = Tac.VillainOptions.PickLive(villainCard, OptionBalance(_lastFeedView));
+            if (opt.Option == null) return plan.Blocks;
+            var ab = cd.abilities;
+            if (ab == null || opt.Option.AbilityIndex < 0 || opt.Option.AbilityIndex >= ab.Length)
+                return plan.Blocks;   // language asset missing the print -> no block
+            var a = ab[opt.Option.AbilityIndex];
+            var L = UIx;
+            if (L == null || string.IsNullOrEmpty(L.ordOptionPrinted)) return plan.Blocks;
+            var lines = new List<string>(plan.Blocks ?? new string[0]);
+            // same glyph rendering the card zoom uses for this very text
+            lines.Add(TF(L.ordOptionPrinted, Saga.Utils.ReplaceGlyphs(a.name),
+                                    Saga.Utils.ReplaceGlyphs(a.text)));
+            return lines.ToArray();
+        }
+
+        /// Threat balance for the utility gate; NULL (hidden) when neither the
+        /// public feed nor the ledger mirror has seen a value - an unknown
+        /// balance must never SHOW a threat-spending option.
+        static int? OptionBalance(Tac.FeedWorldView view)
+        {
+            if (view == null) return null;
+            if (view.ThreatSeen) return (int)view.ThreatBalance;
+            return _threatLedger != null ? (int?)_threatLedger.Balance : null;
         }
 
         static string[] RenderBlocks(string[] tokens, ActivationPlanData plan, int speed)

@@ -99,6 +99,7 @@ namespace TacticalAiHarness
             Run("overlord_focus.json", SecOverlordFocus);
             Run("strain_budget.json", SecStrainBudget);
             Run("keyword_rules.json", SecKeywordRules);
+            Run("villain_options.json", SecVillainOptions);
             Run("logger_extract.json", SecLoggerExtract);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +

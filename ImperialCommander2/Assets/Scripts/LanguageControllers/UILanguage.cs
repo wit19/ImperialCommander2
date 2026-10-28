@@ -35,6 +35,8 @@ public class UITacticalAI
 	public string ordThreat, ordMarked, ordRoundFocus;
 	// M11d: light strain-pressure note in the round-focus WHY line
 	public string ordStrainPressure;
+	// M11e: heading line for the printed {A} option block in the activation popup
+	public string ordOptionPrinted;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;
