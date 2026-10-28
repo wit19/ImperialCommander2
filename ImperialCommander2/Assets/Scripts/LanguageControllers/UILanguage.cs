@@ -24,6 +24,11 @@ public class UILanguage
 public class UITacticalAI
 {
 	public string actionFormat, doctrineHeader, docAggressive, docGuard, docBlocker, docHunter, docSupport, docAmbusher;
+	// M13a (playtest 28.10): popup labelling of the Wenn-Dann tree. A plan
+	// with exactly ONE action block gets the unnumbered solo line
+	// (actionSoloFormat, {0} = block text); plans with >=2 keep "Aktion {n}"
+	// and print doctrineTreeLead directly under the doctrine header.
+	public string actionSoloFormat, doctrineTreeLead;
 	public string moveFocus, moveFocusNoTarget, moveGuard, moveBlocker, moveSupport, moveAmbusher;
 	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
 	public string attack2Move, attack2MoveNoTarget, attack2MoveGuard, attack2MoveAmbush, attack2MoveBlocker;

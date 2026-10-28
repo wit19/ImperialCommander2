@@ -270,6 +270,28 @@ namespace TacticalAI.Core
             for (int i = 0; i < list.Count; i++) outl[i] = Json.AsStr(list[i]);
             return outl;
         }
+
+        /// M13a labelling decision (pure presentation helper, ZERO planning
+        /// effect): how many NUMBERED ACTION blocks a token list carries.
+        /// move/attack/special/rest/interact are the action kinds the
+        /// activation popup numbers; "shuffle" is an icon note the bridge
+        /// renders WITHOUT a number, unknown tokens pass through verbatim
+        /// (never numbered) - exactly the RenderBlocks taxonomy. The popup
+        /// labels count==1 plans with the unnumbered solo line (ui.json
+        /// actionSoloFormat) and count>=2 plans with "Aktion {n}" plus the
+        /// tree-lead line (ui.json doctrineTreeLead); the strings themselves
+        /// stay in ui.json (localization convention), only this decision is
+        /// Core-pure and pinned by the harness action_tree.json fixture +
+        /// the live ActionTreeGate distribution check on the shipped asset.
+        public static int CountActionBlocks(string[] blocks)
+        {
+            if (blocks == null) return 0;
+            int n = 0;
+            foreach (var b in blocks)
+                if (b == "move" || b == "attack" || b == "special" ||
+                    b == "rest" || b == "interact") n++;
+            return n;
+        }
     }
 
     /// Per-mission deck manager mirroring MissionWorld.deal_round_cards /

@@ -1,0 +1,31 @@
+{
+  "_comment": "M13a activation-popup labelling decision (hand-pinned ground truth, NOT --record; same route as logger_extract.json). OrderDeck.CountActionBlocks classifies a deck token list into NUMBERED action blocks: move/attack/special/rest/interact count, 'shuffle' is an unnumbered note, unknown tokens render verbatim and are never counted. The bridge renders exactly 1 action as the unnumbered solo line (ui.json actionSoloFormat) and >=2 as 'Aktion {n}' plus the tree-lead line (ui.json doctrineTreeLead). Presentation-only: planning behaviour and all Canon vectors are untouched, there is no Python sim twin. 'numbered' = the tree numbering applies; solo = the solo label applies; both false = no action-block label exists (validator rejects such cards upstream).",
+  "cases": [
+    { "name": "stormtrooper_dg001_7_playtest_solo_attack", "blocks": ["attack"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "mix_M_move_only", "blocks": ["move"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "mix_R_rest_only", "blocks": ["rest"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "mix_S_special_only", "blocks": ["special"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "interact_only", "blocks": ["interact"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "solo_attack_plus_shuffle_note", "blocks": ["attack", "shuffle"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "solo_move_plus_shuffle_note", "blocks": ["move", "shuffle"],
+      "expect": { "actions": 1, "solo": true,  "numbered": false } },
+    { "name": "heavy_card_dg001_1_tree_move_attack", "blocks": ["move", "attack"],
+      "expect": { "actions": 2, "solo": false, "numbered": true } },
+    { "name": "tree_move_attack_shuffle", "blocks": ["move", "attack", "shuffle"],
+      "expect": { "actions": 2, "solo": false, "numbered": true } },
+    { "name": "shuffle_only_unlabelable", "blocks": ["shuffle"],
+      "expect": { "actions": 0, "solo": false, "numbered": false } },
+    { "name": "empty_card_unlabelable", "blocks": [],
+      "expect": { "actions": 0, "solo": false, "numbered": false } },
+    { "name": "unknown_token_verbatim", "blocks": ["bogus"],
+      "expect": { "actions": 0, "solo": false, "numbered": false } },
+    { "name": "fairness_violation_counts_purely", "blocks": ["attack", "attack"],
+      "expect": { "actions": 2, "solo": false, "numbered": true } }
+  ]
+}

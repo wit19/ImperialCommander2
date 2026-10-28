@@ -274,6 +274,8 @@
   },
   "uiTacticalAI": {
     "actionFormat": "Action {0} – {1}",
+    "actionSoloFormat": "Order: {0}",
+    "doctrineTreeLead": "The numbering is an if-then decision tree — you play EXACTLY ONE action per activation (move OR attack), never both one after the other.",
     "doctrineHeader": "Doctrine: {0} — this rulebook governs your activation",
     "docAggressive": "Advance (close into combat - one attack per activation)",
     "docGuard": "Guard (hold the zone, never be lured out)",

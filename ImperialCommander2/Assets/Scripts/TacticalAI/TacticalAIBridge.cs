@@ -571,13 +571,30 @@ namespace TacticalAI
             var pat = plan.Pattern ?? "aggressive";
             bool priorAttack = false;   // one-attack-per-activation rule tracker
             outp.Add(TF(L.doctrineHeader, DoctrineName(pat, L)));
+            // M13a (playtest 28.10, Thomas): the numbers are a Wenn-Dann
+            // TREE, not a to-do list. Shipped decks genuinely print 1-action
+            // cards (mix keys A/M/R/S in order_decks.json, e.g. DG001-7/8
+            // ['attack']) - labelling such a lone block "Aktion 1" made
+            // players wait for a missing "Aktion 2". So: exactly ONE action
+            // block -> unnumbered solo label; >=2 -> keep "Aktion {n}" and
+            // state the either-or law right under the doctrine header.
+            // The count decision is Core-pure (OrderDeck.CountActionBlocks,
+            // harness action_tree.json + live ActionTreeGate); both strings
+            // live in ui.json (localization convention). Missing keys fall
+            // back to the old numbered rendering - never an empty line.
+            int actions = Tac.OrderDeck.CountActionBlocks(toks);
+            bool solo = actions <= 1 || string.IsNullOrEmpty(L.actionSoloFormat);
+            if (actions >= 2 && !string.IsNullOrEmpty(L.doctrineTreeLead))
+                outp.Add(L.doctrineTreeLead);
             for (int n = 0; n < toks.Length; n++)
             {
                 var tok = toks[n];
                 // Thomas' doctrine template: every action is a numbered
                 // Wenn-Dann decision tree; the IMPERIAL PLAYER evaluates the
                 // conditions at the public board (only they see positions).
-                System.Func<string, string> act = txt => TF(L.actionFormat, n + 1, txt);
+                System.Func<string, string> act = solo
+                    ? (System.Func<string, string>)(txt => TF(L.actionSoloFormat, txt))
+                    : (System.Func<string, string>)(txt => TF(L.actionFormat, n + 1, txt));
                 switch (tok)
                 {
                     case "move":

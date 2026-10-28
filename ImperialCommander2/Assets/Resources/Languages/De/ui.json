@@ -254,6 +254,8 @@
   },
   "uiTacticalAI": {
     "actionFormat": "Aktion {0} – {1}",
+    "actionSoloFormat": "Anweisung: {0}",
+    "doctrineTreeLead": "Die Nummerierung ist ein Wenn-Dann-Baum — du spielst pro Aktivierung GENAU EINE Aktion (Bewegen ODER Angreifen), keine beiden nacheinander.",
     "doctrineHeader": "Doktrin: {0} — nach dieser Vorschrift spielst du diese Aktivierung",
     "docAggressive": "Vorstoß (zum Kampf vorrücken – ein Angriff pro Aktivierung)",
     "docGuard": "Wachschutz (Zone halten, nie herauslocken)",
