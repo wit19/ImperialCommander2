@@ -44,6 +44,20 @@ namespace Saga
 		public long total;
 	}
 
+	/// <summary>One live Attachment placement: card -> the deploy card of the
+	/// group it rides on (Rules Reference "Attachment": attached AT
+	/// DEPLOYMENT, acts on ALL figures of the group). Returned to the play
+	/// area (active=false) when the LAST figure of the group is defeated -
+	/// the attachment is NOT consumed and may attach again at FUTURE
+	/// deployments.</summary>
+	public class ImperialAttachmentEntry
+	{
+		public int seq;
+		public string cardId;
+		public string groupCardId;
+		public bool active;
+	}
+
 	public class ImperialDeckState
 	{
 		public string deckId;                 // chosen class deck (slug)
@@ -54,6 +68,11 @@ namespace Saga
 		public List<ImperialDeckScoreEntry> scores = new List<ImperialDeckScoreEntry>();
 		public int xpBalance;                 // Kontostand imperiale XP
 		public List<ImperialXpEntry> xpLog = new List<ImperialXpEntry>();
+		// M12d: attachment persistence (RR lifecycle lives in the STORE,
+		// not in the planner). Append-only; a return flips active to false,
+		// a re-attach appends a NEW placement row (history stays auditable,
+		// determinism: no timestamps).
+		public List<ImperialAttachmentEntry> attachments = new List<ImperialAttachmentEntry>();
 
 		/// <summary>Freeze one Core choice into the store: deck + full ranked
 		/// score tuple; the chosen deck's BASIC cards (0 XP) are acquired
@@ -106,6 +125,83 @@ namespace Saga
 			AddImperialXp( -xpCost, reason );
 			cards.Add( new ImperialDeckCardEntry { id = cardId, order = cards.Count } );
 			return true;
+		}
+
+		// ------------------------------------------------ M12d attachments
+		// RR "Attachment" lifecycle, verbatim law: attach AT DEPLOYMENT onto
+		// the deploy card of the group; the effect acts on ALL figures of
+		// the group; when the LAST figure of the group is defeated the
+		// attachment returns to the Play Area and can be attached again at
+		// FUTURE deployments (not consumed). Trait restrictions ("Trooper"
+		// etc.) are HARD: a group without the trait cannot receive it.
+
+		/// <summary>Is this acquired card an Attachment print? (table row
+		/// carries the attach_lifecycle hook; the deck table supplies the
+		/// printed restriction line).</summary>
+		public bool IsAttachment( string cardId )
+		{
+			var table = TacticalAI.Core.ImperialCardEffects.Load();
+			if ( table == null || string.IsNullOrEmpty( cardId ) ) return false;
+			TacticalAI.Core.CardEffectEntry e;
+			return table.ById.TryGetValue( cardId, out e )
+				&& e.Hooks.Exists( h => h.Key == "attach_lifecycle" );
+		}
+
+		/// <summary>Attach at deployment: card must be acquired, be an
+		/// Attachment print, not currently attached, and pass the HARD trait
+		/// restriction against the group's printed traits (null = the model
+		/// cannot see the group's traits -> refuse: restrictions are hard).
+		/// Returns false without touching state when any condition fails.</summary>
+		public bool Attach( string cardId, string groupCardId, string groupTraits )
+		{
+			if ( string.IsNullOrEmpty( cardId ) || string.IsNullOrEmpty( groupCardId ) ) return false;
+			bool acquired = false;
+			foreach ( var c in cards )
+				if ( c.id == cardId ) { acquired = true; break; }
+			if ( !acquired || !IsAttachment( cardId ) ) return false;
+			foreach ( var a in attachments )
+				if ( a.cardId == cardId && a.active ) return false;   // already on a group
+			var deckTable = TacticalAI.Core.ImperialDecks.Load();
+			var deck = deckTable != null ? deckTable.Find( deckId ) : null;
+			string restriction = null;
+			if ( deck != null )
+				foreach ( var c in deck.Cards )
+					if ( c.Id == cardId ) { restriction = c.Restriction; break; }
+			if ( !TacticalAI.Core.ImperialCardEffects.AttachLegal( restriction, groupTraits ) )
+				return false;   // hard trait restriction
+			attachments.Add( new ImperialAttachmentEntry
+			{
+				seq = attachments.Count, cardId = cardId, groupCardId = groupCardId, active = true,
+			} );
+			return true;
+		}
+
+		/// <summary>The LAST figure of the group was defeated: every active
+		/// attachment of that deploy card returns to the Play Area (stays
+		/// acquired, re-attachable at future deployments). Returns how many
+		/// attachments returned.</summary>
+		public int ReturnAttachments( string groupCardId )
+		{
+			int n = 0;
+			foreach ( var a in attachments )
+				if ( a.active && a.groupCardId == groupCardId ) { a.active = false; n++; }
+			return n;
+		}
+
+		/// <summary>Play-Area view for UI/M12e: acquired Attachment prints
+		/// currently unattached (re-attachable).</summary>
+		public List<string> AvailableAttachments()
+		{
+			var outl = new List<string>();
+			foreach ( var c in cards )
+			{
+				if ( !IsAttachment( c.id ) ) continue;
+				bool on = false;
+				foreach ( var a in attachments )
+					if ( a.cardId == c.id && a.active ) { on = true; break; }
+				if ( !on ) outl.Add( c.id );
+			}
+			return outl;
 		}
 	}
 }

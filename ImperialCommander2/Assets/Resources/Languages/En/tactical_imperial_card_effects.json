@@ -1,0 +1,1872 @@
+{
+ "schema": "tacai.imperial_card_effects/1",
+ "source": "1:1 classification of tactical_imperial_decks.json (RR Faehigkeiten-Matrix: no-XP ability = passive; horizontal-line = independent ability; unpaid cost -> following text not executed)",
+ "conventions": {
+  "buckets": {
+   "a": "planer-modifier: hook lands on the activation-order / target strength pipeline (OrderPlanner)",
+   "b": "stat-modifier: hook lands on an existing value seam (threat engagement, deployment economy) or a store-model seam (attachment lifecycle, effective Health)",
+   "c": "engine-detail: real rules work needed (dice manipulation, token/condition operations, spatial legality). ACTIVE in the game, WITHOUT an AI model - shown honestly in the M12e UI."
+  },
+  "determinism": "hooks only modify the existing assessment pipeline (no new RNG pot, no hidden information, printed floors only)",
+  "sides": "effects belong to the side owning the card; the engine distinguishes faction only, never AI vs human hand"
+ },
+ "hooks": {
+  "order_boost": {
+   "consumed_by": "OrderPlanner.PlanRound(cardEffects) - Staerke-Effizienz stage",
+   "unit": "stage",
+   "values": [
+    "5/4",
+    "1/8"
+   ],
+   "law": "printes an extra action / extra activation cycle (5/4) or activation-timed movement points (1/8) to the owning side; applied MAX-once per group, public tag + why-text"
+  },
+  "atk_ev_bonus": {
+   "consumed_by": "OrderPlanner.PlanRound(cardEffects) - printed strength",
+   "unit": "rational damage EV",
+   "values": [
+    "1/12",
+    "1/8",
+    "1/4",
+    "1/3",
+    "2/3",
+    "5/12",
+    "3/4",
+    "1",
+    "3/2",
+    "5/6"
+   ],
+   "law": "printed always-on attack-pool improvement, conservative floor (surge prints -> blue surge floor 1/3; a printed fixed '+1 {H}/{C} to the attack results' is the exact pip 1)"
+  },
+  "focus_surcharge": {
+   "consumed_by": "OverlordFocus.Rank(cardEffects) - light +1 econ slot (M11d/M11h, MAX)",
+   "unit": "stage",
+   "values": [
+    "1"
+   ],
+   "law": "printed targeting/attack-declare condition marks the conditioned hero as the cheaper finish (light, never a primary signal)"
+  },
+  "engage_acc_delta": {
+   "consumed_by": "HeroThreatModelV2.Threat(engage) via OverlordFocus.Rank(engage)",
+   "unit": "accuracy pips (signed)",
+   "values": [
+    "1",
+    "-1"
+   ],
+   "law": "printed accuracy pips or attack/defense result shifts on the hero exchange; + = owning side's attacks hit harder (threat of the hero UP), - = hero attacks the owning side worse (threat DOWN); pip floor 1, never inflated"
+  },
+  "engage_pierce": {
+   "consumed_by": "HeroThreatModelV2.Threat(engage) via OverlordFocus.Rank(engage)",
+   "unit": "printed Pierce",
+   "values": [
+    "1"
+   ],
+   "law": "printed 'Pierce N' on attacks of the owning side"
+  },
+  "deploy_cost": {
+   "consumed_by": "ThreatLedger.EffectiveCost (reserve release / anti-stall)",
+   "unit": "threat reduction",
+   "values": [
+    "1",
+    "5"
+   ],
+   "law": "printed deployment-cost reduction for a legal group, floored at 0"
+  },
+  "free_group": {
+   "consumed_by": "ThreatLedger.EffectiveCost at 0 / bridge deploy option (M12e wiring)",
+   "unit": "sentinel",
+   "values": [
+    "1"
+   ],
+   "law": "a group arrives without paying its deployment cost"
+  },
+  "attach_lifecycle": {
+   "consumed_by": "Saga.ImperialDeckState attachment lifecycle (store model)",
+   "unit": "sentinel",
+   "values": [
+    "1"
+   ],
+   "law": "RR 'Attachment': attach at deployment on the deploy card, acts on ALL figures of the group, returns when the last figure is defeated, re-attachable at future deployments (NOT consumed)"
+  },
+  "stat_health": {
+   "consumed_by": "ImperialCardEffects.EffectiveVitality (bridge attrition input)",
+   "unit": "Health",
+   "values": [
+    "2"
+   ],
+   "law": "printed '+N Health' -> effective Health = Health + N in the vitality fraction the OrderPlanner attrition weight consumes"
+  },
+  "stat_speed": {
+   "consumed_by": "none yet (no hex world) - audit",
+   "unit": "audit",
+   "values": [
+    "1"
+   ],
+   "law": "printed Speed/Mobile print without a movement seam in the app-side model; model value 0, kept for M12e UI honesty"
+  }
+ },
+ "cards": [
+  {
+   "id": "armored_onslaught__armor_corps",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "defense reroll is dice manipulation"
+   ],
+   "reason": "Reaktiv-Wurf manipulation (1 Wuerfel neu) braucht den Wuerfelpfad, kein Planer-/Werte-Hook."
+  },
+  {
+   "id": "armored_onslaught__automated_repairs",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Strain-/Recovery-Waehrung nicht im Modell (M11d-Seam)"
+   ],
+   "reason": "Attachment-Lebenszyklus (Store) umgesetzt; Erholungs-Effekt braucht Strain-Waehrung."
+  },
+  {
+   "id": "armored_onslaught__explosive_entry",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Deploy-Trigger-Wuerfel + Flaeche + Zustand"
+   ],
+   "reason": "Deploy-ausgelöster Wuerfel-/Flächen-/Zustandseffekt jenseits von Planer und Werten."
+  },
+  {
+   "id": "armored_onslaught__explosive_munitions",
+   "deck": "armored_onslaught",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "5/12"
+    }
+   ],
+   "partial": [
+    "Blast-Streuung nur bei angrenzenden Helden (kein Hex-Welt-Seam)"
+   ],
+   "reason": "Angriffs-Upgrade (1 Wuerfel -> Rot + Blast) als konservativer EV-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "armored_onslaught__heavy_firepower",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Wuerfel-ersetzen-mit-Handwerk ist Wuerfel-Manipulation"
+   ],
+   "reason": "Freie Wuerfel-Substitution im Angriffspool braucht den Wuerfelpfad (Wahl, kein fester EV)."
+  },
+  {
+   "id": "armored_onslaught__mortar",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 3,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "neue Wuerfel-Mechanik (getrennter Pool)"
+   ],
+   "reason": "Zusaetzlicher Wuerfelpool mit Blast ist echte Wuerfel-Mechanik, kein Hook-Wert."
+  },
+  {
+   "id": "armored_onslaught__power_to_shields",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Schluesselwort-Negation auf Verteidigung"
+   ],
+   "reason": "Keyword-Negation (Blast/…) ist eine Wuerfel-/Regeloperation ohne Werte-Seam."
+  },
+  {
+   "id": "armored_onslaught__rapid_dominance",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Trait-Fenster HEAVY WEAPON/VEHICLE (GroupApplies, Fixture gepinnt)"
+   ],
+   "reason": "Zusatz-Aktion waehrend der Aktivierung = Aktivoekonomik auf der Staerke-Effizienz-Schiene."
+  },
+  {
+   "id": "armored_onslaught__reactive_armor",
+   "deck": "armored_onslaught",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    },
+    {
+     "kind": "stat_health",
+     "value": "2"
+    }
+   ],
+   "partial": [
+    "{F}->{+2G} auf Verteidigung ist Wuerfel-Manipulation"
+   ],
+   "reason": "+2 Health auf die Effektiv-Gesundheit (Attrition) + Attachment-Lebenszyklus; Verteidigungs-Wurf bleibt Detail."
+  },
+  {
+   "id": "hutt_mercenaries__cheap_shot",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Test-Wuerfel + Zustand Weakened"
+   ],
+   "reason": "Attributswurf mit Zustandsfolge braucht den Wuerfelpfad."
+  },
+  {
+   "id": "hutt_mercenaries__guild_hunters",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Deploy -> Hidden; Surge nur gegen Hidden-Opfer"
+   ],
+   "reason": "Hidden-Bedingung und Surge-Gewinn haengen an der (nicht quantifizierten) Hidden-Bedingung."
+  },
+  {
+   "id": "hutt_mercenaries__most_wanted",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Bounty-Zusaatz +1B und Ready-Bedingung sind Zusatzpfade"
+   ],
+   "reason": "Angriffs-Genauigkeits-Buff im Abwehrfall des Helden senkt/erhoeht den Tauschwert — Threat-Hook."
+  },
+  {
+   "id": "hutt_mercenaries__nowhere_to_hide",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "LOS-Freigabe braucht Hex-Welt; Bounty-Bedingung oeffentlich (Angriff)"
+   ],
+   "reason": "Blaue Wuerfel zum Angriffspool als Surge-Boden; LOS-Teil bleibt Modell-Ausnahme."
+  },
+  {
+   "id": "hutt_mercenaries__nowhere_to_run",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "focus_surcharge",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1B bei >=3 Strain und Hutt-Zusaatz sind Wuerfelpfad-Werte"
+   ],
+   "reason": "Zielbedingung 'Held mit >=3 Strain' als leichter Ziel-Aufschlag (M11d-Slot, MAX)."
+  },
+  {
+   "id": "hutt_mercenaries__savage_motivation",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Aktivierungs-Aktion mit Wuerfel"
+   ],
+   "reason": "Aktivierungs-Aktion mit echtem Wuerfelwurf (gelb/blau) ist Wuerfel-Mechanik."
+  },
+  {
+   "id": "hutt_mercenaries__scouted",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Defense-reroll + Flucht-Transport"
+   ],
+   "reason": "Reaktive Wuerfel-Manipulation plus Bewegung, beides ohne Planer-/Werte-Hook."
+  },
+  {
+   "id": "hutt_mercenaries__vendetta",
+   "deck": "hutt_mercenaries",
+   "basic": false,
+   "xp": 1,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/8"
+    }
+   ],
+   "partial": [
+    "Ready gegen {A} ist Aktionsbuchhaltung am Rand"
+   ],
+   "reason": "Ein Wuerfel neu im Angriff = konservativer Reroll-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "hutt_mercenaries__wanted_dead",
+   "deck": "hutt_mercenaries",
+   "basic": true,
+   "xp": null,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Bounty-Pflicht-Passive ist oeffentlich (alle Helden tragen Token); {C}-Alternative und Defeat-Discard sind Detail"
+   ],
+   "reason": "Angriffe gegen Helden mit Bounty verlieren eine Tauschstufe — Threat-Hook nach unten (Pip-Boden 1)."
+  },
+  {
+   "id": "imperial_black_ops__execution_squad",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "'gleiche {A}-Faehigung zweimal' ist Angriffsverdopplung im Detail"
+   ],
+   "reason": "{A}-Faehigungen zaehlen im Modell als Extra-Aktionsokonomie (Aktivierungs-Stufe)."
+  },
+  {
+   "id": "imperial_black_ops__in_the_shadows",
+   "deck": "imperial_black_ops",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "Hidden-Bedingung selbst ist nicht quantifiziert (Core-RR ohne Hidden-Glossar)"
+   ],
+   "reason": "Kostenfreie Aktivierung + Hidden = versteckte Einheit bleibt handlungsfaehig — Aktivierungs-Hook."
+  },
+  {
+   "id": "imperial_black_ops__shadow_armor",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [
+    "-1G/-1B-Alternativen bleiben unmodelliert (Genauigkeits-Boden)"
+   ],
+   "reason": "Angriff gegen die eigene Seite verliert eine Genauigkeitsstufe — Threat-Hook nach unten."
+  },
+  {
+   "id": "imperial_black_ops__shadow_corps",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Hidden-Vervielfaeltigung ueber {A}"
+   ],
+   "reason": "Hidden ist als Bedingung nicht quantifiziert; kein Planer-/Werte-Hook moeglich."
+  },
+  {
+   "id": "imperial_black_ops__stealth",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Hidden-am-Aktivierungsende unquantifiziert"
+   ],
+   "reason": "'{O}-Angriffe gegen dich brauchen 1 Genauigkeit' ist exakt der Hidden-Treffer-Regelwert — Threat-Hook."
+  },
+  {
+   "id": "imperial_black_ops__strategic_redeployment",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 3,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "{B}-Ergebnisse als Bedrohung ausgeben"
+   ],
+   "reason": "Wuerfelergebnis-zu-Bedrohung-Umwandlung haengt am Wuerfel- und Wirtschaftspfad zugleich."
+  },
+  {
+   "id": "imperial_black_ops__surprise_attack",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "LOS-Bedingung der Zielgruppe (kein Hex-Welt-Seam, public-feed-naeh)"
+   ],
+   "reason": "Genauigkeits-Buff auf eigenem Angriff erhoeht den Tauschwert gegen Helden — Threat-Hook."
+  },
+  {
+   "id": "imperial_black_ops__true_shadow",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Hidden bei Deploy + Defense-Wuerfel tauschen sind Engine-Detail"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Hidden und Defense-Wuerfel-Tausch bleiben Engine-Detail."
+  },
+  {
+   "id": "imperial_black_ops__versatility",
+   "deck": "imperial_black_ops",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Bedingungs-tausch + Hidden"
+   ],
+   "reason": "Bedingungen als Waehrung tauschen ist echtes Regelwerk jenseits von Planer und Werten."
+  },
+  {
+   "id": "inspiring_leadership__field_general",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Executive Order = Move oder Attack (nur Move-Seam gezählt)"
+   ],
+   "reason": "Executive Order: zusaetzliche Bewegung/Angriffs-Aktion = Aktivierungsokonomie (Attach an Leader)."
+  },
+  {
+   "id": "inspiring_leadership__field_officer",
+   "deck": "inspiring_leadership",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Interrupt-Timing bleibt M12e-UI-Hinweis"
+   ],
+   "reason": "Order: befreundete Figur unterbricht fuer Bewegung = Extra-Aktion; Attachment-Lebenszyklus dazu."
+  },
+  {
+   "id": "inspiring_leadership__imperial_dedication",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 3,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Angriffsziel-Umleitung"
+   ],
+   "reason": "Ein fremdes Angriffsziel umzubiegen braucht den Wuerfel-/Zielpfad der Heldenangriffe."
+  },
+  {
+   "id": "inspiring_leadership__lead_by_example",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "Executive Order darf auch attackieren"
+   ],
+   "reason": "Order/Executive Order erhalten Move(=Aktion) hinterher = Aktivierungsokonomie."
+  },
+  {
+   "id": "inspiring_leadership__noble_sacrifice",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Defeat-Trigger, 5 Figuren Focused"
+   ],
+   "reason": "Szenario-Trigger mit grossflaechigem Zustands-Gewinn ist Engine-Detail."
+  },
+  {
+   "id": "inspiring_leadership__optimal_tactics",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Reichweite 3 um LEADER (Gruppen-Bedingung), Reroll nicht gezaehlt"
+   ],
+   "reason": "+1 Schaden auf dem Angriff ist der exakte gedruckte Pip — Staerken-Hook."
+  },
+  {
+   "id": "inspiring_leadership__press_on",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Strain-Heilung ohne Waehrung im Modell"
+   ],
+   "reason": "Recovery wirkt auf Strain, das die App nicht fuehrt (M11d-Seam offen)."
+  },
+  {
+   "id": "inspiring_leadership__strategic_planning",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "Move-Points der beiden Karten; Kostenkarte bleibt unbehandelt"
+   ],
+   "reason": "Deployment-Karte fuere Runde bereit = extra Aktivierungszyklus auf der Schiene."
+  },
+  {
+   "id": "inspiring_leadership__supervisory_agent",
+   "deck": "inspiring_leadership",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "free_group",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Offizier-Kostenwert der App; Karte vor Aktivierung erschöpft"
+   ],
+   "reason": "Kostenfreier Deploy eines Offiziers = Gruppe ohne Kosten (BedrohungsOekonomie)."
+  },
+  {
+   "id": "military_might__assault_armor",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    },
+    {
+     "kind": "stat_health",
+     "value": "2"
+    }
+   ],
+   "partial": [
+    "{A} Reroll schwarz ist Wuerfelmanipulation"
+   ],
+   "reason": "+2 Health auf die Effektiv-Gesundheit (Attrition) + Attachment-Lebenszyklus."
+  },
+  {
+   "id": "military_might__combat_medic",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Recovery am Officer-Aktivierungsende"
+   ],
+   "reason": "Recovery ohne Strain-Waehrung im Modell (M11d-Seam offen)."
+  },
+  {
+   "id": "military_might__combat_veterans",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+2 Genauigkeit nur am Threat-Seam denkbar (nicht doppelt gezaehlt), +1G defense unmodelliert"
+   ],
+   "reason": "+1 Blau im Angriff als Surge-Boden; Genauigkeits-Teil bleibt Konservativ-Abschlag."
+  },
+  {
+   "id": "military_might__endless_ranks",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "deploy_cost",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "TROOPER-Fenster (GroupApplies, Fixture gepinnt)"
+   ],
+   "reason": "Printed -1 Deploy-Kosten fuer Truppen auf der BedrohungsOekonomie (Kappe 0)."
+  },
+  {
+   "id": "military_might__riot_grenades",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Flaechen-Test + Schaden sind Wuerfel-Mechanik"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Flaechenwurf bleibt UI-{A}-Block ohne Modell-Wert."
+  },
+  {
+   "id": "military_might__shock_troopers",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "Trooper + Reichweite 2 (Gruppen-Bedingung)"
+   ],
+   "reason": "+1 Blau im Angriff als Surge-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "military_might__shock_and_awe",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "Strain-Token-Wirtschaft der Karte (Erzeugung nicht modelliert)"
+   ],
+   "reason": "Ausgeben der Token am Angriff = Schadensdruck-Pip; konservatives Surge-Pendant 1/3."
+  },
+  {
+   "id": "military_might__show_of_force",
+   "deck": "military_might",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "3/2"
+    }
+   ],
+   "partial": [
+    "Focused wird erst mit dem naechsten Angriff wirksam (RR Focus Fire)"
+   ],
+   "reason": "Focused = eine gruene Wuerfel garantiert (RR-Glossar) = exakter EV auf der Staerke-Schiene."
+  },
+  {
+   "id": "military_might__sustained_fire",
+   "deck": "military_might",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "Stunned danach ist Zustands-Engine-Detail"
+   ],
+   "reason": "Zusatz-Angriff = Zusatz-Aktion; im Modell einheitlich als 5/4-Aktivierungsokonomie."
+  },
+  {
+   "id": "nemeses__devastating_legion",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [
+    "Reichweite 3 um Schurken; -1F-Alternative"
+   ],
+   "reason": "Verteidigungs-Eingriff senkt den Heldenangriff — Threat-Hook nach unten."
+  },
+  {
+   "id": "nemeses__fearsome_presence",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Strain nach Aktivierungsmarkern"
+   ],
+   "reason": "Strain-Injektion ohne Modell-Waehrung (M11d-Seam offen)."
+  },
+  {
+   "id": "nemeses__im_on_the_leader",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Zielwahl 'gesuender Held mit am wenigsten G' bleibt UI-Pfad"
+   ],
+   "reason": "+2 G auf dem Angriff = erhoehter Tauschwert gegen Helden — Threat-Hook (Pip-Boden 1)."
+  },
+  {
+   "id": "nemeses__indomitable",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1 schwarzer Defense-Wuerfel hat keinen Threat-Block-Seam (konservativ 0)"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Defense-Wuerfel und Zustands-Schutz bleiben Engine-Detail."
+  },
+  {
+   "id": "nemeses__inspirational",
+   "deck": "nemeses",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "3/4"
+    }
+   ],
+   "partial": [
+    "Trait-Gleichheit + Schurken-Wahl (Gruppen-Bedingung)"
+   ],
+   "reason": "+1 Schaden (exakt) und +1 Genauigkeit (nicht gezaehlt) auf dem Angriff — Staerken-Hook."
+  },
+  {
+   "id": "nemeses__leave_them_to_me",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "deploy_cost",
+     "value": "5"
+    }
+   ],
+   "partial": [
+    "Villain-Gruppen muessen im Reservestand sein (Fixture)"
+   ],
+   "reason": "Printed -5 Schurken-Deploy-Kosten auf der BedrohungsOekonomie (Kappe 0)."
+  },
+  {
+   "id": "nemeses__powerful_foes",
+   "deck": "nemeses",
+   "basic": true,
+   "xp": null,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "free_group",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "{D}-Gewinn und Deploy-Kosten-Kappung 'by threat level' (variabel)"
+   ],
+   "reason": "Gratis-Schurke in der offenen Hand = Gruppe ohne Deploy-Kosten (BedrohungsOekonomie)."
+  },
+  {
+   "id": "nemeses__prepare_the_ambush",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 1,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "1/8"
+    }
+   ],
+   "partial": [
+    "Karte-statt-Gruppe-ueberspringen ist Tausch am Rand"
+   ],
+   "reason": "Move-Points der ersten Gruppe pro Runde = Mini-Aktivationsoekonomik (Stufe 1/8)."
+  },
+  {
+   "id": "nemeses__punishing_force",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/4"
+    }
+   ],
+   "partial": [
+    "Attachment an Schurken; Readiness an Rebel-Aktivierung"
+   ],
+   "reason": "Bereit nach Rebel-Aktivierung = zus. Zyklus; Reroll offen = Reroll-Boden 1/4."
+  },
+  {
+   "id": "nemeses__ringleader",
+   "deck": "nemeses",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "1/8"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1 Genauigkeit am Nachbar-Angriff nicht gezaehlt"
+   ],
+   "reason": "Move-Points am Aktivierungsanfang (1/8) auf der Aktivierungs-Schiene."
+  },
+  {
+   "id": "overwhelming_oppression__commence_landing",
+   "deck": "overwhelming_oppression",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "{C}-Token und Hand-Karten-Wirtschaft; offene Hand ist Info-Thema"
+   ],
+   "reason": "Token auf der Deploy-Karte sind ausgebenbare Angriffs-Pips — Surge-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "overwhelming_oppression__implacable",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [
+    "Reichweite 3; {C}-Anteil; Hand-Karten-Wirtschaft"
+   ],
+   "reason": "Fremde {D} defensiv ausgeben senkt den Helden-Tauschwert — Threat-Hook nach unten."
+  },
+  {
+   "id": "overwhelming_oppression__indomitable_force",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Token verschieben aus der Hand"
+   ],
+   "reason": "Token-Verschiebe-Operation ist Waehrungs-Manipulation jenseits der Hooks."
+  },
+  {
+   "id": "overwhelming_oppression__lmitless_arsenal",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Pool-Austausch aus der Hand"
+   ],
+   "reason": "Angriffspool gegen Karten-Pool tauschen braucht echte Wuerfel-Mechanik."
+  },
+  {
+   "id": "overwhelming_oppression__personal_flagship",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "free_group",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Token-Gewinn bei Schurken-Aktivierung (3 Raeume)"
+   ],
+   "reason": "Gratis-Schurke in der offenen Hand = Gruppe ohne Deploy-Kosten (BedrohungsOekonomie)."
+  },
+  {
+   "id": "overwhelming_oppression__redouble_our_efforts",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Token-Verteilung beim Tod"
+   ],
+   "reason": "Token-Lebenszyklus-Operation (defeat-getriggert) ist Engine-Detail."
+  },
+  {
+   "id": "overwhelming_oppression__tie_fighter_patrol",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Insight-Test des Helden (Wuerfelpfad) — nur der Schaden ist gezaehlt"
+   ],
+   "reason": "Aktivierungsaktion mit Helden-Schaden erhoht den Tauschwert — Threat-Hook (Pip-Boden 1)."
+  },
+  {
+   "id": "overwhelming_oppression__tie_landers",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "2/3"
+    }
+   ],
+   "partial": [
+    "Reichweite 5 nach Deploy; Aktivierungsmarker-Zusaatz"
+   ],
+   "reason": "Deploy-Schaden an Helden = gelber Wuerfel (exakt 2/3 EV) auf der Staerke-Schiene."
+  },
+  {
+   "id": "overwhelming_oppression__tactical_mastery",
+   "deck": "overwhelming_oppression",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "Reichweite 3; 'andere Figur' teilt ihre Faehigkeit"
+   ],
+   "reason": "Geteilte {B}-Faehigkeit = Surge-Boden 1/3 auf der Staerke-Schiene."
+  },
+  {
+   "id": "power_of_the_dark_side__dark_resurgence",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Defeat verhindert, 3C recover"
+   ],
+   "reason": "Defeat-Verhinderung + Recovery ohne Modell-Waehrung ist Engine-Detail."
+  },
+  {
+   "id": "power_of_the_dark_side__embrace_anger",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Eigener {C}-Kosten wird nicht gegen den Boden gerechnet (konservativ)"
+   ],
+   "reason": "+1 Schaden auf dem eigenen Angriff (exakt) — Staerken-Hook; Selbstkosten bleiben Hinweis."
+  },
+  {
+   "id": "power_of_the_dark_side__embrace_fear",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 1,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "1/8"
+    }
+   ],
+   "partial": [
+    "Insight-Steuer am Rebel-Aktivierungsanfang (Wuerfelpfad)"
+   ],
+   "reason": "Move-Point am Aktivierungsanfang = Mini-Aktivationsoekonomik (Stufe 1/8)."
+  },
+  {
+   "id": "power_of_the_dark_side__embrace_hate",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 3,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Strain + {D} aus Statusphase"
+   ],
+   "reason": "Strain-Injektion und Token-Erzeugung ohne Modell-Waehrung."
+  },
+  {
+   "id": "power_of_the_dark_side__embrace_suffering",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Push / fremde Figur angreifen lassen"
+   ],
+   "reason": "Raumoperationen (Push, fremder Angriff) brauchen die echte Welt."
+  },
+  {
+   "id": "power_of_the_dark_side__manifest_agression",
+   "deck": "power_of_the_dark_side",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "Start-/Ende-der-Runde-Variante; Token-Ausgabe bleibt offen"
+   ],
+   "reason": "1 {D} pro Aktivierung = ausgebenbarer Angriffspip — Surge-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "power_of_the_dark_side__supernatural_vigor",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "temporaere +3 Health bis Rundenende"
+   ],
+   "reason": "Temporäre Gesundheit mit Runden-Ruecknahme ist Zustand-Buchfuehrung (Engine)."
+  },
+  {
+   "id": "power_of_the_dark_side__the_power_of_passion",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/4"
+    }
+   ],
+   "partial": [
+    "+1B beim {D}-Ausgeben (Zusatz zum Token-Pfad)"
+   ],
+   "reason": "Reroll offen am Angriff = Reroll-Boden 1/4 auf der Staerke-Schiene."
+  },
+  {
+   "id": "power_of_the_dark_side__unnatural_abilities",
+   "deck": "power_of_the_dark_side",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1F/+1P bei Gruppen-groesse 1; Strain am Aktivierungsende"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Stat-Zusatz und Strain bleiben Engine-Detail."
+  },
+  {
+   "id": "precision_training__assassins",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "LOS-Negation braucht Welt"
+   ],
+   "reason": "Reroll offen = Reroll-Boden 1/4; Attachment-Lebenszyklus dazu; LOS bleibt Modell-Ausnahme."
+  },
+  {
+   "id": "precision_training__exacting_strike",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 3,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "{D}-Bezahlung, Verteidigungswuerfel entfernen"
+   ],
+   "reason": "Bezahlte Verteidigungs-Schwächung ist Wuerfel-Manipulation am Wuerfelpfad."
+  },
+  {
+   "id": "precision_training__find_the_weakness",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_pierce",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "'+' Genauigkeit-Formel bleibt"
+   ],
+   "reason": "Pierce 1 auf Heldenangriffen ist im Threat-Modell exakt vorhanden — Hook nach oben."
+  },
+  {
+   "id": "precision_training__knowledge_of_attack",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [],
+   "reason": "Angriff des Helden verliert eine Stufe — Threat-Hook nach unten (exakt)."
+  },
+  {
+   "id": "precision_training__pinpoint_accuracy",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "{D}-Bezahlung (Deplete)"
+   ],
+   "reason": "Verteidigung verliert ein G = erhoehter Tauschwert gegen Helden — Threat-Hook."
+  },
+  {
+   "id": "precision_training__sharpshooters",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Genauigkeit wirkt erst gegen Reichweite/Genauigkeits-Engpass"
+   ],
+   "reason": "+1 Genauigkeit = eine Tauschstufe (Pip-Boden 1) am Threat-Seam."
+  },
+  {
+   "id": "precision_training__single_minded",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 4,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Wuerfelergebnis frei setzen"
+   ],
+   "reason": "Ergebnis-Setzen statt Reroll ist freie Wuerfel-Manipulation."
+  },
+  {
+   "id": "precision_training__strike_force",
+   "deck": "precision_training",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/8"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [],
+   "reason": "Ein Wuerfel neu im Angriff = konservativer Reroll-Boden auf der Staerke-Schiene; Attachment an die Gruppe."
+  },
+  {
+   "id": "precision_training__versatile_attack",
+   "deck": "precision_training",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "5/6"
+    }
+   ],
+   "partial": [
+    "{P}-Waehrung fuer Zusatzoptionen (Weaken/Pierce2/+1B)"
+   ],
+   "reason": "Gelber Wuerfel auf dem Angriff (exakt 5/6) auf der Staerke-Schiene; {P}-Optionen bleiben."
+  },
+  {
+   "id": "reactive_defenses__active_surveillance",
+   "deck": "reactive_defenses",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "88-Z-Deploy der Mission; 88-Z {A}-Faehigkeiten"
+   ],
+   "reason": "88-Z aktiviert zusaetzlich zu jeder Imperialen-Aktivierung = Zusatz-Zyklus (Stufe 5/4)."
+  },
+  {
+   "id": "reactive_defenses__blaster_emplacements",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "2"
+    }
+   ],
+   "partial": [
+    "Auswahl an Aktivierungsmarkern; Reichweite 3"
+   ],
+   "reason": "Rundenender-Schaden auf einen Helden erhoht den Tauschwert — Threat-Hook (Pip-Boden 1/Zeile, 2 Zeilen)."
+  },
+  {
+   "id": "reactive_defenses__electromagnetic_disruptors",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [
+    "Reichweite 3 um 88-Z; zweite Faehigkeit (Token-Vergabe)"
+   ],
+   "reason": "Heldenangriff verliert eine Genauigkeitsstufe — Threat-Hook nach unten."
+  },
+  {
+   "id": "reactive_defenses__infrared_scanners",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 3,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "1/8"
+    }
+   ],
+   "partial": [
+    "88-Z {A}-Faehigkeit (Insight-Steuer)"
+   ],
+   "reason": "Move-Point am Aktivierungsanfang jeder Figur = Mini-Aktivationsoekonomik (1/8)."
+  },
+  {
+   "id": "reactive_defenses__mechanical_protocol",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 2,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Droid-Fenster um 88-Z; 88-Z-Strain-Aktion der ersten Faehigkeit"
+   ],
+   "reason": "Droiden-Angriffs-Buff erhoht den Tauschwert gegen Helden — Threat-Hook (Pip-Boden 1)."
+  },
+  {
+   "id": "reactive_defenses__overclock",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "{D}-Gain-Aktion von 88-Z"
+   ],
+   "reason": "88-Z mit 3 Aktionen je Aktivierung = Zusatz-Aktionszyklus (Stufe 5/4)."
+  },
+  {
+   "id": "reactive_defenses__remote_activator",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Move-Point-Ausgabe als Kosten"
+   ],
+   "reason": "Move-Points bezahlen fuer Aktion = Aktivierungsokonomie (5/4) + Attachment-Lebenszyklus."
+  },
+  {
+   "id": "reactive_defenses__shielded",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Energieschilder als Platzhalter-Objekte (Engine)"
+   ],
+   "reason": "Verteidigungs-Buff gegen Angriffe auf die eigene Seite — Threat-Hook nach unten."
+  },
+  {
+   "id": "reactive_defenses__targeting_sensors",
+   "deck": "reactive_defenses",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Reichweite-2-Fenster um 88-Z; {D}-Token-Zusatz nicht gezaehlt"
+   ],
+   "reason": "+1 Genauigkeit am eigenen Angriff = Tauschstufe am Threat-Seam (Pip-Boden 1)."
+  },
+  {
+   "id": "subversive_tactics__executioner",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1 Schaden pro erlittenem Strain (bis 3) ist der volle Wert; Boden 1"
+   ],
+   "reason": "Angriff auf einen Helden mit Strain kostet ihn mehr — Threat-Hook (Konservativ-Boden)."
+  },
+  {
+   "id": "subversive_tactics__exploit_weakness",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 2,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "order_boost",
+     "value": "5/4"
+    }
+   ],
+   "partial": [
+    "Ruhe-Trigger (Helden-Zustand) bleibt UI-Pfad"
+   ],
+   "reason": "Interrupt: Bewegung oder Angriff nach Held-Ruhe = Zusatz-Aktion (Stufe 5/4)."
+  },
+  {
+   "id": "subversive_tactics__heavy_pressure",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Strain wird Bedrohung (Waehrungs-tausch)"
+   ],
+   "reason": "Schadensumwandlung in eine andere Waehrung ist echtes Regelwerk jenseits der Hooks."
+  },
+  {
+   "id": "subversive_tactics__no_quarter",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "focus_surcharge",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1B bei >=2 erlittenem B-Wuerfel ist Wuerfelpfad"
+   ],
+   "reason": "Zielbedingung 'Held mit >=2 Schaden' als leichter Ziel-Aufschlag (M11d-Slot, MAX)."
+  },
+  {
+   "id": "subversive_tactics__oppression",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 4,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "-1"
+    }
+   ],
+   "partial": [
+    "Strain-Schwelle 2 des Helden"
+   ],
+   "reason": "Verteidigungs-Buff gegen Angriffe erschöpfter Helden — Threat-Hook nach unten."
+  },
+  {
+   "id": "subversive_tactics__prey_upon_doubt",
+   "deck": "subversive_tactics",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "focus_surcharge",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Beide Helden-Wahlen (1C erleiden / +1F defense) bleiben Detail"
+   ],
+   "reason": "Angriffs-Steuer bei jedem Rebel-Angriff = Reaktions-Druck auf den Ziel-Slot (M11d-Vokabel)."
+  },
+  {
+   "id": "subversive_tactics__savage_weaponry",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_pierce",
+     "value": "1"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "{A}: Bleed ist Zustands-Engine-Detail"
+   ],
+   "reason": "Pierce 1 (exakt) am Threat-Seam + Attachment-Lebenszyklus."
+  },
+  {
+   "id": "subversive_tactics__surgical_strike",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 1,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Zusaetzliches {C} am Ziel (Strain-Seam offen)"
+   ],
+   "reason": "Fester +1 Schaden nach dem Angriff (exakt) auf der Staerke-Schiene."
+  },
+  {
+   "id": "subversive_tactics__weary_target",
+   "deck": "subversive_tactics",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "engage_acc_delta",
+     "value": "2"
+    }
+   ],
+   "partial": [
+    "Auswahl 'Held unter Ausdauer-Schwelle'; Rundenende-Timing"
+   ],
+   "reason": "Rundenender-Schaden auf einen Helden erhoht den Tauschwert — Threat-Hook (Pip-Boden 1/Zeile)."
+  },
+  {
+   "id": "technological_superiority__adaptive_weapons",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/12"
+    }
+   ],
+   "partial": [
+    "freie Wuerfelwahl; bester sicherer Fall ist Gruen->Blau"
+   ],
+   "reason": "Konservativer Upgrade-Boden des Pool-Tauschs (1/12) auf der Staerke-Schiene."
+  },
+  {
+   "id": "technological_superiority__arc_blasters",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Blast-Option + Stun-Test nach Fernkampf"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Stun/Wuerfel-Option bleiben Engine-Detail."
+  },
+  {
+   "id": "technological_superiority__cloaking_device",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 3,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "+1 weisser Defense-Wuerfel hat keinen Threat-Block-Seam (konservativ 0)"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Defense-Wuerfel ohne Werte-Seam im Threat-Modell."
+  },
+  {
+   "id": "technological_superiority__experimental_arms",
+   "deck": "technological_superiority",
+   "basic": true,
+   "xp": null,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    },
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Eigener {C} nach der Attacke (Selbstkosten, konservativ nicht abgezogen)"
+   ],
+   "reason": "+1 Blau im Angriff = Surge-Boden auf der Staerke-Schiene; Attachment-Lebenszyklus dazu."
+  },
+  {
+   "id": "technological_superiority__failsafe",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Defeat verhindert, 3 Move-Points"
+   ],
+   "reason": "Defeat-Verhinderung ist Engine-Regelwerk; Move-Points ohne Welt nichts wert."
+  },
+  {
+   "id": "technological_superiority__hidden_detonators",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 2,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Flaechen-Schaden + eigener Tod"
+   ],
+   "reason": "Selbstzerstoerungs-Flaecheneffekt braucht Welt und Zustands-Engine."
+  },
+  {
+   "id": "technological_superiority__jetpacks",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 1,
+   "bucket": "b",
+   "hooks": [
+    {
+     "kind": "attach_lifecycle",
+     "value": "1"
+    }
+   ],
+   "partial": [
+    "Mobile ignoriert Terrain-Kosten — kein Hex-Welt-Seam"
+   ],
+   "reason": "Attachment-Lebenszyklus umgesetzt; Mobile braucht die echte Welt."
+  },
+  {
+   "id": "technological_superiority__superior_augments",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 4,
+   "bucket": "a",
+   "hooks": [
+    {
+     "kind": "atk_ev_bonus",
+     "value": "1/3"
+    }
+   ],
+   "partial": [
+    "+1 Speed (keine Welt) als Bedingungs-Trigger"
+   ],
+   "reason": "+1 Blau im Angriff bei Attachment = Surge-Boden auf der Staerke-Schiene."
+  },
+  {
+   "id": "technological_superiority__technical_support",
+   "deck": "technological_superiority",
+   "basic": false,
+   "xp": 1,
+   "bucket": "c",
+   "hooks": [],
+   "partial": [
+    "Speed + {A}-Aktion der Droiden"
+   ],
+   "reason": "Speed ohne Welt und die {A}-Recovery-Aktion sind Engine-Detail."
+  }
+ ]
+}

@@ -102,6 +102,13 @@ namespace TacticalAI.Core
         // to pre-M11h canon. The buffer stays computed from his Card, the
         // caller can only ever supply the PUBLIC round count.
         public int? RoundsCompleted;
+        // M12d: the table sees a printed focus-condition card effect on this
+        // hero (Stunned/Disarmed/Prone/Slowed/Pinned/Weakened on his figure
+        // sheet - public tracker state, the same class of knowledge as the
+        // strain markers). Only consulted when the caller passes a
+        // cardSurcharge (owned focus_surcharge rows); false default keeps
+        // every pre-M12d fixture bit-identical.
+        public bool Conditioned;
 
         public bool Marked { get { return Marks > 0; } }
     }
@@ -201,7 +208,9 @@ namespace TacticalAI.Core
         /// no figure engaged yet, e.g. the round-level explain projection).
         public static List<FocusPick> Rank(IEnumerable<FocusCandidate> candidates,
                                                string posture, string counter,
-                                               IList<string> defenderDefense = null)
+                                               IList<string> defenderDefense = null,
+                                               int cardSurcharge = 0,
+                                               EngagementEffects engage = null)
         {
             var list = candidates == null ? new List<FocusCandidate>()
                                            : candidates.ToList();
@@ -210,8 +219,8 @@ namespace TacticalAI.Core
             var rows = list.Select(c => new Row
             {
                 C = c,
-                Threat = ThreatOf(c, posture, defenderDefense, table),
-                Econ = EconOf(c, posture, defenderDefense, table),
+                Threat = ThreatOf(c, posture, defenderDefense, table, engage),
+                Econ = EconOf(c, posture, defenderDefense, table, engage),
                 Chip = woundAll && c.Profile != null ? c.Profile.ChipKey() : null,
             }).ToList();
 
@@ -264,6 +273,23 @@ namespace TacticalAI.Core
                     r.Econ = r.Econ.Value + surcharge;
             }
 
+            // M12d CARD SURCHARGE (light, table-driven): the Empire owning
+            // printed focus-condition cards (focus_surcharge hook rows)
+            // raises EVERY conditioned candidate's threat by EXACTLY +1 -
+            // the M10b objective-actor precedent ("die Bedrohung erhoeht
+            // sich leicht"): flips ties and <1 gaps only, never outranks
+            // strain (+4/+8), chip law or objective credit. The caller
+            // passes 1 when an owned table row fires (ImperialCardEffects.
+            // CardSurcharge) - the same value applies to the AI's own deck
+            // AND the human Imperial player's deck (faction, not controller).
+            if (cardSurcharge > 0)
+                foreach (var r in rows)
+                    if (r.C.Conditioned && r.Econ.HasValue)
+                    {
+                        r.Threat = r.Threat.Value + cardSurcharge;
+                        r.Econ = r.Econ.Value + cardSurcharge;
+                    }
+
             var ranked = StableSort(rows, Compare);
 
             return ranked.Select(x => new FocusPick
@@ -292,18 +318,20 @@ namespace TacticalAI.Core
         /// first (all 21 app heroes), M2a.4 curated profile as fallback for
         /// rows outside the app roster.</summary>
         static Rational? ThreatOf(FocusCandidate c, string posture,
-                                  IList<string> defenderDefense, HeroCardTable table)
+                                  IList<string> defenderDefense, HeroCardTable table,
+                                  EngagementEffects engage = null)
         {
             if (c.Card != null)
                 return HeroThreatModelV2.Threat(c.Card, table, c.Profile,
-                                                c.Wounded, posture, defenderDefense);
+                                                c.Wounded, posture, defenderDefense, engage);
             return ThreatBase(c.Profile, posture);
         }
 
         static Rational? EconOf(FocusCandidate c, string posture,
-                                IList<string> defenderDefense, HeroCardTable table)
+                                IList<string> defenderDefense, HeroCardTable table,
+                                EngagementEffects engage = null)
         {
-            var t = ThreatOf(c, posture, defenderDefense, table);
+            var t = ThreatOf(c, posture, defenderDefense, table, engage);
             if (!t.HasValue) return null;
             // same wound-economy law as ThreatEconomic: doubling applies in
             // the REMOVING races only; on card rows under protect/stall the

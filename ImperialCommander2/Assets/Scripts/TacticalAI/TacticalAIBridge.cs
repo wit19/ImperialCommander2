@@ -359,8 +359,13 @@ namespace TacticalAI
             }
 
             var rng = new Tac.DeterministicRandom(SessionSeed() ^ (ulong)roundNo * 0x9E3779B97F4A7C15UL);
+            // M12d: the campaign deck's acquired class cards hook into the
+            // SAME pipeline (activation efficiency + printed strength). No
+            // deck / no firing hook -> null -> bit-identical canon plan.
+            Tac.CardEffects cardEff; int cardSurch; Tac.EngagementEffects engage;
+            ImperialCardHooks(out cardEff, out cardSurch, out engage);
             var plan = Tac.OrderPlanner.PlanRound(roundNo, facts, _catalog, posture, skill, rng,
-                                                  roundNo, null, null, null);
+                                                  roundNo, null, null, null, cardEff);
             Tac.OrderPlanner.AssertPermutation(plan, facts.Select(f => f.GroupId));
             _slots = plan.Slots;
             var names = facts.ToDictionary(f => f.GroupId, f => f.Name);
@@ -742,12 +747,17 @@ namespace TacticalAI
                 var cands = BuildFocusCandidates(ordView, living);
                 if (cands.Count > 0)
                 {
+                    // M12d: the deck's focus-condition cards lift the
+                    // conditioned hero (+1, M10b slot) and the engage prints
+                    // move the exchange (threat v2 seam). Null/0 = canon.
+                    Tac.CardEffects ce; int cs; Tac.EngagementEffects en;
+                    ImperialCardHooks(out ce, out cs, out en);
                     var ranked = Tac.OverlordFocus.Rank(cands,
                         string.IsNullOrEmpty(ordView.Posture) ? "eliminate" : ordView.Posture,
                         null,                      // the app has no victory counter
                         // M11b: threat v2 runs against THIS figure's printed
                         // defense pool (public deployment-card data).
-                        DefenseOf(cd));
+                        DefenseOf(cd), cs, en);
                     var dec = ranked[0];
                     _roundFocus = dec;
                     _roundFocusHero = dec.HeroId;
@@ -887,6 +897,75 @@ namespace TacticalAI
             catch { return null; }
         }
 
+        // ------------------------------------------------- M12d card effects
+        /// <summary>The live campaign's Imperial class deck state (M12b
+        /// store field). Null = no deck (non-tactical campaign / older save)
+        /// -> every card hook below is a documented zero: the pipelines run
+        /// bit-identical to the pre-M12d canon.</summary>
+        static Saga.ImperialDeckState ImperialDeckLive()
+        {
+            try
+            {
+                var camp = Saga.RunningCampaign.sagaCampaign;
+                return camp == null ? null : camp.imperialDeck;
+            }
+            catch { return null; }
+        }
+
+        /// <summary>M12d hook bundle for ONE pipeline call: the aggregated
+        /// effects of the campaign deck's ACQUIRED cards (basics always
+        /// owned - ImperialCardEffects.Aggregate checks the deck table).
+        /// FACTION law (task scope 3): the deck belongs to the IMPERIAL
+        /// side; whether the AI or the human Imperial player holds the
+        /// cards makes no difference - the hooks read the deck state, not a
+        /// controller flag. Returns null effects + 0 surcharge when there is
+        /// no deck or no hook fires.</summary>
+        static void ImperialCardHooks(out Tac.CardEffects eff, out int surcharge,
+                                      out Tac.EngagementEffects engage)
+        {
+            eff = null; surcharge = 0; engage = null;
+            try
+            {
+                var st = ImperialDeckLive();
+                if (st == null || string.IsNullOrEmpty(st.deckId)) return;
+                _ = TacticalAIAssets.ImperialDecksRoot;        // prime Core doc
+                _ = TacticalAIAssets.ImperialCardEffectsRoot;  // caches (app loader seam)
+                var owned = st.cards == null ? null
+                    : st.cards.Where(c => !string.IsNullOrEmpty(c.id)).Select(c => c.id).ToList();
+                var e = Tac.ImperialCardEffects.Aggregate(
+                    Tac.ImperialDecks.Load(), st.deckId, owned);
+                // store-model hooks (attach_lifecycle, stat_speed) move no
+                // pipeline number by themselves - CardEffects.IsNeutral says
+                // exactly that; announce only when a number can move.
+                if (e == null || e.IsNeutral) return;
+                eff = e;
+                surcharge = Tac.ImperialCardEffects.CardSurcharge(e);
+                engage = Tac.ImperialCardEffects.EngagementOf(e);
+            }
+            catch { eff = null; surcharge = 0; engage = null; }
+        }
+
+        /// <summary>M12e UI/API seam (no UI here): "aktive Karten +
+        /// Klassifikation" for the live campaign deck - one row per owned
+        /// card with bucket, hooks and the honest (c)-reason, plus the
+        /// re-attachable Attachment view. Null when no deck exists.</summary>
+        public static List<Dictionary<string, object>> ActiveImperialCardInfos(
+            string attachGroupTraits = null)
+        {
+            try
+            {
+                var st = ImperialDeckLive();
+                if (st == null || string.IsNullOrEmpty(st.deckId)) return null;
+                _ = TacticalAIAssets.ImperialDecksRoot;        // prime Core doc
+                _ = TacticalAIAssets.ImperialCardEffectsRoot;  // caches (app loader seam)
+                var owned = st.cards == null ? null
+                    : st.cards.Select(c => c.id).ToList();
+                return Tac.ImperialCardEffects.ActiveCardInfos(
+                    Tac.ImperialDecks.Load(), st.deckId, owned, attachGroupTraits);
+            }
+            catch { return null; }
+        }
+
         /// <summary>Round-level designation on the feed state (focus fire:
         /// every group plans towards the SAME target; the order plan decides
         /// WHO walks it first - Mehrgruppenzug). Recomputed on activation when
@@ -899,7 +978,11 @@ namespace TacticalAI
             if (living.Count == 0) return;
             var cands = BuildFocusCandidates(view, living);
             if (cands.Count == 0) return;
-            var ranked = Tac.OverlordFocus.Rank(cands, posture ?? "eliminate", null);
+            // M12d: same hooks on the round-level designation (see above).
+            Tac.CardEffects ce; int cs; Tac.EngagementEffects en;
+            ImperialCardHooks(out ce, out cs, out en);
+            var ranked = Tac.OverlordFocus.Rank(cands, posture ?? "eliminate", null,
+                                                null, cs, en);
             _roundFocus = ranked.Count > 0 ? ranked[0] : null;
             _roundFocusHero = _roundFocus != null ? _roundFocus.HeroId : null;
             _roundFocusRound = view.Round;

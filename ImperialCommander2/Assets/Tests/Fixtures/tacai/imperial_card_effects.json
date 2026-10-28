@@ -1,0 +1,2202 @@
+{
+ "schema": "tacai.imperial_card_effects/1",
+ "generated_by": "M12d inputs; expects pinned from TacticalAiHarness --record, law-reviewed against the asset hook vocabulary (single source) and cross-checked by wiki_data/tools/tacai_effects_twin.py",
+ "cases": [
+  {
+   "name": "table_integrity",
+   "kind": "integrity",
+   "expect": {
+    "basics_total": 13,
+    "basics_unmodelled": [],
+    "rows": 109,
+    "validate_errors": []
+   }
+  },
+  {
+   "name": "agg_basics_armored_onslaught",
+   "kind": "aggregate",
+   "deck": "armored_onslaught",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "5/12",
+    "cards": [
+     "armored_onslaught__explosive_munitions"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_hutt_mercenaries",
+   "kind": "aggregate",
+   "deck": "hutt_mercenaries",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "hutt_mercenaries__wanted_dead"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 1,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_imperial_black_ops",
+   "kind": "aggregate",
+   "deck": "imperial_black_ops",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "imperial_black_ops__in_the_shadows"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "5/4"
+   }
+  },
+  {
+   "name": "agg_basics_inspiring_leadership",
+   "kind": "aggregate",
+   "deck": "inspiring_leadership",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "inspiring_leadership__field_officer"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "5/4"
+   }
+  },
+  {
+   "name": "agg_basics_military_might",
+   "kind": "aggregate",
+   "deck": "military_might",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "3/2",
+    "cards": [
+     "military_might__show_of_force"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_nemeses",
+   "kind": "aggregate",
+   "deck": "nemeses",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "3/4",
+    "cards": [
+     "nemeses__inspirational",
+     "nemeses__powerful_foes"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 1,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_overwhelming_oppression",
+   "kind": "aggregate",
+   "deck": "overwhelming_oppression",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "1/3",
+    "cards": [
+     "overwhelming_oppression__commence_landing"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_power_of_the_dark_side",
+   "kind": "aggregate",
+   "deck": "power_of_the_dark_side",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "1/3",
+    "cards": [
+     "power_of_the_dark_side__manifest_agression"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_precision_training",
+   "kind": "aggregate",
+   "deck": "precision_training",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "1/8",
+    "cards": [
+     "precision_training__strike_force"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_reactive_defenses",
+   "kind": "aggregate",
+   "deck": "reactive_defenses",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "reactive_defenses__active_surveillance"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "5/4"
+   }
+  },
+  {
+   "name": "agg_basics_subversive_tactics",
+   "kind": "aggregate",
+   "deck": "subversive_tactics",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "subversive_tactics__prey_upon_doubt"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": true,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_basics_technological_superiority",
+   "kind": "aggregate",
+   "deck": "technological_superiority",
+   "owned": [],
+   "expect": {
+    "atk_ev_bonus": "1/3",
+    "cards": [
+     "technological_superiority__experimental_arms"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_mixed_military_might",
+   "kind": "aggregate",
+   "deck": "military_might",
+   "owned": [
+    "military_might__endless_ranks",
+    "military_might__assault_armor"
+   ],
+   "expect": {
+    "atk_ev_bonus": "3/2",
+    "cards": [
+     "military_might__assault_armor",
+     "military_might__endless_ranks",
+     "military_might__show_of_force"
+    ],
+    "deploy_cost_cut": 1,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 2,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "agg_mixed_reactive_defenses",
+   "kind": "aggregate",
+   "deck": "reactive_defenses",
+   "owned": [
+    "reactive_defenses__remote_activator"
+   ],
+   "expect": {
+    "atk_ev_bonus": "0",
+    "cards": [
+     "reactive_defenses__active_surveillance",
+     "reactive_defenses__remote_activator"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 0,
+    "is_neutral": false,
+    "order_boost": "5/4"
+   }
+  },
+  {
+   "name": "agg_mixed_armored_onslaught",
+   "kind": "aggregate",
+   "deck": "armored_onslaught",
+   "owned": [
+    "armored_onslaught__reactive_armor"
+   ],
+   "expect": {
+    "atk_ev_bonus": "5/12",
+    "cards": [
+     "armored_onslaught__explosive_munitions",
+     "armored_onslaught__reactive_armor"
+    ],
+    "deploy_cost_cut": 0,
+    "engage_acc_delta": 0,
+    "engage_pierce": 0,
+    "free_groups": 0,
+    "health_bonus": 2,
+    "is_neutral": false,
+    "order_boost": "0"
+   }
+  },
+  {
+   "name": "plan_basics_armored_onslaught",
+   "kind": "plan",
+   "deck": "armored_onslaught",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 7.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten armored_onslaught__explosive_munitions (Staerke +5/12); Wachtdroide: Staerke-Effizienz 6.94 (W eliminate, Muster aggressive) | Kartenwirkung: Karten armored_onslaught__explosive_munitions (Staerke +5/12)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 7.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten armored_onslaught__explosive_munitions (Staerke +5/12)",
+     "G1|card_effects|Staerke-Effizienz 6.94 (W eliminate, Muster aggressive) | Kartenwirkung: Karten armored_onslaught__explosive_munitions (Staerke +5/12)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_hutt_mercenaries",
+   "kind": "plan",
+   "deck": "hutt_mercenaries",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": false,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive); Wachtdroide: Staerke-Effizienz 6.00 (W eliminate, Muster aggressive)",
+    "reasons": [
+     "G0||Staerke-Effizienz 6.50 (W eliminate, Muster aggressive)",
+     "G1||Staerke-Effizienz 6.00 (W eliminate, Muster aggressive)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_imperial_black_ops",
+   "kind": "plan",
+   "deck": "imperial_black_ops",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten imperial_black_ops__in_the_shadows (Staerke +0, Effizienz x5/4); Wachtdroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten imperial_black_ops__in_the_shadows (Staerke +0, Effizienz x5/4)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten imperial_black_ops__in_the_shadows (Staerke +0, Effizienz x5/4)",
+     "G1|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten imperial_black_ops__in_the_shadows (Staerke +0, Effizienz x5/4)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_inspiring_leadership",
+   "kind": "plan",
+   "deck": "inspiring_leadership",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten inspiring_leadership__field_officer (Staerke +0, Effizienz x5/4); Wachtdroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten inspiring_leadership__field_officer (Staerke +0, Effizienz x5/4)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten inspiring_leadership__field_officer (Staerke +0, Effizienz x5/4)",
+     "G1|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten inspiring_leadership__field_officer (Staerke +0, Effizienz x5/4)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_military_might",
+   "kind": "plan",
+   "deck": "military_might",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 11.00 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__show_of_force (Staerke +3/2); Wachtdroide: Staerke-Effizienz 9.38 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__show_of_force (Staerke +3/2)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 11.00 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__show_of_force (Staerke +3/2)",
+     "G1|card_effects|Staerke-Effizienz 9.38 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__show_of_force (Staerke +3/2)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_nemeses",
+   "kind": "plan",
+   "deck": "nemeses",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 8.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten nemeses__inspirational, nemeses__powerful_foes (Staerke +3/4); Wachtdroide: Staerke-Effizienz 7.69 (W eliminate, Muster aggressive) | Kartenwirkung: Karten nemeses__inspirational, nemeses__powerful_foes (Staerke +3/4)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 8.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten nemeses__inspirational, nemeses__powerful_foes (Staerke +3/4)",
+     "G1|card_effects|Staerke-Effizienz 7.69 (W eliminate, Muster aggressive) | Kartenwirkung: Karten nemeses__inspirational, nemeses__powerful_foes (Staerke +3/4)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_overwhelming_oppression",
+   "kind": "plan",
+   "deck": "overwhelming_oppression",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten overwhelming_oppression__commence_landing (Staerke +1/3); Wachtdroide: Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten overwhelming_oppression__commence_landing (Staerke +1/3)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten overwhelming_oppression__commence_landing (Staerke +1/3)",
+     "G1|card_effects|Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten overwhelming_oppression__commence_landing (Staerke +1/3)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_power_of_the_dark_side",
+   "kind": "plan",
+   "deck": "power_of_the_dark_side",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten power_of_the_dark_side__manifest_agression (Staerke +1/3); Wachtdroide: Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten power_of_the_dark_side__manifest_agression (Staerke +1/3)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten power_of_the_dark_side__manifest_agression (Staerke +1/3)",
+     "G1|card_effects|Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten power_of_the_dark_side__manifest_agression (Staerke +1/3)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_precision_training",
+   "kind": "plan",
+   "deck": "precision_training",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 6.88 (W eliminate, Muster aggressive) | Kartenwirkung: Karten precision_training__strike_force (Staerke +1/8); Wachtdroide: Staerke-Effizienz 6.28 (W eliminate, Muster aggressive) | Kartenwirkung: Karten precision_training__strike_force (Staerke +1/8)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 6.88 (W eliminate, Muster aggressive) | Kartenwirkung: Karten precision_training__strike_force (Staerke +1/8)",
+     "G1|card_effects|Staerke-Effizienz 6.28 (W eliminate, Muster aggressive) | Kartenwirkung: Karten precision_training__strike_force (Staerke +1/8)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_reactive_defenses",
+   "kind": "plan",
+   "deck": "reactive_defenses",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance (Staerke +0, Effizienz x5/4); Wachtdroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance (Staerke +0, Effizienz x5/4)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 8.12 (W eliminate, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance (Staerke +0, Effizienz x5/4)",
+     "G1|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance (Staerke +0, Effizienz x5/4)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_subversive_tactics",
+   "kind": "plan",
+   "deck": "subversive_tactics",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": false,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 6.50 (W eliminate, Muster aggressive); Wachtdroide: Staerke-Effizienz 6.00 (W eliminate, Muster aggressive)",
+    "reasons": [
+     "G0||Staerke-Effizienz 6.50 (W eliminate, Muster aggressive)",
+     "G1||Staerke-Effizienz 6.00 (W eliminate, Muster aggressive)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_basics_technological_superiority",
+   "kind": "plan",
+   "deck": "technological_superiority",
+   "owned": [],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Erntedroide > Wachtdroide | Erntedroide: Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten technological_superiority__experimental_arms (Staerke +1/3); Wachtdroide: Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten technological_superiority__experimental_arms (Staerke +1/3)",
+    "reasons": [
+     "G0|card_effects|Staerke-Effizienz 7.50 (W eliminate, Muster aggressive) | Kartenwirkung: Karten technological_superiority__experimental_arms (Staerke +1/3)",
+     "G1|card_effects|Staerke-Effizienz 6.75 (W eliminate, Muster aggressive) | Kartenwirkung: Karten technological_superiority__experimental_arms (Staerke +1/3)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_mixed_military_might",
+   "kind": "plan",
+   "deck": "military_might",
+   "owned": [
+    "military_might__endless_ranks",
+    "military_might__assault_armor"
+   ],
+   "posture": "eliminate",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    },
+    {
+     "group": "G2",
+     "card": "DG019",
+     "name": "Schwerer Stormtrooper",
+     "pattern": "hunter",
+     "alive": 3,
+     "vitality": "3/4",
+     "heavy": true
+    },
+    {
+     "group": "G3",
+     "card": "DG001",
+     "name": "Stormtrooper",
+     "pattern": "support",
+     "alive": 4,
+     "vitality": "1",
+     "swarm": true
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G2",
+     "G3",
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G2",
+     "G3",
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Schwerer Stormtrooper > Stormtrooper > Erntedroide > Wachtdroide | Schwerer Stormtrooper: Staerke-Effizienz 21.52 (W eliminate, Muster hunter) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2); Stormtrooper: Staerke-Effizienz 11.55 (W eliminate, Muster support) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2); Erntedroide: Staerke-Effizienz 11.00 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2); Wachtdroide: Staerke-Effizienz 9.38 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2)",
+    "reasons": [
+     "G2|card_effects|Staerke-Effizienz 21.52 (W eliminate, Muster hunter) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2)",
+     "G3|card_effects|Staerke-Effizienz 11.55 (W eliminate, Muster support) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2)",
+     "G0|card_effects|Staerke-Effizienz 11.00 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2)",
+     "G1|card_effects|Staerke-Effizienz 9.38 (W eliminate, Muster aggressive) | Kartenwirkung: Karten military_might__assault_armor, military_might__endless_ranks, military_might__show_of_force (Staerke +3/2)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "plan_mixed_reactive_defenses",
+   "kind": "plan",
+   "deck": "reactive_defenses",
+   "owned": [
+    "reactive_defenses__remote_activator"
+   ],
+   "posture": "stall",
+   "skill": "S2",
+   "seed": 7,
+   "groups": [
+    {
+     "group": "G0",
+     "card": "DG011",
+     "name": "Erntedroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1"
+    },
+    {
+     "group": "G1",
+     "card": "DG050",
+     "name": "Wachtdroide",
+     "pattern": "aggressive",
+     "alive": 2,
+     "vitality": "1/2"
+    },
+    {
+     "group": "G2",
+     "card": "DG019",
+     "name": "Schwerer Stormtrooper",
+     "pattern": "hunter",
+     "alive": 3,
+     "vitality": "3/4",
+     "heavy": true
+    },
+    {
+     "group": "G3",
+     "card": "DG001",
+     "name": "Stormtrooper",
+     "pattern": "support",
+     "alive": 4,
+     "vitality": "1",
+     "swarm": true
+    }
+   ],
+   "expect": {
+    "announced": true,
+    "flipped": [],
+    "order_base": [
+     "G2",
+     "G3",
+     "G0",
+     "G1"
+    ],
+    "order_cards": [
+     "G2",
+     "G3",
+     "G0",
+     "G1"
+    ],
+    "public": "Reihenfolge-Karte (Stufe S2): Schwerer Stormtrooper > Stormtrooper > Erntedroide > Wachtdroide | Schwerer Stormtrooper: Staerke-Effizienz 13.12 (W stall, Muster hunter) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4); Stormtrooper: Staerke-Effizienz 9.48 (W stall, Muster support) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4); Erntedroide: Staerke-Effizienz 4.33 (W stall, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4); Wachtdroide: Staerke-Effizienz 4.00 (W stall, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4)",
+    "reasons": [
+     "G2|card_effects|Staerke-Effizienz 13.12 (W stall, Muster hunter) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4)",
+     "G3|card_effects|Staerke-Effizienz 9.48 (W stall, Muster support) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4)",
+     "G0|card_effects|Staerke-Effizienz 4.33 (W stall, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4)",
+     "G1|card_effects|Staerke-Effizienz 4.00 (W stall, Muster aggressive) | Kartenwirkung: Karten reactive_defenses__active_surveillance, reactive_defenses__remote_activator (Staerke +0, Effizienz x5/4)"
+    ],
+    "same_order": true
+   }
+  },
+  {
+   "name": "threat_basics_armored_onslaught",
+   "kind": "threat",
+   "deck": "armored_onslaught",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_hutt_mercenaries",
+   "kind": "threat",
+   "deck": "hutt_mercenaries",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": {
+     "acc_delta": 1,
+     "pierce": 0
+    },
+    "threat_base": "1/2",
+    "threat_cards": "1"
+   }
+  },
+  {
+   "name": "threat_basics_imperial_black_ops",
+   "kind": "threat",
+   "deck": "imperial_black_ops",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_inspiring_leadership",
+   "kind": "threat",
+   "deck": "inspiring_leadership",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_military_might",
+   "kind": "threat",
+   "deck": "military_might",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_nemeses",
+   "kind": "threat",
+   "deck": "nemeses",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_overwhelming_oppression",
+   "kind": "threat",
+   "deck": "overwhelming_oppression",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_power_of_the_dark_side",
+   "kind": "threat",
+   "deck": "power_of_the_dark_side",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_precision_training",
+   "kind": "threat",
+   "deck": "precision_training",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_reactive_defenses",
+   "kind": "threat",
+   "deck": "reactive_defenses",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_subversive_tactics",
+   "kind": "threat",
+   "deck": "subversive_tactics",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_basics_technological_superiority",
+   "kind": "threat",
+   "deck": "technological_superiority",
+   "owned": [],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_mixed_reactive",
+   "kind": "threat",
+   "deck": "reactive_defenses",
+   "owned": [
+    "reactive_defenses__remote_activator"
+   ],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": null,
+    "threat_base": "1/2",
+    "threat_cards": "1/2"
+   }
+  },
+  {
+   "name": "threat_precision_pierce",
+   "kind": "threat",
+   "deck": "precision_training",
+   "owned": [
+    "precision_training__find_the_weakness"
+   ],
+   "hero": "Saska Teft",
+   "profile": "Saska Teft",
+   "posture": "eliminate",
+   "defense": [
+    "White"
+   ],
+   "expect": {
+    "engage": {
+     "acc_delta": 0,
+     "pierce": 1
+    },
+    "threat_base": "1/2",
+    "threat_cards": "3/2"
+   }
+  },
+  {
+   "name": "rank_surcharge_subversive_basics",
+   "kind": "rank",
+   "posture": "eliminate",
+   "surcharge": 1,
+   "defense": [
+    "White"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "attack_dice": 2,
+     "health": 6,
+     "conditioned": true
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "row": 1,
+     "profile": "Biv Bodhrik",
+     "attack_dice": 2,
+     "health": 7
+    }
+   ],
+   "expect": {
+    "order_base": [
+     "Biv Bodhrik",
+     "Fenn Signis"
+    ],
+    "order_cards": [
+     "Fenn Signis",
+     "Biv Bodhrik"
+    ],
+    "rows": [
+     {
+      "basis": "card",
+      "hero": "Fenn Signis",
+      "marked": false,
+      "threat": "13/6",
+      "threat_econ": "13/6",
+      "wounded": false
+     },
+     {
+      "basis": "card",
+      "hero": "Biv Bodhrik",
+      "marked": false,
+      "threat": "7/6",
+      "threat_econ": "7/6",
+      "wounded": false
+     }
+    ]
+   }
+  },
+  {
+   "name": "rank_surcharge_zero_inert",
+   "kind": "rank",
+   "posture": "eliminate",
+   "surcharge": 0,
+   "defense": [
+    "White"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "attack_dice": 2,
+     "health": 6,
+     "conditioned": true
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "row": 1,
+     "profile": "Biv Bodhrik",
+     "attack_dice": 2,
+     "health": 7
+    }
+   ],
+   "expect": {
+    "order_base": [
+     "Biv Bodhrik",
+     "Fenn Signis"
+    ],
+    "order_cards": [
+     "Biv Bodhrik",
+     "Fenn Signis"
+    ],
+    "rows": [
+     {
+      "basis": "card",
+      "hero": "Biv Bodhrik",
+      "marked": false,
+      "threat": "7/6",
+      "threat_econ": "7/6",
+      "wounded": false
+     },
+     {
+      "basis": "card",
+      "hero": "Fenn Signis",
+      "marked": false,
+      "threat": "7/6",
+      "threat_econ": "7/6",
+      "wounded": false
+     }
+    ]
+   }
+  },
+  {
+   "name": "cost_basics_armored_onslaught",
+   "kind": "cost",
+   "deck": "armored_onslaught",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_hutt_mercenaries",
+   "kind": "cost",
+   "deck": "hutt_mercenaries",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_imperial_black_ops",
+   "kind": "cost",
+   "deck": "imperial_black_ops",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_inspiring_leadership",
+   "kind": "cost",
+   "deck": "inspiring_leadership",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_military_might",
+   "kind": "cost",
+   "deck": "military_might",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_nemeses",
+   "kind": "cost",
+   "deck": "nemeses",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_overwhelming_oppression",
+   "kind": "cost",
+   "deck": "overwhelming_oppression",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_power_of_the_dark_side",
+   "kind": "cost",
+   "deck": "power_of_the_dark_side",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_precision_training",
+   "kind": "cost",
+   "deck": "precision_training",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_reactive_defenses",
+   "kind": "cost",
+   "deck": "reactive_defenses",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_subversive_tactics",
+   "kind": "cost",
+   "deck": "subversive_tactics",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_basics_technological_superiority",
+   "kind": "cost",
+   "deck": "technological_superiority",
+   "owned": [],
+   "costs": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_nemeses_leave_them",
+   "kind": "cost",
+   "deck": "nemeses",
+   "owned": [
+    "nemeses__leave_them_to_me"
+   ],
+   "costs": [
+    0,
+    1,
+    3,
+    5,
+    8
+   ],
+   "vitality": "3/4",
+   "expect": {
+    "effective_costs": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "vitality_effective": "3/4"
+   }
+  },
+  {
+   "name": "cost_powerful_foes_free",
+   "kind": "cost",
+   "deck": "nemeses",
+   "owned": [
+    "nemeses__powerful_foes"
+   ],
+   "costs": [
+    5
+   ],
+   "vitality": "1",
+   "expect": {
+    "effective_costs": [
+     0
+    ],
+    "vitality_effective": "1"
+   }
+  },
+  {
+   "name": "cost_reactive_armor_health",
+   "kind": "cost",
+   "deck": "armored_onslaught",
+   "owned": [
+    "armored_onslaught__reactive_armor"
+   ],
+   "costs": [
+    3
+   ],
+   "vitality": "1/2",
+   "expect": {
+    "effective_costs": [
+     3
+    ],
+    "vitality_effective": "1/6"
+   }
+  },
+  {
+   "name": "lifecycle_reactive_armor",
+   "kind": "lifecycle",
+   "deck": "armored_onslaught",
+   "card": "armored_onslaught__reactive_armor",
+   "traits": [
+    "Droid",
+    "Vehicle",
+    "Trooper",
+    "Guardian",
+    null
+   ],
+   "expect": {
+    "legal": [
+     true,
+     true,
+     false,
+     false,
+     false
+    ],
+    "restriction": "Attachment: DROID OR VEHICLE ONLY"
+   }
+  },
+  {
+   "name": "lifecycle_jetpacks",
+   "kind": "lifecycle",
+   "deck": "technological_superiority",
+   "card": "technological_superiority__jetpacks",
+   "traits": [
+    "Trooper",
+    "Droid",
+    null
+   ],
+   "expect": {
+    "legal": [
+     true,
+     false,
+     false
+    ],
+    "restriction": "Attachment: Trooper only"
+   }
+  },
+  {
+   "name": "lifecycle_field_general",
+   "kind": "lifecycle",
+   "deck": "inspiring_leadership",
+   "card": "inspiring_leadership__field_general",
+   "traits": [
+    "Trooper",
+    "Guardian",
+    "Leader",
+    "Droid",
+    null
+   ],
+   "expect": {
+    "legal": [
+     true,
+     true,
+     true,
+     false,
+     false
+    ],
+    "restriction": "Attachment: Guardian, Leader, or Trooper only"
+   }
+  },
+  {
+   "name": "lifecycle_ringleader",
+   "kind": "lifecycle",
+   "deck": "nemeses",
+   "card": "nemeses__ringleader",
+   "traits": [
+    "Villain",
+    "Trooper",
+    null
+   ],
+   "expect": {
+    "legal": [
+     true,
+     false,
+     false
+    ],
+    "restriction": "Attachment: Villain Only"
+   }
+  },
+  {
+   "name": "lifecycle_execution_squad",
+   "kind": "lifecycle",
+   "deck": "imperial_black_ops",
+   "card": "imperial_black_ops__execution_squad",
+   "traits": [
+    "Trooper",
+    "Droid",
+    null
+   ],
+   "expect": {
+    "legal": [
+     true,
+     true,
+     true
+    ],
+    "restriction": "Attachment"
+   }
+  },
+  {
+   "name": "infos_basics_armored_onslaught",
+   "kind": "infos",
+   "deck": "armored_onslaught",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "armored_onslaught",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "5/12"
+      }
+     ],
+     "id": "armored_onslaught__explosive_munitions",
+     "modelled": true,
+     "name": "Explosive Munitions",
+     "partial": [
+      "Blast-Streuung nur bei angrenzenden Helden (kein Hex-Welt-Seam)"
+     ],
+     "reason": "Angriffs-Upgrade (1 Wuerfel -> Rot + Blast) als konservativer EV-Boden auf der Staerke-Schiene.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_hutt_mercenaries",
+   "kind": "infos",
+   "deck": "hutt_mercenaries",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "b",
+     "deck": "hutt_mercenaries",
+     "hooks": [
+      {
+       "kind": "engage_acc_delta",
+       "value": "1"
+      }
+     ],
+     "id": "hutt_mercenaries__wanted_dead",
+     "modelled": true,
+     "name": "Wanted Dead",
+     "partial": [
+      "Bounty-Pflicht-Passive ist oeffentlich (alle Helden tragen Token); {C}-Alternative und Defeat-Discard sind Detail"
+     ],
+     "reason": "Angriffe gegen Helden mit Bounty verlieren eine Tauschstufe — Threat-Hook nach unten (Pip-Boden 1).",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_imperial_black_ops",
+   "kind": "infos",
+   "deck": "imperial_black_ops",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "imperial_black_ops",
+     "hooks": [
+      {
+       "kind": "order_boost",
+       "value": "5/4"
+      }
+     ],
+     "id": "imperial_black_ops__in_the_shadows",
+     "modelled": true,
+     "name": "In the Shadows",
+     "partial": [
+      "Hidden-Bedingung selbst ist nicht quantifiziert (Core-RR ohne Hidden-Glossar)"
+     ],
+     "reason": "Kostenfreie Aktivierung + Hidden = versteckte Einheit bleibt handlungsfaehig — Aktivierungs-Hook.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_inspiring_leadership",
+   "kind": "infos",
+   "deck": "inspiring_leadership",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "inspiring_leadership",
+     "hooks": [
+      {
+       "kind": "order_boost",
+       "value": "5/4"
+      },
+      {
+       "kind": "attach_lifecycle",
+       "value": "1"
+      }
+     ],
+     "id": "inspiring_leadership__field_officer",
+     "modelled": true,
+     "name": "Field Officer",
+     "partial": [
+      "Interrupt-Timing bleibt M12e-UI-Hinweis"
+     ],
+     "reason": "Order: befreundete Figur unterbricht fuer Bewegung = Extra-Aktion; Attachment-Lebenszyklus dazu.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_military_might",
+   "kind": "infos",
+   "deck": "military_might",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "military_might",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "3/2"
+      }
+     ],
+     "id": "military_might__show_of_force",
+     "modelled": true,
+     "name": "Show of Force",
+     "partial": [
+      "Focused wird erst mit dem naechsten Angriff wirksam (RR Focus Fire)"
+     ],
+     "reason": "Focused = eine gruene Wuerfel garantiert (RR-Glossar) = exakter EV auf der Staerke-Schiene.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_nemeses",
+   "kind": "infos",
+   "deck": "nemeses",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "nemeses",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "3/4"
+      }
+     ],
+     "id": "nemeses__inspirational",
+     "modelled": true,
+     "name": "Inspirational",
+     "partial": [
+      "Trait-Gleichheit + Schurken-Wahl (Gruppen-Bedingung)"
+     ],
+     "reason": "+1 Schaden (exakt) und +1 Genauigkeit (nicht gezaehlt) auf dem Angriff — Staerken-Hook.",
+     "xp": null
+    },
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "b",
+     "deck": "nemeses",
+     "hooks": [
+      {
+       "kind": "free_group",
+       "value": "1"
+      }
+     ],
+     "id": "nemeses__powerful_foes",
+     "modelled": true,
+     "name": "Powerful Foes",
+     "partial": [
+      "{D}-Gewinn und Deploy-Kosten-Kappung 'by threat level' (variabel)"
+     ],
+     "reason": "Gratis-Schurke in der offenen Hand = Gruppe ohne Deploy-Kosten (BedrohungsOekonomie).",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_overwhelming_oppression",
+   "kind": "infos",
+   "deck": "overwhelming_oppression",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "overwhelming_oppression",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "1/3"
+      }
+     ],
+     "id": "overwhelming_oppression__commence_landing",
+     "modelled": true,
+     "name": "Commence Landing",
+     "partial": [
+      "{C}-Token und Hand-Karten-Wirtschaft; offene Hand ist Info-Thema"
+     ],
+     "reason": "Token auf der Deploy-Karte sind ausgebenbare Angriffs-Pips — Surge-Boden auf der Staerke-Schiene.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_power_of_the_dark_side",
+   "kind": "infos",
+   "deck": "power_of_the_dark_side",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "power_of_the_dark_side",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "1/3"
+      }
+     ],
+     "id": "power_of_the_dark_side__manifest_agression",
+     "modelled": true,
+     "name": "Manifest Agression",
+     "partial": [
+      "Start-/Ende-der-Runde-Variante; Token-Ausgabe bleibt offen"
+     ],
+     "reason": "1 {D} pro Aktivierung = ausgebenbarer Angriffspip — Surge-Boden auf der Staerke-Schiene.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_precision_training",
+   "kind": "infos",
+   "deck": "precision_training",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "precision_training",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "1/8"
+      },
+      {
+       "kind": "attach_lifecycle",
+       "value": "1"
+      }
+     ],
+     "id": "precision_training__strike_force",
+     "modelled": true,
+     "name": "Strike Force",
+     "partial": [],
+     "reason": "Ein Wuerfel neu im Angriff = konservativer Reroll-Boden auf der Staerke-Schiene; Attachment an die Gruppe.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_reactive_defenses",
+   "kind": "infos",
+   "deck": "reactive_defenses",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "reactive_defenses",
+     "hooks": [
+      {
+       "kind": "order_boost",
+       "value": "5/4"
+      }
+     ],
+     "id": "reactive_defenses__active_surveillance",
+     "modelled": true,
+     "name": "Active Surveillance",
+     "partial": [
+      "88-Z-Deploy der Mission; 88-Z {A}-Faehigkeiten"
+     ],
+     "reason": "88-Z aktiviert zusaetzlich zu jeder Imperialen-Aktivierung = Zusatz-Zyklus (Stufe 5/4).",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_subversive_tactics",
+   "kind": "infos",
+   "deck": "subversive_tactics",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "subversive_tactics",
+     "hooks": [
+      {
+       "kind": "focus_surcharge",
+       "value": "1"
+      }
+     ],
+     "id": "subversive_tactics__prey_upon_doubt",
+     "modelled": true,
+     "name": "Prey Upon Doubt",
+     "partial": [
+      "Beide Helden-Wahlen (1C erleiden / +1F defense) bleiben Detail"
+     ],
+     "reason": "Angriffs-Steuer bei jedem Rebel-Angriff = Reaktions-Druck auf den Ziel-Slot (M11d-Vokabel).",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_basics_technological_superiority",
+   "kind": "infos",
+   "deck": "technological_superiority",
+   "owned": [],
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "technological_superiority",
+     "hooks": [
+      {
+       "kind": "atk_ev_bonus",
+       "value": "1/3"
+      },
+      {
+       "kind": "attach_lifecycle",
+       "value": "1"
+      }
+     ],
+     "id": "technological_superiority__experimental_arms",
+     "modelled": true,
+     "name": "Experimental Arms",
+     "partial": [
+      "Eigener {C} nach der Attacke (Selbstkosten, konservativ nicht abgezogen)"
+     ],
+     "reason": "+1 Blau im Angriff = Surge-Boden auf der Staerke-Schiene; Attachment-Lebenszyklus dazu.",
+     "xp": null
+    }
+   ]
+  },
+  {
+   "name": "infos_mixed_reactive",
+   "kind": "infos",
+   "deck": "reactive_defenses",
+   "owned": [
+    "reactive_defenses__remote_activator"
+   ],
+   "group_traits": "Droid",
+   "expect": [
+    {
+     "attachable": true,
+     "basic": true,
+     "bucket": "a",
+     "deck": "reactive_defenses",
+     "hooks": [
+      {
+       "kind": "order_boost",
+       "value": "5/4"
+      }
+     ],
+     "id": "reactive_defenses__active_surveillance",
+     "modelled": true,
+     "name": "Active Surveillance",
+     "partial": [
+      "88-Z-Deploy der Mission; 88-Z {A}-Faehigkeiten"
+     ],
+     "reason": "88-Z aktiviert zusaetzlich zu jeder Imperialen-Aktivierung = Zusatz-Zyklus (Stufe 5/4).",
+     "xp": null
+    },
+    {
+     "attachable": true,
+     "basic": false,
+     "bucket": "a",
+     "deck": "reactive_defenses",
+     "hooks": [
+      {
+       "kind": "order_boost",
+       "value": "5/4"
+      },
+      {
+       "kind": "attach_lifecycle",
+       "value": "1"
+      }
+     ],
+     "id": "reactive_defenses__remote_activator",
+     "modelled": true,
+     "name": "Remote Activator",
+     "partial": [
+      "Move-Point-Ausgabe als Kosten"
+     ],
+     "reason": "Move-Points bezahlen fuer Aktion = Aktivierungsokonomie (5/4) + Attachment-Lebenszyklus.",
+     "xp": 2
+    }
+   ]
+  }
+ ]
+}

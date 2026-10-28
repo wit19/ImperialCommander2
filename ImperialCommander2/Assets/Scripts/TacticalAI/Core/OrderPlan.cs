@@ -230,9 +230,14 @@ namespace TacticalAI.Core
             return pattern == "aggressive" || pattern == "hunter";
         }
 
-        public static GroupFactsWithEv WithEv(GroupFacts facts, DeploymentCard card)
+        public static GroupFactsWithEv WithEv(GroupFacts facts, DeploymentCard card,
+                                             Rational attackEvBonus = default)
         {
-            return new GroupFactsWithEv(facts, Dice.PrintedEv(card) * facts.NAlive);
+            var ev = Dice.PrintedEv(card);
+            // M12d: the printed-strength hook adds to the SAME printed-EV
+            // yardstick the ORD decks calibrate with (no new scale).
+            if (attackEvBonus.Num != 0) ev += attackEvBonus;
+            return new GroupFactsWithEv(facts, ev * facts.NAlive);
         }
 
         /// Staerke-Effizienz-Matrix: printed value x Einsatzwert.
@@ -291,16 +296,25 @@ namespace TacticalAI.Core
                                           int issuedTurn = 0,
                                           IEnumerable<string> ringZones = null,
                                           string contestZone = null,
-                                          string counter = null)
+                                          string counter = null,
+                                          CardEffects cardEffects = null)
         {
             var prof = skill;                       // resolve_skill(skill)
             var level = prof != null ? prof.Level : "ref";
             if (groups == null || groups.Count == 0)
                 return new OrderPlan(roundNo, level, issuedTurn, null, "");
 
+            // M12d card hooks: MAX-once aggregated (CardEffects), null/neutral
+            // -> every number below stays bit-identical to the pre-M12d canon.
+            var cardBoost = cardEffects != null && cardEffects.OrderBoost > Rational.Zero
+                ? cardEffects.OrderBoost : Rational.Zero;
+            var cardEvBonus = cardEffects != null && cardEffects.AtkEvBonus > Rational.Zero
+                ? cardEffects.AtkEvBonus : Rational.Zero;
+            bool cardsFire = cardBoost > Rational.Zero || cardEvBonus > Rational.Zero;
+
             var weighted = new List<GroupFactsWithEv>();
             foreach (var g in groups)
-                weighted.Add(WithEv(g, cards[g.CardId]));
+                weighted.Add(WithEv(g, cards[g.CardId], cardEvBonus));
 
             var tags = new Dictionary<string, List<string>>();
             var why = new Dictionary<string, List<string>>();
@@ -325,7 +339,14 @@ namespace TacticalAI.Core
                 if (ringZones != null) foreach (var z in ringZones) ringSet.Add(z == null ? null : z.ToString());
                 var effs = new Dictionary<string, Rational>();
                 foreach (var w in weighted)
-                    effs[w.Facts.GroupId] = Efficiency(w, posture, ringSet, contestZone);
+                {
+                    var e0 = Efficiency(w, posture, ringSet, contestZone);
+                    // M12d activation-economy stage: printed extra-action /
+                    // movement-point cards lift the owning side's groups by
+                    // ONE fixed multiplier (MAX-once, never a sum - M11h
+                    // combination law), announced in the public why-text.
+                    effs[w.Facts.GroupId] = cardBoost > Rational.Zero ? e0 * cardBoost : e0;
+                }
                 // key = (-eff, -printed_ev_total, index) — stable tie chain
                 SortStable(order, (a, b) =>
                 {
@@ -354,6 +375,24 @@ namespace TacticalAI.Core
             }
             if (prof != null && (level == "S4" || level == "S5"))
                 ApplySlotFinisher(order, tags, why, counter);
+
+            // M12d public announcement: whenever card hooks moved numbers,
+            // EVERY group's order card names the owned cards (open book -
+            // the deck state is public campaign data once chosen).
+            if (cardsFire && cardEffects != null && cardEffects.CardIds.Count > 0)
+                foreach (var w in weighted)
+                {
+                    tags[w.Facts.GroupId].Add("card_effects");
+                    bool announced = false;
+                    foreach (var s in why[w.Facts.GroupId])
+                        if (s.StartsWith("Kartenwirkung")) announced = true;
+                    if (!announced)
+                        why[w.Facts.GroupId].Add(
+                            "Kartenwirkung: Karten " + string.Join(", ", cardEffects.CardIds)
+                            + " (Staerke +" + cardEvBonus +
+                            (cardBoost > Rational.Zero
+                                ? ", Effizienz x" + cardBoost : "") + ")");
+                }
 
             // -- seeded missers (S3/S4): reuse the skill stream, no own pot -----
             string miss = "";

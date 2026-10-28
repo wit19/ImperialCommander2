@@ -84,6 +84,21 @@ namespace TacticalAI.Core
             return income;
         }
 
+        // -------------------------------------------------- M12d card seams
+        /// <summary>The deployment cost one reserve group REALLY pays when
+        /// the Empire owns printed cost-reduction / free-arrival cards
+        /// (ImperialCardEffects deploy_cost / free_group hooks). Floored at
+        /// 0 - the ledger stays balanced because the Empire really spends
+        /// the reduced cost (Release books EffectiveCost, not the printed
+        /// one). Pure function, caller passes the aggregated effects.</summary>
+        public static int EffectiveCost(int printedCost, CardEffects eff)
+        {
+            if (eff == null || eff.IsNeutral) return printedCost;
+            if (eff.FreeGroups > 0) return 0;
+            int c = printedCost - eff.DeployCostCut;
+            return c < 0 ? 0 : c;
+        }
+
         // ------------------------------------------------------------ decisions
         /// Pick the next reserve group to bring in THIS round, or null.
         ///

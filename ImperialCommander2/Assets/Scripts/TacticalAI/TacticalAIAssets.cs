@@ -20,6 +20,7 @@ namespace TacticalAI
         const string HERO_PROFILES_PATH = "Languages/En/tactical_hero_profiles";
         const string HERO_CARDS_PATH = "Languages/En/tactical_hero_cards";
         const string IMPERIAL_DECKS_PATH = "Languages/En/tactical_imperial_decks";
+        const string IMPERIAL_CARD_EFFECTS_PATH = "Languages/En/tactical_imperial_card_effects";
         const string CAMPAIGN_ITEMS_PATH = "Languages/En/CampaignData/items";
         const string CAMPAIGN_SKILLS_PATH = "Languages/En/CampaignData/skills";
 
@@ -28,10 +29,11 @@ namespace TacticalAI
         static object _heroProfilesRoot;
         static object _heroCardsRoot;
         static object _imperialDecksRoot;
+        static object _imperialCardEffectsRoot;
         static object _campaignItemsRoot;
         static object _campaignSkillsRoot;
         static bool _orderDecksFailed, _lethalityFailed, _heroProfilesFailed,
-                    _heroCardsFailed, _imperialDecksFailed,
+                    _heroCardsFailed, _imperialDecksFailed, _imperialCardEffectsFailed,
                     _campaignItemsFailed, _campaignSkillsFailed;
 
         /// <summary>tacai.order_decks/1 root object (Core Json) or null when
@@ -120,6 +122,24 @@ namespace TacticalAI
                         Tac.ImperialDecks.PrimeDoc(d);
                 }
                 return _imperialDecksRoot;
+            }
+        }
+
+        /// <summary>M12d: tacai.imperial_card_effects/1 - the classification
+        /// table (every deck card -> bucket + hooks). Loads AND primes the
+        /// Core cache (same seam as ImperialDecksRoot).</summary>
+        public static object ImperialCardEffectsRoot
+        {
+            get
+            {
+                if (_imperialCardEffectsRoot == null && !_imperialCardEffectsFailed)
+                {
+                    _imperialCardEffectsRoot = LoadJson(IMPERIAL_CARD_EFFECTS_PATH,
+                                                        ref _imperialCardEffectsFailed);
+                    if (_imperialCardEffectsRoot is System.Collections.Generic.Dictionary<string, object> d)
+                        Tac.ImperialCardEffects.PrimeDoc(d);
+                }
+                return _imperialCardEffectsRoot;
             }
         }
 

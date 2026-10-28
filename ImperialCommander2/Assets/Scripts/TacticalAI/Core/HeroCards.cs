@@ -255,14 +255,22 @@ namespace TacticalAI.Core
 
         /// <summary>Printed-threat value of one hero in one race, or null
         /// when the posture is not a threat race. card null -> caller falls
-        /// back to the M2a.4 curation table (Han/Wookiee sim rows).</summary>
+        /// back to the M2a.4 curation table (Han/Wookiee sim rows).
+        /// M12d: engage = the IMPERIAL SIDE's card effects on the hero
+        /// exchange (owned engage-hook cards, ImperialCardEffects). null or
+        /// neutral -> bit-identical pre-M12d threat (canon law): the acc pip
+        /// floor moves the hero's accuracy EV (his attack exchange against
+        /// the owning side: negative delta = printed defensive prints make
+        /// his attack worse), the printed Pierce of the owning side rides
+        /// the EXISTING pierce seam (M11b item pierce).</summary>
         public static Rational? Threat(HeroCard card, HeroCardTable table,
                                        HeroThreatProfile profile, bool wounded,
-                                       string posture, IList<string> defenderDefense)
+                                       string posture, IList<string> defenderDefense,
+                                       EngagementEffects engage = null)
         {
             if (card == null) return null;
             if (posture == "eliminate" || posture == "attrition")
-                return EliminateEv(card, table, profile, wounded, defenderDefense);
+                return EliminateEv(card, table, profile, wounded, defenderDefense, engage);
             if (posture == "protect" || posture == "stall")
                 return RunnerValue(card, table, profile, wounded);
             return null;
@@ -271,7 +279,8 @@ namespace TacticalAI.Core
         // ------------------------------------------------------- damage race
         static Rational EliminateEv(HeroCard card, HeroCardTable table,
                                     HeroThreatProfile profile, bool wounded,
-                                    IList<string> defenderDefense)
+                                    IList<string> defenderDefense,
+                                    EngagementEffects engage = null)
         {
             var owned = profile != null && profile.LoadoutItems != null
                 ? profile.LoadoutItems : NoItems;
@@ -304,12 +313,23 @@ namespace TacticalAI.Core
             // printed weapon (rules-true: one weapon per attack, and the
             // Empire may never under-estimate an equipped hero - same
             // direction as the M10a investment tie-break)
+            int engagePierce = engage == null ? 0 : engage.Pierce;
+            int engageAcc = engage == null ? 0 : engage.AccDelta;
             var best = Rational.Zero;
             foreach (var p in pools)
             {
                 var stats = Dice.BuildAttackStats(p.Item1, keywords, p.Item2, null,
                     defenderDefense != null ? new List<string>(defenderDefense) : null);
-                var ev = Dice.ExpectedDamage(stats, defender, 1, pierce);
+                // M12d engagement hook: the acc pips ride the AccEv/GATE of
+                // this exact pool (printed-accuracy law: pips pair damage,
+                // the gate follows); pierce uses the existing pierce seam.
+                if (engageAcc != 0)
+                {
+                    stats.AccEv = Rational.Max(Rational.Zero, stats.AccEv + engageAcc);
+                    var gate = stats.AccEv + Rational.One / 2;
+                    stats.AccGate = (int)(gate.Num / gate.Den);
+                }
+                var ev = Dice.ExpectedDamage(stats, defender, 1, pierce + engagePierce);
                 if (ev > best) best = ev;
             }
             return best;
