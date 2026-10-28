@@ -22,6 +22,10 @@
 // Behaviour (unchanged): master gates the sub-menu; click cycles values;
 // 'legacy' is not offered globally (dev 15); the ladder is the single
 // difficulty dial (dev 20); values render localized + caps (dev 22).
+// M13g (Thomas 28.10): the old deployment-mode row is GONE - the app is a
+// companion to the board game and the printed rules never hide a
+// deployment: Aufstellungen sind IMMER SICHTBAR (DP highlight + camera
+// move + TextBox, exactly like the legacy original).
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -125,11 +129,6 @@ namespace TacticalAI
             MakeRow(go.transform, "skill", () =>
             {
                 TacticalAISettings.SkillLevel = Next(TacticalAISettings.SkillLevel, TacticalAISettings.SkillValues);
-                Refresh();
-            });
-            MakeRow(go.transform, "deployment", () =>
-            {
-                TacticalAISettings.DeploymentMode = Next(TacticalAISettings.DeploymentMode, TacticalAISettings.DeploymentModeValues);
                 Refresh();
             });
             MakeRow(go.transform, "explain", () =>
@@ -316,11 +315,6 @@ namespace TacticalAI
                 case "master": value = on ? (tl != null ? tl.setOn : "ON") : (tl != null ? tl.setOff : "OFF"); break;
                 case "mode": value = TacticalAISettings.Mode.ToUpperInvariant(); break;
                 case "skill": value = SkillDisplay(TacticalAISettings.SkillLevel, tl); break;
-                case "deployment":
-                    value = TacticalAISettings.DeploymentMode == "open"
-                        ? Pick(tl != null ? tl.depOpen : null, "OPEN")
-                        : Pick(tl != null ? tl.depSecret : null, "SECRET");
-                    break;
                 case "explain":
                     value = TacticalAISettings.ExplainLevel == "none"
                         ? Pick(tl != null ? tl.expNone : null, "NONE")
@@ -335,7 +329,6 @@ namespace TacticalAI
             else if (master) heading = tl.setHeading;
             else if (kind == "mode") heading = tl.setMode;
             else if (kind == "skill") heading = tl.setSkill;
-            else if (kind == "deployment") heading = tl.setDeployment;
             else heading = tl.setExplain;
             // dialog rows render in caps like the Rundenlimit neighbours
             return (tl != null ? tl.setRowFormat : "{0}:  {1}")

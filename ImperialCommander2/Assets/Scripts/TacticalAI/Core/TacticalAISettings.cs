@@ -24,7 +24,6 @@ namespace TacticalAI
     {
         public static readonly string[] ModeValues = { "legacy", "reference", "overlord" };
         public static readonly string[] SkillValues = { "S1", "S2", "S3", "S4", "S5" };
-        public static readonly string[] DeploymentModeValues = { "secret", "open" };
         public static readonly string[] ExplainLevelValues = { "none", "post_hoc", "full" };
 
         // ---- defaults: OFF, legacy, printed rules only -------------------
@@ -32,7 +31,6 @@ namespace TacticalAI
         // dev 20: no stored mode dial; kept as legacy token for missions/tests.
         public const string DefaultMode = "legacy";
         public const string DefaultSkillLevel = "S1";
-        public const string DefaultDeploymentMode = "secret";
         public const string DefaultExplainLevel = "post_hoc";
 
         static bool _enabled = DefaultEnabled;
@@ -43,7 +41,6 @@ namespace TacticalAI
         // setter survives only as an explicit test/console override seam.
         static string _modeOverride;
         static string _skillLevel = DefaultSkillLevel;
-        static string _deploymentMode = DefaultDeploymentMode;
         static string _explainLevel = DefaultExplainLevel;
 
         static Func<string, string> _saveHook;   // (jsonToStore) -> storedJson|null
@@ -92,14 +89,6 @@ namespace TacticalAI
             set { _skillLevel = Validate(value, SkillValues, DefaultSkillLevel); Save(); }
         }
 
-        /// <summary>"secret" (planner picks DPs silently) | "open" (DP
-        /// highlight kept on screen).</summary>
-        public static string DeploymentMode
-        {
-            get { return _deploymentMode; }
-            set { _deploymentMode = Validate(value, DeploymentModeValues, DefaultDeploymentMode); Save(); }
-        }
-
         /// <summary>"none" | "post_hoc" (round summary after the round) |
         /// "full" (per-activation why-strings). Printed info only.</summary>
         public static string ExplainLevel
@@ -136,7 +125,14 @@ namespace TacticalAI
                 // an explicit override round-trips, and only when valid.
                 _modeOverride = Validate(Core.Json.AsStr(Core.Json.Get(d, "modeOverride", "")), ModeValues, null);
                 _skillLevel = Validate(Core.Json.AsStr(Core.Json.Get(d, "skill", DefaultSkillLevel)), SkillValues, DefaultSkillLevel);
-                _deploymentMode = Validate(Core.Json.AsStr(Core.Json.Get(d, "deployment", DefaultDeploymentMode)), DeploymentModeValues, DefaultDeploymentMode);
+                // M13g (Thomas 28.10): the deployment-mode switch is GONE -
+                // the app is a companion to the board game and deployments
+                // are ALWAYS OPEN. Old save files may still carry a
+                // "deployment" field: Load reads ONLY the named fields below
+                // via Json.Get (TryGetValue) and never enumerates unknown
+                // keys, so the stale key is silently ignored - no throw, no
+                // warning, no effect on any state. The harness pins this
+                // route in settings_load.json.
                 _explainLevel = Validate(Core.Json.AsStr(Core.Json.Get(d, "explain", DefaultExplainLevel)), ExplainLevelValues, DefaultExplainLevel);
             }
             catch (Exception)
@@ -150,7 +146,6 @@ namespace TacticalAI
             _enabled = DefaultEnabled;
             _modeOverride = null;
             _skillLevel = DefaultSkillLevel;
-            _deploymentMode = DefaultDeploymentMode;
             _explainLevel = DefaultExplainLevel;
         }
 
@@ -221,7 +216,6 @@ namespace TacticalAI
             sb.Append("\"enabled\":").Append(_enabled ? "true" : "false").Append(',');
             Kv(sb, "mode", Mode); Kv(sb, "skill", _skillLevel);
             if (_modeOverride != null) Kv(sb, "modeOverride", _modeOverride);
-            Kv(sb, "deployment", _deploymentMode);
             sb.Append("\"explain\":\"").Append(_explainLevel).Append('"');
             sb.Append('}');
             return sb.ToString();

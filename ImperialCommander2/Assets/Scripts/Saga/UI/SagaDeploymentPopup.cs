@@ -41,10 +41,10 @@ namespace Saga
 		DeploymentGroupOverride deploymentOverride;
 		bool acceptInput = true;
 
-		//M13c: tactical optional deployment -> the chosen DP marker is revealed
-		//even in "secret" deployment mode (Thomas 28.10: the marker IS the
-		//placement instruction for the human Imperator at the open screen; the
-		//suppression stays for all NON-optional deployments).
+		//M13c/M13g: tactical optional deployment -> the chosen DP marker is
+		//revealed (Thomas 28.10: the marker IS the placement instruction for
+		//the human Imperator at the open screen; deployments are ALWAYS OPEN
+		//- exactly like the printed rules, which never hide a deployment).
 		bool tacticalOptionalReveal = false;
 
 		//M13c: manual (legacy-mode) optional placement window state.
@@ -475,9 +475,10 @@ namespace Saga
 		/// second pick. The pulsing marker (ShowDeploymentPoints,
 		/// MapEntityManager.cs:491) is lit for exactly the duration of each
 		/// announce TextBox - on when the line opens, off when it closes -
-		/// sequentially, one TextBox at a time. The Secret-DP suppression for
-		/// NON-optional deployments (DeploymentManager.cs ovrd==null branch)
-		/// stays untouched.
+		/// sequentially, one TextBox at a time. Since M13g EVERY deployment -
+		/// optional or not - shows its DP highlight: the ovrd==null branch in
+		/// DeploymentManager runs the legacy reveal (highlight + camera)
+		/// VERBATIM; deployments are always open (Thomas 28.10).
 		/// </summary>
 		void AnnounceTacticalLandings()
 		{

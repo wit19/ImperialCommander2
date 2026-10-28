@@ -48,7 +48,7 @@ public class UITacticalAI
 	public string ordOptionPrinted;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
-	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;
+	public string setHeading, setMode, setSkill, setExplain, setOn, setOff, setRowFormat;
 	// M11c2 explain line under the settings rows: printed card abilities are
 	// played from S4 up (all languages carry the EN text except De).
 	public string setCardSkills;
@@ -84,7 +84,7 @@ public class UITacticalAI
 	public string impAttachTip;
 	public string impBadgeDeckLine, impAgendaLine;
 	public string impCampaignHeader, impCampaignXpLine;
-	public string depSecret, depOpen, expNone, expPostHoc, expFull;
+	public string expNone, expPostHoc, expFull;
 }
 
 public class UISettings

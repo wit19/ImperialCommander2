@@ -132,7 +132,10 @@ namespace TacticalAI.Tests
             Assert.IsFalse(TacticalAISettings.Enabled, "Default MUST be off");
             Assert.AreEqual("reference", TacticalAISettings.Mode,
                 "dev 20: mode is DERIVED from the ladder (default S1 -> reference)");
-            Assert.AreEqual("secret", TacticalAISettings.DeploymentMode);
+            // M13g: the deployment-mode switch is gone (deployments are
+            // always open, Thomas 28.10); ResetDefaults must also
+            // neutralise stale save state cleanly.
+            Assert.AreEqual("post_hoc", TacticalAISettings.ExplainLevel);
             Assert.IsFalse(TacticalAISettings.IsTactical("reference"),
                 "no tactical behaviour while the global switch is off");
             Assert.AreEqual("legacy", TacticalAISettings.EffectiveMode("overlord"),

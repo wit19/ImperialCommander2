@@ -377,19 +377,17 @@ namespace Saga
 				if ( adp != Guid.Empty )
 				{
 					FindObjectOfType<SagaEventManager>().toggleVisButton.SetActive( true );
-					// TACTICAL AI (concept 4.2.5 'secret'): the planner picks the DP
-					// silently - no highlight reveal. Default OFF keeps the legacy
-					// highlight + camera move VERBATIM.
-					bool tacSecret = TacticalAI.TacticalAISettings.Enabled
-						&& TacticalAI.TacticalAISettings.DeploymentMode == "secret";
-					if ( !tacSecret )
-					{
-						//FindObjectOfType<SagaController>().ToggleNavAndEntitySelection( false );
-						FindObjectOfType<MapEntityManager>().ToggleHighlightDeploymentPoint( adp, true );
-						FindObjectOfType<CameraController>().MoveToEntity( adp );
-					}
-					else
-						Debug.Log( "HandleMapDeployment()::TACTICAL secret DP - no reveal highlight" );
+					//M13g: the deployment-mode row was removed entirely
+					//(Thomas 28.10: the app is only a companion to the board
+					//game and the printed rules never hide a deployment -
+					//deployments are ALWAYS OPEN). This branch runs VERBATIM
+					//like the legacy original: highlight ON + camera move,
+					//highlight OFF again when the TextBox below closes. It is
+					//also the path every Aufstellungs-Ereignis and every
+					//reinforcement landing takes (no override).
+					//FindObjectOfType<SagaController>().ToggleNavAndEntitySelection( false );
+					FindObjectOfType<MapEntityManager>().ToggleHighlightDeploymentPoint( adp, true );
+					FindObjectOfType<CameraController>().MoveToEntity( adp );
 					//string enemyName = ovrd.useGenericMugshot ? "Rebel" : enemyToAdd.name;
 					FindObjectOfType<SagaEventManager>().ShowTextBox( $"{DataStore.uiLanguage.sagaMainApp.deployMessageUC}:\n\n<color=white>{enemyToAdd.name}</color>", () =>
 					{

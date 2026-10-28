@@ -27,7 +27,7 @@ namespace TacticalAI
             // legacy/reference/overlord "mode" from old saves is ignored by
             // the loader, so no migration is needed any more.
             Debug.Log($"TacticalAISettingsUnity::mode={TacticalAISettings.Mode}{(TacticalAISettings.HasModeOverride ? " (OVERRIDE)" : "")} enabled={TacticalAISettings.Enabled} " +
-                      $"skill={TacticalAISettings.SkillLevel} deploy={TacticalAISettings.DeploymentMode} " +
+                      $"skill={TacticalAISettings.SkillLevel} " +
                       $"explain={TacticalAISettings.ExplainLevel}");
         }
 

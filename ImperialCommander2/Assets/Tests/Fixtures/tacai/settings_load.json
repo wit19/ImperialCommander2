@@ -1,0 +1,20 @@
+{
+  "_comment": "M13g settings-loader section (hand-pinned ground truth, NOT --record; same route as action_tree.json). TacticalAISettings.Load reads ONLY the named fields via Json.Get (TryGetValue) and never enumerates unknown keys, so a stale 'deployment' field left over in old PlayerPrefs saves from the removed deployment switch is silently ignored: no throw, no warning, no state change. Cases 1-2 pin the two historical values ('secret', 'open'); case 3 adds an unknown extra key on top. loaded_ok pins the absence of any exception (the section catches it explicitly). modeOverride absent in ToJson proves the new serialization writes no deployment field any more. Presentation/settings-only: planning behaviour and all Canon vectors are untouched, there is no Python sim twin.",
+  "cases": [
+    {
+      "name": "legacy_save_deployment_secret",
+      "json": "{\"enabled\":true,\"mode\":\"overlord\",\"skill\":\"S3\",\"deployment\":\"secret\",\"explain\":\"full\"}",
+      "expect": { "enabled": true, "skill": "S3", "explain": "full", "mode": "reference", "mode_override": false, "to_json": "{\"enabled\":true,\"mode\":\"reference\",\"skill\":\"S3\",\"explain\":\"full\"}", "reset_clean": "{\"enabled\":false,\"mode\":\"reference\",\"skill\":\"S1\",\"explain\":\"post_hoc\"}" }
+    },
+    {
+      "name": "legacy_save_deployment_open",
+      "json": "{\"enabled\":true,\"skill\":\"S4\",\"deployment\":\"open\",\"explain\":\"none\"}",
+      "expect": { "enabled": true, "skill": "S4", "explain": "none", "mode": "overlord", "mode_override": false, "to_json": "{\"enabled\":true,\"mode\":\"overlord\",\"skill\":\"S4\",\"explain\":\"none\"}", "reset_clean": "{\"enabled\":false,\"mode\":\"reference\",\"skill\":\"S1\",\"explain\":\"post_hoc\"}" }
+    },
+    {
+      "name": "legacy_save_deployment_plus_junk_key",
+      "json": "{\"enabled\":false,\"skill\":\"S5\",\"deployment\":\"secret\",\"bogus_future_field\":42}",
+      "expect": { "enabled": false, "skill": "S5", "explain": "post_hoc", "mode": "overlord", "mode_override": false, "to_json": "{\"enabled\":false,\"mode\":\"overlord\",\"skill\":\"S5\",\"explain\":\"post_hoc\"}", "reset_clean": "{\"enabled\":false,\"mode\":\"reference\",\"skill\":\"S1\",\"explain\":\"post_hoc\"}" }
+    }
+  ]
+}
