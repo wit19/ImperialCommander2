@@ -186,3 +186,78 @@ Printed-Bedingung textlich dabei.
 - Alle Gates/Scripts gegen `637ebbb` in eigener Worktree; Kanban-DB-Zitate gegen
   Originaltexte geprüft; Behauptungen des Controllers/Workers wurden nur dort
   übernommen, wo ich Gegenbeleg (Datei:Zeile/Skript/Gate-Ausgabe) habe.
+
+---
+
+# Delta-Recheck nach M11g (Abschluss, 2026-10-28)
+
+Basis: eigene, frische abgetrennte Worktree `qa_m11/wt2` @ `43c863e` (= HEAD,
+enthält M11f `8de1ee3`/`cf3b834` und M11g `74c9c23`/`43c863e`); Arbeitsbaum der
+Kette unberührt, keine Produktlogik geändert, nichts von mir committet.
+Logs: `qa_m11/logs2/`. Auftragsgrundlage: Controller-Anweisung nach
+M11-QA-01-Entscheidung (Kartenvolltexte bleiben Build-Inhalt; Thomas, 2026-10-28):
+Delta-Recheck der drei Texte + Bestätigung Asset unverändert.
+
+## Zu M11-QA-01 — erledigt durch M11g, Delta-Beweise
+
+1. **Asset inhaltlich unverändert (programmatisch bewiesen).**
+   `git diff 637ebbb..HEAD -- .../En/tactical_hero_cards.json` zeigt genau zwei
+   geänderte Zeilen: `source` und `conventions.faehigkeiten` (Doku-Kopf).
+   Skriptgegenprobe (Datenblock ohne diese beiden Header-Strings,
+   sortiert normalisiert, sha256): `316cf495a8a1fdfa` == `316cf495a8a1fdfa`
+   (alt/neu) → **DATA IDENTICAL: True**. Die 12 Volltext-Zeilen (>60 Zeichen,
+   max 247 Zeichen, 7 Helden) sind zeichengleich erhalten (`identical: True`);
+   heroes 21 / items 42 wie zuvor.
+2. **Die drei Texte jetzt wahr und ehrlich ( gegen gemessene Realität geprüft):**
+   - `LICENSE_DATA.md` Punkt 5: trennt (a) Roh-Wiki-Dumps (out-of-build,
+     unverändert) von (b) kuratierten Brettspiel-Kartentexten; Wiki als
+     Transkriptions-Medium benannt; „keine Sauberkeit behauptet",
+     Originallizenz des Wikis ausdrücklich als nicht einwandfrei geklärt
+     markiert; Controller-Entscheidung mit Datum dokumentiert. ✓
+   - Asset-Header `source` + `conventions.faehigkeiten`: beschreiben jetzt den
+     echten Zustand („Volltext nur bei auf der Karte aufgedruckten
+     Fähigkeiten"); der alte, durch meinen Befund widerlegte Claim
+     („reine Keyword-Slugs + Zahlen") ist ersetzt. ✓
+   - `curate_hero_cards.py`-Header: „NO prose, NO wiki text" berichtigt auf
+     „slug carries the full printed text too"; **Skriptlogik nachweislich
+     unberührt** — `git diff 637ebbb..HEAD` über das Skript: 0 Nicht-Kommentar-
+     Zeilen geändert; `py_compile` OK. ✓
+3. **Präzedenz-Behauptung verifiziert** (Doku stützt sich auf allies/villains —
+   nicht ungeprüft übernommen): `Assets/Resources/Languages/En/DeploymentGroups/`
+   `allies.json` trägt 28, `villains.json` 31 Volltext-Zeilen >80 Zeichen
+   (gedruckte Regeln, z.B. „While a friendly figure within 3 spaces is
+   defending, it may reroll 1 defense die…"). Die App shipped also bereits
+   Kartenvolltexte — Präzedenz ist real. ✓
+4. **Restliche Doku-Widersprüche?** Punkt 2 der Policy beschreibt dasselbe
+   Modell (1:1-Transkripte bei Selbstaufdruck, Wiki = Transportmedium) —
+   konsistent mit Punkt 5 und Asset-Header. Kein Restbefund.
+
+## Gates in wt2 @ HEAD selbst gefahren (nicht Autor-Ausgaben übernommen)
+
+- `build.sh` (REPO auf wt2): **BUILD_RC=0** — UI/TMP/INSYS/RESMGR/ADDRS/MATH/
+  SRPC/URP rc=0 errors=0; **APP rc=0 errors=0 files=258**; TESTS rc=0 (build.log).
+- Harness **3×**: `ALL PASS | checks=36972 fails=0` in allen drei Läufen,
+  zahlgleich zu meinem Erstlauf @637ebbb und zum letzten Worker-Kommentar
+  (M11f/M11g: 36972). Determinismus: Diff Läufe 1/2 = nur Compile-Warning-Zeile
+  des Erstlaufs + rc-Marker; Diff 2/3 = nur rc-Marker → Ergebnis identisch.
+- Live-Gate in `tools/TacticalAiGate` (cwd-Pflicht): **ALL PASS**, GATE_RC=0.
+- M11f (`8de1ee3`) lag außerhalb meines Prüfumfangs (Präfixliste der Kette) und
+  wurde vom Controller unabhängig reproduziert (`cf3b834`); meine Gates @HEAD
+  belegen zusätzlich: kein Regressionseffekt auf Build/Harness/Gate der Kette.
+
+## Restzustand der Befunde
+
+- **M11-QA-01: erledigt.** Spec-Korrektur durch Controller/Thomas (M11g);
+  Befund gegen die alte Spec war korrekt, Asset bleibt wie gemessen, Doku
+  nun wahr. Keine Nacharbeit mehr.
+- **M11-QA-02 (F4, HeroCards.cs `EliminateEv`): bleibt als Beobachtung
+  stehen** — keine Controller-Entscheidung dazu getroffen, dokumentierter
+  Safety-Bias, aktuell kein Canon-Effekt. Dem Controller zur Kenntnis;
+  keine Befund-Eskalation durch die QA.
+
+## Ergebnis
+
+**REVIEW-CLEAN (delta)** — Matrix-Punkte A1–A6, B7–B11, C-Gates: ✓ wie im
+Erstbefund; M11-QA-01 durch M11g erledigt (Delta bewiesen: Datenblock
+zeichengleich, drei Texte wahr, Präzedenz real); Gates bei HEAD ALL PASS,
+Harness 36972 zahlgleich und deterministisch. QA abgeschlossen.
