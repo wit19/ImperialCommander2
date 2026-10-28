@@ -55,13 +55,26 @@ namespace Saga
 		List<DeploymentPoint> manualDps;
 		DeploymentCard manualGroup;
 		DeploymentPoint manualPickedDp;
-		//True only for the DM-button optional flows (manual window or tactical
-		//path). Event-sourced optional deployments (Aufstellungs-Ereignis) are
-		//NOT touched: no extra save, no announce - their chain calls
-		//NextEventAction itself.
+		//M13f: true ONLY for the DM-button optional flows (manual window or
+		//tactical fuzzy path), driven by the explicit buttonFlow parameter of
+		//Show() - NEVER inferred from ovrd. The button passes ovrd NON-null
+		//(ImperialPopup.cs) while the event rails pass it null
+		//(MissionEventHandler.cs) - an `ovrd == null` predicate as used in
+		//M13c was INVERTED against the real callers (QA finding).
+		//Event-sourced optional deployments (Aufstellungs-Ereignis,
+		//delayOptionalDeployment) are NOT touched: no extra save, no announce -
+		//their chain calls NextEventAction itself.
 		bool isOptionalFlow = false;
 
-		public void Show( DeployMode mode, bool skipThreatIncrease, bool isOptionalDeployment, Action callback = null, DeploymentGroupOverride ovrd = null, bool manual = false )
+		/// <summary>
+		/// M13f: buttonFlow is the CALLER's explicit statement that this Show()
+		/// comes from the DM's optional-deployment button (ImperialPopup).
+		/// It is never inferred from ovrd: the button passes a NON-null ovrd
+		/// while the delayOptionalDeployment event rails omit it entirely
+		/// (MissionEventHandler.cs :354/:356/:724/:797 all stay buttonFlow=false
+		/// = pre-M13c behaviour, no extra save, no announce).
+		/// </summary>
+		public void Show( DeployMode mode, bool skipThreatIncrease, bool isOptionalDeployment, Action callback = null, DeploymentGroupOverride ovrd = null, bool manual = false, bool buttonFlow = false )
 		{
 			acceptInput = true;
 			gameObject.SetActive( true );
@@ -86,7 +99,7 @@ namespace Saga
 			//M13c: reset the manual-mode state + marker-reveal flag on every Show.
 			tacticalOptionalReveal = isOptionalDeployment && manual == false
 				&& TacticalAI.TacticalAIBridge.OptionalDeployPath() == TacticalAI.Core.OptionalDeploy.PathTactical;
-			isOptionalFlow = isOptionalDeployment && ovrd == null;//DM-button flows only
+			isOptionalFlow = isOptionalDeployment && buttonFlow;//explicit DM-button flow flag, never ovrd-inference (M13f)
 			ResetManual();
 
 			//reset reinforce
@@ -157,34 +170,58 @@ namespace Saga
 			{
 				//M13c: restore the modal default for the next Show()
 				fader.raycastTarget = true;
+				//M13f: closing the window - CONFIRM or ABORT (CLOSE button /
+				//space) - now also tears down the manual picker: DP markers
+				//off, map hook released, strip destroyed. QA corpus 'Marker
+				//verschwindet nach Aufstellungsphase wieder' holds for the
+				//abort path too; before this, markers stayed lit until the
+				//next Show()/ResetManual.
+				ResetManual();
 				//destroy onslaught group icons
 				foreach ( Transform tf in depGrid.transform )
 					Destroy( tf.gameObject );
 				gameObject.SetActive( false );
+
+				//M13f: the tactical announce runs as the deploy-COMPLETION
+				//callback, not beside it: the per-card deploy TextBox (and
+				//the Active-branch highlight around it, DeploymentManager.cs
+				//:311 on / :320 off) must finish first, and only then is
+				//every card's actually-used DP recorded. The event rails are
+				//untouched: isOptionalFlow=false -> afterDeploy ==
+				//postAction, byte-for-byte the pre-M13c wiring.
+				Action afterDeploy = postAction;
+				if ( isOptionalFlow && tacticalOptionalReveal && groupsToDeploy.Count > 0 )
+				{
+					var prev = postAction;
+					afterDeploy = () =>
+					{
+						AnnounceTacticalLandings();
+						prev?.Invoke();
+					};
+				}
+
 				//update/deploy groups
 				if ( groupsToDeploy.Count > 0 )
 				{
 					if ( deploymentOverride == null )
-						FindObjectOfType<DeploymentManager>().DeployGroupList( groupsToDeploy, false, postAction );
+						FindObjectOfType<DeploymentManager>().DeployGroupList( groupsToDeploy, false, afterDeploy );
 					else
-						FindObjectOfType<DeploymentManager>().DeployGroupListWithOverride( groupsToDeploy, deploymentOverride, postAction );
+						FindObjectOfType<DeploymentManager>().DeployGroupListWithOverride( groupsToDeploy, deploymentOverride, afterDeploy );
 				}
 				else
 				{
-					postAction?.Invoke();
+					afterDeploy?.Invoke();
 				}
 				FindObjectOfType<DeploymentManager>().UpdateGroups();
 
-				//M13c: the optional-deployment flows (manual window and the
-				//tactical fuzzy path) persist the mission + announce the
-				//placement instruction. GroupDeployment log lines are already
-				//written by DeploymentManager on deploy.
+				//M13c/M13f: the DM-button optional flows (manual window +
+				//tactical fuzzy path) persist the mission state right after
+				//the logical deploy (DoDeployGroup runs synchronously inside
+				//the DeployGroupList* calls above). GroupDeployment log lines
+				//are written by DeploymentManager on deploy; the placement
+				//announcement is chained to afterDeploy.
 				if ( isOptionalFlow )
-				{
 					DataStore.sagaSessionData.SaveState();
-					if ( tacticalOptionalReveal )
-						AnnounceTacticalLandings();
-				}
 				isOptionalFlow = false;
 
 				//save state
@@ -426,29 +463,62 @@ namespace Saga
 		// ---------------------------------------------------------------- M13c
 
 		/// <summary>
-		/// M13c Scope B: tactical-mode optional deployment announcement. The
-		/// DP shown here is resolved by the SAME deterministic picker the
-		/// deployment path uses right afterwards (GetActiveDeploymentPoint ->
-		/// TacticalAIBridge.TryChooseDeploymentPoint, seeded by the campaign
-		/// key + round) - one DP truth, no second pick. The pulsing marker
-		/// (HandleMapDeployment highlight) stays visible exactly as long as
-		/// the instruction TextBox is on screen.
+		/// M13f Scope B (reworked after QA): tactical-mode optional deployment
+		/// announcement, run as the deploy-completion callback. The DP named
+		/// here is the DP the deploy ACTUALLY used, recorded by
+		/// DeploymentManager.LastActiveDeploymentPoint on its ovrd.Active
+		/// deploy path (DeploymentManager.cs:303-328) - NOT a fresh
+		/// GetActiveDeploymentPoint re-roll: in the deterministic bridge case
+		/// (MapEntityManager.cs:526-528) a re-roll repeats the same pick, but
+		/// the legacy RNG fallback (MapEntityManager.cs:530) could otherwise
+		/// name a DIFFERENT DP than the one deployed to. One DP truth, no
+		/// second pick. The pulsing marker (ShowDeploymentPoints,
+		/// MapEntityManager.cs:491) is lit for exactly the duration of each
+		/// announce TextBox - on when the line opens, off when it closes -
+		/// sequentially, one TextBox at a time. The Secret-DP suppression for
+		/// NON-optional deployments (DeploymentManager.cs ovrd==null branch)
+		/// stays untouched.
 		/// </summary>
 		void AnnounceTacticalLandings()
 		{
 			var scm = FindObjectOfType<SagaController>();
 			if ( scm == null ) return;
+			var dm = FindObjectOfType<DeploymentManager>();
+			var lines = new List<string>();
+			var dps = new List<Guid>();
 			foreach ( var card in groupsToDeploy )
 			{
-				Guid dp = scm.mapEntityManager.GetActiveDeploymentPoint( card );
+				//the DP the deploy really used; the resolver call below is
+				//only a defensive fallback for paths that recorded nothing.
+				Guid dp = dm != null ? dm.LastActiveDeploymentPoint( card.id ) : Guid.Empty;
+				if ( dp == Guid.Empty )
+					dp = scm.mapEntityManager.GetActiveDeploymentPoint( card );
 				string dpName = dp == Guid.Empty ? "" : (scm.mapEntityManager.GetEntity( dp )?.name ?? "");
 				string line = TacticalAI.Core.OptionalDeploy.AnnounceLine(
 					OptionalDeployUi.AnnounceFormat, card.name, dpName );
 				if ( string.IsNullOrEmpty( line ) ) continue;
-				var em = FindObjectOfType<SagaEventManager>();
-				if ( em != null )
-					em.ShowTextBox( line );
+				lines.Add( line );
+				dps.Add( dp );
 			}
+			AnnounceStep( scm, lines, dps, 0 );
+		}
+
+		void AnnounceStep( SagaController scm, List<string> lines, List<Guid> dps, int index )
+		{
+			if ( index >= lines.Count )
+				return;
+			var em = FindObjectOfType<SagaEventManager>();
+			if ( em == null )
+				return;
+			Guid dp = dps[index];
+			if ( dp != Guid.Empty )
+				scm.mapEntityManager.ShowDeploymentPoints( new[] { dp }, true );
+			em.ShowTextBox( lines[index], () =>
+			{
+				if ( dp != Guid.Empty )
+					scm.mapEntityManager.ShowDeploymentPoints( new[] { dp }, false );
+				AnnounceStep( scm, lines, dps, index + 1 );
+			} );
 		}
 
 		/// <summary>

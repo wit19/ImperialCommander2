@@ -93,7 +93,10 @@ namespace Saga
 			ovrd.specificDeploymentPoint = System.Guid.Empty;
 			ovrd.useThreat = true;
 			ovrd.threatCost = 0;
-			FindObjectOfType<SagaController>().deploymentPopup.Show( DeployMode.Landing, true, true, null, ovrd, manual );
+			//M13f: buttonFlow=true is the explicit DM-button marker; the
+			//predicate in SagaDeploymentPopup must never infer the flow
+			//from ovrd (this call passes ovrd NON-null).
+			FindObjectOfType<SagaController>().deploymentPopup.Show( DeployMode.Landing, true, true, null, ovrd, manual, buttonFlow: true );
 		}
 
 		public void OnHelpClick()

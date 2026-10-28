@@ -14,6 +14,27 @@ namespace Saga
 
 		Sound sound;
 
+		//M13f: the DP the deployment path ACTUALLY used, per card id, recorded
+		//on the ovrd.Active branch of HandleMapDeployment. The optional-flow
+		//announce (SagaDeploymentPopup.AnnounceTacticalLandings) reads this
+		//instead of re-rolling GetActiveDeploymentPoint: the deterministic
+		//bridge pick (MapEntityManager.cs:526-528) would repeat, but the
+		//legacy RNG fallback (MapEntityManager.cs:530) could otherwise name a
+		//different DP than the one the group was really deployed to.
+		readonly Dictionary<string, Guid> lastActiveDPByCard = new Dictionary<string, Guid>();
+
+		/// <summary>
+		/// M13f: the Active DP used by the most recent map deployment of this
+		/// card, or Guid.Empty when nothing was recorded yet.
+		/// </summary>
+		public Guid LastActiveDeploymentPoint( string cardId )
+		{
+			if ( string.IsNullOrEmpty( cardId ) )
+				return Guid.Empty;
+			Guid g;
+			return lastActiveDPByCard.TryGetValue( cardId, out g ) ? g : Guid.Empty;
+		}
+
 		private void Awake()
 		{
 			sound = FindObjectOfType<Sound>();
@@ -306,6 +327,9 @@ namespace Saga
 					var adp = FindObjectOfType<MapEntityManager>().GetActiveDeploymentPoint( enemyToAdd );
 					if ( adp != Guid.Empty )
 					{
+						//M13f: record the DP this deploy really used - the
+						//optional-flow announce names THIS DP, never a re-roll.
+						lastActiveDPByCard[enemyToAdd.id] = adp;
 						FindObjectOfType<SagaEventManager>().toggleVisButton.SetActive( true );
 						//FindObjectOfType<SagaController>().ToggleNavAndEntitySelection( false );
 						FindObjectOfType<MapEntityManager>().ToggleHighlightDeploymentPoint( adp, true );
