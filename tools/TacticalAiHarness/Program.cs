@@ -113,6 +113,7 @@ namespace TacticalAiHarness
             Run("villain_options.json", SecVillainOptions);
             Run("logger_extract.json", SecLoggerExtract);
             Run("imperial_deck.json", SecImperialDeck);
+            Run("imperial_purchases.json", SecImperialPurchases);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);

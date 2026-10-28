@@ -215,6 +215,21 @@ namespace Saga
 					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::imperial deck backfill failed " + e.Message ); }
 				}
 
+				// TACTICAL AI (M12c): the Imperial Upgrade Stage runs HERE -
+				// mission end lands back on this scene (SagaController.
+				// EndMission -> Campaign -> this load), the next Einsatzkarte
+				// comes later, so 'nach Missionsende-Wertung, vor der
+				// naechsten Einsatzkarte' is exactly this point. Purchases
+				// are greedy-deterministic (seed + profile + owned + XP
+				// account) and in-memory like the M12b backfill: the next
+				// SaveCampaignState persists them, a re-load before that
+				// replays the identical stage.
+				if ( state.imperialDeck != null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { state.RunImperialUpgradeStage(); }
+					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::imperial upgrade stage failed " + e.Message ); }
+				}
+
 				Debug.Log( "***CAMPAIGN LOADED***" );
 				return state;
 			}
@@ -486,6 +501,136 @@ namespace Saga
 			var choice = PreviewImperialDeck();
 			if ( choice == null ) return;   // asset missing - stay 'kein Deck'
 			imperialDeck = ImperialDeckState.FromChoice( choice, GUID.ToString() );
+		}
+
+		// TACTICAL AI M12c - Imperial Upgrade Stage (Rules Reference,
+		// verbatim: "To purchase Class cards, the Imperial player EXAMINES
+		// ALL CARDS in his Class deck and may purchase AS MANY AS HE WISHES
+		// by spending XP equal to the cards' costs ... kept faceup ... for
+		// the remainder of the campaign."). No market, no chance: the full
+		// chosen deck is always visible, so the KI buys greedily by the
+		// purchase priority of the M12b profile (TacticalAI.Core.
+		// ImperialPurchases) - one buy per step ("1 Karte, wenn XP >= Preis",
+		// chain scope 2), and the RR explicitly allows repeating that step
+		// in one stage, so RunImperialUpgradeStage() loops while the account
+		// can still pay. XP ARRIVES between missions (CM6 bookings from
+		// mission outcome branches); purchases RUN on the campaign reload
+		// after mission end (LoadCampaignState hook) - i.e. after the
+		// mission-end evaluation, before the next Einsatzkarte, exactly as
+		// the chain prescribes. Non-tactical campaigns never have a stored
+		// deck: every entry point below honestly returns the M12b 'kein
+		// Deck' state (Scope 3: the mode UI only ever shows what it allows).
+
+		/// <summary>Read-only view of the KI's NEXT purchase step against the
+		/// CURRENT store (account + owned). Never writes, never books - UIs
+		/// (M12e) can preview the ranked candidates and the pick without
+		/// touching the campaign store. Null: 'kein Deck' state (no stored
+		/// deck) or deck asset unavailable.</summary>
+		public TacticalAI.Core.ImperialPurchaseChoice PreviewImperialPurchase()
+		{
+			if ( imperialDeck == null ) return null;
+			try
+			{
+				var table = ImperialDeckTableOrNull();
+				if ( table == null ) return null;
+				var seed = TacticalAI.Core.ImperialDecks.DeckSeedFor( GUID.ToString() );
+				return TacticalAI.Core.ImperialPurchases.Plan( table, BuildImperialProfile(),
+					imperialDeck.deckId, OwnedDeckCardIds(), imperialDeck.xpBalance, seed );
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::PreviewImperialPurchase failed " + e.Message );
+				return null;
+			}
+		}
+
+		/// <summary>Run the upgrade stage on the stored deck: greedy purchase
+		/// steps until the account cannot pay for any remaining card. Each buy
+		/// goes through ImperialDeckState.TryBuyDeckCard - the single booking
+		/// path (card + spend in one append-only step) - and logs the ui.json
+		/// line. In-memory only here (same doctrine as the M12b backfill):
+		/// the next regular SaveCampaignState persists purchases; a crash
+		/// before that just re-runs the identical stage on the next load.
+		/// Returns the choices made (for UI/log), empty in 'kein Deck'.</summary>
+		public List<TacticalAI.Core.ImperialPurchaseChoice> RunImperialUpgradeStage()
+		{
+			var bought = new List<TacticalAI.Core.ImperialPurchaseChoice>();
+			if ( imperialDeck == null ) return bought;
+			try
+			{
+				var table = ImperialDeckTableOrNull();
+				if ( table == null ) return bought;
+				var seed = TacticalAI.Core.ImperialDecks.DeckSeedFor( GUID.ToString() );
+				var profile = BuildImperialProfile();
+				// era-1 decks hold 8 paid cards; the guard only protects
+				// against a future pathological corpus, never against 'no
+				// card affordable' (that exits via plan.CardId == null).
+				for ( int guard = 0; guard < 100; guard++ )
+				{
+					var plan = TacticalAI.Core.ImperialPurchases.Plan( table, profile,
+						imperialDeck.deckId, OwnedDeckCardIds(), imperialDeck.xpBalance, seed );
+					if ( plan == null || plan.CardId == null ) break;
+					if ( !imperialDeck.TryBuyDeckCard( plan.CardId, (int)plan.XpCost,
+					                                   "buy:" + plan.CardId ) ) break;
+					bought.Add( plan );
+					Debug.Log( TacticalAI.TacticalAISettingsUnity.ImperialBuyLogText(
+						plan.CardName, plan.XpCost ) );
+				}
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::RunImperialUpgradeStage failed " + e.Message );
+			}
+			return bought;
+		}
+
+		/// <summary>Manual purchase for a HUMAN Imperial player (Scope 3):
+		/// same store, same single booking path, same append-only history as
+		/// the KI - only the decision source differs. Strictly validated: the
+		/// card must be a printed, purchasable (non-basic, XP cost) card of
+		/// the STORED deck and not owned yet, and the account must cover the
+		/// cost. Without a stored deck ('kein Deck' / non-tactical) nothing
+		/// is allowed - returns false. The caller saves via the regular
+		/// campaign save path.</summary>
+		public bool ManualBuyImperialDeckCard( string cardId )
+		{
+			if ( imperialDeck == null || string.IsNullOrEmpty( cardId ) ) return false;
+			try
+			{
+				var table = ImperialDeckTableOrNull();
+				var deck = table != null ? table.Find( imperialDeck.deckId ) : null;
+				if ( deck == null ) return false;
+				var card = deck.Cards.FirstOrDefault( x => x.Id == cardId );
+				if ( card == null || card.Basic || !card.Xp.HasValue ) return false;
+				if ( imperialDeck.cards.Any( c => c.id == cardId ) ) return false;
+				if ( !imperialDeck.TryBuyDeckCard( cardId, (int)card.Xp.Value, "buy:" + cardId ) ) return false;
+				Debug.Log( TacticalAI.TacticalAISettingsUnity.ImperialBuyLogText( card.Name, card.Xp.Value ) );
+				return true;
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::ManualBuyImperialDeckCard failed " + e.Message );
+				return false;
+			}
+		}
+
+		/// <summary>Deck table only when the shipped asset is actually
+		/// available (touching TacticalAIAssets primes the Core doc cache -
+		/// same pattern as PreviewImperialDeck). Null = stay 'kein Deck'.</summary>
+		TacticalAI.Core.ImperialClassDeckTable ImperialDeckTableOrNull()
+		{
+			if ( TacticalAI.Core.ImperialDecks.DocOrNull() == null &&
+				 TacticalAI.TacticalAIAssets.ImperialDecksRoot == null )
+				return null;
+			return TacticalAI.Core.ImperialDecks.Load();
+		}
+
+		HashSet<string> OwnedDeckCardIds()
+		{
+			var owned = new HashSet<string>( StringComparer.Ordinal );
+			foreach ( var c in imperialDeck.cards )
+				owned.Add( c.id );
+			return owned;
 		}
 	}
 }

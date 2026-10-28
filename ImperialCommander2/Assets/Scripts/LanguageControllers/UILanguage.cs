@@ -57,6 +57,11 @@ public class UITacticalAI
 	// rung number, {1} = skillS name. The (auto) variant marks ""/AUTO tokens
 	// that resolve to the global ladder rung.
 	public string badgeMissionFormat, badgeMissionAutoFormat, badgeMissionOff;
+	// M12c (Imperial Upgrade Stage): persistent purchase line per KI/human
+	// class-card buy. {0} = printed card name (NOT translated - board-game
+	// reality), {1} = spent XP. The stored audit trail stays machine-keyed
+	// ("buy:<cardId>" in the xpLog); this is the display row (M12e panel).
+	public string impBuyLog;
 	public string depSecret, depOpen, expNone, expPostHoc, expFull;
 }
 

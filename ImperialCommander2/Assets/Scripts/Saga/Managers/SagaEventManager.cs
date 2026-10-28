@@ -505,6 +505,9 @@ namespace Saga
 				case EventActionType.CM5:
 					AddCampaignRewards( eventAction as AddCampaignReward );
 					break;
+				case EventActionType.CM6:
+					ModifyImperialXP( eventAction as CampaignModifyImperialXP );
+					break;
 				default:
 					Debug.Log( "ProcessEventAction()::EVENT TYPE NOT SUPPORTED: " + eventAction.eventActionType.ToString() + " = " + (int)eventAction.eventActionType );
 					NextEventAction();

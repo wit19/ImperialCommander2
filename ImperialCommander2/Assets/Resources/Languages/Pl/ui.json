@@ -312,6 +312,7 @@
     "badgeMissionFormat": "Tactical AI — Level {0} ({1})",
     "badgeMissionAutoFormat": "Tactical AI — Level {0} ({1}) (auto)",
     "badgeMissionOff": "Tactical AI — OFF",
+    "impBuyLog": "The Empire acquires: {0} ({1} XP)",
     "depSecret": "TAJNE",
     "depOpen": "JAWNE",
     "expNone": "BRAK",

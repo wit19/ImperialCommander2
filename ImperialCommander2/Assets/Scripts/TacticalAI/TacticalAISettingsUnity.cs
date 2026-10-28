@@ -99,6 +99,21 @@ namespace TacticalAI
             return string.IsNullOrEmpty(value) ? fallback : value;
         }
 
+        /// <summary>M12c: the persistent Imperial Upgrade Stage purchase
+        /// line (ui.json uiTacticalAI.impBuyLog). Used by both the booking
+        /// Debug.Log and the M12e campaign-side display; the store itself
+        /// keeps only the machine key ("buy:&lt;cardId&gt;") so the wording
+        /// lives in the language files alone. Card names stay EN (printed
+        /// board-game content, M11g doctrine).</summary>
+        public static string ImperialBuyLogText(string cardName, long xp)
+        {
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            var fmt = Fallback(tl != null ? tl.impBuyLog : null,
+                               "The Empire acquires: {0} ({1} XP)");
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                 fmt, cardName, xp);
+        }
+
         static string SkillDisplayName(UITacticalAI tl, string token)
         {
             if (tl == null) return token;

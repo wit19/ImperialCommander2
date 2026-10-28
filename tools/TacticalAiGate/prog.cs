@@ -24,6 +24,7 @@ class P {
         WorldFeedGate.Run();
         OverlordGate.Run();
         ImperialDeckGate.Run();
+        ImperialPurchaseGate.Run();
         Console.WriteLine(Environment.ExitCode == 0 ? "ALL PASS" : "FAILURES");
     }
 }

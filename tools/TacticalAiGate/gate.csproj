@@ -11,5 +11,6 @@
     <Compile Include="..\..\ImperialCommander2\Assets\Scripts\TacticalAI\Core\*.cs" />
     <Compile Include="WorldFeedGate.cs" /><Compile Include="OverlordGate.cs" />
     <Compile Include="ImperialDeckGate.cs" />
+    <Compile Include="ImperialPurchaseGate.cs" />
   </ItemGroup>
 </Project>

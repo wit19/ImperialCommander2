@@ -1,0 +1,564 @@
+{
+  "_comment": "M12c Imperial Upgrade Stage: deterministische KI-Kauflogik. AUTHORED, nicht recorded (wie imperial_deck.json): Erwartungswerte aus der im Core-Header dokumentierten Regel (Assets/Scripts/TacticalAI/Core/ImperialPurchases.cs) - unabhaengiger Python-Twin wiki_data/tools/tacai_purchase_twin.py gegen das SHIPPED Asset (tactical_imperial_decks.json); Kampagnen-Save-Blöcke = die identischen Profile aus imperial_deck.json (Deckwahl dort von M12b gepinnt, hier wiederverwendet - dasselbe Profil, dieselbe Familien-Synergie). Regeln: RR 'Imperial Upgrade Stage' - volles Deck sichtbar, kein Markt/Zufall; KI kauft greedy nach Score gegen das M12b-Profil, Gleichstand -> Karten-id aufsteigend; ein Schritt = '1 Karte, wenn XP >= Preis', die Stage wiederholt den Schritt (RR erlaubt beliebig viele Kaeufe). Basic-Karten sind bei Deckwahl bereits Owned und NIE Kandidat. Noise-Salz 'buy|' (distinct von 'noise|'). XP-Historie = xp_events (Buchungen, dann Stage); 'bought' = exakte Kaufreihenfolge, 'balance' = Endstand.",
+  "schema": "tacai.imperial_purchases/1",
+  "noise_vectors": [
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__cheap_shot",
+      "expect": 2
+    },
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__guild_hunters",
+      "expect": 2
+    },
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__most_wanted",
+      "expect": 3
+    },
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__nowhere_to_hide",
+      "expect": 2
+    },
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__nowhere_to_run",
+      "expect": 2
+    },
+    {
+      "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "card": "hutt_mercenaries__savage_motivation",
+      "expect": 3
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__cheap_shot",
+      "expect": 1
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__guild_hunters",
+      "expect": 0
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__most_wanted",
+      "expect": 3
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__nowhere_to_hide",
+      "expect": 1
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__nowhere_to_run",
+      "expect": 1
+    },
+    {
+      "key": "11111111-2222-3333-4444-555555555555",
+      "card": "hutt_mercenaries__savage_motivation",
+      "expect": 2
+    }
+  ],
+  "purchase_cases": [
+    {
+      "name": "core_first_stage",
+      "campaign_save": {
+        "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+        "campaignHeroes": [
+          {
+            "heroID": "H1"
+          },
+          {
+            "heroID": "H2"
+          },
+          {
+            "heroID": "H4"
+          }
+        ],
+        "campaignVillains": [
+          {
+            "name": "Scout Trooper"
+          },
+          {
+            "name": "Assault Trooper"
+          },
+          {
+            "name": "Imperial Probe Droid"
+          },
+          {
+            "name": "Heavy Weapon Expert"
+          },
+          {
+            "name": "Omblesse Officer"
+          }
+        ],
+        "campaignStructure": [
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 1,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 1
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 5
+          }
+        ]
+      },
+      "xp_events": [
+        2
+      ],
+      "expect": {
+        "deck": "hutt_mercenaries",
+        "bought": [
+          "hutt_mercenaries__scouted",
+          "hutt_mercenaries__vendetta"
+        ],
+        "balance": 0
+      }
+    },
+    {
+      "name": "core_slow_ledger",
+      "campaign_save": {
+        "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+        "campaignHeroes": [
+          {
+            "heroID": "H1"
+          },
+          {
+            "heroID": "H2"
+          },
+          {
+            "heroID": "H4"
+          }
+        ],
+        "campaignVillains": [
+          {
+            "name": "Scout Trooper"
+          },
+          {
+            "name": "Assault Trooper"
+          },
+          {
+            "name": "Imperial Probe Droid"
+          },
+          {
+            "name": "Heavy Weapon Expert"
+          },
+          {
+            "name": "Omblesse Officer"
+          }
+        ],
+        "campaignStructure": [
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 1,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 1
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 5
+          }
+        ]
+      },
+      "xp_events": [
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4
+      ],
+      "expect": {
+        "deck": "hutt_mercenaries",
+        "bought": [
+          "hutt_mercenaries__scouted",
+          "hutt_mercenaries__vendetta",
+          "hutt_mercenaries__savage_motivation",
+          "hutt_mercenaries__cheap_shot",
+          "hutt_mercenaries__nowhere_to_hide",
+          "hutt_mercenaries__nowhere_to_run",
+          "hutt_mercenaries__most_wanted",
+          "hutt_mercenaries__guild_hunters"
+        ],
+        "balance": 0
+      }
+    },
+    {
+      "name": "core_rich_single_stage",
+      "campaign_save": {
+        "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+        "campaignHeroes": [
+          {
+            "heroID": "H1"
+          },
+          {
+            "heroID": "H2"
+          },
+          {
+            "heroID": "H4"
+          }
+        ],
+        "campaignVillains": [
+          {
+            "name": "Scout Trooper"
+          },
+          {
+            "name": "Assault Trooper"
+          },
+          {
+            "name": "Imperial Probe Droid"
+          },
+          {
+            "name": "Heavy Weapon Expert"
+          },
+          {
+            "name": "Omblesse Officer"
+          }
+        ],
+        "campaignStructure": [
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 1,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 1
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 5
+          }
+        ]
+      },
+      "xp_events": [
+        20
+      ],
+      "expect": {
+        "deck": "hutt_mercenaries",
+        "bought": [
+          "hutt_mercenaries__scouted",
+          "hutt_mercenaries__most_wanted",
+          "hutt_mercenaries__savage_motivation",
+          "hutt_mercenaries__nowhere_to_hide",
+          "hutt_mercenaries__nowhere_to_run",
+          "hutt_mercenaries__vendetta",
+          "hutt_mercenaries__cheap_shot",
+          "hutt_mercenaries__guild_hunters"
+        ],
+        "balance": 0
+      }
+    },
+    {
+      "name": "vehicles_ledger",
+      "campaign_save": {
+        "GUID": "11111111-2222-3333-4444-555555555555",
+        "campaignHeroes": [
+          {
+            "heroID": "H1"
+          },
+          {
+            "heroID": "H2"
+          }
+        ],
+        "campaignVillains": [
+          {
+            "name": "Imperial Speeder Bike"
+          },
+          {
+            "name": "Juggernaut"
+          },
+          {
+            "name": "Reinforced Juggernaut"
+          },
+          {
+            "name": "TIE Fighter"
+          },
+          {
+            "name": "Scout Trooper"
+          }
+        ],
+        "campaignStructure": [
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 5
+          }
+        ]
+      },
+      "xp_events": [
+        5
+      ],
+      "expect": {
+        "deck": "subversive_tactics",
+        "bought": [
+          "subversive_tactics__exploit_weakness",
+          "subversive_tactics__weary_target"
+        ],
+        "balance": 0
+      }
+    },
+    {
+      "name": "core_zero",
+      "campaign_save": {
+        "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+        "campaignHeroes": [
+          {
+            "heroID": "H1"
+          },
+          {
+            "heroID": "H2"
+          },
+          {
+            "heroID": "H4"
+          }
+        ],
+        "campaignVillains": [
+          {
+            "name": "Scout Trooper"
+          },
+          {
+            "name": "Assault Trooper"
+          },
+          {
+            "name": "Imperial Probe Droid"
+          },
+          {
+            "name": "Heavy Weapon Expert"
+          },
+          {
+            "name": "Omblesse Officer"
+          }
+        ],
+        "campaignStructure": [
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 1,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 1
+          },
+          {
+            "missionType": 0
+          },
+          {
+            "missionType": 0,
+            "isAgendaMission": true
+          },
+          {
+            "missionType": 5
+          }
+        ]
+      },
+      "xp_events": [],
+      "expect": {
+        "deck": "hutt_mercenaries",
+        "bought": [],
+        "balance": 0
+      }
+    },
+    {
+      "name": "empty_profile_ledger",
+      "campaign_save": {
+        "GUID": "empty-campaign-guid"
+      },
+      "xp_events": [
+        3
+      ],
+      "expect": {
+        "deck": "imperial_black_ops",
+        "bought": [
+          "imperial_black_ops__execution_squad"
+        ],
+        "balance": 0
+      }
+    }
+  ],
+  "plan_snapshot": {
+    "name": "plan_first_ranked",
+    "campaign_save": {
+      "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+      "campaignHeroes": [
+        {
+          "heroID": "H1"
+        },
+        {
+          "heroID": "H2"
+        },
+        {
+          "heroID": "H4"
+        }
+      ],
+      "campaignVillains": [
+        {
+          "name": "Scout Trooper"
+        },
+        {
+          "name": "Assault Trooper"
+        },
+        {
+          "name": "Imperial Probe Droid"
+        },
+        {
+          "name": "Heavy Weapon Expert"
+        },
+        {
+          "name": "Omblesse Officer"
+        }
+      ],
+      "campaignStructure": [
+        {
+          "missionType": 0
+        },
+        {
+          "missionType": 0
+        },
+        {
+          "missionType": 1,
+          "isAgendaMission": true
+        },
+        {
+          "missionType": 1
+        },
+        {
+          "missionType": 0
+        },
+        {
+          "missionType": 0,
+          "isAgendaMission": true
+        },
+        {
+          "missionType": 5
+        }
+      ]
+    },
+    "xp_balance": 20,
+    "seed": "7074e2f2197e0c4d",
+    "deck": "hutt_mercenaries",
+    "bought": "hutt_mercenaries__scouted",
+    "cost": 1,
+    "scores": [
+      {
+        "card": "hutt_mercenaries__scouted",
+        "name": "Scouted",
+        "cost": 1,
+        "synergy": 13,
+        "noise": 0,
+        "total": 13
+      },
+      {
+        "card": "hutt_mercenaries__most_wanted",
+        "name": "Most Wanted",
+        "cost": 4,
+        "synergy": 6,
+        "noise": 3,
+        "total": 9
+      },
+      {
+        "card": "hutt_mercenaries__savage_motivation",
+        "name": "Savage Motivation",
+        "cost": 2,
+        "synergy": 6,
+        "noise": 3,
+        "total": 9
+      },
+      {
+        "card": "hutt_mercenaries__nowhere_to_hide",
+        "name": "Nowhere to Hide",
+        "cost": 3,
+        "synergy": 6,
+        "noise": 2,
+        "total": 8
+      },
+      {
+        "card": "hutt_mercenaries__nowhere_to_run",
+        "name": "Nowhere to Run",
+        "cost": 3,
+        "synergy": 6,
+        "noise": 2,
+        "total": 8
+      },
+      {
+        "card": "hutt_mercenaries__vendetta",
+        "name": "Vendetta",
+        "cost": 1,
+        "synergy": 6,
+        "noise": 1,
+        "total": 7
+      },
+      {
+        "card": "hutt_mercenaries__cheap_shot",
+        "name": "Cheap Shot",
+        "cost": 2,
+        "synergy": 0,
+        "noise": 2,
+        "total": 2
+      },
+      {
+        "card": "hutt_mercenaries__guild_hunters",
+        "name": "Guild Hunters",
+        "cost": 4,
+        "synergy": 0,
+        "noise": 2,
+        "total": 2
+      }
+    ]
+  }
+}

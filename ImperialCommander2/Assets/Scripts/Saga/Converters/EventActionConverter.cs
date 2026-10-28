@@ -126,6 +126,9 @@ namespace Saga
 					case 30:
 						eventActionAction = item.ToObject<AddCampaignReward>();
 						break;
+					case 31: // CM6 (M12c): Imperial-side mission reward XP
+						eventActionAction = item.ToObject<CampaignModifyImperialXP>();
+						break;
 				}
 				eObserver.Add( eventActionAction );
 			}

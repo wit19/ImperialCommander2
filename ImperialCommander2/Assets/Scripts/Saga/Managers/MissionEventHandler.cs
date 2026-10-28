@@ -839,6 +839,42 @@ namespace Saga
 			NextEventAction();
 		}
 
+		// TACTICAL AI M12c: Imperial-side sibling of ModifyXP. Mission-end
+		// Imperial XP (victory bonus, mission loot XP, hero-kill bonus) is
+		// booked into the SINGLE truth source - the M12b XP account on the
+		// stored class deck (append-only xpLog). Tactical campaigns without
+		// deck data re-derive the deterministic choice first (same pure
+		// path as the load backfill). Non-tactical campaigns keep the M12b
+		// 'kein Deck' state: nothing to book to, honestly skipped - the
+		// upgrade stage there stays mode-restricted (Scope 3). Purchases do
+		// NOT trigger here: the RR upgrade stage runs BETWEEN missions, the
+		// campaign-load hook in SagaCampaign spends the XP.
+		void ModifyImperialXP( CampaignModifyImperialXP mixp )
+		{
+			if ( RunningCampaign.sagaCampaignGUID != Guid.Empty )
+			{
+				var campaign = RunningCampaign.sagaCampaign;
+				if ( campaign.imperialDeck == null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { campaign.EnsureImperialDeck(); }
+					catch ( Exception e ) { Debug.LogWarning( $"SagaEventManager()::ModifyImperialXP deck choice failed {e.Message}" ); }
+				}
+				if ( campaign.imperialDeck != null )
+				{
+					var reason = string.IsNullOrEmpty( mixp.reason ) ? "event" : mixp.reason;
+					Debug.Log( $"SagaEventManager()::PROCESSING ModifyImperialXP: {mixp.xpToAdd} ({reason})" );
+					campaign.imperialDeck.AddImperialXp( mixp.xpToAdd, $"imperial_xp:{reason}" );
+					campaign.SaveCampaignState();
+				}
+				else
+					Debug.Log( $"SagaEventManager()::ModifyImperialXP({mixp.xpToAdd})::no imperial deck (non-tactical), skipped" );
+			}
+			else
+				Debug.Log( $"SagaEventManager()::ModifyImperialXP({mixp.xpToAdd})::Campaign isn't active" );
+
+			NextEventAction();
+		}
+
 		void ModifyCredits( CampaignModifyCredits mcredits )
 		{
 			if ( RunningCampaign.sagaCampaignGUID != Guid.Empty )
