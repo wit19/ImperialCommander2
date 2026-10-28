@@ -9,11 +9,15 @@ Karten und Regelbuch-Keywords). Sie sind **ohne Übernahme von Wiki-Text** erste
 
 1. **Fakten sind nicht copyrightfähig**: Gesundheit, Ausdauer, Tempo, Verteidigung,
    Attributswürfel, Kosten, Tier, XP-Kosten, Strain-Kosten - Zahlen von den Karten.
-2. **Mechaniken als Funktionsbeschreibung**: Fähigkeits- und Keyword-Texte wurden in
-   eigener kurzer Sprache neu gefasst (EN) und von uns ins Deutsche übertragen (DE),
-   angelehnt an den Stil und die offizielle deutsche Nomenklatur, die das Spiel selbst
-   in seinen Sprachdateien führt (z. B. Truppenausbildung, Zielcomputer, Konzentrierter
-   Beschuss). Token-Bezeichnungen (Schadens-/Block-/Wild-Marker) folgen dem Spiel.
+2. **Mechaniken als Funktionsbeschreibung**: Keyword-Fähigkeiten, auf deren Karten nur der
+   Keyword-NAME aufgedruckt ist (Stativ, Truppenausbildung, Zielcomputer …), wurden von uns
+   als kurze Funktionsbeschreibung in eigener Sprache gefasst (EN) und ins Deutsche
+   übertragen (DE) - angelehnt an Stil und offizielle deutsche Nomenklatur, wie sie das
+   Spiel selbst in seinen Sprachdateien führt. Token-Bezeichnungen (Schadens-/Block-/
+   Wild-Marker) folgen dem Spiel. Fähigkeitstexte, die auf den Karten SELBST vollständig
+   aufgedruckt sind, sind 1:1-Transkripte des Kartentextes (genau so trägt das Spiel sie
+   auch in allies.json/villains.json); das Wiki diente dabei nur als Transportmedium für
+   den gedruckten Text.
 3. **Keine Wiki-Prosa, keine Wiki-Bilder, keine Quellenattribute im Build.** Das Fandom-Wiki
    diente als Recherchewerkzeug (Abgleich, ob ein Wert auf der gedruckten Karte steht);
    seine Texte wurden nicht kopiert. Roh-Mitschnitte (wiki_data/raw/, *_raw.json) sind
@@ -21,6 +25,13 @@ Karten und Regelbuch-Keywords). Sie sind **ohne Übernahme von Wiki-Text** erste
 4. Die Spiel-Selbst-Daten (Assets/Resources/Languages/**) bleiben die einzige Quelle zur
    Laufzeit; diese Ordner-Dateien sind Werkzeuge für Ableitungen (Threat-Modelle,
    Keyword-Semantik, M11b/c).
+5. **Offener Punkt (vor externer Weitergabe zu schließen):** die Normalisate
+   heros.json/hero_class_cards.json führen Helden- und Klassenkartentexte noch als
+   Wiki-Transkripte (Lizenzstatus der Wiki-Originale nicht einwandfrei geklärt). Sie
+   stehen nur in diesem Werkzeug-Ordner, nicht im Build; bei der M11b-Integration werden
+   die wenigen Baustein-Texte, die das Spiel je anzeigen soll, in eigener Sprache neu
+   gefasst (wie in keyword_table.json geschehen). Reine Zahlenwerte (Würfelpools,
+   Kosten, Strain) sind davon nicht betroffen.
 
 ## Werkzeuge
 `tools/` enthält den Scraper/Normalisierer (reproduzierbar, MediaWiki-API). Lizenz des
