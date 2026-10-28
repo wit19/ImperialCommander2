@@ -314,7 +314,7 @@
     "expNone": "NENHUMA",
     "expPostHoc": "APÓS",
     "expFull": "COMPLETA",
-    "ordThreat": "ameaça {0} por rodada (tabela pública de ameaça)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "marca de alvo: o objetivo da missão o nomeia",
     "ordRoundFocus": "todos os grupos convergem para o mesmo alvo de foco",
     "ordRiskLabel": "postura de risco: {0}",

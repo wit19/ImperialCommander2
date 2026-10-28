@@ -312,6 +312,37 @@ namespace TacticalAI.Core
             };
         }
 
+        /// <summary>Continuous (untruncated) expected damage of the frozen
+        /// pairing/hit formula — M11b threat v2 runs the SAME hit formula the
+        /// imperial attack model uses (EV branch of ResolveAttack), only
+        /// without the integer round-down. pierce > 0 removes that many
+        /// expected block results (printed "Pierce N"). accOk=false (ranged
+        /// gate below the distance) pairs to 0 damage. rng-free and
+        /// position-free: distance is a plain parameter.</summary>
+        public static Rational ExpectedDamage(AttackStats attacker,
+                                              AttackStats defender, int distance,
+                                              int pierce = 0)
+        {
+            Rational v, b;
+            return ExpectedDamage(attacker, defender, distance, pierce, out v, out b);
+        }
+
+        static Rational ExpectedDamage(AttackStats attacker, AttackStats defender,
+                                       int distance, int pierce,
+                                       out Rational valid, out Rational blocks)
+        {
+            bool accOk = !attacker.IsRanged || attacker.AccGate >= distance;
+            var raw = attacker.AttackEv + attacker.FlatDamage;
+            // IA pairing rule (RefGuide HIT icon): every damage pip needs a
+            // hit pip; ranged attacks spend hit pips for the distance first.
+            var accAvail = attacker.AccEv - (attacker.IsRanged ? distance : 0);
+            valid = Rational.Min(raw, Rational.Max(Rational.Zero, accAvail));
+            blocks = accOk ? (defender == null ? Rational.Zero : defender.BlocksEv)
+                           : Rational.Zero;
+            if (pierce > 0) blocks = Rational.Max(Rational.Zero, blocks - pierce);
+            return Rational.Max(Rational.Zero, valid - blocks);
+        }
+
         /// Resolve one attack. rng=null -> expected-value mode (deterministic);
         /// rng given -> stochastic mode (rolls printed faces).
         ///
@@ -326,12 +357,9 @@ namespace TacticalAI.Core
             {
                 bool accOk = !attacker.IsRanged || attacker.AccGate >= distance;
                 var raw = attacker.AttackEv + attacker.FlatDamage;
-                // IA pairing rule (RefGuide HIT icon): every damage pip needs a
-                // hit pip; ranged attacks spend hit pips for the distance first.
-                var accAvail = attacker.AccEv - (attacker.IsRanged ? distance : 0);
-                var valid = Rational.Min(raw, Rational.Max(Rational.Zero, accAvail));
-                var blocks = accOk ? defender.BlocksEv : Rational.Zero;
-                var dmg = Rational.Max(Rational.Zero, valid - blocks);
+                Rational valid, blocks;
+                var dmg = ExpectedDamage(attacker, defender, distance, 0,
+                                         out valid, out blocks);
                 // deterministic integer damage: round down; a positive fractional
                 // remainder is carried by the caller via frac_left (fair long-run EV)
                 long whole = (long)(dmg.Num / dmg.Den);

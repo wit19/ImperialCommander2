@@ -65,6 +65,16 @@ namespace TacticalAiHarness
                     HeroProfiles.PrimeDoc(Json.AsDict(Json.Parse(File.ReadAllText(assetPath))));
             }
             catch { /* sections that need the doc fail loudly on their own */ }
+            // M11b: the printed hero-card asset (threat v2 basis) — same
+            // seam: harness pins against the SHIPPED asset, never a fixture copy.
+            try
+            {
+                var langDir = LanguagesDir();
+                var cardsPath = Path.Combine(langDir, "En", "tactical_hero_cards.json");
+                if (File.Exists(cardsPath))
+                    HeroCards.PrimeDoc(Json.AsDict(Json.Parse(File.ReadAllText(cardsPath))));
+            }
+            catch { /* sections that need the doc fail loudly on their own */ }
 
             Run("geometry.json", SecGeometry);
             Run("board.json", SecBoard);

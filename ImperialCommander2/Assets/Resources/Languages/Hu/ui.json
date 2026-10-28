@@ -314,7 +314,7 @@
     "expNone": "NINCS",
     "expPostHoc": "A CSATA UTÁN",
     "expFull": "TELJES",
-    "ordThreat": "fenyegetés {0} körönként (nyilvános fenyegetési táblázat)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "cél-jelölő: a küldetéscélnél nevén van",
     "ordRoundFocus": "minden csoport ugyanarra a fókuszcelra fordul",
     "ordRiskLabel": "kockázati állás: {0}",

@@ -18,16 +18,18 @@ namespace TacticalAI
         const string ORDER_DECKS_PATH = "TacticalAI/order_decks";
         const string HERO_LETHALITY_PATH = "Languages/En/tactical_hero_lethality";
         const string HERO_PROFILES_PATH = "Languages/En/tactical_hero_profiles";
+        const string HERO_CARDS_PATH = "Languages/En/tactical_hero_cards";
         const string CAMPAIGN_ITEMS_PATH = "Languages/En/CampaignData/items";
         const string CAMPAIGN_SKILLS_PATH = "Languages/En/CampaignData/skills";
 
         static object _orderDecksRoot;
         static object _heroLethalityRoot;
         static object _heroProfilesRoot;
+        static object _heroCardsRoot;
         static object _campaignItemsRoot;
         static object _campaignSkillsRoot;
         static bool _orderDecksFailed, _lethalityFailed, _heroProfilesFailed,
-                    _campaignItemsFailed, _campaignSkillsFailed;
+                    _heroCardsFailed, _campaignItemsFailed, _campaignSkillsFailed;
 
         /// <summary>tacai.order_decks/1 root object (Core Json) or null when
         /// the asset is missing/unparsable - hooks then fall back to the
@@ -72,6 +74,33 @@ namespace TacticalAI
                 }
                 return _heroProfilesRoot;
             }
+        }
+
+        /// <summary>M11b: tacai.hero_cards/1 - the printed hero-card values
+        /// of all 21 campaign heroes. Loads AND primes the Core cache (same
+        /// seam and the same dev-30 lesson as HeroProfilesRoot: whoever
+        /// touches the table first gets the doc, app and harness agree).</summary>
+        public static object HeroCardsRoot
+        {
+            get
+            {
+                if (_heroCardsRoot == null && !_heroCardsFailed)
+                {
+                    _heroCardsRoot = LoadJson(HERO_CARDS_PATH, ref _heroCardsFailed);
+                    if (_heroCardsRoot is System.Collections.Generic.Dictionary<string, object> d)
+                        Tac.HeroCards.PrimeDoc(d);
+                }
+                return _heroCardsRoot;
+            }
+        }
+
+        /// <summary>M11b printed card lookup; primes via HeroCardsRoot on
+        /// first use, null when the asset is unavailable (rows then keep the
+        /// curated fallback - the layer degrades, never throws).</summary>
+        public static Tac.HeroCard CardFor(string heroName)
+        {
+            var root = HeroCardsRoot;    // prime the Core doc cache (dev-30 seam)
+            return Tac.HeroCards.For(heroName);
         }
 
         /// <summary>App's OWN campaign tables (v3.11: the AI reads what the

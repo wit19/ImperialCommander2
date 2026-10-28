@@ -1,5 +1,5 @@
 {
- "comment": "M6 overlord focus pins; expect recorded via harness --record (reviewed, never hand-written). Layer inputs are feed facts + the curated public hero table only - fairness canon.",
+ "comment": "M6 overlord focus pins; expect recorded via harness --record (reviewed, never hand-written). Layer inputs are feed facts + the PRINTED hero cards (tactical_hero_cards.json, M11b) + the curated fallback table for rows outside the 21-hero roster only - fairness canon. Case-level \"defense\" (M11b) = the engaging imperial figure's printed defense dice.",
  "cases": [
   {
    "name": "eliminate_economy",
@@ -49,36 +49,36 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
-     "hero": "Squad Stranger",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": true
-    },
-    {
-     "basis": "proxy",
-     "hero": "Gaarkhan",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": true
-    },
-    {
-     "basis": "proxy",
      "hero": "Han Solo",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "7/2",
+     "threat_econ": "7/2",
+     "basis": "economy"
     },
     {
-     "basis": "proxy",
      "hero": "Fenn Signis",
      "marked": false,
+     "wounded": false,
+     "threat": "13/6",
+     "threat_econ": "13/6",
+     "basis": "card"
+    },
+    {
+     "hero": "Gaarkhan",
+     "marked": false,
+     "wounded": true,
+     "threat": "5/6",
+     "threat_econ": "5/3",
+     "basis": "card"
+    },
+    {
+     "hero": "Squad Stranger",
+     "marked": false,
+     "wounded": true,
      "threat": null,
      "threat_econ": null,
-     "wounded": false
+     "basis": "proxy"
     }
    ]
   },
@@ -130,36 +130,36 @@
    ],
    "expect": [
     {
-     "basis": "chip",
      "hero": "Fenn Signis",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "13/6",
+     "threat_econ": "13/6",
+     "basis": "chip"
     },
     {
-     "basis": "chip",
      "hero": "Han Solo",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": true
+     "wounded": true,
+     "threat": "7/2",
+     "threat_econ": "7",
+     "basis": "chip"
     },
     {
-     "basis": "chip",
      "hero": "Gaarkhan",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "chip"
     },
     {
-     "basis": "proxy",
      "hero": "Squad Stranger",
      "marked": false,
+     "wounded": true,
      "threat": null,
      "threat_econ": null,
-     "wounded": true
+     "basis": "proxy"
     }
    ]
   },
@@ -191,20 +191,20 @@
    ],
    "expect": [
     {
-     "basis": "mark",
      "hero": "Gaarkhan",
      "marked": true,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "mark"
     },
     {
-     "basis": "proxy",
      "hero": "Han Solo",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "7/2",
+     "threat_econ": "7/2",
+     "basis": "economy"
     }
    ]
   },
@@ -236,20 +236,20 @@
    ],
    "expect": [
     {
-     "basis": "mark",
      "hero": "Gaarkhan",
      "marked": true,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "mark"
     },
     {
-     "basis": "mark",
      "hero": "Han Solo",
      "marked": true,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "7/2",
+     "threat_econ": "7/2",
+     "basis": "mark"
     }
    ]
   },
@@ -291,28 +291,28 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
-     "hero": "Gaarkhan",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": true
-    },
-    {
-     "basis": "proxy",
-     "hero": "Diala Passil",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
-    },
-    {
-     "basis": "proxy",
      "hero": "Han Solo",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "14",
+     "threat_econ": "14",
+     "basis": "economy"
+    },
+    {
+     "hero": "Diala Passil",
+     "marked": false,
+     "wounded": false,
+     "threat": "4",
+     "threat_econ": "4",
+     "basis": "card"
+    },
+    {
+     "hero": "Gaarkhan",
+     "marked": false,
+     "wounded": true,
+     "threat": "1",
+     "threat_econ": "1",
+     "basis": "card"
     }
    ]
   },
@@ -354,33 +354,33 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
      "hero": "Gaarkhan",
      "marked": false,
+     "wounded": true,
      "threat": null,
      "threat_econ": null,
-     "wounded": true
+     "basis": "proxy"
     },
     {
-     "basis": "proxy",
      "hero": "Han Solo",
      "marked": false,
+     "wounded": false,
      "threat": null,
      "threat_econ": null,
-     "wounded": false
+     "basis": "proxy"
     },
     {
-     "basis": "proxy",
      "hero": "Fenn Signis",
      "marked": false,
+     "wounded": false,
      "threat": null,
      "threat_econ": null,
-     "wounded": false
+     "basis": "proxy"
     }
    ]
   },
   {
-   "name": "m10a_placeholder_loadout_breaks_row_queue",
+   "name": "m10a_campaign_loadout_breaks_row_queue",
    "posture": "stall",
    "counter": null,
    "heroes": [
@@ -447,36 +447,36 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
      "hero": "Drokkatta",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "12",
+     "threat_econ": "12",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
      "hero": "Biv Bodhrik",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "6",
+     "threat_econ": "6",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
-     "hero": "Davith Elso",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
-    },
-    {
-     "basis": "proxy",
      "hero": "CT-1701",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "6",
+     "threat_econ": "6",
+     "basis": "card"
+    },
+    {
+     "hero": "Davith Elso",
+     "marked": false,
+     "wounded": false,
+     "threat": "2",
+     "threat_econ": "2",
+     "basis": "card"
     }
    ]
   },
@@ -495,30 +495,16 @@
      "attack_dice": 0,
      "health": 0,
      "loadout": {
-      "items": [],
-      "skills": []
-     }
-    },
-    {
-     "hero": "Davith Elso",
-     "row": 1,
-     "profile": "Davith Elso",
-     "wounded": false,
-     "marks": 0,
-     "marked_round": 0,
-     "attack_dice": 0,
-     "health": 0,
-     "loadout": {
       "items": [
-       "item328"
+       "item315"
       ],
       "skills": []
      }
     },
     {
-     "hero": "CT-1701",
-     "row": 2,
-     "profile": "CT-1701",
+     "hero": "Saska Teft",
+     "row": 1,
+     "profile": "Saska Teft",
      "wounded": true,
      "marks": 0,
      "marked_round": 0,
@@ -530,9 +516,9 @@
      }
     },
     {
-     "hero": "Drokkatta",
-     "row": 3,
-     "profile": "Drokkatta",
+     "hero": "CT-1701",
+     "row": 2,
+     "profile": "CT-1701",
      "wounded": false,
      "marks": 0,
      "marked_round": 0,
@@ -546,36 +532,28 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
-     "hero": "CT-1701",
+     "hero": "Saska Teft",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": true
+     "wounded": true,
+     "threat": "6",
+     "threat_econ": "6",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
-     "hero": "Davith Elso",
-     "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
-    },
-    {
-     "basis": "proxy",
      "hero": "Biv Bodhrik",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "6",
+     "threat_econ": "6",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
-     "hero": "Drokkatta",
+     "hero": "CT-1701",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "6",
+     "threat_econ": "6",
+     "basis": "card"
     }
    ]
   },
@@ -619,20 +597,20 @@
    ],
    "expect": [
     {
-     "basis": "proxy",
      "hero": "Biv Bodhrik",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "12",
+     "threat_econ": "12",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
      "hero": "Davith Elso",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "12",
+     "threat_econ": "12",
+     "basis": "card"
     }
    ]
   },
@@ -666,67 +644,223 @@
    ],
    "expect": [
     {
-     "basis": "economy",
      "hero": "Han Solo Two",
      "marked": false,
+     "wounded": false,
      "threat": "15",
      "threat_econ": "15",
-     "wounded": false
+     "basis": "economy"
     },
     {
-     "basis": "economy",
      "hero": "Han Solo",
      "marked": false,
+     "wounded": false,
      "threat": "14",
      "threat_econ": "14",
-     "wounded": false
+     "basis": "economy"
     }
    ]
   },
   {
-   "name": "m10b_mixed_basis_purity",
+   "name": "m11b_mixed_roster_common_basis",
    "posture": "eliminate",
    "counter": null,
+   "defense": [
+    "White"
+   ],
    "heroes": [
     {
-     "hero": "Han Solo",
+     "hero": "Fenn Signis",
      "row": 0,
-     "profile": "Han Solo",
+     "profile": "Fenn Signis",
      "wounded": false,
      "marks": 0,
      "marked_round": 0,
-     "attack_dice": 0,
-     "health": 0,
-     "objective_actor": false
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Gaarkhan",
+     "row": 1,
+     "profile": "Gaarkhan",
+     "wounded": true,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
     },
     {
      "hero": "Biv Bodhrik",
-     "row": 1,
+     "row": 2,
      "profile": "Biv Bodhrik",
      "wounded": false,
      "marks": 0,
      "marked_round": 0,
-     "attack_dice": 0,
-     "health": 0,
-     "objective_actor": true
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "MHD-19",
+     "row": 3,
+     "profile": "MHD-19",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item328"
+      ],
+      "skills": []
+     }
     }
    ],
    "expect": [
     {
-     "basis": "proxy",
-     "hero": "Biv Bodhrik",
+     "hero": "MHD-19",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "8/3",
+     "threat_econ": "8/3",
+     "basis": "card"
     },
     {
-     "basis": "proxy",
-     "hero": "Han Solo",
+     "hero": "Fenn Signis",
      "marked": false,
-     "threat": null,
-     "threat_econ": null,
-     "wounded": false
+     "wounded": false,
+     "threat": "7/6",
+     "threat_econ": "7/6",
+     "basis": "card"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "marked": false,
+     "wounded": false,
+     "threat": "7/6",
+     "threat_econ": "7/6",
+     "basis": "card"
+    },
+    {
+     "hero": "Gaarkhan",
+     "marked": false,
+     "wounded": true,
+     "threat": "0",
+     "threat_econ": "0",
+     "basis": "card"
+    }
+   ]
+  },
+  {
+   "name": "m11b_equal_threat_investment_tie",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item315"
+      ],
+      "skills": [
+       "murne03"
+      ]
+     }
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Murne Rin",
+     "marked": false,
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "card"
+    },
+    {
+     "hero": "Fenn Signis",
+     "marked": false,
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "card"
+    }
+   ]
+  },
+  {
+   "name": "m11b_real_wound_runner",
+   "posture": "protect",
+   "counter": null,
+   "heroes": [
+    {
+     "hero": "Diala Passil",
+     "row": 0,
+     "profile": "Diala Passil",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item303"
+      ],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Diala Passil",
+     "row": 1,
+     "profile": "Diala Passil",
+     "wounded": true,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item303"
+      ],
+      "skills": []
+     }
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Diala Passil",
+     "marked": false,
+     "wounded": false,
+     "threat": "4",
+     "threat_econ": "4",
+     "basis": "card"
+    },
+    {
+     "hero": "Diala Passil",
+     "marked": false,
+     "wounded": true,
+     "threat": "2",
+     "threat_econ": "2",
+     "basis": "card"
     }
    ]
   }

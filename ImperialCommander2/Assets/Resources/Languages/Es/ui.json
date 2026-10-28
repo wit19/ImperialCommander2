@@ -314,7 +314,7 @@
     "expNone": "NINGUNA",
     "expPostHoc": "DESPUÉS",
     "expFull": "COMPLETA",
-    "ordThreat": "amenaza {0} por turno (tabla pública de amenazas)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "marca de objetivo: el objetivo de la misión lo nombra",
     "ordRoundFocus": "todos los grupos convergen en el mismo objetivo focal",
     "ordRiskLabel": "postura de riesgo: {0}",

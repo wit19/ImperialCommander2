@@ -334,7 +334,7 @@
     "expNone": "NONE",
     "expPostHoc": "AFTER ACTION",
     "expFull": "FULL",
-    "ordThreat": "threat {0} per round (public threat table)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "aim marker: the mission objective names him",
     "ordRoundFocus": "all groups converge on the same focus target",
     "ordRiskLabel": "risk posture: {0}",

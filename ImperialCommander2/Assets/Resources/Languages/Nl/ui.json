@@ -334,7 +334,7 @@
     "expNone": "GEEN",
     "expPostHoc": "NADERHAND",
     "expFull": "VOLLEDIG",
-    "ordThreat": "dreiging {0} per beurt (openbare dreigingstabel)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "doelmarkering: het missiedoel noemt hem",
     "ordRoundFocus": "alle groepen richten zich op hetzelfde focudoel",
     "ordRiskLabel": "risicopositie: {0}",

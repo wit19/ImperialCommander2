@@ -314,7 +314,7 @@
     "expNone": "KEINE",
     "expPostHoc": "NACHHER",
     "expFull": "AUSFÜHRLICH",
-    "ordThreat": "Bedrohung {0} pro Runde (öffentliche Bedrohungstabelle)",
+    "ordThreat": "Bedrohung {0} pro Runde (gedruckte Heldenkarte: Werte, Waffe, Items)",
     "ordMarked": "Zielmarke: das Missionsziel nennt ihn",
     "ordRoundFocus": "alle Gruppen richten sich auf dasselbe Fokusziel",
     "ordRiskLabel": "Risikoposition: {0}",

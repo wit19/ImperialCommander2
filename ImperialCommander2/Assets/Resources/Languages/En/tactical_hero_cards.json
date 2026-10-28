@@ -1,0 +1,1884 @@
+{
+  "schema": "tacai.hero_cards/1",
+  "source": "Kuratierung: oeffentlich gedruckte Heldenkarten-Werte aller 21 Kampagnen-Helden (gesund + verwundete Rueckseite), Basiswaffen und Item-Wuerfel/Modifikatoren; ids und xp-Kosten aus den App-Tabellen (CardData/heroes.json, CampaignData/items.json, CampaignData/skills.json). Cleanroom-Policy: wiki_data/LICENSE_DATA.md — nur Zahlen, Wuerfelbuchstaben und reine Keyword-Slugs, keine Prosa.",
+  "conventions": {
+    "wuerfelBuchstaben": "B/R/G/Y = gedruckte Angruesfel (App-Konvention); verteidigung: K=schwarz, W=weiss",
+    "basisAngriffswuerfel": "Basiswuerfel der gedruckten Basiswaffe, Nahkampf-Waffe mit aufgedrucktem Reach: Suffix '+Reach'",
+    "angriffsTyp": "P = Nahkampf, O = Fernkampf (App-Symbolkonvention keyword_table.json)",
+    "reichweite": "Nahkampf 1 (mit Reach 2); Fernkampf = int(Genauigkeits-EW + 1/2) der gedruckten Waffe — Acc-Gate der ATTACKS-Regelseite (IC2-Bandensemantik)",
+    "attribut": "Waffen mit Attribut-Pool ('Your attack pool is your X pool'): staerke/einsicht/tech — im verwundeten Zustand schrumpfen die Attributswuerfel (verwundete Kartenseite)",
+    "items": "nur Items mit Angriffswirkung; genauigkeit/schaden/durchschlag = statische (nicht-Surge) Aufdrucke; Surge-Zeilen bleiben bewusst aussen vor (konservative Vereinfachung, wie Dice.cs)",
+    "faehigkeiten": "reine Keyword-Slugs + Zahlen (xp-Kosten aus App-Tabelle, strain-Kosten von der gedruckten Karte); Konsum erst M11d"
+  },
+  "heroes": [
+    {
+      "name": "Biv Bodhrik",
+      "appHeroId": "H7",
+      "gesUnderhalt": 13,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 13,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BGY",
+        "einsicht": "B",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "RBG",
+        "einsicht": "R",
+        "tech": "RB"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BR",
+      "reichweite": 3,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "advance",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "close_and_personal",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "crushing_blow",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "deadly_precision",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "final_stand",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "into_the_fray",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "shake_it_off",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "stay_down",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "trophy_armor",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "vibrobayonet",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "CT-1701",
+      "appHeroId": "H20",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BY",
+        "einsicht": "G",
+        "tech": "BGG"
+      },
+      "attributeVerwundet": {
+        "staerke": "BR",
+        "einsicht": "R",
+        "tech": "BRG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "GG",
+      "reichweite": 3,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "barrage",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "barrage_2_s_use_after_you_resolve_an_attack_with_a_p_weapon_to_perform_another_attack_with_that_weapon_against_any_target_within_3_spaces_of_the_previous_target_space_during_this_attack_add_1_white_die_to_the_defense_pool_limit_once_per_activation",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "concentrate_fire",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "covering_fire",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "focus_fire_while_attacking_with_a_p_weapon_you_gain_z_gain_1_dt",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "pin_them_down",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "reload",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "squad_tactics",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "strafing_run",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "weakness_identified",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "wild_fire",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Davith Elso",
+      "appHeroId": "H12",
+      "gesUnderhalt": 11,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 11,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BGY",
+        "tech": "B"
+      },
+      "attributeVerwundet": {
+        "staerke": "BR",
+        "einsicht": "BRG",
+        "tech": "R"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "GY",
+      "reichweite": 1,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "blindside",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "cloak_dagger",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "covert_operative",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "elusive_agent",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "embody_the_force",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "falling_leaf",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "fell_swoop",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "force_illusion",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "force_speed",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "shrouded_lightsaber",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Diala Passil",
+      "appHeroId": "H1",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 4,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BGY",
+        "tech": "B"
+      },
+      "attributeVerwundet": {
+        "staerke": "RB",
+        "einsicht": "BRG",
+        "tech": "R"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "GY+Reach",
+      "reichweite": 2,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "art_of_movement",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "battle_meditation",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "dancing_weapon",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "defensive_stance",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "force_adept",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "force_throw",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "foresight",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "precise_strike",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "snap_kick",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "way_of_the_sarlacc",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Drokkatta",
+      "appHeroId": "H17",
+      "gesUnderhalt": 13,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 13,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BGG",
+        "einsicht": "BB",
+        "tech": "GG"
+      },
+      "attributeVerwundet": {
+        "staerke": "BRG",
+        "einsicht": "BR",
+        "tech": "RG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BR",
+      "reichweite": 3,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "bank_shot",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "charging_up",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "demolish",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "dispersal_shot",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "leave_no_one_behind",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "repeater_cannon",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "shrapnel_rounds",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "structural_exploitation",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "thermal_explosives",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "wookiee_wrath",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Fenn Signis",
+      "appHeroId": "H2",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BG",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "RB",
+        "einsicht": "RB",
+        "tech": "RB"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BG",
+      "reichweite": 5,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "adrenaline_rush",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "havoc_shot",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "lone_wolf",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "rebel_elite",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "superior_positioning",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "suppressive_fire",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "tactical_movement",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "take_cover",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "trench_fighter",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "weapon_expert",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Gaarkhan",
+      "appHeroId": "H3",
+      "gesUnderhalt": 14,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 14,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BGY",
+        "einsicht": "B",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "BRG",
+        "einsicht": "R",
+        "tech": "BR"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "RY",
+      "reichweite": 1,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "brutal_cleave",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "charge",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "ferocity",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rage",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rampage",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "staggering_blow",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "unstoppable",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "vicious_strike",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "wookiee_fortitude",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "wookiee_loyalty",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Gideon Argus",
+      "appHeroId": "H4",
+      "gesUnderhalt": 10,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 10,
+      "verwundeteAusdauer": 4,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BGY",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "RB",
+        "einsicht": "RBG",
+        "tech": "RB"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BY",
+      "reichweite": 4,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "air_of_command",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "called_shot",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "command",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "disabling_shot",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "for_the_cause",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "hammer_and_anvil",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "masterstroke",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "military_efficiency",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mobile_tactician",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rallying_shout",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Jarrod Kelvin",
+      "appHeroId": "H18",
+      "gesUnderhalt": 10,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 10,
+      "verwundeteAusdauer": 4,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "GG",
+        "einsicht": "BG",
+        "tech": "BGY"
+      },
+      "attributeVerwundet": {
+        "staerke": "RG",
+        "einsicht": "BR",
+        "tech": "BRG"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "YY",
+      "reichweite": 1,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "balanced_approach",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "droid_mastery",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "explosive_reflexes",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "forward_momentum",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "leaping_slash",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mechanical_master",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mutual_progression",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "parry",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "scout_s_loadout",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "slicer_s_upgrade",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Jyn Odan",
+      "appHeroId": "H5",
+      "gesUnderhalt": 10,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 10,
+      "verwundeteAusdauer": 3,
+      "tempo": 5,
+      "tempoVerwundet": 4,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BG",
+        "tech": "BGY"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "RB",
+        "tech": "RBG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "GG",
+      "reichweite": 3,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "cheap_shot",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "get_cocky",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "gunslinger",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "opportunist",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "quick_as_a_whip",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "quick_draw",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "roll_with_it",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "sidewinder",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "smuggler_s_luck",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "trick_shot",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Ko-Tun Feralo",
+      "appHeroId": "H19",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BGY",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "BRG",
+        "tech": "BR"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BG",
+      "reichweite": 5,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "arms_distribution",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "auxiliary_training",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "combat_logistics",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "dig_in",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "fire_support_specialist",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "inch_by_inch",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "opportunist",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "self_sufficient",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "squad_cohesion",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "stockpile",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Loku Kanoloa",
+      "appHeroId": "H9",
+      "gesUnderhalt": 10,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 10,
+      "verwundeteAusdauer": 4,
+      "tempo": 5,
+      "tempoVerwundet": 4,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BGY",
+        "tech": "B"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "RBG",
+        "tech": "R"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BG",
+      "reichweite": 5,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "clear_minded",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "combat_spotter",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "coordinated_attack",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mon_cala_special_forces",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "overwatch",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "scout_s_guidance",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "scouting_report",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "set_your_sights",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "spectrum_scanner",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "study_of_enemies",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "while_you_or_a_friendly_figure_is_attacking_a_figure_with_a_recon_token_apply_1_d_to_the_attack_results",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "MHD-19",
+      "appHeroId": "H10",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BG",
+        "tech": "BGY"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "RB",
+        "tech": "RBG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BY",
+      "reichweite": 4,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "adrenal_vapor",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "bacta_injector",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "bacta_radiation",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "combat_override",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "field_surgeon",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "fuel_injection",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "improper_procedure",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mechanical",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "medical_loadout",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "miracle_worker",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "ready_for_service",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Mak Eshka'rey",
+      "appHeroId": "H6",
+      "gesUnderhalt": 10,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 10,
+      "verwundeteAusdauer": 4,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BG",
+        "tech": "BGY"
+      },
+      "attributeVerwundet": {
+        "staerke": "BR",
+        "einsicht": "BR",
+        "tech": "BRG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BB",
+      "reichweite": 6,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "ambush",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "covert",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "decoy",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "disengage",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "execute",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "expertise",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "jeswandi_training",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "no_escape",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "supply_network",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "target_acquired",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Murne Rin",
+      "appHeroId": "H13",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BGY",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "BRG",
+        "tech": "BR"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BG",
+      "reichweite": 5,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "company_of_heroes",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "double_agent",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "false_orders",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "figurehead",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "lead_from_the_front",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "professional_aide",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rebel_propaganda",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "solidarity",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "sonic_bellow",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "waylay",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Onar Koma",
+      "appHeroId": "H14",
+      "gesUnderhalt": 20,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 20,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "–",
+      "verteidigungVerwundet": "–",
+      "attribute": {
+        "staerke": "BYY",
+        "einsicht": "GY",
+        "tech": "BR"
+      },
+      "attributeVerwundet": {
+        "staerke": "BRY",
+        "einsicht": "RG",
+        "tech": "RR"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "GR",
+      "reichweite": 2,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "black_sun_armor",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "brute_strength",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "don_t_make_me_hurt_you",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "get_down",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "hold_still",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "keep_up",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mutual_destruction",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "power_through_when_you_rest_you_recover_2_additional_d",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "power_through_you_cannot_gain_harmful_conditions",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rush_when_you_enter_a_space_adjacent_to_a_small_figure_you_may_push_that_figure_1_space_limit_once_per_activation",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rush_when_you_enter_a_space_adjacent_to_a_small_figure_you_may_push_that_figure_up_to_1_space_limit_once_per_activation",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "stay_behind_me",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Saska Teft",
+      "appHeroId": "H8",
+      "gesUnderhalt": 11,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 11,
+      "verwundeteAusdauer": 3,
+      "tempo": 5,
+      "tempoVerwundet": 4,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "B",
+        "einsicht": "BG",
+        "tech": "BGY"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "RB",
+        "tech": "RBG"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "GY",
+      "reichweite": 3,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "adrenaline_injector",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "battle_technician",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "energy_shield",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "gadgeteer",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "power_converter",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "practical_solutions",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "remote_distribution",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "structural_weakness",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "tool_kit",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "unstable_device",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "while_performing_an_attribute_test_a_figure_may_discard_1_device_token_to_reroll_1_die",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Shyla Varad",
+      "appHeroId": "H15",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 3,
+      "tempo": 5,
+      "tempoVerwundet": 4,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BBG",
+        "einsicht": "GG",
+        "tech": "BY"
+      },
+      "attributeVerwundet": {
+        "staerke": "BBR",
+        "einsicht": "RG",
+        "tech": "BR"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "GY",
+      "reichweite": 1,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "all_out_attack",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "deadly_grace",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "full_sweep",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mandalorian_whip_a_1_s_choose_a_small_hostile_figure_within_3_spaces_and_line_of_sight_push_that_figure_up_to_3_spaces_to_a_space_adjacent_to_you_then_perform_an_attack_with_a_l_weapon_targeting_that_figure",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "proximity_strike",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "remote_detonator",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "respite_at_the_end_of_your_activation_if_you_are_not_adjacent_to_any_hostile_figures_recover_1_s",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        },
+        {
+          "bezeichnung": "responsiveness",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "smoke_bombs",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "swords_dance",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Tress Hacnua",
+      "appHeroId": "H21",
+      "gesUnderhalt": 11,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 11,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "GY",
+        "einsicht": "GG",
+        "tech": "BB"
+      },
+      "attributeVerwundet": {
+        "staerke": "GR",
+        "einsicht": "GR",
+        "tech": "BR"
+      },
+      "angriffsTyp": "P",
+      "basisAngriffswuerfel": "BG",
+      "reichweite": 1,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "acklay_counter",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "aryx_variation",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "dianoga_sweep",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "dragonsnake_variation",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "fluidity",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "fyrnock_style_after_you_resolve_an_attack_with_a_l_weapon_gain_1_style_token",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "gundark_throw",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "krayt_dragon_fury",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "leg_hydraulics_at_the_start_of_your_activation_you_may_test_f_and_move_a_number_of_spaces_up_to_the_z_results",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "mynock_strike",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Verena Talos",
+      "appHeroId": "H11",
+      "gesUnderhalt": 12,
+      "gesundeAusdauer": 5,
+      "verwundetesGesundheit": 12,
+      "verwundeteAusdauer": 4,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "K",
+      "verteidigungVerwundet": "K",
+      "attribute": {
+        "staerke": "BG",
+        "einsicht": "BG",
+        "tech": "BG"
+      },
+      "attributeVerwundet": {
+        "staerke": "RB",
+        "einsicht": "RB",
+        "tech": "RB"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BY",
+      "reichweite": 4,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "close_quarters",
+          "xp_kosten": null,
+          "strain_kosten": 2
+        },
+        {
+          "bezeichnung": "combat_mastery",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "combat_momentum",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "create_opening",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "duck_and_weave",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "improvised_cover",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "k_tara_maneuver",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "master_operative",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "point_blank_shot",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "student_of_battle",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        }
+      ]
+    },
+    {
+      "name": "Vinto Hreeda",
+      "appHeroId": "H16",
+      "gesUnderhalt": 11,
+      "gesundeAusdauer": 4,
+      "verwundetesGesundheit": 11,
+      "verwundeteAusdauer": 3,
+      "tempo": 4,
+      "tempoVerwundet": 3,
+      "verteidigung": "W",
+      "verteidigungVerwundet": "W",
+      "attribute": {
+        "staerke": "G",
+        "einsicht": "BGG",
+        "tech": "RY"
+      },
+      "attributeVerwundet": {
+        "staerke": "R",
+        "einsicht": "BRG",
+        "tech": "RR"
+      },
+      "angriffsTyp": "O",
+      "basisAngriffswuerfel": "BY",
+      "reichweite": 4,
+      "faehigkeiten": [
+        {
+          "bezeichnung": "battlefield_experience",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "boltslinger_after_you_resolve_an_attack_with_a_p_weapon_if_the_target_suffered_d_you_may_choose_another_hostile_figure_in_your_line_of_sight_and_within_3_spaces_of_you_that_figure_suffers_1_d",
+          "xp_kosten": null,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "dead_on",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "merciless",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "off_hand_blaster",
+          "xp_kosten": 3,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "pinpoint_shot",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "rapid_fire",
+          "xp_kosten": 4,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "sharpshooter",
+          "xp_kosten": 2,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "shot_on_the_run",
+          "xp_kosten": 1,
+          "strain_kosten": 0
+        },
+        {
+          "bezeichnung": "thread_the_needle_1_s_use_during_your_activation_figures_do_not_block_your_line_of_sight_during_this_activation",
+          "xp_kosten": null,
+          "strain_kosten": 1
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "item101",
+      "typ": "P",
+      "wuerfel": "GY"
+    },
+    {
+      "id": "item104",
+      "typ": "O",
+      "wuerfel": "GG",
+      "genauigkeit": 1
+    },
+    {
+      "id": "item108",
+      "typ": "O",
+      "wuerfel": "GY"
+    },
+    {
+      "id": "item109",
+      "typ": "O",
+      "wuerfel": "GY"
+    },
+    {
+      "id": "item110",
+      "typ": "O",
+      "wuerfel": "BY"
+    },
+    {
+      "id": "item111",
+      "typ": "O",
+      "wuerfel": "BG"
+    },
+    {
+      "id": "item114",
+      "typ": "P",
+      "wuerfel": "RY",
+      "durchschlag": 1
+    },
+    {
+      "id": "item115",
+      "typ": "O",
+      "wuerfel": "RR",
+      "genauigkeit": 1
+    },
+    {
+      "id": "item116",
+      "typ": "O",
+      "genauigkeit": 2
+    },
+    {
+      "id": "item118",
+      "typ": "P",
+      "wuerfel": "BY"
+    },
+    {
+      "id": "item123",
+      "typ": "O",
+      "wuerfel": "BB"
+    },
+    {
+      "id": "item124",
+      "typ": "O",
+      "genauigkeit": 1
+    },
+    {
+      "id": "item125",
+      "typ": "P",
+      "wuerfel": "GG"
+    },
+    {
+      "id": "item126",
+      "typ": "P",
+      "wuerfel": "GG"
+    },
+    {
+      "id": "item127",
+      "typ": "P",
+      "wuerfel": "BG"
+    },
+    {
+      "id": "item201",
+      "typ": "O",
+      "wuerfel": "BR",
+      "schaden": 1
+    },
+    {
+      "id": "item202",
+      "typ": "O",
+      "wuerfel": "BG",
+      "genauigkeit": 1
+    },
+    {
+      "id": "item203",
+      "typ": "P",
+      "wuerfel": "RG"
+    },
+    {
+      "id": "item207",
+      "typ": "P",
+      "wuerfel": "GR"
+    },
+    {
+      "id": "item208",
+      "typ": "O",
+      "wuerfel": "GG"
+    },
+    {
+      "id": "item209",
+      "typ": "O",
+      "wuerfel": "RY",
+      "genauigkeit": 4
+    },
+    {
+      "id": "item210",
+      "typ": "O",
+      "wuerfel": "GG",
+      "genauigkeit": 2
+    },
+    {
+      "id": "item216",
+      "typ": "O",
+      "wuerfel": "GG",
+      "genauigkeit": 2
+    },
+    {
+      "id": "item220",
+      "typ": "O",
+      "durchschlag": 1
+    },
+    {
+      "id": "item221",
+      "typ": "P",
+      "wuerfel": "RR"
+    },
+    {
+      "id": "item225",
+      "typ": "P",
+      "wuerfel": "BR"
+    },
+    {
+      "id": "item226",
+      "typ": "O",
+      "wuerfel": "GGY"
+    },
+    {
+      "id": "item227",
+      "typ": "P",
+      "wuerfel": "GY"
+    },
+    {
+      "id": "item301",
+      "typ": "O",
+      "wuerfel": "BBY"
+    },
+    {
+      "id": "item303",
+      "typ": "P",
+      "attribut": "einsicht"
+    },
+    {
+      "id": "item304",
+      "typ": "P",
+      "wuerfel": "BBR"
+    },
+    {
+      "id": "item308",
+      "typ": "O",
+      "genauigkeit": 2
+    },
+    {
+      "id": "item309",
+      "typ": "O",
+      "wuerfel": "GR",
+      "genauigkeit": 2
+    },
+    {
+      "id": "item310",
+      "typ": "O",
+      "wuerfel": "BBG"
+    },
+    {
+      "id": "item311",
+      "typ": "O",
+      "wuerfel": "RR",
+      "genauigkeit": 6
+    },
+    {
+      "id": "item312",
+      "typ": "P",
+      "wuerfel": "BRG"
+    },
+    {
+      "id": "item313",
+      "typ": "P",
+      "wuerfel": "RYY"
+    },
+    {
+      "id": "item316",
+      "typ": "O",
+      "attribut": "tech"
+    },
+    {
+      "id": "item320",
+      "typ": "O",
+      "wuerfel": "BGY"
+    },
+    {
+      "id": "item322",
+      "typ": "P",
+      "attribut": "staerke"
+    },
+    {
+      "id": "item325",
+      "typ": "O",
+      "wuerfel": "BYY"
+    },
+    {
+      "id": "item328",
+      "typ": "O",
+      "wuerfel": "BBR"
+    }
+  ]
+}

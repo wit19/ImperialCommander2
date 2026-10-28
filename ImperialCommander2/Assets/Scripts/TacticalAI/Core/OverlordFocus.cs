@@ -8,9 +8,12 @@
 //       world feed (M5): wounded/defeated flags, focus MARKS (aim tokens).
 //       No positions, no hidden state, no dice. A human GM sees the very
 //       same facts at the table.
-//   (2) HeroThreatProfile - the curated PUBLIC threat table (printed card
-//       values + app-managed campaign loadouts, concept 3.3.1a). Every W
-//       component is vector-ported sim truth (hero_profiles.json, hero_w.json).
+//   (2) HeroCard (M11b, tactical_hero_cards.json) - the PRINTED hero card
+//       values of all 21 campaign heroes (healthy + wounded side, weapon
+//       dice, items via the app campaign state); HeroThreatProfile stays the
+//       role/chip vocabulary and the fallback for rows outside the app
+//       roster (concept 3.3.1a). Every W component is vector-ported sim
+//       truth (hero_profiles.json, hero_w.json).
 //
 // FAIRNESS CANON (concept 3.3.1/12, hard constraint): ranking only ever
 // PERMUTES the candidate set - it never filters, never invents a target,
@@ -23,10 +26,14 @@
 //                     groups converge on it: focus fire, table-visible.
 //     2. counter    - "woundAll": the sim ChipKey verbatim (healthy-first,
 //                     healer last) - counter law outranks economics.
-//     3. economy    - posture-keyed profile value x wound-economy multiplier.
-//                     Cost/benefit instead of the raw score: a wounded hero
-//                     still projects his printed threat until he is out, but
-//                     costs only about half the engagement to finish - the
+//     3. economy    - posture-keyed threat x wound-economy multiplier. On
+//                     the M11b hero-card basis: expected damage of the real
+//                     printed dice pool (weapon + known loadout items)
+//                     against the engaging imperial figure's defense, or the
+//                     real-tempo runner value under protect/stall. Cost/
+//                     benefit instead of the raw score: a wounded hero still
+//                     projects his printed threat until he is out, but costs
+//                     only about half the engagement to finish - the
 //                     danger-per-shot DENSITY doubles. Rational x2, exact.
 //     4. reference  - no curated profile: the S1-S3 public proxy ranking
 //                     (wounded, printed attack dice, printed health).
@@ -57,6 +64,10 @@ namespace TacticalAI.Core
         // from public events only: objective progress happened, then a hero
         // finished his activation -> he gets the credit (feed vector).
         public bool ObjectiveActor;
+        // M11b: his PRINTED hero card (tactical_hero_cards.json, all 21 app
+        // heroes). Null only for rows outside the app roster (sim fixture
+        // heroes) - those keep the M2a.4 curated fallback.
+        public HeroCard Card;
 
         public bool Marked { get { return Marks > 0; } }
     }
@@ -69,7 +80,7 @@ namespace TacticalAI.Core
         public bool Wounded;
         public Rational? Threat;            // printed threat BEFORE economy
         public Rational? ThreatEconomic;    // after the wound-economy multiplier
-        public string Basis;                // "mark"|"chip"|"economy"|"proxy"
+        public string Basis;                // "mark"|"chip"|"card"|"economy"|"proxy"
 
         /// Comparable vector row (harness/NUnit pin), exact string fields.
         public Dictionary<string, object> AsDict()
@@ -122,51 +133,38 @@ namespace TacticalAI.Core
         /// that the id-multiset is input-equal for every skill level).
         /// posture/counter come from the public feed derivation; counter
         /// "woundAll" applies the sim ChipKey (profile.py port, vector truth).
+        /// M11b: defenderDefense = the defense dice of the IMPERIAL FIGURE
+        /// choosing its target (its printed deployment-card defense - public
+        /// card data, identical against every candidate in one call; null ->
+        /// no figure engaged yet, e.g. the round-level explain projection).
         public static List<FocusPick> Rank(IEnumerable<FocusCandidate> candidates,
-                                               string posture, string counter)
+                                               string posture, string counter,
+                                               IList<string> defenderDefense = null)
         {
             var list = candidates == null ? new List<FocusCandidate>()
                                            : candidates.ToList();
             bool woundAll = counter == "woundAll";
+            var table = HeroCards.Load();
             var rows = list.Select(c => new Row
             {
                 C = c,
-                Threat = ThreatBase(c.Profile, posture),
-                Econ = ThreatEconomic(c.Profile, posture, c.Wounded),
+                Threat = ThreatOf(c, posture, defenderDefense, table),
+                Econ = EconOf(c, posture, defenderDefense, table),
                 Chip = woundAll && c.Profile != null ? c.Profile.ChipKey() : null,
             }).ToList();
 
-            // M10b BASE PURITY (Thomas revision 27.10): the 16 curated rows
-            // are values from plain REBEL cards (a different mode's scale,
-            // usable as a guideline), the expansion heroes carry the neutral
-            // prior, profile-less rows the reference proxy. Comparing a
-            // curated 7/2 against a neutral prior EV of 1 mixes data bases
-            // and silently skews the race - in a MIXED round nobody competes
-            // on printed values: the economic/chip keys go to common ground
-            // (null) and the objective actor, wounds, campaign investment
-            // and the proxy keys decide. A pure curated round keeps its
-            // full ranking. Honesty over precision, per doctrine.
-            bool pure = rows.TrueForAll(r => RealCurated(r.C.Profile));
-            if (!pure)
-                foreach (var r in rows)
+            // M10b OBJECTIVE ACTOR: the hero credited with the last
+            // objective progress raises his threat by EXACTLY +1 - "die
+            // Bedrohung erhöht sich leicht", exact integer, public-event-
+            // derived, never a hidden stat. (M11b: applies on the single
+            // hero-card basis directly - the M10b purity guard, which used
+            // to gate this to pure curation rounds, is gone.)
+            foreach (var r in rows)
+                if (r.C.ObjectiveActor && r.Econ.HasValue)
                 {
-                    r.Threat = null; r.Econ = null;
-                    // The chip CLASS (healer/support/combat) is curated on
-                    // every row - keep that doctrine; only the runner/ev
-                    // sub-keys mix data bases -> common neutral prior.
-                    if (r.Chip != null) r.Chip = CommonGroundChip(r.Chip);
+                    r.Threat = r.Threat.Value + Rational.One;
+                    r.Econ = r.Econ.Value + Rational.One;
                 }
-            else
-                // M10b OBJECTIVE ACTOR (pure rounds): the hero credited with
-                // the last objective progress raises his threat by EXACTLY
-                // +1 - "die Bedrohung erhöht sich leicht", exact integer,
-                // public-event-derived, never a hidden stat.
-                foreach (var r in rows)
-                    if (r.C.ObjectiveActor && r.Econ.HasValue)
-                    {
-                        r.Threat = r.Threat.Value + Rational.One;
-                        r.Econ = r.Econ.Value + Rational.One;
-                    }
 
             var ranked = StableSort(rows, Compare);
 
@@ -179,8 +177,33 @@ namespace TacticalAI.Core
                 ThreatEconomic = x.Econ,
                 Basis = x.C.Marked ? "mark"
                         : (x.Chip != null ? "chip"
-                        : (x.Econ != null ? "economy" : "proxy")),
+                        : (x.Econ != null ? (x.C.Card != null ? "card" : "economy")
+                                          : "proxy")),
             }).ToList();
+        }
+
+        /// <summary>M11b threat v2 for one candidate: printed hero card
+        /// first (all 21 app heroes), M2a.4 curated profile as fallback for
+        /// rows outside the app roster.</summary>
+        static Rational? ThreatOf(FocusCandidate c, string posture,
+                                  IList<string> defenderDefense, HeroCardTable table)
+        {
+            if (c.Card != null)
+                return HeroThreatModelV2.Threat(c.Card, table, c.Profile,
+                                                c.Wounded, posture, defenderDefense);
+            return ThreatBase(c.Profile, posture);
+        }
+
+        static Rational? EconOf(FocusCandidate c, string posture,
+                                IList<string> defenderDefense, HeroCardTable table)
+        {
+            var t = ThreatOf(c, posture, defenderDefense, table);
+            if (!t.HasValue) return null;
+            // same wound-economy law as ThreatEconomic: doubling applies in
+            // the REMOVING races only; on card rows under protect/stall the
+            // wounded penalty is already REAL (card-back tempo, M11b).
+            bool race = posture != "protect" && posture != "stall";
+            return c.Wounded && race ? t.Value * WoundEconomy : t;
         }
 
         sealed class Row
@@ -250,29 +273,6 @@ namespace TacticalAI.Core
             int row = a.C.SquadRow.CompareTo(b.C.SquadRow);
             if (row != 0) return row;
             return string.CompareOrdinal(a.C.HeroId ?? "", b.C.HeroId ?? "");
-        }
-
-        /// <summary>M10b purity test: only a profile WITHOUT the
-        /// basis-prior-neutral placeholder flag carries a real curated
-        /// basis - neutral priors and reference proxies are NOT comparable
-        /// with curated values (mixed-basis law, Thomas 27.10).</summary>
-        static bool RealCurated(HeroThreatProfile p)
-        {
-            return p != null && p.Flags != null && !p.Flags.Contains("basis-prior-neutral");
-        }
-
-        /// <summary>M10b: chip key on common ground for mixed-basis rounds -
-        /// class survives, runner/ev sub-keys become the documented neutral
-        /// prior for EVERY row (HeroProfiles.cs NeutralMobility x NeutralRange
-        /// / NeutralEv), so no curated value competes against a prior.</summary>
-        static List<object> CommonGroundChip(List<object> chip)
-        {
-            return new List<object>
-            {
-                chip[0],
-                HeroProfiles.NeutralMobility * HeroProfiles.NeutralRange,
-                HeroProfiles.NeutralEv,
-            };
         }
 
         /// ChipKey = [int class, int runner, Rational ev] (HeroProfiles.cs

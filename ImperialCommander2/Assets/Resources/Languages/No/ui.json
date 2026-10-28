@@ -314,7 +314,7 @@
     "expNone": "INGEN",
     "expPostHoc": "ETTER",
     "expFull": "FULL",
-    "ordThreat": "trussel {0} per runde (offentlig trusselstabell)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "målmerke: oppdraret nevner ham",
     "ordRoundFocus": "alle grupper samler seg om samme fokusmål",
     "ordRiskLabel": "risikoposisjon: {0}",

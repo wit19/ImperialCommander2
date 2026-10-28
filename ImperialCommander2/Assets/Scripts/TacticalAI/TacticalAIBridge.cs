@@ -694,7 +694,10 @@ namespace TacticalAI
                 {
                     var ranked = Tac.OverlordFocus.Rank(cands,
                         string.IsNullOrEmpty(ordView.Posture) ? "eliminate" : ordView.Posture,
-                        null);                      // the app has no victory counter
+                        null,                      // the app has no victory counter
+                        // M11b: threat v2 runs against THIS figure's printed
+                        // defense pool (public deployment-card data).
+                        DefenseOf(cd));
                     var dec = ranked[0];
                     _roundFocus = dec;
                     _roundFocusHero = dec.HeroId;
@@ -758,6 +761,9 @@ namespace TacticalAI
                     HeroId = id,
                     SquadRow = row++,
                     Profile = prof,
+                    // M11b: the printed hero card (null only for rows
+                    // outside the 21-hero app roster -> curated fallback).
+                    Card = TacticalAIAssets.CardFor(id),
                     // feed fact first (deterministic public history); the live
                     // hero state is the fallback for heroes the feed never saw
                     Wounded = hv != null ? hv.Wounded : (h.heroState != null && h.heroState.isWounded),
@@ -770,6 +776,21 @@ namespace TacticalAI
                     ObjectiveActor = view != null && !string.IsNullOrEmpty(view.ObjectiveActor)
                         && System.StringComparer.Ordinal.Equals(view.ObjectiveActor, id),
                 });
+            }
+            return outp;
+        }
+
+        /// <summary>M11b: the engaging imperial figure's printed defense
+        /// pool as Core die names (Dice.DefenseDieFaces keys). Public
+        /// deployment-card data; unknown/absent figures -> no blocks.</summary>
+        static System.Collections.Generic.List<string> DefenseOf(global::DeploymentCard cd)
+        {
+            var outp = new System.Collections.Generic.List<string>();
+            if (cd == null || cd.defense == null) return outp;
+            foreach (var d in cd.defense)
+            {
+                var name = d.ToString();
+                if (name == "Black" || name == "White") outp.Add(name);
             }
             return outp;
         }

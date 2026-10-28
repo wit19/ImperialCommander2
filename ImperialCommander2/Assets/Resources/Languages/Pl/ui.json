@@ -314,7 +314,7 @@
     "expNone": "BRAK",
     "expPostHoc": "PO WALCE",
     "expFull": "PEŁNE",
-    "ordThreat": "zagrożenie {0} na rundę (publicna tabela zagrożeń)",
+    "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordMarked": "znacznik celu: cel misji go wymienia",
     "ordRoundFocus": "wszystkie grupy skupiają się na tym samym celu",
     "ordRiskLabel": "postawa ryzyka: {0}",

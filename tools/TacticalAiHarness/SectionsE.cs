@@ -1,8 +1,11 @@
 // M6 overlord-focus vectors: overlord_focus.json pins the DETERMINISTIC
-// target ranking of the OverlordFocus layer (aim marks > counter chip law >
-// threat economy > wounded > M10a campaign investment > reference proxy >
-// stable tie chain) over the SAME curated
-// public hero table the reference path uses. Like world_feed.json this is a
+// target ranking of the OverlordFocus layer (aim marks > objective actor >
+// counter chip law > threat economy > wounded > M10a campaign investment >
+// reference proxy > stable tie chain). M11b: the threat basis is each hero's
+// OWN printed hero card (tactical_hero_cards.json asset, primed from the
+// shipped file) — the M10b mixed-basis purity case is rewritten onto the
+// single common basis; rows outside the 21-hero roster keep the curated
+// fallback and are labelled "economy". Like world_feed.json this is a
 // C#-side canonical vector (the sim has no app feed); its W components are
 // sim-vectored via hero_profiles.json / hero_w.json. Expect blocks were
 // recorded once with `--record`, reviewed, then pinned - never hand-written.
@@ -33,6 +36,12 @@ namespace TacticalAiHarness
                 string counter = null;
                 if (c.ContainsKey("counter") && c["counter"] != null)
                     counter = Json.AsStr(c["counter"]);
+                // M11b: optional case-level "defense" - the defense dice of
+                // the engaging imperial figure ("Black"/"White", printed
+                // deployment-card data). Absent -> no figure engaged yet.
+                List<string> defender = null;
+                if (c.ContainsKey("defense") && c["defense"] != null)
+                    defender = Json.AsList(c["defense"]).ConvertAll(o => Json.AsStr(o));
 
                 List<FocusCandidate> Build()
                 {
@@ -88,14 +97,18 @@ namespace TacticalAiHarness
                             // M10b: optional per-hero flag (default false).
                             ObjectiveActor = h.ContainsKey("objective_actor")
                                 && Json.AsBool(h["objective_actor"]),
+                            // M11b: the printed hero card by NAME (same key
+                            // the live bridge uses); rows outside the 21-hero
+                            // roster (fixture heroes) stay on the fallback.
+                            Card = HeroCards.For(Json.AsStr(h["hero"])),
                         });
                     }
                     return list;
                 }
 
                 // replay twice: the layer is a pure function (determinism law)
-                var d1 = OverlordFocus.Rank(Build(), posture, counter);
-                var d2 = OverlordFocus.Rank(Build(), posture, counter);
+                var d1 = OverlordFocus.Rank(Build(), posture, counter, defender);
+                var d2 = OverlordFocus.Rank(Build(), posture, counter, defender);
                 Check(name + ".replay",
                       d1.Select(x => (object)x.AsDict()).ToList(),
                       d2.Select(x => (object)x.AsDict()).ToList());
