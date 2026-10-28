@@ -240,6 +240,32 @@ damit ausgeschlossen.
   automatisch weiß.)
 
 
+## 4c. dev 33 — Kartenfähigkeiten statt „Ignorierte Kartenfähigkeiten"
+
+Datenänderung an `DeploymentGroups/enemies.json` + `villains.json` (EN+DE, die übrigen
+Sprachen bewusst unverändert): Alle 83 Karteneinträge, deren Fähigkeiten bisher im
+`ignored`-Feld standen („Ignored Card Abilities"), haben die Fähigkeiten jetzt regulär im
+`abilities`-Feld — englisch und deutsch, im Stil der vorhandenen Texte, Symbole wie im
+Spiel ({H} Schaden, {C} Strain, {B} Surge, {G} Block, {O} Fern-, {P} Nahkampf-Angriff).
+Die Karte zeigt den roten Block „Ignorierte Kartenfähigkeiten" nur noch, wenn eine Karte
+tatsächlich etwas ignoriert (bei den betroffenen Einträgen: gar nicht mehr).
+
+**Sichtbare Änderungen beim Spielen:**
+- Sturmtruppen-Karte: „Truppenausbildung" steht jetzt als normale Fähigkeit (blau) statt
+  rot als ignoriert. Gleiches bei Snowtrooper, Imperial Officer, Sentry Droid, Riot
+  Trooper, Wing Guard, Vader, Thrawn, Jabba, Dengar, Boba Fett usw. (83 Einträge).
+- Karten-Popup, Aktivierungs-Popup und Gruppen-Übersicht: kein roter
+  „Ignorierte Kartenfähigkeiten:"-Block mehr bei diesen Gruppen.
+- An den Würfeln/Anweisungen der Legacy-KI ändert sich nichts; die taktische KI nutzt die
+  Fähigkeiten-Information erst ab M11c (Keyword-Halber wie Stativ/Assault in der
+  Musterwahl) — diese Lieferung ist die Daten- und Anzeige-Grundlage.
+
+**Playtest-Prüfpunkte:** (1) Eine Karte einer Sturmtruppen-Gruppe antippen → Fähigkeit
+erscheint normal, kein roter Ignorier-Block. (2) Sprache Deutsch → deutschen Namen
+trauen („Truppenausbildung", „Konzentrierter Beschuss"). (3) Boba Fett hat genau zwei
+Fähigkeiten (Kampfpräsenz + Kampfdisziplin), keine Doppelung.
+
+
 ## 5. Bekannte Grenzen (bewusst so entschieden)
 
 - Die KI sieht keine Sichtlinien — Angriffe „durch Wände" verhindert sie über

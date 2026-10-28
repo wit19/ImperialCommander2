@@ -283,34 +283,27 @@ public class DynamicCardPrefab : MonoBehaviour
 			}
 		}
 
-		//ignored (title)
-		GameObject g = new GameObject( "ability" );
-		g.layer = 5;
-		g.transform.SetParent( abilityContainer.transform );
-		g.transform.localScale = Vector3.one;
-		g.transform.localEulerAngles = Vector3.zero;
-		g.transform.localPosition = Vector3.zero;
-
-		TextMeshProUGUI tt = g.AddComponent<TextMeshProUGUI>();
-		tt.color = new Color( 0, 1, 0.628047f, 1 );//( 137f / 255f, 164f / 255f, 1 );
-		tt.text = $"<size=25><b><color=red>{DataStore.uiLanguage.uiMainApp.ignoredAbilitiesUC}:</color></b><br>";
-
-		//ignored abilities
-		GameObject go = new GameObject( "ability" );
-		go.layer = 5;
-		go.transform.SetParent( abilityContainer.transform );
-		go.transform.localScale = Vector3.one;
-		go.transform.localEulerAngles = Vector3.zero;
-		go.transform.localPosition = Vector3.zero;
-		if ( card.ignored?.Length == 0 )
+		//ignored (title) - only shown when the card actually ignores something
+		if ( !string.IsNullOrEmpty( card.ignored ) )
 		{
-			tt.text += DataStore.uiLanguage.uiMainApp.noneUC;
+			GameObject g = new GameObject( "ability" );
+			g.layer = 5;
+			g.transform.SetParent( abilityContainer.transform );
+			g.transform.localScale = Vector3.one;
+			g.transform.localEulerAngles = Vector3.zero;
+			g.transform.localPosition = Vector3.zero;
+
+			TextMeshProUGUI tt = g.AddComponent<TextMeshProUGUI>();
+			tt.color = new Color( 0, 1, 0.628047f, 1 );//( 137f / 255f, 164f / 255f, 1 );
+			tt.text = $"<size=25><b><color=red>{DataStore.uiLanguage.uiMainApp.ignoredAbilitiesUC}:</color></b><br>";
+
+			//ignored abilities
+			for ( int i = 0; i < card.ignored?.Length; i++ )
+			{
+				tt.text += card.ignored[i];
+			}
+			tt.text += "</size>";
 		}
-		for ( int i = 0; i < card.ignored?.Length; i++ )
-		{
-			tt.text += card.ignored[i];
-		}
-		tt.text += "</size>";
 
 		//scroll to top
 		var rt = abilityContainer.GetComponent<RectTransform>();

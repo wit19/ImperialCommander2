@@ -1,0 +1,32 @@
+{
+ "source": "https://imperial-assault.fandom.com (MediaWiki API, action=parse prop=wikitext)",
+ "license": "CC-BY-SA 4.0 (wiki community content) - attribution required when shipped",
+ "collected": "2026-10-28",
+ "method": "raw wikitext infobox parse; raw pages cached verbatim under raw/",
+ "records": {
+  "heros.json": 21,
+  "hero_class_cards.json": 172,
+  "imperial_units.json": 46,
+  "mercenary_units.json": 43,
+  "rebel_units.json": 52,
+  "items.json": 84,
+  "rewards.json": 83,
+  "hero_weapons.json": 21
+ },
+ "raw_cache_pages": 506,
+ "cross_check_vs_game": {
+  "items": "83/84 app items.json entries match name+tier+cost exactly; 1 spelling drift: app 'Telecoping Sights' vs wiki 'Telescoping Sights'",
+  "skills": "83/85 app skills.json entries found as wiki class card / weapon / reward card ('Masterstroke'='Master Stroke'; 'Bacta Radiation' has no wiki page)",
+  "units": "117/117 game deployment entries matched to wiki unit pages; 29 game entries have EMPTY abilities/keywords and are fillable from wiki (Stormtrooper, Snowtrooper, Imperial Officer, Sentry Droid, Darth Vader, Jabba the Hutt, ...); 88 already carry abilities",
+  "hero_xp_skills": "158/168 hero-sheet XP tiers matched in the class-card mirror (10 name variants, e.g. suffixes)",
+  "wiki_data_bug_found": "wiki page 'Bacta Pump' has name field 'Bacta Test' (typo on the wiki; page title used as canonical)",
+  "cost_mismatches": 0
+ },
+ "symbol_legend": "wiki_symbol_templates.json - extracted from Template:* docs: S=strain D=damage Z=surge O=block H=threat | dice: B=blue R=red G=green Y=yellow attack; W=white K=black defense | P=ranged L=melee F=strength-test I=insight-test C=tech-test A=action",
+ "notes": [
+  "hero weapon dice scraped (hero_weapons.json) - all 21 base weapons with dice pool, range type and surge effects",
+  "ability texts are English; the game ships 12 languages (De included) - UI integration needs a localization decision",
+  "items.json rows mirror the app's (name,tier) shape 1:1 (multi-tier gear expanded)",
+  "game unit entries keep priority: wiki data is enrichment source, not override"
+ ]
+}

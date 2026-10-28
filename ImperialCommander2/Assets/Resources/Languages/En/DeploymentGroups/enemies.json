@@ -3,7 +3,7 @@
 		"name": "Stormtrooper",
 		"subname": "",
 		"id": "DG001",
-		"ignored": "Squad Training",
+		"ignored": "",
 		"traits": [
 			"Trooper"
 		],
@@ -12,13 +12,18 @@
 			"{B}: +2 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Squad Training",
+				"text": "While attacking, while adjacent to another friendly TROOPER, you may reroll 1 attack die."
+			}
+		],
 	},
 	{
 		"name": "Stormtrooper",
 		"subname": "",
 		"id": "DG002",
-		"ignored": "Squad Training",
+		"ignored": "",
 		"traits": [
 			"Trooper"
 		],
@@ -27,13 +32,18 @@
 			"{B}: +2 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Squad Training",
+				"text": "While attacking, while adjacent to another friendly TROOPER, you may reroll 1 attack die."
+			}
+		],
 	},
 	{
 		"name": "Stormtrooper (Elite)",
 		"subname": "",
 		"id": "DG003",
-		"ignored": "Squad Training, Last Stand",
+		"ignored": "",
 		"traits": [
 			"Trooper"
 		],
@@ -42,13 +52,22 @@
 			"{B}: +3 Accuracy",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Squad Training",
+				"text": "While attacking, while adjacent to another friendly TROOPER, you may reroll 1 attack die."
+			},
+			{
+				"name": "Last Stand",
+				"text": "When you are defeated, choose another figure in your group. That figure becomes Focused."
+			}
+		],
 	},
 	{
 		"name": "Imperial Officer",
 		"subname": "",
 		"id": "DG004",
-		"ignored": "Order, Cower",
+		"ignored": "",
 		"traits": [
 			"Leader"
 		],
@@ -58,13 +77,22 @@
 			"{B}: +1 {H}",
 			"{B}: Focus"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Order",
+				"text": "Choose another friendly figure within 2 spaces. In a campaign, that figure may interrupt to perform a move. In a skirmish, that figure gains 2 movement points."
+			},
+			{
+				"name": "Cower",
+				"text": "While defending, while adjacent to a friendly figure, you may reroll 1 defense die."
+			}
+		],
 	},
 	{
 		"name": "Imperial Officer",
 		"subname": "",
 		"id": "DG005",
-		"ignored": "Order, Cower",
+		"ignored": "",
 		"traits": [
 			"Leader"
 		],
@@ -74,13 +102,22 @@
 			"{B}: +1 {H}",
 			"{B}: Focus"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Order",
+				"text": "Choose another friendly figure within 2 spaces. In a campaign, that figure may interrupt to perform a move. In a skirmish, that figure gains 2 movement points."
+			},
+			{
+				"name": "Cower",
+				"text": "While defending, while adjacent to a friendly figure, you may reroll 1 defense die."
+			}
+		],
 	},
 	{
 		"name": "Imperial Officer (Elite)",
 		"subname": "",
 		"id": "DG006",
-		"ignored": "Executive Order, Cower",
+		"ignored": "",
 		"traits": [
 			"Leader"
 		],
@@ -91,13 +128,22 @@
 			"{B}: Focus ",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Executive Order",
+				"text": "Choose another friendly figure within 2 spaces. That figure may interrupt to perform a move or attack."
+			},
+			{
+				"name": "Cower",
+				"text": "While defending, while adjacent to a friendly figure, you may reroll 1 defense die."
+			}
+		],
 	},
 	{
 		"name": "E-Web Engineer",
 		"subname": "",
 		"id": "DG007",
-		"ignored": "Tripod",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Heavy Weapon"
@@ -113,14 +159,17 @@
 			{
 				"name": "Assault",
 				"text": "The E-Web Engineer can perform multiple attack actions each activation."
-			}
-		],
+			},
+			{
+				"name": "Tripod",
+				"text": "During your activation, you cannot voluntarily exit your space if you attack, and you cannot attack if you exit your space."
+			}],
 	},
 	{
 		"name": "E-Web Engineer (Elite)",
 		"subname": "",
 		"id": "DG008",
-		"ignored": "Tripod",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Heavy Weapon"
@@ -137,8 +186,11 @@
 			{
 				"name": "Assault",
 				"text": "The E-Web Engineer can perform multiple attack actions each activation."
-			}
-		],
+			},
+			{
+				"name": "Tripod",
+				"text": "During your activation, you cannot voluntarily exit your space if you attack, and you cannot attack if you exit your space."
+			}],
 	},
 	{
 		"name": "Royal Guard",
@@ -199,7 +251,7 @@
 		"name": "Probe Droid",
 		"subname": "",
 		"id": "DG011",
-		"ignored": "Self-Destruct",
+		"ignored": "",
 		"traits": [
 			"Droid"
 		],
@@ -211,13 +263,18 @@
 			"{B}: Pierce 1",
 			"{B}: Recover 1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Self-Destruct",
+				"text": "At the end of a round, you may roll 1 red die. Each adjacent figure and object suffers {H} equal to the {H} results. Then, you are defeated."
+			}
+		],
 	},
 	{
 		"name": "Probe Droid",
 		"subname": "",
 		"id": "DG012",
-		"ignored": "Self-Destruct",
+		"ignored": "",
 		"traits": [
 			"Droid"
 		],
@@ -229,13 +286,18 @@
 			"{B}: Pierce 1",
 			"{B}: Recover 1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Self-Destruct",
+				"text": "At the end of a round, you may roll 1 red die. Each adjacent figure and object suffers {H} equal to the {H} results. Then, you are defeated."
+			}
+		],
 	},
 	{
 		"name": "Probe Droid (Elite)",
 		"subname": "",
 		"id": "DG013",
-		"ignored": "Targeting Computer, Self-Destruct",
+		"ignored": "",
 		"traits": [
 			"Droid"
 		],
@@ -247,13 +309,22 @@
 			"{B}: Pierce 2",
 			"{B}: Recover 2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			},
+			{
+				"name": "Self-Destruct",
+				"text": "At the end of a round, you may roll 1 red die. Each adjacent figure and object suffers {H} equal to the {H} results. Then, you are defeated."
+			}
+		],
 	},
 	{
 		"name": "AT-ST",
 		"subname": "",
 		"id": "DG014",
-		"ignored": "Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Vehicle",
 			"Heavy Weapon"
@@ -270,8 +341,11 @@
 			{
 				"name": "Awkward",
 				"text": "The AT-ST cannot attack adjacent figures."
-			}
-		],
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}],
 	},
 	{
 		"name": "Trandoshan Hunter",
@@ -328,7 +402,7 @@
 		"name": "Nexu",
 		"subname": "",
 		"id": "DG017",
-		"ignored": "Pounce",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -349,14 +423,17 @@
 			{
 				"name": "Non-Sentient",
 				"text": "The Nexu cannot interact."
-			}
-		],
+			},
+			{
+				"name": "{A} Pounce",
+				"text": "Place your figure in an empty space within 3 spaces. Then, you may perform an attack."
+			}],
 	},
 	{
 		"name": "Nexu (Elite)",
 		"subname": "",
 		"id": "DG018",
-		"ignored": "Pounce",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -377,8 +454,11 @@
 			{
 				"name": "Non-Sentient",
 				"text": "The Nexu cannot interact."
-			}
-		],
+			},
+			{
+				"name": "{A} Pounce",
+				"text": "Place your figure in an empty space within 3 spaces. Then, you may perform an attack."
+			}],
 	},
 	{
 		"name": "Heavy Stormtrooper",
@@ -430,7 +510,7 @@
 		"name": "Tusken Raider",
 		"subname": "",
 		"id": "DG021",
-		"ignored": "Tusken Cycler",
+		"ignored": "",
 		"traits": [
 			"Brawler"
 		],
@@ -441,13 +521,18 @@
 			"{B}: Cleave 1 {H}",
 			"{B}: Weaken"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Tusken Cycler",
+				"text": "Perform a {O} attack using 1 blue and 1 red die. You cannot use abilities during this attack."
+			}
+		],
 	},		
 	{
 		"name": "Tusken Raider (Elite)",
 		"subname": "",
 		"id": "DG022",
-		"ignored": "Tusken Cycler",
+		"ignored": "",
 		"traits": [
 			"Brawler"
 		],
@@ -459,13 +544,18 @@
 			"{B}: Cleave 1 {H}",
 			"{B}: Weaken"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Tusken Cycler",
+				"text": "Perform a {O} attack using 1 blue and 1 red die. You cannot use abilities during this attack."
+			}
+		],
 	},		
 	{
 		"name": "Snowtrooper",
 		"subname": "",
 		"id": "DG023",
-		"ignored": "Environmental Recovery Gear",
+		"ignored": "",
 		"traits": [
 			"Trooper"
 		],
@@ -475,13 +565,18 @@
 			"{B}: Weaken",
 			"{B}: Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Environmental Recovery Gear",
+				"text": "You and each adjacent friendly TROOPER may either recover 1 {H} or discard 1 HARMFUL condition."
+			}
+		],
 	},		
 	{
 		"name": "Snowtrooper (Elite)",
 		"subname": "",
 		"id": "DG024",
-		"ignored": "Environmental Recovery Gear",
+		"ignored": "",
 		"traits": [
 			"Trooper"
 		],
@@ -495,14 +590,17 @@
 			{
 				"name": "Efficient Travel",
 				"text": "Snowtroopers (Elite) ignores additional movement point costs for difficult terrain and hostile figures."
-			}
-		],
+			},
+			{
+				"name": "{A} Environmental Recovery Gear",
+				"text": "You and each adjacent friendly TROOPER may either recover 1 {H} or discard 1 HARMFUL condition."
+			}],
 	},		
 	{
 		"name": "SC2-M Repulsor Tank",
 		"subname": "",
 		"id": "DG025",
-		"ignored": "Focus Fire, Defensible",
+		"ignored": "",
 		"traits": [
 			"Vehicle"
 		],
@@ -514,13 +612,22 @@
 			"{B}: Blast 1 {H}",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Focus Fire",
+				"text": "Perform 2 attacks targeting the same figure."
+			},
+			{
+				"name": "Defensible",
+				"text": "While defending, you may apply either +1 {G} or +1 {F} to your defense results."
+			}
+		],
 	},		
 	{
 		"name": "HK Assassin Droid",
 		"subname": "",
 		"id": "DG026",
-		"ignored": "Versatile Weaponry, Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Droid",
 			"Hunter"
@@ -531,13 +638,22 @@
 			"{B}: +1 {H}",
 			"{B}: Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Versatile Weaponry",
+				"text": "While attacking, you may force the defender to reroll 1 defense die."
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "HK Assassin Droid (Elite)",
 		"subname": "",
 		"id": "DG027",
-		"ignored": "Versatile Weaponry, Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Droid",
 			"Hunter"
@@ -553,14 +669,21 @@
 			{
 				"name": "Priority Target",
 				"text": "Figures do not block line of sight for this group's attacks."
-			}
-		],
+			},
+			{
+				"name": "Versatile Weaponry",
+				"text": "While attacking, you may force the defender to reroll 1 defense die."
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}],
 	},		
 	{
 		"name": "Wampa",
 		"subname": "",
 		"id": "DG028",
-		"ignored": "Hunger",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -581,14 +704,17 @@
 			{
 				"name": "Non-Sentient",
 				"text": "The Wampa cannot interact."
-			}
-		],
+			},
+			{
+				"name": "Hunger",
+				"text": "At the start of your activation, if there are no hostile figures within 3 spaces, gain 2 movement points."
+			}],
 	},		
 	{
 		"name": "Wampa (Elite)",
 		"subname": "",
 		"id": "DG029",
-		"ignored": "Hunger",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -609,14 +735,17 @@
 			{
 				"name": "Non-Sentient",
 				"text": "The Wampa cannot interact."
-			}
-		],
+			},
+			{
+				"name": "Hunger",
+				"text": "At the start of your activation, if there are no hostile figures within 3 spaces, gain 2 movement points."
+			}],
 	},		
 	{
 		"name": "Ugnaught Tinkerer",
 		"subname": "",
 		"id": "DG030",
-		"ignored": "Spot Weld",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -629,14 +758,17 @@
 			{
 				"name": "Scrap Battalion",
 				"text": "The Junk Droid readies at the start of this group's activation. It activates as though it was part of this group and may use the Ugnaught Tinkerer's surge abilities."
-			}
-		],
+			},
+			{
+				"name": "{A} Spot Weld",
+				"text": "Place the Junk Droid companion in an adjacent space."
+			}],
 	},		
 	{
 		"name": "Ugnaught Tinkerer",
 		"subname": "",
 		"id": "DG031",
-		"ignored": "Spot Weld",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -649,14 +781,17 @@
 			{
 				"name": "Scrap Battalion",
 				"text": "The Junk Droid readies at the start of this group's activation. It activates as though it was part of this group and may use the Ugnaught Tinkerer's surge abilities."
-			}
-		],
+			},
+			{
+				"name": "{A} Spot Weld",
+				"text": "Place the Junk Droid companion in an adjacent space."
+			}],
 	},		
 	{
 		"name": "Ugnaught Tinkerer (Elite)",
 		"subname": "",
 		"id": "DG032",
-		"ignored": "Spot Weld, Overclock",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -669,30 +804,42 @@
 			{
 				"name": "Scrap Battalion",
 				"text": "The Junk Droid readies at the start of this group's activation. It activates as though it was part of this group and may use the Ugnaught Tinkerer's surge abilities."
+			},
+			{
+				"name": "{A} Spot Weld",
+				"text": "Place the Junk Droid companion in an adjacent space."
+			},
+			{
+				"name": "{A} Overclock",
+				"text": "The Junk Droid may interrupt to perform a move or attack."
+			}],
+	},		
+	{
+		"name": "Wing Guard",
+		"subname": "",
+		"id": "DG033",
+		"ignored": "",
+		"traits": [
+			"Guardian",
+			"Trooper"
+		],
+		"keywords": [],
+		"surges": [
+			"{B}: +1 {H}",
+			"{B}: Recover 1 {H}"
+		],
+		"abilities": [
+			{
+				"name": "Keep the Peace",
+				"text": "When a hostile figure declares an attack targeting a space adjacent to you, if that space does not contain a friendly GUARDIAN, you may suffer 1 {C}. If you do, the attack targets you instead."
 			}
 		],
 	},		
 	{
 		"name": "Wing Guard",
 		"subname": "",
-		"id": "DG033",
-		"ignored": "Keep the Peace",
-		"traits": [
-			"Guardian",
-			"Trooper"
-		],
-		"keywords": [],
-		"surges": [
-			"{B}: +1 {H}",
-			"{B}: Recover 1 {H}"
-		],
-		"abilities": [],
-	},		
-	{
-		"name": "Wing Guard",
-		"subname": "",
 		"id": "DG034",
-		"ignored": "Keep the Peace",
+		"ignored": "",
 		"traits": [
 			"Guardian",
 			"Trooper"
@@ -702,13 +849,18 @@
 			"{B}: +1 {H}",
 			"{B}: Recover 1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Keep the Peace",
+				"text": "When a hostile figure declares an attack targeting a space adjacent to you, if that space does not contain a friendly GUARDIAN, you may suffer 1 {C}. If you do, the attack targets you instead."
+			}
+		],
 	},		
 	{
 		"name": "Wing Guard (Elite)",
 		"subname": "",
 		"id": "DG035",
-		"ignored": "Keep the Peace, Squad Training",
+		"ignored": "",
 		"traits": [
 			"Guardian",
 			"Trooper"
@@ -718,13 +870,22 @@
 			"{B}: +2 {H}",
 			"{B}: Recover 2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Keep the Peace",
+				"text": "When a hostile figure declares an attack targeting a space adjacent to you, if that space does not contain a friendly GUARDIAN, you may suffer 1 {C}. If you do, the attack targets you instead."
+			},
+			{
+				"name": "Squad Training",
+				"text": "While attacking, while adjacent to another friendly TROOPER, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Jet Trooper",
 		"subname": "",
 		"id": "DG036",
-		"ignored": "Agile, Jets",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Vehicle"
@@ -736,13 +897,22 @@
 			"{B}: +2 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Agile",
+				"text": "While defending, you may convert 1 {G} to 1 {F}."
+			},
+			{
+				"name": "Jets",
+				"text": "After you resolve an attack, if the target space is within 2 spaces, gain 1 movement point."
+			}
+		],
 	},		
 	{
 		"name": "Jet Trooper",
 		"subname": "",
 		"id": "DG037",
-		"ignored": "Agile, Jets",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Vehicle"
@@ -754,13 +924,22 @@
 			"{B}: +2 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Agile",
+				"text": "While defending, you may convert 1 {G} to 1 {F}."
+			},
+			{
+				"name": "Jets",
+				"text": "After you resolve an attack, if the target space is within 2 spaces, gain 1 movement point."
+			}
+		],
 	},		
 	{
 		"name": "Jet Trooper (Elite)",
 		"subname": "",
 		"id": "DG038",
-		"ignored": "Agile, Fly-By",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Vehicle"
@@ -772,13 +951,22 @@
 			"{B}: +3 Accuracy",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Agile",
+				"text": "While defending, you may convert 1 {G} to 1 {F}."
+			},
+			{
+				"name": "Fly-By",
+				"text": "When you declare an attack, if the target space is within 2 spaces, add 1 blue die to your attack pool. After the attack resolves, gain 2 movement points."
+			}
+		],
 	},		
 	{
 		"name": "Gamorrean Guard",
 		"subname": "",
 		"id": "DG039",
-		"ignored": "Gamorrean Honor, Labored Attack",
+		"ignored": "",
 		"traits": [
 			"Brawler",
 			"Guardian"
@@ -790,13 +978,22 @@
 		"surges": [
 			"{B}: Cleave 1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Gamorrean Honor",
+				"text": "While defending during a {O} attack, you may reroll 1 defense die."
+			},
+			{
+				"name": "Labored Attack",
+				"text": "While attacking, you may suffer 1 {C} to reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Gamorrean Guard",
 		"subname": "",
 		"id": "DG040",
-		"ignored": "Gamorrean Honor, Labored Attack",
+		"ignored": "",
 		"traits": [
 			"Brawler",
 			"Guardian"
@@ -808,13 +1005,22 @@
 		"surges": [
 			"{B}: Cleave 1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Gamorrean Honor",
+				"text": "While defending during a {O} attack, you may reroll 1 defense die."
+			},
+			{
+				"name": "Labored Attack",
+				"text": "While attacking, you may suffer 1 {C} to reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Gamorrean Guard (Elite)",
 		"subname": "",
 		"id": "DG041",
-		"ignored": "Professional",
+		"ignored": "",
 		"traits": [
 			"Brawler",
 			"Guardian"
@@ -829,32 +1035,40 @@
 			{
 				"name": "Gamorrean Honor Guard",
 				"text": "While defending during a {O} attack, apply +1 {G} to the defense results."
+			},
+			{
+				"name": "Professional",
+				"text": "While attacking, you may reroll 1 attack die."
+			}],
+	},		
+	{
+		"name": "Weequay Pirate",
+		"subname": "",
+		"id": "DG042",
+		"ignored": "",
+		"traits": [
+			"Hunter",
+			"Smuggler"
+		],
+		"keywords": [
+			"+1 Accuracy"
+		],
+		"surges": [
+			"{B}: +1 Accuracy",
+			"{B}: +1 {H}"
+		],
+		"abilities": [
+			{
+				"name": "Raider",
+				"text": "While attacking, you may choose 1 die. The player that rolled that die must reroll that die."
 			}
 		],
 	},		
 	{
 		"name": "Weequay Pirate",
 		"subname": "",
-		"id": "DG042",
-		"ignored": "Raider",
-		"traits": [
-			"Hunter",
-			"Smuggler"
-		],
-		"keywords": [
-			"+1 Accuracy"
-		],
-		"surges": [
-			"{B}: +1 Accuracy",
-			"{B}: +1 {H}"
-		],
-		"abilities": [],
-	},		
-	{
-		"name": "Weequay Pirate",
-		"subname": "",
 		"id": "DG043",
-		"ignored": "Raider",
+		"ignored": "",
 		"traits": [
 			"Hunter",
 			"Smuggler"
@@ -866,13 +1080,18 @@
 			"{B}: +1 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Raider",
+				"text": "While attacking, you may choose 1 die. The player that rolled that die must reroll that die."
+			}
+		],
 	},		
 	{
 		"name": "Weequay Pirate (Elite)",
 		"subname": "",
 		"id": "DG044",
-		"ignored": "Prowl, Raider",
+		"ignored": "",
 		"traits": [
 			"Hunter",
 			"Smuggler"
@@ -885,13 +1104,22 @@
 			"{B}: +2 {H}",
 			"{B}: Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Prowl",
+				"text": "You become Hidden."
+			},
+			{
+				"name": "Raider",
+				"text": "While attacking, you may choose 1 die. The player that rolled that die must reroll that die."
+			}
+		],
 	},		
 	{
 		"name": "Rancor",
 		"subname": "",
 		"id": "DG045",
-		"ignored": "Throw, Feed",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -909,14 +1137,21 @@
 			{
 				"name": "Non-Sentient",
 				"text": "You cannot interact."
-			}
-		],
+			},
+			{
+				"name": "{A} Throw",
+				"text": "Push a small figure within 2 spaces up to 2 spaces. Then, that figure suffers 2 {H}."
+			},
+			{
+				"name": "Feed",
+				"text": "At the start or end of your activation, you may choose another friendly figure within 2 spaces. Recover {H} equal to its Health minus the {H} it has suffered. That figure is defeated."
+			}],
 	},		
 	{
 		"name": "AT-DP",
 		"subname": "",
 		"id": "DG046",
-		"ignored": "Charge Generators",
+		"ignored": "",
 		"traits": [
 			"Vehicle",
 			"Heavy Weapon"
@@ -934,31 +1169,43 @@
 			{
 				"name": "Assault",
 				"text": "The AT-DP can perform multiple attack actions each activation."
+			},
+			{
+				"name": "Charge Generators",
+				"text": "While attacking, if you have suffered fewer than 9 {H}, apply +1 {H} to the attack results and you may reroll 1 attack die."
+			}],
+	},		
+	{
+		"name": "Riot Trooper",
+		"subname": "",
+		"id": "DG047",
+		"ignored": "",
+		"traits": [
+			"Trooper",
+			"Brawler",
+			"Guardian"
+		],
+		"keywords": [],
+		"surges": [
+			"{B}: +1 {H}",
+			"{B}: +1 {H}"
+		],
+		"abilities": [
+			{
+				"name": "Crowd Control",
+				"text": "While attacking, you may apply -1 {H} to the attack results. If you do and the target suffers {H}, it also suffers 1 {C}."
+			},
+			{
+				"name": "Shield",
+				"text": "At the end of your activation, if you have no block tokens, gain 1 block token."
 			}
 		],
 	},		
 	{
 		"name": "Riot Trooper",
 		"subname": "",
-		"id": "DG047",
-		"ignored": "Crowd Control, Shield",
-		"traits": [
-			"Trooper",
-			"Brawler",
-			"Guardian"
-		],
-		"keywords": [],
-		"surges": [
-			"{B}: +1 {H}",
-			"{B}: +1 {H}"
-		],
-		"abilities": [],
-	},		
-	{
-		"name": "Riot Trooper",
-		"subname": "",
 		"id": "DG048",
-		"ignored": "Crowd Control, Shield",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Brawler",
@@ -969,13 +1216,22 @@
 			"{B}: +1 {H}",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Crowd Control",
+				"text": "While attacking, you may apply -1 {H} to the attack results. If you do and the target suffers {H}, it also suffers 1 {C}."
+			},
+			{
+				"name": "Shield",
+				"text": "At the end of your activation, if you have no block tokens, gain 1 block token."
+			}
+		],
 	},		
 	{
 		"name": "Riot Trooper (Elite)",
 		"subname": "",
 		"id": "DG049",
-		"ignored": "Crowd Control, Shield, Professional",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Brawler",
@@ -988,13 +1244,26 @@
 			"{B}: +2 {H}",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Crowd Control",
+				"text": "While attacking, you may apply -1 {H} to the attack results. If you do and the target suffers {H}, it also suffers 1 {C}."
+			},
+			{
+				"name": "Shield",
+				"text": "At the end of your activation, if you have no block tokens, gain 1 block token."
+			},
+			{
+				"name": "Professional",
+				"text": "While attacking, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Sentry Droid",
 		"subname": "",
 		"id": "DG050",
-		"ignored": "Multi-Fire, Charged Shot, Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Droid",
@@ -1006,13 +1275,26 @@
 			"{B}: Pierce 2",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Multi-Fire",
+				"text": "Perform 2 attacks. Each attack must have a different target. Apply -1 {H} to each attack's results."
+			},
+			{
+				"name": "{A} Charged Shot",
+				"text": "Perform an attack. Apply +2 Accuracy to the attack results."
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Sentry Droid",
 		"subname": "",
 		"id": "DG051",
-		"ignored": "Multi-Fire, Charged Shot, Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Droid",
@@ -1024,13 +1306,26 @@
 			"{B}: Pierce 2",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Multi-Fire",
+				"text": "Perform 2 attacks. Each attack must have a different target. Apply -1 {H} to each attack's results."
+			},
+			{
+				"name": "{A} Charged Shot",
+				"text": "Perform an attack. Apply +2 Accuracy to the attack results."
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Sentry Droid (Elite)",
 		"subname": "",
 		"id": "DG052",
-		"ignored": "Multi-Fire, Charged Shot, Targeting Computer",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Droid",
@@ -1042,52 +1337,128 @@
 			"{B}: Pierce 2",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Multi-Fire",
+				"text": "Perform 2 attacks. Each attack must have a different target. Apply -1 {H} to each attack's results."
+			},
+			{
+				"name": "{A} Charged Shot",
+				"text": "Perform an attack. Apply +2 Accuracy to the attack results."
+			},
+			{
+				"name": "Targeting Computer",
+				"text": "While attacking, you may reroll 1 attack die."
+			}
+		],
 	},		
 	{
 		"name": "Clawdite Shapeshifter",
 		"subname": "",
 		"id": "DG053",
-		"ignored": "Assassin's Blade, Conspire, Fleet, Shape, Shift",
+		"ignored": "",
 		"traits": [
 			"Hunter",
 			"Spy"
 		],
 		"keywords": [],
 		"surges": [],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{B} Assassin's Blade",
+				"text": "After this attack resolves, choose an adjacent hostile figure and roll 1 red die. That figure suffers {H} equal to the {H} results."
+			},
+			{
+				"name": "Conspire",
+				"text": "Roll your attack pool plus 1 yellow die. For each {B} result, to a maximum of 3, you or an adjacent friendly figure gains 1 wild token."
+			},
+			{
+				"name": "Fleet",
+				"text": "At the start of your activation, gain 2 movement points."
+			},
+			{
+				"name": "Shape",
+				"text": "When you are deployed, you may gain 1 Form card of your choice from the supply."
+			},
+			{
+				"name": "Shift",
+				"text": "At the start of each round, you may switch your Form card with 1 other Form card of your choice."
+			}
+		],
 	},		
 	{
 		"name": "Clawdite Shapeshifter",
 		"subname": "",
 		"id": "DG054",
-		"ignored": "Assassin's Blade, Conspire, Fleet, Shape, Shift",
+		"ignored": "",
 		"traits": [
 			"Hunter",
 			"Spy"
 		],
 		"keywords": [],
 		"surges": [],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{B} Assassin's Blade",
+				"text": "After this attack resolves, choose an adjacent hostile figure and roll 1 red die. That figure suffers {H} equal to the {H} results."
+			},
+			{
+				"name": "Conspire",
+				"text": "Roll your attack pool plus 1 yellow die. For each {B} result, to a maximum of 3, you or an adjacent friendly figure gains 1 wild token."
+			},
+			{
+				"name": "Fleet",
+				"text": "At the start of your activation, gain 2 movement points."
+			},
+			{
+				"name": "Shape",
+				"text": "When you are deployed, you may gain 1 Form card of your choice from the supply."
+			},
+			{
+				"name": "Shift",
+				"text": "At the start of each round, you may switch your Form card with 1 other Form card of your choice."
+			}
+		],
 	},		
 	{
 		"name": "Clawdite Shapeshifter (Elite)",
 		"subname": "",
 		"id": "DG055",
-		"ignored": "Assassin's Blade, Conspire, Fleet, Shape, Shift",
+		"ignored": "",
 		"traits": [
 			"Hunter",
 			"Spy"
 		],
 		"keywords": [],
 		"surges": [],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{B} Assassin's Blade",
+				"text": "After this attack resolves, choose an adjacent hostile figure and roll 1 red die. That figure suffers {H} equal to the {H} results."
+			},
+			{
+				"name": "Conspire",
+				"text": "Roll your attack pool plus 1 yellow die. For each {B} result, to a maximum of 3, you or an adjacent friendly figure gains 1 wild token."
+			},
+			{
+				"name": "Fleet",
+				"text": "At the start of your activation, gain 2 movement points."
+			},
+			{
+				"name": "Shape",
+				"text": "When you are deployed, you may gain 1 Form card of your choice from the supply."
+			},
+			{
+				"name": "Shift",
+				"text": "At the start of each round, you may switch your Form card with 1 other Form card of your choice."
+			}
+		],
 	},		
 	{
 		"name": "Death Trooper",
 		"subname": "",
 		"id": "DG056",
-		"ignored": "Full Detachment, Tactical Comms",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Guardian"
@@ -1099,13 +1470,22 @@
 			"{B}: +2 Accuracy, Pierce 1",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Full Detachment",
+				"text": "During setup, you may choose any number of \"Death Trooper\" Deployment cards as one open group."
+			},
+			{
+				"name": "Tactical Comms",
+				"text": "After your activation, you may immediately activate a \"Death Trooper\" or LEADER group with cost 6 or less. Limit one \"Tactical Comms\" per round."
+			}
+		],
 	},		
 	{
 		"name": "Death Trooper",
 		"subname": "",
 		"id": "DG057",
-		"ignored": "Full Detachment, Tactical Comms",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Guardian"
@@ -1117,13 +1497,22 @@
 			"{B}: +2 Accuracy, Pierce 1",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Full Detachment",
+				"text": "During setup, you may choose any number of \"Death Trooper\" Deployment cards as one open group."
+			},
+			{
+				"name": "Tactical Comms",
+				"text": "After your activation, you may immediately activate a \"Death Trooper\" or LEADER group with cost 6 or less. Limit one \"Tactical Comms\" per round."
+			}
+		],
 	},		
 	{
 		"name": "Death Trooper (Elite)",
 		"subname": "",
 		"id": "DG058",
-		"ignored": "Squad Captain, Tactical Comms",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Guardian"
@@ -1135,13 +1524,22 @@
 			"{B}: +2 {H}",
 			"{B}: +2 Accuracy, Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Squad Captain",
+				"text": "Once during your activation, an adjacent friendly TROOPER or LEADER may gain 1 wild token."
+			},
+			{
+				"name": "Tactical Comms",
+				"text": "After your activation, you may immediately activate a \"Death Trooper\" or LEADER group with cost 6 or less. Limit one \"Tactical Comms\" per round."
+			}
+		],
 	},		
 	{
 		"name": "Death Trooper (Elite)",
 		"subname": "",
 		"id": "DG059",
-		"ignored": "Squad Captain, Tactical Comms",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Guardian"
@@ -1153,13 +1551,22 @@
 			"{B}: +2 {H}",
 			"{B}: +2 Accuracy, Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Squad Captain",
+				"text": "Once during your activation, an adjacent friendly TROOPER or LEADER may gain 1 wild token."
+			},
+			{
+				"name": "Tactical Comms",
+				"text": "After your activation, you may immediately activate a \"Death Trooper\" or LEADER group with cost 6 or less. Limit one \"Tactical Comms\" per round."
+			}
+		],
 	},		
 	{
 		"name": "Loth-cat",
 		"subname": "",
 		"id": "DG060",
-		"ignored": "Pounce, Rat Catcher",
+		"ignored": "",
 		"traits": [
 			"Creature"
 		],
@@ -1173,14 +1580,21 @@
 			{
 				"name": "Curious",
 				"text": "After a Loth-Cat interacts, it suffers 1 {C}."
-			}
-		],
+			},
+			{
+				"name": "{A} Pounce",
+				"text": "Place your figure in an empty space within 3 spaces. Then, you may perform an attack."
+			},
+			{
+				"name": "{A} Rat Catcher",
+				"text": "You or an adjacent CREATURE gains 1 block token."
+			}],
 	},		
 	{
 		"name": "Loth-cat (Elite)",
 		"subname": "",
 		"id": "DG061",
-		"ignored": "Pounce, Fresh Catch",
+		"ignored": "",
 		"traits": [
 			"Creature"
 		],
@@ -1194,14 +1608,21 @@
 			{
 				"name": "Curious",
 				"text": "After a Loth-Cat interacts, it suffers 1 {C}."
-			}
-		],
+			},
+			{
+				"name": "{A} Pounce",
+				"text": "Place your figure in an empty space within 3 spaces. Then, you may perform an attack."
+			},
+			{
+				"name": "{A} Fresh Catch",
+				"text": "You or an adjacent CREATURE gains 1 wild token."
+			}],
 	},		
 	{
 		"name": "Dewback Rider (Elite)",
 		"subname": "",
 		"id": "DG062",
-		"ignored": "Shock Lance, Mounted",
+		"ignored": "",
 		"traits": [
 			"Trooper",
 			"Creature"
@@ -1212,13 +1633,22 @@
 			"{B}: Pierce 2",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Shock Lance",
+				"text": "Choose a figure within 2 spaces and roll 1 yellow die. That figure suffers {H} equal to the {H} results. Then, if you rolled 1 or more {B}, it becomes Weakened."
+			},
+			{
+				"name": "Mounted",
+				"text": "At the start of your activation, gain 3 movement points."
+			}
+		],
 	},		
 	{
 		"name": "Hired Gun",
 		"subname": "",
 		"id": "DG063",
-		"ignored": "Parting Shot",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -1232,14 +1662,17 @@
 			{
 				"name": "Disposable",
 				"text": "While defending, apply -1 {E} to the defense results."
-			}
-		],
+			},
+			{
+				"name": "Parting Shot",
+				"text": "When you have suffered {H} equal to your Health, before you are defeated, you may interrupt to perform an attack. Then, you are defeated."
+			}],
 	},		
 	{
 		"name": "Hired Gun (Elite)",
 		"subname": "",
 		"id": "DG064",
-		"ignored": "Parting Shot",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -1255,14 +1688,17 @@
 			{
 				"name": "Disposable",
 				"text": "While defending, apply -1 {E} to the defense results."
-			}
-		],
+			},
+			{
+				"name": "Parting Shot",
+				"text": "When you have suffered {H} equal to your Health, before you are defeated, you may interrupt to perform an attack. Then, you are defeated."
+			}],
 	},		
 	{
 		"name": "Bantha Rider (Elite)",
 		"subname": "",
 		"id": "DG065",
-		"ignored": "Trample",
+		"ignored": "",
 		"traits": [
 			"Creature",
 			"Brawler"
@@ -1279,14 +1715,17 @@
 			{
 				"name": "Stampede",
 				"text": "When the Bantha Rider ends movement in spaces that contain other figures, each hostile figure in its spaces suffers 1 {H}."
-			}
-		],
+			},
+			{
+				"name": "{A} Trample",
+				"text": "Choose up to 3 adjacent hostile figures and roll 1 red die. Each of those figures suffers {H} equal to the {H} result."
+			}],
 	},		
 	{
 		"name": "Jawa Scavenger",
 		"subname": "",
 		"id": "DG066",
-		"ignored": "Take Cover",
+		"ignored": "",
 		"traits": [
 			"Smuggler"
 		],
@@ -1302,14 +1741,17 @@
 			{
 				"name": "Harass",
 				"text": "{B}: After the attack resolves, if it did not miss, the defender suffers 1 {C}."
-			}
-		],
+			},
+			{
+				"name": "Take Cover",
+				"text": "While defending, you may apply +1 {G} and -1 {F} to the defense results."
+			}],
 	},		
 	{
 		"name": "Jawa Scavenger (Elite)",
 		"subname": "",
 		"id": "DG067",
-		"ignored": "Haggle, Take Cover",
+		"ignored": "",
 		"traits": [
 			"Smuggler",
 			"Leader"
@@ -1326,14 +1768,21 @@
 			{
 				"name": "Motivators",
 				"text": "Friendly DROIDS gain +1 Speed and +1 Accuracy."
-			}
-		],
+			},
+			{
+				"name": "{B} Haggle",
+				"text": "Spend 1 threat to roll 1 green die. For each {H} result, increase threat by 1."
+			},
+			{
+				"name": "Take Cover",
+				"text": "While defending, you may apply +1 {G} and -1 {F} to the defense results."
+			}],
 	},		
 	{
 		"name": "ISB Infiltrator",
 		"subname": "",
 		"id": "DG068",
-		"ignored": "Coordinated Raid",
+		"ignored": "",
 		"traits": [
 			"Spy"
 		],
@@ -1343,13 +1792,18 @@
 			"{B}: Hide",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Coordinated Raid",
+				"text": "Another figure in your group may interrupt to perform an attack targeting a hostile figure in your line of sight. Limit once per group per round."
+			}
+		],
 	},		
 	{
 		"name": "ISB Infiltrator (Elite)",
 		"subname": "",
 		"id": "DG069",
-		"ignored": "Coordinated Raid",
+		"ignored": "",
 		"traits": [
 			"Spy"
 		],
@@ -1360,6 +1814,11 @@
 			"{B}: Pierce 1, Hide",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Coordinated Raid",
+				"text": "Another figure in your group may interrupt to perform an attack targeting a hostile figure in your line of sight. Limit once per group per round."
+			}
+		],
 	}
 ]

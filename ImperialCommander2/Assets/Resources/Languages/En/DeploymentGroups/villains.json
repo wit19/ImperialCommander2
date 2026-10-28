@@ -3,7 +3,7 @@
 		"name": "IG-88",
 		"id": "DG071",
 		"subname": "ASSASSIN DROID",
-		"ignored": "Arsenal",
+		"ignored": "",
 		"traits": [
 			 "Droid",
 			 "Hunter"
@@ -24,14 +24,17 @@
 			{
 				"name": "Assault",
 				"text": "IG-88 can perform multiple attacks each activation."
-			}
-		]			
+			},
+			{
+				"name": "Arsenal",
+				"text": "Your attack pool consists of any combination of 2 attack dice."
+			}]			
 	},
 	{
 		"name": "Darth Vader",
 		"subname": "LORD OF THE SITH",
 		"id": "DG072",
-		"ignored": "Brutality, Force Choke, Foresight",
+		"ignored": "",
 		"traits": [
 			 "Force User",
 			 "Leader",
@@ -42,13 +45,26 @@
 			"{B}: Pierce 3",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Brutality",
+				"text": "Perform 2 attacks. Each attack must have a different target."
+			},
+			{
+				"name": "{A} Force Choke",
+				"text": "Choose a hostile figure in your line of sight. That figure suffers 2 {H} and 1 {C}."
+			},
+			{
+				"name": "Foresight",
+				"text": "While defending, you may reroll 1 defense die."
+			}
+		],
 	},
 	{
 		"name": "General Weiss",
 		"subname": "FIELD COMMANDER",
 		"id": "DG073",
-		"ignored": "General's Orders, Epic Arsenal",	
+		"ignored": "",	
 		"traits": [
 			 "Vehicle",
 			 "Leader",
@@ -62,13 +78,22 @@
 			"{B} {B}: Blast 3 {H}",
 			"{B}: Pierce 2"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} General's Orders",
+				"text": "Choose up to 2 other friendly figures on the map. Those figures may each interrupt to perform a move."
+			},
+			{
+				"name": "Epic Arsenal",
+				"text": "Your attack pool consists of any combination of 3 attack dice. You may not roll more than 2 dice of a single color."
+			}
+		],
 	},
 	{
 		"name": "Royal Guard Champion",
 		"subname": "",
 		"id": "DG074",
-		"ignored": "Brutality, Executor",
+		"ignored": "",
 		"traits": [
 			 "Guardian",
 			 "Brawler"
@@ -79,13 +104,22 @@
 			"{B}: Pierce 2",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Brutality",
+				"text": "Perform 2 attacks. Each attack must have a different target."
+			},
+			{
+				"name": "Executor",
+				"text": "When a friendly figure within 3 spaces is defeated, this figure may interrupt to move up to 2 spaces and then perform an attack. Limit once per round."
+			}
+		],
 	},
 	{
 		"name": "Kayn Somos",
 		"subname": "TROOPER COMMANDER",
 		"id": "DG075",
-		"ignored": "Firing Squad, Squad Command",
+		"ignored": "",
 		"traits": [
 			 "Trooper",
 			 "Leader"
@@ -95,13 +129,22 @@
 			"{B}: +1 {H}",
 			"{B}: Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Firing Squad",
+				"text": "Choose up to 2 adjacent friendly TROOPERS. Each of those figures may interrupt to perform an attack targeting the same figure."
+			},
+			{
+				"name": "{B} Squad Command",
+				"text": "Choose an adjacent friendly TROOPER. That figure becomes Focused."
+			}
+		],
 	},
 	{
 		"name": "Boba Fett",
 		"subname": "INFAMOUS BOUNTY HUNTER",
 		"id": "DG076",
-		"ignored": "Battle Presence, Battle Discipline",
+		"ignored": "",
 		"traits": [
 			 "Hunter"
 		],
@@ -118,14 +161,17 @@
 			{
 				"name": "Battle Presence",
 				"text": "After a hostile figure voluntarily exits a space adjacent to Boba Fett, that figure suffers 1 {C}. Limit once per figure per round."
-			}
-		]
+			},
+			{
+				"name": "Battle Discipline",
+				"text": "When you declare an attack, choose 1 of the following abilities to apply to that attack: +2 Accuracy | {B}: +2 {H} | {B}: Recover 2 {H}."
+			}]
 	},
 	{
 		"name": "Dengar",
 		"subname": "RUTHLESS KILLER",
 		"id": "DG077",
-		"ignored": "Punishment",
+		"ignored": "",
 		"traits": [
 			 "Hunter"
 		],
@@ -139,14 +185,17 @@
 			{
 				"name": "Contempt",
 				"text": "While attacking, if the target does not have a HARMFUL condition, Dengar applies +1 {B} to the attack results."
-			}
-		]
+			},
+			{
+				"name": "{B} Punishment",
+				"text": "After the attack resolves, if the target suffered 1 or more {H}, choose 1 HARMFUL condition. The target gains that condition. This ability can be triggered multiple times in the same attack."
+			}]
 	},
 	{
 		"name": "General Sorin",
 		"subname": "VICIOUS TACTICIAN",
 		"id": "DG078",
-		"ignored": "Bombardment",
+		"ignored": "",
 		"traits": [
 			 "Leader"
 		],
@@ -160,14 +209,17 @@
 			{
 				"name": "Advanced Firepower",
 				"text": "Adjacent friendly DROIDS and VEHICLES can use General Sorin's surge abilities."
-			}
-		]
+			},
+			{
+				"name": "{A} Bombardment",
+				"text": "Choose an adjacent friendly figure. That figure may interrupt to perform an attack. The attack gains Blast 1 {H}."
+			}]
 	},
 	{
 		"name": "Agent Blaise",
 		"subname": "ISB INTERROGATOR",
 		"id": "DG079",
-		"ignored": "Activate Agent, Menace",
+		"ignored": "",
 		"traits": [
 			 "Spy",
 			 "Leader"
@@ -179,13 +231,22 @@
 			"{B}: +1 {H}",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Activate Agent",
+				"text": "Resolve an optional deployment. During this deployment, reduce the deployment cost of SPY and TROOPER groups by 1."
+			},
+			{
+				"name": "{B} Menace",
+				"text": "Increase threat by 1."
+			}
+		],
 	},
 	{
 		"name": "Bossk",
 		"subname": "BORN HUNTER",
 		"id": "DG080",
-		"ignored": "Indiscriminate Fire",
+		"ignored": "",
 		"traits": [
 			 "Hunter",
 			 "Brawler"
@@ -202,14 +263,17 @@
 			{
 				"name": "Regenerate",
 				"text": "At the end of each round, Bossk recovers 2 {H} and discards all HARMFUL conditions."
-			}
-		]
+			},
+			{
+				"name": "{A} Indiscriminate Fire",
+				"text": "Choose a space within 3 spaces and in your line of sight. Then, roll 1 green die. Each figure on or adjacent to that space suffers {H} equal to the {H} results and {C} equal to the {C} results."
+			}]
 	},
 	{
 		"name": "Jabba the Hutt",
 		"subname": "VILE GANGSTER",
 		"id": "DG081",
-		"ignored": "Bully, Execution Order, Financial Incentive, Plot, Hutt Syndicate",
+		"ignored": "",
 		"traits": [
 			 "Leader",
 			 "Smuggler",
@@ -217,13 +281,34 @@
 		],
 		"keywords": [],
 		"surges": [],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Bully",
+				"text": "A figure of your choice within 3 spaces suffers 3 {C}."
+			},
+			{
+				"name": "{A} Execution Order",
+				"text": "Another EXECUTOR figure of your choice may interrupt to perform an attack."
+			},
+			{
+				"name": "{A} Financial Incentive",
+				"text": "A friendly figure of your choice recovers 2 {H} and becomes Focused."
+			},
+			{
+				"name": "{A} Plot",
+				"text": "Increase threat by 2."
+			},
+			{
+				"name": "Hutt Syndicate",
+				"text": "If you are on the map at the end of the mission, the Imperial player may gain 1 influence."
+			}
+		],
 	},
 	{
 		"name": "Captain Terro",
 		"subname": "WASTELAND ENFORCER",
 		"id": "DG082",
-		"ignored": "Flamethrower, Mounted",
+		"ignored": "",
 		"traits": [
 			 "Trooper",
 			 "Leader",
@@ -234,13 +319,22 @@
 			"{B}: +2 {H}",
 			"{B}: Pierce 2"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Flamethrower",
+				"text": "Choose a space within 2 spaces. Each other figure on or adjacent to that space suffers 1 {H} and 1 {C}, then becomes Weakened."
+			},
+			{
+				"name": "Mounted",
+				"text": "At the start of your activation, gain 3 movement points."
+			}
+		],
 	},
 	{
 		"name": "Emperor Palpatine",
 		"subname": "SITH MASTER",
 		"id": "DG083",
-		"ignored": "Emperor, Tempt, Force Lightning",
+		"ignored": "",
 		"traits": [
 			 "Force User",
 			 "Leader"
@@ -251,13 +345,26 @@
 		"surges": [
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Emperor",
+				"text": "Once during your activation, you may choose another figure within 4 spaces. That figure interrupts to perform an attack."
+			},
+			{
+				"name": "Tempt",
+				"text": "At the start of your activation, a figure of your choice suffers 1 {H} and gains 1 damage token."
+			},
+			{
+				"name": "{A} Force Lightning",
+				"text": "Choose a figure within 4 spaces and line of sight. That figure suffers 3 {H} and becomes Weakened. Each figure adjacent to that figure suffers 1 {H}."
+			}
+		],
 	},
 	{
 		"name": "Maul",
 		"subname": "SEEKER OF VENGEANCE",
 		"id": "DG084",
-		"ignored": "Dual-Bladed Fury, Stalk Prey",
+		"ignored": "",
 		"traits": [
 			 "Force User",
 			 "Brawler"
@@ -272,14 +379,21 @@
 			{
 				"name": "Sustained by Rage",
 				"text": "Maul cannot recover {H}. If Maul has not resolved an activation this round, he cannot be defeated."
-			}
-		]
+			},
+			{
+				"name": "Dual-Bladed Fury",
+				"text": "Before you declare an attack, choose one: This attack gains Reach and Cleave 2 {H} or you become Focused."
+			},
+			{
+				"name": "{B} Stalk Prey",
+				"text": "After this attack resolves, you gain 2 movement points and 1 damage token."
+			}]
 	},
 	{
 		"name": "Thrawn",
 		"subname": "GRAND ADMIRAL",
 		"id": "DG085",
-		"ignored": "Prediction, Patience",
+		"ignored": "",
 		"traits": [
 			 "Leader"
 		],
@@ -290,13 +404,22 @@
 			"{B}{B}: +3 {H}",
 			"{B}: Pierce 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Prediction",
+				"text": "At the start of each round, choose 1 hero. If it is the first hero to activate this round, it becomes Stunned."
+			},
+			{
+				"name": "Patience",
+				"text": "When you activate a group, you may distribute wild tokens equal to the number of exhausted Rebel activation tokens among its figures, each figure a different token. Limit once per round."
+			}
+		],
 	},
 	{
 		"name": "Hondo Ohnaka",
 		"subname": "FRIEND FOR HIRE",
 		"id": "DG086",
-		"ignored": "Negotiate, Ulterior Motive",
+		"ignored": "",
 		"traits": [
 			 "Smuggler",
 			 "Leader"
@@ -306,13 +429,22 @@
 			"{B}: +2 Accuracy",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Negotiate",
+				"text": "When you declare an attack, the heroes must choose one: Increase threat by 2 or apply +2 {H} to the attack results."
+			},
+			{
+				"name": "Ulterior Motive",
+				"text": "When you enter a space containing a crate, increase threat by 2. Limit once per crate."
+			}
+		],
 	},
 	{
 		"name": "The Grand Inquisitor",
 		"subname": "SITH LOYALIST",
 		"id": "DG087",
-		"ignored": "Lightsaber Throw",
+		"ignored": "",
 		"traits": [
 			 "Force User",
 			 "Hunter"
@@ -328,14 +460,17 @@
 			{
 				"name": "Defensive",
 				"text": "While defending, if the Grand Inquisitor did not roll a {G} result, apply +1 {G} to the defense results."
-			}
-		]
+			},
+			{
+				"name": "{A} Lightsaber Throw",
+				"text": "Perform a {O} attack using 1 red and 1 yellow die. Apply +3 Accuracy to the attack results."
+			}]
 	},
 	{
 		"name": "0-0-0",
 		"subname": "SPECIALIZED IN PAIN",
 		"id": "DG088",
-		"ignored": "Shocking Palm, Invasive Procedure",
+		"ignored": "",
 		"traits": [
 			 "Droid"
 		],
@@ -348,14 +483,21 @@
 			{
 				"name": "Unnerving",
 				"text": "At the end of 0-0-0's activation, each adjacent hostile figure becomes Weakened."
-			}
-		]
+			},
+			{
+				"name": "{B} Shocking Palm",
+				"text": "The attack misses and the defender becomes Stunned."
+			},
+			{
+				"name": "{A} Invasive Procedure",
+				"text": "An adjacent figure suffers 1 {H}, 1 {C}, and becomes Bleeding. You become Focused."
+			}]
 	},
 	{
 		"name": "BT-1",
 		"subname": "DESTRUCTIVE ASSASSIN",
 		"id": "DG089",
-		"ignored": "Missile Salvo",
+		"ignored": "",
 		"traits": [
 			 "Droid",
 			 "Heavy Weapon",
@@ -371,14 +513,17 @@
 			{
 				"name": "Assassin",
 				"text": "Before BT-1 declares an attack, he becomes Focused."
-			}
-		]
+			},
+			{
+				"name": "{A} Missile Salvo",
+				"text": "Perform up to 3 {O} attacks with different targets using 1 blue, 1 red, or 1 yellow die. Limit once per die. Apply +3 Accuracy to each of these attacks."
+			}]
 	},
 	{
 		"name": "Greedo",
 		"subname": "AMBITIOUS MERCENARY",
 		"id": "DG090",
-		"ignored": "Parting Shot",
+		"ignored": "",
 		"traits": [
 			 "Hunter",
 			 "Smuggler"
@@ -396,7 +541,10 @@
 			{
 				"name": "Slow on the Draw",
 				"text": "When Greedo declares an attack, the target may interrupt to perform an attack targeting Greedo."
-			}
-		]
+			},
+			{
+				"name": "Parting Shot",
+				"text": "When you have suffered {H} equal to your Health, before you are defeated, you may interrupt to perform an attack. Then, you are defeated."
+			}]
 	}
 ]

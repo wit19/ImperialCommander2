@@ -3,7 +3,7 @@
 		"name": "IG-88",
 		"id": "DG071",
 		"subname": "ATTENTÄTERDROIDE",
-		"ignored": "Arsenal",
+		"ignored": "",
 		"traits": [
 			 "Droide",
 			 "Jäger"
@@ -24,14 +24,17 @@
 			{
 				"name": "Sturm",
 				"text": "IG-88 kann in jeder Aktivierung mehrere Angriffe durchführen."
-			}
-		]			
+			},
+			{
+				"name": "Arsenal",
+				"text": "Dein Angriffspool besteht aus einer beliebigen Kombination aus 2 Angriffswürfeln."
+			}]			
 	},
 	{
 		"name": "Darth Vader",
 		"subname": "LORD DER SITH",
 		"id": "DG072",
-		"ignored": "Grausamkeit, Machtwürgegriff, Vorahnung",
+		"ignored": "",
 		"traits": [
 			 "Machtnutzer",
 			 "Anführer",
@@ -42,13 +45,26 @@
 			"{B}: Durchschlagen 3",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Grausamkeit",
+				"text": "Führe 2 Angriffe durch. Jedes Ziel muss verschieden sein."
+			},
+			{
+				"name": "{A} Machtwürgegriff",
+				"text": "Wähle eine feindliche Figur in deiner Sichtlinie. Diese Figur erleidet 2 {H} und 1 {C}."
+			},
+			{
+				"name": "Vorahnung",
+				"text": "Beim Verteidigen darfst du 1 Verteidigungswürfel neu würfeln."
+			}
+		],
 	},
 	{
 		"name": "General Weiss",
 		"subname": "FELDKOMMANDEUR",
 		"id": "DG073",
-		"ignored": "Befehl des Generals, Überlegenes Arsenal",	
+		"ignored": "",	
 		"traits": [
 			 "Fahrzeug",
 			 "Anführer",
@@ -62,13 +78,22 @@
 			"{B} {B}: Explosion 3 {H}",
 			"{B}: Durchschlagen 2"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Befehl des Generals",
+				"text": "Wähle bis zu 2 andere befreundete Figuren auf der Karte. Jede dieser Figuren darf unterbrechen, um einen Zug durchzuführen."
+			},
+			{
+				"name": "Überlegenes Arsenal",
+				"text": "Dein Angriffspool besteht aus einer beliebigen Kombination aus 3 Angriffswürfeln. Du darfst nicht mehr als 2 Würfel einer einzelnen Farbe werfen."
+			}
+		],
 	},
 	{
 		"name": "Hauptmann der Roten Garde",
 		"subname": "",
 		"id": "DG074",
-		"ignored": "Grausamkeit, Vollstrecker",
+		"ignored": "",
 		"traits": [
 			 "Wächter",
 			 "Nahkämpfer"
@@ -79,13 +104,22 @@
 			"{B}: Durchschlagen 2",
 			"{B}: +2 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Grausamkeit",
+				"text": "Führe 2 Angriffe durch. Jedes Ziel muss verschieden sein."
+			},
+			{
+				"name": "Vollstrecker",
+				"text": "Wenn eine befreundete Figur innerhalb von 3 Feldern besiegt wird, darf diese Figur unterbrechen, sich um bis zu 2 Felder bewegen und dann einen Angriff durchführen. Begrenzt auf einmal pro Runde."
+			}
+		],
 	},
 	{
 		"name": "Kayn Somos",
 		"subname": "KOMMANDANT DER STURMTRUPPEN",
 		"id": "DG075",
-		"ignored": "Erschießungskommando, Truppenkommando",
+		"ignored": "",
 		"traits": [
 			 "Truppler",
 			 "Anführer"
@@ -95,13 +129,22 @@
 			"{B}: +1 {H}",
 			"{B}: Durchschlagen 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Erschießungskommando",
+				"text": "Wähle bis zu 2 benachbarte befreundete TROOPER. Jede dieser Figuren darf unterbrechen, um einen Angriff gegen dieselbe Figur durchzuführen."
+			},
+			{
+				"name": "{B} Truppenkommando",
+				"text": "Wähle einen benachbarten befreundeten TROOPER. Diese Figur wird Fokussiert."
+			}
+		],
 	},
 	{
 		"name": "Boba Fett",
 		"subname": "BERÜCHTIGTER KOPFGELDJÄGER",
 		"id": "DG076",
-		"ignored": "Kampfdisziplin",
+		"ignored": "",
 		"traits": [
 			 "Jäger"
 		],
@@ -118,14 +161,17 @@
 			{
 				"name": "Kampfpräsenz",
 				"text": "Nachdem eine feindliche Figur freiwillig eines der Nachbarfelder von Boba Fett verlassen hat, erleidet die Figur 1 {C}. Nur einmal pro Figur und Runde."
-			}
-		]
+			},
+				{
+				"name": "Kampfdisziplin",
+				"text": "Wenn du einen Angriff erklärst, wähle eine der folgenden Fähigkeiten, um sie auf diesen Angriff anzuwenden: +2 Genauigkeit | {B}: +2 {H} | {B}: 2 {H} regenerieren."
+			}]
 	},
 	{
 		"name": "Dengar",
 		"subname": "SKRUPELLOSER KILLER",
 		"id": "DG077",
-		"ignored": "Brutalität",
+		"ignored": "",
 		"traits": [
 			 "Jäger"
 		],
@@ -139,14 +185,17 @@
 			{
 				"name": "Verachtung",
 				"text": "Beim Angreifen wendet Dengar +1 {B} auf den Angriffswurf an, falls das Ziel keinen SCHÄDLICHEN Zustand hat."
-			}
-		]
+			},
+			{
+				"name": "{B} Brutalität",
+				"text": "Nachdem der Angriff abgeschlossen ist, wähle 1 SCHÄDLICHEN Zustand, falls das Ziel mindestens 1 {H} erlitten hat. Das Ziel erhält diesen Zustand. Diese Fähigkeit kann im selben Angriff mehrfach ausgelöst werden."
+			}]
 	},
 	{
 		"name": "General Sorin",
 		"subname": "GRAUSAMER TAKTIKER",
 		"id": "DG078",
-		"ignored": "Bombardement",
+		"ignored": "",
 		"traits": [
 			 "Anführer"
 		],
@@ -160,14 +209,17 @@
 			{
 				"name": "Überlegene Feuerkraft",
 				"text": "Benachbarte befreundete DROIDEN und FAHRZEUGE können die Energiefähigkeiten von General Sorin einsetzen."
-			}
-		]
+			},
+			{
+				"name": "{A} Bombardement",
+				"text": "Wähle eine benachbarte befreundete Figur. Diese Figur darf unterbrechen, um einen Angriff durchzuführen. Der Angriff erhält Detonation 1 {H}."
+			}]
 	},
 	{
 		"name": "Agent Blaise",
 		"subname": "ISB-VERHÖRSPEZIALIST",
 		"id": "DG079",
-		"ignored": "Agent aktivieren, Bedrohung",
+		"ignored": "",
 		"traits": [
 			 "Spion",
 			 "Anführer"
@@ -179,13 +231,22 @@
 			"{B}: +1 {H}",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Agent aktivieren",
+				"text": "Führe einen optionalen Truppeneinsatz durch. Senke dabei die Einsatzkosten von SPION- und TROOPER-Gruppen um 1."
+			},
+			{
+				"name": "{B} Bedrohung",
+				"text": "Erhöhe die Bedrohung um 1."
+			}
+		],
 	},
 	{
 		"name": "Bossk",
 		"subname": "GEBORENER JÄGER",
 		"id": "DG080",
-		"ignored": "Wahlloser Beschuss",
+		"ignored": "",
 		"traits": [
 			 "Jäger",
 			 "Nahkämpfer"
@@ -202,14 +263,17 @@
 			{
 				"name": "Regeneration",
 				"text": "Am Ende jeder Runde regeneriert Bossk 2 {H} und legt alle SCHÄDLICHEN Zustände ab."
-			}
-		]
+			},
+			{
+				"name": "{A} Wahlloser Beschuss",
+				"text": "Wähle ein Feld innerhalb von 3 Feldern in deiner Sichtlinie. Wirf dann 1 grünen Würfel. Jede Figur auf oder angrenzend zu diesem Feld erleidet {H} in Höhe der {H}-Ergebnisse und {C} in Höhe der {C}-Ergebnisse."
+			}]
 	},
 	{
 		"name": "Jabba der Hutt",
 		"subname": "NIEDERTRÄCHTIGER GANGSTER",
 		"id": "DG081",
-		"ignored": "Schikanieren, Hinrichtungsbefehl, Finanzieller Anreiz, Komplott, Hutt-Syndikat",
+		"ignored": "",
 		"traits": [
 			 "Anführer",
 			 "Schmuggler",
@@ -217,13 +281,34 @@
 		],
 		"keywords": [],
 		"surges": [],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Schikanieren",
+				"text": "Eine Figur deiner Wahl innerhalb von 3 Feldern erleidet 3 {C}."
+			},
+			{
+				"name": "{A} Hinrichtungsbefehl",
+				"text": "Eine andere VOLLSTRECKER-Figur deiner Wahl darf unterbrechen, um einen Angriff durchzuführen."
+			},
+			{
+				"name": "{A} Finanzieller Anreiz",
+				"text": "Eine befreundete Figur deiner Wahl regeneriert 2 {H} und wird Fokussiert."
+			},
+			{
+				"name": "{A} Komplott",
+				"text": "Erhöhe die Bedrohung um 2."
+			},
+			{
+				"name": "Hutt-Syndikat",
+				"text": "Falls du am Ende der Mission auf der Karte bist, darf der imperiale Spieler 1 Einfluss erhalten."
+			}
+		],
 	},
 	{
 		"name": "Captain Terro",
 		"subname": "ÖDLAND-VOLLSTRECKER",
 		"id": "DG082",
-		"ignored": "Flammenwerfer, Beritten",
+		"ignored": "",
 		"traits": [
 			 "Truppler",
 			 "Anführer",
@@ -234,13 +319,22 @@
 			"{B}: +2 {H}",
 			"{B}: Durchschlagen 2"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "{A} Flammenwerfer",
+				"text": "Wähle ein Feld innerhalb von 2 Feldern. Jede andere Figur auf oder angrenzend zu diesem Feld erleidet 1 {H} und 1 {C} und wird dann Geschwächt."
+			},
+			{
+				"name": "Beritten",
+				"text": "Zu Beginn deiner Aktivierung erhältst du 3 Bewegungspunkte."
+			}
+		],
 	},
 	{
 		"name": "Imperator Palpatine",
 		"subname": "SITH-MEISTER",
 		"id": "DG083",
-		"ignored": "Imperator, In Versuchung führen, Machtblitz",
+		"ignored": "",
 		"traits": [
 			 "Machtnutzer",
 			 "Anführer"
@@ -251,13 +345,26 @@
 		"surges": [
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Imperator",
+				"text": "Einmal während deiner Aktivierung darfst du eine andere Figur innerhalb von 4 Feldern wählen. Diese Figur unterbricht, um einen Angriff durchzuführen."
+			},
+			{
+				"name": "In Versuchung führen",
+				"text": "Zu Beginn deiner Aktivierung erleidet eine Figur deiner Wahl 1 {H} und erhält 1 Schadens-Marker."
+			},
+			{
+				"name": "{A} Machtblitz",
+				"text": "Wähle eine Figur innerhalb von 4 Feldern und in deiner Sichtlinie. Diese Figur erleidet 3 {H} und wird Geschwächt. Jede Figur angrenzend zu ihr erleidet 1 {H}."
+			}
+		],
 	},
 	{
 		"name": "Maul",
 		"subname": "DER RACHSÜCHTIGE",
 		"id": "DG084",
-		"ignored": "Doppelklingenwirbel, Auf Beutejagd",
+		"ignored": "",
 		"traits": [
 			 "Machtnutzer",
 			 "Nahkämpfer"
@@ -272,14 +379,21 @@
 			{
 				"name": "Vom Zorn am Leben gehalten",
 				"text": "Maul darf keinen {H} regenerieren. Falls Maul in dieser Runde noch keine Aktivierung durchgeführt hat, darf er nicht besiegt werden."
-			}
-		]
+			},
+			{
+				"name": "Doppelklingenwirbel",
+				"text": "Bevor du einen Angriff erklärst, wähle eins: Dieser Angriff erhält Reichweite und Spalten 2 {H} oder du wirst Fokussiert."
+			},
+			{
+				"name": "{B} Auf Beutejagd",
+				"text": "Nachdem dieser Angriff abgeschlossen ist, erhältst du 2 Bewegungspunkte und 1 Schadens-Marker."
+			}]
 	},
 	{
 		"name": "Thrawn",
 		"subname": "GROSSADMIRAL",
 		"id": "DG085",
-		"ignored": "Prognose, Geduld",
+		"ignored": "",
 		"traits": [
 			 "Anführer"
 		],
@@ -290,13 +404,22 @@
 			"{B}{B}: +3 {H}",
 			"{B}: Durchschlagen 1"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Prognose",
+				"text": "Wähle zu Beginn jeder Runde 1 Held. Wenn er der erste Held ist, der in dieser Runde aktiviert wird, wird er Betäubt."
+			},
+			{
+				"name": "Geduld",
+				"text": "Wenn du eine Gruppe aktivierst, darfst du Wild-Marker in Höhe der Anzahl erschöpfter Rebellen-Aktivierungsmarker auf ihre Figuren verteilen, jede Figur einen anderen Marker. Begrenzt auf einmal pro Runde."
+			}
+		],
 	},
 	{
 		"name": "Hondo Ohnaka",
 		"subname": "GEKAUFTER FREUND",
 		"id": "DG086",
-		"ignored": "Verhandeln, Hintergedanken",
+		"ignored": "",
 		"traits": [
 			 "Schmuggler",
 			 "Anführer"
@@ -306,13 +429,22 @@
 			"{B}: +2 Zielsicherheit",
 			"{B}: +1 {H}"
 		],
-		"abilities": [],
+		"abilities": [
+			{
+				"name": "Verhandeln",
+				"text": "Wenn du einen Angriff erklärst, müssen die Helden wählen: Erhöhe die Bedrohung um 2 oder erhöhe die {H}-Ergebnisse des Angriffs um 2."
+			},
+			{
+				"name": "Hintergedanken",
+				"text": "Wenn du ein Feld mit einer Kiste betrittst, erhöhe die Bedrohung um 2. Begrenzt auf einmal pro Kiste."
+			}
+		],
 	},
 	{
 		"name": "Der Großinquisitor",
 		"subname": "SITH-LOYALIST",
 		"id": "DG087",
-		"ignored": "Lichtschwertwurf",
+		"ignored": "",
 		"traits": [
 			 "Machtnutzer",
 			 "Jäger"
@@ -328,14 +460,17 @@
 			{
 				"name": "Defensiv",
 				"text": "Falls der Großinquisitor beim Verteidigen kein {G} gewürfelt hat, wende +1 {G} auf den Verteidigungswurf an."
-			}
-		]
+			},
+			{
+				"name": "{A} Lichtschwertwurf",
+				"text": "Führe einen {O}-Angriff mit 1 roten und 1 gelben Würfel aus. Erhöhe die Genauigkeit der Angriffsergebnisse um 3."
+			}]
 	},
 	{
 		"name": "0-0-0",
 		"subname": "SPEZIALIST FÜR SCHMERZEN",
 		"id": "DG088",
-		"ignored": "Schock-Handflächen, Invasive Maßnahmen",
+		"ignored": "",
 		"traits": [
 			 "Droide"
 		],
@@ -348,14 +483,21 @@
 			{
 				"name": "Verstörend",
 				"text": "Am Ende von 0-0-0s Aktivierung wird jede benachbarte feindliche Figur GESCHWÄCHT."
-			}
-		]
+			},
+			{
+				"name": "{B} Schock-Handflächen",
+				"text": "Der Angriff verfehlt und der Verteidiger wird Betäubt."
+			},
+			{
+				"name": "{A} Invasive Maßnahmen",
+				"text": "Eine benachbarte Figur erleidet 1 {H} und 1 {C} und wird Blutend. Du wirst Fokussiert."
+			}]
 	},
 	{
 		"name": "BT-1",
 		"subname": "ZERSTÖRUNGSWÜTIGER ATTENTÄTER",
 		"id": "DG089",
-		"ignored": "Raketensalve",
+		"ignored": "",
 		"traits": [
 			 "Droide",
 			 "Schwere Waffe",
@@ -371,14 +513,17 @@
 			{
 				"name": "Attentäter",
 				"text": "Bevor BT-1 einen Angriff deklariert, wird er FOKUSSIERT."
-			}
-		]
+			},
+			{
+				"name": "{A} Raketensalve",
+				"text": "Führe bis zu 3 {O}-Angriffe gegen verschiedene Ziele mit jeweils 1 blauen, roten oder gelben Würfel aus (jeder Würfel höchstens einmal). Erhöhe die Genauigkeit jedes dieser Angriffe um 3."
+			}]
 	},
 	{
 		"name": "Greedo",
 		"subname": "AMBITIONIERTER SÖLDNER",
 		"id": "DG090",
-		"ignored": "Glorreicher Abgang",
+		"ignored": "",
 		"traits": [
 			 "Jäger",
 			 "Schmuggler"
@@ -396,7 +541,10 @@
 			{
 				"name": "Langsam ziehen",
 				"text": "Sobald Greedo einen Angriff deklariert, darf das Ziel unterbrechen, um einen Angriff durchzuführen, der auf Greedo zielt."
-			}
-		]
+			},
+			{
+				"name": "Glorreicher Abgang",
+				"text": "Wenn du {H} in Höhe deiner Gesundheit erlitten hast, darfst du unterbrechen, um einen Angriff durchzuführen, bevor du besiegt wirst. Danach wirst du besiegt."
+			}]
 	}
 ]
