@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # M11b curation generator: tactical_hero_cards.json
 # ---------------------------------------------------------------------------
-# Builds the RUNTIME asset from the local wiki_data normalisates (public
-# printed card values - cleanroom policy wiki_data/LICENSE_DATA.md: numbers,
-# die letters and keyword slugs only, NO prose, NO wiki text). Joins the
-# APP's own tables for ids and xp costs:
+# Builds the RUNTIME asset from the local wiki_data normalisates and the
+# APP's own tables for ids and xp costs. Cleanroom policy
+# (wiki_data/LICENSE_DATA.md Punkt 5, Klaerung M11g): printed card numbers,
+# die letters and keyword slugs; where an ability is printed IN FULL on the
+# card, its slug carries the full printed text too -- board-game content from
+# the licensed copy, transcribed 1:1 (precedent: the app's own allies.json/
+# villains.json ship the same printed rule texts); the wiki served only as the
+# transcription medium for that printed text. Raw wiki dumps (HTML/scraper
+# output) stay out of the build.
 #   * CardData/heroes.json        hero name <-> app hero id (H1..H21)
 #   * CampaignData/items.json     item name/tier/cost -> app item id
 #   * CampaignData/skills.json    purchased skill names -> xp cost

@@ -25,13 +25,19 @@ Karten und Regelbuch-Keywords). Sie sind **ohne Übernahme von Wiki-Text** erste
 4. Die Spiel-Selbst-Daten (Assets/Resources/Languages/**) bleiben die einzige Quelle zur
    Laufzeit; diese Ordner-Dateien sind Werkzeuge für Ableitungen (Threat-Modelle,
    Keyword-Semantik, M11b/c).
-5. **Offener Punkt (vor externer Weitergabe zu schließen):** die Normalisate
-   heros.json/hero_class_cards.json führen Helden- und Klassenkartentexte noch als
-   Wiki-Transkripte (Lizenzstatus der Wiki-Originale nicht einwandfrei geklärt). Sie
-   stehen nur in diesem Werkzeug-Ordner, nicht im Build; bei der M11b-Integration werden
-   die wenigen Baustein-Texte, die das Spiel je anzeigen soll, in eigener Sprache neu
-   gefasst (wie in keyword_table.json geschehen). Reine Zahlenwerte (Würfelpools,
-   Kosten, Strain) sind davon nicht betroffen.
+5. **Zwei Materialarten (Klärung M11g, Stand 2026-10-28):**
+   (a) **Roh-Wiki-Dumps** (HTML/Scraper-Auswurf, wiki_data/raw/ und *_raw.json): nicht
+   versioniert, nicht buildfähig — das bleibt wie bisher. (b) **Kuratierte
+   Brettspiel-Kartentexte** — Fähigkeitstexte, die auf den Karten SELBST vollständig
+   aufgedruckt sind, samt ihrer Werte: Spielinhalt aus dem lizenzierten
+   Brettspiel-Exemplar, 1:1 vom Aufdruck (Präzedenz: allies.json/villains.json der App,
+   siehe Punkt 2). buildfähig; das Wiki diente dabei als Transkriptions-Medium für den
+   gedruckten Text — dessen Originallizenz ist nicht einwandfrei geklärt, wir behaupten
+   keine Sauberkeit und benennen das Medium. Vor M11g galt Punkt 5 als offener Punkt mit
+   Neufassung in eigener Sprache; der Controller hat am 2026-10-28 ausdrücklich
+   entschieden, dass die gedruckten Fähigkeitstexte 1:1 ins Spiel gehören ("damit der
+   Spieler vor der App weiß, was zu tun ist"). Reine Zahlenwerte (Würfelpools, Kosten,
+   Strain) sind von alledem nicht berührt.
 
 ## Werkzeuge
 `tools/` enthält den Scraper/Normalisierer (reproduzierbar, MediaWiki-API). Lizenz des

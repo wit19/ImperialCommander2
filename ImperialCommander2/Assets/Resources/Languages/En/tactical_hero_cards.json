@@ -1,6 +1,6 @@
 {
   "schema": "tacai.hero_cards/1",
-  "source": "Kuratierung: oeffentlich gedruckte Heldenkarten-Werte aller 21 Kampagnen-Helden (gesund + verwundete Rueckseite), Basiswaffen und Item-Wuerfel/Modifikatoren; ids und xp-Kosten aus den App-Tabellen (CardData/heroes.json, CampaignData/items.json, CampaignData/skills.json). Cleanroom-Policy: wiki_data/LICENSE_DATA.md — nur Zahlen, Wuerfelbuchstaben und reine Keyword-Slugs, keine Prosa.",
+  "source": "Kuratierung: oeffentlich gedruckte Heldenkarten-Werte aller 21 Kampagnen-Helden (gesund + verwundete Rueckseite), Basiswaffen und Item-Wuerfel/Modifikatoren; ids und xp-Kosten aus den App-Tabellen (CardData/heroes.json, CampaignData/items.json, CampaignData/skills.json). Cleanroom-Policy: wiki_data/LICENSE_DATA.md Punkt 5 — Zahlen, Wuerfelbuchstaben, Keyword-Slugs; Volltext nur bei auf der Karte aufgedruckten Faehigkeiten (Brettspiel-Inhalt, Wiki als Transkriptions-Medium); Roh-Wiki-Dumps out-of-build.",
   "conventions": {
     "wuerfelBuchstaben": "B/R/G/Y = gedruckte Angruesfel (App-Konvention); verteidigung: K=schwarz, W=weiss",
     "basisAngriffswuerfel": "Basiswuerfel der gedruckten Basiswaffe, Nahkampf-Waffe mit aufgedrucktem Reach: Suffix '+Reach'",
@@ -8,7 +8,7 @@
     "reichweite": "Nahkampf 1 (mit Reach 2); Fernkampf = int(Genauigkeits-EW + 1/2) der gedruckten Waffe — Acc-Gate der ATTACKS-Regelseite (IC2-Bandensemantik)",
     "attribut": "Waffen mit Attribut-Pool ('Your attack pool is your X pool'): staerke/einsicht/tech — im verwundeten Zustand schrumpfen die Attributswuerfel (verwundete Kartenseite)",
     "items": "nur Items mit Angriffswirkung; genauigkeit/schaden/durchschlag = statische (nicht-Surge) Aufdrucke; Surge-Zeilen bleiben bewusst aussen vor (konservative Vereinfachung, wie Dice.cs)",
-    "faehigkeiten": "reine Keyword-Slugs + Zahlen (xp-Kosten aus App-Tabelle, strain-Kosten von der gedruckten Karte); Konsum erst M11d"
+    "faehigkeiten": "Keyword-Slug + Zahlen (xp-Kosten aus App-Tabelle, strain-Kosten von der gedruckten Karte). Bei Fähigkeiten, die auf der Karte vollständig aufgedruckt sind, trägt der Slug zusätzlich den Volltext des gedruckten Fähigkeitstextes (Brettspiel-Inhalt aus dem lizenzierten Exemplar; Transkription, Wiki als Herkunfts-Medium — wiki_data/LICENSE_DATA.md Punkt 5); Konsum erst M11d"
   },
   "heroes": [
     {
