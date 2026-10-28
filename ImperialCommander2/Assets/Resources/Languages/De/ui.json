@@ -283,7 +283,7 @@
   "uiTacticalAI": {
     "actionFormat": "Aktion {0} – {1}",
     "actionSoloFormat": "Anweisung: {0}",
-    "doctrineTreeLead": "Die Nummerierung ist ein Wenn-Dann-Baum: wähle GENAU EINEN Block — nach dieser Hausregel führst du pro Aktivierung nur EINE Aktion aus: Bewegen ODER Angreifen.",
+    "doctrineTreeLead": "Diese Karte zeigt die Aktionen der Figur für diese Aktivierung — sie führt sie der Reihe nach aus. Referenzregel: Normalfiguren dürfen pro Aktivierung nur einen Angriff ausführen; Helden dürfen beide Aktionen für Angriffe nutzen. Karten mit nur einem Block halten die Position.",
     "doctrineHeader": "Doktrin: {0} — nach dieser Vorschrift spielst du diese Aktivierung",
     "docAggressive": "Vorstoß (zum Kampf vorrücken – ein Angriff pro Aktivierung)",
     "docGuard": "Wachschutz (Zone halten, nie herauslocken)",

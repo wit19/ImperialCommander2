@@ -596,7 +596,8 @@ namespace TacticalAI
             // ['attack']) - labelling such a lone block "Aktion 1" made
             // players wait for a missing "Aktion 2". So: exactly ONE action
             // block -> unnumbered solo label; >=2 -> keep "Aktion {n}" and
-            // state the either-or law right under the doctrine header.
+            // state the RR slot rule (two action slots, one attack
+            // cap for non-heroes) right under the doctrine header.
             // The count decision is Core-pure (OrderDeck.CountActionBlocks,
             // harness action_tree.json + live ActionTreeGate); both strings
             // live in ui.json (localization convention). Missing keys fall
