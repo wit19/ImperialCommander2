@@ -1,0 +1,398 @@
+{
+ "comment": "M11d formula vectors (authored, not recorded): StrainPressure.Budget + Pressure on the shipped tactical_hero_cards.json. Budget = sum of the DISTINCT printed reaction strains (export-twin prefix-merge, min strain per reaction); Pressure: markers>=budget AND markers>0 -> \"8\", visible-but-below -> \"0\", buffer-less hero (budget 0) -> null even with markers. Every campaign-purchasable skill prints strain 0, so the unspent-XP gate is value-neutral (xp_zero_gate_neutral pins identical budgets at xp_amount 0). Biv Bodhrik pins the full-buffer fire (markers==budget==3); Onar Koma/Tress Hacnua pin the buffer guard with 1 marker and druck null.",
+ "cases": [
+  {
+   "name": "all_heroes_distinct_reactions",
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "markers": 3
+    },
+    {
+     "hero": "CT-1701",
+     "markers": 1
+    },
+    {
+     "hero": "Davith Elso",
+     "markers": 0
+    },
+    {
+     "hero": "Diala Passil",
+     "markers": 2
+    },
+    {
+     "hero": "Drokkatta",
+     "markers": 1
+    },
+    {
+     "hero": "Fenn Signis",
+     "markers": 1
+    },
+    {
+     "hero": "Gaarkhan",
+     "markers": 1
+    },
+    {
+     "hero": "Gideon Argus",
+     "markers": 1
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "markers": 1
+    },
+    {
+     "hero": "Jyn Odan",
+     "markers": 1
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "markers": 0
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "markers": 1
+    },
+    {
+     "hero": "MHD-19",
+     "markers": 0
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "markers": 0
+    },
+    {
+     "hero": "Murne Rin",
+     "markers": 1
+    },
+    {
+     "hero": "Onar Koma",
+     "markers": 1
+    },
+    {
+     "hero": "Saska Teft",
+     "markers": 0
+    },
+    {
+     "hero": "Shyla Varad",
+     "markers": 1
+    },
+    {
+     "hero": "Tress Hacnua",
+     "markers": 1
+    },
+    {
+     "hero": "Verena Talos",
+     "markers": 1
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "markers": 0
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "druck": "8"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Diala Passil",
+     "budget": 3,
+     "druck": "0"
+    },
+    {
+     "hero": "Drokkatta",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Fenn Signis",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Gaarkhan",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Gideon Argus",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Jyn Odan",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "MHD-19",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Murne Rin",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "druck": null
+    },
+    {
+     "hero": "Saska Teft",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Shyla Varad",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Tress Hacnua",
+     "budget": 0,
+     "druck": null
+    },
+    {
+     "hero": "Verena Talos",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "budget": 1,
+     "druck": "0"
+    }
+   ]
+  },
+  {
+   "name": "xp_zero_gate_neutral",
+   "xp_amount": 0,
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "markers": 2
+    },
+    {
+     "hero": "CT-1701",
+     "markers": 1
+    },
+    {
+     "hero": "Davith Elso",
+     "markers": 0
+    },
+    {
+     "hero": "Diala Passil",
+     "markers": 2
+    },
+    {
+     "hero": "Drokkatta",
+     "markers": 1
+    },
+    {
+     "hero": "Fenn Signis",
+     "markers": 1
+    },
+    {
+     "hero": "Gaarkhan",
+     "markers": 1
+    },
+    {
+     "hero": "Gideon Argus",
+     "markers": 1
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "markers": 1
+    },
+    {
+     "hero": "Jyn Odan",
+     "markers": 1
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "markers": 0
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "markers": 1
+    },
+    {
+     "hero": "MHD-19",
+     "markers": 0
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "markers": 0
+    },
+    {
+     "hero": "Murne Rin",
+     "markers": 1
+    },
+    {
+     "hero": "Onar Koma",
+     "markers": 0
+    },
+    {
+     "hero": "Saska Teft",
+     "markers": 0
+    },
+    {
+     "hero": "Shyla Varad",
+     "markers": 1
+    },
+    {
+     "hero": "Tress Hacnua",
+     "markers": 0
+    },
+    {
+     "hero": "Verena Talos",
+     "markers": 1
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "markers": 0
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "druck": "0"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Diala Passil",
+     "budget": 3,
+     "druck": "0"
+    },
+    {
+     "hero": "Drokkatta",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Fenn Signis",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Gaarkhan",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Gideon Argus",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Jyn Odan",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "MHD-19",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Murne Rin",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "druck": null
+    },
+    {
+     "hero": "Saska Teft",
+     "budget": 1,
+     "druck": "0"
+    },
+    {
+     "hero": "Shyla Varad",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Tress Hacnua",
+     "budget": 0,
+     "druck": null
+    },
+    {
+     "hero": "Verena Talos",
+     "budget": 2,
+     "druck": "0"
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "budget": 1,
+     "druck": "0"
+    }
+   ]
+  }
+ ]
+}

@@ -33,6 +33,8 @@ public class UITacticalAI
 	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
 	// M6 overlord explain parts (public threat economy + aim marks + risk)
 	public string ordThreat, ordMarked, ordRoundFocus;
+	// M11d: light strain-pressure note in the round-focus WHY line
+	public string ordStrainPressure;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setDeployment, setExplain, setOn, setOff, setRowFormat;

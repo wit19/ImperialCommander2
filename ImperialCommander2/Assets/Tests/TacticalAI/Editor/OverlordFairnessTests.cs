@@ -267,6 +267,14 @@ using DeploymentCard = TacticalAI.Core.DeploymentCard;
                     MarkedRound = (int)Json.AsLong(h["marked_round"]),
                     AttackDice = (int)Json.AsLong(h["attack_dice"]),
                     Health = Json.AsInt(h["health"]),
+                    // M11b/M11d mirror parity with the harness Build():
+                    // printed card + optional strain input (absent = live
+                    // app state, zero influence).
+                    Card = HeroCards.For(Json.AsStr(h["hero"])),
+                    StrainMarkers = h.ContainsKey("strain_markers") && h["strain_markers"] != null
+                        ? (int?)Json.AsLong(h["strain_markers"]) : null,
+                    AvailableXp = h.ContainsKey("xp_amount") && h["xp_amount"] != null
+                        ? (int?)Json.AsLong(h["xp_amount"]) : null,
                 });
             }
             return list;

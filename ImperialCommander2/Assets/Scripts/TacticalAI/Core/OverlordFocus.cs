@@ -35,6 +35,16 @@
 //                     projects his printed threat until he is out, but costs
 //                     only about half the engagement to finish - the
 //                     danger-per-shot DENSITY doubles. Rational x2, exact.
+//                     M11d STRAIN PRESSURE (light, capped): a hero whose
+//                     table strain markers reached his printed reaction
+//                     buffer cannot pay his costly reactions for a moment ->
+//                     +8 on this key ONLY (StrainPressure.Druck), after the
+//                     objective-actor +1, BEFORE the tie-chain (5) - never
+//                     a key of its own: marks (1), chip law (2), wounded
+//                     (4) and a >8 econ gap all stay untouched. Null strain
+//                     source (live app today: markers are not modelled) =
+//                     zero influence; the polling seam is documented at the
+//                     bridge's candidate builder.
 //     4. reference  - no curated profile: the S1-S3 public proxy ranking
 //                     (wounded, printed attack dice, printed health).
 //     5. tiebreak   - squad row (stable, deterministic), then hero id.
@@ -68,6 +78,18 @@ namespace TacticalAI.Core
         // heroes). Null only for rows outside the app roster (sim fixture
         // heroes) - those keep the M2a.4 curated fallback.
         public HeroCard Card;
+        // M11d: strain markers the TABLE has placed on him. Null = the
+        // source cannot see strain at all (live app today -> ready-to-wire,
+        // zero influence). The buffer is NOT caller-supplied: it is computed
+        // from his Card (StrainPressure.Budget) so no caller can smuggle a
+        // bigger one in (fairness canon).
+        public int? StrainMarkers;
+        // M11d: the hero's CURRENT unspent campaign XP (CampaignHero.xpAmount
+        // via the bridge; optional in fixtures). Gates only KNOWN-cost
+        // reactions in StrainPressure.Budget - value-neutral on today's
+        // roster (every known-cost row prints strain 0), future-proof if a
+        // strain-bearing purchasable ability ever joins the tables.
+        public int? AvailableXp;
 
         public bool Marked { get { return Marks > 0; } }
     }
@@ -81,11 +103,19 @@ namespace TacticalAI.Core
         public Rational? Threat;            // printed threat BEFORE economy
         public Rational? ThreatEconomic;    // after the wound-economy multiplier
         public string Basis;                // "mark"|"chip"|"card"|"economy"|"proxy"
+        // M11d: the LIVE strain-pressure surcharge actually applied to the
+        // econ key this call: 8 (buffer full), 0 (source visible, below the
+        // buffer) or null (no strain source / no buffer). The public WHY
+        // cell fires on == Druck only.
+        public int? StrainDruck;
 
         /// Comparable vector row (harness/NUnit pin), exact string fields.
+        /// The strain_druck key appears ONLY on rows where the pressure
+        /// fired - the pre-M11d canon of every strain-free case is byte-
+        /// identical (record discipline: no unexplained Expect diffs).
         public Dictionary<string, object> AsDict()
         {
-            return new Dictionary<string, object>
+            var d = new Dictionary<string, object>
             {
                 { "hero", HeroId },
                 { "marked", Marked },
@@ -94,6 +124,9 @@ namespace TacticalAI.Core
                 { "threat_econ", ThreatEconomic.HasValue ? ThreatEconomic.Value.ToString() : null },
                 { "basis", Basis },
             };
+            if (StrainDruck.HasValue && StrainDruck.Value > 0)
+                d["strain_druck"] = StrainDruck.Value.ToString();
+            return d;
         }
     }
 
@@ -166,6 +199,23 @@ namespace TacticalAI.Core
                     r.Econ = r.Econ.Value + Rational.One;
                 }
 
+            // M11d STRAIN PRESSURE (Thomas: "erhöht sich leicht" - light and
+            // NEVER a primary signal): a hero whose strain markers reached
+            // his printed reaction buffer cannot pay his costly reactions
+            // (heal, block, power moves) for a short window. +Druck on the
+            // econ component ONLY, after the objective-actor +1 and before
+            // the deterministic tie-chain (Compare keys 4/5): it flips ties
+            // and <Druck gaps, nothing else. Null markers (live app today -
+            // the polling seam at TacticalAIBridge.BuildFocusCandidates) or
+            // a buffer-less hero (Onar Koma, Tress Hacnua) = zero influence.
+            foreach (var r in rows)
+            {
+                r.Druck = StrainPressure.Pressure(r.C.StrainMarkers,
+                                                  StrainPressure.Budget(r.C.Card, r.C.AvailableXp));
+                if (r.Druck > 0 && r.Econ.HasValue)
+                    r.Econ = r.Econ.Value + r.Druck.Value;
+            }
+
             var ranked = StableSort(rows, Compare);
 
             return ranked.Select(x => new FocusPick
@@ -175,6 +225,7 @@ namespace TacticalAI.Core
                 Wounded = x.C.Wounded,
                 Threat = x.Threat,
                 ThreatEconomic = x.Econ,
+                StrainDruck = x.Druck,
                 Basis = x.C.Marked ? "mark"
                         : (x.Chip != null ? "chip"
                         : (x.Econ != null ? (x.C.Card != null ? "card" : "economy")
@@ -212,6 +263,7 @@ namespace TacticalAI.Core
             public Rational? Threat;
             public Rational? Econ;
             public List<object> Chip;
+            public int? Druck;              // M11d strain surcharge (see Rank)
         }
 
         /// Lexicographic compare of two rows, DESC (a before b => -1).

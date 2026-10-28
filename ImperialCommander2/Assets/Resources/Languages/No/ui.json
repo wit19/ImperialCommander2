@@ -315,6 +315,7 @@
     "expPostHoc": "ETTER",
     "expFull": "FULL",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
+    "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
     "ordMarked": "målmerke: oppdraret nevner ham",
     "ordRoundFocus": "alle grupper samler seg om samme fokusmål",
     "ordRiskLabel": "risikoposisjon: {0}",

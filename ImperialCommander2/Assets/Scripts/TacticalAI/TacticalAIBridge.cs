@@ -754,7 +754,8 @@ namespace TacticalAI
                 var id = h.name ?? h.id;
                 Tac.FeedWorldView.HeroView hv;
                 heroViews.TryGetValue(id, out hv);
-                var prof = TacticalAIAssets.ProfileFor(id, CampaignHeroFor(id));
+                var ch = CampaignHeroFor(id);
+                var prof = TacticalAIAssets.ProfileFor(id, ch);
                 _profileByName[id] = prof;
                 outp.Add(new Tac.FocusCandidate
                 {
@@ -775,6 +776,21 @@ namespace TacticalAI
                     // feed names the hero - never a cell/position read).
                     ObjectiveActor = view != null && !string.IsNullOrEmpty(view.ObjectiveActor)
                         && System.StringComparer.Ordinal.Equals(view.ObjectiveActor, id),
+                    // M11d READY-TO-WIRE (the honest half): the strain BUFFER
+                    // is public printed data and is fully wired - card
+                    // reactions + the hero's current unspent campaign XP
+                    // (purchase-screen law). The MARKERS are the missing
+                    // input: the app does not model strain markers anywhere
+                    // (M11d research: no StrainMarker/stress state exists -
+                    // only the DG 'exhausted' card flag), so this stays null
+                    // and the pressure term is provably inert live. POLLING
+                    // SEAM: when endurance/strain polling lands (concept
+                    // M11d 'Ausdauer-Polling erforschen'), pass the per-hero
+                    // marker count here; budget, ranking, cap and the
+                    // ordStrainPressure WHY cell already work end-to-end
+                    // (pinned by overlord_focus.json m11d_* cases).
+                    StrainMarkers = null,
+                    AvailableXp = ch != null ? (int?)ch.xpAmount : null,
                 });
             }
             return outp;
@@ -906,6 +922,9 @@ namespace TacticalAI
                 parts.Add(TF(L.ordThreat, Tac.Py.F2(dec.Threat.Value.ToDouble())));
             else parts.Add(TF(L.focusFirepower));
             if (dec.Wounded) parts.Add(TF(L.focusWounded));
+            // M11d: only when the pressure actually fired this round
+            if (dec.StrainDruck.HasValue && dec.StrainDruck.Value == Tac.StrainPressure.Druck)
+                parts.Add(TF(L.ordStrainPressure));
             parts.Add(TF(L.ordRoundFocus));
             parts.Add(TF(L.focusNoChance));
             return TF(L.focusPrefix) + heroName + " — " + string.Join("; ", parts);

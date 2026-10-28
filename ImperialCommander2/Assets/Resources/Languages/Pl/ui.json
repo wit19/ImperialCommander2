@@ -315,6 +315,7 @@
     "expPostHoc": "PO WALCE",
     "expFull": "PEŁNE",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
+    "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
     "ordMarked": "znacznik celu: cel misji go wymienia",
     "ordRoundFocus": "wszystkie grupy skupiają się na tym samym celu",
     "ordRiskLabel": "postawa ryzyka: {0}",

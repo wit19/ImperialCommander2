@@ -315,6 +315,7 @@
     "expPostHoc": "DESPUÉS",
     "expFull": "COMPLETA",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
+    "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
     "ordMarked": "marca de objetivo: el objetivo de la misión lo nombra",
     "ordRoundFocus": "todos los grupos convergen en el mismo objetivo focal",
     "ordRiskLabel": "postura de riesgo: {0}",

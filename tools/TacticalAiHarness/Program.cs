@@ -97,6 +97,7 @@ namespace TacticalAiHarness
             Run("hero_w.json", SecHeroW);
             Run("world_feed.json", SecWorldFeed);
             Run("overlord_focus.json", SecOverlordFocus);
+            Run("strain_budget.json", SecStrainBudget);
             Run("keyword_rules.json", SecKeywordRules);
             Run("logger_extract.json", SecLoggerExtract);
 

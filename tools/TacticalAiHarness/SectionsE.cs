@@ -5,7 +5,10 @@
 // OWN printed hero card (tactical_hero_cards.json asset, primed from the
 // shipped file) — the M10b mixed-basis purity case is rewritten onto the
 // single common basis; rows outside the 21-hero roster keep the curated
-// fallback and are labelled "economy". Like world_feed.json this is a
+// fallback and are labelled "economy". M11d: optional per-hero strain_markers
+// add the capped +8 pressure to the econ key when the printed buffer is full
+// (m11d_* cases; the strain_druck expect key appears only on firing rows, so
+// every pre-M11d canon is byte-identical). Like world_feed.json this is a
 // C#-side canonical vector (the sim has no app feed); its W components are
 // sim-vectored via hero_profiles.json / hero_w.json. Expect blocks were
 // recorded once with `--record`, reviewed, then pinned - never hand-written.
@@ -101,6 +104,16 @@ namespace TacticalAiHarness
                             // the live bridge uses); rows outside the 21-hero
                             // roster (fixture heroes) stay on the fallback.
                             Card = HeroCards.For(Json.AsStr(h["hero"])),
+                            // M11d: optional per-hero strain input. ABSENT =
+                            // the live-app state (source cannot see strain ->
+                            // zero influence; every pre-M11d case stays
+                            // byte-identical). The buffer itself is NEVER a
+                            // fixture input - Rank() computes it from the
+                            // hero's shipped card (fairness canon).
+                            StrainMarkers = h.ContainsKey("strain_markers") && h["strain_markers"] != null
+                                ? (int?)Json.AsLong(h["strain_markers"]) : null,
+                            AvailableXp = h.ContainsKey("xp_amount") && h["xp_amount"] != null
+                                ? (int?)Json.AsLong(h["xp_amount"]) : null,
                         });
                     }
                     return list;

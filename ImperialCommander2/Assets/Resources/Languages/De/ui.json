@@ -315,6 +315,7 @@
     "expPostHoc": "NACHHER",
     "expFull": "AUSFÜHRLICH",
     "ordThreat": "Bedrohung {0} pro Runde (gedruckte Heldenkarte: Werte, Waffe, Items)",
+    "ordStrainPressure": "Helden mit vollem Strain-Puffer sind kurzzeitig etwas verwundbarer",
     "ordMarked": "Zielmarke: das Missionsziel nennt ihn",
     "ordRoundFocus": "alle Gruppen richten sich auf dasselbe Fokusziel",
     "ordRiskLabel": "Risikoposition: {0}",

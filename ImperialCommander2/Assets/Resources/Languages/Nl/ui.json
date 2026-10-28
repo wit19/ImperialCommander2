@@ -335,6 +335,7 @@
     "expPostHoc": "NADERHAND",
     "expFull": "VOLLEDIG",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
+    "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
     "ordMarked": "doelmarkering: het missiedoel noemt hem",
     "ordRoundFocus": "alle groepen richten zich op hetzelfde focudoel",
     "ordRiskLabel": "risicopositie: {0}",

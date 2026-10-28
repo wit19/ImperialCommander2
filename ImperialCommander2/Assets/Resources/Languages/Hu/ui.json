@@ -315,6 +315,7 @@
     "expPostHoc": "A CSATA UTÁN",
     "expFull": "TELJES",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
+    "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
     "ordMarked": "cél-jelölő: a küldetéscélnél nevén van",
     "ordRoundFocus": "minden csoport ugyanarra a fókuszcelra fordul",
     "ordRiskLabel": "kockázati állás: {0}",

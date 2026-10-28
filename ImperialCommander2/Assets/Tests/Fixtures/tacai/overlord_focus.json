@@ -863,6 +863,210 @@
      "basis": "card"
     }
    ]
+  },
+  {
+   "name": "m11d_strain_full_flips_tie",
+   "comment": "M11d flip pin: SAME two heroes as m11b_equal_threat_investment_tie (card threat 5/6 each, defense Black). Murne carries his FULL printed buffer (Foresight-like reactions cost 2 strain -> budget 2) -> he cannot pay his reactions this window: +8 (48/6) on the econ key ONLY makes him 53/6 and flips the 5/6 tie away from squad row. The empty half of the same-hero pair is the untouched canon: with strain absent (live-app state) the OLD case still ranks Murne-first by row, byte-identical (m11b_equal_threat_investment_tie unchanged). Threat itself stays 5/6 - the surcharge lands on threat_econ, after the objective-actor +1 slot, before the deterministic tie-chain.",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "strain_markers": 2
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Murne Rin",
+     "marked": false,
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "53/6",
+     "basis": "card",
+     "strain_druck": "8"
+    },
+    {
+     "hero": "Fenn Signis",
+     "marked": false,
+     "wounded": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "basis": "card"
+    }
+   ]
+  },
+  {
+   "name": "m11d_strain_below_buffer_and_capped",
+   "comment": "M11d signal-shape pins (defense None -> eliminate EVs: CT 7/3, Drokkatta 13/6, Biv 13/6): (a) Biv carries 2 of his 3-marker buffer = BELOW -> no signal (no strain_druck key), stays on plain 13/6; (b) CT-1701 at his FULL buffer 2 (barrage export twins merged to ONE reaction, budget 2 not 4) fires +8 = 31/3 and overtakes the 13/6 pair - he was LAST pre-M11d, so the window genuinely softens him; (c) the fired pair then orders by the untouched lower keys (Drokkatta row 0 before Biv row 1): the pressure never re-orders rows it did not lift, and it is capped at +8 regardless of overflow (markers 99 would print the same 31/3 row).",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": null,
+   "heroes": [
+    {
+     "hero": "Drokkatta",
+     "row": 0,
+     "profile": "Drokkatta",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "row": 1,
+     "profile": "Biv Bodhrik",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "strain_markers": 2
+    },
+    {
+     "hero": "CT-1701",
+     "row": 2,
+     "profile": "CT-1701",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "strain_markers": 2
+    }
+   ],
+   "expect": [
+    {
+     "hero": "CT-1701",
+     "marked": false,
+     "wounded": false,
+     "threat": "7/3",
+     "threat_econ": "31/3",
+     "basis": "card",
+     "strain_druck": "8"
+    },
+    {
+     "hero": "Drokkatta",
+     "marked": false,
+     "wounded": false,
+     "threat": "13/6",
+     "threat_econ": "13/6",
+     "basis": "card"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "marked": false,
+     "wounded": false,
+     "threat": "13/6",
+     "threat_econ": "13/6",
+     "basis": "card"
+    }
+   ]
+  },
+  {
+   "name": "m11d_marks_and_wounded_outrank_pressure",
+   "comment": "M11d precedence pins (protect posture; Diala runner values 4 healthy / 2 wounded as in m11b_real_wound_runner, Fenn on the curated prior 10 - eliminate_economy shows the identical card-vs-economy shape). (1) LIGHT, capped: the FULL 3-marker buffer on healthy Diala lifts the econ key 4 -> 12 and nothing else - threat stays 4, no second signal, no scaling. (2) The human aim MARK (key 1) still owns row 0 and carries its own strain_druck cell: pressure rides the econ key, it never demotes the table designation. (3) NO PRIMARY SIGNAL SHIFT: wounded Diala stays ranked by the same econ law she had without any strain input in this family (2 on this key; the reference canon eliminate_economy already pins that wounded rows rank below higher-econ healthy rows), and Biv/Drokkatta-style untouched rows keep their pre-M11d relative order - the +8 only ever moves the row it fires on.",
+   "posture": "protect",
+   "counter": null,
+   "defense": null,
+   "heroes": [
+    {
+     "hero": "Diala Passil",
+     "row": 0,
+     "profile": "Diala Passil",
+     "wounded": false,
+     "marks": 1,
+     "marked_round": 3,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item303"
+      ],
+      "skills": []
+     },
+     "strain_markers": 3
+    },
+    {
+     "hero": "Diala Passil",
+     "row": 1,
+     "profile": "Diala Passil",
+     "wounded": true,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item303"
+      ],
+      "skills": []
+     }
+    },
+    {
+     "hero": "Fenn Signis",
+     "row": 2,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "loadout": {
+      "items": [
+       "item303"
+      ],
+      "skills": []
+     }
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Diala Passil",
+     "marked": true,
+     "wounded": false,
+     "threat": "4",
+     "threat_econ": "12",
+     "basis": "mark",
+     "strain_druck": "8"
+    },
+    {
+     "hero": "Fenn Signis",
+     "marked": false,
+     "wounded": false,
+     "threat": "10",
+     "threat_econ": "10",
+     "basis": "card"
+    },
+    {
+     "hero": "Diala Passil",
+     "marked": false,
+     "wounded": true,
+     "threat": "2",
+     "threat_econ": "2",
+     "basis": "card"
+    }
+   ]
   }
  ]
 }
