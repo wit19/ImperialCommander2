@@ -62,6 +62,13 @@ public class UITacticalAI
 	// reality), {1} = spent XP. The stored audit trail stays machine-keyed
 	// ("buy:<cardId>" in the xpLog); this is the display row (M12e panel).
 	public string impBuyLog;
+	// M12d2 agenda purchase lines (ui.json uiTacticalAI, 11 languages).
+	// agendaBuyKept carries the SPEND ONLY - the card stays secret (RR
+	// "keep this card secret"; anti-leak law in AgendaState.RebelView).
+	public string agendaBuySide;
+	public string agendaBuyForced;
+	public string agendaBuyOngoing;
+	public string agendaBuyKept;
 	public string depSecret, depOpen, expNone, expPostHoc, expFull;
 }
 

@@ -875,6 +875,42 @@ namespace Saga
 			NextEventAction();
 		}
 
+		// TACTICAL AI M12d2: CM7 - influence income books into the single
+		// truth source, the M12d2 influence ledger on AgendaState (RR
+		// "Influence": gains and spends both recorded on the campaign log;
+		// saving up is legal). Mirrors ModifyImperialXP exactly: tactical
+		// campaigns without agenda data re-derive the deterministic setup
+		// choice first; non-tactical campaigns keep 'kein Agenda-State' and
+		// the booking is honestly skipped (Scope 6: the mode UI only ever
+		// shows what the mode allows). Purchases do NOT trigger here - the
+		// agenda market runs on the campaign-load hook (SagaCampaign), the
+		// RR upgrade stage is BETWEEN missions.
+		void ModifyInfluence( CampaignModifyInfluence mci )
+		{
+			if ( RunningCampaign.sagaCampaignGUID != Guid.Empty )
+			{
+				var campaign = RunningCampaign.sagaCampaign;
+				if ( campaign.agenda == null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { campaign.EnsureAgendaDeck(); }
+					catch ( Exception e ) { Debug.LogWarning( $"SagaEventManager()::ModifyInfluence agenda choice failed {e.Message}" ); }
+				}
+				if ( campaign.agenda != null )
+				{
+					var reason = string.IsNullOrEmpty( mci.reason ) ? "event" : mci.reason;
+					Debug.Log( $"SagaEventManager()::PROCESSING ModifyInfluence: {mci.influenceToAdd} ({reason})" );
+					campaign.agenda.AddInfluence( mci.influenceToAdd, $"influence:{reason}" );
+					campaign.SaveCampaignState();
+				}
+				else
+					Debug.Log( $"SagaEventManager()::ModifyInfluence({mci.influenceToAdd})::no agenda deck (non-tactical), skipped" );
+			}
+			else
+				Debug.Log( $"SagaEventManager()::ModifyInfluence({mci.influenceToAdd})::Campaign isn't active" );
+
+			NextEventAction();
+		}
+
 		void ModifyCredits( CampaignModifyCredits mcredits )
 		{
 			if ( RunningCampaign.sagaCampaignGUID != Guid.Empty )

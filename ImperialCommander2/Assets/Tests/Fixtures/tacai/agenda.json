@@ -1,0 +1,965 @@
+{
+ "_comment": "M12d2 Agenda system: influence economy + 4-card market + AI buys. AUTHORED, not recorded (like imperial_deck.json / imperial_purchases.json): expectations computed by the independent Python twin wiki_data/tools/tacai_agenda_twin.py from the rules documented in Assets/Scripts/TacticalAI/Core/AgendaCards.cs + AgendaMarket.cs + Saga/Managers/AgendaState.cs, against the SHIPPED asset (tactical_agenda_cards.json). RR basis: FFG Rules Reference (wording secured 28.10.2026): setup chooses 6 sets of 3 -> 18-card deck; upgrade stage: XP first, then influence -> shuffles agenda deck, SECRETLY draws 4, buys any for printed influence, unpaid cards shuffle BACK unrevealed; types side/forced/ongoing/kept secret; influence over the campaign log, saving up legal; kept secrets secret until resolved (anti-leak: Saga AgendaState.RebelView, fixture anti_leak block). Time-period RR filter is per-card [lo,hi] (fixture time_period_gate) - the app models no campaign-level time period, so the production default stays vacuous-null (honest, documented). Campaign-save blocks reuse the M12b profile fixture (GUID varied -> agenda seed).",
+ "schema": 1,
+ "asset_stats": {
+  "schema": "tacai.agenda_cards/1",
+  "set_count": 42,
+  "card_count": 126,
+  "time_period_cards": {
+   "[1, 8]": 1,
+   "[1, 5]": 2
+  },
+  "by_type": {
+   "kept_secret": 73,
+   "side_mission": 27,
+   "forced_mission": 2,
+   "ongoing": 24
+  },
+  "by_cost": {
+   "1": 61,
+   "3": 27,
+   "4": 2,
+   "2": 36
+  }
+ },
+ "setup_cases": [
+  {
+   "name": "agenda_core",
+   "campaign_save": {
+    "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     },
+     {
+      "heroID": "H4"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Scout Trooper"
+     },
+     {
+      "name": "Assault Trooper"
+     },
+     {
+      "name": "Imperial Probe Droid"
+     },
+     {
+      "name": "Heavy Weapon Expert"
+     },
+     {
+      "name": "Omblesse Officer"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 1,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 1
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "expect": {
+    "seed": "8872f416f0df846e",
+    "chosen_sets": [
+     "infiltration_agenda_set",
+     "devious_droids",
+     "stormtrooper_support",
+     "enhanced_interrogation",
+     "persistence",
+     "the_emperor_s_plots"
+    ],
+    "deck": [
+     "devious_droids__etiquette_and_torture",
+     "enhanced_interrogation__learn_their_weaknesses",
+     "devious_droids__missile_salvo",
+     "persistence__no_rest_for_the_weary",
+     "stormtrooper_support__military_presence",
+     "stormtrooper_support__perpetual_reinforcements",
+     "persistence__snap_fire",
+     "infiltration_agenda_set__misdirection",
+     "the_emperor_s_plots__for_the_emperor",
+     "enhanced_interrogation__blackmail",
+     "devious_droids__invasive_procedure",
+     "stormtrooper_support__strength_of_command",
+     "the_emperor_s_plots__isolation",
+     "infiltration_agenda_set__quiet_entry",
+     "the_emperor_s_plots__insidious",
+     "enhanced_interrogation__weak_links",
+     "infiltration_agenda_set__trip_mine",
+     "persistence__jetpacks_agenda_card"
+    ],
+    "top_totals": [
+     59,
+     54,
+     51,
+     50,
+     49,
+     49,
+     47,
+     47
+    ]
+   }
+  },
+  {
+   "name": "agenda_rich",
+   "campaign_save": {
+    "GUID": "77aa55cc-33bb-44dd-9eff-011223344556",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     },
+     {
+      "heroID": "H3"
+     },
+     {
+      "heroID": "H4"
+     },
+     {
+      "heroID": "H5"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Scout Trooper"
+     },
+     {
+      "name": "Assault Trooper"
+     },
+     {
+      "name": "Imperial Probe Droid"
+     },
+     {
+      "name": "Heavy Weapon Expert"
+     },
+     {
+      "name": "Omblesse Officer"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 1,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 3
+     },
+     {
+      "missionType": 1,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "expect": {
+    "seed": "3ca9610fe5f83641",
+    "chosen_sets": [
+     "infiltration_agenda_set",
+     "enhanced_interrogation",
+     "devious_droids",
+     "the_emperor_s_plots",
+     "imperial_intelligence",
+     "stormtrooper_support"
+    ],
+    "deck": [
+     "the_emperor_s_plots__isolation",
+     "enhanced_interrogation__weak_links",
+     "devious_droids__missile_salvo",
+     "enhanced_interrogation__blackmail",
+     "the_emperor_s_plots__for_the_emperor",
+     "imperial_intelligence__classified_techniques",
+     "devious_droids__invasive_procedure",
+     "stormtrooper_support__strength_of_command",
+     "stormtrooper_support__military_presence",
+     "imperial_intelligence__under_surveillance",
+     "devious_droids__etiquette_and_torture",
+     "the_emperor_s_plots__insidious",
+     "enhanced_interrogation__learn_their_weaknesses",
+     "imperial_intelligence__security_breach",
+     "infiltration_agenda_set__quiet_entry",
+     "infiltration_agenda_set__trip_mine",
+     "infiltration_agenda_set__misdirection",
+     "stormtrooper_support__perpetual_reinforcements"
+    ],
+    "top_totals": [
+     57,
+     54,
+     53,
+     51,
+     49,
+     49,
+     47,
+     47
+    ]
+   }
+  },
+  {
+   "name": "time_period_gate_6",
+   "campaign_save": {
+    "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     },
+     {
+      "heroID": "H4"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Scout Trooper"
+     },
+     {
+      "name": "Assault Trooper"
+     },
+     {
+      "name": "Imperial Probe Droid"
+     },
+     {
+      "name": "Heavy Weapon Expert"
+     },
+     {
+      "name": "Omblesse Officer"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 1,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 1
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "campaign_time_period": 6,
+   "expect": {
+    "seed": "8872f416f0df846e",
+    "chosen_sets": [
+     "infiltration_agenda_set",
+     "devious_droids",
+     "stormtrooper_support",
+     "enhanced_interrogation",
+     "persistence",
+     "the_emperor_s_plots"
+    ],
+    "deck": [
+     "devious_droids__etiquette_and_torture",
+     "enhanced_interrogation__learn_their_weaknesses",
+     "devious_droids__missile_salvo",
+     "persistence__no_rest_for_the_weary",
+     "stormtrooper_support__military_presence",
+     "stormtrooper_support__perpetual_reinforcements",
+     "persistence__snap_fire",
+     "infiltration_agenda_set__misdirection",
+     "the_emperor_s_plots__for_the_emperor",
+     "enhanced_interrogation__blackmail",
+     "devious_droids__invasive_procedure",
+     "stormtrooper_support__strength_of_command",
+     "the_emperor_s_plots__isolation",
+     "infiltration_agenda_set__quiet_entry",
+     "the_emperor_s_plots__insidious",
+     "enhanced_interrogation__weak_links",
+     "infiltration_agenda_set__trip_mine",
+     "persistence__jetpacks_agenda_card"
+    ],
+    "illegal_sets": [
+     "pursuit_of_the_enemy",
+     "soldiers_for_hire"
+    ]
+   }
+  }
+ ],
+ "market_stages": {
+  "name": "agenda_rich_3stages",
+  "campaign_save": {
+   "GUID": "77aa55cc-33bb-44dd-9eff-011223344556",
+   "campaignHeroes": [
+    {
+     "heroID": "H1"
+    },
+    {
+     "heroID": "H2"
+    },
+    {
+     "heroID": "H3"
+    },
+    {
+     "heroID": "H4"
+    },
+    {
+     "heroID": "H5"
+    }
+   ],
+   "campaignVillains": [
+    {
+     "name": "Scout Trooper"
+    },
+    {
+     "name": "Assault Trooper"
+    },
+    {
+     "name": "Imperial Probe Droid"
+    },
+    {
+     "name": "Heavy Weapon Expert"
+    },
+    {
+     "name": "Omblesse Officer"
+    }
+   ],
+   "campaignStructure": [
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 3
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 5
+    }
+   ]
+  },
+  "influence_events": [
+   3,
+   1,
+   5
+  ],
+  "expect_stages": [
+   {
+    "stage": 0,
+    "market": [
+     "the_emperor_s_plots__isolation",
+     "enhanced_interrogation__blackmail",
+     "devious_droids__invasive_procedure",
+     "the_emperor_s_plots__for_the_emperor"
+    ],
+    "buys": [
+     {
+      "card": "the_emperor_s_plots__isolation",
+      "name": "Isolation",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 26,
+      "noise": 3,
+      "total": 29
+     },
+     {
+      "card": "devious_droids__invasive_procedure",
+      "name": "Invasive Procedure",
+      "type": "kept_secret",
+      "cost": 2,
+      "read_aloud": false,
+      "synergy": 17,
+      "noise": 0,
+      "total": 17
+     }
+    ],
+    "not_purchased": [
+     "enhanced_interrogation__blackmail",
+     "the_emperor_s_plots__for_the_emperor"
+    ],
+    "deck_after": [
+     "imperial_intelligence__under_surveillance",
+     "imperial_intelligence__security_breach",
+     "imperial_intelligence__classified_techniques",
+     "enhanced_interrogation__learn_their_weaknesses",
+     "stormtrooper_support__military_presence",
+     "infiltration_agenda_set__misdirection",
+     "infiltration_agenda_set__trip_mine",
+     "devious_droids__etiquette_and_torture",
+     "enhanced_interrogation__weak_links",
+     "devious_droids__missile_salvo",
+     "infiltration_agenda_set__quiet_entry",
+     "stormtrooper_support__perpetual_reinforcements",
+     "the_emperor_s_plots__insidious",
+     "stormtrooper_support__strength_of_command",
+     "enhanced_interrogation__blackmail",
+     "the_emperor_s_plots__for_the_emperor"
+    ],
+    "influence_before": 3,
+    "influence_after": 0
+   },
+   {
+    "stage": 1,
+    "market": [
+     "stormtrooper_support__perpetual_reinforcements",
+     "infiltration_agenda_set__quiet_entry",
+     "the_emperor_s_plots__insidious",
+     "enhanced_interrogation__learn_their_weaknesses"
+    ],
+    "buys": [
+     {
+      "card": "enhanced_interrogation__learn_their_weaknesses",
+      "name": "Learn Their Weaknesses",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 22,
+      "noise": 0,
+      "total": 22
+     }
+    ],
+    "not_purchased": [
+     "stormtrooper_support__perpetual_reinforcements",
+     "infiltration_agenda_set__quiet_entry",
+     "the_emperor_s_plots__insidious"
+    ],
+    "deck_after": [
+     "stormtrooper_support__strength_of_command",
+     "the_emperor_s_plots__for_the_emperor",
+     "imperial_intelligence__under_surveillance",
+     "imperial_intelligence__security_breach",
+     "devious_droids__etiquette_and_torture",
+     "stormtrooper_support__military_presence",
+     "infiltration_agenda_set__trip_mine",
+     "devious_droids__missile_salvo",
+     "imperial_intelligence__classified_techniques",
+     "enhanced_interrogation__weak_links",
+     "enhanced_interrogation__blackmail",
+     "infiltration_agenda_set__misdirection",
+     "stormtrooper_support__perpetual_reinforcements",
+     "infiltration_agenda_set__quiet_entry",
+     "the_emperor_s_plots__insidious"
+    ],
+    "influence_before": 1,
+    "influence_after": 0
+   },
+   {
+    "stage": 2,
+    "market": [
+     "stormtrooper_support__military_presence",
+     "infiltration_agenda_set__quiet_entry",
+     "imperial_intelligence__security_breach",
+     "infiltration_agenda_set__trip_mine"
+    ],
+    "buys": [
+     {
+      "card": "infiltration_agenda_set__trip_mine",
+      "name": "Trip Mine",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 22,
+      "noise": 2,
+      "total": 24
+     },
+     {
+      "card": "infiltration_agenda_set__quiet_entry",
+      "name": "Quiet Entry",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 20,
+      "noise": 0,
+      "total": 20
+     },
+     {
+      "card": "stormtrooper_support__military_presence",
+      "name": "Military Presence",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 14,
+      "noise": 1,
+      "total": 15
+     }
+    ],
+    "not_purchased": [
+     "imperial_intelligence__security_breach"
+    ],
+    "deck_after": [
+     "the_emperor_s_plots__insidious",
+     "enhanced_interrogation__weak_links",
+     "imperial_intelligence__under_surveillance",
+     "devious_droids__missile_salvo",
+     "devious_droids__etiquette_and_torture",
+     "stormtrooper_support__perpetual_reinforcements",
+     "infiltration_agenda_set__misdirection",
+     "imperial_intelligence__classified_techniques",
+     "stormtrooper_support__strength_of_command",
+     "enhanced_interrogation__blackmail",
+     "the_emperor_s_plots__for_the_emperor",
+     "imperial_intelligence__security_breach"
+    ],
+    "influence_before": 5,
+    "influence_after": 2
+   }
+  ],
+  "expect_final": {
+   "deck_after": [
+    "the_emperor_s_plots__insidious",
+    "enhanced_interrogation__weak_links",
+    "imperial_intelligence__under_surveillance",
+    "devious_droids__missile_salvo",
+    "devious_droids__etiquette_and_torture",
+    "stormtrooper_support__perpetual_reinforcements",
+    "infiltration_agenda_set__misdirection",
+    "imperial_intelligence__classified_techniques",
+    "stormtrooper_support__strength_of_command",
+    "enhanced_interrogation__blackmail",
+    "the_emperor_s_plots__for_the_emperor",
+    "imperial_intelligence__security_breach"
+   ],
+   "balance": 2,
+   "total_buys": 6
+  }
+ },
+ "market_stages_plain": {
+  "name": "agenda_empty_profile_2stages",
+  "campaign_save": {
+   "GUID": "00000000-0000-0000-0000-000000000000",
+   "campaignHeroes": [],
+   "campaignVillains": [],
+   "campaignStructure": []
+  },
+  "influence_events": [
+   4,
+   4
+  ],
+  "expect_stages": [
+   {
+    "stage": 0,
+    "market": [
+     "imperial_security_bureau__imperial_operative",
+     "field_commander__reinforcements_en_route",
+     "guild_hunters_imperial_agenda__shoot_first",
+     "lord_vader_s_command__a_dark_power"
+    ],
+    "buys": [
+     {
+      "card": "field_commander__reinforcements_en_route",
+      "name": "Reinforcements En Route",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 3,
+      "total": 3
+     },
+     {
+      "card": "lord_vader_s_command__a_dark_power",
+      "name": "A Dark Power",
+      "type": "kept_secret",
+      "cost": 2,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 3,
+      "total": 3
+     },
+     {
+      "card": "imperial_security_bureau__imperial_operative",
+      "name": "Imperial Operative",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 2,
+      "total": 2
+     }
+    ],
+    "not_purchased": [
+     "guild_hunters_imperial_agenda__shoot_first"
+    ],
+    "deck_after": [
+     "guild_hunters_imperial_agenda__abandon_contract",
+     "lord_vader_s_command__as_you_wish",
+     "imperial_security_bureau__internal_affairs",
+     "imperial_security_bureau__isb_enforcers",
+     "field_commander__unyielding_dedication",
+     "contract_gunmen__stealth_squad",
+     "contract_gunmen__top_target",
+     "field_commander__assault_coordination",
+     "a_former_sith__critical_strikes",
+     "guild_hunters_imperial_agenda__call_your_shot",
+     "contract_gunmen__hunter_for_a_fee",
+     "a_former_sith__dubious_disposition",
+     "lord_vader_s_command__dark_obsession",
+     "a_former_sith__imminent_reprisal",
+     "guild_hunters_imperial_agenda__shoot_first"
+    ],
+    "influence_before": 4,
+    "influence_after": 0
+   },
+   {
+    "stage": 1,
+    "market": [
+     "a_former_sith__critical_strikes",
+     "imperial_security_bureau__isb_enforcers",
+     "field_commander__assault_coordination",
+     "lord_vader_s_command__dark_obsession"
+    ],
+    "buys": [
+     {
+      "card": "a_former_sith__critical_strikes",
+      "name": "Critical Strikes",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 3,
+      "total": 3
+     },
+     {
+      "card": "imperial_security_bureau__isb_enforcers",
+      "name": "ISB Enforcers",
+      "type": "kept_secret",
+      "cost": 2,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 2,
+      "total": 2
+     },
+     {
+      "card": "field_commander__assault_coordination",
+      "name": "Assault Coordination",
+      "type": "kept_secret",
+      "cost": 1,
+      "read_aloud": false,
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     }
+    ],
+    "not_purchased": [
+     "lord_vader_s_command__dark_obsession"
+    ],
+    "deck_after": [
+     "guild_hunters_imperial_agenda__abandon_contract",
+     "imperial_security_bureau__internal_affairs",
+     "guild_hunters_imperial_agenda__call_your_shot",
+     "lord_vader_s_command__as_you_wish",
+     "contract_gunmen__stealth_squad",
+     "contract_gunmen__hunter_for_a_fee",
+     "guild_hunters_imperial_agenda__shoot_first",
+     "a_former_sith__dubious_disposition",
+     "contract_gunmen__top_target",
+     "a_former_sith__imminent_reprisal",
+     "field_commander__unyielding_dedication",
+     "lord_vader_s_command__dark_obsession"
+    ],
+    "influence_before": 4,
+    "influence_after": 0
+   }
+  ],
+  "expect_final": {
+   "deck_after": [
+    "guild_hunters_imperial_agenda__abandon_contract",
+    "imperial_security_bureau__internal_affairs",
+    "guild_hunters_imperial_agenda__call_your_shot",
+    "lord_vader_s_command__as_you_wish",
+    "contract_gunmen__stealth_squad",
+    "contract_gunmen__hunter_for_a_fee",
+    "guild_hunters_imperial_agenda__shoot_first",
+    "a_former_sith__dubious_disposition",
+    "contract_gunmen__top_target",
+    "a_former_sith__imminent_reprisal",
+    "field_commander__unyielding_dedication",
+    "lord_vader_s_command__dark_obsession"
+   ],
+   "balance": 0,
+   "total_buys": 6
+  }
+ },
+ "backfill_identity": {
+  "campaign_save": {
+   "GUID": "77aa55cc-33bb-44dd-9eff-011223344556",
+   "campaignHeroes": [
+    {
+     "heroID": "H1"
+    },
+    {
+     "heroID": "H2"
+    },
+    {
+     "heroID": "H3"
+    },
+    {
+     "heroID": "H4"
+    },
+    {
+     "heroID": "H5"
+    }
+   ],
+   "campaignVillains": [
+    {
+     "name": "Scout Trooper"
+    },
+    {
+     "name": "Assault Trooper"
+    },
+    {
+     "name": "Imperial Probe Droid"
+    },
+    {
+     "name": "Heavy Weapon Expert"
+    },
+    {
+     "name": "Omblesse Officer"
+    }
+   ],
+   "campaignStructure": [
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 3
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 5
+    }
+   ]
+  },
+  "expect": {
+   "seed": "3ca9610fe5f83641",
+   "deck": [
+    "the_emperor_s_plots__isolation",
+    "enhanced_interrogation__weak_links",
+    "devious_droids__missile_salvo",
+    "enhanced_interrogation__blackmail",
+    "the_emperor_s_plots__for_the_emperor",
+    "imperial_intelligence__classified_techniques",
+    "devious_droids__invasive_procedure",
+    "stormtrooper_support__strength_of_command",
+    "stormtrooper_support__military_presence",
+    "imperial_intelligence__under_surveillance",
+    "devious_droids__etiquette_and_torture",
+    "the_emperor_s_plots__insidious",
+    "enhanced_interrogation__learn_their_weaknesses",
+    "imperial_intelligence__security_breach",
+    "infiltration_agenda_set__quiet_entry",
+    "infiltration_agenda_set__trip_mine",
+    "infiltration_agenda_set__misdirection",
+    "stormtrooper_support__perpetual_reinforcements"
+   ]
+  }
+ },
+ "anti_leak": {
+  "campaign_save": {
+   "GUID": "77aa55cc-33bb-44dd-9eff-011223344556",
+   "campaignHeroes": [
+    {
+     "heroID": "H1"
+    },
+    {
+     "heroID": "H2"
+    },
+    {
+     "heroID": "H3"
+    },
+    {
+     "heroID": "H4"
+    },
+    {
+     "heroID": "H5"
+    }
+   ],
+   "campaignVillains": [
+    {
+     "name": "Scout Trooper"
+    },
+    {
+     "name": "Assault Trooper"
+    },
+    {
+     "name": "Imperial Probe Droid"
+    },
+    {
+     "name": "Heavy Weapon Expert"
+    },
+    {
+     "name": "Omblesse Officer"
+    }
+   ],
+   "campaignStructure": [
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 3
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    },
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 5
+    }
+   ]
+  },
+  "influence_events": [
+   3,
+   1,
+   5
+  ],
+  "expect": {
+   "kept_secret_buys": [
+    "the_emperor_s_plots__isolation",
+    "devious_droids__invasive_procedure",
+    "enhanced_interrogation__learn_their_weaknesses",
+    "infiltration_agenda_set__trip_mine",
+    "infiltration_agenda_set__quiet_entry",
+    "stormtrooper_support__military_presence"
+   ],
+   "buy_rows": [
+    {
+     "type": "kept_secret",
+     "cost": 1,
+     "card": ""
+    },
+    {
+     "type": "kept_secret",
+     "cost": 2,
+     "card": ""
+    },
+    {
+     "type": "kept_secret",
+     "cost": 1,
+     "card": ""
+    },
+    {
+     "type": "kept_secret",
+     "cost": 1,
+     "card": ""
+    },
+    {
+     "type": "kept_secret",
+     "cost": 1,
+     "card": ""
+    },
+    {
+     "type": "kept_secret",
+     "cost": 1,
+     "card": ""
+    }
+   ],
+   "forbidden_strings": [
+    "devious_droids__invasive_procedure|Invasive Procedure",
+    "enhanced_interrogation__learn_their_weaknesses|Learn Their Weaknesses",
+    "infiltration_agenda_set__quiet_entry|Quiet Entry",
+    "infiltration_agenda_set__trip_mine|Trip Mine",
+    "stormtrooper_support__military_presence|Military Presence",
+    "the_emperor_s_plots__isolation|Isolation"
+   ]
+  }
+ },
+ "classification": {
+  "expect": {
+   "rows": 126,
+   "a_store": 97,
+   "b_public": 29
+  }
+ },
+ "store_routing": {
+  "expect": {
+   "picks": [
+    {
+     "card": "agents_of_the_empire__tracking_beacon",
+     "name": "Tracking Beacon",
+     "type": "ongoing",
+     "cost": 1
+    },
+    {
+     "card": "a_former_sith__dubious_disposition",
+     "name": "Dubious Disposition",
+     "type": "side_mission",
+     "cost": 3
+    },
+    {
+     "card": "agents_of_the_empire__impounded",
+     "name": "Impounded",
+     "type": "forced_mission",
+     "cost": 4
+    },
+    {
+     "card": "a_former_sith__critical_strikes",
+     "name": "Critical Strikes",
+     "type": "kept_secret",
+     "cost": 1
+    }
+   ]
+  }
+ }
+}

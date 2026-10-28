@@ -508,6 +508,9 @@ namespace Saga
 				case EventActionType.CM6:
 					ModifyImperialXP( eventAction as CampaignModifyImperialXP );
 					break;
+				case EventActionType.CM7:
+					ModifyInfluence( eventAction as CampaignModifyInfluence );
+					break;
 				default:
 					Debug.Log( "ProcessEventAction()::EVENT TYPE NOT SUPPORTED: " + eventAction.eventActionType.ToString() + " = " + (int)eventAction.eventActionType );
 					NextEventAction();

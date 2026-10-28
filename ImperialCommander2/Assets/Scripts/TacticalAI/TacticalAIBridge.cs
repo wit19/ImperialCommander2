@@ -966,6 +966,66 @@ namespace TacticalAI
             catch { return null; }
         }
 
+        // ------------------------------------------------- M12d2 agenda deck
+        /// <summary>The live campaign's agenda store (M12d2 field). Null =
+        /// 'kein Agenda-State': non-tactical campaigns never carry agenda
+        /// data and older saves load null (valid base state).</summary>
+        static Saga.AgendaState AgendaLive()
+        {
+            try
+            {
+                var camp = Saga.RunningCampaign.sagaCampaign;
+                return camp == null ? null : camp.agenda;
+            }
+            catch { return null; }
+        }
+
+        /// <summary>REBEL-SAFE purchase ledger for UI/log/export consumers
+        /// (M12e): RR type + printed influence cost of every buy, card
+        /// identities of UNREVEALED Kept Secrets removed - the anti-leak
+        /// law lives in AgendaState.RebelView, this seam just exposes it.
+        /// Null when there is no agenda state.</summary>
+        public static List<Dictionary<string, object>> AgendaPublicLedger()
+        {
+            try
+            {
+                var st = AgendaLive();
+                return st == null ? null : st.RebelView();
+            }
+            catch { return null; }
+        }
+
+        /// <summary>Imperial-side audit view (human imperial / dev console
+        /// ONLY - feeding this into a rebel-facing surface is the leak the
+        /// anti-leak fixture forbids): full purchase rows incl. unrevealed
+        /// Kept Secrets. Null when there is no agenda state.</summary>
+        public static List<Dictionary<string, object>> AgendaImperialAuditView()
+        {
+            try
+            {
+                var st = AgendaLive();
+                return st == null ? null : st.ImperialAuditView();
+            }
+            catch { return null; }
+        }
+
+        /// <summary>M12d-style classification table of the shipped agenda
+        /// asset (every card -> bucket + hook, pure function of the asset):
+        /// 'a_store' rows are model-wired (ongoing persistence, kept-secret
+        /// reserve), 'b_public' rows are announcement-only by the PRUF-
+        /// AUFTRAG (2) verdict. Null while the asset is unavailable.</summary>
+        public static List<Dictionary<string, object>> AgendaClassification()
+        {
+            try
+            {
+                _ = TacticalAIAssets.AgendaCardsRoot;          // prime Core doc
+                var table = Tac.AgendaCards.Load();
+                return table == null ? null
+                    : Tac.AgendaCards.ClassificationTable(table);
+            }
+            catch { return null; }
+        }
+
         /// <summary>Round-level designation on the feed state (focus fire:
         /// every group plans towards the SAME target; the order plan decides
         /// WHO walks it first - Mehrgruppenzug). Recomputed on activation when

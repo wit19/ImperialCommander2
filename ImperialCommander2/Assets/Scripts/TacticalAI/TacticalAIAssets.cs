@@ -21,6 +21,7 @@ namespace TacticalAI
         const string HERO_CARDS_PATH = "Languages/En/tactical_hero_cards";
         const string IMPERIAL_DECKS_PATH = "Languages/En/tactical_imperial_decks";
         const string IMPERIAL_CARD_EFFECTS_PATH = "Languages/En/tactical_imperial_card_effects";
+        const string AGENDA_CARDS_PATH = "Languages/En/tactical_agenda_cards";
         const string CAMPAIGN_ITEMS_PATH = "Languages/En/CampaignData/items";
         const string CAMPAIGN_SKILLS_PATH = "Languages/En/CampaignData/skills";
 
@@ -30,10 +31,12 @@ namespace TacticalAI
         static object _heroCardsRoot;
         static object _imperialDecksRoot;
         static object _imperialCardEffectsRoot;
+        static object _agendaCardsRoot;
         static object _campaignItemsRoot;
         static object _campaignSkillsRoot;
         static bool _orderDecksFailed, _lethalityFailed, _heroProfilesFailed,
                     _heroCardsFailed, _imperialDecksFailed, _imperialCardEffectsFailed,
+                    _agendaCardsFailed,
                     _campaignItemsFailed, _campaignSkillsFailed;
 
         /// <summary>tacai.order_decks/1 root object (Core Json) or null when
@@ -140,6 +143,23 @@ namespace TacticalAI
                         Tac.ImperialCardEffects.PrimeDoc(d);
                 }
                 return _imperialCardEffectsRoot;
+            }
+        }
+
+        /// <summary>M12d2: tacai.agenda_cards/1 - the agenda cards + sets
+        /// (42 complete 3-card sets, 126 cards). Loads AND primes the Core
+        /// cache (same seam as ImperialDecksRoot).</summary>
+        public static object AgendaCardsRoot
+        {
+            get
+            {
+                if (_agendaCardsRoot == null && !_agendaCardsFailed)
+                {
+                    _agendaCardsRoot = LoadJson(AGENDA_CARDS_PATH, ref _agendaCardsFailed);
+                    if (_agendaCardsRoot is System.Collections.Generic.Dictionary<string, object> d)
+                        Tac.AgendaCards.PrimeDoc(d);
+                }
+                return _agendaCardsRoot;
             }
         }
 

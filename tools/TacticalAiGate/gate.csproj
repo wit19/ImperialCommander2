@@ -13,6 +13,8 @@
     <Compile Include="ImperialDeckGate.cs" />
     <Compile Include="ImperialPurchaseGate.cs" />
     <Compile Include="ImperialCardEffectsGate.cs" />
+    <Compile Include="AgendaGate.cs" />
     <Compile Include="..\..\ImperialCommander2\Assets\Scripts\Screens\CampaignScreen\Models\ImperialDeckState.cs" />
+    <Compile Include="..\..\ImperialCommander2\Assets\Scripts\Screens\CampaignScreen\Models\AgendaState.cs" />
   </ItemGroup>
 </Project>

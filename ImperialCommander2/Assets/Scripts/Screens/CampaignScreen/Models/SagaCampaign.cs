@@ -39,6 +39,12 @@ namespace Saga
 		// passes the FileManager/ContinueCampaignPanel format filter).
 		public ImperialDeckState imperialDeck;
 
+		// TACTICAL AI (M12d2): Agenda deck of the campaign (RR "Building the
+		// Agenda Deck" + "Influence") - null is the VALID 'kein Agenda-State'
+		// base state: older saves load as null; non-tactical campaigns never
+		// store agenda data. ADDITIVE field only, formatVersion STAYS 2.
+		public AgendaState agenda;
+
 		//data sets
 		[JsonIgnore]
 		public static List<CampaignItem> campaignDataItems;
@@ -230,6 +236,22 @@ namespace Saga
 					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::imperial upgrade stage failed " + e.Message ); }
 				}
 
+				// TACTICAL AI (M12d2): agenda deck backfill + the agenda half
+				// of the Imperial Upgrade Stage (RR order: "first ... XP ...
+				// then influence" -> runs AFTER the class-card stage above).
+				// Same in-memory doctrine; the market is ONE draw per stage
+				// and fully re-derivable from seed + stage pointer.
+				if ( state.agenda == null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { state.EnsureAgendaDeck(); }
+					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::agenda deck backfill failed " + e.Message ); }
+				}
+				if ( state.agenda != null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { state.RunAgendaUpgradeStage(); }
+					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::agenda upgrade stage failed " + e.Message ); }
+				}
+
 				Debug.Log( "***CAMPAIGN LOADED***" );
 				return state;
 			}
@@ -251,6 +273,12 @@ namespace Saga
 			{
 				try { EnsureImperialDeck(); }
 				catch ( Exception e ) { Debug.LogWarning( "SaveCampaignState()::imperial deck choice failed " + e.Message ); }
+			}
+			// M12d2: same additive rule for the agenda deck.
+			if ( agenda == null && TacticalAI.TacticalAISettings.Enabled )
+			{
+				try { EnsureAgendaDeck(); }
+				catch ( Exception e ) { Debug.LogWarning( "SaveCampaignState()::agenda deck choice failed " + e.Message ); }
 			}
 
 			if ( structures != null )
@@ -631,6 +659,160 @@ namespace Saga
 			foreach ( var c in imperialDeck.cards )
 				owned.Add( c.id );
 			return owned;
+		}
+
+		// ------------------------------------------------- M12d2 agenda deck
+		// Rules Reference law implemented here (verbatim in
+		// TacticalAI/Core/AgendaCards.cs / AgendaMarket.cs headers): setup
+		// picks SIX complete 3-card sets (time-period filter is data-driven
+		// and vacuous while the app models no campaign time period - see
+		// AgendaCards.SetLegal), the deck is shuffled ONCE at setup, and
+		// every Imperial Upgrade Stage runs exactly ONE market: "shuffles
+		// the Agenda deck and secretly draws four of them", buys anything
+		// affordable from the four, returns the rest UNREVEALED. The stage
+		// pointer (stagesRun) makes the sequence re-derivable end to end;
+		// influence books through the append-only campaign-log ledger
+		// (RR "Influence"), income arrives via CM7 bookings like CM6 XP -
+		// mission rewards are mission CONTENT, this module never invents
+		// income. RR order "first ... XP ... then influence": this runs
+		// right after RunImperialUpgradeStage() on the same load.
+		// Side/Forced announcements: PRUEFAUFTRAG (2) found NO agenda-shaped
+		// trigger (details in the M12d2 closing comment) - the buy becomes
+		// the public read-aloud announcement, execution stays with the
+		// table. Kept Secret content never leaves the store until the card
+		// itself demands resolution (AgendaState.RebelView anti-leak law).
+
+		/// <summary>Read-only view of the deterministic setup choice (6 sets
+		/// + deck order) for the CURRENT campaign - the human imperial's
+		/// setup PROPOSAL (scope 6: display without compulsion) and the
+		/// backfill source. Pure: never writes. Null: asset missing.</summary>
+		public TacticalAI.Core.AgendaDeckChoice PreviewAgendaSetup()
+		{
+			try
+			{
+				var table = AgendaTableOrNull();
+				if ( table == null ) return null;
+				var seed = TacticalAI.Core.AgendaCards.AgendaSeedFor( GUID.ToString() );
+				return TacticalAI.Core.AgendaCards.ChooseDeck( table, BuildImperialProfile(),
+					seed, CampaignTimePeriodOrNull() );
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::PreviewAgendaSetup failed " + e.Message );
+				return null;
+			}
+		}
+
+		/// <summary>Backfill/creation entry: freeze the deterministic setup
+		/// choice into the store. Idempotent; only ever called while the
+		/// tactical mode is ON (same doctrine as EnsureImperialDeck).</summary>
+		public void EnsureAgendaDeck()
+		{
+			if ( agenda != null ) return;
+			var choice = PreviewAgendaSetup();
+			if ( choice == null ) return;   // asset missing - stay 'kein Agenda-State'
+			agenda = AgendaState.FromChoice( choice, GUID.ToString() );
+		}
+
+		/// <summary>Run the ONE market of the NEXT upgrade stage against the
+		/// stored deck: draw, greedy deterministic buys, return-mix, audit
+		/// rows, public log lines. In-memory only (same doctrine as the M12c
+		/// stage): the next regular SaveCampaignState persists, a crash
+		/// before that replays the identical stage. Returns the played plan
+		/// (empty list = 'kein Agenda-State', no asset, or empty deck).</summary>
+		public List<TacticalAI.Core.AgendaStagePlan> RunAgendaUpgradeStage()
+		{
+			var played = new List<TacticalAI.Core.AgendaStagePlan>();
+			if ( agenda == null ) return played;
+			try
+			{
+				var table = AgendaTableOrNull();
+				if ( table == null || agenda.deck.Count == 0 ) return played;
+				var seed = TacticalAI.Core.AgendaCards.AgendaSeedFor( GUID.ToString() );
+				int stage = agenda.stagesRun;
+				var plan = TacticalAI.Core.AgendaMarket.RunStage( table, BuildImperialProfile(),
+					agenda.deck, agenda.influenceBalance, seed, stage );
+				if ( plan == null ) return played;
+				foreach ( var b in plan.Buys )
+					if ( !agenda.TryBuyAgenda( b.Card, b.Type, (int)b.Cost, stage, "buy:" + b.Card ) )
+					{
+						// cannot happen (the plan priced every buy against this
+						// very balance) - stop honestly rather than drift.
+						Debug.LogWarning( "SagaCampaign::RunAgendaUpgradeStage booking refused " + b.Card );
+						break;
+					}
+				var boughtIds = new List<string>();
+				foreach ( var b in plan.Buys ) boughtIds.Add( b.Card );
+				agenda.AddMarketAudit( stage, plan.Market, boughtIds, plan.NotPurchased, plan.SeedHex );
+				agenda.ReplaceDeckAfterStage( plan.DeckAfter );
+				// Public announcements (ui.json; read-aloud law). Kept Secret
+				// buys announce the SPEND only - never the card (AgendaBuyLogText
+				// maps that by the RR type; the secret is mechanics, a leak is
+				// a bug).
+				foreach ( var b in plan.Buys )
+					Debug.Log( TacticalAI.TacticalAISettingsUnity.AgendaBuyLogText(
+						b.Type, b.Name, b.Cost ) );
+				played.Add( plan );
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::RunAgendaUpgradeStage failed " + e.Message );
+			}
+			return played;
+		}
+
+		/// <summary>Read-only market preview against the CURRENT store
+		/// (imperial audit view - M12e display seam for the HUMAN imperial,
+		/// scope 6 'anzeigen ohne Zwang'). Never writes; never feeds a
+		/// rebel-facing surface with market content.</summary>
+		public TacticalAI.Core.AgendaStagePlan PreviewAgendaStage()
+		{
+			if ( agenda == null ) return null;
+			try
+			{
+				var table = AgendaTableOrNull();
+				if ( table == null || agenda.deck.Count == 0 ) return null;
+				var seed = TacticalAI.Core.AgendaCards.AgendaSeedFor( GUID.ToString() );
+				return TacticalAI.Core.AgendaMarket.RunStage( table, BuildImperialProfile(),
+					agenda.deck, agenda.influenceBalance, seed, agenda.stagesRun );
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::PreviewAgendaStage failed " + e.Message );
+				return null;
+			}
+		}
+
+		/// <summary>Rebel-safe purchase ledger for UI/log consumers (anti-
+		/// leak law lives in AgendaState.RebelView): public facts only -
+		/// RR type and printed influence cost of every buy, card identities
+		/// of UNREVEALED Kept Secrets removed.</summary>
+		public List<Dictionary<string, object>> AgendaRebelView()
+		{
+			return agenda == null ? null : agenda.RebelView();
+		}
+
+		/// <summary>The campaign's time period number for the RR setup
+		/// filter. The app models NO campaign time period (verified in the
+		/// M12d2 PRUEFAUFTRAG: MissionCard.timePeriod is per-mission display
+		/// data only), so this is honestly null and the filter stays
+		/// vacuous. Single seam: a future setup option lands HERE, nowhere
+		/// else.</summary>
+		long? CampaignTimePeriodOrNull()
+		{
+			return null;
+		}
+
+		/// <summary>Agenda asset table only when the shipped file is really
+		/// available (touching TacticalAIAssets primes the Core doc cache -
+		/// same pattern as ImperialDeckTableOrNull). Null = stay 'kein
+		/// Agenda-State'.</summary>
+		TacticalAI.Core.AgendaCardTable AgendaTableOrNull()
+		{
+			if ( TacticalAI.Core.AgendaCards.DocOrNull() == null &&
+				 TacticalAI.TacticalAIAssets.AgendaCardsRoot == null )
+				return null;
+			return TacticalAI.Core.AgendaCards.Load();
 		}
 	}
 }

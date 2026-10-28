@@ -98,6 +98,17 @@ namespace TacticalAiHarness
             }
             catch { /* sections that need the doc fail loudly on their own */ }
 
+            // M12d2: the agenda-card asset (setup + market basis) — same
+            // seam: harness pins against the SHIPPED asset, never a copy.
+            try
+            {
+                var langDir = LanguagesDir();
+                var agendaPath = Path.Combine(langDir, "En", "tactical_agenda_cards.json");
+                if (File.Exists(agendaPath))
+                    AgendaCards.PrimeDoc(Json.AsDict(Json.Parse(File.ReadAllText(agendaPath))));
+            }
+            catch { /* the agenda section fails loudly on its own */ }
+
             Run("geometry.json", SecGeometry);
             Run("board.json", SecBoard);
             Run("path.json", SecPath);
@@ -125,6 +136,7 @@ namespace TacticalAiHarness
             Run("logger_extract.json", SecLoggerExtract);
             Run("imperial_deck.json", SecImperialDeck);
             Run("imperial_purchases.json", SecImperialPurchases);
+            Run("agenda.json", SecAgenda);
             Run("imperial_card_effects.json", SecImperialCardEffects);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +

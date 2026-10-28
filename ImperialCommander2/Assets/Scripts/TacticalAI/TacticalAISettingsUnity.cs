@@ -114,6 +114,42 @@ namespace TacticalAI
                                  fmt, cardName, xp);
         }
 
+        /// <summary>M12d2: the public agenda purchase line, mapped by the RR
+        /// type (ui.json uiTacticalAI.agenda* keys). Read-aloud law: the
+        /// three open types announce name + cost (the table reads the card
+        /// aloud anyway); a Kept Secret buy announces the INFLUENCE SPEND
+        /// ONLY - the spend is public campaign-log data, the card is not,
+        /// so this function refuses the name even if a caller passes one
+        /// (anti-leak lives in code, not in caller discipline).</summary>
+        public static string AgendaBuyLogText(string type, string cardName, long influence)
+        {
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            string fmt;
+            switch (type)
+            {
+                case "side_mission":
+                    fmt = Fallback(tl != null ? tl.agendaBuySide : null,
+                        "Agenda SIDE MISSION: {0} ({1} influence). It is now an active side mission - execution is at the table's discretion.");
+                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                         fmt, cardName, influence);
+                case "forced_mission":
+                    fmt = Fallback(tl != null ? tl.agendaBuyForced : null,
+                        "Agenda FORCED MISSION: {0} ({1} influence). Its mission is played immediately - execution is at the table's discretion.");
+                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                         fmt, cardName, influence);
+                case "ongoing":
+                    fmt = Fallback(tl != null ? tl.agendaBuyOngoing : null,
+                        "Agenda ONGOING: {0} ({1} influence). It stays face up in the Imperial play area.");
+                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                         fmt, cardName, influence);
+                default:   // kept_secret and anything unknown: never the card
+                    fmt = Fallback(tl != null ? tl.agendaBuyKept : null,
+                        "The Empire purchases an Agenda card - kept secret ({0} influence).");
+                    return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                         fmt, influence);
+            }
+        }
+
         static string SkillDisplayName(UITacticalAI tl, string token)
         {
             if (tl == null) return token;
