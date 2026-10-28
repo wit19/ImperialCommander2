@@ -152,7 +152,10 @@ namespace Saga
 			faderCG.alpha = 0;
 			faderCG.DOFade( 1, .5f );
 
-			EventSystem.current.SetSelectedGameObject( difficultyButton.gameObject );
+			//M11f: while the tactical badge owns the difficulty slot it is the
+			//gamepad/keyboard entry point, not the hidden difficulty button.
+			var firstFocus = FirstFocusGameObject();
+			if ( firstFocus != null ) EventSystem.current.SetSelectedGameObject( firstFocus );
 		}
 
 		void bootstrapDEBUG()
@@ -163,19 +166,40 @@ namespace Saga
 		}
 
 		// TACTICAL AI (playtest 27.10): runtime mode badge on the mission-card
-		// panel (next to the difficulty toggle). Shown only when the global
-		// master switch is ON; click cycles OFF -> REF -> ORD -> OFF. Empty
-		// aiMode follows the global mode (concept 4.2.7 fallback semantics).
+		// panel. Shown only when the global master switch is ON; click cycles
+		// AUTO -> OFF -> S1..S5 -> AUTO. Empty aiMode follows the global mode
+		// (concept 4.2.7 fallback semantics).
+		// M11f: while the mission actually plays tactically, the legacy
+		// difficulty/adaptive toggles are functionless (the planner calibrates on
+		// the S-rung) -> hidden via SetActive, and the badge takes their slot.
+		// When the badge is deliberately OFF (or the master switch is off) the
+		// mission runs the legacy path, the toggles DO have an effect, so they
+		// stay visible and the badge keeps its small dev 21 spot below them.
+		// All derived from existing settings/sessionValues - no new UI state.
 		TMPro.TextMeshProUGUI setupAiBadgeText;
+		GameObject setupAiBadgeGo;
+
+		/// <summary>True exactly when this mission will run the tactical planner
+		/// (master ON and the per-mission token does not force legacy).</summary>
+		bool TacticalControlsActive()
+		{
+			if ( !TacticalAI.TacticalAISettings.Enabled ) return false;
+			string mode = setupOptions != null ? setupOptions.aiMode : "";
+			return TacticalAI.TacticalAISettings.EffectiveMode( mode ) != "legacy";
+		}
 
 		void EnsureAiBadge()
 		{
 			var show = TacticalAI.TacticalAISettings.Enabled;
 			if ( setupAiBadgeText != null )
 			{
-				setupAiBadgeText.gameObject.SetActive( show );
-				if ( show && setupOptions != null )
+				setupAiBadgeGo.SetActive( show );
+				if ( show )
+				{
+					ApplyLegacyControls( !TacticalControlsActive() );
+					PlaceAiBadge();
 					setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+				}
 				return;
 			}
 			if ( !show || setupOptions == null || difficultyButton == null ) return;
@@ -186,10 +210,7 @@ namespace Saga
 			rt.anchorMin = new Vector2( 0f, 1f );
 			rt.anchorMax = new Vector2( 0f, 1f );
 			rt.pivot = new Vector2( 0f, 1f );
-			var dRT = difficultyButton.transform as RectTransform;
-			rt.anchoredPosition = dRT != null
-				? new Vector2( dRT.anchoredPosition.x, dRT.anchoredPosition.y - dRT.rect.height - 10f )
-				: new Vector2( 12f, -160f );
+			rt.anchoredPosition = new Vector2( 12f, -160f );
 			rt.sizeDelta = new Vector2( 170f, 26f ); // dev 21: ladder names
 			var img = go.AddComponent<UnityEngine.UI.Image>();
 			img.color = new Color( 0f, .55f, .45f, .9f );
@@ -207,12 +228,64 @@ namespace Saga
 			setupAiBadgeText.enableAutoSizing = true; setupAiBadgeText.fontSizeMax = 15; setupAiBadgeText.fontSizeMin = 8;
 			setupAiBadgeText.alignment = TMPro.TextAlignmentOptions.Center;
 			setupAiBadgeText.color = Color.white;
+			setupAiBadgeGo = go;
+			// dev 38 (M11f): slot, visibility and Klartext label in one place
+			ApplyLegacyControls( !TacticalControlsActive() );
+			PlaceAiBadge();
 			setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+		}
+
+		/// <summary>M11f: the legacy difficulty/adaptive toggles - shown only when
+		/// they have an effect. Their labels are children of the button GameObjects
+		/// (red button prefab), so one SetActive covers text + button.</summary>
+		void ApplyLegacyControls( bool visible )
+		{
+			if ( difficultyButton != null && difficultyButton.gameObject.activeSelf != visible )
+				difficultyButton.gameObject.SetActive( visible );
+			if ( adaptiveButton != null && adaptiveButton.gameObject.activeSelf != visible )
+				adaptiveButton.gameObject.SetActive( visible );
+		}
+
+		/// <summary>M11f: tactical -> the badge takes the difficulty button's slot
+		/// (anchors/position/size copied, works on both layouts); legacy-visible
+		/// -> the small dev 21 badge below the difficulty button.</summary>
+		void PlaceAiBadge()
+		{
+			if ( setupAiBadgeGo == null ) return;
+			var rt = setupAiBadgeGo.GetComponent<RectTransform>();
+			var dRT = difficultyButton != null ? difficultyButton.transform as RectTransform : null;
+			if ( TacticalControlsActive() && dRT != null )
+			{
+				rt.anchorMin = dRT.anchorMin;
+				rt.anchorMax = dRT.anchorMax;
+				rt.pivot = dRT.pivot;
+				rt.anchoredPosition = dRT.anchoredPosition;
+				rt.sizeDelta = dRT.sizeDelta;
+			}
+			else if ( dRT != null )
+			{
+				rt.anchorMin = new Vector2( 0f, 1f );
+				rt.anchorMax = new Vector2( 0f, 1f );
+				rt.pivot = new Vector2( 0f, 1f );
+				rt.anchoredPosition = new Vector2( dRT.anchoredPosition.x, dRT.anchoredPosition.y - dRT.rect.height - 10f );
+				rt.sizeDelta = new Vector2( 170f, 26f );
+			}
 		}
 
 		string SetupAiLabel( string mode )
 		{
-			return TacticalAI.TacticalAISettingsUnity.MissionBadgeLabel( mode );
+			// M11f: Klartext "Tactical AI — Level 3 (Veteran)" etc. (ui.json keys)
+			return TacticalAI.TacticalAISettingsUnity.MissionBadgeText( mode );
+		}
+
+		/// <summary>Gamepad/keyboard focus entry: the badge owns the difficulty
+		/// slot while it is there; otherwise the difficulty button as always.</summary>
+		GameObject FirstFocusGameObject()
+		{
+			if ( difficultyButton != null && !difficultyButton.gameObject.activeInHierarchy
+				&& setupAiBadgeGo != null && setupAiBadgeGo.activeInHierarchy )
+				return setupAiBadgeGo;
+			return difficultyButton != null ? difficultyButton.gameObject : null;
 		}
 
 		void OnSetupAiClicked()
@@ -222,7 +295,9 @@ namespace Saga
 			// as the campaign-list badge and SagaSetupOptions.ToggleAiMode)
 			// dev 21 (Thomas): ladder cycle, shared with the campaign badge
 			setupOptions.aiMode = TacticalAI.TacticalAISettings.NextMissionToken( setupOptions.aiMode );
-			if ( setupAiBadgeText != null ) setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+			// M11f: cycling back to OFF must bring the legacy toggles back and
+			// move the badge out of their slot again - one refresh covers all.
+			EnsureAiBadge();
 			//persist for campaign missions (structure is saved with SaveCampaignState)
 			if ( RunningCampaign.campaignStructure != null )
 				RunningCampaign.campaignStructure.aiMode = setupOptions.aiMode;
@@ -1000,6 +1075,20 @@ namespace Saga
 				};
 			}
 
+			//M11f: when the tactical badge sits in the difficulty slot it takes
+			//over the difficulty button's explicit navigation edges.
+			if ( setupAiBadgeGo != null && setupAiBadgeGo.activeInHierarchy && TacticalControlsActive() )
+			{
+				var badgeBtn = setupAiBadgeGo.GetComponent<Button>();
+				if ( badgeBtn != null )
+					badgeBtn.navigation = new Navigation()
+					{
+						mode = Navigation.Mode.Explicit,
+						selectOnUp = viewMissionCardButton.interactable ? viewMissionCardButton : null,
+						selectOnDown = threatButton,
+					};
+			}
+
 			InputFocusCheck();
 		}
 
@@ -1023,7 +1112,12 @@ namespace Saga
 				if ( lastSelected != null )
 					lastSelected.Select();
 				else
-					difficultyButton.Select();
+				{
+					//M11f: in tactical mode the difficulty button is hidden -
+					//the badge holding its slot is the entry point instead.
+					var fb = FirstFocusGameObject();
+					if ( fb != null ) fb.GetComponent<Selectable>().Select();
+				}
 				selected = EventSystem.current.currentSelectedGameObject;
 				return;
 			}
@@ -1048,13 +1142,18 @@ namespace Saga
 			//avoid a race between built-in Navigation and this custom logic within the same input frame
 			if ( InputManager.Instance.navRight )
 			{
+				//M11f: right from the tactical badge (either layout) goes to the
+				//mission picker, like the adaptive button it replaces/hides.
+				bool badgeSelected = setupAiBadgeGo != null && setupAiBadgeGo.activeInHierarchy
+					&& selected == setupAiBadgeGo;
 				if ( selected == difficultyButton.gameObject )
 					EventSystem.current.SetSelectedGameObject( adaptiveButton.gameObject );
 				else if ( selected == threatButton.gameObject )
 					EventSystem.current.SetSelectedGameObject( additionalButton.gameObject );
 				else if ( selected == ignoredButton.gameObject )
 					EventSystem.current.SetSelectedGameObject( villainsButton.gameObject );
-				else if ( selected == viewMissionCardButton.gameObject
+				else if ( badgeSelected
+					|| selected == viewMissionCardButton.gameObject
 					|| selected == adaptiveButton.gameObject
 					|| selected == additionalButton.gameObject
 					|| selected == villainsButton.gameObject

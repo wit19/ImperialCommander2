@@ -72,6 +72,33 @@ namespace TacticalAI
             return "AI:" + token.ToUpperInvariant();
         }
 
+        /// <summary>M11f (Einsatzkarte/Klassik-Start): Klartext-Badge, der die
+        /// Legacy-Difficulty ersetzt, solange die taktische KI calibriert:
+        /// Modusname + S-Stufe mit Klartext, z.B. "Tactical AI — Level 3
+        /// (Veteran)". Ein AUTO-Token ("") loest sich auf die globale Leiter
+        /// auf und bekommt die (auto)-Variante; off/legacy rendern OFF.
+        /// Kurzes MissionBadgeLabel (Kampagnenliste) bleibt unveraendert.</summary>
+        public static string MissionBadgeText(string token)
+        {
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            if (token == "off" || token == "legacy")
+                return Fallback(tl != null ? tl.badgeMissionOff : null, "Tactical AI \u2014 OFF");
+            string skill = TacticalAISettings.EffectiveSkill(token);
+            int rank = TacticalAISettings.RankOfToken(skill);
+            string name = SkillDisplayName(tl, skill);
+            string fmt;
+            if (TacticalAISettings.IsMissionSkillToken(token))
+                fmt = Fallback(tl != null ? tl.badgeMissionFormat : null, "Tactical AI \u2014 Level {0} ({1})");
+            else
+                fmt = Fallback(tl != null ? tl.badgeMissionAutoFormat : null, "Tactical AI \u2014 Level {0} ({1}) (auto)");
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture, fmt, rank, name);
+        }
+
+        static string Fallback(string value, string fallback)
+        {
+            return string.IsNullOrEmpty(value) ? fallback : value;
+        }
+
         static string SkillDisplayName(UITacticalAI tl, string token)
         {
             if (tl == null) return token;

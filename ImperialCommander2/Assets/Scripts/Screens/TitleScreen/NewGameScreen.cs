@@ -72,6 +72,13 @@ public class NewGameScreen : MonoBehaviour
 		//set the language strings into the UI
 		languageController.SetTranslatedUI();
 
+		//TACTICAL AI M11f (same rule as the mission setup screen): with the
+		//master switch ON, legacy difficulty/adaptive are functionless (the
+		//planner calibrates on the S-rung) -> hidden, and a Klartext badge
+		//shows mode + level in the difficulty button's slot. Switch OFF ->
+		//untouched legacy layout. Derived from settings only, no new UI state.
+		ApplyTacticalBadge();
+
 		//check for default state
 		string path = Path.Combine( Saga.FileManager.classicDefaultsPath, "sessiondata.json" );
 		loadDefaultsButton.interactable = File.Exists( path );
@@ -164,6 +171,61 @@ public class NewGameScreen : MonoBehaviour
 		//string txt = Resources.Load<TextAsset>( $"Languages/{DataStore.languageCodeList[DataStore.languageCode]}/MissionText/{DataStore.sessionData.selectedMissionID}info" ).text;
 		//if ( txt != null )
 		//	missionTextBox.Show( txt );
+	}
+
+	// TACTICAL AI M11f: display-only badge - this deprecated classic screen has
+	// no per-mission aiMode, so it always shows the global ladder rung.
+	GameObject tacaiClassicBadgeGo;
+	TMPro.TextMeshProUGUI tacaiClassicBadgeText;
+
+	void ApplyTacticalBadge()
+	{
+		bool tactical = TacticalAI.TacticalAISettings.Enabled;
+		// difficultyText is a child of the difficulty button (red button prefab)
+		// -> it hides and restores together with its parent, no own SetActive.
+		if ( difficultyButton != null ) difficultyButton.gameObject.SetActive( !tactical );
+		if ( adaptiveToggle != null ) adaptiveToggle.gameObject.SetActive( !tactical );
+		if ( languageController != null && languageController.adaptiveInfo != null )
+			languageController.adaptiveInfo.gameObject.SetActive( !tactical );
+
+		if ( !tactical )
+		{
+			if ( tacaiClassicBadgeGo != null ) tacaiClassicBadgeGo.SetActive( false );
+			return;
+		}
+		if ( difficultyButton == null ) return;
+		if ( tacaiClassicBadgeGo == null )
+		{
+			var go = new GameObject( "tacaiClassicBadge", typeof( RectTransform ) );
+			go.transform.SetParent( difficultyButton.transform.parent, false );
+			var img = go.AddComponent<UnityEngine.UI.Image>();
+			img.color = new Color( 0f, .55f, .45f, .9f );
+			var textGo = new GameObject( "Text (TMP)", typeof( RectTransform ) );
+			textGo.transform.SetParent( go.transform, false );
+			var trt = textGo.GetComponent<RectTransform>();
+			trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
+			trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
+			tacaiClassicBadgeText = textGo.AddComponent<TMPro.TextMeshProUGUI>();
+			tacaiClassicBadgeText.font = TMPro.TMP_Settings.defaultFontAsset;
+			tacaiClassicBadgeText.enableAutoSizing = true; tacaiClassicBadgeText.fontSizeMax = 15; tacaiClassicBadgeText.fontSizeMin = 8;
+			tacaiClassicBadgeText.alignment = TMPro.TextAlignmentOptions.Center;
+			tacaiClassicBadgeText.color = Color.white;
+			tacaiClassicBadgeGo = go;
+		}
+		else
+			tacaiClassicBadgeGo.SetActive( true );
+		//take the difficulty button's slot (anchors/position/size)
+		var rt = tacaiClassicBadgeGo.GetComponent<RectTransform>();
+		var dRT = difficultyButton.transform as RectTransform;
+		if ( dRT != null )
+		{
+			rt.anchorMin = dRT.anchorMin;
+			rt.anchorMax = dRT.anchorMax;
+			rt.pivot = dRT.pivot;
+			rt.anchoredPosition = dRT.anchoredPosition;
+			rt.sizeDelta = dRT.sizeDelta;
+		}
+		tacaiClassicBadgeText.text = TacticalAI.TacticalAISettingsUnity.MissionBadgeText( "" );
 	}
 
 	public void OnChooseEnemyGroups( int btnIndex )

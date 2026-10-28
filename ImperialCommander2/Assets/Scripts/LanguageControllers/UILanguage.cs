@@ -48,6 +48,11 @@ public class UITacticalAI
 	// display via language files).
 	public string skillS1, skillS2, skillS3, skillS4, skillS5;
 	public string badgeAuto, badgeOff;
+	// M11f (Einsatzkarte): plain-text mission badge that replaces the legacy
+	// difficulty toggle while the tactical planner is in charge. {0} = ladder
+	// rung number, {1} = skillS name. The (auto) variant marks ""/AUTO tokens
+	// that resolve to the global ladder rung.
+	public string badgeMissionFormat, badgeMissionAutoFormat, badgeMissionOff;
 	public string depSecret, depOpen, expNone, expPostHoc, expFull;
 }
 
