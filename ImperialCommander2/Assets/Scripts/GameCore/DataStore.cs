@@ -8,7 +8,7 @@ using UnityEngine;
 
 public static class DataStore
 {
-	public static readonly string appVersion = "v.2.2.16 dev 35";
+	public static readonly string appVersion = "v.2.2.16 dev 36";
 	public static readonly string[] languageCodeList = { "En", "De", "Es", "Fr", "Pl", "It", "Hu", "No", "Ru", "Nl", "Br" };
 
 	public static Mission mission;
