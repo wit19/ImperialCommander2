@@ -55,7 +55,8 @@
     "missionChooser": "KÜLDETÉS VÁLASZTÁS",
     "heroAllyChooser": "VÁLASSZ EGYET",
     "adaptiveInfoUC": "Alkalmazkodó nehézség: Minél több ellenséges csoportot győzől le, annál keményebben próbálnak megállítani téged, cserébe a jutalmad is nagyobb lesz.",
-    "chooseHeroesHeading": "VÁLASSZ HOST"
+    "chooseHeroesHeading": "VÁLASSZ HOST",
+    "appMissionFormat": "App Mission Format:"
   },
   "sagaUISetup": {
     "groupsText": "MELLOZÖTT",
@@ -151,7 +152,26 @@
     "roundLimitOff": "OFF",
     "roundLimitDangerous": "DANGEROUS",
     "roundLimitLabel": "ROUND LIMIT",
-    "skipWarpIntroLabel": "SKIP HYPERSPACE INTRO"
+    "skipWarpIntroLabel": "SKIP HYPERSPACE INTRO",
+    "enemyGroupsColor": "DEFAULT ENEMY GROUPS COLOR",
+    "colorRegular": "REGULAR",
+    "colorElite": "ELITE",
+    "colorVillain": "VILLAIN",
+    "audioHeader": "AUDIO",
+    "uiHeader": "INTERFACE",
+    "graphicsHeader": "GRAPHICS",
+    "mapperHeader": "KEY MAPPER",
+    "reset": "RESET",
+    "pressKeyMessage": "PRESS A KEY...",
+    "mapActivateImperialsLabel": "ACTIVATE IMPERIALS",
+    "mapToggleCamViewLabel": "TOGGLE CAMERA VIEW",
+    "mapToggleMapVisibilityLabel": "TOGGLE MAP VISIBILITY",
+    "mapNavForwardLabel": "NAVIGATE MAP FORWARD",
+    "mapNavBackLabel": "NAVIGATE MAP BACKWARD",
+    "mapNavLeftLabel": "NAVIGATE MAP LEFT",
+    "mapNavRightLabel": "NAVIGATE MAP RIGHT",
+    "mapNavCWLabel": "ROTATE CAMERA CLOCKWISE",
+    "mapNavCCWLabel": "ROTATE CAMERA COUNTERCLOCKWISE"
   },
   "uiExpansions": {
     "core": "CORE",

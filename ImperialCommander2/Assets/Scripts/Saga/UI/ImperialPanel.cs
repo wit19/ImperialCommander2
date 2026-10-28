@@ -178,23 +178,30 @@ namespace Saga
 	{
 		public string Text;
 
+		// M13d (EMPIRE12 Player.log): GlowEngine.FindUnityObject<T> ends in
+		// `return results[0]` (GlowEngine.cs:595) and THROWS
+		// ArgumentOutOfRangeException on the empty scene list during a scene
+		// teardown - the null-check below it can never fire. OnDisable runs
+		// exactly then, so it must work off the hover-cached reference only
+		// (Unity's == null also reports destroyed objects as null).
+		Tooltip cachedTooltip;
+
 		public void OnPointerEnter( PointerEventData eventData )
 		{
-			var tt = GlowEngine.FindUnityObject<Tooltip>();
-			if ( tt != null && !string.IsNullOrEmpty( Text ) ) tt.ShowText( Text );
+			cachedTooltip = GlowEngine.FindUnityObject<Tooltip>();
+			if ( cachedTooltip != null && !string.IsNullOrEmpty( Text ) ) cachedTooltip.ShowText( Text );
 		}
 
 		public void OnPointerExit( PointerEventData eventData )
 		{
-			var tt = GlowEngine.FindUnityObject<Tooltip>();
-			if ( tt != null ) tt.Hide();
+			if ( cachedTooltip != null ) cachedTooltip.Hide();
 		}
 
 		void OnDisable()
 		{
-			// safety net: hidden rows must never leave the tooltip stranded
-			var tt = GlowEngine.FindUnityObject<Tooltip>();
-			if ( tt != null ) tt.Hide();
+			// safety net: hidden rows must never leave the tooltip stranded -
+			// cached reference ONLY, never FindUnityObject during teardown
+			if ( cachedTooltip != null ) cachedTooltip.Hide();
 		}
 	}
 

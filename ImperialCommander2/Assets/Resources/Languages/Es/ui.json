@@ -55,7 +55,8 @@
     "missionChooser": "SELECCIONA UNA MISIÓN",
     "heroAllyChooser": "ELIGE UNO",
     "adaptiveInfoUC": "Dificultad Adaptativa: Cuantos más grupos Imperiales derrotes, mayor énfasis pondrá el Imperio para intentar detenerte, pero mejores serán las recompensas.",
-    "chooseHeroesHeading": "ELIGE A TUS HÉROES"
+    "chooseHeroesHeading": "ELIGE A TUS HÉROES",
+    "appMissionFormat": "App Mission Format:"
   },
   "sagaUISetup": {
     "groupsText": "GRUPOS",
@@ -151,7 +152,26 @@
     "roundLimitOff": "DESACTIVADO",
     "roundLimitDangerous": "PELIGROSO",
     "roundLimitLabel": "LÍMITE DE RONDAS",
-    "skipWarpIntroLabel": "OMITIR INTRO HIPERESPACIO"
+    "skipWarpIntroLabel": "OMITIR INTRO HIPERESPACIO",
+    "enemyGroupsColor": "DEFAULT ENEMY GROUPS COLOR",
+    "colorRegular": "REGULAR",
+    "colorElite": "ELITE",
+    "colorVillain": "VILLAIN",
+    "audioHeader": "AUDIO",
+    "uiHeader": "INTERFACE",
+    "graphicsHeader": "GRAPHICS",
+    "mapperHeader": "KEY MAPPER",
+    "reset": "RESET",
+    "pressKeyMessage": "PRESS A KEY...",
+    "mapActivateImperialsLabel": "ACTIVATE IMPERIALS",
+    "mapToggleCamViewLabel": "TOGGLE CAMERA VIEW",
+    "mapToggleMapVisibilityLabel": "TOGGLE MAP VISIBILITY",
+    "mapNavForwardLabel": "NAVIGATE MAP FORWARD",
+    "mapNavBackLabel": "NAVIGATE MAP BACKWARD",
+    "mapNavLeftLabel": "NAVIGATE MAP LEFT",
+    "mapNavRightLabel": "NAVIGATE MAP RIGHT",
+    "mapNavCWLabel": "ROTATE CAMERA CLOCKWISE",
+    "mapNavCCWLabel": "ROTATE CAMERA COUNTERCLOCKWISE"
   },
   "uiExpansions": {
     "core": "Caja Básica",

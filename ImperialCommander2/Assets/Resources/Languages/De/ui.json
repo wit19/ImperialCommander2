@@ -55,7 +55,8 @@
     "missionChooser": "EINSATZ WAEHLEN",
     "heroAllyChooser": "WAEHLE EINEN",
     "adaptiveInfoUC": "Adaptive Schwierigkeit: Je mehr imperiale Gruppen du besiegen kannst, desto mehr bemüht sich das Imperium, dich aufzuhalten, aber desto besser sind deine Belohnungen.",
-    "chooseHeroesHeading": "WAEHLE EURE HELDEN"
+    "chooseHeroesHeading": "WAEHLE EURE HELDEN",
+    "appMissionFormat": "APP-MISSIONSFORMAT:"
   },
   "sagaUISetup": {
     "groupsText": "GRUPPEN",
@@ -151,7 +152,26 @@
     "roundLimitOff": "AUS",
     "roundLimitDangerous": "GEFAEHRLICH",
     "roundLimitLabel": "RUNDENLIMIT",
-    "skipWarpIntroLabel": "INTRO UEBERSPRINGEN"
+    "skipWarpIntroLabel": "INTRO UEBERSPRINGEN",
+    "enemyGroupsColor": "STANDARDFARBE DER GEGNERGRUPPEN",
+    "colorRegular": "NORMALE",
+    "colorElite": "ELITE",
+    "colorVillain": "SCHURKEN",
+    "audioHeader": "AUDIO",
+    "uiHeader": "OBERFLAECHE",
+    "graphicsHeader": "GRAFIK",
+    "mapperHeader": "TASTENBELEGUNG",
+    "reset": "STANDARDBELEGUNG",
+    "pressKeyMessage": "TASTE DRUECKEN...",
+    "mapActivateImperialsLabel": "IMPERIALE AKTIVIEREN",
+    "mapToggleCamViewLabel": "KAMERASICHT WECHSELN",
+    "mapToggleMapVisibilityLabel": "KARTENANSICHT WECHSELN",
+    "mapNavForwardLabel": "KARTE VOR",
+    "mapNavBackLabel": "KARTE ZURUECK",
+    "mapNavLeftLabel": "KARTE LINKS",
+    "mapNavRightLabel": "KARTE RECHTS",
+    "mapNavCWLabel": "KAMERA IM UHRZEIGERSINN DREHEN",
+    "mapNavCCWLabel": "KAMERA GEGEN DEN UHRZEIGERSINN DREHEN"
   },
   "uiExpansions": {
     "core": "BASIS",

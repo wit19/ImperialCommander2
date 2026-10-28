@@ -20,18 +20,23 @@ namespace Saga
 		/// </summary>
 		public void Show( string m, Action onCloseCallback = null )
 		{
-			InputManager.Instance.PushFocus( gameObject );
+			// M13d defensive guards: during a scene teardown LogCallback may
+			// reach this panel while its own components are already gone -
+			// the error display must never crash on top of the original
+			// error (EMPIRE12 Player.log: NRE right here, from
+			// SagaController.LogCallback). No double-crash, ever.
+			if ( message == null || popupBase == null ) return;
 
-			exitText.text = DataStore.uiLanguage.uiSettings.quit;
-			continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
+			if ( InputManager.Instance != null )
+				InputManager.Instance.PushFocus( gameObject );
+
+			if ( exitText != null ) exitText.text = DataStore.uiLanguage.uiSettings.quit;
+			if ( continueText != null ) continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
 
 			message.text = m;
 			closeCallback = onCloseCallback;
 
-			if ( continueButton.gameObject.activeSelf )
-				continueButton.GetComponent<Selectable>().Select();
-			else
-				exitButton.GetComponent<Selectable>().Select();
+			SelectButton();
 
 			popupBase.Show();
 		}
@@ -41,26 +46,30 @@ namespace Saga
 		/// </summary>
 		public void Show( string header, string m, Action onCloseCallback = null )
 		{
-			InputManager.Instance.PushFocus( gameObject );
+			// M13d defensive guards - see Show(string) above (observed NRE:
+			// GetComponent<Selectable>() returns null once the button's
+			// component is destroyed during teardown while the GO still reads
+			// activeSelf, and the unguarded .Select() then throws).
+			if ( message == null || popupBase == null ) return;
+
+			if ( InputManager.Instance != null )
+				InputManager.Instance.PushFocus( gameObject );
 
 			try
 			{
-				exitText.text = DataStore.uiLanguage.uiSettings.quit;
-				continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
+				if ( exitText != null ) exitText.text = DataStore.uiLanguage.uiSettings.quit;
+				if ( continueText != null ) continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
 			}
 			catch ( Exception )
 			{
-				exitText.text = "EXIT APP";
-				continueText.text = "CONTINUE";
+				if ( exitText != null ) exitText.text = "EXIT APP";
+				if ( continueText != null ) continueText.text = "CONTINUE";
 			}
 
 			message.text = $"<color=yellow>{header}</color>\n\n<align=left>{m}</align>";
 			closeCallback = onCloseCallback;
 
-			if ( continueButton.gameObject.activeSelf )
-				continueButton.GetComponent<Selectable>().Select();
-			else
-				exitButton.GetComponent<Selectable>().Select();
+			SelectButton();
 
 			popupBase.Show();
 		}
@@ -70,28 +79,42 @@ namespace Saga
 		/// </summary>
 		public void Show( string header, Exception e, Action onCloseCallback = null )
 		{
-			InputManager.Instance.PushFocus( gameObject );
+			// M13d defensive guards - see Show(string) above
+			if ( message == null || popupBase == null || e == null ) return;
+
+			if ( InputManager.Instance != null )
+				InputManager.Instance.PushFocus( gameObject );
 
 			try
 			{
-				exitText.text = DataStore.uiLanguage.uiSettings.quit;
-				continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
+				if ( exitText != null ) exitText.text = DataStore.uiLanguage.uiSettings.quit;
+				if ( continueText != null ) continueText.text = DataStore.uiLanguage.uiSetup.continueBtn;
 			}
 			catch ( Exception )
 			{
-				exitText.text = "EXIT APP";
-				continueText.text = "CONTINUE";
+				if ( exitText != null ) exitText.text = "EXIT APP";
+				if ( continueText != null ) continueText.text = "CONTINUE";
 			}
 
-			message.text = $"<color=yellow>{header}</color>\n\n<align=left><color=orange>{e.Message}</color>\n{e.StackTrace.Replace( " at ", "\nat " )}</align>";
+			message.text = $"<color=yellow>{header}</color>\n\n<align=left><color=orange>{e.Message}</color>\n{( e.StackTrace ?? "" ).Replace( " at ", "\nat " )}</align>";
 			closeCallback = onCloseCallback;
 
-			if ( continueButton.gameObject.activeSelf )
-				continueButton.GetComponent<Selectable>().Select();
-			else
-				exitButton.GetComponent<Selectable>().Select();
+			SelectButton();
 
 			popupBase.Show();
+		}
+
+		/// <summary>M13d: shared guarded focus-select for all three Show
+		/// overloads. Unity's == null also reports destroyed objects, so a
+		/// torn-down button (or its Selectable) simply skips the select
+		/// instead of NRE-ing the error display itself.</summary>
+		void SelectButton()
+		{
+			GameObject btn = ( continueButton != null && continueButton.gameObject.activeSelf )
+				? continueButton : exitButton;
+			if ( btn == null ) return;
+			Selectable sel = btn.GetComponent<Selectable>();
+			if ( sel != null ) sel.Select();
 		}
 
 		public void ContinueApp()

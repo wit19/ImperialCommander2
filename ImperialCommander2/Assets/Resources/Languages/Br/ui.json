@@ -55,7 +55,8 @@
     "missionChooser": "SELECIONE UMA MISSAO",
     "heroAllyChooser": "ESCOLHA UMA OPCAO",
     "adaptiveInfoUC": "Dificuldade adaptativa: quanto mais grupos imperiais você conseguir derrotar, mais o Império tentará impedi-lo, mas melhores serão suas recompensas.",
-    "chooseHeroesHeading": "ESCOLHA SEUS HEROIS"
+    "chooseHeroesHeading": "ESCOLHA SEUS HEROIS",
+    "appMissionFormat": "App Mission Format:"
   },
   "sagaUISetup": {
     "groupsText": "GRUPOS",
@@ -151,7 +152,26 @@
     "roundLimitOff": "DESLIGADO",
     "roundLimitDangerous": "DANGEROUS",
     "roundLimitLabel": "ROUND LIMIT",
-    "skipWarpIntroLabel": "PULAR INTRODUCAO AO HIPERESPACO"
+    "skipWarpIntroLabel": "PULAR INTRODUCAO AO HIPERESPACO",
+    "enemyGroupsColor": "DEFAULT ENEMY GROUPS COLOR",
+    "colorRegular": "REGULAR",
+    "colorElite": "ELITE",
+    "colorVillain": "VILLAIN",
+    "audioHeader": "AUDIO",
+    "uiHeader": "INTERFACE",
+    "graphicsHeader": "GRAPHICS",
+    "mapperHeader": "KEY MAPPER",
+    "reset": "RESET",
+    "pressKeyMessage": "PRESS A KEY...",
+    "mapActivateImperialsLabel": "ACTIVATE IMPERIALS",
+    "mapToggleCamViewLabel": "TOGGLE CAMERA VIEW",
+    "mapToggleMapVisibilityLabel": "TOGGLE MAP VISIBILITY",
+    "mapNavForwardLabel": "NAVIGATE MAP FORWARD",
+    "mapNavBackLabel": "NAVIGATE MAP BACKWARD",
+    "mapNavLeftLabel": "NAVIGATE MAP LEFT",
+    "mapNavRightLabel": "NAVIGATE MAP RIGHT",
+    "mapNavCWLabel": "ROTATE CAMERA CLOCKWISE",
+    "mapNavCCWLabel": "ROTATE CAMERA COUNTERCLOCKWISE"
   },
   "uiExpansions": {
     "core": "CORE",

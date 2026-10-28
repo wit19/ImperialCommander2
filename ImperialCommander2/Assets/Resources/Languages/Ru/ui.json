@@ -55,7 +55,8 @@
     "missionChooser": "ВЫБЕРИТЕ ЗАДАНИЕ",
     "heroAllyChooser": "ВЫБЕРИТЕ ОДНОГО",
     "adaptiveInfoUC": "Адаптивная сложность: Чем больше Имперских групп вам удастся победить, тем сильнее будет становиться Империя, но тем лучше будут ваши награды.",
-    "chooseHeroesHeading": "ВЫБЕРИТЕ СВОИХ ГЕРОЕВ"
+    "chooseHeroesHeading": "ВЫБЕРИТЕ СВОИХ ГЕРОЕВ",
+    "appMissionFormat": "App Mission Format:"
   },
   "sagaUISetup": {
     "groupsText": "ГРУППЫ",
@@ -151,7 +152,26 @@
     "roundLimitOff": "ВЫКЛ",
     "roundLimitDangerous": "ОПАСНОСТЬ",
     "roundLimitLabel": "ОГРАНИЧЕНИЕ РАУНДОВ",
-    "skipWarpIntroLabel": "ПРОПУСК ИНТРО"
+    "skipWarpIntroLabel": "ПРОПУСК ИНТРО",
+    "enemyGroupsColor": "DEFAULT ENEMY GROUPS COLOR",
+    "colorRegular": "REGULAR",
+    "colorElite": "ELITE",
+    "colorVillain": "VILLAIN",
+    "audioHeader": "AUDIO",
+    "uiHeader": "INTERFACE",
+    "graphicsHeader": "GRAPHICS",
+    "mapperHeader": "KEY MAPPER",
+    "reset": "RESET",
+    "pressKeyMessage": "PRESS A KEY...",
+    "mapActivateImperialsLabel": "ACTIVATE IMPERIALS",
+    "mapToggleCamViewLabel": "TOGGLE CAMERA VIEW",
+    "mapToggleMapVisibilityLabel": "TOGGLE MAP VISIBILITY",
+    "mapNavForwardLabel": "NAVIGATE MAP FORWARD",
+    "mapNavBackLabel": "NAVIGATE MAP BACKWARD",
+    "mapNavLeftLabel": "NAVIGATE MAP LEFT",
+    "mapNavRightLabel": "NAVIGATE MAP RIGHT",
+    "mapNavCWLabel": "ROTATE CAMERA CLOCKWISE",
+    "mapNavCCWLabel": "ROTATE CAMERA COUNTERCLOCKWISE"
   },
   "uiExpansions": {
     "core": "БАЗОВАЯ ИГРА",

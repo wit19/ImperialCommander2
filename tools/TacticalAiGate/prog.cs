@@ -29,6 +29,7 @@ class P {
         AgendaGate.Run();
         ActionTreeGate.Run();
         OptionalDeployGate.Run();
+        UiCompletenessGate.Run();
         Console.WriteLine(Environment.ExitCode == 0 ? "ALL PASS" : "FAILURES");
     }
 }
