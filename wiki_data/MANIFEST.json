@@ -28,5 +28,27 @@
   "ability texts are English; the game ships 12 languages (De included) - UI integration needs a localization decision",
   "items.json rows mirror the app's (name,tier) shape 1:1 (multi-tier gear expanded)",
   "game unit entries keep priority: wiki data is enrichment source, not override"
- ]
+ ],
+ "imperial_class_cards": {
+  "file": "imperial_class_cards.json",
+  "records": 109,
+  "decks": 12,
+  "collected": "2026-10-28",
+  "origin": "Brettspiel (eigenes Exemplar), Kartentext 1:1 vom Aufdruck. Transkription medienunterstuetzt: Kartenbilder vom Fan-Inventar imperial-assault.com (Inventar-Ground-Truth fuer Deck-Zuordnung und Kartennamen) und cards.boardwars.eu (595px-Variante fuer XP-Ecken); Gegencheck der Textbedeutung: Blogserie 'IP Class Deck Review' (wretchedhivearmada.blogspot.com) und Name/XP-Kreuzcheck gegen imperial-assault.fandom.com. Wie bei hero_class_cards.json (LICENSE_DATA.md Punkt 5b) wird fuer die gedruckten Kartendaten selbst kein Fremd-Lizenztext beansprucht; die Medien sind Transkriptionshilfe.",
+  "method": "tools/scrape_imperial_class_decks.py (Inventar + beide Bildvarianten) -> tools/extract_imperial_class_cards.py (Vision-Transkription beider Varianten, unabhaengiges Symbol-Audit, XP-Ecken-Probe, deterministischer Merge) -> tools/retry_zoom_imperial_class_cards.py + tools/fix_m12a_cards.py (Zoom-Crop-Nachbearbeitung) -> tools/validate_imperial_class_cards.py (Blog-Judge + Fandom-Kreuzcheck + Textqualitaets-Garble-Check) -> tools/check_imperial_class_cards.py (Schema+Statistik). Alle Laeufe cachen unter raw/imperial_class_cards/ und sind offline reproduzierbar (--dry-run, alle drei Gates bestanden 2026-10-28).",
+  "xp_structure": "je Deck: 1 Basic (Basic-Karten planmaessig xp=null; Nemeses hat 2 Starter) + 8 Kaufkarten mit XP-Paaren 1,1,2,2,3,3,4,4 - in allen 12 Decks verifiziert",
+  "deviation_vs_task_body": "Task-Soll '~121 Bilder': die Quelle rendert vollstaendig 109 Bilder (12 Decks x 9 + 1 zusaetzlicher Starter in Nemeses). Ein 'Loyal to a Fault' existiert weder im Inventar, noch auf Fandom noch im Blog (frueherer Zwischenstands-Kommentar berichtete das anders - korrigiert). Alle 12 Decks sind intern vollstaendig (Starter + 8 Kaufkarten).",
+  "validation": {
+   "name_vs_path": "109/109; 2 Namens-Typos der Bildquelle behalten (Pfad-Ground-Truth-Regel) und markiert: 'Lmitless Arsenal', 'Manifest Agression' (Wiki+Vision lesen jeweils korrekte Schreibweise; Notiz im Eintrag)",
+   "blog_judge": "81 ok, 6 suspicious (nach je 2 Re-Extraktionen), 21 unknowable (Blog paraphrasiert zu vage - kein Gegenbeweis), 1 not_in_blog",
+   "needs_review": 47,
+   "needs_review_breakdown": {
+    "variants_disagree": 34,
+    "blog_suspicious_after_retries": 6,
+    "audit_only_icon_ambiguity": 5,
+    "source_site_name_typos": 2
+   },
+   "variants_disagree_note": "beide Bildvarianten lesen an der Stelle unterschiedlich (Text-/Attachment-Ebene); keine automatische Entscheidung - physische Karte pruefen"
+  }
+ }
 }

@@ -43,6 +43,30 @@ Karten und Regelbuch-Keywords). Sie sind **ohne Übernahme von Wiki-Text** erste
 `tools/` enthält den Scraper/Normalisierer (reproduzierbar, MediaWiki-API). Lizenz des
 Scrapers: MIT (wie das Hauptprojekt).
 
+M12a (Imperial-Klassendecks): `tools/scrape_imperial_class_cards`-Familie —
+`scrape_imperial_class_decks.py` (Inventar + beide Bildvarianten),
+`extract_imperial_class_cards.py` (Vision-Transkription + Symbol-Audit),
+`retry_zoom_imperial_class_cards.py` (Zoom-Crop-Nachbearbeitung),
+`fix_m12a_cards.py` (gezielte Vollbreiten-Reparatur Einzelfall),
+`validate_imperial_class_cards.py` (Blog-Gegencheck),
+`check_imperial_class_cards.py` (Schema+Statistik-Gate). Alle Runs cachen unter
+`raw/imperial_class_cards/` (nicht versioniert) und sind mit `--dry-run`
+offline reproduzierbar.
+Kartenbilder: Quelle 1 imperial-assault.com (Fan-Inventarseite, nativ 485x741),
+Quelle 2 cards.boardwars.eu (Zenphoto-Fangalerie, 595px-Wasserzeichen-Variante);
+Gegencheck-Texte: Blogserie „IP Class Deck Review", wretchedhivearmada.blogspot.com.
+Die Rohbilder sind Scans des lizenzierten Brettspiels und bleiben — wie alle
+Roh-Mitschnitte — outside version control; die kuratierte Datei
+`imperial_class_cards.json` folgt derselben Policy wie hero_class_cards.json
+(Punkt 5b: 1:1-Transkript des Kartenaufdrucks aus dem eigenen Spieleexemplar).
+**Token-Legende M12a** (einfache Klammern, Konvention der App-Sprachdateien und
+`keyword_table.json`): {A}=Aktionssymbol, {U}=Upgrade-Symbol, {B}=Surge,
+{H}=Schadensergebnis, {C}=Strain-/Kritikalitätssymbol, {D}=Threat-Token,
+{G}=Block, {F}=Ausweichen, {O}=Fernkampfangriff, {P}=Nahkampfangriff;
+Kosten ohne App-Glyphe (Stoppuhr/Stiefel/Mond) stehen als gedrucktes Wort
+("Event:", "Manoeuvre:", "Sleep:", "Regroup:", "Interrupt:", "Reaction:").
+Würzelfarben, Disruptionswürfel, Objektiv-/Macht-/Absinkmarken als Wort.
+
 ## Symbole
 Die Glyphen in den Texteinträgen folgen der Konvention der App-Sprachdateien:
 {A}=Aktion, {B}=Surge, {H}=Schaden/Regeneration, {C}=Strain, {G}=Block, {F}=Ausweichen,
