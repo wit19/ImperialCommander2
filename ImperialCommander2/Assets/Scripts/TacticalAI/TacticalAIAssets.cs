@@ -19,6 +19,7 @@ namespace TacticalAI
         const string HERO_LETHALITY_PATH = "Languages/En/tactical_hero_lethality";
         const string HERO_PROFILES_PATH = "Languages/En/tactical_hero_profiles";
         const string HERO_CARDS_PATH = "Languages/En/tactical_hero_cards";
+        const string IMPERIAL_DECKS_PATH = "Languages/En/tactical_imperial_decks";
         const string CAMPAIGN_ITEMS_PATH = "Languages/En/CampaignData/items";
         const string CAMPAIGN_SKILLS_PATH = "Languages/En/CampaignData/skills";
 
@@ -26,10 +27,12 @@ namespace TacticalAI
         static object _heroLethalityRoot;
         static object _heroProfilesRoot;
         static object _heroCardsRoot;
+        static object _imperialDecksRoot;
         static object _campaignItemsRoot;
         static object _campaignSkillsRoot;
         static bool _orderDecksFailed, _lethalityFailed, _heroProfilesFailed,
-                    _heroCardsFailed, _campaignItemsFailed, _campaignSkillsFailed;
+                    _heroCardsFailed, _imperialDecksFailed,
+                    _campaignItemsFailed, _campaignSkillsFailed;
 
         /// <summary>tacai.order_decks/1 root object (Core Json) or null when
         /// the asset is missing/unparsable - hooks then fall back to the
@@ -101,6 +104,23 @@ namespace TacticalAI
         {
             var root = HeroCardsRoot;    // prime the Core doc cache (dev-30 seam)
             return Tac.HeroCards.For(heroName);
+        }
+
+        /// <summary>M12b: tacai.imperial_decks/1 - the 12 Imperial class
+        /// decks. Loads AND primes the Core cache (same seam as HeroCardsRoot:
+        /// app and harness agree on the doc whoever touches it first).</summary>
+        public static object ImperialDecksRoot
+        {
+            get
+            {
+                if (_imperialDecksRoot == null && !_imperialDecksFailed)
+                {
+                    _imperialDecksRoot = LoadJson(IMPERIAL_DECKS_PATH, ref _imperialDecksFailed);
+                    if (_imperialDecksRoot is System.Collections.Generic.Dictionary<string, object> d)
+                        Tac.ImperialDecks.PrimeDoc(d);
+                }
+                return _imperialDecksRoot;
+            }
         }
 
         /// <summary>App's OWN campaign tables (v3.11: the AI reads what the

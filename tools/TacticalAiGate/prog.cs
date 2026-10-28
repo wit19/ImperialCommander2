@@ -23,6 +23,7 @@ class P {
         Eq(TacticalAISettings.NextMissionToken("bogus"), "off", "unknown -> OFF");
         WorldFeedGate.Run();
         OverlordGate.Run();
+        ImperialDeckGate.Run();
         Console.WriteLine(Environment.ExitCode == 0 ? "ALL PASS" : "FAILURES");
     }
 }

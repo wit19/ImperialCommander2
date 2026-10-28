@@ -32,6 +32,13 @@ namespace Saga
 		public CampaignType campaignType;
 		public CampaignPackage campaignPackage;
 
+		// TACTICAL AI (M12b): Imperial class deck of the campaign - null is the
+		// VALID "kein Deck" state (older saves load as null; non-tactical
+		// campaigns never store AI-owned deck data). ADDITIVE field only:
+		// formatVersion STAYS 2 so every older save still loads (and still
+		// passes the FileManager/ContinueCampaignPanel format filter).
+		public ImperialDeckState imperialDeck;
+
 		//data sets
 		[JsonIgnore]
 		public static List<CampaignItem> campaignDataItems;
@@ -197,6 +204,17 @@ namespace Saga
 					foreach ( var cs in state.campaignStructure )
 						if ( cs.aiMode == "legacy" ) cs.aiMode = "";
 
+				// TACTICAL AI (M12b): load-backfill - a tactical-mode campaign
+				// without deck data re-derives the choice from seed + profile
+				// (pure, mission-independent; two loads -> bit-identical). In
+				// memory ONLY: the file is not rewritten here, the next regular
+				// SaveCampaignState persists it. Non-tactical: nothing created.
+				if ( state.imperialDeck == null && TacticalAI.TacticalAISettings.Enabled )
+				{
+					try { state.EnsureImperialDeck(); }
+					catch ( Exception e ) { Debug.LogWarning( "SagaCampaign::imperial deck backfill failed " + e.Message ); }
+				}
+
 				Debug.Log( "***CAMPAIGN LOADED***" );
 				return state;
 			}
@@ -210,6 +228,15 @@ namespace Saga
 		public void SaveCampaignState( List<CampaignStructure> structures = null )
 		{
 			Debug.Log( "SaveCampaignState()::SAVING CAMPAIGN" );
+
+			// TACTICAL AI (M12b): tactical campaigns persist the KI deck choice
+			// (deck + score tuple) with the campaign; non-tactical saves never
+			// gain AI-owned deck data (Scope 5: 'kein Deck' is a valid state).
+			if ( imperialDeck == null && TacticalAI.TacticalAISettings.Enabled )
+			{
+				try { EnsureImperialDeck(); }
+				catch ( Exception e ) { Debug.LogWarning( "SaveCampaignState()::imperial deck choice failed " + e.Message ); }
+			}
 
 			if ( structures != null )
 				campaignStructure = structures;
@@ -378,6 +405,87 @@ namespace Saga
 			{
 				Utils.LogWarning( $"ModifyNextMissionThreatLevel()::ERROR\n{e.Message}" );
 			}
+		}
+
+		// ------------------------------------------------------------ M12b deck
+
+		/// <summary>Campaign profile for the deck choice - the SAME mapping the
+		/// canon fixture pins through ImperialCampaignProfile.ProfileFromCampaignSave
+		/// (heroes = counted heroIDs, agenda = isAgendaMission OR missionType
+		/// Agenda). Enrichment over the pure save data: villain families get the
+		/// app's OWN trait table (DataStore.deploymentCards by id, fallback by
+		/// name) on top of the printed-name tokens, because saves carry NO
+		/// traits ([JsonIgnore]). Resolution runs against static build content,
+		/// so it idempotents across loads (determinism rule).</summary>
+		public TacticalAI.Core.ImperialCampaignProfile BuildImperialProfile()
+		{
+			var profile = new TacticalAI.Core.ImperialCampaignProfile();
+			if ( campaignHeroes != null )
+				foreach ( var h in campaignHeroes )
+					if ( h != null && !string.IsNullOrEmpty( h.heroID ) )
+						profile.HeroCount++;
+
+			if ( campaignVillains != null )
+				foreach ( var v in campaignVillains )
+				{
+					if ( v == null ) continue;
+					var families = new HashSet<string>( StringComparer.Ordinal );
+					foreach ( var kv in TacticalAI.Core.ImperialDecks.FamilyCounts( v.name ) )
+						families.Add( kv.Key );
+					var full = DataStore.deploymentCards?.Find( x => x.id == v.id )
+					          ?? DataStore.deploymentCards?.Find( x => x.name == v.name );
+					if ( full?.traits != null )
+						foreach ( var trait in full.traits )
+						{
+							var fam = TacticalAI.Core.ImperialDecks.FamilyFromTrait( trait.ToString() );
+							if ( fam != null ) families.Add( fam );
+						}
+					foreach ( var fam in families )
+					{
+						profile.VillainFamilies.TryGetValue( fam, out int n );
+						profile.VillainFamilies[fam] = n + 1;
+					}
+				}
+
+			if ( campaignStructure != null )
+				foreach ( var cs in campaignStructure )
+				{
+					profile.MissionCount++;
+					if ( cs.isAgendaMission )
+						profile.AgendaMissionCount++;   // Saga.MissionType has NO Agenda member - the flag IS the signal
+				}
+			return profile;
+		}
+
+		/// <summary>Pure deterministic choice (preview): campaign seed + profile,
+		/// nothing stored. Non-tactical UIs may show this without ever touching
+		/// the campaign store. Null when the deck asset is unavailable.</summary>
+		public TacticalAI.Core.ImperialDeckChoice PreviewImperialDeck()
+		{
+			try
+			{
+				if ( TacticalAI.Core.ImperialDecks.DocOrNull() == null &&
+					 TacticalAI.TacticalAIAssets.ImperialDecksRoot == null )
+					return null;
+				var seed = TacticalAI.Core.ImperialDecks.DeckSeedFor( GUID.ToString() );
+				return TacticalAI.Core.ImperialDecks.Choose( BuildImperialProfile(), seed );
+			}
+			catch ( Exception e )
+			{
+				Debug.LogWarning( "SagaCampaign::PreviewImperialDeck failed " + e.Message );
+				return null;
+			}
+		}
+
+		/// <summary>Backfill/creation entry: freeze the deterministic choice
+		/// into the store (basic cards acquired, score tuple persisted).
+		/// Idempotent; only ever called while the tactical mode is ON.</summary>
+		public void EnsureImperialDeck()
+		{
+			if ( imperialDeck != null ) return;
+			var choice = PreviewImperialDeck();
+			if ( choice == null ) return;   // asset missing - stay 'kein Deck'
+			imperialDeck = ImperialDeckState.FromChoice( choice, GUID.ToString() );
 		}
 	}
 }

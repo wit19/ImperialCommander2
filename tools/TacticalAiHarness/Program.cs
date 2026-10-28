@@ -76,6 +76,17 @@ namespace TacticalAiHarness
             }
             catch { /* sections that need the doc fail loudly on their own */ }
 
+            // M12b: the Imperial class-deck asset (deck choice basis) — same
+            // seam: harness pins against the SHIPPED asset, never a fixture copy.
+            try
+            {
+                var langDir = LanguagesDir();
+                var decksPath = Path.Combine(langDir, "En", "tactical_imperial_decks.json");
+                if (File.Exists(decksPath))
+                    ImperialDecks.PrimeDoc(Json.AsDict(Json.Parse(File.ReadAllText(decksPath))));
+            }
+            catch { /* sections that need the doc fail loudly on their own */ }
+
             Run("geometry.json", SecGeometry);
             Run("board.json", SecBoard);
             Run("path.json", SecPath);
@@ -101,6 +112,7 @@ namespace TacticalAiHarness
             Run("keyword_rules.json", SecKeywordRules);
             Run("villain_options.json", SecVillainOptions);
             Run("logger_extract.json", SecLoggerExtract);
+            Run("imperial_deck.json", SecImperialDeck);
 
             Console.WriteLine("== summary: " + (TotalFails == 0 ? "ALL PASS" : "FAILURES") +
                               " | checks=" + TotalChecks + " fails=" + TotalFails);

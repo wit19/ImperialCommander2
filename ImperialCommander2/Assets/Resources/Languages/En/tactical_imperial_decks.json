@@ -1,0 +1,1969 @@
+{
+  "schema": "tacai.imperial_decks/1",
+  "source": "wiki_data/imperial_class_cards.json (M12a, sha256 d969d0053ff446773b9ca90211daee1f26874e45f48edf7a4f42c50277955b0f); Projection: wiki_data/tools/import_imperial_decks.py; Kartentexte 1:1 (LICENSE_DATA.md Punkt 5); images/image_urls bewusst out-of-build",
+  "conventions": {
+    "ids": "deck = slug(Deckname), Karte = deck_slug__karten_slug (stabiler Import-Key)",
+    "xp": "xp=null bei Basic-Karten (0 XP, Setup-Schritt 3 'Choose Imperial Class': liegt ab sofort aus); sonst 1/2/3/4 - Imperiale XP kosten in der Imperial Upgrade Stage",
+    "families": "Einheiten-Familien (TROOPER, REBEL, VEHICLE, DROID, HEAVY WEAPON, MINE, HERO, OFFICER, GUARDIAN, COMMANDER, AGENDA, MISSION) werden zur Laufzeit aus abilities.text + restriction + keyword extrahiert (Core ImperialDecks.FamilyCounts) - das Asset bleibt textnah und damit pruefbar",
+    "needs_review": "M12a-Ehrlichkeitsflag bleibt erhalten (47/109), Modell gewichtet es NICHT"
+  },
+  "deck_count": 12,
+  "card_count": 109,
+  "decks": [
+    {
+      "id": "armored_onslaught",
+      "name": "Armored Onslaught",
+      "cards": [
+        {
+          "id": "armored_onslaught__armor_corps",
+          "name": "Armor Corps",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While defending, Imperial TROOPERS adjacent to a friendly DROID, HEAVY WEAPON, or VEHICLE may reroll 1 defense die."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__automated_repairs",
+          "name": "Automated Repairs",
+          "basic": false,
+          "xp": 1,
+          "restriction": "Attachment: Heavy Weapon, Droid, or Vehicle only",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{A}:",
+              "text": "Exhaust this card to recover 2 {C}."
+            },
+            {
+              "cost": "{P}:",
+              "text": "Exhaust this card to recover 1 {C}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "armored_onslaught__explosive_entry",
+          "name": "Explosive Entry",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when you deploy a figure to roll 1 green die. Each Rebel figure adjacent to that figure suffers {H} equal to the {H} results and becomes Weakened."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__explosive_munitions",
+          "name": "Explosive Munitions",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares a {O} attack. You may replace 1 die in the attack pool with 1 red die and the attack gains Blast 1 {H}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__heavy_firepower",
+          "name": "Heavy Firepower",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares a {O} attack. You may remove 1 red die from the attack pool to apply +3{H} to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__mortar",
+          "name": "Mortar",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card during an Imperial figure's activation. That figure gains: {A}: Choose a space within 3 spaces and roll 1 red die. Each figure and object on or adjacent to that space suffers {H} equal to the {H} results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__power_to_shields",
+          "name": "Power to Shields",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is defending and choose 1 of the following keywords: Pierce, Blast, Cleave, or any Condition keyword. During this attack, the chosen keyword has no effect. Then, you may pay 1 {D} to ready this card."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__rapid_dominance",
+          "name": "Rapid Dominance",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "2{U}:",
+              "text": "Exhaust this card during a HEAVY WEAPON or VEHICLE figure's activation. That figure may perform an additional action."
+            },
+            {
+              "cost": "3{U}:",
+              "text": "Deplete this card to ready 1 HEAVY WEAPON or VEHICLE Deployment card."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "armored_onslaught__reactive_armor",
+          "name": "Reactive Armor",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment: DROID OR VEHICLE ONLY",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "+2 Health"
+            },
+            {
+              "cost": null,
+              "text": "While defending, if you roll an {F} result on a black die, apply +2 {G} to the defense results."
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "hutt_mercenaries",
+      "name": "Hutt Mercenaries",
+      "cards": [
+        {
+          "id": "hutt_mercenaries__cheap_shot",
+          "name": "Cheap Shot",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card during an Imperial figure's activation and choose an adjacent hostile figure. That figure may test {G}. If it does not pass, it becomes Weakened."
+            },
+            {
+              "cost": null,
+              "text": "If the Imperial figure is a SCUM figure, apply -1 {B} to the test results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__guild_hunters",
+          "name": "Guild Hunters",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When you deploy a figure, that figure becomes Hidden."
+            },
+            {
+              "cost": null,
+              "text": "Imperial figures gain: {P}: +1{G}, +2 Accuracy {P}: Pierce 2 {P}: Hide"
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__most_wanted",
+          "name": "Most Wanted",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while a hero is defending to apply +2 {B} to the attack results. If that hero has a Bounty token, apply an additional +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__nowhere_to_hide",
+          "name": "Nowhere to Hide",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card before an attack targeting a hero with a Bounty token is declared. Figures do not block line of sight for this attack and you add 1 blue die to the attack pool."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "hutt_mercenaries__nowhere_to_run",
+          "name": "Nowhere to Run",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an attack targeting a hero who has suffered 3 or more {C} is declared to apply +1 {B} to the attack results."
+            },
+            {
+              "cost": null,
+              "text": "If the attacker is a Hutt figure, apply an additional +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__savage_motivation",
+          "name": "Savage Motivation",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card during an Imperial figure's activation and choose an adjacent Rebel figure. Roll 1 yellow die. That figure suffers {H} equal to the {H} results."
+            },
+            {
+              "cost": null,
+              "text": "If the Imperial figure is a OFFICER figure, roll 1 blue die instead."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__scouted",
+          "name": "Scouted",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while a hero with a Bounty token is attacking to reroll 1 defense die. If you do, convert all {G} results to {F} results."
+            },
+            {
+              "cost": null,
+              "text": "While choosing open groups for missions, ignore the “No FIGURE figures” restriction."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__vendetta",
+          "name": "Vendetta",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while a hero with a Bounty token is defending to reroll 1 attack die."
+            },
+            {
+              "cost": null,
+              "text": "While attacking, an Imperial figure can spend 1 {A} to ready this card."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "hutt_mercenaries__wanted_dead",
+          "name": "Wanted Dead",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When no heroes have a Bounty token, each hero claims a Bounty token."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while a hero with a Bounty token is defending to apply +1 {B} or +1 {C} to the results."
+            },
+            {
+              "cost": null,
+              "text": "When a hero with a Bounty token is defeated, discard that token."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    },
+    {
+      "id": "imperial_black_ops",
+      "name": "Imperial Black Ops",
+      "cards": [
+        {
+          "id": "imperial_black_ops__execution_squad",
+          "name": "Execution Squad",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "You gain: Overload: You can trigger the same {A} ability up to twice per attack."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "imperial_black_ops__in_the_shadows",
+          "name": "In the Shadows",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card at the start of an activation and choose an Imperial figure. That figure becomes Hidden."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "imperial_black_ops__shadow_armor",
+          "name": "Shadow Armor",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an attack targeting an Imperial figure is declared to apply -1{G}, -1{B}, or -2 Accuracy to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "imperial_black_ops__shadow_corps",
+          "name": "Shadow Corps",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Each Hidden Imperial figure gains:"
+            },
+            {
+              "cost": "{A}:",
+              "text": "Choose an adjacent friendly figure. That figure becomes Hidden."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "imperial_black_ops__stealth",
+          "name": "Stealth",
+          "basic": false,
+          "xp": 1,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "{O} attacks targeting you require 1 or more Accuracy to not miss."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card at the end of your activation to become Hidden."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "imperial_black_ops__strategic_redeployment",
+          "name": "Strategic Redeployment",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking to deploy or reinforce a figure, spending {B} results instead of {D}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "imperial_black_ops__surprise_attack",
+          "name": "Surprise Attack",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares an attack. If the target did not have line of sight to the attacker at the start of this activation, apply +2 Accuracy and +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "imperial_black_ops__true_shadow",
+          "name": "True Shadow",
+          "basic": false,
+          "xp": 4,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When you are deployed, you become Hidden. You cannot discard the Hidden condition."
+            },
+            {
+              "cost": null,
+              "text": "Deplete this card while defending to apply +1 {G} to the defense results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "imperial_black_ops__versatility",
+          "name": "Versatility",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "During its activation, an Imperial figure may discard 1 BENEFICIAL condition to gain 1 BENEFICIAL condition of your choice."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking. The attack gains: {A}: Hide"
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "inspiring_leadership",
+      "name": "Inspiring Leadership",
+      "cards": [
+        {
+          "id": "inspiring_leadership__field_general",
+          "name": "Field General",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment: Guardian, Leader, or Trooper only",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{A}:",
+              "text": "Exhaust this card. You gain: Executive Order: Choose a friendly figure within 2 spaces. That figure may interrupt to perform a move or attack."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__field_officer",
+          "name": "Field Officer",
+          "basic": true,
+          "xp": null,
+          "restriction": "ATTACHMENT",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card. You gain:"
+            },
+            {
+              "cost": "{A}:",
+              "text": "Order: Choose a friendly figure within 2 spaces. That figure may interrupt to perform a move."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__imperial_dedication",
+          "name": "Imperial Dedication",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "1{A}:",
+              "text": "Exhaust this card when an attack targeting an Imperial figure is declared. Choose an Imperial figure adjacent to the target who could also be the target of that attack. That figure becomes the target of that attack."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "inspiring_leadership__lead_by_example",
+          "name": "Lead By Example",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "After a figure resolves an “Order,” it may perform a move."
+            },
+            {
+              "cost": null,
+              "text": "After a figure resolves an “Executive Order,” it may perform a move or attack."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__noble_sacrifice",
+          "name": "Noble Sacrifice",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Deplete this card when an Imperial LEADER or GUARDIAN is defeated. Choose up to 5 Imperial figures that had line of sight to that figure. Each of those figures becomes Focused."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__optimal_tactics",
+          "name": "Optimal Tactics",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While attacking, other Imperial figures within 3 spaces of a friendly LEADER apply +1 {D} to their attack results and may reroll 1 attack die."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "inspiring_leadership__press_on",
+          "name": "Press On",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the end of each round, choose 1 regular Imperial group. Each figure in that group recovers 1 {C}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__strategic_planning",
+          "name": "Strategic Planning",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card and 1 of your Deployment cards before activating a group. Ready another of your Deployment cards of equal or lesser deployment cost. Each figure corresponding to both Deployment cards gains 1 movement point."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "inspiring_leadership__supervisory_agent",
+          "name": "Supervisory Agent",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Deplete this card before activating a group. Deploy 1 regular Imperial Officer from your hand without paying its Deployment cost."
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "military_might",
+      "name": "Military Might",
+      "cards": [
+        {
+          "id": "military_might__assault_armor",
+          "name": "Assault Armor",
+          "basic": false,
+          "xp": 2,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "+2 Health"
+            },
+            {
+              "cost": "{A}",
+              "text": "Exhaust this card while defending to reroll 1 black die."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "military_might__combat_medic",
+          "name": "Combat Medic",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{U}: ",
+              "text": "Exhaust this card at the end of a TROOPER's activation. That figure and each adjacent Imperial figure recovers 2 ."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "military_might__combat_veterans",
+          "name": "Combat Veterans",
+          "basic": false,
+          "xp": 4,
+          "restriction": "ATTACHMENT",
+          "keyword": "TROOPER ONLY",
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While defending, apply +1 {G} to the defense results."
+            },
+            {
+              "cost": null,
+              "text": "While attacking, apply +2 Accuracy and +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "military_might__endless_ranks",
+          "name": "Endless Ranks",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When you deploy a TROOPER, reduce its deployment cost by 1."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "military_might__riot_grenades",
+          "name": "Riot Grenades",
+          "basic": false,
+          "xp": 1,
+          "restriction": "ATTACHMENT",
+          "keyword": "TROOPER ONLY",
+          "abilities": [
+            {
+              "cost": "{A}: ",
+              "text": "Exhaust this card to choose a space within 3 spaces. Each figure on or adjacent to that space tests {F}. Each figure who fails suffers 1 {H}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "military_might__shock_troopers",
+          "name": "Shock Troopers",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While an Imperial TROOPER is attacking a figure within 2 spaces, apply +1{B} to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "military_might__shock_and_awe",
+          "name": "Shock and Awe",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the end of each round, place 1 strain token on this card. Then you may spend 1 {C} to place an additional strain token on this card."
+            },
+            {
+              "cost": null,
+              "text": "When an Imperial figure declares an attack, you may discard 1 strain token from this card to apply +1 {C} to the attack results. Limit once per attack."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "military_might__show_of_force",
+          "name": "Show of Force",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares an attack. That figure becomes Focused."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "military_might__sustained_fire",
+          "name": "Sustained Fire",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card after an Imperial figure resolves an attack. That figure performs an additional attack. Then that figure becomes Stunned."
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "nemeses",
+      "name": "Nemeses",
+      "cards": [
+        {
+          "id": "nemeses__devastating_legion",
+          "name": "Devastating Legion",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While a Rebel figure within 3 spaces of a villain is defending, you may apply -1{G} or -1{F} to the defense results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "nemeses__fearsome_presence",
+          "name": "Fearsome Presence",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card at the end of your activation. Each Rebel figure adjacent to an Imperial figure with a figure cost equal to or greater than the threat level suffers 1 {C} for each activation token he has."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "nemeses__im_on_the_leader",
+          "name": "Im on the Leader",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking the healthy hero who has suffered the least {G}. Apply +2 {G} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "nemeses__indomitable",
+          "name": "Indomitable",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Villains cannot receive Harmful conditions."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card when an attack targeting a villain is declared to add 1 black die to that villain’s defense pool."
+            },
+            {
+              "cost": "{U}:",
+              "text": "Use when an attack targeting a villain is declared to ready this card."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "nemeses__inspirational",
+          "name": "Inspirational",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when a figure declares an attack to choose a villain on the map or reveal a villain in your open or reserved groups. During this attack, non-villain Imperial figures that share a trait with the chosen or revealed villain gain +1{P} and +1{F}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "nemeses__leave_them_to_me",
+          "name": "Leave Them to Me",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "After choosing open groups, add 1 earned villain to your hand of open groups."
+            },
+            {
+              "cost": null,
+              "text": "Deplete this card when you deploy a villain to reduce that villain's deployment cost by 5. Exhaust that villain's Deployment card."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "nemeses__powerful_foes",
+          "name": "Powerful Foes",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "You earn 1 {D} and 1 villain of your choice."
+            },
+            {
+              "cost": null,
+              "text": "After choosing open groups, add 1 earned villain to your hand of open groups."
+            },
+            {
+              "cost": "{U}:",
+              "text": "Deplete this card when you deploy a villain to reduce its deployment cost by the threat level."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "nemeses__prepare_the_ambush",
+          "name": "Prepare the Ambush",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When it is your turn to activate a group, you may exhaust this card instead of activating a group."
+            },
+            {
+              "cost": null,
+              "text": "At the start of its activation, each figure in the first Imperial group to activate each round gains 2 movement points."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "nemeses__punishing_force",
+          "name": "Punishing Force",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking to reroll any number of attack dice."
+            },
+            {
+              "cost": null,
+              "text": "Ready this card at the end of each Rebel activation."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "nemeses__ringleader",
+          "name": "Ringleader",
+          "basic": false,
+          "xp": 2,
+          "restriction": "Attachment: Villain Only",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of your activation, you gain 2 movement points."
+            },
+            {
+              "cost": null,
+              "text": "While an adjacent friendly figure is attacking, apply +1 Accuracy and +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    },
+    {
+      "id": "overwhelming_oppression",
+      "name": "Overwhelming Oppression",
+      "cards": [
+        {
+          "id": "overwhelming_oppression__commence_landing",
+          "name": "Commence Landing",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Play with your hand of Deployment cards faceup."
+            },
+            {
+              "cost": null,
+              "text": "At the start of each round, distribute 1 {D} and 1 {C} among cards in your hand."
+            },
+            {
+              "cost": null,
+              "text": "When you deploy a group from your hand, distribute the tokens on its card among its figures."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "overwhelming_oppression__implacable",
+          "name": "Implacable",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each round, place 1 {D} on a card in your hand."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is defending. That figure may spend {C} or {D} from friendly figures within 3 spaces as if they were its own."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "overwhelming_oppression__indomitable_force",
+          "name": "Indomitable Force",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each round, place 1 {D} on a card in your hand."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card during one of your activations. Remove 2 power tokens from Deployment cards in your hand. Distribute those tokens among friendly figures."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "overwhelming_oppression__lmitless_arsenal",
+          "name": "Lmitless Arsenal",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares an attack. You may replace that figure's attack pool with the attack pool of a Deployment card in your hand with at least 1 {O} or 1 {P} on it."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "overwhelming_oppression__personal_flagship",
+          "name": "Personal Flagship",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "You earn 1 villain of your choice."
+            },
+            {
+              "cost": null,
+              "text": "After choosing open groups, add 1 earned villain to your hand of open groups."
+            },
+            {
+              "cost": null,
+              "text": "When you activate a villain, a friendly figure within 3 spaces of that villain gains 1 {C} or 1 {G}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "overwhelming_oppression__redouble_our_efforts",
+          "name": "Redouble Our Efforts",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each round, place 1 {D} or 1 {C} on a card in your hand."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure is defeated. Distribute that figure's power tokens among other friendly figures within 3 spaces."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "overwhelming_oppression__tie_fighter_patrol",
+          "name": "TIE Fighter Patrol",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card during one of your activations to choose a hero. That hero may test . If the hero succeeds, they suffer 1{C}. Otherwise, the hero suffers 3{G}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "overwhelming_oppression__tie_landers",
+          "name": "TIE Landers",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card after you deploy a figure. Choose up to 3 Rebel figures within 5 spaces of the deployed figure. Each of those figures suffers 1 {H}, plus an additional 1 {H} if that figure has two activation tokens."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "overwhelming_oppression__tactical_mastery",
+          "name": "Tactical Mastery",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each round, place 1 {D} on a card in your hand."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure spends a {D}. During this attack, that figure may use 1 {B} ability on another Imperial figure within 3 spaces."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    },
+    {
+      "id": "power_of_the_dark_side",
+      "name": "Power of the Dark Side",
+      "cards": [
+        {
+          "id": "power_of_the_dark_side__dark_resurgence",
+          "name": "Dark Resurgence",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Deplete this card when an Imperial figure would be defeated. Instead, that figure recovers 3 {C}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "power_of_the_dark_side__embrace_anger",
+          "name": "Embrace Anger",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares an attack. That figure suffers 1 {C}. Then, apply +1 {C} to the attack results."
+            },
+            {
+              "cost": null,
+              "text": "Ready this card at the end of each Imperial group activation."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "power_of_the_dark_side__embrace_fear",
+          "name": "Embrace Fear",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of the first Rebel activation each round, the activating figure may test Insight. If it does not succeed, it suffers 1 {C}."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card at the start of an Imperial figure’s activation. That figure gains 1 movement point."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "power_of_the_dark_side__embrace_hate",
+          "name": "Embrace Hate",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each Status Phase, choose a Rebel figure. The chosen figure suffers 1 {C}. Then, if the chosen figure is in line of sight of an Imperial figure, that Imperial figure also suffers 1 {C} and gains 1 {D}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "power_of_the_dark_side__embrace_suffering",
+          "name": "Embrace Suffering",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card at the end of a round and choose a Rebel figure. Push that figure up to 2 spaces."
+            },
+            {
+              "cost": "2{U}:",
+              "text": "Exhaust this card at the end of a round and choose a Rebel figure. Perform an attack with that figure."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "power_of_the_dark_side__manifest_agression",
+          "name": "Manifest Agression",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card at the start or end of a round and choose up to 2 Imperial figures. Each of those figures gains 1{D}."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card at the start of an Imperial figure's activation. That figure gains 1{D}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "power_of_the_dark_side__supernatural_vigor",
+          "name": "Supernatural Vigor",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each round, choose 1 Imperial figure. That figure gains +3 Health until the end of the round."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "power_of_the_dark_side__the_power_of_passion",
+          "name": "The Power of Passion",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When an Imperial figure spends a {D}, apply +1 {B} to the attack results (in addition to the +1 {D} for spending the token)."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking to reroll any number of attack dice."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "power_of_the_dark_side__unnatural_abilities",
+          "name": "Unnatural Abilities",
+          "basic": false,
+          "xp": 3,
+          "restriction": "ATTACHMENT",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "NON-CREATURE ONLY +1 {F} +1 {P} also if the starting group size is 1."
+            },
+            {
+              "cost": null,
+              "text": "At the end of this group's activation, one figure in this group gains 1 {C}."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    },
+    {
+      "id": "precision_training",
+      "name": "Precision Training",
+      "cards": [
+        {
+          "id": "precision_training__assassins",
+          "name": "Assassins",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Figures do not block line of sight for your attacks."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while attacking to reroll any number of attack dice."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__exacting_strike",
+          "name": "Exacting Strike",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "2{D}:",
+              "text": "Exhaust this card when an Imperial figure declares an attack to remove 1 die from the target’s defense pool."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "precision_training__find_the_weakness",
+          "name": "Find the Weakness",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While an Imperial figure is attacking, apply Pierce 1 to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__knowledge_of_attack",
+          "name": "Knowledge of Attack",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is defending to apply -1 {B} to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__pinpoint_accuracy",
+          "name": "Pinpoint Accuracy",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Deplete this card while an Imperial figure is attacking to apply -1 {G} to the defense results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__sharpshooters",
+          "name": "Sharpshooters",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While an Imperial figure is attacking, apply +1 Accuracy to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__single_minded",
+          "name": "Single Minded",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure rerolls an attack die. Instead of rerolling that die, change that die's result to another result of your choice on that die."
+            },
+            {
+              "cost": "{U}:",
+              "text": "Ready this card."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "precision_training__strike_force",
+          "name": "Strike Force",
+          "basic": true,
+          "xp": null,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While attacking, you may reroll 1 attack die."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "precision_training__versatile_attack",
+          "name": "Versatile Attack",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{U}:",
+              "text": "Exhaust this card when an Imperial figure declares an attack to add 1 yellow die to the attack pool. The attack gains:"
+            },
+            {
+              "cost": "{P}:",
+              "text": "Weaken"
+            },
+            {
+              "cost": "{P}:",
+              "text": "+1 {B}"
+            },
+            {
+              "cost": "{P}:",
+              "text": "Pierce 2"
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "reactive_defenses",
+      "name": "Reactive Defenses",
+      "cards": [
+        {
+          "id": "reactive_defenses__active_surveillance",
+          "name": "Active Surveillance",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the start of each mission, deploy 88-Z."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card during an optional deployment to deploy 88-Z."
+            },
+            {
+              "cost": null,
+              "text": "88-Z activates at the start or end of an Imperial activation."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__blaster_emplacements",
+          "name": "Blaster Emplacements",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the end of each round, choose a Rebel figure. Then, roll 1 yellow die. That figure suffers {H} equal to the {H} results."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card when an Imperial figure declares an attack. Apply +2 Accuracy to the results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__electromagnetic_disruptors",
+          "name": "Electromagnetic Disruptors",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While a Rebel figure within 3 spaces of 88-Z is attacking, apply -1 Accuracy to the results."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card after 88-Z activates. Distribute 2 {G} or {F} among figures within 3 spaces. A figure can gain a {G} only if it rolls a white die or an {F} only if it rolls a black die."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__infrared_scanners",
+          "name": "Infrared Scanners",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "88-Z gains {A}: Choose a hero in your line of sight. That hero may suffer 1 {C} to test {B}. If it does not succeed, increase {D} by 1."
+            },
+            {
+              "cost": null,
+              "text": "At the start of each Imperial figure's activation, that figure gains 1 movement point."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__mechanical_protocol",
+          "name": "Mechanical Protocol",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "88-Z gains {A}: Up to 2 other figures within 2 spaces of you each gain 1 {C}."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while a DROID (including 88-Z) is attacking to apply +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__overclock",
+          "name": "Overclock",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card to ready 88-Z."
+            },
+            {
+              "cost": null,
+              "text": "88-Z gains: {A}: Gain 1 {D}."
+            },
+            {
+              "cost": null,
+              "text": "88-Z can perform 3 actions each activation."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__remote_activator",
+          "name": "Remote Activator",
+          "basic": false,
+          "xp": 2,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{A}:",
+              "text": "88-Z may interrupt to perform a move, attack, or special action. Limit once per group activation."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card during your activation for 88-Z to gain 2 movement points."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__shielded",
+          "name": "Shielded",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "88-Z gains {A}: Place 1 energy shield in an adjacent space. A figure can attack these energy shields (Health: 5, Defense: 1 {G})."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card when an attack targeting an Imperial figure is declared to apply +1 {G} to the defense results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "reactive_defenses__targeting_sensors",
+          "name": "Targeting Sensors",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When another Imperial figure within 2 spaces of 88-Z declares an attack, apply +1 {D} and +1 Accuracy to the attack results."
+            },
+            {
+              "cost": null,
+              "text": "Exhaust this card while an Imperial figure is attacking to apply +1 {D} to the attack results."
+            }
+          ],
+          "needs_review": false
+        }
+      ]
+    },
+    {
+      "id": "subversive_tactics",
+      "name": "Subversive Tactics",
+      "cards": [
+        {
+          "id": "subversive_tactics__executioner",
+          "name": "Executioner",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{A}{U}:",
+              "text": "Exhaust this card when an Imperial figure declares an attack targeting a hero. Apply +1 {H} for each {C} the hero has suffered, to a maximum of +3 {H}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "subversive_tactics__exploit_weakness",
+          "name": "Exploit Weakness",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card after a hero rests. An Imperial figure can interrupt to perform a move or perform an attack targeting that hero."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "subversive_tactics__heavy_pressure",
+          "name": "Heavy Pressure",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when a hero would suffer {C} from an attack. Instead of suffering {C}, that hero suffers an equal amount of {D}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "subversive_tactics__no_quarter",
+          "name": "No Quarter",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When an IMPERIAL figure declares an attack targeting a HERO who has suffered 2 or more {B}, apply +1 {B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "subversive_tactics__oppression",
+          "name": "Oppression",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "When a hero who has suffered 2 or more {C} declares an attack, apply +1 {G} to the defense results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "subversive_tactics__prey_upon_doubt",
+          "name": "Prey Upon Doubt",
+          "basic": true,
+          "xp": null,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card when a Rebel figure declares an attack. The Rebel figure chooses to either suffer 1{C}, or apply +1{F} to the defense results."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "subversive_tactics__savage_weaponry",
+          "name": "Savage Weaponry",
+          "basic": false,
+          "xp": 1,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Pierce 1"
+            },
+            {
+              "cost": "{A}",
+              "text": "Bleed"
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "subversive_tactics__surgical_strike",
+          "name": "Surgical Strike",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Exhaust this card after an Imperial figure resolves an attack. The target suffers 1{H} and 1{C}."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "subversive_tactics__weary_target",
+          "name": "Weary Target",
+          "basic": false,
+          "xp": 3,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "At the end of each round, choose 1 hero who has not suffered {H} equal to his Endurance. That hero suffers 2{H}."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    },
+    {
+      "id": "technological_superiority",
+      "name": "Technological Superiority",
+      "cards": [
+        {
+          "id": "technological_superiority__adaptive_weapons",
+          "name": "Adaptive Weapons",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While an Imperial figure is attacking, you may replace 1 die in its attack pool with another attack die of your choice."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "technological_superiority__arc_blasters",
+          "name": "Arc Blasters",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "After resolving a {O} attack, each figure that suffered 1 or more {H} tests {G}. Each figure that fails is Stunned."
+            },
+            {
+              "cost": null,
+              "text": "If you have the {O} attack type, you gain: {A}: +1{O}, Blast 1{H}"
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "technological_superiority__cloaking_device",
+          "name": "Cloaking Device",
+          "basic": false,
+          "xp": 3,
+          "restriction": "Attachment: Trooper or Droid only",
+          "keyword": "TROOPER OR DROID ONLY",
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Add 1 white die to your defense pool."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "technological_superiority__experimental_arms",
+          "name": "Experimental Arms",
+          "basic": true,
+          "xp": null,
+          "restriction": "Attachment",
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "While attacking, you may apply +1{B} to the attack results. Then, after the attack is resolved, you suffer 1{C}."
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "technological_superiority__failsafe",
+          "name": "Failsafe",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "2{A}:",
+              "text": "Exhaust this card when an Imperial figure suffers {H} equal to its Health. Instead of being defeated, that figure recovers 1{H} and gains 3 movement points."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "technological_superiority__hidden_detonators",
+          "name": "Hidden Detonators",
+          "basic": false,
+          "xp": 2,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": "{U}: ",
+              "text": "Exhaust this card at the end of a round to choose 1 Imperial figure. Each figure and object adjacent to the Imperial figure suffers 2{H}. Then the Imperial figure is defeated."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "technological_superiority__jetpacks",
+          "name": "Jetpacks",
+          "basic": false,
+          "xp": 1,
+          "restriction": "Attachment: Trooper only",
+          "keyword": "TROOPER ONLY",
+          "abilities": [
+            {
+              "cost": null,
+              "text": "You gain “Mobile.”"
+            }
+          ],
+          "needs_review": false
+        },
+        {
+          "id": "technological_superiority__superior_augments",
+          "name": "Superior Augments",
+          "basic": false,
+          "xp": 4,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "If a group has 1 or more attachments, apply +1 Speed to each figure in that group."
+            },
+            {
+              "cost": null,
+              "text": "While a figure in a group with 1 or more attachments is attacking, it applies +1{B} to the attack results."
+            }
+          ],
+          "needs_review": true
+        },
+        {
+          "id": "technological_superiority__technical_support",
+          "name": "Technical Support",
+          "basic": false,
+          "xp": 1,
+          "restriction": null,
+          "keyword": null,
+          "abilities": [
+            {
+              "cost": null,
+              "text": "Apply +1 Speed to each Imperial DROID. Each of those figures also gains:"
+            },
+            {
+              "cost": "{A}:",
+              "text": "Choose an adjacent friendly figure. That figure may discard all conditions, become Focused, or recover 3 {C}."
+            }
+          ],
+          "needs_review": true
+        }
+      ]
+    }
+  ]
+}

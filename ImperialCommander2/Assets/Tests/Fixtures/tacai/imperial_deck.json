@@ -1,0 +1,783 @@
+{
+ "_comment": "M12b Imperial-Klassendeck: Deck-Persistenz + deterministische KI-Deckwahl. AUTHORED, nicht recorded (wie strain_budget.json): Erwartungswerte aus der im Core-Header dokumentierten Regel (Assets/Scripts/TacticalAI/Core/ImperialDecks.cs) - unabhaengiger Python-Twin wiki_data/tools/tacai_deck_twin.py liest das SHIPPED Asset (tactical_imperial_decks.json) und berechnet Synergie + SplitMix64-Noise; der Harness laeuft gegen das C#-Original, eine Divergenz faellt als FAIL auf. profile-Mapping = ProfileFromCampaignSave auf save-Form (missionType als int wie im Save). WICHTIG: echte Saves serialisieren campaignVillains OHNE traits ([JsonIgnore]) - Familien-Signal aus dem Save sind die Kartennamen; zusammengesetzte Namen wie 'Shoretrooper' liefern  bewusst KEIN TROOPER-Token (Wortgrenze!), das schliesst der Live-Adapter ueber die App-eigene Trait-Tabelle (families-Feld = dokumentierter Anreicherungs-Naeht, im Save nie vorhanden). backfill pinnt zusaetzlich den Ordinal-Tiebreak (hutt_mercenaries vs subversive_tactics, gleicher Total).",
+ "schema": "tacai.imperial_deck/1",
+ "table": {
+  "deck_count": 12,
+  "card_count": 109,
+  "deck_order": [
+   "armored_onslaught",
+   "hutt_mercenaries",
+   "imperial_black_ops",
+   "inspiring_leadership",
+   "military_might",
+   "nemeses",
+   "overwhelming_oppression",
+   "power_of_the_dark_side",
+   "precision_training",
+   "reactive_defenses",
+   "subversive_tactics",
+   "technological_superiority"
+  ],
+  "paid_xp_expect": [
+   1,
+   1,
+   2,
+   2,
+   3,
+   3,
+   4,
+   4
+  ]
+ },
+ "seeds": {
+  "fnv_empty_hex": "14650fb0739d0383",
+  "vectors": [
+   {
+    "key": "0f1e2d3c-4b5a-4938-8726-152433221100",
+    "expect": "7074e2f2197e0c4d"
+   },
+   {
+    "key": "11111111-2222-3333-4444-555555555555",
+    "expect": "0418c01a8978636a"
+   },
+   {
+    "key": "a7b3c9d1-5e2f-4a8b-9c0d-1e2f3a4b5c6d",
+    "expect": "8160944a945d5acf"
+   },
+   {
+    "key": "empty-campaign-guid",
+    "expect": "23b49eae1c0f4638"
+   }
+  ]
+ },
+ "start_cases": [
+  {
+   "name": "start_core",
+   "campaign_save": {
+    "GUID": "0f1e2d3c-4b5a-4938-8726-152433221100",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     },
+     {
+      "heroID": "H4"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Scout Trooper"
+     },
+     {
+      "name": "Assault Trooper"
+     },
+     {
+      "name": "Imperial Probe Droid"
+     },
+     {
+      "name": "Heavy Weapon Expert"
+     },
+     {
+      "name": "Omblesse Officer"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 1,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 1
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0,
+      "isAgendaMission": true
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "expect": {
+    "seed": "7074e2f2197e0c4d",
+    "deck": "hutt_mercenaries",
+    "scores": [
+     {
+      "deck": "hutt_mercenaries",
+      "synergy": 37,
+      "noise": 2,
+      "total": 39
+     },
+     {
+      "deck": "technological_superiority",
+      "synergy": 33,
+      "noise": 1,
+      "total": 34
+     },
+     {
+      "deck": "armored_onslaught",
+      "synergy": 30,
+      "noise": 3,
+      "total": 33
+     },
+     {
+      "deck": "reactive_defenses",
+      "synergy": 28,
+      "noise": 3,
+      "total": 31
+     },
+     {
+      "deck": "subversive_tactics",
+      "synergy": 30,
+      "noise": 1,
+      "total": 31
+     },
+     {
+      "deck": "overwhelming_oppression",
+      "synergy": 27,
+      "noise": 1,
+      "total": 28
+     },
+     {
+      "deck": "military_might",
+      "synergy": 24,
+      "noise": 3,
+      "total": 27
+     },
+     {
+      "deck": "nemeses",
+      "synergy": 15,
+      "noise": 3,
+      "total": 18
+     },
+     {
+      "deck": "power_of_the_dark_side",
+      "synergy": 12,
+      "noise": 3,
+      "total": 15
+     },
+     {
+      "deck": "inspiring_leadership",
+      "synergy": 9,
+      "noise": 1,
+      "total": 10
+     },
+     {
+      "deck": "precision_training",
+      "synergy": 0,
+      "noise": 2,
+      "total": 2
+     },
+     {
+      "deck": "imperial_black_ops",
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     }
+    ]
+   }
+  },
+  {
+   "name": "start_vehicles",
+   "campaign_save": {
+    "GUID": "11111111-2222-3333-4444-555555555555",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Imperial Speeder Bike"
+     },
+     {
+      "name": "Juggernaut"
+     },
+     {
+      "name": "Reinforced Juggernaut"
+     },
+     {
+      "name": "TIE Fighter"
+     },
+     {
+      "name": "Scout Trooper"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "expect": {
+    "seed": "0418c01a8978636a",
+    "deck": "subversive_tactics",
+    "scores": [
+     {
+      "deck": "subversive_tactics",
+      "synergy": 20,
+      "noise": 3,
+      "total": 23
+     },
+     {
+      "deck": "hutt_mercenaries",
+      "synergy": 22,
+      "noise": 0,
+      "total": 22
+     },
+     {
+      "deck": "overwhelming_oppression",
+      "synergy": 18,
+      "noise": 3,
+      "total": 21
+     },
+     {
+      "deck": "reactive_defenses",
+      "synergy": 16,
+      "noise": 0,
+      "total": 16
+     },
+     {
+      "deck": "technological_superiority",
+      "synergy": 12,
+      "noise": 2,
+      "total": 14
+     },
+     {
+      "deck": "military_might",
+      "synergy": 12,
+      "noise": 0,
+      "total": 12
+     },
+     {
+      "deck": "nemeses",
+      "synergy": 10,
+      "noise": 2,
+      "total": 12
+     },
+     {
+      "deck": "power_of_the_dark_side",
+      "synergy": 8,
+      "noise": 3,
+      "total": 11
+     },
+     {
+      "deck": "armored_onslaught",
+      "synergy": 5,
+      "noise": 1,
+      "total": 6
+     },
+     {
+      "deck": "inspiring_leadership",
+      "synergy": 3,
+      "noise": 1,
+      "total": 4
+     },
+     {
+      "deck": "imperial_black_ops",
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     },
+     {
+      "deck": "precision_training",
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     }
+    ]
+   }
+  },
+  {
+   "name": "vehicles_enriched",
+   "campaign_save": {
+    "GUID": "11111111-2222-3333-4444-555555555555",
+    "campaignHeroes": [
+     {
+      "heroID": "H1"
+     },
+     {
+      "heroID": "H2"
+     }
+    ],
+    "campaignVillains": [
+     {
+      "name": "Imperial Speeder Bike",
+      "families": [
+       "VEHICLE",
+       "TROOPER"
+      ]
+     },
+     {
+      "name": "Juggernaut",
+      "families": [
+       "VEHICLE",
+       "HEAVY WEAPON"
+      ]
+     },
+     {
+      "name": "Reinforced Juggernaut",
+      "families": [
+       "VEHICLE",
+       "HEAVY WEAPON"
+      ]
+     },
+     {
+      "name": "TIE Fighter",
+      "families": [
+       "VEHICLE"
+      ]
+     },
+     {
+      "name": "Scout Trooper"
+     }
+    ],
+    "campaignStructure": [
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 0
+     },
+     {
+      "missionType": 5
+     }
+    ]
+   },
+   "expect": {
+    "seed": "0418c01a8978636a",
+    "deck": "armored_onslaught",
+    "scores": [
+     {
+      "deck": "armored_onslaught",
+      "synergy": 80,
+      "noise": 1,
+      "total": 81
+     },
+     {
+      "deck": "technological_superiority",
+      "synergy": 24,
+      "noise": 2,
+      "total": 26
+     },
+     {
+      "deck": "military_might",
+      "synergy": 24,
+      "noise": 0,
+      "total": 24
+     },
+     {
+      "deck": "subversive_tactics",
+      "synergy": 20,
+      "noise": 3,
+      "total": 23
+     },
+     {
+      "deck": "hutt_mercenaries",
+      "synergy": 22,
+      "noise": 0,
+      "total": 22
+     },
+     {
+      "deck": "overwhelming_oppression",
+      "synergy": 18,
+      "noise": 3,
+      "total": 21
+     },
+     {
+      "deck": "reactive_defenses",
+      "synergy": 16,
+      "noise": 0,
+      "total": 16
+     },
+     {
+      "deck": "nemeses",
+      "synergy": 10,
+      "noise": 2,
+      "total": 12
+     },
+     {
+      "deck": "power_of_the_dark_side",
+      "synergy": 8,
+      "noise": 3,
+      "total": 11
+     },
+     {
+      "deck": "inspiring_leadership",
+      "synergy": 6,
+      "noise": 1,
+      "total": 7
+     },
+     {
+      "deck": "imperial_black_ops",
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     },
+     {
+      "deck": "precision_training",
+      "synergy": 0,
+      "noise": 1,
+      "total": 1
+     }
+    ]
+   }
+  }
+ ],
+ "backfill": {
+  "name": "backfill",
+  "campaign_save": {
+   "GUID": "a7b3c9d1-5e2f-4a8b-9c0d-1e2f3a4b5c6d",
+   "formatVersion": 2,
+   "campaignHeroes": [
+    {
+     "heroID": "H7"
+    },
+    {
+     "heroID": "H12"
+    }
+   ],
+   "campaignVillains": [
+    {
+     "name": "Shoretrooper"
+    },
+    {
+     "name": "Shoretrooper"
+    },
+    {
+     "name": "Heavy Weapon Expert"
+    },
+    {
+     "name": "Imperial Shoretrooper"
+    }
+   ],
+   "campaignStructure": [
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    }
+   ]
+  },
+  "expect": {
+   "seed": "8160944a945d5acf",
+   "deck": "hutt_mercenaries",
+   "scores": [
+    {
+     "deck": "hutt_mercenaries",
+     "synergy": 21,
+     "noise": 0,
+     "total": 21
+    },
+    {
+     "deck": "subversive_tactics",
+     "synergy": 20,
+     "noise": 1,
+     "total": 21
+    },
+    {
+     "deck": "overwhelming_oppression",
+     "synergy": 18,
+     "noise": 1,
+     "total": 19
+    },
+    {
+     "deck": "armored_onslaught",
+     "synergy": 14,
+     "noise": 3,
+     "total": 17
+    },
+    {
+     "deck": "reactive_defenses",
+     "synergy": 15,
+     "noise": 0,
+     "total": 15
+    },
+    {
+     "deck": "nemeses",
+     "synergy": 10,
+     "noise": 3,
+     "total": 13
+    },
+    {
+     "deck": "power_of_the_dark_side",
+     "synergy": 8,
+     "noise": 3,
+     "total": 11
+    },
+    {
+     "deck": "inspiring_leadership",
+     "synergy": 0,
+     "noise": 3,
+     "total": 3
+    },
+    {
+     "deck": "technological_superiority",
+     "synergy": 0,
+     "noise": 3,
+     "total": 3
+    },
+    {
+     "deck": "imperial_black_ops",
+     "synergy": 0,
+     "noise": 2,
+     "total": 2
+    },
+    {
+     "deck": "military_might",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "precision_training",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    }
+   ]
+  }
+ },
+ "backfill_enriched": {
+  "name": "backfill_enriched",
+  "campaign_save": {
+   "GUID": "a7b3c9d1-5e2f-4a8b-9c0d-1e2f3a4b5c6d",
+   "campaignHeroes": [
+    {
+     "heroID": "H7"
+    },
+    {
+     "heroID": "H12"
+    }
+   ],
+   "campaignVillains": [
+    {
+     "name": "Shoretrooper",
+     "families": [
+      "TROOPER"
+     ]
+    },
+    {
+     "name": "Shoretrooper",
+     "families": [
+      "TROOPER"
+     ]
+    },
+    {
+     "name": "Heavy Weapon Expert"
+    },
+    {
+     "name": "Imperial Shoretrooper",
+     "families": [
+      "TROOPER"
+     ]
+    }
+   ],
+   "campaignStructure": [
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 0
+    },
+    {
+     "missionType": 1,
+     "isAgendaMission": true
+    }
+   ]
+  },
+  "expect": {
+   "seed": "8160944a945d5acf",
+   "deck": "technological_superiority",
+   "scores": [
+    {
+     "deck": "technological_superiority",
+     "synergy": 36,
+     "noise": 3,
+     "total": 39
+    },
+    {
+     "deck": "military_might",
+     "synergy": 36,
+     "noise": 1,
+     "total": 37
+    },
+    {
+     "deck": "armored_onslaught",
+     "synergy": 23,
+     "noise": 3,
+     "total": 26
+    },
+    {
+     "deck": "hutt_mercenaries",
+     "synergy": 21,
+     "noise": 0,
+     "total": 21
+    },
+    {
+     "deck": "subversive_tactics",
+     "synergy": 20,
+     "noise": 1,
+     "total": 21
+    },
+    {
+     "deck": "overwhelming_oppression",
+     "synergy": 18,
+     "noise": 1,
+     "total": 19
+    },
+    {
+     "deck": "reactive_defenses",
+     "synergy": 15,
+     "noise": 0,
+     "total": 15
+    },
+    {
+     "deck": "nemeses",
+     "synergy": 10,
+     "noise": 3,
+     "total": 13
+    },
+    {
+     "deck": "inspiring_leadership",
+     "synergy": 9,
+     "noise": 3,
+     "total": 12
+    },
+    {
+     "deck": "power_of_the_dark_side",
+     "synergy": 8,
+     "noise": 3,
+     "total": 11
+    },
+    {
+     "deck": "imperial_black_ops",
+     "synergy": 0,
+     "noise": 2,
+     "total": 2
+    },
+    {
+     "deck": "precision_training",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    }
+   ]
+  }
+ },
+ "empty_profile": {
+  "name": "empty_profile",
+  "campaign_save": {
+   "GUID": "empty-campaign-guid"
+  },
+  "expect": {
+   "seed": "23b49eae1c0f4638",
+   "deck": "imperial_black_ops",
+   "scores": [
+    {
+     "deck": "imperial_black_ops",
+     "synergy": 0,
+     "noise": 3,
+     "total": 3
+    },
+    {
+     "deck": "precision_training",
+     "synergy": 0,
+     "noise": 2,
+     "total": 2
+    },
+    {
+     "deck": "subversive_tactics",
+     "synergy": 0,
+     "noise": 2,
+     "total": 2
+    },
+    {
+     "deck": "armored_onslaught",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "hutt_mercenaries",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "inspiring_leadership",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "military_might",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "power_of_the_dark_side",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "reactive_defenses",
+     "synergy": 0,
+     "noise": 1,
+     "total": 1
+    },
+    {
+     "deck": "nemeses",
+     "synergy": 0,
+     "noise": 0,
+     "total": 0
+    },
+    {
+     "deck": "overwhelming_oppression",
+     "synergy": 0,
+     "noise": 0,
+     "total": 0
+    },
+    {
+     "deck": "technological_superiority",
+     "synergy": 0,
+     "noise": 0,
+     "total": 0
+    }
+   ]
+  }
+ }
+}
