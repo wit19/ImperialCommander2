@@ -107,6 +107,20 @@ Simulieren der Karten.
   Planung (Schicht 2), „ignoriere Fähigkeiten"-Meldung ersetzen, Explain-Zeilen.
 - **M11d (optional) — Strain & Sheet-Genauigkeit:** verwundete Werte von der
   echten Rückseite, Strain-Budget im Threat, Ausdauer-Polling erforschen.
+- **M11h — unscharfer Strain-Druck-Prior (umgesetzt):** macht das M11d-Fenster
+  live, ohne Marker-Polling. Regelprüfung (Rules Reference + Learn-to-Play v17
+  „Strain and Endurance“/„Rest“/„Wounded“/Post-Mission-Cleanup): Strain fällt
+  nie automatisch pro Runde ab, entfernt nur durch Rest-/„recover“-Effekte,
+  Missionsende-Cleanup und Verwundet-Überhang; Ausdauer ist die gedruckte
+  Harte Kappe auf Markern, freiwilliger Strain darüber ist unbezahlbar
+  (Kosten C „without exceeding his endurance“), Zwangs-Überhang wird Schaden
+  → (b) = TRUE → Ausdauer sitzt als Obergrenze U = min(Buffer, Ausdauer der
+  aktiven Seite) in der Formel. Prior: abgeschlossene Helden-Aktionen r
+  (öffentlicher Feed-Zähler HeroView.Activations) gegen U, Stufen 0/4/8 wie
+  M11d, nur Overlord-Pfad, Erklärung sagt immer „wahrscheinlich“. Kombiniert
+  mit der exakten Marker-Regel als MAXIMUM, nie Summe. Heute U == Buffer für
+  alle 21 Helden beider Seiten (Ausdauer 3–5 ≥ Buffer ≤ 3) → Kappe
+  wertneutral gepinnt, Zukunft falls ein größerer Druck kommt.
 
 Reihen-Vorschlag: M11a → M11c → M11b → M11d, weil M11c die von Dir benannte
 sichtbare Baustelle („ignoriere Fähigkeiten") am schnellsten schließt.

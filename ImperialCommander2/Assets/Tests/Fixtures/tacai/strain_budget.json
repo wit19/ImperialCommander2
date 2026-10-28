@@ -393,6 +393,772 @@
      "druck": "0"
     }
    ]
+  },
+  {
+   "name": "m11h_prior_round_zero_is_level_zero",
+   "comment": "M11h prior vectors (authored formula, task rule literal): r=0 (mission round 1 / no completed activation) -> level 0 on every hero WITH a buffer, null on the buffer-less pair (Onar Koma, Tress Hacnua print no strain reaction - they stay silent at ANY r, case c). r is the PUBLIC completed-activation count (HeroView.Activations via the bridge); the buffer is the M11d budget of the shipped cards, never caller-supplied.",
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "CT-1701",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Davith Elso",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Diala Passil",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Drokkatta",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Fenn Signis",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Gaarkhan",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Gideon Argus",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Jyn Odan",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "MHD-19",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Murne Rin",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Onar Koma",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Saska Teft",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Shyla Varad",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Tress Hacnua",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Verena Talos",
+     "runden": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "runden": 0,
+     "wounded": false
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "0"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Diala Passil",
+     "budget": 3,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Drokkatta",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Fenn Signis",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Gaarkhan",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Gideon Argus",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Jyn Odan",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "budget": 1,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "MHD-19",
+     "budget": 1,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "budget": 1,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Murne Rin",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Saska Teft",
+     "budget": 1,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Shyla Varad",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Tress Hacnua",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Verena Talos",
+     "budget": 2,
+     "unscharf": "0"
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "budget": 1,
+     "unscharf": "0"
+    }
+   ]
+  },
+  {
+   "name": "m11h_prior_half_ceiling_stage_four",
+   "comment": "r = ceil(B/2): stage 4 (PROBABLY half the reachable buffer spent) for every hero with B>=2. B=1 heroes (Davith Elso, Ko-Tun Feralo, MHD-19, Mak Eshka'rey, Saska Teft, Vinto Hreeda) have NO integer strictly between 0 and 1, so their half-point IS the full ceiling: r=1 -> 8 (honest edge, no invented half stage). Buffer-less pair stays null at r=1. Endurance cap neutral today: every healthy endurance (4/5) >= buffer (<=3), so U == B on all 21 - same law as M11d's xp_zero_gate_neutral.",
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "CT-1701",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Davith Elso",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Diala Passil",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Drokkatta",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Fenn Signis",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Gaarkhan",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Gideon Argus",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Jyn Odan",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "MHD-19",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Murne Rin",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Onar Koma",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Saska Teft",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Shyla Varad",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Tress Hacnua",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Verena Talos",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "runden": 1,
+     "wounded": false
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "4"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Diala Passil",
+     "budget": 3,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Drokkatta",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Fenn Signis",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Gaarkhan",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Gideon Argus",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Jyn Odan",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "MHD-19",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Murne Rin",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Saska Teft",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Shyla Varad",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Tress Hacnua",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Verena Talos",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "budget": 1,
+     "unscharf": "8"
+    }
+   ]
+  },
+  {
+   "name": "m11h_prior_full_ceiling_stage_eight",
+   "comment": "r = B (and r>0): stage 8 - the M11d full-buffer surcharge value reached by ROUND MATH instead of marker knowledge ('wahrscheinlich', never 'hat voll'). Capped: r=99 would print the same 8 (the exact-rule cap law carries over, no scaling). Buffer-less pair null at any r.",
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 3,
+     "wounded": false
+    },
+    {
+     "hero": "CT-1701",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Davith Elso",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Diala Passil",
+     "runden": 3,
+     "wounded": false
+    },
+    {
+     "hero": "Drokkatta",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Fenn Signis",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Gaarkhan",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Gideon Argus",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Jyn Odan",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "MHD-19",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Murne Rin",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Onar Koma",
+     "runden": 3,
+     "wounded": false
+    },
+    {
+     "hero": "Saska Teft",
+     "runden": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Shyla Varad",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Tress Hacnua",
+     "runden": 3,
+     "wounded": false
+    },
+    {
+     "hero": "Verena Talos",
+     "runden": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "runden": 1,
+     "wounded": false
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "8"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Diala Passil",
+     "budget": 3,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Drokkatta",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Fenn Signis",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Gaarkhan",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Gideon Argus",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Jarrod Kelvin",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Jyn Odan",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Ko-Tun Feralo",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Loku Kanoloa",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "MHD-19",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Mak Eshka'rey",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Murne Rin",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Saska Teft",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Shyla Varad",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Tress Hacnua",
+     "budget": 0,
+     "unscharf": null
+    },
+    {
+     "hero": "Verena Talos",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Vinto Hreeda",
+     "budget": 1,
+     "unscharf": "8"
+    }
+   ]
+  },
+  {
+   "name": "m11h_endurance_cap_law",
+   "comment": "PRUEFAUFTRAG (b)=TRUE (Rules Reference 'Endurance': max strain a hero can suffer; 'Abilities' cost C payable only 'without exceeding his endurance'; forced excess becomes damage) -> endurance IS in the formula as the reachable ceiling U=min(B, E_active). No TODAY card has E<B (cases 1-3 pin U==B), so the override rows stand in for a future print and pin the cap law itself: below-B endurance saturates the prior EARLIER than the raw buffer (Biv endurance 2: r=2 is already stage 8), endurance 0/absent = unknown = no invented cap, wounded side reads verwundeteAusdauer, and the buffer guard (B=0) still speaks first.",
+   "heroes": [
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 2,
+     "endurance": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 1,
+     "endurance": 2,
+     "wounded": false
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 1,
+     "endurance": 1,
+     "wounded": false
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 2,
+     "endurance": 0,
+     "wounded": false
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 3,
+     "wounded": true
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "runden": 2,
+     "wounded": true
+    },
+    {
+     "hero": "CT-1701",
+     "runden": 1,
+     "wounded": true
+    },
+    {
+     "hero": "CT-1701",
+     "runden": 2,
+     "wounded": true
+    },
+    {
+     "hero": "Davith Elso",
+     "runden": 1,
+     "endurance": 5
+    },
+    {
+     "hero": "Onar Koma",
+     "runden": 5,
+     "endurance": 1
+    }
+   ],
+   "expect": [
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "4"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Biv Bodhrik",
+     "budget": 3,
+     "unscharf": "4"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "unscharf": "4"
+    },
+    {
+     "hero": "CT-1701",
+     "budget": 2,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Davith Elso",
+     "budget": 1,
+     "unscharf": "8"
+    },
+    {
+     "hero": "Onar Koma",
+     "budget": 0,
+     "unscharf": null
+    }
+   ]
   }
  ]
 }

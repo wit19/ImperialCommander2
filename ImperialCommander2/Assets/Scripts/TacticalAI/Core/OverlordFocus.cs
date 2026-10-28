@@ -44,7 +44,10 @@
 //                     (4) and a >8 econ gap all stay untouched. Null strain
 //                     source (live app today: markers are not modelled) =
 //                     zero influence; the polling seam is documented at the
-//                     bridge's candidate builder.
+//                     bridge's candidate builder. M11h sits on the SAME
+//                     slot with the FUZZY USAGE PRIOR (rounds vs the
+//                     reachable buffer, +4/+8, public round count only)
+//                     and combines with the exact rule as MAX, never sum.
 //     4. reference  - no curated profile: the S1-S3 public proxy ranking
 //                     (wounded, printed attack dice, printed health).
 //     5. tiebreak   - squad row (stable, deterministic), then hero id.
@@ -90,6 +93,15 @@ namespace TacticalAI.Core
         // roster (every known-cost row prints strain 0), future-proof if a
         // strain-bearing purchasable ability ever joins the tables.
         public int? AvailableXp;
+        // M11h: completed hero activations in THIS mission, public feed
+        // state (HeroView.Activations - the activation tracker every player
+        // at the table counts, see bridge). Drives the FUZZY strain-usage
+        // prior (StrainPressure.Unscharf): a prior on markers, NOT marker
+        // knowledge. null = no round source (fixture default for a silent
+        // row); 0 = round 1 of the mission - prior level 0, bit-identical
+        // to pre-M11h canon. The buffer stays computed from his Card, the
+        // caller can only ever supply the PUBLIC round count.
+        public int? RoundsCompleted;
 
         public bool Marked { get { return Marks > 0; } }
     }
@@ -108,11 +120,26 @@ namespace TacticalAI.Core
         // buffer) or null (no strain source / no buffer). The public WHY
         // cell fires on == Druck only.
         public int? StrainDruck;
+        // M11h: the fuzzy round-prior stage (0/4/8, StrainPressure.Unscharf)
+        // for THIS row: 0 = visible rounds, no stage reached; null = no
+        // round source or buffer-less hero (never a signal). The ECON key
+        // carries MAX(exact, fuzzy), never the sum - both sources describe
+        // the same shortage (combination law pinned in strain_budget /
+        // overlord_focus vectors).
+        public int? StrainDruckUnscharf;
+        // M11h WHY args (only set when the fuzzy stage fires and the exact
+        // rule did not): the public round count and the reachable ceiling
+        // U it was measured against -> "wahrscheinlich angespannt
+        // (Runde r/U)".
+        public int? StrainPriorRunden;
+        public int? StrainPriorDecke;
 
         /// Comparable vector row (harness/NUnit pin), exact string fields.
         /// The strain_druck key appears ONLY on rows where the pressure
         /// fired - the pre-M11d canon of every strain-free case is byte-
         /// identical (record discipline: no unexplained Expect diffs).
+        /// M11h: strain_druck_unscharf likewise appears ONLY where the
+        /// fuzzy stage fired (> 0), so every pre-M11h row stays identical.
         public Dictionary<string, object> AsDict()
         {
             var d = new Dictionary<string, object>
@@ -126,6 +153,8 @@ namespace TacticalAI.Core
             };
             if (StrainDruck.HasValue && StrainDruck.Value > 0)
                 d["strain_druck"] = StrainDruck.Value.ToString();
+            if (StrainDruckUnscharf.HasValue && StrainDruckUnscharf.Value > 0)
+                d["strain_druck_unscharf"] = StrainDruckUnscharf.Value.ToString();
             return d;
         }
     }
@@ -208,12 +237,31 @@ namespace TacticalAI.Core
             // and <Druck gaps, nothing else. Null markers (live app today -
             // the polling seam at TacticalAIBridge.BuildFocusCandidates) or
             // a buffer-less hero (Onar Koma, Tress Hacnua) = zero influence.
+            //
+            // M11h FUZZY USAGE PRIOR sits EXACTLY beside it on the same
+            // slot: an aggressive hero spends ~1 strain reaction per
+            // completed activation (public round count r), so after r >= U
+            // round-trips his reachable buffer (U = min(buffer, endurance
+            // of the ACTIVE sheet side - endurance is the printed hard cap
+            // on markers, Learn to Play v17 "Strain and Endurance"; U == B
+            // on today's whole roster, pinned value-neutral like the XP
+            // gate) he is PROBABLY unable to pay reactions for a moment:
+            // +4 at half the ceiling, +8 at it - exactly the two M11d
+            // stages, no scaling. The exact marker rule below keeps its
+            // full printed form untouched; when both sources can fire they
+            // combine as MAX, never a sum (same shortage, one econ key -
+            // pinned by the m11h_max_not_sum overlord_focus case).
             foreach (var r in rows)
             {
-                r.Druck = StrainPressure.Pressure(r.C.StrainMarkers,
-                                                  StrainPressure.Budget(r.C.Card, r.C.AvailableXp));
-                if (r.Druck > 0 && r.Econ.HasValue)
-                    r.Econ = r.Econ.Value + r.Druck.Value;
+                int budget = StrainPressure.Budget(r.C.Card, r.C.AvailableXp);
+                r.Druck = StrainPressure.Pressure(r.C.StrainMarkers, budget);
+                int? endurance = r.C.Card == null ? (int?)null
+                    : (r.C.Wounded ? r.C.Card.VerwundeteAusdauer : r.C.Card.GesundeAusdauer);
+                r.Unscharf = StrainPressure.Unscharf(r.C.RoundsCompleted, budget, endurance);
+                r.Decke = StrainPressure.Ceiling(budget, endurance);
+                int surcharge = System.Math.Max(r.Druck ?? 0, r.Unscharf ?? 0);
+                if (surcharge > 0 && r.Econ.HasValue)
+                    r.Econ = r.Econ.Value + surcharge;
             }
 
             var ranked = StableSort(rows, Compare);
@@ -226,6 +274,13 @@ namespace TacticalAI.Core
                 Threat = x.Threat,
                 ThreatEconomic = x.Econ,
                 StrainDruck = x.Druck,
+                StrainDruckUnscharf = x.Unscharf,
+                // WHY args ride along ONLY when the fuzzy stage actually
+                // speaks (fired AND the exact marker rule stayed silent -
+                // the exact cell "full strain buffer" is truth, the fuzzy
+                // cell "wahrscheinlich" must never double-stamp it).
+                StrainPriorRunden = x.Unscharf > 0 && !(x.Druck > 0) ? x.C.RoundsCompleted : (int?)null,
+                StrainPriorDecke = x.Unscharf > 0 && !(x.Druck > 0) ? x.Decke : (int?)null,
                 Basis = x.C.Marked ? "mark"
                         : (x.Chip != null ? "chip"
                         : (x.Econ != null ? (x.C.Card != null ? "card" : "economy")
@@ -264,6 +319,8 @@ namespace TacticalAI.Core
             public Rational? Econ;
             public List<object> Chip;
             public int? Druck;              // M11d strain surcharge (see Rank)
+            public int? Unscharf;           // M11h fuzzy round-prior stage (see Rank)
+            public int? Decke;              // M11h reachable ceiling U behind it
         }
 
         /// Lexicographic compare of two rows, DESC (a before b => -1).

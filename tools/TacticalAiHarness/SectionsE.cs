@@ -114,6 +114,14 @@ namespace TacticalAiHarness
                                 ? (int?)Json.AsLong(h["strain_markers"]) : null,
                             AvailableXp = h.ContainsKey("xp_amount") && h["xp_amount"] != null
                                 ? (int?)Json.AsLong(h["xp_amount"]) : null,
+                            // M11h: "runden" = completed hero activations on
+                            // the public feed (mirrors HeroView.Activations,
+                            // the live bridge source). ABSENT -> 0: every
+                            // pre-M11h case replays at r = 0 - prior level 0,
+                            // no dict key - so the whole existing canon must
+                            // pass bit-identical (Canon test, not a new rule).
+                            RoundsCompleted = h.ContainsKey("runden") && h["runden"] != null
+                                ? (int?)Json.AsLong(h["runden"]) : 0,
                         });
                     }
                     return list;

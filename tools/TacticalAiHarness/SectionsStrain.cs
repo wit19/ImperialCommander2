@@ -8,6 +8,16 @@
 // (The record/--record discipline governs MODEL outputs like overlord_focus
 // expect blocks; a pure-input formula vector is authored, like threat.json's
 // synthetic cases.)
+// M11h adds the FUZZY usage prior rows: a hero row carrying "runden" (the
+// public completed-activation count) also reports "unscharf" = the capped
+// level of StrainPressure.Unscharf(runden, budget, endurance) with
+// endurance = the ACTIVE side's printed endurance, or an explicit per-row
+// "endurance" override for the cap-law vectors (an override stands in for a
+// future card whose buffer exceeds its endurance - today every hero prints
+// endurance >= buffer, which the m11h_prior_* cases pin as value-neutral).
+// Key pairing is strict: "druck"/"unscharf" appear on a row ONLY when the
+// input row carries "markers"/"runden", so every pre-M11h case stays
+// byte-identical.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,16 +45,33 @@ namespace TacticalAiHarness
                 {
                     var h = Json.AsDict(rawH);
                     var heroName = Json.AsStr(h["hero"]);
-                    var markers = Json.AsLong(h["markers"]);
                     var card = HeroCards.For(heroName);
                     var budget = StrainPressure.Budget(card, xp);
-                    var druck = StrainPressure.Pressure((int)markers, budget);
-                    got.Add(new Dictionary<string, object>
+                    var row = new Dictionary<string, object>
                     {
                         { "hero", heroName },
                         { "budget", budget },
-                        { "druck", druck.HasValue ? (object)druck.Value.ToString() : null },
-                    });
+                    };
+                    if (h.ContainsKey("markers"))
+                    {
+                        var markers = Json.AsLong(h["markers"]);
+                        var druck = StrainPressure.Pressure((int)markers, budget);
+                        row["druck"] = druck.HasValue ? (object)druck.Value.ToString() : null;
+                    }
+                    if (h.ContainsKey("runden"))
+                    {
+                        // active side of the sheet drives the printed endurance
+                        bool wounded = h.ContainsKey("wounded") && Json.AsBool(h["wounded"]);
+                        int? endurance = h.ContainsKey("endurance") && h["endurance"] != null
+                            ? (int?)Json.AsLong(h["endurance"])
+                            : (card == null ? (int?)null
+                               : (int?)(wounded ? card.VerwundeteAusdauer : card.GesundeAusdauer));
+                        int? runden = h["runden"] != null
+                            ? (int?)Json.AsLong(h["runden"]) : (int?)null;
+                        var uns = StrainPressure.Unscharf(runden, budget, endurance);
+                        row["unscharf"] = uns.HasValue ? (object)uns.Value.ToString() : null;
+                    }
+                    got.Add(row);
                 }
 
                 if (!c.ContainsKey("expect"))
@@ -54,7 +81,7 @@ namespace TacticalAiHarness
                 }
                 // Norm() on the expect side too: Json gives ints, Norm(actual)
                 // yields longs and Eq(long, int) is type-strict.
-                var exp = Norm(Json.AsList(c["expect"]).ConvertList());
+                var exp = Norm(Json.AsList(c["expect"]).ConvertStrainRows());
                 Check(name + ".budget", exp, got);
             }
         }
@@ -62,19 +89,24 @@ namespace TacticalAiHarness
 
     static class StrainBudgetJsonExt   // tiny shim: expect rows -> plain dicts
     {
-        public static List<object> ConvertList(this List<object> rows)
+        public static List<object> ConvertStrainRows(this List<object> rows)
         {
             var outp = new List<object>();
             foreach (var raw in rows)
             {
                 var d = Json.AsDict(raw);
-                outp.Add(new Dictionary<string, object>
+                var row = new Dictionary<string, object>
                 {
                     { "hero", Json.AsStr(d["hero"]) },
                     { "budget", (int)Json.AsLong(d["budget"]) },
-                    { "druck", d.ContainsKey("druck") && d["druck"] != null
-                        ? Json.AsStr(d["druck"]) : null },
-                });
+                };
+                // M11h strict key pairing: optional keys ride along ONLY when
+                // the expect row states them (mirrors the got-row rules).
+                if (d.ContainsKey("druck"))
+                    row["druck"] = d["druck"] != null ? Json.AsStr(d["druck"]) : null;
+                if (d.ContainsKey("unscharf"))
+                    row["unscharf"] = d["unscharf"] != null ? Json.AsStr(d["unscharf"]) : null;
+                outp.Add(row);
             }
             return outp;
         }

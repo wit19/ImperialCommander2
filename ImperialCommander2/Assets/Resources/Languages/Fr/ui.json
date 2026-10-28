@@ -324,6 +324,7 @@
     "expFull": "DÉTAILLÉE",
     "ordThreat": "threat {0} per round (printed hero card: values, weapon, items)",
     "ordStrainPressure": "heroes with a full strain buffer are briefly a little more vulnerable",
+    "ordStrainFuzzy": "probably strained from the fighting (round {0}/{1})",
     "ordOptionPrinted": "Card special action: {0} - {1}",
     "ordMarked": "marqueur de cible : l’objectif de mission le nomme",
     "ordRoundFocus": "tous les groupes convergent vers la même cible prioritaire",

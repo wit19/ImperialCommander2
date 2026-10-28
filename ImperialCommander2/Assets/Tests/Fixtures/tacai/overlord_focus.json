@@ -1067,6 +1067,283 @@
      "basis": "card"
     }
    ]
+  },
+  {
+   "name": "m11h_prior_rounds_flip_the_tie",
+   "comment": "M11h flip pin (a): SAME pair as m11d_strain_full_flips_tie, but the prior is ROUND math, not marker knowledge - Murne has completed 2 activations (r = his printed buffer B = 2, healthy endurance 4 -> reachable ceiling U = min(2,4) = 2). Aggressive play spends ~1 strain reaction per round, so his reaction budget is PROBABLY spent: +8 on the econ key (5/6 -> 53/6) flips the tie away from squad row - the same one-place lift as the M11d full-buffer flip, WITHOUT any marker being tracked. The strain_druck key is ABSENT (no marker source); strain_druck_unscharf is the honest, fuzzy stamp.",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 2
+    }
+   ],
+   "expect": [
+    {
+     "basis": "card",
+     "hero": "Murne Rin",
+     "marked": false,
+     "strain_druck_unscharf": "8",
+     "threat": "5/6",
+     "threat_econ": "53/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Fenn Signis",
+     "marked": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m11h_prior_half_stage_lifts_tie",
+   "comment": "M11h half stage: r=1 of Murne's U=2 ceiling (>= ceil(2/2), < 2) -> +4 only: 5/6 -> 29/6, which already flips THIS tie (the +8 M11d case pins the full stage; the +4 still never outranks a >8 econ gap - lighter than the exact rule's full fire, exactly as designed). Key strain_druck_unscharf = 4, strain_druck stays absent.",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 1
+    }
+   ],
+   "expect": [
+    {
+     "basis": "card",
+     "hero": "Murne Rin",
+     "marked": false,
+     "strain_druck_unscharf": "4",
+     "threat": "5/6",
+     "threat_econ": "29/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Fenn Signis",
+     "marked": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m11h_round_zero_is_today",
+   "comment": "M11h canon pin (b): r = 0 for BOTH heroes (mission round 1 / no completed activation) -> prior level 0 emits NO dict key: this is byte-identical to the pre-M11h tie canon (same pair, same rows as m11d_strain_full_flips_tie's untouched half) - squad row orders it. Every EXISTING case in this file carries no runden and defaults to r=0, so the whole pre-M11h canon passing untouched is the mechanized bit-identity proof.",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 0
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 0
+    }
+   ],
+   "expect": [
+    {
+     "basis": "card",
+     "hero": "Fenn Signis",
+     "marked": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Murne Rin",
+     "marked": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m11h_no_buffer_pair_stays_silent",
+   "comment": "M11h silence pin (c): Onar Koma and Tress Hacnua print NO strain reactions (budget 0) - after 5/3 completed activations the prior STILL does not fire (null = no buffer, never a stage): no strain key on either row, pure printed-card economy ranks them, exactly the pre-M11h values.",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": null,
+   "heroes": [
+    {
+     "hero": "Onar Koma",
+     "row": 0,
+     "profile": "Onar Koma",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 5
+    },
+    {
+     "hero": "Tress Hacnua",
+     "row": 1,
+     "profile": "Tress Hacnua",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 3
+    }
+   ],
+   "expect": [
+    {
+     "basis": "card",
+     "hero": "Tress Hacnua",
+     "marked": false,
+     "threat": "13/6",
+     "threat_econ": "13/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Onar Koma",
+     "marked": false,
+     "threat": "2/3",
+     "threat_econ": "2/3",
+     "wounded": false
+    }
+   ]
+  },
+  {
+   "name": "m11h_max_not_sum",
+   "comment": "M11h combination law pin (d): the app today has ONE strain source at a time (markers are not tracked), so this simultaneity is the future-clean definition: exact M11d rule AND fuzzy prior fire on the same hero -> the econ surcharge is MAX, never the sum. Row 1: markers 2 = full buffer AND r=2 = full ceiling -> strain_druck 8 + strain_druck_unscharf 8, econ 53/6 (a sum would print 61/6 - it must not). Row 2: exact full buffer + fuzzy HALF stage -> strain_druck 8 + strain_druck_unscharf 4, econ STILL 53/6 (the exact fire subsumes the prior, no double count). Rows then order by the untouched tie chain (row 1 before row 2).",
+   "posture": "eliminate",
+   "counter": null,
+   "defense": [
+    "Black"
+   ],
+   "heroes": [
+    {
+     "hero": "Fenn Signis",
+     "row": 0,
+     "profile": "Fenn Signis",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 1,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 2,
+     "strain_markers": 2
+    },
+    {
+     "hero": "Murne Rin",
+     "row": 2,
+     "profile": "Murne Rin",
+     "wounded": false,
+     "marks": 0,
+     "marked_round": 0,
+     "attack_dice": 2,
+     "health": 6,
+     "runden": 1,
+     "strain_markers": 2
+    }
+   ],
+   "expect": [
+    {
+     "basis": "card",
+     "hero": "Murne Rin",
+     "marked": false,
+     "strain_druck": "8",
+     "strain_druck_unscharf": "8",
+     "threat": "5/6",
+     "threat_econ": "53/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Murne Rin",
+     "marked": false,
+     "strain_druck": "8",
+     "strain_druck_unscharf": "4",
+     "threat": "5/6",
+     "threat_econ": "53/6",
+     "wounded": false
+    },
+    {
+     "basis": "card",
+     "hero": "Fenn Signis",
+     "marked": false,
+     "threat": "5/6",
+     "threat_econ": "5/6",
+     "wounded": false
+    }
+   ]
   }
  ]
 }

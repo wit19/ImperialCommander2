@@ -35,6 +35,10 @@ public class UITacticalAI
 	public string ordThreat, ordMarked, ordRoundFocus;
 	// M11d: light strain-pressure note in the round-focus WHY line
 	public string ordStrainPressure;
+	// M11h: fuzzy strain-usage prior in the round-focus WHY line - args
+	// {0} = completed round, {1} = reachable buffer; wording says
+	// "wahrscheinlich/probably" (a prior, never marker knowledge).
+	public string ordStrainFuzzy;
 	// M11e: heading line for the printed {A} option block in the activation popup
 	public string ordOptionPrinted;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;

@@ -114,5 +114,72 @@ namespace TacticalAI.Core
             if (strainMarkers.Value <= 0) return 0;
             return strainMarkers.Value >= bufferBudget ? (int?)Druck : (int?)0;
         }
+
+        // -----------------------------------------------------------------
+        // M11h: the FUZZY strain-usage prior (no marker knowledge needed).
+        //
+        // The live app tracks no strain markers (M11d "ready-to-wire"), so
+        // Pressure() stays dead there. This prior uses ONLY the public
+        // round count instead: an anchor reading of play patterns says an
+        // aggressive hero pays about ONE strain reaction per activation
+        // (Rules Reference "Abilities" cost C + "Activation": heroes lean
+        // on their paid reactions every round they can afford them). So
+        // after r completed activations the table has PROBABLY piled ~r
+        // markers on him. This is a prior, never knowledge: the wording
+        // everywhere says "wahrscheinlich/probably", never "hat vollen
+        // Strain".
+        //
+        // Endurance IS part of the formula (PRUEFAUFTRAG (b) = TRUE with
+        // printed source, Learn to Play v17 / Rules Reference "Endurance"
+        // + "Strain and Endurance" + "Wounded"): a hero can never carry
+        // more strain markers than his printed ENDURANCE (voluntary strain
+        // beyond it is unpayable - every C-cost reaction goes dark - and
+        // forced excess becomes damage). The reachable ceiling is
+        // therefore min(buffer, endurance of the ACTIVE side). On today's
+        // roster endurance (3-5) >= buffer (<= 3) for all 21 heroes x both
+        // sheet sides, so the cap is value-neutral - exactly like M11d's
+        // XP gate: documented, pinned (strain_budget.json), future-proof
+        // if a bigger reaction print or a lower endurance ever ships.
+        //
+        // Combination law with the exact M11d rule (marker source): MAX,
+        // never sum - both describe the SAME shortage on the SAME econ key,
+        // stacking would double-count one fact. Unrealistic today (the app
+        // has one strain source at a time), pinned for the future.
+
+        /// <summary>M11h: the +4 half-stage of the fuzzy prior (level
+        /// 4 = "about half the reachable buffer spent, PROBABLY"; full
+        /// saturation reuses the M11d <see cref="Druck"/> = 8).</summary>
+        public const int DruckUnscharf = 4;
+
+        /// <summary>M11h: the reachable strain ceiling - endurance is the
+        /// printed hard cap on markers, the reaction buffer the soft one.
+        /// endurance null/0 = not printed/unknown = no invented cap (the
+        /// buffer alone governs).</summary>
+        public static int Ceiling(int bufferBudget, int? endurance)
+        {
+            if (endurance == null || endurance.Value <= 0) return bufferBudget;
+            return endurance.Value < bufferBudget ? endurance.Value : bufferBudget;
+        }
+
+        /// <summary>M11h: the fuzzy usage prior on the public round count
+        /// (task rule, literal). r = completed hero activations in this
+        /// mission from the PUBLIC feed state (HeroView.Activations); null
+        /// = no round source at all. Levels, capped by construction - no
+        /// scaling: 0 when r == 0 or the spend rate has not reached half
+        /// the ceiling yet; 4 (DruckUnscharf) when r >= ceil(U/2) and
+        /// r &lt; U; 8 (Druck) when r >= U (U = Ceiling(buffer, endurance)).
+        /// Null (never a signal) when the hero has no buffer or no round
+        /// source - the buffer is never caller-supplied (fairness canon,
+        /// same law as Pressure).</summary>
+        public static int? Unscharf(int? rounds, int bufferBudget, int? endurance)
+        {
+            if (rounds == null || bufferBudget <= 0) return null;
+            int u = Ceiling(bufferBudget, endurance);
+            if (u <= 0) return null;
+            int r = rounds.Value;
+            if (r >= u) return Druck;
+            if (r >= (u + 1) / 2) return DruckUnscharf;   // (u+1)/2 = ceil(u/2)
+            return 0;
+        }
     }
 }

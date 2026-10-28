@@ -841,6 +841,17 @@ namespace TacticalAI
                     // (pinned by overlord_focus.json m11d_* cases).
                     StrainMarkers = null,
                     AvailableXp = ch != null ? (int?)ch.xpAmount : null,
+                    // M11h: the FUZZY usage prior's only input - completed
+                    // hero activations from the PUBLIC feed projection
+                    // (HeroView.Activations counts the HeroActivated events
+                    // every table player sees; nothing hidden, nothing
+                    // guessed). No feed row for this hero = no round source
+                    // = null = the prior stays silent for him (fallback law:
+                    // never rate what we cannot see). Mode gate: this whole
+                    // builder only ever runs on the tactical-overlord focus
+                    // path - reference and the S1-S3 legacy planners never
+                    // build candidates here, so they stay bit-identical.
+                    RoundsCompleted = hv != null ? (int?)hv.Activations : null,
                 });
             }
             return outp;
@@ -975,6 +986,13 @@ namespace TacticalAI
             // M11d: only when the pressure actually fired this round
             if (dec.StrainDruck.HasValue && dec.StrainDruck.Value == Tac.StrainPressure.Druck)
                 parts.Add(TF(L.ordStrainPressure));
+            // M11h: the fuzzy round prior speaks ONLY when it fired and the
+            // exact rule above stayed silent - and it says "wahrscheinlich"
+            // (probably): a prior is never stated as knowledge ("hat vollen
+            // Strain" would be a lie - the app cannot see markers).
+            else if (dec.StrainDruckUnscharf.HasValue && dec.StrainDruckUnscharf.Value > 0
+                     && dec.StrainPriorRunden.HasValue && dec.StrainPriorDecke.HasValue)
+                parts.Add(TF(L.ordStrainFuzzy, dec.StrainPriorRunden.Value, dec.StrainPriorDecke.Value));
             parts.Add(TF(L.ordRoundFocus));
             parts.Add(TF(L.focusNoChance));
             return TF(L.focusPrefix) + heroName + " — " + string.Join("; ", parts);
