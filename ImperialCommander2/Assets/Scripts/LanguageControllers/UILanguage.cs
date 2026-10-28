@@ -69,6 +69,16 @@ public class UITacticalAI
 	public string agendaBuyForced;
 	public string agendaBuyOngoing;
 	public string agendaBuyKept;
+	// M12e (Imperium-UI): play-area panel, Einsatzkarte deck line, campaign
+	// upgrade-stage section. Card NAMES and card TEXTS stay EN (printed
+	// board-game content, M11g doctrine); only the accompanying chrome is
+	// translated. impNoModelTag is the honest M12d(c) marker: card is played
+	// as printed but carries no model hook ("aktiv - ohne KI-Hebel").
+	public string impPanelTitle;
+	public string impDeckLine, impBasicTag, impXpTag, impNoModelTag, impNoModelTip;
+	public string impAttachTip;
+	public string impBadgeDeckLine, impAgendaLine;
+	public string impCampaignHeader, impCampaignXpLine;
 	public string depSecret, depOpen, expNone, expPostHoc, expFull;
 }
 

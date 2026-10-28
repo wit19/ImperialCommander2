@@ -59,4 +59,14 @@ public class Tooltip : MonoBehaviour
 	{
 		gameObject.SetActive( false );
 	}
+
+	/// <summary>M12e: free-form tooltip for dynamically built elements
+	/// (Imperium panel rows) - the printed content itself, glyph-mapped like
+	/// every other in-game text. Unknown-string-code branch above stays the
+	/// only path for fixed HUD tooltips.</summary>
+	public void ShowText( string text )
+	{
+		gameObject.SetActive( true );
+		tmp.text = Saga.Utils.ReplaceGlyphs( text ?? "" );
+	}
 }

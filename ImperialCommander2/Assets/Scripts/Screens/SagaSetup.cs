@@ -178,6 +178,11 @@ namespace Saga
 		// All derived from existing settings/sessionValues - no new UI state.
 		TMPro.TextMeshProUGUI setupAiBadgeText;
 		GameObject setupAiBadgeGo;
+		// M12e: the deck line under the badge ("Militaermacht · 4 Karten" +
+		// open agenda). Display-only, campaign missions with an Imperial deck.
+		TMPro.TextMeshProUGUI setupImperialDeckLineText;
+		GameObject setupImperialDeckLineGo;
+		SagaCampaign setupCampaign;
 
 		/// <summary>True exactly when this mission will run the tactical planner
 		/// (master ON and the per-mission token does not force legacy).</summary>
@@ -199,6 +204,7 @@ namespace Saga
 					ApplyLegacyControls( !TacticalControlsActive() );
 					PlaceAiBadge();
 					setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+					EnsureImperialDeckLine();
 				}
 				return;
 			}
@@ -233,6 +239,64 @@ namespace Saga
 			ApplyLegacyControls( !TacticalControlsActive() );
 			PlaceAiBadge();
 			setupAiBadgeText.text = SetupAiLabel( setupOptions.aiMode );
+			EnsureImperialDeckLine();
+		}
+
+		/// <summary>M12e: display-only deck line under the tactical badge -
+		/// "Militaermacht · 4 Karten" plus an ACTIVE ONGOING agenda if one is
+		/// face up (kept secrets never render here - the Anti-Leak-Seam in
+		/// ImperialDisplay/AgendaState owns that law). Invisible without a
+		/// campaign deck: a classic mission shows no empty chrome. Layout
+		/// follows the badge through both slots (PlaceAiBadge geometry).</summary>
+		void EnsureImperialDeckLine()
+		{
+			var campaign = setupCampaign ?? RunningCampaign.sagaCampaign;
+			if ( campaign == null && RunningCampaign.sagaCampaignGUID != Guid.Empty )
+			{
+				try { campaign = SagaCampaign.LoadCampaignState( RunningCampaign.sagaCampaignGUID ); }
+				catch { campaign = null; }
+			}
+			var info = ImperialDisplay.Build( campaign );
+			string line = info == null ? null
+				: TacticalAI.TacticalAISettingsUnity.ImperialDeckBadgeText( info.DeckName, info.CardCount );
+			if ( string.IsNullOrEmpty( line ) )
+			{
+				if ( setupImperialDeckLineGo != null ) setupImperialDeckLineGo.SetActive( false );
+				return;
+			}
+			if ( !string.IsNullOrEmpty( info.OpenAgenda ) ) line += "\n" + info.OpenAgenda;
+
+			if ( setupImperialDeckLineText == null )
+			{
+				var go = new GameObject( "tacaiImperialDeckLine", typeof( RectTransform ) );
+				go.transform.SetParent( difficultyButton.transform.parent, false );
+				var img = go.AddComponent<Image>();
+				img.color = new Color( 0f, .35f, .30f, .85f );   // badge family, non-interactive
+				img.raycastTarget = false;
+				var textGo = new GameObject( "Text (TMP)", typeof( RectTransform ) );
+				textGo.transform.SetParent( go.transform, false );
+				var trt = textGo.GetComponent<RectTransform>();
+				trt.anchorMin = Vector2.zero; trt.anchorMax = Vector2.one;
+				trt.offsetMin = Vector2.zero; trt.offsetMax = Vector2.zero;
+				setupImperialDeckLineText = textGo.AddComponent<TMPro.TextMeshProUGUI>();
+				setupImperialDeckLineText.font = TMPro.TMP_Settings.defaultFontAsset;
+				setupImperialDeckLineText.enableAutoSizing = true;
+				setupImperialDeckLineText.fontSizeMax = 12; setupImperialDeckLineText.fontSizeMin = 7;
+				setupImperialDeckLineText.alignment = TMPro.TextAlignmentOptions.Center;
+				setupImperialDeckLineText.color = new Color( .85f, 1f, .95f, 1f );
+				setupImperialDeckLineGo = go;
+			}
+			setupImperialDeckLineGo.SetActive( true );
+
+			var rt = setupImperialDeckLineGo.GetComponent<RectTransform>();
+			var bRT = setupAiBadgeGo != null ? setupAiBadgeGo.GetComponent<RectTransform>() : null;
+			if ( bRT != null )
+			{
+				rt.anchorMin = bRT.anchorMin; rt.anchorMax = bRT.anchorMax; rt.pivot = bRT.pivot;
+				rt.anchoredPosition = bRT.anchoredPosition + new Vector2( 0f, -bRT.rect.height - 4f );
+				rt.sizeDelta = new Vector2( bRT.rect.width > 0 ? bRT.rect.width : 170f, 32f );
+			}
+			setupImperialDeckLineText.text = Utils.ReplaceGlyphs( line );
 		}
 
 		/// <summary>M11f: the legacy difficulty/adaptive toggles - shown only when
@@ -379,6 +443,7 @@ namespace Saga
 		{
 			isFromCampaign = true;
 			var campaign = SagaCampaign.LoadCampaignState( RunningCampaign.sagaCampaignGUID );
+			setupCampaign = campaign;   // M12e: the badge deck line reads the saved deck state
 			if ( campaign == null )
 			{
 				Debug.Log( "SetupCampaignMission()::Could not load the campaign" );

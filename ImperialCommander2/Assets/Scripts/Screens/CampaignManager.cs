@@ -233,6 +233,9 @@ namespace Saga
 			}
 			foreach ( var item in items.OrderBy( x => x.Value ) )
 				AddItemToUI( sagaCampaign.GetItemFromID( item.Key ) );
+			//M12e: the Imperial Upgrade Stage purchases, shown as printed cards
+			//next to the rebel items list (tactical campaigns only)
+			AddImperialDeckSectionToUI();
 			//allies
 			foreach ( var ally in sagaCampaign.campaignAllies.OrderBy( x => x.name ) )
 				AddAllyToUI( ally );
@@ -373,6 +376,113 @@ namespace Saga
 			} );
 		}
 
+		/// <summary>
+		/// M12e (Upgrade-Stage-Transparenz): a runtime clone of the "Items"
+		/// section shows what the Imperial Upgrade Stage actually bought -
+		/// every acquired class-deck card as a printed card (name + XP price +
+		/// 1:1 card text, ItemSkillSelector-style content, board-game English),
+		/// plus the honest "aktiv - ohne KI-Hebel" marker for cards the M12d
+		/// table leaves unmodelled. Pure display: no buttons, no campaign
+		/// state touched; hidden entirely when the feature or a deck is absent
+		/// (classic campaigns render exactly as before).
+		/// </summary>
+		void AddImperialDeckSectionToUI()
+		{
+			try
+			{
+				var info = Saga.ImperialDisplay.Build( sagaCampaign );
+				if ( info == null || itemContainer == null || itemContainer.childCount == 0 ) return;
+
+				// clone the items SECTION (grandparent of the item rows) - same
+				// visual language, zero prefab/scene edits
+				var sectionT = itemContainer.GetChild( 0 ).parent.gameObject;
+				var clone = Instantiate( sectionT, sectionT.transform.parent );
+				clone.name = "imperial";
+				clone.transform.SetSiblingIndex( Mathf.Min( sectionT.transform.GetSiblingIndex() + 1, clone.transform.parent.childCount - 1 ) );
+				clone.SetActive( true );
+
+				// the "add" button would open the rebel item picker - useless here
+				foreach ( Transform child in clone.transform )
+					if ( child.name == "add" ) Destroy( child.gameObject );
+
+				var title = clone.GetComponentInChildren<TMPro.TextMeshProUGUI>( true );
+				if ( title == null ) { Destroy( clone ); return; }
+				// never ship cloned copies of the ORIGINAL item rows (stale,
+				// non-functional); the imperium rows are built fresh below
+				for ( int i = title.transform.childCount - 1; i >= 0; i-- )
+					Destroy( title.transform.GetChild( i ).gameObject );
+				var cloneScroll = clone.GetComponentInChildren<ScrollRect>( true );
+				if ( cloneScroll != null && cloneScroll.content != null )
+					for ( int i = cloneScroll.content.childCount - 1; i >= 0; i-- )
+						Destroy( cloneScroll.content.GetChild( i ).gameObject );
+
+				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+				string header = tl != null && !string.IsNullOrEmpty( tl.impCampaignHeader ) ? tl.impCampaignHeader : "Imperial class deck — {0}";
+				title.text = Utils.ReplaceGlyphs( string.Format( System.Globalization.CultureInfo.InvariantCulture, header, info.DeckName ) );
+
+				// rows stack manually below the title (the game's own list
+				// sections parent rows under the section title's RectTransform)
+				float width = 225f;
+				float y = 20f;   // title height, matches the other sections
+				foreach ( var row in info.Rows )
+					y += AddImperialDeckRowToUI( clone.transform, row, y, width ) + 6f;
+				y += AddImperialDeckLineToUI( clone.transform,
+					( tl != null && !string.IsNullOrEmpty( tl.impCampaignXpLine ) ? tl.impCampaignXpLine : "Imperial XP: {0}" ).Replace( "{0}", info.XpBalance.ToString() ),
+					y, width, 11, new Color( 1f, .71f, .33f, 1f ) ) + 6f;
+
+				var srt = clone.GetComponent<RectTransform>();
+				srt.sizeDelta = new Vector2( 225f, y );
+				Debug.Log( $"AddImperialDeckSectionToUI::deck={info.DeckName} rows={info.Rows.Count} height={y}" );
+			}
+			catch ( Exception e )
+			{
+				Utils.LogWarning( "AddImperialDeckSectionToUI skipped: " + e.Message );
+			}
+		}
+
+		float AddImperialDeckRowToUI( Transform parent, Saga.ImperialDisplay.Row row, float yTop, float width )
+		{
+			var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+			string tag = row.Basic
+				? ( tl != null && !string.IsNullOrEmpty( tl.impBasicTag ) ? tl.impBasicTag : "Basic · free" )
+				: string.Format( System.Globalization.CultureInfo.InvariantCulture,
+					tl != null && !string.IsNullOrEmpty( tl.impXpTag ) ? tl.impXpTag : "{0} XP", row.Xp );
+			string head = $"<color=white><b>{row.Name}</b></color>  <color=orange>{tag}</color>";
+			if ( !row.Modelled )
+				head += $"\n<color=#8FE3C8><i>{( tl != null ? tl.impNoModelTag : "active — no AI lever" )}</i></color>";
+			// the printed card text, 1:1 (M11g doctrine: printed content stays EN)
+			var card = Saga.ImperialDisplay.FindCard( row.CardId );
+			string body = "";
+			if ( card != null )
+				body = string.Join( "\n", card.AbilityTexts
+					.Where( t => !string.IsNullOrWhiteSpace( t ) ).Select( t => t.Trim() ).ToArray() );
+			string full = head + ( string.IsNullOrEmpty( body ) ? "" : "\n<size=85%><color=#C9D6D3>" + body + "</color></size>" );
+
+			return AddImperialDeckLineToUI( parent, full, yTop, width, 10, Color.white );
+		}
+
+		float AddImperialDeckLineToUI( Transform parent, string text, float yTop, float width, int size, Color color )
+		{
+			var go = new GameObject( "impRow", typeof( RectTransform ) );
+			go.transform.SetParent( parent, false );
+			var rt = go.GetComponent<RectTransform>();
+			rt.anchorMin = new Vector2( 0f, 1f );
+			rt.anchorMax = new Vector2( 0f, 1f );
+			rt.pivot = new Vector2( 0f, 1f );
+			rt.anchoredPosition = new Vector2( 0f, -yTop );
+			rt.sizeDelta = new Vector2( width, 16f );
+			var t = go.AddComponent<TMPro.TextMeshProUGUI>();
+			t.font = TMPro.TMP_Settings.defaultFontAsset;
+			t.fontSize = size;
+			t.color = color;
+			t.enableWordWrapping = true;
+			t.richText = true;
+			t.text = Utils.ReplaceGlyphs( text );
+			float h = Mathf.Max( 16f, t.GetPreferredValues( text ).y );
+			rt.sizeDelta = new Vector2( width, h );
+			return h;
+		}
+
 		void AddRewardToUI( CampaignReward item )
 		{
 			if ( item == null )
@@ -380,7 +490,6 @@ namespace Saga
 				Utils.LogWarning( $"AddRewardToUI()::item is null" );
 				return;
 			}
-
 			List<string> rewards = new List<string>();
 			foreach ( var campaignReward in sagaCampaign.campaignRewards )
 			{

@@ -150,6 +150,42 @@ namespace TacticalAI
             }
         }
 
+        /// <summary>M12e (Einsatzkarte): second badge line "Militaermacht - 4
+        /// Karten" under the M11f level badge. Deck NAME is printed board-game
+        /// content and stays EN; only the surrounding word shapes translate.
+        /// Returns null when there is nothing to show (no deck chosen) - the
+        /// caller then hides the line entirely, never renders an empty row.</summary>
+        public static string ImperialDeckBadgeText(string deckName, int cardCount)
+        {
+            if (string.IsNullOrEmpty(deckName) || cardCount < 0) return null;
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                Fallback(tl != null ? tl.impBadgeDeckLine : null, "{0} \u2014 {1} cards"),
+                deckName, cardCount);
+        }
+
+        /// <summary>M12e + M12d2 anti-leak: an OPEN agenda (ongoing/side/forced
+        /// buys announce read-aloud anyway) shows its name next to the deck
+        /// line; a Kept Secret shows NOTHING here - the spend line at buy time
+        /// is already the full public record. Callers pass the name only for
+        /// open types; this function additionally refuses unknown types.</summary>
+        public static string AgendaOpenLineText(string type, string cardName)
+        {
+            if (type != "ongoing" && type != "side_mission" && type != "forced_mission")
+                return null;
+            if (string.IsNullOrEmpty(cardName)) return null;
+            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                Fallback(tl != null ? tl.impAgendaLine : null, "Agenda: {0}"), cardName);
+        }
+
+        /// <summary>M12e (Play-Area-Panel / Kampagnen-Sektion): the deck row
+        /// "Militaermacht - 4 Karten" (shared wording with the badge line).</summary>
+        public static string ImperialDeckLineText(string deckName, int cardCount)
+        {
+            return ImperialDeckBadgeText(deckName, cardCount);
+        }
+
         static string SkillDisplayName(UITacticalAI tl, string token)
         {
             if (tl == null) return token;

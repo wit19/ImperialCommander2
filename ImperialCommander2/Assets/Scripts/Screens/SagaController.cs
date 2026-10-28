@@ -86,6 +86,10 @@ namespace Saga
 		{
 			Debug.Log( "ENTERING SAGA GAME" );
 
+			//M12e: the Imperium play-area panel mounts itself (no scene edits);
+			//all feature/campaign gating lives in ImperialPanel.Start
+			new GameObject( "TacaiImperialPanelHost" ).AddComponent<ImperialPanel>();
+
 			//Exception handling for any Unity thrown exception, such as from asset management
 			Application.logMessageReceived += LogCallback;
 
