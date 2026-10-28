@@ -1,0 +1,952 @@
+{
+ "_comment": "M11c2 keyword-rule golden vectors (C#-side pin, --record cast; see SectionsF.cs header). Worlds are M2a scenario specs run through the same BuildScenarioWorld as action_plan.json, with world.Skill attached per case. The S1/S2/S3/reference expects were cast while the CardKeywords gate was INACTIVE - their unchanged PASS after the rule shipped is the bit-identity proof for skill levels below S4. The s1 figures build as catalog card DG007 and take the exact IC2 CardData/enemies.json DG008 (E-Web Elite) values through the case-level card_override (units_core.json stays untouched - board.json pins its allows-lists).",
+ "cards": {
+  "source": "IC2 CardData/enemies.json (exact card values)",
+  "cards": [
+   {
+    "id": "DG008",
+    "name": "E-Web Engineer (Elite)",
+    "subname": "",
+    "miniSize": "Medium1x2",
+    "speed": 3,
+    "health": 7,
+    "attackType": "Ranged",
+    "attacks": [
+     "Blue",
+     "Red",
+     "Yellow"
+    ],
+    "keywords": [
+     "+1 {G}",
+     "+3 Accuracy"
+    ],
+    "isElite": true
+   }
+  ]
+ },
+ "scenarios": {
+  "ewebs_lair": {
+   "board": "keyword_wall",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "s1",
+     "card": "DG007",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "r1",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      6,
+      3
+     ],
+     "vitality": 1
+    }
+   ],
+   "script": []
+  },
+  "ewebs_pinched": {
+   "board": "m2a2_woundall",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "s1",
+     "card": "DG007",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "r_pin",
+     "card": "DG021",
+     "team": "rebel",
+     "at": [
+      3,
+      2
+     ],
+     "vitality": 1
+    }
+   ],
+   "script": []
+  },
+  "atdp_post": {
+   "board": "m2a2_woundall",
+   "rounds": 1,
+   "figures": [
+    {
+     "id": "s1",
+     "card": "DG046",
+     "team": "imperial",
+     "at": [
+      2,
+      2
+     ]
+    },
+    {
+     "id": "r1",
+     "card": "DG050",
+     "team": "rebel",
+     "at": [
+      7,
+      3
+     ],
+     "vitality": 1
+    }
+   ],
+   "script": []
+  }
+ },
+ "cases": [
+  {
+   "name": "table_coverage",
+   "kind": "table",
+   "expect": {
+    "active_levels": [
+     "S4",
+     "S5"
+    ],
+    "focus_fire": [
+     "DG025"
+    ],
+    "multi_attack": [
+     "DG007",
+     "DG008",
+     "DG046",
+     "DG071"
+    ],
+    "no_move_and_attack": [
+     "DG007",
+     "DG008"
+    ]
+   }
+  },
+  {
+   "name": "ewebs_s1_unchanged",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": "S1",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": true,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hazards_avoided": null,
+        "mp": 2,
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           0
+          ],
+          0
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "move 2 MP to legal attack position against r1"
+      },
+      {
+       "params": {
+        "target_id": "r1"
+       },
+       "type": "attack",
+       "why": "attack r1 after repositioning"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S1",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP); Skill S1: Fokusziel r1 — Rang 1 von 1 (Gegenzug: Counter nicht gelesen, kein koordinierter Feuerbefehl)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 2,
+     "why": "move-then-attack. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP); Skill S1: Fokusziel r1 — Rang 1 von 1 (Gegenzug: Counter nicht gelesen, kein koordinierter Feuerbefehl)"
+    }
+   }
+  },
+  {
+   "name": "ewebs_s2_unchanged",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": "S2",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": true,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hazards_avoided": null,
+        "mp": 2,
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           0
+          ],
+          0
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "move 2 MP to legal attack position against r1"
+      },
+      {
+       "params": {
+        "target_id": "r1"
+       },
+       "type": "attack",
+       "why": "attack r1 after repositioning"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S2",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP); Skill S2: Fokusziel r1 — Rang 1 von 1 (Gegenzug: Counter nicht gelesen, kein koordinierter Feuerbefehl)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 2,
+     "why": "move-then-attack. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP); Skill S2: Fokusziel r1 — Rang 1 von 1 (Gegenzug: Counter nicht gelesen, kein koordinierter Feuerbefehl)"
+    }
+   }
+  },
+  {
+   "name": "ewebs_s3_unchanged",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": "S3",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": true,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hazards_avoided": null,
+        "mp": 2,
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           0
+          ],
+          0
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "move 2 MP to legal attack position against r1"
+      },
+      {
+       "params": {
+        "target_id": "r1"
+       },
+       "type": "attack",
+       "why": "attack r1 after repositioning"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S3",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 2,
+     "why": "move-then-attack. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "ewebs_reference_unchanged",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": null,
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": true,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hazards_avoided": null,
+        "mp": 2,
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           2,
+           0
+          ],
+          0
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "move 2 MP to legal attack position against r1"
+      },
+      {
+       "params": {
+        "target_id": "r1"
+       },
+       "type": "attack",
+       "why": "attack r1 after repositioning"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 2,
+     "why": "move-then-attack. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "ewebs_s4_never_move_and_attack",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": "S4",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 0,
+    "move_and_attack": false,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hillclimb": true,
+        "mp": 3,
+        "purpose": "approach",
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           1
+          ],
+          1
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "no path to attack cell; reduce distance 4"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S4",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 3,
+     "why": "printed no-move-and-attack rule (Stativ/Tripod): the attack would need leaving your space -> advance without attacking, shoot from standstill next activation. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "ewebs_s5_never_move_and_attack",
+   "scenario": "ewebs_lair",
+   "fig": "s1",
+   "skill": "S5",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 0,
+    "move_and_attack": false,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hillclimb": true,
+        "mp": 3,
+        "purpose": "approach",
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           1
+          ],
+          0
+         ],
+         [
+          [
+           3,
+           1
+          ],
+          1
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "no path to attack cell; reduce distance 4"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 7,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S5",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 7,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 3,
+     "why": "printed no-move-and-attack rule (Stativ/Tripod): the attack would need leaving your space -> advance without attacking, shoot from standstill next activation. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "pinched_s3_unchanged",
+   "scenario": "ewebs_pinched",
+   "fig": "s1",
+   "skill": "S3",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": true,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "hazards_avoided": null,
+        "mp": 3,
+        "purpose": "break_engagement",
+        "states": [
+         [
+          [
+           2,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           1,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           0,
+           2
+          ],
+          0
+         ],
+         [
+          [
+           0,
+           3
+          ],
+          0
+         ]
+        ]
+       },
+       "type": "move",
+       "why": "ranged figure engaged by r_pin: back away 3 MP (gap 1->4) while keeping attack"
+      },
+      {
+       "params": {
+        "target_id": "r_pin"
+       },
+       "type": "attack",
+       "why": "attack r_pin after backing away"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 1,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S3",
+      "skill_rank": 1,
+      "target": "r_pin",
+      "tiebreak_trace": [
+       {
+        "dist": 1,
+        "id": "r_pin",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         3.333333,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       3.333333,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r_pin [r_pin:W[0, 1, 0, 3.333333, -1]]; can attack r_pin from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 3,
+     "why": "break engagement then attack.  focus: posture eliminate: W-argmax r_pin [r_pin:W[0, 1, 0, 3.333333, -1]]; can attack r_pin from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "pinched_s4_stands_and_shoots",
+   "scenario": "ewebs_pinched",
+   "fig": "s1",
+   "skill": "S4",
+   "card_override": "DG008",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": false,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "target_id": "r_pin"
+       },
+       "type": "attack",
+       "why": "attack r_pin: in range and LOS from current position"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 1,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S4",
+      "skill_rank": 1,
+      "target": "r_pin",
+      "tiebreak_trace": [
+       {
+        "dist": 1,
+        "id": "r_pin",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         3.333333,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       3.333333,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r_pin [r_pin:W[0, 1, 0, 3.333333, -1]]; can attack r_pin from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 0,
+     "why": "attack now. focus: posture eliminate: W-argmax r_pin [r_pin:W[0, 1, 0, 3.333333, -1]]; can attack r_pin from current position (0 MP)"
+    }
+   }
+  },
+  {
+   "name": "assault_s4_single_attack_schema_limit",
+   "scenario": "atdp_post",
+   "fig": "s1",
+   "skill": "S4",
+   "expect": {
+    "attack_actions": 1,
+    "move_and_attack": false,
+    "plan": {
+     "actions": [
+      {
+       "params": {
+        "target_id": "r1"
+       },
+       "type": "attack",
+       "why": "attack r1: in range and LOS from current position"
+      }
+     ],
+     "fig": "s1",
+     "focus": {
+      "count_dist": 4,
+      "focus_cost_mp": 0,
+      "posture": "eliminate",
+      "skill": "S4",
+      "skill_rank": 1,
+      "target": "r1",
+      "tiebreak_trace": [
+       {
+        "dist": 4,
+        "id": "r1",
+        "mp": 0,
+        "order": 1,
+        "vitality": 1,
+        "w": [
+         0,
+         1,
+         0,
+         2.666667,
+         -1
+        ],
+        "weight": 0
+       }
+      ],
+      "w": [
+       0,
+       1,
+       0,
+       2.666667,
+       -1
+      ],
+      "why": "posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+     },
+     "mp_budget": 3,
+     "mp_planned": 0,
+     "why": "attack now. focus: posture eliminate: W-argmax r1 [r1:W[0, 1, 0, 2.666667, -1]]; can attack r1 from current position (0 MP)"
+    }
+   }
+  }
+ ],
+ "boards": [
+  {
+   "schema": "tacai.board/1",
+   "name": "keyword_wall",
+   "width": 10,
+   "height": 5,
+   "flags": {
+    "interior": [],
+    "difficult": [],
+    "blocking": [
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "impassable": []
+   },
+   "edges": {
+    "wall": [],
+    "blocking": [],
+    "impassable": []
+   },
+   "doors": [],
+   "hazards": [],
+   "deployment_points": [
+    {
+     "id": "DP-A",
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "colors": [
+      "green"
+     ],
+     "massive_allowed": false,
+     "description": "imperial arrival"
+    }
+   ],
+   "objectives": [
+    {
+     "id": "obj-terminal",
+     "role": "terminal",
+     "cells": [
+      [
+       9,
+       4
+      ]
+     ],
+     "weight": 2
+    }
+   ],
+   "victoryCounter": "woundAll",
+   "_comment": "M11c2 helper board (inline, SectionsF registers it): m2a2_woundall plus a 3-cell blocking column at x=4 that hides (6,3) from (2,2..3); legal attack cells lie around its top end."
+  }
+ ]
+}

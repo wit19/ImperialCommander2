@@ -197,10 +197,19 @@ namespace TacticalAI.Core
             }
             var target = focus.Target;
 
+            // M11c2: printed no-move-and-attack rule (Tripod/Stativ cards,
+            // curated table CardKeywords) - ACTIVE ONLY ab S4 (S1..S3 and the
+            // reference path keep every branch below bit-identical). Such a
+            // figure may never combine movement and attack in one activation,
+            // not even via the engaged-retreat variant.
+            bool noMoveAttack = CardKeywords.ActiveFor(
+                world, fig.Card.Id, CardKeywords.NoMoveAndAttack);
+
             // -- 1. attack from current position if legal (GH: attack if able)
             if (ExecOk(world, fig, target, SpaceLegality.FigureCells(fig)))
             {
-                if (TryEngagedRetreat(world, fig, target, mp, plan, null, 0)) return plan;
+                if (!noMoveAttack && TryEngagedRetreat(world, fig, target, mp, plan, null, 0))
+                    return plan;
                 plan.Actions.Add(new PlannedAction("attack",
                     new Dictionary<string, object> { { "target_id", target.Id } },
                     why: "attack " + target.Id + ": in range and LOS from current position"));
@@ -212,7 +221,7 @@ namespace TacticalAI.Core
             var best = BestAttackState(world, fig, target, mp);
             var res = best.Res;
             bool? avoided = best.Avoided;
-            if (res != null && res.Cost > 0)
+            if (res != null && res.Cost > 0 && !noMoveAttack)
             {
                 if (fig.Card.AttackType == "Ranged" && EngagedRebels(world, fig).Count > 0)
                     if (TryEngagedRetreat(world, fig, target, mp, plan, res.States, res.Cost))
@@ -255,8 +264,12 @@ namespace TacticalAI.Core
             {
                 plan.Actions.Add(step);
                 plan.MpPlanned = Json.AsInt(step.Params["mp"]);
-                plan.Why = "cannot attack this activation -> advance toward focus " +
-                           "(no movement beyond Speed). focus: " + focus.Why;
+                plan.Why = noMoveAttack && res != null && res.Cost > 0
+                    ? "printed no-move-and-attack rule (Stativ/Tripod): the attack would "
+                      + "need leaving your space -> advance without attacking, shoot from "
+                      + "standstill next activation. focus: " + focus.Why
+                    : "cannot attack this activation -> advance toward focus " +
+                      "(no movement beyond Speed). focus: " + focus.Why;
             }
             else
             {
