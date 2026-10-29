@@ -957,73 +957,78 @@ namespace Saga
 		void ApplyTacticalMedPacPolicy()
 		{
 			var tactical = TacticalAI.TacticalAIBridge.TacticalMissionActive();
-			// the HUD icon carries the serialized TooltipHandler key "MedPac".
-			// M13o (Thomas Player-10.log): the old GetComponentsInChildren
-			// scan only saw SagaController's own subtree - the HUD canvas is
-			// NOT under it, so medSlot stayed null and the policy silently
-			// did nothing. Search the WHOLE loaded scene instead (prefab
-			// assets filtered out via scene validity).
-			RectTransform medSlot = null;
+			// M13p (Thomas screenshot + Saga.unity ground truth): the bar is
+			// 'bottom button grid' (layout-group driven, bottom center) and
+			// 'medpac button base' (own bottom-left anchor) are SEPARATE -
+			// hiding medpac alone can never pull the "?" over, and M13o's
+			// attempt moved the Button's child Image out of the button,
+			// breaking the HUD ("verschoben"). The scene truth:
+			//   Canvas / medpac button base (100x100, anchor 0,0)
+			//     |- medpac button (95x95) <- TooltipHandler "MedPac"
+			//     |- medpac counter
+			//   Canvas / bottom button grid / dashboard Button / Image (=infoBtnTX, the yellow "?")
+			// The policy therefore re-parents the BUTTON ITSELF into the
+			// freed medpac base (leaving the grid re-flows its leftovers)
+			// and never touches the Image's own parentage.
+			GameObject medBase = GameObject.Find( "medpac button base" );
+			RectTransform medBtn = null;
 			foreach ( var th in Resources.FindObjectsOfTypeAll<TooltipHandler>() )
 			{
 				if ( th == null || !th.gameObject.scene.IsValid() ) continue;
-				if ( th.tooltip == "MedPac" )
-				{
-					th.gameObject.SetActive( !tactical );
-					medSlot = th.transform as RectTransform;
-				}
+				if ( th.tooltip != "MedPac" ) continue;
+				medBtn = th.transform as RectTransform;
+				if ( medBase == null ) medBase = th.transform.parent != null ? th.transform.parent.gameObject : null;
+			}
+			if ( medBase == null )
+			{
+				Debug.LogWarning( "SagaController()::TACTICAL mode - 'medpac button base' not found; icon/\"?\" layout NOT applied" );
+				return;
 			}
 			if ( medPacText != null ) medPacText.gameObject.SetActive( !tactical );
-			if ( !tactical ) return;
-			if ( medSlot == null )
+			foreach ( Transform c in medBase.transform )
+				if ( c.name.StartsWith( "medpac counter" ) ) c.gameObject.SetActive( !tactical );
+			if ( !tactical )
 			{
-				Debug.LogWarning( "SagaController()::TACTICAL mode - MedPac TooltipHandler 'MedPac' not found; icon/\"?\" layout NOT applied" );
+				medBase.SetActive( true );
+				if ( medBtn != null ) medBtn.gameObject.SetActive( true );
 				return;
 			}
+			// NOTE: the BASE itself stays ACTIVE - it is the empty 100x100
+			// slot the "?" moves into and the ImperialPanel measures its
+			// right edge from, and GameObject.Find would stop seeing an
+			// inactive base. Only the icon and the counter switch off.
+			if ( medBtn != null ) medBtn.gameObject.SetActive( false );
 
-			// 1) "?" info button takes the freed medpac slot (re-parented into
-			// the medpac's own rect space so the placement is resolution-proof)
-			var dashRT = infoBtnTX as RectTransform;
-			if ( dashRT != null && dashRT.parent != medSlot.parent )
+			var btnGO = GameObject.Find( "dashboard Button" );
+			var btnRT = btnGO != null ? btnGO.transform as RectTransform : null;
+			if ( infoBtnTX != null && btnRT != null && infoBtnTX.transform.parent != btnRT )
+				infoBtnTX.transform.SetParent( btnRT, false );   // undo any earlier image-level move
+			if ( btnRT == null )
 			{
-				dashRT.SetParent( medSlot.parent, false );
-				dashRT.anchorMin = medSlot.anchorMin;
-				dashRT.anchorMax = medSlot.anchorMax;
-				dashRT.pivot = medSlot.pivot;
-				dashRT.sizeDelta = medSlot.sizeDelta;
-				dashRT.anchoredPosition = medSlot.anchoredPosition;
+				Debug.LogWarning( "SagaController()::TACTICAL mode - 'dashboard Button' not found; \"?\" stays in the grid" );
+				return;
 			}
-
-			// 2) quick-message/info box: slide it out from behind the icon row
-			// AND the ImperialPanel that now sits right of it. Works in world
-			// space so it is correct for any anchor setup, and is naturally
-			// idempotent (the shift is zero once the gap holds).
-			var qm = GlowEngine.FindUnityObject<QuickMessage>();
-			if ( qm == null || qm.message == null )
-				return;
-			var box = qm.message.transform as RectTransform;
-			while ( box != null && box.parent != null && box.parent != qm.transform )
-				box = box.parent as RectTransform;
-			if ( box == null || box.parent == null )
-				return;
-			var canvas = box.GetComponentInParent<Canvas>( true )?.rootCanvas;
-			var gapWorld = ( canvas != null && canvas.scaleFactor > 0f ? 24f / canvas.scaleFactor : 24f );
-			var clearWorldX = medSlot.TransformPoint( new Vector3( medSlot.rect.xMax, medSlot.rect.center.y, 0f ) ).x;
-			// the ImperialPanel (class cards + agenda) lives right of the row:
-			// measure the quick-message gap from ITS right edge when present.
-			var panelGo = GameObject.Find( "tacaiImperialPanel" );
-			var panelRT = panelGo != null ? panelGo.transform as RectTransform : null;
-			if ( panelRT != null && panelRT.gameObject.activeInHierarchy )
+			if ( btnRT.parent != medBase.transform )
+				btnRT.SetParent( medBase.transform, false );
+			// occupy EXACTLY the medpac button's rect: same parent, so a 1:1
+			// copy of anchor/pivot/size/pos is mathematically exact - and
+			// works pre-layout because it only uses serialized anchor values
+			if ( medBtn != null )
 			{
-				var panelRight = panelRT.TransformPoint( new Vector3( panelRT.rect.xMax, panelRT.rect.center.y, 0f ) ).x;
-				if ( panelRight > clearWorldX )
-					clearWorldX = panelRight;
+				btnRT.anchorMin = medBtn.anchorMin;
+				btnRT.anchorMax = medBtn.anchorMax;
+				btnRT.pivot = medBtn.pivot;
+				btnRT.sizeDelta = medBtn.sizeDelta;
+				btnRT.anchoredPosition = medBtn.anchoredPosition;
 			}
-			var boxLeftWorld = box.TransformPoint( new Vector3( box.rect.xMin, box.rect.center.y, 0f ) );
-			var dx = clearWorldX + gapWorld - boxLeftWorld.x;
-			if ( dx > 0f )
-				box.position += new Vector3( dx, 0f, 0f );
-			Debug.Log( "SagaController()::TACTICAL mode - MedPac UI off (reference rules: wounded until end of mission), info \"?\" moved into its slot, info display shifted clear of the icon row" );
+			else
+			{
+				btnRT.anchorMin = btnRT.anchorMax = new Vector2( 0.5f, 0.5f );
+				btnRT.pivot = new Vector2( 0.5f, 0.5f );
+				btnRT.sizeDelta = new Vector2( 95f, 95f );
+				btnRT.anchoredPosition = Vector2.zero;
+			}
+			Debug.Log( "SagaController()::TACTICAL mode - medpac icon/counter off (reference rules: wounded until end of mission), \"?\" button re-seated into its slot (M13p)" );
 		}
 
 		public void OnImperialPopup()

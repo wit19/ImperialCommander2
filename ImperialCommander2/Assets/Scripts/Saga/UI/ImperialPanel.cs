@@ -11,9 +11,10 @@
 // does not simulate.
 //
 // Built at runtime on top of the existing HUD (M11f precedent: no prefab or
-// scene edits, everything derived from wired siblings). It joins the HUD's
-// own hiding rules: hidden while the dashboard popup or the settings dialog
-// is open. Read-only: no buttons here do anything, so the row Graphics set
+// scene edits, everything derived from wired siblings). It paints UNDER all
+// HUD siblings (first-sibling rule), so opened windows cover it by itself;
+// only the settings dialog, outside that sibling stack, hides it explicitly.
+// Read-only: no buttons here do anything, so the row Graphics set
 // raycastTarget=false - the board underneath stays clickable; the tooltip
 // handlers ride whatever pointer events still reach the rows.
 using System;
@@ -214,7 +215,6 @@ namespace Saga
 		const float ROW_WIDTH = 320f;
 		const float MAX_HEIGHT = 420f;
 
-		HeroDashboard dashboard;
 		GameObject root, contentRoot;
 		TextMeshProUGUI headerText;
 		SagaCampaign campaign;
@@ -259,19 +259,10 @@ namespace Saga
 			// The panel only ever exists in tactical campaigns, where the HUD's
 			// bottom-left icon row (rules / medpac-or-"?" / settings) would bury
 			// it (Thomas playtest 29.10.: class-card and agenda rows were
-			// completely covered). Start it clear of the row: the row's right
-			// edge is measured live from the medpac button rect - the "?" takes
-			// over that slot in tactical mode, so the edge stays the same.
-			var left = 12f;
-			var medGo = GameObject.Find( "medpac button base" );
-			var medRT = medGo != null ? medGo.transform as RectTransform : null;
-			if ( medRT != null )
-			{
-				var slotRight = rt.parent.InverseTransformPoint(
-					medRT.TransformPoint( new Vector3( medRT.rect.xMax, medRT.rect.center.y, 0f ) ) );
-				left = slotRight.x + 24f;
-			}
-			rt.anchoredPosition = new Vector2( left, 12f );
+			// completely covered). M13p: the measurement runs through
+			// LeftEdgeClear() and is REPEATED on every refresh, so a not-yet
+			// measurable slot at Start self-heals within 0.5 s.
+			rt.anchoredPosition = new Vector2( LeftEdgeClear(), 12f );
 			rt.sizeDelta = new Vector2( ROW_WIDTH, 60f );
 
 			var bg = root.AddComponent<Image>();
@@ -307,16 +298,27 @@ namespace Saga
 		{
 			try
 			{
-				// HUD hiding rules (dashboard popup / settings dialog): the
-				// panel joins them instead of floating over opened windows.
-				if ( dashboard == null ) dashboard = GlowEngine.FindUnityObject<HeroDashboard>();
-				bool blocked = ( dashboard != null && dashboard.gameObject.activeInHierarchy )
-					|| IsSettingsOpen();
+				// M13p (Thomas: "Text ist immer noch weg"): the old rule hid
+				// the panel while HeroDashboard.gameObject was active - but
+				// the Saga.unity ground truth shows the HeroDashboard ROOT is
+				// permanently active (it is the persistent hero bar; only its
+				// misionInfo/fame/log child windows open and close). The rule
+				// therefore blocked the panel FOREVER. Overlay safety is
+				// already given: the panel is SetAsFirstSibling, so any opened
+				// window paints over it anyway - only the settings dialog,
+				// which lives outside this sibling stack, still blocks.
+				bool blocked = IsSettingsOpen();
 				var infoNow = ImperialDisplay.Build( campaign );
 				bool show = !blocked && infoNow != null;
 				root.SetActive( show );
 				if ( !show ) return;
 				info = infoNow;
+
+				// re-measure the HUD row's right edge every refresh: the
+				// medpac slot is hidden in tactical mode and the "?" button
+				// sits in it - panel starts right of that, self-healing
+				var rt0 = root.GetComponent<RectTransform>();
+				rt0.anchoredPosition = new Vector2( LeftEdgeClear(), rt0.anchoredPosition.y );
 
 				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
 				string title = tl != null && !string.IsNullOrEmpty( tl.impPanelTitle ) ? tl.impPanelTitle : "IMPERIUM";
@@ -357,6 +359,25 @@ namespace Saga
 		{
 			var sp = GlowEngine.FindUnityObject<SettingsPanel>();
 			return sp != null && sp.gameObject.activeInHierarchy;
+		}
+
+		/// <summary>Left start of the panel: clear of the bottom-left HUD
+		/// slot row. Measured from 'medpac button base' (the "?" button takes
+		/// over exactly that rect in tactical mode) through world space, so
+		/// it is correct across canvases; falls back to the canvas corner.
+		/// Re-evaluated every refresh (M13p) - a zero-measurement at Start
+		/// can no longer stick.</summary>
+		float LeftEdgeClear()
+		{
+			var rt = root != null ? root.GetComponent<RectTransform>() : null;
+			var parent = rt != null ? rt.parent as RectTransform : null;
+			if ( parent == null ) return 12f;
+			var medGo = GameObject.Find( "medpac button base" );
+			var medRT = medGo != null ? medGo.transform as RectTransform : null;
+			if ( medRT == null || medRT.rect.width <= 0f ) return 12f;
+			var slotRight = parent.InverseTransformPoint(
+				medRT.TransformPoint( new Vector3( medRT.rect.xMax, medRT.rect.center.y, 0f ) ) );
+			return slotRight.x + 24f;
 		}
 
 		/// <summary>One printed-card row: name + XP/basic tag + honest
