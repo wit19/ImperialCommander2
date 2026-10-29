@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -233,9 +233,10 @@ namespace Saga
 			}
 			foreach ( var item in items.OrderBy( x => x.Value ) )
 				AddItemToUI( sagaCampaign.GetItemFromID( item.Key ) );
-			//M12e: the Imperial Upgrade Stage purchases, shown as printed cards
-			//next to the rebel items list (tactical campaigns only)
-			AddImperialDeckSectionToUI();
+			//M13k: Imperial class-deck info behind a bar button + scrollable
+			//popup (the old inline section crowded the overview and overlapped
+			//the rebel items list - Thomas playtest 29.10.)
+			AddImperialDeckButtonToBar();
 			//allies
 			foreach ( var ally in sagaCampaign.campaignAllies.OrderBy( x => x.name ) )
 				AddAllyToUI( ally );
@@ -377,110 +378,252 @@ namespace Saga
 		}
 
 		/// <summary>
-		/// M12e (Upgrade-Stage-Transparenz): a runtime clone of the "Items"
-		/// section shows what the Imperial Upgrade Stage actually bought -
-		/// every acquired class-deck card as a printed card (name + XP price +
-		/// 1:1 card text, ItemSkillSelector-style content, board-game English),
-		/// plus the honest "aktiv - ohne KI-Hebel" marker for cards the M12d
-		/// table leaves unmodelled. Pure display: no buttons, no campaign
-		/// state touched; hidden entirely when the feature or a deck is absent
+		/// M13k (Thomas playtest 29.10.): the Imperial class-deck/agenda info
+		/// moves off the crowded overview into a scrollable popup behind a new
+		/// button inserted in the top-right bar, LEFT of the yellow "?" help
+		/// button (clone of that button: same visual language, zero prefab/
+		/// scene edits - the M12e runtime-build doctrine). Cloned onClick is
+		/// replaced with a fresh ButtonClickedEvent so the inherited "show
+		/// help" persistent call cannot fire; recolor + "IMP" overlay mark it
+		/// apart. Hidden entirely when the feature or a deck is absent
 		/// (classic campaigns render exactly as before).
 		/// </summary>
-		void AddImperialDeckSectionToUI()
+		void AddImperialDeckButtonToBar()
 		{
 			try
 			{
 				var info = Saga.ImperialDisplay.Build( sagaCampaign );
-				if ( info == null || itemContainer == null || itemContainer.childCount == 0 ) return;
-
-				// clone the items SECTION (grandparent of the item rows) - same
-				// visual language, zero prefab/scene edits
-				var sectionT = itemContainer.GetChild( 0 ).parent.gameObject;
-				var clone = Instantiate( sectionT, sectionT.transform.parent );
-				clone.name = "imperial";
-				clone.transform.SetSiblingIndex( Mathf.Min( sectionT.transform.GetSiblingIndex() + 1, clone.transform.parent.childCount - 1 ) );
+				if ( info == null ) return;
+				// anchor on the yellow "?" (the prefab instance carries this
+				// stable name); if a future build renames it, the "i" button
+				// is the next-best bar member to sit left of
+				var helpGO = GameObject.Find( "Help Activation Button" )
+					?? GameObject.Find( "info Button" );
+				var btn0 = helpGO != null ? helpGO.GetComponent<Button>() : null;
+				if ( btn0 == null )
+				{
+					Utils.LogWarning( "AddImperialDeckButtonToBar skipped: help button not found" );
+					return;
+				}
+				var bar = helpGO.transform.parent;
+				var clone = Instantiate( helpGO, bar );
+				clone.name = "tacaiImpInfoButton";
 				clone.SetActive( true );
-
-				// the "add" button would open the rebel item picker - useless here
-				foreach ( Transform child in clone.transform )
-					if ( child.name == "add" ) Destroy( child.gameObject );
-
-				var title = clone.GetComponentInChildren<TMPro.TextMeshProUGUI>( true );
-				if ( title == null ) { Destroy( clone ); return; }
-				// never ship cloned copies of the ORIGINAL item rows (stale,
-				// non-functional); the imperium rows are built fresh below
-				for ( int i = title.transform.childCount - 1; i >= 0; i-- )
-					Destroy( title.transform.GetChild( i ).gameObject );
-				var cloneScroll = clone.GetComponentInChildren<ScrollRect>( true );
-				if ( cloneScroll != null && cloneScroll.content != null )
-					for ( int i = cloneScroll.content.childCount - 1; i >= 0; i-- )
-						Destroy( cloneScroll.content.GetChild( i ).gameObject );
-
-				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
-				string header = tl != null && !string.IsNullOrEmpty( tl.impCampaignHeader ) ? tl.impCampaignHeader : "Imperial class deck — {0}";
-				title.text = Utils.ReplaceGlyphs( string.Format( System.Globalization.CultureInfo.InvariantCulture, header, info.DeckName ) );
-
-				// rows stack manually below the title (the game's own list
-				// sections parent rows under the section title's RectTransform)
-				float width = 225f;
-				float y = 20f;   // title height, matches the other sections
-				foreach ( var row in info.Rows )
-					y += AddImperialDeckRowToUI( clone.transform, row, y, width ) + 6f;
-				y += AddImperialDeckLineToUI( clone.transform,
-					( tl != null && !string.IsNullOrEmpty( tl.impCampaignXpLine ) ? tl.impCampaignXpLine : "Imperial XP: {0}" ).Replace( "{0}", info.XpBalance.ToString() ),
-					y, width, 11, new Color( 1f, .71f, .33f, 1f ) ) + 6f;
-
-				var srt = clone.GetComponent<RectTransform>();
-				srt.sizeDelta = new Vector2( 225f, y );
-				Debug.Log( $"AddImperialDeckSectionToUI::deck={info.DeckName} rows={info.Rows.Count} height={y}" );
+				// full detour from the clone's inherited help behaviour:
+				// fresh event object, persistent calls cannot survive it
+				var btn = clone.GetComponent<Button>();
+				btn.onClick = new Button.ButtonClickedEvent();
+				btn.onClick.AddListener( ShowImperialDeckPopup );
+				// visual difference: teal (the tactical-AI accent) + own label
+				var img = clone.GetComponent<Image>();
+				if ( img != null ) img.color = new Color( 0.40f, 0.85f, 0.75f, 1f );
+				for ( int i = clone.transform.childCount - 1; i >= 0; i-- )
+					Destroy( clone.transform.GetChild( i ).gameObject );
+				var label = new GameObject( "label", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
+				label.transform.SetParent( clone.transform, false );
+				var lrt = label.GetComponent<RectTransform>();
+				lrt.anchorMin = Vector2.zero;
+				lrt.anchorMax = Vector2.one;
+				lrt.offsetMin = Vector2.zero;
+				lrt.offsetMax = Vector2.one * -1f;
+				label.font = TMPro.TMP_Settings.defaultFontAsset;
+				label.fontSize = 20;
+				label.fontStyle = TMPro.FontStyles.Bold;
+				label.alignment = TMPro.TextAlignmentOptions.Center;
+				label.color = new Color( 0.02f, 0.10f, 0.09f, 1f );
+				label.enableWordWrapping = false;
+				label.raycastTarget = false;
+				label.text = "IMP";
+				// sit it left of the "?": a bar layout group re-flows it, a
+				// manually placed bar needs the measured offset
+				var h = helpGO.transform as RectTransform;
+				var c = clone.transform as RectTransform;
+				if ( bar.GetComponent<UnityEngine.UI.LayoutGroup>() != null )
+					c.SetSiblingIndex( h.GetSiblingIndex() );
+				else
+				{
+					c.anchorMin = h.anchorMin;
+					c.anchorMax = h.anchorMax;
+					c.pivot = h.pivot;
+					c.sizeDelta = h.sizeDelta;
+					c.anchoredPosition = h.anchoredPosition - new Vector2( h.rect.width + 10f, 0f );
+				}
+				Debug.Log( $"AddImperialDeckButtonToBar::deck={info.DeckName} rows={info.Rows.Count}" );
 			}
 			catch ( Exception e )
 			{
-				Utils.LogWarning( "AddImperialDeckSectionToUI skipped: " + e.Message );
+				Utils.LogWarning( "AddImperialDeckButtonToBar skipped: " + e.Message );
 			}
 		}
 
-		float AddImperialDeckRowToUI( Transform parent, Saga.ImperialDisplay.Row row, float yTop, float width )
-		{
-			var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
-			string tag = row.Basic
-				? ( tl != null && !string.IsNullOrEmpty( tl.impBasicTag ) ? tl.impBasicTag : "Basic · free" )
-				: string.Format( System.Globalization.CultureInfo.InvariantCulture,
-					tl != null && !string.IsNullOrEmpty( tl.impXpTag ) ? tl.impXpTag : "{0} XP", row.Xp );
-			string head = $"<color=white><b>{row.Name}</b></color>  <color=orange>{tag}</color>";
-			if ( !row.Modelled )
-				head += $"\n<color=#8FE3C8><i>{( tl != null ? tl.impNoModelTag : "active — no AI lever" )}</i></color>";
-			// the printed card text, 1:1 (M11g doctrine: printed content stays EN)
-			var card = Saga.ImperialDisplay.FindCard( row.CardId );
-			string body = "";
-			if ( card != null )
-				body = string.Join( "\n", card.AbilityTexts
-					.Where( t => !string.IsNullOrWhiteSpace( t ) ).Select( t => t.Trim() ).ToArray() );
-			string full = head + ( string.IsNullOrEmpty( body ) ? "" : "\n<size=85%><color=#C9D6D3>" + body + "</color></size>" );
+		GameObject impPopup;   // at most one open Imperial popup
 
-			return AddImperialDeckLineToUI( parent, full, yTop, width, 10, Color.white );
+		/// <summary>All Imperial campaign info (deck, every acquired card with
+		/// its printed text, agenda, XP balance) in one scrollable text popup;
+		/// click beside the box or the close button dismisses it.</summary>
+		void ShowImperialDeckPopup()
+		{
+			try
+			{
+				if ( impPopup != null ) Destroy( impPopup );
+				var info = Saga.ImperialDisplay.Build( sagaCampaign );
+				if ( info == null ) return;
+				var canvas = GameObject.Find( "Canvas" )?.transform;
+				if ( canvas == null ) return;
+				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+
+				// full-screen dim catch layer: any click outside closes
+				impPopup = new GameObject( "tacaiImpPopup", typeof( RectTransform ) );
+				impPopup.transform.SetParent( canvas, false );
+				var pr = impPopup.GetComponent<RectTransform>();
+				pr.anchorMin = Vector2.zero;
+				pr.anchorMax = Vector2.one;
+				pr.offsetMin = Vector2.zero;
+				pr.offsetMax = Vector2.zero;
+				var dim = impPopup.AddComponent<Image>();
+				dim.color = new Color( 0f, 0f, 0f, 0.55f );
+				var dimBtn = impPopup.AddComponent<Button>();
+				dimBtn.transition = Selectable.Transition.None;
+				dimBtn.onClick.AddListener( () => { if ( impPopup != null ) Destroy( impPopup ); } );
+
+				var tl2 = DataStore.uiLanguage;
+				// centred box
+				var box = new GameObject( "box", typeof( RectTransform ) );
+				box.transform.SetParent( impPopup.transform, false );
+				var brt = box.GetComponent<RectTransform>();
+				brt.anchorMin = new Vector2( .5f, .5f );
+				brt.anchorMax = new Vector2( .5f, .5f );
+				brt.pivot = new Vector2( .5f, .5f );
+				brt.sizeDelta = new Vector2( 760f, 560f );
+				var bg = box.AddComponent<Image>();
+				bg.color = new Color( 0.02f, 0.10f, 0.09f, 0.97f );
+
+				// header (same localized line as the old section used)
+				var headerGO = new GameObject( "header", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
+				headerGO.transform.SetParent( box.transform, false );
+				var hrt = headerGO.GetComponent<RectTransform>();
+				hrt.anchorMin = new Vector2( 0f, 1f );
+				hrt.anchorMax = new Vector2( 1f, 1f );
+				hrt.pivot = new Vector2( .5f, 1f );
+				hrt.anchoredPosition = new Vector2( 0f, -10f );
+				hrt.sizeDelta = new Vector2( -20f, 34f );
+				headerGO.font = TMPro.TMP_Settings.defaultFontAsset;
+				headerGO.fontSize = 20;
+				headerGO.fontStyle = TMPro.FontStyles.Bold;
+				headerGO.alignment = TMPro.TextAlignmentOptions.Center;
+				headerGO.color = Color.white;
+				headerGO.text = Utils.ReplaceGlyphs( string.Format( System.Globalization.CultureInfo.InvariantCulture,
+					tl != null && !string.IsNullOrEmpty( tl.impCampaignHeader ) ? tl.impCampaignHeader : "Imperial class deck — {0}", info.DeckName ) );
+
+				// scroll window
+				var scrollGO = new GameObject( "scroll", typeof( RectTransform ) ).AddComponent<ScrollRect>();
+				scrollGO.transform.SetParent( box.transform, false );
+				var srt = scrollGO.GetComponent<RectTransform>();
+				srt.anchorMin = new Vector2( 0f, 0f );
+				srt.anchorMax = new Vector2( 1f, 1f );
+				srt.offsetMin = new Vector2( 12f, 56f );
+				srt.offsetMax = new Vector2( -12f, -50f );
+				var viewport = new GameObject( "viewport", typeof( RectTransform ) );
+				viewport.transform.SetParent( scrollGO.transform, false );
+				var vrt = viewport.GetComponent<RectTransform>();
+				vrt.anchorMin = Vector2.zero;
+				vrt.anchorMax = Vector2.one;
+				vrt.offsetMin = Vector2.zero;
+				vrt.offsetMax = Vector2.zero;
+				viewport.AddComponent<UnityEngine.UI.RectMask2D>();
+				var contentGO = new GameObject( "content", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
+				contentGO.transform.SetParent( viewport.transform, false );
+				var crt = contentGO.GetComponent<RectTransform>();
+				crt.anchorMin = new Vector2( 0f, 1f );
+				crt.anchorMax = new Vector2( 1f, 1f );
+				crt.pivot = new Vector2( 0f, 1f );
+				crt.anchoredPosition = Vector2.zero;
+				contentGO.font = TMPro.TMP_Settings.defaultFontAsset;
+				contentGO.fontSize = 12;
+				contentGO.color = Color.white;
+				contentGO.enableWordWrapping = true;
+				contentGO.richText = true;
+				contentGO.alignment = TMPro.TextAlignmentOptions.TopLeft;
+				contentGO.text = Utils.ReplaceGlyphs( BuildImperialDeckPopupText( info ) );
+				contentGO.rectTransform.sizeDelta = new Vector2( 0f, contentGO.GetPreferredValues( contentGO.text, 700f, 0f ).y );
+				crt.sizeDelta = new Vector2( 0f, Mathf.Max( crt.sizeDelta.y, contentGO.GetPreferredValues( contentGO.text, 700f, 0f ).y ) );
+				scrollGO.horizontal = false;
+				scrollGO.vertical = true;
+				scrollGO.movementType = ScrollRect.MovementType.Clamped;
+				scrollGO.viewport = vrt;
+				scrollGO.content = crt;
+
+				// close button (localized)
+				var closeGO = new GameObject( "close", typeof( RectTransform ) );
+				closeGO.transform.SetParent( box.transform, false );
+				var clrt = closeGO.GetComponent<RectTransform>();
+				clrt.anchorMin = new Vector2( .5f, 0f );
+				clrt.anchorMax = new Vector2( .5f, 0f );
+				clrt.pivot = new Vector2( .5f, 0f );
+				clrt.anchoredPosition = new Vector2( 0f, 10f );
+				clrt.sizeDelta = new Vector2( 180f, 36f );
+				var cimg = closeGO.AddComponent<Image>();
+				cimg.color = new Color( 1f, .62f, .2f, 1f );
+				var cbtn = closeGO.AddComponent<Button>();
+				cbtn.onClick.AddListener( () => { if ( impPopup != null ) Destroy( impPopup ); } );
+				var closeLabel = new GameObject( "label", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
+				closeLabel.transform.SetParent( closeGO.transform, false );
+				var cl2 = closeLabel.GetComponent<RectTransform>();
+				cl2.anchorMin = Vector2.zero;
+				cl2.anchorMax = Vector2.one;
+				cl2.offsetMin = Vector2.zero;
+				cl2.offsetMax = Vector2.zero;
+				closeLabel.font = TMPro.TMP_Settings.defaultFontAsset;
+				closeLabel.fontSize = 14;
+				closeLabel.fontStyle = TMPro.FontStyles.Bold;
+				closeLabel.alignment = TMPro.TextAlignmentOptions.Center;
+				closeLabel.color = Color.white;
+				closeLabel.raycastTarget = false;
+				closeLabel.text = Utils.ReplaceGlyphs(
+					tl2?.uiMainApp?.close != null ? tl2.uiMainApp.close.ToUpper() : "CLOSE" ).Replace( "\r", "" ).Replace( "\n", "" );
+
+				impPopup.transform.SetAsLastSibling();   // on top of every panel
+				Debug.Log( $"ShowImperialDeckPopup::deck={info.DeckName} rows={info.Rows.Count}" );
+			}
+			catch ( Exception e )
+			{
+				if ( impPopup != null ) Destroy( impPopup );
+				Utils.LogWarning( "ShowImperialDeckPopup skipped: " + e.Message );
+			}
 		}
 
-		float AddImperialDeckLineToUI( Transform parent, string text, float yTop, float width, int size, Color color )
+		/// <summary>One rich-text report: open agenda first, then every card
+		/// (name + XP tag + 1:1 printed text, M11g doctrine: printed content
+		/// stays EN) then the XP balance line - the same content the inline
+		/// section spilled across the overview, now in one scrollable column.</summary>
+		string BuildImperialDeckPopupText( Saga.ImperialDisplay.Info info )
 		{
-			var go = new GameObject( "impRow", typeof( RectTransform ) );
-			go.transform.SetParent( parent, false );
-			var rt = go.GetComponent<RectTransform>();
-			rt.anchorMin = new Vector2( 0f, 1f );
-			rt.anchorMax = new Vector2( 0f, 1f );
-			rt.pivot = new Vector2( 0f, 1f );
-			rt.anchoredPosition = new Vector2( 0f, -yTop );
-			rt.sizeDelta = new Vector2( width, 16f );
-			var t = go.AddComponent<TMPro.TextMeshProUGUI>();
-			t.font = TMPro.TMP_Settings.defaultFontAsset;
-			t.fontSize = size;
-			t.color = color;
-			t.enableWordWrapping = true;
-			t.richText = true;
-			t.text = Utils.ReplaceGlyphs( text );
-			float h = Mathf.Max( 16f, t.GetPreferredValues( text ).y );
-			rt.sizeDelta = new Vector2( width, h );
-			return h;
+			var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+			var sb = new System.Text.StringBuilder();
+			if ( !string.IsNullOrEmpty( info.OpenAgenda ) )
+				sb.Append( "<color=#8FE3C8><b>" ).Append( info.OpenAgenda ).Append( "</b></color>\n\n" );
+			foreach ( var row in info.Rows )
+			{
+				string tag = row.Basic
+					? ( tl != null && !string.IsNullOrEmpty( tl.impBasicTag ) ? tl.impBasicTag : "Basic · free" )
+					: string.Format( System.Globalization.CultureInfo.InvariantCulture,
+						tl != null && !string.IsNullOrEmpty( tl.impXpTag ) ? tl.impXpTag : "{0} XP", row.Xp );
+				sb.Append( $"<color=white><b>{row.Name}</b></color>  <color=orange>{tag}</color>" );
+				if ( !row.Modelled )
+					sb.Append( $"\n<color=#8FE3C8><i>{( tl != null ? tl.impNoModelTag : "active — no AI lever" )}</i></color>" );
+				var card = Saga.ImperialDisplay.FindCard( row.CardId );
+				if ( card != null )
+				{
+					var body = string.Join( "\n", card.AbilityTexts
+						.Where( t => !string.IsNullOrWhiteSpace( t ) ).Select( t => t.Trim() ).ToArray() );
+					if ( !string.IsNullOrEmpty( body ) )
+						sb.Append( "\n<size=85%><color=#C9D6D3>" ).Append( body ).Append( "</color></size>" );
+				}
+				sb.Append( "\n\n" );
+			}
+			sb.Append( string.Format( System.Globalization.CultureInfo.InvariantCulture,
+				( tl != null && !string.IsNullOrEmpty( tl.impCampaignXpLine ) ? tl.impCampaignXpLine : "Imperial XP: {0}" ).Replace( "{0}", "<color=orange><b>{0}</b></color>" ), info.XpBalance.ToString() ) );
+			return sb.ToString();
 		}
 
 		void AddRewardToUI( CampaignReward item )
