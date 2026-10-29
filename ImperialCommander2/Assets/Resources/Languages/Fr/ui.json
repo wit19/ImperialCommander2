@@ -297,7 +297,7 @@
     "moveBlocker": "Occupy the space between the mission objective and the nearest hero's path - his shortest route to the objective should cross your tile.\nNo such space reachable? Then: hold the next chokepoint on his route.",
     "moveSupport": "Keep your distance from the focus target.\nApproach by at most {0} spaces - and only if no hero would then stand within melee reach of you. Otherwise: hold the distance.",
     "moveAmbusher": "Move only onto spaces no hero can see.\nA target within your attack range? Then: reveal and attack. No target in range? Then: stay undetected.",
-    "attackFocus": "Not attacked yet? Then: attack the focus target - weapon/ability range and clear line of sight required.\nNo line of sight or too far? Then: move up to {0} spaces toward the focus target.\nLine of sight blocked by ANOTHER hero figure? Then: attack that blocking figure.\nAlready attacked? Then: no second attack - unless the Imperial card explicitly allows several. Spend leftover movement in cover.",
+    "attackFocus": "Not attacked yet? Then: attack the focus target - weapon/ability range and clear line of sight required.\nNo line of sight or too far? Then: move up to {0} spaces toward the focus target.\nLine of sight blocked by ANOTHER hero figure? Then: attack that blocking figure.\nAlready attacked? Then no second attack - unless the Imperial card explicitly allows multiple attacks; then proceed like Action 1.\nInstead: Movement points left? Then spend them in cover.",
     "attackNoTarget": "Not attacked yet? Then: the nearest hero you can reach (range + clear line of sight).\nNo hero reachable? Then: move up to {0} spaces toward the nearest hero.\nAlready attacked? Then: spend leftover movement in cover.",
     "attackGuard": "Not attacked yet? Then: the nearest hero inside your guard zone (range + clear line of sight).\nNo hero in the guard zone, but the focus target is shootable from here? Then: attack the focus target.\nAlready attacked or no target? Then: no shot - move up to {0} spaces against the nearest hero INSIDE your guard zone or hold your position.",
     "attackGuardNoTarget": "Not attacked yet? Then: the nearest hero inside your guard zone (range + clear line of sight).\nNo hero in the zone or already attacked? Then: no shot - move up to {0} spaces against the nearest hero INSIDE your guard zone or hold your position.",
@@ -369,6 +369,8 @@
     "ordRiskPress": "attaque",
     "ordRiskHold": "tenir la ligne de feu",
     "ordRiskGuardHold": "couverture en tenant l’objectif",
-    "ordRiskDisengage": "repli vers la couverture"
+    "ordRiskDisengage": "repli vers la couverture",
+    "ordInfoAttack": "Attack: use a weapon or an ability.",
+    "ordInfoDoor": "Doors may be opened on the way to the objective - opening one costs an action (interact); locked doors only as the mission rules allow."
   }
 }

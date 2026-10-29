@@ -297,7 +297,7 @@
     "moveBlocker": "Besetze das Feld zwischen Missionsziel und dem Weg des nächsten Helden – sein kürzester Weg zum Ziel soll über dein Feld führen.\nKein solches Feld erreichbar? Dann: halte die nächste Engstelle auf seinem Weg.",
     "moveSupport": "Halte Abstand zum Fokusziel.\nNähere dich höchstens auf {0} Felder – und nur, wenn danach kein Held in Nahkampfreichweite von dir steht. Sonst: Abstand halten.",
     "moveAmbusher": "Bewege dich nur auf Felder, die kein Held sehen kann.\nEin Ziel in deiner Angriffsreichweite? Dann: zeigen und angreifen. Kein Ziel in Reichweite? Dann: unentdeckt bleiben.",
-    "attackFocus": "Noch nicht angegriffen? Dann: Fokusziel angreifen – Reichweite und freie Sichtlinie der Waffe/Fähigkeit vorausgesetzt.\nKeine Sichtlinie oder zu weit? Dann: bis zu {0} Felder auf das Fokusziel zubewegen.\nSichtlinie durch eine ANDERE Heldenfigur blockiert? Dann: diese blockierende Heldenfigur angreifen.\nSchon angegriffen? Dann: kein zweiter Angriff – außer die imperiale Karte erlaubt ausdrücklich mehrere. Übrige Bewegungspunkte in Deckung ausgeben.",
+    "attackFocus": "Noch nicht angegriffen? Dann: Fokusziel angreifen – Reichweite und freie Sichtlinie der Waffe/Fähigkeit vorausgesetzt.\nKeine Sichtlinie oder zu weit? Dann: bis zu {0} Felder auf das Fokusziel zubewegen.\nSichtlinie durch eine ANDERE Heldenfigur blockiert? Dann: diese blockierende Heldenfigur angreifen.\nSchon angegriffen? Dann kein zweiter Angriff – außer die imperiale Karte erlaubt ausdrücklich mehrere Angriffe; dann wie bei Aktion 1.\nStattdessen: Noch Bewegungspunkte übrig? Dann in Deckung ausgeben.",
     "attackNoTarget": "Noch nicht angegriffen? Dann: der nächste Held, den du erreichen kannst (Reichweite + freie Sichtlinie).\nKein Held erreichbar? Dann: bis zu {0} Felder auf den nächsten Helden zubewegen.\nSchon angegriffen? Dann: übrige Bewegungspunkte in Deckung ausgeben.",
     "attackGuard": "Noch nicht angegriffen? Dann: der nächste Held in deiner Wachzone (Reichweite + freie Sichtlinie).\nKein Held in der Wachzone, aber das Fokusziel ist von hier schießbar? Dann: Fokusziel angreifen.\nSchon angegriffen oder kein Ziel? Dann: kein Schuss – bewege dich bis zu {0} Felder innerhalb der Wachzone auf den nächsten Helden zu oder halte deine Stellung.",
     "attackGuardNoTarget": "Noch nicht angegriffen? Dann: der nächste Held in deiner Wachzone (Reichweite + freie Sichtlinie).\nKein Held in der Wachzone oder schon angegriffen? Dann: kein Schuss – bewege dich bis zu {0} Felder innerhalb der Wachzone auf den nächsten Helden zu oder halte deine Stellung.",
@@ -369,6 +369,8 @@
     "ordRiskPress": "Angriff",
     "ordRiskHold": "Feuerlinie halten",
     "ordRiskGuardHold": "in Deckung, Objekt halten",
-    "ordRiskDisengage": "Rückzug zur Deckung"
+    "ordRiskDisengage": "Rückzug zur Deckung",
+    "ordInfoAttack": "Angriff: Waffe oder Fähigkeit nutzen.",
+    "ordInfoDoor": "Türen dürfen auf dem Weg zum Ziel geöffnet werden – das Öffnen kostet eine Aktion (Interaktion); gesperrte Türen nur nach Missionsregel."
   }
 }

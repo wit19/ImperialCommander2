@@ -46,6 +46,11 @@ public class UITacticalAI
 	public string ordStrainFuzzy;
 	// M11e: heading line for the printed {A} option block in the activation popup
 	public string ordOptionPrinted;
+	// M13n (Thomas 29.10): general RR reminder block printed under the action
+	// blocks, BEFORE the gated explanation: attack = weapon/ability use, and
+	// the door law (RR DOORS: opening a door is an INTERACT - one of the five
+	// action types - so it costs an action; locked doors only per mission).
+	public string ordInfoAttack, ordInfoDoor;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setExplain, setOn, setOff, setRowFormat;

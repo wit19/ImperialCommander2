@@ -610,6 +610,22 @@ namespace TacticalAI
             // above remain the planned proposal); without a focus target the
             // option would name nobody -> no block.
             plan.Blocks = WithVillainOption(plan, cd);
+            // M13n (Thomas 29.10): general RR info block under the actions,
+            // BEFORE the gated explanation (popup appends ExplainLine after
+            // Blocks, so appending here lands exactly between them). Door law
+            // verified against RR DOORS: "A figure can interact with a door to
+            // open it" - INTERACT is one of the five action types, so opening
+            // costs an action; it is never a free side-effect of movement.
+            // Missing keys skip their line (never a blank row).
+            var Li = UIx;
+            if (Li != null && (!string.IsNullOrEmpty(Li.ordInfoAttack)
+                               || !string.IsNullOrEmpty(Li.ordInfoDoor)))
+            {
+                var withInfo = new List<string>(plan.Blocks ?? new string[0]);
+                if (!string.IsNullOrEmpty(Li.ordInfoAttack)) withInfo.Add(Li.ordInfoAttack);
+                if (!string.IsNullOrEmpty(Li.ordInfoDoor)) withInfo.Add(Li.ordInfoDoor);
+                plan.Blocks = withInfo.ToArray();
+            }
             return true;
         }
 
