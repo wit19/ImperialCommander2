@@ -984,9 +984,10 @@ namespace Saga
 				dashRT.anchoredPosition = medSlot.anchoredPosition;
 			}
 
-			// 2) quick-message/info box: slide it out from behind the icon row.
-			// Works in world space so it is correct for any anchor setup, and
-			// is naturally idempotent (the shift is zero once the gap holds).
+			// 2) quick-message/info box: slide it out from behind the icon row
+			// AND the ImperialPanel that now sits right of it. Works in world
+			// space so it is correct for any anchor setup, and is naturally
+			// idempotent (the shift is zero once the gap holds).
 			var qm = GlowEngine.FindUnityObject<QuickMessage>();
 			if ( qm == null || qm.message == null )
 				return;
@@ -997,9 +998,19 @@ namespace Saga
 				return;
 			var canvas = box.GetComponentInParent<Canvas>( true )?.rootCanvas;
 			var gapWorld = ( canvas != null && canvas.scaleFactor > 0f ? 24f / canvas.scaleFactor : 24f );
-			var slotRightWorld = medSlot.TransformPoint( new Vector3( medSlot.rect.xMax, medSlot.rect.center.y, 0f ) );
+			var clearWorldX = medSlot.TransformPoint( new Vector3( medSlot.rect.xMax, medSlot.rect.center.y, 0f ) ).x;
+			// the ImperialPanel (class cards + agenda) lives right of the row:
+			// measure the quick-message gap from ITS right edge when present.
+			var panelGo = GameObject.Find( "tacaiImperialPanel" );
+			var panelRT = panelGo != null ? panelGo.transform as RectTransform : null;
+			if ( panelRT != null && panelRT.gameObject.activeInHierarchy )
+			{
+				var panelRight = panelRT.TransformPoint( new Vector3( panelRT.rect.xMax, panelRT.rect.center.y, 0f ) ).x;
+				if ( panelRight > clearWorldX )
+					clearWorldX = panelRight;
+			}
 			var boxLeftWorld = box.TransformPoint( new Vector3( box.rect.xMin, box.rect.center.y, 0f ) );
-			var dx = slotRightWorld.x + gapWorld - boxLeftWorld.x;
+			var dx = clearWorldX + gapWorld - boxLeftWorld.x;
 			if ( dx > 0f )
 				box.position += new Vector3( dx, 0f, 0f );
 			Debug.Log( "SagaController()::TACTICAL mode - MedPac UI off (reference rules: wounded until end of mission), info \"?\" moved into its slot, info display shifted clear of the icon row" );

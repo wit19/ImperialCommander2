@@ -253,10 +253,25 @@ namespace Saga
 			root = new GameObject( "tacaiImperialPanel", typeof( RectTransform ) );
 			root.transform.SetParent( canvas, false );
 			var rt = root.GetComponent<RectTransform>();
-			rt.anchorMin = new Vector2( 0f, 0f );       // bottom-left corner, left of the HUD strip
+			rt.anchorMin = new Vector2( 0f, 0f );       // bottom-left corner, RIGHT of the HUD icon row
 			rt.anchorMax = new Vector2( 0f, 0f );
 			rt.pivot = new Vector2( 0f, 0f );
-			rt.anchoredPosition = new Vector2( 12f, 12f );
+			// The panel only ever exists in tactical campaigns, where the HUD's
+			// bottom-left icon row (rules / medpac-or-"?" / settings) would bury
+			// it (Thomas playtest 29.10.: class-card and agenda rows were
+			// completely covered). Start it clear of the row: the row's right
+			// edge is measured live from the medpac button rect - the "?" takes
+			// over that slot in tactical mode, so the edge stays the same.
+			var left = 12f;
+			var medGo = GameObject.Find( "medpac button base" );
+			var medRT = medGo != null ? medGo.transform as RectTransform : null;
+			if ( medRT != null )
+			{
+				var slotRight = rt.parent.InverseTransformPoint(
+					medRT.TransformPoint( new Vector3( medRT.rect.xMax, medRT.rect.center.y, 0f ) ) );
+				left = slotRight.x + 24f;
+			}
+			rt.anchoredPosition = new Vector2( left, 12f );
 			rt.sizeDelta = new Vector2( ROW_WIDTH, 60f );
 
 			var bg = root.AddComponent<Image>();
