@@ -957,19 +957,29 @@ namespace Saga
 		void ApplyTacticalMedPacPolicy()
 		{
 			var tactical = TacticalAI.TacticalAIBridge.TacticalMissionActive();
-			// the HUD icon carries the serialized TooltipHandler key "MedPac"
-			// (same GameObject as the OnMedPac button) - stable scene identity,
-			// no fragile scan of persistent onClick names.
+			// the HUD icon carries the serialized TooltipHandler key "MedPac".
+			// M13o (Thomas Player-10.log): the old GetComponentsInChildren
+			// scan only saw SagaController's own subtree - the HUD canvas is
+			// NOT under it, so medSlot stayed null and the policy silently
+			// did nothing. Search the WHOLE loaded scene instead (prefab
+			// assets filtered out via scene validity).
 			RectTransform medSlot = null;
-			foreach ( var th in GetComponentsInChildren<TooltipHandler>( true ) )
+			foreach ( var th in Resources.FindObjectsOfTypeAll<TooltipHandler>() )
+			{
+				if ( th == null || !th.gameObject.scene.IsValid() ) continue;
 				if ( th.tooltip == "MedPac" )
 				{
 					th.gameObject.SetActive( !tactical );
 					medSlot = th.transform as RectTransform;
 				}
-			medPacText.gameObject.SetActive( !tactical );
-			if ( !tactical || medSlot == null )
+			}
+			if ( medPacText != null ) medPacText.gameObject.SetActive( !tactical );
+			if ( !tactical ) return;
+			if ( medSlot == null )
+			{
+				Debug.LogWarning( "SagaController()::TACTICAL mode - MedPac TooltipHandler 'MedPac' not found; icon/\"?\" layout NOT applied" );
 				return;
+			}
 
 			// 1) "?" info button takes the freed medpac slot (re-parented into
 			// the medpac's own rect space so the placement is resolution-proof)

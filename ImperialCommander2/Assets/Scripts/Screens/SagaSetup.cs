@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -290,41 +291,64 @@ namespace Saga
 			setupImperialDeckLineGo.SetActive( true );
 
 			var rt = setupImperialDeckLineGo.GetComponent<RectTransform>();
-			// M13i (Thomas screenshot 28.10): the line used to follow the badge
-			// at the bottom of the Einsatzkarte and collided with the bottom
-			// buttons. It now sits to the RIGHT of the 'Schwierigkeitsgrad'
-			// value in the info column (the free spot Thomas asked for). The
-			// geometry is computed from the difficulty label's REAL rect in
-			// anchor space (point-anchored label), so it works on both card
-			// layouts; falls back to the old badge geometry only when the label
-			// is missing or not laid out yet.
-			var dT = difficultyText != null ? difficultyText.transform as RectTransform : null;
-			bool placed = false;
-			if ( dT != null && dT.rect.height > 0f && dT.anchorMin == dT.anchorMax )
-			{
-				// center of the difficulty label in parent/anchor space
-				Vector2 dCenter = dT.anchoredPosition + ( dT.pivot - dT.anchorMin ) * dT.rect.size;
-				float rightEdge = dCenter.x + dT.rect.width / 2f;
-				float topEdge = dCenter.y + dT.rect.height / 2f;
-				Vector2 size = new Vector2( 250f, dT.rect.height * 2.4f + 24f );
-				rt.anchorMin = dT.anchorMin; rt.anchorMax = dT.anchorMin;
-				rt.pivot = new Vector2( 0f, 1f );   // top-left, flush to the label's right edge
-				rt.sizeDelta = size;
-				Vector2 ourCenter = new Vector2( rightEdge + 16f + size.x / 2f, topEdge - size.y / 2f );
-				rt.anchoredPosition = ourCenter - ( rt.pivot - dT.anchorMin ) * size;
-				placed = true;
-			}
-			if ( !placed )
-			{
-				var bRT = setupAiBadgeGo != null ? setupAiBadgeGo.GetComponent<RectTransform>() : null;
-				if ( bRT != null )
-				{
-					rt.anchorMin = bRT.anchorMin; rt.anchorMax = bRT.anchorMax; rt.pivot = bRT.pivot;
-					rt.anchoredPosition = bRT.anchoredPosition + new Vector2( 0f, -bRT.rect.height - 4f );
-					rt.sizeDelta = new Vector2( bRT.rect.width > 0 ? bRT.rect.width : 170f, 32f );
-				}
-			}
+			// M13i/M13o (Thomas screenshots 28./29.10.): the line sits to the
+			// RIGHT of the tactical-AI display (the AI badge, which owns the
+			// difficulty slot in tactical mode; legacy difficulty label when
+			// the badge is off). Player-10.log showed the old in-place
+			// measurement ran BEFORE the first layout pass (rects still 0)
+			// and silently fell back to the position BELOW the badge - which
+			// is exactly what Thomas kept seeing. The geometry now works in
+			// WORLD space (any anchor setup, no point-anchor assumption) and
+			// retries through a coroutine until the anchor is actually laid
+			// out, so the fallback can no longer stick.
 			setupImperialDeckLineText.text = Utils.ReplaceGlyphs( line );
+			if ( !TryPlaceImperialDeckLine( rt ) && impDeckLinePlaceCo == null )
+				impDeckLinePlaceCo = StartCoroutine( PlaceImperialDeckLineWhenLaidOut( rt ) );
+		}
+
+		Coroutine impDeckLinePlaceCo;
+
+		IEnumerator PlaceImperialDeckLineWhenLaidOut( RectTransform rt )
+		{
+			// give the canvas a few layout passes (script runs at scene start)
+			for ( int i = 0; i < 40 && !TryPlaceImperialDeckLine( rt ); i++ )
+				yield return new WaitForEndOfFrame();
+			impDeckLinePlaceCo = null;
+		}
+
+		/// True once placed on a REAL laid-out rect. Anchor: active AI badge,
+		/// else the difficulty label. Right/top edges are converted from world
+		/// to this rect's parent space through the root canvas, so stretched
+		/// or point anchors both work and no hardcoded pixel column exists.
+		bool TryPlaceImperialDeckLine( RectTransform rt )
+		{
+			RectTransform anchor = null;
+			var bGo = setupAiBadgeGo;
+			if ( bGo != null && bGo.activeInHierarchy ) anchor = bGo.GetComponent<RectTransform>();
+			if ( ( anchor == null || anchor.rect.height <= 0f ) && difficultyText != null )
+			{
+				var dT = difficultyText.transform as RectTransform;
+				if ( dT != null && dT.rect.height > 0f ) anchor = dT;
+			}
+			if ( anchor == null || anchor.rect.height <= 0f ) return false;
+			var parent = rt.parent as RectTransform;
+			if ( parent == null ) return false;
+			var canvas = rt.GetComponentInParent<Canvas>( true )?.rootCanvas;
+			if ( canvas == null ) return false;
+			var cam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
+			var tr = anchor;
+			var topRightScreen = RectTransformUtility.WorldToScreenPoint( cam,
+				tr.TransformPoint( new Vector3( tr.rect.xMax, tr.rect.yMax, 0f ) ) );
+			if ( !RectTransformUtility.ScreenPointToLocalPointInRectangle( parent, topRightScreen, cam, out Vector2 lp ) )
+				return false;
+			float w = 250f;
+			float h = Mathf.Max( 44f, tr.rect.height * 2.4f );
+			rt.anchorMin = parent.pivot;
+			rt.anchorMax = parent.pivot;
+			rt.pivot = new Vector2( 0f, 1f );   // top-left, flush right of the anchor's top edge
+			rt.sizeDelta = new Vector2( w, h );
+			rt.anchoredPosition = lp + new Vector2( 16f, 0f );
+			return true;
 		}
 
 		/// <summary>M11f: the legacy difficulty/adaptive toggles - shown only when

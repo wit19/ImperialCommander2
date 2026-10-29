@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -394,66 +395,108 @@ namespace Saga
 			{
 				var info = Saga.ImperialDisplay.Build( sagaCampaign );
 				if ( info == null ) return;
-				// anchor on the yellow "?" (the prefab instance carries this
-				// stable name); if a future build renames it, the "i" button
-				// is the next-best bar member to sit left of
-				var helpGO = GameObject.Find( "Help Activation Button" )
-					?? GameObject.Find( "info Button" );
-				var btn0 = helpGO != null ? helpGO.GetComponent<Button>() : null;
-				if ( btn0 == null )
-				{
-					Utils.LogWarning( "AddImperialDeckButtonToBar skipped: help button not found" );
-					return;
-				}
-				var bar = helpGO.transform.parent;
-				var clone = Instantiate( helpGO, bar );
-				clone.name = "tacaiImpInfoButton";
-				clone.SetActive( true );
-				// full detour from the clone's inherited help behaviour:
-				// fresh event object, persistent calls cannot survive it
-				var btn = clone.GetComponent<Button>();
-				btn.onClick = new Button.ButtonClickedEvent();
-				btn.onClick.AddListener( ShowImperialDeckPopup );
-				// visual difference: teal (the tactical-AI accent) + own label
-				var img = clone.GetComponent<Image>();
-				if ( img != null ) img.color = new Color( 0.40f, 0.85f, 0.75f, 1f );
-				for ( int i = clone.transform.childCount - 1; i >= 0; i-- )
-					Destroy( clone.transform.GetChild( i ).gameObject );
-				var label = new GameObject( "label", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
-				label.transform.SetParent( clone.transform, false );
-				var lrt = label.GetComponent<RectTransform>();
-				lrt.anchorMin = Vector2.zero;
-				lrt.anchorMax = Vector2.one;
-				lrt.offsetMin = Vector2.zero;
-				lrt.offsetMax = Vector2.one * -1f;
-				label.font = TMPro.TMP_Settings.defaultFontAsset;
-				label.fontSize = 20;
-				label.fontStyle = TMPro.FontStyles.Bold;
-				label.alignment = TMPro.TextAlignmentOptions.Center;
-				label.color = new Color( 0.02f, 0.10f, 0.09f, 1f );
-				label.enableWordWrapping = false;
-				label.raycastTarget = false;
-				label.text = "IMP";
-				// sit it left of the "?": a bar layout group re-flows it, a
-				// manually placed bar needs the measured offset
-				var h = helpGO.transform as RectTransform;
-				var c = clone.transform as RectTransform;
-				if ( bar.GetComponent<UnityEngine.UI.LayoutGroup>() != null )
-					c.SetSiblingIndex( h.GetSiblingIndex() );
-				else
-				{
-					c.anchorMin = h.anchorMin;
-					c.anchorMax = h.anchorMax;
-					c.pivot = h.pivot;
-					c.sizeDelta = h.sizeDelta;
-					c.anchoredPosition = h.anchoredPosition - new Vector2( h.rect.width + 10f, 0f );
-				}
-				Debug.Log( $"AddImperialDeckButtonToBar::deck={info.DeckName} rows={info.Rows.Count}" );
+				// M13o (Thomas Player-10.log): at this call the bar may not
+				// be ACTIVE yet (GameObject.Find only sees activeInHierarchy)
+				// - the run failed with "help button not found" and the
+				// button never appeared. Locate + clone through a retry
+				// coroutine that waits for the bar (and its first layout).
+				impDeckInfoPending = info;
+				if ( impDeckButtonCo == null ) impDeckButtonCo = StartCoroutine( TryAddImperialDeckButtonCo() );
 			}
 			catch ( Exception e )
 			{
 				Utils.LogWarning( "AddImperialDeckButtonToBar skipped: " + e.Message );
 			}
+		}
+
+		ImperialDisplay.Info impDeckInfoPending;   // info for the pending button
+		Coroutine impDeckButtonCo;
+
+		static GameObject FindImperialDeckBarAnchor()
+		{
+			var go = GameObject.Find( "Help Activation Button" ) ?? GameObject.Find( "info Button" );
+			if ( go != null ) return go;
+			// bar members can still be hidden at this moment: scan every
+			// loaded Button INCLUDING not-yet-active ones (scene-valid only,
+			// prefab assets filtered out)
+			foreach ( var b in Resources.FindObjectsOfTypeAll<Button>() )
+			{
+				if ( !b.gameObject.scene.IsValid() ) continue;
+				var n = b.gameObject.name;
+				if ( n == "Help Activation Button" || n == "info Button" ) return b.gameObject;
+			}
+			return null;
+		}
+
+		IEnumerator TryAddImperialDeckButtonCo()
+		{
+			GameObject helpGO = null;
+			for ( int i = 0; i < 240 && helpGO == null; i++ )
+			{
+				helpGO = FindImperialDeckBarAnchor();
+				if ( helpGO == null ) yield return new WaitForEndOfFrame();
+			}
+			var btn0 = helpGO != null ? helpGO.GetComponent<Button>() : null;
+			if ( btn0 == null )
+			{
+				Utils.LogWarning( "AddImperialDeckButtonToBar skipped: help button not found (also not inactive) after 4s" );
+				impDeckButtonCo = null;
+				yield break;
+			}
+			yield return AddImperialDeckButtonClone( helpGO );
+			impDeckButtonCo = null;
+		}
+
+		IEnumerator AddImperialDeckButtonClone( GameObject helpGO )
+		{
+			var bar = helpGO.transform.parent;
+			var clone = Instantiate( helpGO, bar );
+			clone.name = "tacaiImpInfoButton";
+			clone.SetActive( true );
+			// full detour from the clone's inherited help behaviour:
+			// fresh event object, persistent calls cannot survive it
+			var btn = clone.GetComponent<Button>();
+			btn.onClick = new Button.ButtonClickedEvent();
+			btn.onClick.AddListener( ShowImperialDeckPopup );
+			// visual difference: teal (the tactical-AI accent) + own label
+			var img = clone.GetComponent<Image>();
+			if ( img != null ) img.color = new Color( 0.40f, 0.85f, 0.75f, 1f );
+			for ( int i = clone.transform.childCount - 1; i >= 0; i-- )
+				Destroy( clone.transform.GetChild( i ).gameObject );
+			var label = new GameObject( "label", typeof( RectTransform ) ).AddComponent<TMPro.TextMeshProUGUI>();
+			label.transform.SetParent( clone.transform, false );
+			var lrt = label.GetComponent<RectTransform>();
+			lrt.anchorMin = Vector2.zero;
+			lrt.anchorMax = Vector2.one;
+			lrt.offsetMin = Vector2.zero;
+			lrt.offsetMax = Vector2.one * -1f;
+			label.font = TMPro.TMP_Settings.defaultFontAsset;
+			label.fontSize = 20;
+			label.fontStyle = TMPro.FontStyles.Bold;
+			label.alignment = TMPro.TextAlignmentOptions.Center;
+			label.color = new Color( 0.02f, 0.10f, 0.09f, 1f );
+			label.enableWordWrapping = false;
+			label.raycastTarget = false;
+			label.text = "IMP";
+			// sit it left of the "?": a bar layout group re-flows it, a
+			// manually placed bar needs the measured offset - so wait for
+			// the anchor's REAL rect (M13o: no more zero-rect placement)
+			var h = helpGO.transform as RectTransform;
+			var c = clone.transform as RectTransform;
+			bool barHasLayout = bar.GetComponent<UnityEngine.UI.LayoutGroup>() != null;
+			if ( barHasLayout )
+				c.SetSiblingIndex( h.GetSiblingIndex() );
+			else
+			{
+				for ( int i = 0; i < 40 && h.rect.width <= 0f; i++ )
+					yield return new WaitForEndOfFrame();
+				c.anchorMin = h.anchorMin;
+				c.anchorMax = h.anchorMax;
+				c.pivot = h.pivot;
+				c.sizeDelta = h.sizeDelta;
+				c.anchoredPosition = h.anchoredPosition - new Vector2( h.rect.width + 10f, 0f );
+			}
+			Debug.Log( $"AddImperialDeckButtonToBar::deck={impDeckInfoPending.DeckName} rows={impDeckInfoPending.Rows.Count}" );
 		}
 
 		GameObject impPopup;   // at most one open Imperial popup
