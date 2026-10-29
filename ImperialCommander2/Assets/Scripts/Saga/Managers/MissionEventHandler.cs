@@ -21,6 +21,10 @@ namespace Saga
 		public void ShowTextBox( string m, Action callback = null )
 		{
 			Debug.Log( "SagaEventManager()::PROCESSING ShowTextBox" );
+			// REF/ORD law: the MedPac reward is mechanically skipped in
+			// tactical missions, so its promise must not be shown either
+			// (Thomas playtest 29.10., crate pickup text).
+			m = TacticalAI.TacticalAIBridge.ScrubMedpacRewardText( m );
 			if ( string.IsNullOrEmpty( m?.Trim() ) )
 			{
 				Debug.Log( "ShowTextBox()::NO TEXT" );

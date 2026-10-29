@@ -54,7 +54,7 @@ namespace Saga
 
 			popupBase.Show();
 
-			SetText( Utils.ReplaceGlyphs( questionPrompt.theText ) );
+			SetText( TacticalAI.TacticalAIBridge.ScrubMedpacRewardText( Utils.ReplaceGlyphs( questionPrompt.theText ) ) );
 
 			theText.transform.parent.localPosition = new Vector3( theText.transform.parent.localPosition.x, -3000, 0 );
 		}

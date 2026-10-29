@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Tac = TacticalAI.Core;
 
@@ -160,6 +161,75 @@ namespace TacticalAI
         {
             try { return ActiveNow(); }
             catch { return false; }
+        }
+
+        // A sentence is one [^ .!?\n]-run up to a terminator; a MedPac
+        // sentence carries the token in any language form (the shipped
+        // translations keep "medpac" as a loanword - De "Medpac", En
+        // "medpac", Ru "медпак", Hu "medpac-et"). A "claim the token"
+        // instruction (Marker/token/жетон/jelző/żeton) in the SAME line is
+        // the bookkeeping half of the same reward and goes with it; on
+        // untouched lines those words keep their mission-token meaning.
+        static readonly Regex MedpacSentenceRx = new Regex(
+            @"[^.!?\n\r]*(?:med.?pac|медпак)[^.!?]*[.!?]?",
+            RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        static readonly Regex ClaimTokenRx = new Regex(
+            @"[^.!?\n\r]*(?:\bmarker|\btoken|jelz|жетон|żeton)[^.!?]*[.!?]?",
+            RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        /// <summary>REF/ORD text law (Thomas playtest 29.10.): crates still
+        /// exist, but the MedPac reward is mechanically SKIPPED in tactical
+        /// missions (dev 15) - so no mission text may promise one either.
+        /// Strips every MedPac sentence from mission prose, plus the
+        /// paired "claim the medpac token" instruction on the same line.
+        /// Only ever active while TacticalMissionActive(); fail-open (a
+        /// regex hiccup shows the original text, never an empty box).</summary>
+        public static string ScrubMedpacRewardText(string text)
+        {
+            if ( string.IsNullOrEmpty( text ) )
+                return text;
+            if ( !TacticalMissionActive() )
+                return text;
+            try
+            {
+                if ( text.IndexOf( "pac", StringComparison.OrdinalIgnoreCase ) < 0
+                     && text.IndexOf( "медпак", StringComparison.OrdinalIgnoreCase ) < 0 )
+                    return text;   // no MedPac token anywhere - untouched
+                var lines = text.Replace( "\r\n", "\n" ).Split( '\n' );
+                var kept = new List<string>( lines.Length );
+                foreach ( var line in lines )
+                {
+                    var scrubbed = MedpacSentenceRx.Replace( line, "" );
+                    if ( scrubbed != line )   // a reward sentence died here:
+                    {
+                        scrubbed = ClaimTokenRx.Replace( scrubbed, "" );  // take its claim-token instruction with it
+                        kept.Add( scrubbed );
+                    }
+                    else
+                        kept.Add( line );
+                }
+                // drop lines the scrub emptied entirely, then collapse the
+                // paragraph gap they orphaned; everything else stays verbatim.
+                var sb = new StringBuilder();
+                for ( var i = 0; i < kept.Count; i++ )
+                {
+                    if ( kept[i].Trim().Length == 0 && lines[i].Trim().Length > 0 )
+                        continue;   // line existed before and is empty only because we scrubbed it
+                    sb.Append( kept[i] );
+                    if ( i < kept.Count - 1 )
+                        sb.Append( '\n' );
+                }
+                var result = Regex.Replace( sb.ToString().TrimEnd( '\n' ), @"\n{3,}", "\n\n" );
+                if ( result.Trim().Length == 0 )
+                    return text;   // would blank the whole box - keep original
+                if ( result != text )
+                    Debug.Log( "TacticalAIBridge::ScrubMedpacRewardText - MedPac reward sentence removed for REF/ORD mission text" );
+                return result;
+            }
+            catch
+            {
+                return text;
+            }
         }
 
         /// <summary>M13c: the optional-deployment path fork (Scope D) fed
