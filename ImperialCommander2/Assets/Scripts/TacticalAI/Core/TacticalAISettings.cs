@@ -31,7 +31,9 @@ namespace TacticalAI
         // dev 20: no stored mode dial; kept as legacy token for missions/tests.
         public const string DefaultMode = "legacy";
         public const string DefaultSkillLevel = "S1";
-        public const string DefaultExplainLevel = "post_hoc";
+        // M13h (Thomas 28.10): default is 'none' - explanations must be asked
+        // for, not served unprompted. Post-hoc/full stay selectable per row.
+        public const string DefaultExplainLevel = "none";
 
         static bool _enabled = DefaultEnabled;
         // Dev 20 (option A, Thomas): the procedural mode is DERIVED from the

@@ -37,7 +37,6 @@ namespace TacticalAI
     {
         const float TitleH = 40f;
         const float RowH = 36f;
-        const float NoteH = 36f;   // M11c2 explain line (wrapped two-liner)
         const float Gap = 6f;
         static readonly Color Yellow = new Color(0.93f, 0.79f, 0.17f);
         static readonly Color RowBg = new Color(0f, 0f, 0f, 0.45f);
@@ -54,7 +53,6 @@ namespace TacticalAI
         static Transform _root;
         static readonly List<string> _subKinds = new List<string>();
         static readonly Dictionary<string, Row> _rows = new Dictionary<string, Row>();
-        static Row _note;   // M11c2 explain line (see MakeNote)
 
         public static bool TryInstall(GameObject panel)
         {
@@ -71,7 +69,6 @@ namespace TacticalAI
             if (stale != null) UnityEngine.Object.Destroy(stale.gameObject);
             _rows.Clear();
             _subKinds.Clear();
-            _note = null;
 
             var sr = panel.GetComponentInChildren<ScrollRect>(true);
             var host = (sr != null && sr.content != null) ? sr.content : panel.transform;
@@ -136,35 +133,14 @@ namespace TacticalAI
                 TacticalAISettings.ExplainLevel = Next(TacticalAISettings.ExplainLevel, TacticalAISettings.ExplainLevelValues);
                 Refresh();
             });
-            MakeNote();
+            // M13h: the old non-clickable note line under the rows ("From S4 on
+            // the AI plays the printed card abilities ...") is REMOVED by Thomas'
+            // decision 28.10: it referenced internal 'S4' labels no player ever
+            // sees (difficulty rows show renamed names) and added nothing that a
+            // row does not already say. Do not reintroduce a note line here.
 
             Refresh();
             return true;
-        }
-
-        // M11c2: plain (non-clickable) explain line under the rows - the
-        // pattern of the M6 explain cells, shown with the sub-menu (ON only).
-        static void MakeNote()
-        {
-            var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
-            var go = new GameObject("tacai_note", typeof(RectTransform));
-            go.transform.SetParent(_root, false);
-            var img = go.AddComponent<Image>();
-            img.color = RowBg;
-            img.raycastTarget = false;
-            var t = MakeText(go.transform,
-                Pick(tl != null ? tl.setCardSkills : null,
-                     "From S4 on the AI plays the printed card abilities " +
-                     "(e.g. Tripod: never move and attack in one activation)"),
-                TMPro.TextAlignmentOptions.MidlineLeft, false);
-            // the note is a sentence, not a row label: wrap, no ellipsis
-            t.enableAutoSizing = false;
-            t.overflowMode = TMPro.TextOverflowModes.Overflow;
-            t.enableWordWrapping = true;
-            t.fontSize = 13f;
-            var le = go.AddComponent<LayoutElement>();
-            le.preferredHeight = NoteH; le.minHeight = NoteH;
-            _note = new Row { go = go, tmp = t };
         }
 
         static string Chain(Transform t)
@@ -282,18 +258,10 @@ namespace TacticalAI
                 kv.Value.go.SetActive(!sub || on);   // sub-menu hidden while OFF
             }
 
-            // M11c2 note: language-following, visible with the sub-menu
-            if (_note != null)
-            {
-                _note.Set(Pick(tl != null ? tl.setCardSkills : null,
-                    "From S4 on the AI plays the printed card abilities " +
-                    "(e.g. Tripod: never move and attack in one activation)"));
-                _note.go.SetActive(on);
-            }
-
-            // explicit total height - every host flavour gets it:
+            // M13h: note line removed (see Build() comment) - height = title +
+            // master row + visible sub rows only.
             float h = TitleH + RowH + Gap
-                      + (on ? (_subKinds.Count + (_note != null ? 1 : 0)) * (RowH + Gap) : 0f)
+                      + (on ? _subKinds.Count * (RowH + Gap) : 0f)
                       + 12f;
             var le = _root.GetComponent<LayoutElement>();
             if (le != null) { le.preferredHeight = h; le.minHeight = h; }

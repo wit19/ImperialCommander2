@@ -49,9 +49,9 @@ public class UITacticalAI
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
 	public string setHeading, setMode, setSkill, setExplain, setOn, setOff, setRowFormat;
-	// M11c2 explain line under the settings rows: printed card abilities are
-	// played from S4 up (all languages carry the EN text except De).
-	public string setCardSkills;
+	// M13h (Thomas 28.10): the setCardSkills note field is REMOVED - the note
+	// line it fed is gone from the settings screen (stale 'S4' wording).
+
 	// skill ladder DISPLAY names (dev 18: recruit..5-star general, Thomas).
 	// Stored/logged token stays s1..s5 - these are labels only (PR rule:
 	// display via language files).

@@ -330,7 +330,6 @@
     "setOn": "ON",
     "setOff": "OFF",
     "setRowFormat": "{0}:  {1}",
-    "setCardSkills": "From S4 on the AI plays the printed card abilities (e.g. Tripod: never move and attack in one activation)",
     "skillS1": "Recruit",
     "skillS2": "Stormtrooper",
     "skillS3": "Veteran",
