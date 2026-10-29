@@ -242,12 +242,13 @@ namespace Saga
 			EnsureImperialDeckLine();
 		}
 
-		/// <summary>M12e: display-only deck line under the tactical badge -
-		/// "Militaermacht · 4 Karten" plus an ACTIVE ONGOING agenda if one is
-		/// face up (kept secrets never render here - the Anti-Leak-Seam in
-		/// ImperialDisplay/AgendaState owns that law). Invisible without a
-		/// campaign deck: a classic mission shows no empty chrome. Layout
-		/// follows the badge through both slots (PlaceAiBadge geometry).</summary>
+		/// <summary>M12e: display-only deck line - "Militaermacht · 4 Karten"
+		/// plus an ACTIVE ONGOING agenda if one is face up (kept secrets never
+		/// render here - the Anti-Leak-Seam in ImperialDisplay/AgendaState owns
+		/// that law). Invisible without a campaign deck: a classic mission shows
+		/// no empty chrome. M13i (Thomas screenshot 28.10): placed to the RIGHT
+		/// of the difficulty row in the info column (see geometry block), no
+		/// longer trailing the badge into the bottom buttons.</summary>
 		void EnsureImperialDeckLine()
 		{
 			var campaign = setupCampaign ?? RunningCampaign.sagaCampaign;
@@ -289,12 +290,39 @@ namespace Saga
 			setupImperialDeckLineGo.SetActive( true );
 
 			var rt = setupImperialDeckLineGo.GetComponent<RectTransform>();
-			var bRT = setupAiBadgeGo != null ? setupAiBadgeGo.GetComponent<RectTransform>() : null;
-			if ( bRT != null )
+			// M13i (Thomas screenshot 28.10): the line used to follow the badge
+			// at the bottom of the Einsatzkarte and collided with the bottom
+			// buttons. It now sits to the RIGHT of the 'Schwierigkeitsgrad'
+			// value in the info column (the free spot Thomas asked for). The
+			// geometry is computed from the difficulty label's REAL rect in
+			// anchor space (point-anchored label), so it works on both card
+			// layouts; falls back to the old badge geometry only when the label
+			// is missing or not laid out yet.
+			var dT = difficultyText != null ? difficultyText.transform as RectTransform : null;
+			bool placed = false;
+			if ( dT != null && dT.rect.height > 0f && dT.anchorMin == dT.anchorMax )
 			{
-				rt.anchorMin = bRT.anchorMin; rt.anchorMax = bRT.anchorMax; rt.pivot = bRT.pivot;
-				rt.anchoredPosition = bRT.anchoredPosition + new Vector2( 0f, -bRT.rect.height - 4f );
-				rt.sizeDelta = new Vector2( bRT.rect.width > 0 ? bRT.rect.width : 170f, 32f );
+				// center of the difficulty label in parent/anchor space
+				Vector2 dCenter = dT.anchoredPosition + ( dT.pivot - dT.anchorMin ) * dT.rect.size;
+				float rightEdge = dCenter.x + dT.rect.width / 2f;
+				float topEdge = dCenter.y + dT.rect.height / 2f;
+				Vector2 size = new Vector2( 250f, dT.rect.height * 2.4f + 24f );
+				rt.anchorMin = dT.anchorMin; rt.anchorMax = dT.anchorMin;
+				rt.pivot = new Vector2( 0f, 1f );   // top-left, flush to the label's right edge
+				rt.sizeDelta = size;
+				Vector2 ourCenter = new Vector2( rightEdge + 16f + size.x / 2f, topEdge - size.y / 2f );
+				rt.anchoredPosition = ourCenter - ( rt.pivot - dT.anchorMin ) * size;
+				placed = true;
+			}
+			if ( !placed )
+			{
+				var bRT = setupAiBadgeGo != null ? setupAiBadgeGo.GetComponent<RectTransform>() : null;
+				if ( bRT != null )
+				{
+					rt.anchorMin = bRT.anchorMin; rt.anchorMax = bRT.anchorMax; rt.pivot = bRT.pivot;
+					rt.anchoredPosition = bRT.anchoredPosition + new Vector2( 0f, -bRT.rect.height - 4f );
+					rt.sizeDelta = new Vector2( bRT.rect.width > 0 ? bRT.rect.width : 170f, 32f );
+				}
 			}
 			setupImperialDeckLineText.text = Utils.ReplaceGlyphs( line );
 		}
