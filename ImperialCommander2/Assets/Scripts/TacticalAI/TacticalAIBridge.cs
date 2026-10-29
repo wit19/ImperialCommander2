@@ -1341,7 +1341,17 @@ namespace TacticalAI
             if (_catalog != null) return;
             EnsureDecks();   // known-deck ids decide villain inclusion (DG071-DG090 ship decks)
             _catalog = new Dictionary<string, Tac.DeploymentCard>();
-            foreach (var cd in DataStore.deploymentCards)
+            // BOTH card pools: the app keeps unique villains (DG071-DG090 -
+            // Vader, Palpatine, Boba Fett, Maul, Thrawn, ...) in a SEPARATE
+            // villainCards list. Iterating only deploymentCards left the
+            // whole villain roster out of the catalog, so every unique
+            // villain missed the round deal and its activation popup fell
+            // back to the legacy instructions (Thomas bug 4+5, 29.10.:
+            // "Palpatine/Vader show the old actions" - all 20 were hit).
+            IEnumerable<global::DeploymentCard> pools = DataStore.deploymentCards
+                ?? Enumerable.Empty<global::DeploymentCard>();
+            if (DataStore.villainCards != null) pools = pools.Concat(DataStore.villainCards);
+            foreach (var cd in pools)
             {
                 if (cd.isDummy) continue;
                 bool hasDeck = _deckMgr != null && _deckMgr.DecksByCard.ContainsKey(cd.id);
