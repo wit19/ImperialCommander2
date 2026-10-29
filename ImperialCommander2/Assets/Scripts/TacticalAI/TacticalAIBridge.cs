@@ -584,10 +584,12 @@ namespace TacticalAI
             // anymore - the popup prints it ABOVE the action blocks (focus
             // first, then actions, then the gated explanation); the
             // ExplainLevel gate now really hides only the explanation.
-            // Doctrine pattern from the card's Core catalog record (dev 11).
-            // All shipped cards are 'aggressive' until M4 assigns per-mission
-            // roles - but the renderer already carries full action-tree text
-            // for ALL six patterns, so no future doctrine ships as bare tokens.
+            // Doctrine pattern from the card's Core catalog record (dev 11),
+            // classified by MissionPosture() x printed traits at catalog
+            // build (M4, Thomas 29.10.): defend-missions put guards and
+            // blockers on the objective, hunt-missions run zero guards.
+            // The renderer carries full action-tree text for all six
+            // patterns, so no doctrine ever ships as bare tokens.
             EnsureCatalog();
             plan.Pattern = _patternByCard != null && _patternByCard.TryGetValue(cd.id, out var pat)
                            && !string.IsNullOrEmpty(pat) ? pat : "aggressive";
@@ -1394,6 +1396,11 @@ namespace TacticalAI
             if (_catalog != null) return;
             EnsureDecks();   // known-deck ids decide villain inclusion (DG071-DG090 ship decks)
             _catalog = new Dictionary<string, Tac.DeploymentCard>();
+            // M4 (Thomas 29.10): doctrines are SITUATION-driven. The mission
+            // posture decides whether anyone may guard AT ALL; the printed
+            // traits then sort the roster. Both inputs are public (mission
+            // data + printed cards), never rebel positions.
+            var posture = MissionPosture();
             // BOTH card pools: the app keeps unique villains (DG071-DG090 -
             // Vader, Palpatine, Boba Fett, Maul, Thrawn, ...) in a SEPARATE
             // villainCards list. Iterating only deploymentCards left the
@@ -1410,9 +1417,70 @@ namespace TacticalAI
                 bool hasDeck = _deckMgr != null && _deckMgr.DecksByCard.ContainsKey(cd.id);
                 if (cd.characterType != Saga.CharacterType.Imperial && !hasDeck) continue;
                 if (_catalog.ContainsKey(cd.id)) continue;
-                try { _catalog[cd.id] = Tac.DeploymentCard.FromRecord(ToRecord(cd)); }
+                try
+                {
+                    var core = Tac.DeploymentCard.FromRecord(ToRecord(cd));
+                    core.Pattern = ClassifyPattern(core, posture);
+                    _catalog[cd.id] = core;
+                }
                 catch (Exception e) { Debug.LogWarning("TacticalAIBridge::catalog skip " + cd.id + ": " + e.Message); }
             }
+            var sb = new System.Text.StringBuilder("TacticalAIBridge::doctrines posture=" + posture + ":");
+            foreach (var kv in _catalog) sb.Append(' ').Append(kv.Key).Append('=').Append(kv.Value.Pattern);
+            Debug.Log(sb.ToString());
+        }
+
+        /// M4 posture from STRUCTURED mission data (never event texts, so no
+        /// language file is ever a rules source):
+        ///  "defend" - the mission puts something to defend on the board
+        ///           (terminals the Imperials work for/protect, or an ally
+        ///           priority target the mission cares about);
+        ///  "hunt"   - nothing to defend: the Imperials must run the rebels
+        ///           down. Thomas' law: in a hunt NOBODY gets Wachschutz.
+        /// Null mission (classic mode etc.) -> hunt (plain annihilation).
+        static string MissionPosture()
+        {
+            try
+            {
+                var m = DataStore.mission;
+                if (m == null) return "hunt";
+                if (m.missionProperties != null &&
+                    m.missionProperties.priorityTargetType == Saga.PriorityTargetType.Ally) return "defend";
+                if (m.mapEntities != null)
+                    foreach (var e in m.mapEntities)
+                        if (e != null && e.entityType == Saga.EntityType.Terminal) return "defend";
+                return "hunt";
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("TacticalAIBridge::posture fail-open hunt: " + e.Message);
+                return "hunt";
+            }
+        }
+
+        /// M4 printed-trait x posture classification (fairness whitelist only:
+        /// Id/Speed/AttackType/MiniSize/Keywords - all printed, all public).
+        /// defend: immobile AND melee figures hold the objective zone (several
+        ///   guards per Thomas), Massive/large bases block the lanes to it,
+        ///   mobile shooters keep the counter-attack fire line (aggressive).
+        /// hunt:   zero guards. Large bases cut escape lanes (blocker), fast
+        ///   melee chases (hunter), everything else advances (aggressive).
+        /// Manual: DG071 IG-88 always hunter - its printed Relentless pursuit
+        ///   is the tracker role (matches its own deck design note).
+        static string ClassifyPattern(Tac.DeploymentCard c, string posture)
+        {
+            if (c.Id == "DG071") return "hunter";
+            bool big = c.IsLargeBase || c.IsMassive;
+            if (posture == "defend")
+            {
+                if (big) return "blocker";
+                if (c.Speed <= 2) return "guard";
+                if (c.AttackType == "Melee") return "guard";
+                return "aggressive";
+            }
+            if (big) return "blocker";
+            if (c.AttackType == "Melee" && c.Speed >= 5) return "hunter";
+            return "aggressive";
         }
 
         /// <summary>Only the PRINTED card values go through (fairness
@@ -1462,7 +1530,7 @@ namespace TacticalAI
                 var vitality = gv != null ? gv.VitalityFrac : Tac.Rational.One;
                 facts.Add(new Tac.GroupFacts(
                     cd.id, idx, cd.id, cd.name,
-                    pattern: "aggressive",                     // TODO(M4): printed-trait classification
+                    pattern: core.Pattern,                     // M4: posture x printed traits
                     nAlive: Math.Max(1, cd.currentSize),
                     vitalityFrac: vitality,
                     zone: null, arrivedRound: null,
@@ -1471,7 +1539,7 @@ namespace TacticalAI
                 {
                     Id = cd.id, GroupId = cd.id, Card = core, Team = "imperial",
                     Anchor = new Tac.Cell(0, 0), Orientation = 0,
-                    Vitality = core.Health, Index = idx, Alive = true, Pattern = "aggressive",
+                    Vitality = core.Health, Index = idx, Alive = true, Pattern = core.Pattern,
                 };
                 figures.Add(fig);
                 idx++;
@@ -1486,7 +1554,7 @@ namespace TacticalAI
             {
                 Id = cd.id, GroupId = cd.id, Card = core, Team = "imperial",
                 Anchor = new Tac.Cell(0, 0), Orientation = 0,
-                Vitality = core.Health, Index = Math.Max(0, index), Alive = true, Pattern = "aggressive",
+                Vitality = core.Health, Index = Math.Max(0, index), Alive = true, Pattern = core.Pattern,
             };
         }
 

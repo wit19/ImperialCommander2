@@ -28,6 +28,11 @@ namespace TacticalAI.Core
         public bool IsMobile => Keywords.Contains("Mobile");
         public bool HasReach => Keywords.Contains("Reach");
         public bool IsLargeBase => Geometry.IsLarge(MiniSize);
+        // M4 (Thomas 29.10.): doctrine pattern assigned by the APP layer at
+        // catalog build (MissionPosture x printed traits, bridge-side). Core
+        // data class default keeps every pre-M4 caller aggressive - the sim
+        // harness sets Pattern per roster itself, vectors stay untouched.
+        public string Pattern = "aggressive";
 
         public int[] Footprint(int orientation = 0) => Geometry.FootprintDims(MiniSize, orientation);
 
