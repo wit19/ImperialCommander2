@@ -425,6 +425,12 @@ namespace Saga
 			//set round number
 			UpdateRoundNumberUI();
 
+			//TACTICAL REF/ORD: apply the HUD layout policy from the very first
+			//frame (Thomas playtest 29.10.: previously it only ran on the
+			//restore path, so a fresh tactical mission still showed the
+			//MedPac icon and the "?" sat in its legacy spot).
+			ApplyTacticalMedPacPolicy();
+
 			//create deployment hand and manual deploy list
 			DataStore.CreateDeploymentHand( DataStore.sagaSessionData.EarnedVillains, DataStore.sagaSessionData.setupOptions.threatLevel );
 			DataStore.CreateManualDeployment();
@@ -938,21 +944,65 @@ namespace Saga
 			medPacText.text = DataStore.sagaSessionData.gameVars.medPacCount.ToString();
 		}
 
-		/// <summary>Hides the MedPac HUD icon+counter in tactical (REF/ORD)
-		/// missions. The button is located through its persistent onClick
-		/// binding (name "OnMedPac") so no prefab wiring is needed.</summary>
+		/// <summary>
+		/// TACTICAL HUD layout policy (idempotent):
+		/// - hides the MedPac icon+counter (reference rules: wounded until end
+		///   of mission, dev 15),
+		/// - moves the yellow info "?" button into the freed MedPac slot,
+		/// - shifts the QuickMessage box (the tactical AI's "next round" info
+		///   display) right, clear of the icon row that used to cover it
+		///   (Thomas playtest 29.10.).
+		/// The button is located through its persistent onClick binding
+		/// (name "OnMedPac") so no prefab wiring is needed.</summary>
 		void ApplyTacticalMedPacPolicy()
 		{
-			if ( !TacticalAI.TacticalAIBridge.TacticalMissionActive() )
-				return;
-			medPacText.gameObject.SetActive( false );
+			var tactical = TacticalAI.TacticalAIBridge.TacticalMissionActive();
 			// the HUD icon carries the serialized TooltipHandler key "MedPac"
 			// (same GameObject as the OnMedPac button) - stable scene identity,
 			// no fragile scan of persistent onClick names.
+			RectTransform medSlot = null;
 			foreach ( var th in GetComponentsInChildren<TooltipHandler>( true ) )
 				if ( th.tooltip == "MedPac" )
-					th.gameObject.SetActive( false );
-			Debug.Log( "SagaController()::TACTICAL mode - MedPac UI off (reference rules: wounded until end of mission)" );
+				{
+					th.gameObject.SetActive( !tactical );
+					medSlot = th.transform as RectTransform;
+				}
+			medPacText.gameObject.SetActive( !tactical );
+			if ( !tactical || medSlot == null )
+				return;
+
+			// 1) "?" info button takes the freed medpac slot (re-parented into
+			// the medpac's own rect space so the placement is resolution-proof)
+			var dashRT = infoBtnTX as RectTransform;
+			if ( dashRT != null && dashRT.parent != medSlot.parent )
+			{
+				dashRT.SetParent( medSlot.parent, false );
+				dashRT.anchorMin = medSlot.anchorMin;
+				dashRT.anchorMax = medSlot.anchorMax;
+				dashRT.pivot = medSlot.pivot;
+				dashRT.sizeDelta = medSlot.sizeDelta;
+				dashRT.anchoredPosition = medSlot.anchoredPosition;
+			}
+
+			// 2) quick-message/info box: slide it out from behind the icon row.
+			// Works in world space so it is correct for any anchor setup, and
+			// is naturally idempotent (the shift is zero once the gap holds).
+			var qm = GlowEngine.FindUnityObject<QuickMessage>();
+			if ( qm == null || qm.message == null )
+				return;
+			var box = qm.message.transform as RectTransform;
+			while ( box != null && box.parent != null && box.parent != qm.transform )
+				box = box.parent as RectTransform;
+			if ( box == null || box.parent == null )
+				return;
+			var canvas = box.GetComponentInParent<Canvas>( true )?.rootCanvas;
+			var gapWorld = ( canvas != null && canvas.scaleFactor > 0f ? 24f / canvas.scaleFactor : 24f );
+			var slotRightWorld = medSlot.TransformPoint( new Vector3( medSlot.rect.xMax, medSlot.rect.center.y, 0f ) );
+			var boxLeftWorld = box.TransformPoint( new Vector3( box.rect.xMin, box.rect.center.y, 0f ) );
+			var dx = slotRightWorld.x + gapWorld - boxLeftWorld.x;
+			if ( dx > 0f )
+				box.position += new Vector3( dx, 0f, 0f );
+			Debug.Log( "SagaController()::TACTICAL mode - MedPac UI off (reference rules: wounded until end of mission), info \"?\" moved into its slot, info display shifted clear of the icon row" );
 		}
 
 		public void OnImperialPopup()
