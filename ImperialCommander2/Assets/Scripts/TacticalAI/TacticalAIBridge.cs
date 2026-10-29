@@ -580,8 +580,10 @@ namespace TacticalAI
                 plan.TargetWhy = why;
             }
             plan.ExplainLine = ExplainFor(cd.id);
-            if (plan.ExplainLine != null && plan.HasTarget)
-                plan.ExplainLine += " | " + plan.TargetWhy;
+            // Thomas 29.10: the focus line is NOT part of the explanation
+            // anymore - the popup prints it ABOVE the action blocks (focus
+            // first, then actions, then the gated explanation); the
+            // ExplainLevel gate now really hides only the explanation.
             // Doctrine pattern from the card's Core catalog record (dev 11).
             // All shipped cards are 'aggressive' until M4 assigns per-mission
             // roles - but the renderer already carries full action-tree text
@@ -675,7 +677,8 @@ namespace TacticalAI
             int actions = Tac.OrderDeck.CountActionBlocks(toks);
             bool solo = actions <= 1 || string.IsNullOrEmpty(L.actionSoloFormat);
             if (actions >= 2 && !string.IsNullOrEmpty(L.doctrineTreeLead))
-                outp.Add(L.doctrineTreeLead);
+                foreach (var lead in L.doctrineTreeLead.Split('\n'))
+                    if (!string.IsNullOrEmpty(lead)) outp.Add(lead);
             for (int n = 0; n < toks.Length; n++)
             {
                 var tok = toks[n];
@@ -688,16 +691,24 @@ namespace TacticalAI
                 switch (tok)
                 {
                     case "move":
-                        if (pat == "guard") outp.Add(act(TF(L.moveGuard, speed)));
-                        else if (pat == "blocker") outp.Add(act(TF(L.moveBlocker, speed)));
-                        else if (pat == "support") outp.Add(act(TF(L.moveSupport, speed, t)));
-                        else if (pat == "ambusher") outp.Add(act(TF(L.moveAmbusher, speed)));
+                        // Thomas 29.10: the RR gives TWO free actions in any
+                        // order (one attack cap for non-heroes), so no block
+                        // may READ like a hardcoded role. Trees come from the
+                        // language files as '\n'-separated decision lines;
+                        // EmitBlock puts every line on its own popup row
+                        // (ParseInstructions keeps a fixed row height, so an
+                        // embedded '\n' inside one TMP row would overflow).
+                        if (pat == "guard") EmitBlock(outp, act, TF(L.moveGuard, speed));
+                        else if (pat == "blocker") EmitBlock(outp, act, TF(L.moveBlocker, speed));
+                        else if (pat == "support") EmitBlock(outp, act, TF(L.moveSupport, speed));
+                        else if (pat == "ambusher") EmitBlock(outp, act, TF(L.moveAmbusher, speed));
                         else
-                            // aggressive + hunter (the sweep IS the advance on
-                            // the focus target): hit&run tree with the
-                            // stand-and-shoot anti-pin guard (dev 10).
-                            outp.Add(act(t != null ? TF(L.moveFocus, speed, t)
-                                                   : TF(L.moveFocusNoTarget, speed)));
+                            // aggressive + hunter (Thomas' own template): the
+                            // attack OPTION rides in this block too - which
+                            // action becomes the attack is decided at the
+                            // board; block 2 checks the one-attack cap.
+                            EmitBlock(outp, act, t != null ? TF(L.moveFocus, speed)
+                                                          : TF(L.moveFocusNoTarget, speed));
                         break;
                     case "attack":
                         if (priorAttack)
@@ -714,33 +725,42 @@ namespace TacticalAI
                             if (pat == "guard") body = TF(L.attack2MoveGuard, speed);
                             else if (pat == "ambusher") body = TF(L.attack2MoveAmbush, speed);
                             else if (pat == "blocker") body = TF(L.attack2MoveBlocker, speed, t);
-                            else body = t != null ? TF(L.attack2Move, speed, t)
+                            else body = t != null ? TF(L.attack2Move, speed)
                                                    : TF(L.attack2MoveNoTarget, speed);
-                            outp.Add(act(TF(L.attackSecondIntro, body) + " " + TF(L.attackSecondTail)));
+                            EmitBlock(outp, act, TF(L.attackSecondIntro, body) + "\n"
+                                                  + TF(L.attackSecondTail));
                             break;
                         }
                         priorAttack = true;
                         if (pat == "guard")
-                            outp.Add(act(t != null ? TF(L.attackGuard, t) : TF(L.attackGuardNoTarget)));
+                            EmitBlock(outp, act, t != null ? TF(L.attackGuard, speed)
+                                                           : TF(L.attackGuardNoTarget, speed));
                         else if (pat == "ambusher")
-                            outp.Add(act(t != null ? TF(L.attackAmbush, t) : TF(L.attackAmbushNoTarget)));
+                            EmitBlock(outp, act, t != null ? TF(L.attackAmbush, speed)
+                                                           : TF(L.attackAmbushNoTarget, speed));
                         else if (pat == "support")
-                            outp.Add(act(t != null ? TF(L.attackSupport, t) : TF(L.attackSupportNoTarget)));
+                            EmitBlock(outp, act, t != null ? TF(L.attackSupport, speed)
+                                                           : TF(L.attackSupportNoTarget, speed));
                         else
                             // aggressive/hunter/blocker: Thomas' Wenn-Dann-Schema
                             // (focus if engaged, close in via the action, shoot
-                            // the line-blocker).
-                            outp.Add(act(t != null ? TF(L.attackFocus, t, speed)
-                                                   : TF(L.attackNoTarget)));
+                            // the line-blocker) + the cap check tail. No target
+                            // NAMES in the texts anymore (Thomas 29.10): the
+                            // round start already announces the focus target.
+                            EmitBlock(outp, act, t != null ? TF(L.attackFocus, speed)
+                                                           : TF(L.attackNoTarget, speed));
                         break;
                     case "special":
-                        outp.Add(act(TF(L.specialAsPrinted)));
+                        EmitBlock(outp, act, TF(L.specialAsPrinted));
                         break;
                     case "rest":
-                        outp.Add(act(TF(L.restLine)));
+                        // RR REST section defines recovery via ENDURANCE,
+                        // which is printed on hero sheets only - an Imperial
+                        // figure rests nothing. Honest line: action lapses.
+                        EmitBlock(outp, act, TF(L.restLine));
                         break;
                     case "interact":
-                        outp.Add(act(TF(L.interactLine)));
+                        EmitBlock(outp, act, TF(L.interactLine));
                         break;
                     case "shuffle":
                         outp.Add(TF(L.shuffleNote));
@@ -751,6 +771,23 @@ namespace TacticalAI
                 }
             }
             return outp.ToArray();
+        }
+
+        /// Thomas 29.10 (playtest): decision trees are MULTI-LINE by design
+        /// ("Wenn-Dann: Frage? Dann Befehl." one line per branch). The popup
+        /// renderer gives every instruction string one fixed-height TMP row,
+        /// so a '\n' inside a single string would visually overflow. EmitBlock
+        /// puts the first line under the "Aktion n" label and every further
+        /// branch line on its own row.
+        static void EmitBlock(List<string> outp, System.Func<string, string> act, string text)
+        {
+            bool first = true;
+            foreach (var line in (text ?? "").Split('\n'))
+            {
+                if (string.IsNullOrEmpty(line)) continue;
+                outp.Add(first ? act(line) : line);
+                first = false;
+            }
         }
 
         // ------------------------------------------------------- language files

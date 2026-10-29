@@ -152,10 +152,21 @@ public class EnemyActivationPopup : MonoBehaviour
 			//GetModifiedRepositioning rewrite. Mission event instruction overrides
 			//still apply (they are scenario rules, not hidden enemy knowledge).
 			Debug.Log( $"ShowSaga()::TACTICAL order card {tacPlan.DeckCardId} ({tacPlan.Blocks.Length} blocks)" );
-			List<string> tacInstructions = new List<string>( tacPlan.Blocks ?? new string[0] );
-			tacInstructions = GetModifiedInstructions( cd.id, tacInstructions );
+			// Thomas 29.10: reading order = FOCUS TARGET first, then the
+			// action blocks, then (only when the ERKLÄRUNG setting is on) the
+			// explanation last. '\n' splits every decision-tree branch onto
+			// its own popup row (ParseInstructions keeps a fixed row height).
+			List<string> tacInstructions = new List<string>();
+			if ( tacPlan.HasTarget && !string.IsNullOrEmpty( tacPlan.TargetWhy ) )
+				tacInstructions.Add( tacPlan.TargetWhy );
+			tacInstructions.AddRange( tacPlan.Blocks ?? new string[0] );
 			if ( !string.IsNullOrEmpty( tacPlan.ExplainLine ) )
 				tacInstructions.Add( tacPlan.ExplainLine );
+			tacInstructions = GetModifiedInstructions( cd.id, tacInstructions );
+			var tacRows = new List<string>();
+			foreach ( string line in tacInstructions )
+				tacRows.AddRange( line.Split( new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries ) );
+			tacInstructions = tacRows;
 			ParseInstructions( tacInstructions );
 			//store activation data
 			cardDescriptor.instructionOption = new InstructionOption() { instruction = tacInstructions };
