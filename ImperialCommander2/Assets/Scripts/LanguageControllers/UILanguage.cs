@@ -32,6 +32,11 @@ public class UITacticalAI
 	public string moveFocus, moveFocusNoTarget, moveGuard, moveBlocker, moveSupport, moveAmbusher;
 	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
 	public string attack2Move, attack2MoveNoTarget, attack2MoveGuard, attack2MoveAmbush, attack2MoveBlocker;
+	// M13t (Thomas 30.10.): Stativ/Tripod emplacement action trees - printed
+	// rule: movement and attack are mutually exclusive per activation, so the
+	// guard tree must never suggest a shuffle while a post/target exists.
+	// Missing keys fall back to the plain guard trees (never empty rows).
+	public string moveGuardTripod, attackGuardTripod, attackGuardTripodNoTarget, attack2MoveGuardTripod;
 	public string attackSecondIntro, attackSecondTail;
 	public string overlordFallback;
 	public string specialAsPrinted, restLine, interactLine, shuffleNote;

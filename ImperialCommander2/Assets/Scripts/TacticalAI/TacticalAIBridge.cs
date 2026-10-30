@@ -46,6 +46,11 @@ namespace TacticalAI
         public string ExplainLine;      // printed why-string (ExplainLevel)
         public bool HasTarget;
         public string Pattern;          // doctrine pattern (dev 11); null = aggressive
+        // M13t (Thomas 30.10.): the activation's card prints Stativ/Tripod.
+        // The renderer swaps in the emplacement action trees: every move
+        // forfeits the attack, so the tree must never suggest one while a
+        // post is held or a target is in range.
+        public bool Tripod;
     }
 
     public static class TacticalAIBridge
@@ -593,6 +598,11 @@ namespace TacticalAI
             EnsureCatalog();
             plan.Pattern = _patternByCard != null && _patternByCard.TryGetValue(cd.id, out var pat)
                            && !string.IsNullOrEmpty(pat) ? pat : "aggressive";
+            // M13t: printed Stativ/Tripod flag for the renderer (see
+            // ActivationPlanData.Tripod; same catalog source as the pattern).
+            Tac.DeploymentCard tripodCard;
+            plan.Tripod = _catalog != null && _catalog.TryGetValue(cd.id, out tripodCard)
+                          && tripodCard.IsTripod;
             // Playtest 27.10 (Thomas): raw deck tokens ('move', 'attack') are
             // not an instruction a human Imperial player can execute. Render
             // every block as a concrete, localized order naming the focus
@@ -716,7 +726,16 @@ namespace TacticalAI
                         // EmitBlock puts every line on its own popup row
                         // (ParseInstructions keeps a fixed row height, so an
                         // embedded '\n' inside one TMP row would overflow).
-                        if (pat == "guard") EmitBlock(outp, act, TF(L.moveGuard, speed));
+                        if (pat == "guard")
+                            // M13t (Thomas 30.10.): Stativ/Tripod units get
+                            // their own movement tree - the printed rule
+                            // makes movement and attack mutually exclusive,
+                            // so the default "close in inside the guard
+                            // zone" wording would talk the human into
+                            // forfeiting the shot. Missing key (old language
+                            // asset) -> legacy guard tree, never an empty row.
+                            EmitBlock(outp, act, plan.Tripod && !string.IsNullOrEmpty(L.moveGuardTripod)
+                                ? TF(L.moveGuardTripod, speed) : TF(L.moveGuard, speed));
                         else if (pat == "blocker") EmitBlock(outp, act, TF(L.moveBlocker, speed));
                         else if (pat == "support") EmitBlock(outp, act, TF(L.moveSupport, speed));
                         else if (pat == "ambusher") EmitBlock(outp, act, TF(L.moveAmbusher, speed));
@@ -740,7 +759,9 @@ namespace TacticalAI
                             // block plays like an Aktion-1 attack. The move
                             // body is the doctrine's disengage/hold logic.
                             string body;
-                            if (pat == "guard") body = TF(L.attack2MoveGuard, speed);
+                            if (pat == "guard") body = plan.Tripod && !string.IsNullOrEmpty(L.attack2MoveGuardTripod)
+                                ? TF(L.attack2MoveGuardTripod, speed)
+                                : TF(L.attack2MoveGuard, speed);
                             else if (pat == "ambusher") body = TF(L.attack2MoveAmbush, speed);
                             else if (pat == "blocker") body = TF(L.attack2MoveBlocker, speed, t);
                             else body = t != null ? TF(L.attack2Move, speed)
@@ -751,8 +772,17 @@ namespace TacticalAI
                         }
                         priorAttack = true;
                         if (pat == "guard")
-                            EmitBlock(outp, act, t != null ? TF(L.attackGuard, speed)
-                                                           : TF(L.attackGuardNoTarget, speed));
+                            // M13t: tripod attack tree - the Wachzone wording
+                            // is replaced by plain "in reach" (a Stativ post
+                            // may hold a hunt-mission corridor too, where no
+                            // mission zone exists), and the no-target branch
+                            // never suggests the movement that would cost the
+                            // next activation's rules their meaning.
+                            EmitBlock(outp, act, plan.Tripod && !string.IsNullOrEmpty(L.attackGuardTripod)
+                                ? (t != null ? TF(L.attackGuardTripod, speed)
+                                             : TF(L.attackGuardTripodNoTarget, speed))
+                                : t != null ? TF(L.attackGuard, speed)
+                                            : TF(L.attackGuardNoTarget, speed));
                         else if (pat == "ambusher")
                             EmitBlock(outp, act, t != null ? TF(L.attackAmbush, speed)
                                                            : TF(L.attackAmbushNoTarget, speed));
@@ -1470,6 +1500,20 @@ namespace TacticalAI
         static string ClassifyPattern(Tac.DeploymentCard c, string posture)
         {
             if (c.Id == "DG071") return "hunter";
+            // M13t (Thomas 30.10., EMPIRE6 playtest): a Stativ/Tripod figure
+            // may never hold a MOVING role. Its printed rule forbids moving
+            // and attacking in the same activation, so the whole value of the
+            // figure is its fire lane. DG007/DG008 (E-Web-Schütze) were being
+            // read as big bases -> "blocker" (engage the lane, reposition);
+            // that made the AI walk the emplacement toward the rebels and
+            // waste the attack. The correct doctrine is "guard": hold the
+            // ground it was placed on (the objective / the lane the rebels
+            // must cross), do NOT chase, and pour fire into anything that
+            // steps into the Wachzone. Guard is the one pattern whose Move-
+            // Shackle keeps it home and whose attack fires on zone entry -
+            // exactly the "unter Feuer nehmen, wenn die zum Fluchtpunkt
+            // kommen" behaviour. This overrides the big-base branch below.
+            if (c.IsTripod) return "guard";
             bool big = c.IsLargeBase || c.IsMassive;
             if (posture == "defend")
             {
@@ -1487,6 +1531,23 @@ namespace TacticalAI
         /// whitelist Core DeploymentCard.CardFieldWhitelist); no bonus data.</summary>
         static Dictionary<string, object> ToRecord(global::DeploymentCard cd)
         {
+            // M13t (Thomas 30.10., EMPIRE6 playtest): the printed
+            // Stativ/Tripod rule must reach the doctrine layer. Source is
+            // the card's own printed ability line (En asset says "Tripod",
+            // De asset says "Stativ"; other language files are partial
+            // overlays whose runtime ability list is filled from the EN
+            // backup, so both names cover every shipped language). DG-id
+            // belt: across ALL shipped language assets only DG007/DG008
+            // print Stativ - the same printed-fact class as the DG071
+            // hunter rule. Never read from hidden bonus data.
+            var kws = new List<string>(cd.keywords ?? new string[0]);
+            bool tripod = false;
+            var ab = cd.abilities;
+            if (ab != null)
+                foreach (var a in ab)
+                    if (a != null && (a.name == "Tripod" || a.name == "Stativ")) tripod = true;
+            if (cd.id == "DG007" || cd.id == "DG008") tripod = true;
+            if (tripod && !kws.Contains("Tripod")) kws.Add("Tripod");
             return new Dictionary<string, object>
             {
                 { "id", cd.id },
@@ -1497,7 +1558,7 @@ namespace TacticalAI
                 { "health", cd.health },
                 { "attackType", cd.attackType.ToString() },
                 { "attacks", (cd.attacks ?? new DiceColor[0]).Select(a => a.ToString()).ToArray() },
-                { "keywords", cd.keywords ?? new string[0] },
+                { "keywords", kws.ToArray() },
                 { "isElite", cd.isElite },
                 { "defense", (cd.defense ?? new DiceColor[0]).Select(a => a.ToString()).ToArray() },
                 { "surges", cd.surges ?? new string[0] },

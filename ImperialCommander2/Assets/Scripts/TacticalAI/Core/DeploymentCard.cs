@@ -25,6 +25,12 @@ namespace TacticalAI.Core
         public int Cost = 1;                // printed deck-build point cost
 
         public bool IsMassive => Keywords.Contains("Massive");
+        // M13t (EMPIRE6 playtest, Thomas 30.10.): printed Stativ/Tripod rule
+        // - leaving your space and attacking are mutually exclusive within
+        // one activation. The app layer injects this keyword from the
+        // card's PRINTED ability (En "Tripod" / De "Stativ"); it is public
+        // card text the human reads on the physical card, fairness-safe.
+        public bool IsTripod => Keywords.Contains("Tripod");
         public bool IsMobile => Keywords.Contains("Mobile");
         public bool HasReach => Keywords.Contains("Reach");
         public bool IsLargeBase => Geometry.IsLarge(MiniSize);

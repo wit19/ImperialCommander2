@@ -152,6 +152,14 @@ namespace TacticalAI.Core
 
             if (pattern == "guard")
             {
+                // M13t (Thomas 30.10.): a printed Stativ/Tripod figure loses
+                // its attack the moment it leaves its space - even a shuffle
+                // inside the guard zone is an attack spent. Pin it to the
+                // space it holds (same hold-logic the unarmed ambusher uses);
+                // pursuit and in-zone repositioning are both illegal for it.
+                if (fig.Card != null && fig.Card.IsTripod)
+                    return state => state.anchor == fig.Anchor &&
+                                    state.orientation == fig.Orientation;
                 var zone = guardZone ?? new List<Cell>();
                 var heroes = KnownHeroes(world, fig, heroesKnown);
                 bool threat = false;
