@@ -412,18 +412,27 @@ namespace Saga
 		ImperialDisplay.Info impDeckInfoPending;   // info for the pending button
 		Coroutine impDeckButtonCo;
 
-		static GameObject FindImperialDeckBarAnchor()
+		GameObject FindImperialDeckBarAnchor()
 		{
+			// M13b (Player-13/14/15): the scene names scanned before are
+			// the SAGA GAME help names - the Campaign Manager's "?" is the
+			// screen's own serialized campaignInfoButton reference, which
+			// was never consulted here (why the hunt timed out every run).
+			// Reference first; name scans only as fallback.
+			var own = campaignInfoButton != null && campaignInfoButton.gameObject.scene.IsValid()
+				? campaignInfoButton.gameObject : null;
+			if ( own != null ) return own;
 			var go = GameObject.Find( "Help Activation Button" ) ?? GameObject.Find( "info Button" );
 			if ( go != null ) return go;
 			// bar members can still be hidden at this moment: scan every
-			// loaded Button INCLUDING not-yet-active ones (scene-valid only,
-			// prefab assets filtered out)
-			foreach ( var b in Resources.FindObjectsOfTypeAll<Button>() )
+			// loaded scene Transform by NAME (M13aa lesson: these objects
+			// can carry a name but NO Button component, so a Button-typed
+			// scan finds nothing)
+			foreach ( var t in Resources.FindObjectsOfTypeAll<Transform>() )
 			{
-				if ( !b.gameObject.scene.IsValid() ) continue;
-				var n = b.gameObject.name;
-				if ( n == "Help Activation Button" || n == "info Button" ) return b.gameObject;
+				if ( t == null || !t.gameObject.scene.IsValid() ) continue;
+				var n = t.name;
+				if ( n == "Help Activation Button" || n == "info Button" ) return t.gameObject;
 			}
 			return null;
 		}
@@ -437,12 +446,16 @@ namespace Saga
 				if ( helpGO == null ) yield return new WaitForEndOfFrame();
 			}
 			var btn0 = helpGO != null ? helpGO.GetComponent<Button>() : null;
-			if ( btn0 == null )
+			if ( helpGO == null )
 			{
-				Utils.LogWarning( "AddImperialDeckButtonToBar skipped: help button not found (also not inactive) after 4s" );
+				// M13b: abort ONLY on a missing anchor object - help
+				// objects legitimately lack a Button component (M13aa),
+				// the clone gets one added instead.
+				Utils.LogWarning( "AddImperialDeckButtonToBar skipped: bar anchor not found after 4s" );
 				impDeckButtonCo = null;
 				yield break;
 			}
+			if ( btn0 == null ) Debug.Log( "AddImperialDeckButtonToBar::anchor has no Button component - clone gets a fresh one" );
 			yield return AddImperialDeckButtonClone( helpGO );
 			impDeckButtonCo = null;
 		}
@@ -455,7 +468,8 @@ namespace Saga
 			clone.SetActive( true );
 			// full detour from the clone's inherited help behaviour:
 			// fresh event object, persistent calls cannot survive it
-			var btn = clone.GetComponent<Button>();
+			// (M13b: help anchors can lack the component outright)
+			var btn = clone.GetComponent<Button>() ?? clone.gameObject.AddComponent<Button>();
 			btn.onClick = new Button.ButtonClickedEvent();
 			btn.onClick.AddListener( ShowImperialDeckPopup );
 			// visual difference: teal (the tactical-AI accent) + own label
