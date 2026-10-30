@@ -206,9 +206,32 @@ namespace Saga
 		}
 	}
 
-	/// <summary>The panel itself. Lives on a runtime GameObject under the
+	/// <summary>Panel itself. Lives on a runtime GameObject under the
 	/// mission Canvas; refreshes on a slow poll because the deck state is
 	/// written outside the UI (upgrade stage, attachment lifecycle).</summary>
+	/// <remarks>M13w GEOMETRY ROOT CAUSE (Player-12.log, decisive): the
+	/// breadcrumb showed x=-654 y=-495 with parent=Canvas active=True and the
+	/// panel provably SHOWING (geometry logged => Refresh reached show=true).
+	/// So it was NOT culled, NOT inactive, NOT hidden - it was positioned at
+	/// NEGATIVE Canvas coordinates, i.e. entirely off the left/bottom edge of
+	/// the screen, exactly as Thomas said ("außerhalb des unteren sichtbaren
+	/// Bereichs"). The bug: SlotAnchor() mixed two coordinate spaces. It
+	/// measured the medpac slot through WORLD space and wrote
+	/// InverseTransformPoint(...) - TRUE parent-local coords, whose origin is
+	/// the parent rect's PIVOT (a 1920x1080 root Canvas has pivot at centre:
+	/// local -960..960 / -540..540, so the bottom-left icon strip lives at
+	/// roughly -900/-500). But the panel's own anchor is set to (0,0), where
+	/// anchoredPosition is an offset from the parent rect's BOTTOM-LEFT
+	/// corner. Writing a pivot-origin local number as a corner-origin offset
+	/// shifts the panel by the full half-size (half the 1920x1080 canvas)
+	/// straight off the screen's bottom-left corner - and that negative
+	/// offset (-654/-495) is exactly what the breadcrumb printed. The old
+	/// M13p..M13v code carried this off-by-half-canvas error; only the M13v
+	/// breadcrumb made it visible. Fix: convert to corner-origin offsets in
+	/// SlotAnchor (measured local MINUS the parent rect's min corner), and
+	/// clamp the final anchoredPosition to a non-negative on-screen minimum
+	/// so no future measurement slip can ever push the panel off screen
+	/// again.</remarks>
 	public class ImperialPanel : MonoBehaviour
 	{
 		const float REFRESH_SECONDS = 0.5f;
@@ -317,7 +340,7 @@ namespace Saga
 			// completely covered). M13p: the measurement runs through
 			// SlotAnchor() and is REPEATED on every refresh, so a not-yet
 			// measurable slot at Start self-heals within 0.5 s.
-			rt.anchoredPosition = SlotAnchor();
+			rt.anchoredPosition = ClampOnScreen( SlotAnchor() );
 			rt.sizeDelta = new Vector2( ROW_WIDTH, 60f );
 
 			var bg = root.AddComponent<Image>();
@@ -417,7 +440,7 @@ namespace Saga
 				// medpac slot is hidden in tactical mode and the "?" button
 				// sits in it - panel starts right of that, self-healing
 				var rt0 = root.GetComponent<RectTransform>();
-				var slot = SlotAnchor();
+				var slot = ClampOnScreen( SlotAnchor() );
 				rt0.anchoredPosition = slot;
 				if ( !geometryLogged )
 				{
@@ -514,7 +537,34 @@ namespace Saga
 			// bottom edge of the icon strip -> panel bottom sits flush with it
 			var slotBottom = parent.InverseTransformPoint(
 				medRT.TransformPoint( new Vector3( medRT.rect.center.x, medRT.rect.yMin, 0f ) ) );
-			return new Vector2( slotRight.x + 24f, slotBottom.y );
+			// M13w CRITICAL COORD FIX (Player-12.log proof: geometry landed
+			// at x=-654 y=-495 -> off screen). InverseTransformPoint yields
+			// TRUE local coordinates, whose origin is the parent's PIVOT
+			// (Canvas root pivot is centered: rect spans -960..960 /
+			// -540..540 at 1920x1080). anchoredPosition with anchor(0,0) is
+			// an offset from the parent rect's BOTTOM-LEFT corner. Feeding
+			// one into the other double-offsets the panel by the full corner
+			// distance straight off the screen bottom-left - which is
+			// exactly Thomas' "außerhalb des unteren sichtbaren Bereichs",
+			// true since the M13p measurement first shipped. Convert:
+			return new Vector2( slotRight.x - parent.rect.xMin + 24f,
+			                    slotBottom.y - parent.rect.yMin );
+		}
+
+		/// <summary>M13w last-line-of-defence guard: SlotAnchor() returns
+		/// corner-origin offsets (anchor (0,0)), so any negative number means
+		/// "off the bottom-left edge of the screen" - the exact class of bug
+		/// that hid this panel for five playtest rounds. Clamp to a sane
+		/// on-screen window; a wrong measurement then degrades to a panel in
+		/// the corner, never to an invisible panel.</summary>
+		Vector2 ClampOnScreen( Vector2 cornerOffset )
+		{
+			var parent = root != null ? root.transform.parent as RectTransform : null;
+			float xMax = parent != null
+				? Mathf.Max( 12f, parent.rect.size.x - 340f )
+				: Screen.width - 340f;
+			return new Vector2( Mathf.Clamp( cornerOffset.x, 12f, xMax ),
+			                    Mathf.Max( 12f, cornerOffset.y ) );
 		}
 
 		/// <summary>One printed-card row: name + XP/basic tag + honest

@@ -162,7 +162,7 @@ public class EnemyActivationPopup : MonoBehaviour
 			tacInstructions.AddRange( tacPlan.Blocks ?? new string[0] );
 			if ( !string.IsNullOrEmpty( tacPlan.ExplainLine ) )
 				tacInstructions.Add( tacPlan.ExplainLine );
-			tacInstructions = GetModifiedInstructions( cd.id, tacInstructions );
+			tacInstructions = GetModifiedInstructions( cd.id, tacInstructions, true );
 			var tacRows = new List<string>();
 			foreach ( string line in tacInstructions )
 				tacRows.AddRange( line.Split( new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries ) );
@@ -629,7 +629,7 @@ public class EnemyActivationPopup : MonoBehaviour
 		diceRoller.Show( cardDescriptor, false, OnReturn );
 	}
 
-	public List<string> GetModifiedInstructions( string ID, List<string> linesOut )
+	public List<string> GetModifiedInstructions( string ID, List<string> linesOut, bool tactical = false )
 	{
 		//all
 		var ci = DataStore.sagaSessionData.gameVars.GetDeploymentOverride()?.changeInstructions;
@@ -637,7 +637,7 @@ public class EnemyActivationPopup : MonoBehaviour
 		{
 			List<string> lines = ci.theText.Split( new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries ).ToList();
 			if ( ci.instructionType == CustomInstructionType.Replace )
-				linesOut = lines;
+				linesOut = tactical ? TacticalMerge( lines, linesOut ) : lines;
 			else if ( ci.instructionType == CustomInstructionType.Top )
 				linesOut = lines.Concat( linesOut ).ToList();
 			else if ( ci.instructionType == CustomInstructionType.Bottom )
@@ -651,7 +651,7 @@ public class EnemyActivationPopup : MonoBehaviour
 		{
 			List<string> lines = dgOvrd.theText.Split( new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries ).ToList();
 			if ( dgOvrd.instructionType == CustomInstructionType.Replace )
-				linesOut = lines;
+				linesOut = tactical ? TacticalMerge( lines, linesOut ) : lines;
 			else if ( dgOvrd.instructionType == CustomInstructionType.Top )
 				linesOut = lines.Concat( linesOut ).ToList();
 			else if ( dgOvrd.instructionType == CustomInstructionType.Bottom )
@@ -660,6 +660,23 @@ public class EnemyActivationPopup : MonoBehaviour
 		}
 
 		return linesOut;
+	}
+
+	/// <summary>M13w (Thomas 30.10., EMPIRE13: AT-DP showed the OLD action
+	/// text): a mission Replace-override used to wipe the tactical doctrine
+	/// tree entirely. Those overrides are MIXED blocks: scenario rules
+	/// printed as '{-}' rule bullets (EMPIRE13's "CHARGE GENERATORS: ..."
+	/// is the AT-DP's immunity rule - losing it would change the mission!)
+	/// plus legacy action lines written in dice-glyph shorthand ('{Q}',
+	/// '{A}', ... prefixes - language-independent, the glyphs are markup,
+	/// never translated). Tactical mode keeps the doctrine tree as the
+	/// ACTIONS and appends only the rule lines. Top/Bottom overrides are
+	/// additive and stay untouched.</summary>
+	static List<string> TacticalMerge( List<string> missionLines, List<string> tacLines )
+	{
+		var rules = missionLines.Where( l => !Regex.IsMatch( l.TrimStart(), @"^(\{[QAR]\})+\s" ) ).ToList();
+		Debug.Log( $"TacticalMerge: {missionLines.Count} mission lines -> {rules.Count} rule lines kept, doctrine tree stays" );
+		return rules.Count > 0 ? tacLines.Concat( rules ).ToList() : tacLines;
 	}
 
 	public List<string> GetModifiedRepositioning( string ID, List<string> linesOut )
