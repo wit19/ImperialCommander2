@@ -332,6 +332,15 @@ public class EnemyActivationPopup : MonoBehaviour
 			//replace glyphs
 			item = ReplaceGlyphs( item );
 
+			// M13s (Thomas): bold the leading LABEL of each instruction line
+			// for readability - "Fokus-Ziel:", "Doktrin:", "Grundregel:",
+			// "Aktion 1"/"Aktion 2" ... Purely a render effect: the stored
+			// instruction strings and all game logic stay tag-free. A label
+			// is the first <=14 characters when directly followed by ':' or
+			// the ' -' block separator (en dash), so question-style branch
+			// lines ("Noch nicht angegriffen? Dann: ...") stay untouched.
+			item = BoldLeadLabel( item );
+
 			//add bullets (light blue text)
 			if ( item.Contains( "{-}" ) )
 			{
@@ -352,6 +361,20 @@ public class EnemyActivationPopup : MonoBehaviour
 			var rt = go.GetComponent<RectTransform>();
 			rt.sizeDelta = new Vector2( 1100, 100 );
 		}
+	}
+
+	/// <summary>M13s: bolds the leading label (<=14 chars directly before a
+	/// ':' or the ' -' en-dash block separator) of an instruction row.
+	/// TMP rich text; everything after the label is returned untouched.</summary>
+	static string BoldLeadLabel( string s )
+	{
+		if ( string.IsNullOrEmpty( s ) )
+			return s;
+		var m = System.Text.RegularExpressions.Regex.Match( s, @"^(\s*)([^:–\n]{1,14})(?=\s*[:–])" );
+		if ( !m.Success || m.Groups[ 2 ].Value.Trim().Length == 0 )
+			return s;
+		return m.Groups[ 1 ].Value + "<b>" + m.Groups[ 2 ].Value + "</b>"
+			+ s.Substring( m.Groups[ 1 ].Value.Length + m.Groups[ 2 ].Value.Length );
 	}
 
 	string ReplaceGlyphs( string item )
