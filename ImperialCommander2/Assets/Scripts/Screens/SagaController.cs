@@ -945,26 +945,28 @@ namespace Saga
 		}
 
 		/// <summary>
-		/// TACTICAL HUD layout policy (idempotent):
-		/// - hides the MedPac icon+counter (reference rules: wounded until end
-		///   of mission, dev 15),
-		/// - moves the yellow info "?" button into the freed MedPac slot,
-		/// - shifts the QuickMessage box (the tactical AI's "next round" info
-		///   display) right, clear of the icon row that used to cover it
-		///   (Thomas playtest 29.10.).
-		/// The button is located through its persistent onClick binding
-		/// (name "OnMedPac") so no prefab wiring is needed.</summary>
+		/// TACTICAL HUD layout policy (idempotent), M13r final form:
+		/// - switches off the MedPac slot completely (icon, counter, the red
+		///   disc graphic on the base itself, and its interactability) -
+		///   reference rules keep wounded units wounded until mission end,
+		///   so there is nothing to medpac;
+		/// - the mission panel's "i" and every other HUD object stay exactly
+		///   where the game put them (the M13o/p "?"-into-slot moves were a
+		///   mis-identification and are reverted, including mid-game saves
+		///   that already got an evicted "i" - those are re-seated).
+		Dictionary<UnityEngine.UI.Graphic, bool> impMedpacGfx;
+
 		void ApplyTacticalMedPacPolicy()
 		{
 			var tactical = TacticalAI.TacticalAIBridge.TacticalMissionActive();
-			// M13q final layout policy for tactical missions (supersedes the
+			// M13q/r layout policy for tactical missions (supersedes the
 			// M13o/M13p button moves - those evicted the mission panel's "i",
 			// see Saga.unity truth below):
 			//   Canvas / bottom button grid  (the blue mission panel)
 			//     [settings | dashboard Button "i" | fame | debug | rules]
 			//   Canvas / activate imperial Button (big red cog)
 			//   Canvas / medpac button base / medpac button + counter
-			// ONLY the medpac icon and counter switch off (reference rules:
+			// ONLY the medpac slot is switched off, fully (reference rules:
 			// wounded units stay wounded until mission end - nothing to
 			// medpac). Everything else in the HUD stays untouched.
 			GameObject medBase = GameObject.Find( "medpac button base" );
@@ -978,7 +980,7 @@ namespace Saga
 			}
 			if ( medBase == null )
 			{
-				Debug.LogWarning( "SagaController()::TACTICAL mode - 'medpac button base' not found; icon/\"?\" layout NOT applied" );
+				Debug.LogWarning( "SagaController()::TACTICAL mode - 'medpac button base' not found; medpac slot NOT switched off (M13r)" );
 				return;
 			}
 			if ( medPacText != null ) medPacText.gameObject.SetActive( !tactical );
@@ -988,13 +990,37 @@ namespace Saga
 			{
 				medBase.SetActive( true );
 				if ( medBtn != null ) medBtn.gameObject.SetActive( true );
+				if ( impMedpacGfx != null )
+				{
+					foreach ( var kvp in impMedpacGfx )
+						if ( kvp.Key != null ) kvp.Key.enabled = kvp.Value;
+					impMedpacGfx = null;
+				}
 				return;
 			}
 			// NOTE: the BASE itself stays ACTIVE - it is the empty 100x100
-			// slot the "?" moves into and the ImperialPanel measures its
-			// right edge from, and GameObject.Find would stop seeing an
-			// inactive base. Only the icon and the counter switch off.
+			// slot the ImperialPanel measures its right edge from, and
+			// GameObject.Find would stop seeing an inactive base.
 			if ( medBtn != null ) medBtn.gameObject.SetActive( false );
+			// M13r (Thomas screenshot: "ein roter Kreis. Warum?"): the BASE
+			// object itself carries the red medpac disc graphic - it was
+			// simply hidden behind the moved "i" until M13q put the "i" back.
+			// Kill ALL graphics in the subtree (base included), so whatever
+			// sprite layer draws the disc goes away for any artwork version;
+			// original enabled-states are remembered for the restore path.
+			if ( impMedpacGfx == null )
+			{
+				impMedpacGfx = new Dictionary<UnityEngine.UI.Graphic, bool>();
+				foreach ( var g in medBase.GetComponentsInChildren<UnityEngine.UI.Graphic>( true ) )
+				{
+					impMedpacGfx[ g ] = g.enabled;
+					g.enabled = false;
+				}
+				// an invisible-but-clickable slot would still open the medpac
+				// popup - switch the interactables off too
+				foreach ( var s in medBase.GetComponentsInChildren<UnityEngine.UI.Selectable>( true ) )
+					s.interactable = false;
+			}
 
 			// M13q (Thomas screenshot): the "i" (tip[Dashboard]) belongs
 			// INSIDE the blue mission panel = 'bottom button grid'
@@ -1027,7 +1053,7 @@ namespace Saga
 					btnRT.anchoredPosition = sib.anchoredPosition;
 				}
 			}
-			Debug.Log( "SagaController()::TACTICAL mode - medpac icon/counter off (reference rules: wounded until end of mission), \"i\" back in the mission panel (M13q)" );
+			Debug.Log( "SagaController()::TACTICAL mode - medpac slot off (graphics+interactables, M13r), \"i\" confirmed in the mission panel" );
 		}
 
 		public void OnImperialPopup()

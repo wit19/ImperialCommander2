@@ -213,9 +213,15 @@ namespace Saga
 	{
 		const float REFRESH_SECONDS = 0.5f;
 		const float ROW_WIDTH = 320f;
-		const float MAX_HEIGHT = 420f;
+		// M13r (Thomas: "da steht kein Imperium Text"): the briefing text
+		// box covers the bottom-left corner above y~240 (verified pixel-wise
+		// on his mission screenshot - the icon-strip band y=0..230 is free).
+		// Capping the panel inside that band makes the header+rows readable
+		// WHILE the briefing is open; overflow beyond the cap is masked.
+		const float MAX_HEIGHT = 200f;
 
 		GameObject root, contentRoot;
+		bool geometryLogged;
 		TextMeshProUGUI headerText;
 		SagaCampaign campaign;
 		ImperialDisplay.Info info;
@@ -268,6 +274,9 @@ namespace Saga
 			var bg = root.AddComponent<Image>();
 			bg.color = new Color( 0.02f, 0.10f, 0.09f, 0.88f );
 			bg.raycastTarget = false;
+			// M13r: with the height capped at MAX_HEIGHT a long deck must not
+			// paint its overflow up into the briefing box area
+			root.AddComponent<UnityEngine.UI.RectMask2D>();
 			root.transform.SetAsFirstSibling();                   // HUD siblings stay on top (M11f lesson)
 
 			headerText = MakeText( "header", root.transform, 13, 15f, 0f, ROW_WIDTH - 20f );
@@ -318,7 +327,15 @@ namespace Saga
 				// medpac slot is hidden in tactical mode and the "?" button
 				// sits in it - panel starts right of that, self-healing
 				var rt0 = root.GetComponent<RectTransform>();
-				rt0.anchoredPosition = new Vector2( LeftEdgeClear(), rt0.anchoredPosition.y );
+				var leftNow = LeftEdgeClear();
+				rt0.anchoredPosition = new Vector2( leftNow, rt0.anchoredPosition.y );
+				if ( !geometryLogged )
+				{
+					// one breadcrumb so the next Player.log can prove WHERE
+					// the panel landed and whether the slot measurement worked
+					geometryLogged = true;
+					Debug.Log( $"ImperialPanel::geometry left={leftNow:F0} parent={rt0.parent.name} h={rt0.sizeDelta.y:F0}" );
+				}
 
 				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
 				string title = tl != null && !string.IsNullOrEmpty( tl.impPanelTitle ) ? tl.impPanelTitle : "IMPERIUM";
