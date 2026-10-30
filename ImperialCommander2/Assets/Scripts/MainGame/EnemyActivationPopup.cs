@@ -364,8 +364,19 @@ public class EnemyActivationPopup : MonoBehaviour
 	}
 
 	/// <summary>M13s: bolds the leading label (<=14 chars directly before a
-	/// ':' or the ' -' en-dash block separator) of an instruction row.
-	/// TMP rich text; everything after the label is returned untouched.</summary>
+	/// ':' or the '–' en-dash block separator) of an instruction row.
+	/// TMP rich text; everything after the label is returned untouched.
+	/// M13y (Thomas screenshot: '"Stattdessen:" ist hervorgehoben - gehört
+	/// zu Aktion 2'): the plain colon rule also caught ordinary BODY lines,
+	/// because "Stattdessen:" looks exactly like a label to it. Real headers
+	/// are mechanically distinguishable: numbered headers come from
+	/// actionFormat ("Aktion {0} – {1}", en-dash - the dash never appears
+	/// as a label separator in body text) and every colon-style header word
+	/// is a prefix of a known header format ("Aktion: {0}",
+	/// "Sonderaktion: ...", "Interaktion: ..."). So: dash => always bold;
+	/// colon => bold only whitelisted header words, derived at runtime from
+	/// the localized strings themselves - no word lists, all 11 languages
+	/// correct without touching a dictionary.</summary>
 	static string BoldLeadLabel( string s )
 	{
 		if ( string.IsNullOrEmpty( s ) )
@@ -373,8 +384,38 @@ public class EnemyActivationPopup : MonoBehaviour
 		var m = System.Text.RegularExpressions.Regex.Match( s, @"^(\s*)([^:–\n]{1,14})(?=\s*[:–])" );
 		if ( !m.Success || m.Groups[ 2 ].Value.Trim().Length == 0 )
 			return s;
-		return m.Groups[ 1 ].Value + "<b>" + m.Groups[ 2 ].Value + "</b>"
-			+ s.Substring( m.Groups[ 1 ].Value.Length + m.Groups[ 2 ].Value.Length );
+		var rest = s.Substring( m.Groups[ 1 ].Value.Length + m.Groups[ 2 ].Value.Length );
+		if ( rest.TrimStart().StartsWith( ":" ) && !HeaderLabels.Contains( m.Groups[ 2 ].Value.Trim().ToLowerInvariant() ) )
+			return s;   // body line ("Stattdessen: ...") - stays plain
+		return m.Groups[ 1 ].Value + "<b>" + m.Groups[ 2 ].Value + "</b>" + rest;
+	}
+
+	// header words before a ':' are not a wordlist - they ARE the first
+	// word of our own format strings, re-derived whenever the UI language
+	// object changes (cheap, and immune to reloads/language switches)
+	static HashSet<string> headerLabelsCache;
+	static UILanguage headerLabelsOwner;
+	static HashSet<string> HeaderLabels
+	{
+		get
+		{
+			var owner = DataStore.uiLanguage;
+			if ( headerLabelsCache != null && ReferenceEquals( headerLabelsOwner, owner ) && owner != null )
+				return headerLabelsCache;
+			var set = new HashSet<string>();
+			var tl = owner != null ? owner.uiTacticalAI : null;
+			if ( tl != null )
+				foreach ( var fmt in new[] { tl.actionSoloFormat, tl.specialAsPrinted, tl.interactLine,
+				                             tl.doctrineHeader, tl.ordRiskLabel, tl.ordMarked } )
+				{
+					if ( string.IsNullOrEmpty( fmt ) ) continue;
+					int i = fmt.IndexOf( ':' );
+					if ( i > 0 ) set.Add( fmt.Substring( 0, i ).Trim().ToLowerInvariant() );
+				}
+			headerLabelsCache = set;
+			headerLabelsOwner = owner;
+			return set;
+		}
 	}
 
 	string ReplaceGlyphs( string item )
