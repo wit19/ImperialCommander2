@@ -256,7 +256,9 @@ namespace Saga
 		const float MAX_HEIGHT = 380f;
 
 		GameObject root, contentRoot;
+		int helpSeen = -1;   // M13z: # active 'Help Activation Button's the anchor scan saw (-1 = never measured) - logged once, proves the "?" was found from any resolution
 		bool geometryLogged;
+		string lastGeoLine;   // M13z: re-log the breadcrumb whenever it changes
 		bool hiddenLogged;
 		bool buildAllowed;    // M13v: Update retries BuildPanel ONLY if Start's
 		                      // feature gates actually passed (a disabled
@@ -442,15 +444,21 @@ namespace Saga
 				var rt0 = root.GetComponent<RectTransform>();
 				var slot = ClampOnScreen( SlotAnchor() );
 				rt0.anchoredPosition = slot;
-				if ( !geometryLogged )
+				// M13z: the breadcrumb used to fire ONCE at install - which
+				// logged pre-content h=60 and could hide where the panel
+				// ENDED UP after re-measurements. Now it fires on install and
+				// on every changed (x, y, helpCount) triple, so the log
+				// always proves the FINAL position and whether the "?" was
+				// actually seen - build-independent, resolution-independent.
+				var geoLine = $"ImperialPanel::geometry x={slot.x:F0} y={slot.y:F0} help={helpSeen}"
+					+ $" parent={rt0.parent.name}"
+					+ $" parentSize={(rt0.parent as RectTransform != null ? (rt0.parent as RectTransform).rect.width : 0):F0}x{(rt0.parent as RectTransform != null ? (rt0.parent as RectTransform).rect.height : 0):F0}"
+					+ $" h={rt0.sizeDelta.y:F0} sibling={root.transform.GetSiblingIndex()}/{root.transform.parent.childCount}";
+				if ( geoLine != lastGeoLine )
 				{
-					// one breadcrumb so the next Player.log can prove WHERE
-					// the panel landed and whether the slot measurement worked
+					lastGeoLine = geoLine;
 					geometryLogged = true;
-					var pr = rt0.parent as RectTransform;
-					Debug.Log( $"ImperialPanel::geometry x={slot.x:F0} y={slot.y:F0} parent={rt0.parent.name}"
-						+ $" parentSize={(pr != null ? pr.rect.width : 0):F0}x{(pr != null ? pr.rect.height : 0):F0}"
-						+ $" h={rt0.sizeDelta.y:F0} sibling={root.transform.GetSiblingIndex()}/{root.transform.parent.childCount}" );
+					Debug.Log( geoLine );
 				}
 
 				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
@@ -540,18 +548,22 @@ namespace Saga
 		/// außerhalb des unteren sichtbaren Bereichs"). Falls back to the
 		/// canvas corner until the slot is measurable; re-evaluated every
 		/// refresh (M13p), so a zero-measurement self-heals within 0.5 s.
-		/// M13x (Thomas screenshot: panel still overlapped the yellow "?"
-		/// help button): the "?" is instantiated at runtime by the help
-		/// overlay system - no scene name, no tooltip string to ride, and
-		/// guessing it would burn another playtest round. So the panel
-		/// stops GUESSING who stands there and MEASURES who stands there:
-		/// union of every active sibling's right edge that (a) overlaps the
-		/// slot's vertical band, (b) starts at or left of the slot's right
-		/// edge (the left-hand HUD group: tray, slot, "?") and (c) ends
-		/// within slotRight+200 - the cap keeps full-screen containers
-		/// (settings etc.) from flanking the panel across the screen. The
-		/// blue mission panel starts right of the slot, so it is excluded
-		/// by (b) and stays visible. Returns (x, y).</summary>
+		/// M13z (Thomas Player-14: STILL overlaps the yellow "?"): the "?"
+		/// is now identified exactly, not guessed. It is the game's own
+		/// 'Help Activation Button' (HelpPanel.cs:55 - every helpable panel
+		/// carries one; 5 instances in Saga.unity), which is why
+		/// GameObject.Find and the M13x direct-sibling scan both missed it:
+		/// it is nested inside those panels' hierarchies, not a Canvas
+		/// child. Union = slot right edge + every ACTIVE Help Activation
+		/// Button whose rect shares the slot's vertical band (a "?" higher
+		/// up cannot collide with a bottom-strip panel; band widened 60px
+		/// because the circle image overhangs its usual placement). Name +
+		/// RectTransform based => resolution- and window-mode-independent
+		/// (Thomas 30.10.: pixel measuring from a screenshot is NOT an
+		/// option, every player has a different display). Buttons are found
+		/// via Resources.FindObjectsOfTypeAll&lt;Button&gt;, the exact
+		/// pattern CampaignManager.FindImperialDeckBarAnchor uses for this
+		/// same object; only scene-valid, activeInHierarchy instances count.</summary>
 		Vector2 SlotAnchor()
 		{
 			var rt = root != null ? root.GetComponent<RectTransform>() : null;
@@ -560,33 +572,36 @@ namespace Saga
 			var medGo = GameObject.Find( "medpac button base" );
 			var medRT = medGo != null ? medGo.transform as RectTransform : null;
 			if ( medRT == null || medRT.rect.width <= 0f ) return new Vector2( 12f, 12f );
-			// corner-origin numbers (see the M13w coord fix below):
-			// local coords MINUS the parent rect's min corner.
+			// corner-origin numbers (the M13w coordinate lesson: pivot-origin
+			// local MINUS the parent rect's min corner = corner offset).
 			Vector3 c = parent.rect.min;   // Vector3: Vector3-Vector2 subtraction is ambiguous
 			var w = new Vector3[4];
 			medRT.GetWorldCorners( w );
 			var sl0 = parent.InverseTransformPoint( w[0] ) - c;   // bottom-left
 			var sl1 = parent.InverseTransformPoint( w[2] ) - c;   // top-right
-			var slotL = Mathf.Min( sl0.x, sl1.x );
 			var slotR = Mathf.Max( sl0.x, sl1.x );
 			var slotB = Mathf.Min( sl0.y, sl1.y );
 			var slotT = Mathf.Max( sl0.y, sl1.y );
 			var rightMost = slotR;
-			foreach ( Transform sib in parent )
+			int helpCount = 0;
+			foreach ( var b in Resources.FindObjectsOfTypeAll<Button>() )
 			{
-				if ( sib == root.transform || !sib.gameObject.activeInHierarchy ) continue;
-				var sr = sib as RectTransform;
-				if ( sr == null || sr.rect.width <= 0f || sr.rect.height <= 0f ) continue;
-				sr.GetWorldCorners( w );
+				if ( b == null || !b.gameObject.scene.IsValid() ) continue;   // prefab asset
+				if ( b.gameObject.name != "Help Activation Button" ) continue;
+				if ( !b.gameObject.activeInHierarchy ) continue;              // invisible cannot overlap
+				var br = b.transform as RectTransform;
+				if ( br == null || br.rect.width <= 0f || br.rect.height <= 0f ) continue;
+				br.GetWorldCorners( w );
 				var a = parent.InverseTransformPoint( w[0] ) - c;
-				var b = parent.InverseTransformPoint( w[2] ) - c;
-				var l = Mathf.Min( a.x, b.x ); var r = Mathf.Max( a.x, b.x );
-				var bt = Mathf.Min( a.y, b.y ); var tt = Mathf.Max( a.y, b.y );
-				if ( bt >= slotT || tt <= slotB ) continue;   // different vertical band
-				if ( l > slotR + 60f ) continue;             // not part of the left group
-				if ( r > slotR + 200f ) continue;             // giant container - ignore
+				var d = parent.InverseTransformPoint( w[2] ) - c;
+				var l = Mathf.Min( a.x, d.x ); var r = Mathf.Max( a.x, d.x );
+				var bt = Mathf.Min( a.y, d.y ); var tt = Mathf.Max( a.y, d.y );
+				if ( bt >= slotT + 60f || tt <= slotB - 60f ) continue;   // not the bottom strip
+				if ( l > slotR + 200f ) continue;   // far right of the slot - its panel, not our row
+				helpCount++;
 				if ( r > rightMost ) rightMost = r;
 			}
+			helpSeen = helpCount;
 			// bottom edge of the icon strip -> panel bottom sits flush with it
 			// M13w CRITICAL COORD FIX (Player-12.log proof: geometry landed
 			// at x=-654 y=-495 -> off screen). InverseTransformPoint yields
