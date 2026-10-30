@@ -134,7 +134,7 @@ will. Dazu gehört zwingend der Ein-Zeilen-Fix am CM-Bar-Button
 
 ## Umsetzung (Thomas wählt A, 30.10.)
 
-tools/mission_income_editor.py (im Repo-stamm ../tools/) hat in alle
+tools/mission_income_editor.py (im Repo, seit M13b) hat in alle
 Saga-Missionen die CM1-Anker (Typ 24, xpToAdd>0 — sämtliche 279 liegen in
 Missionsend-/Kampagnenend-Events, keine Mid-Mission-Anker; geprüft) 1:1
 gespiegelt: 279× CM6 (xpToAdd = Autorenwert) + 279× CM7 (influenceToAdd =
