@@ -253,7 +253,7 @@ namespace Saga
 		// on his mission screenshot - the icon-strip band y=0..230 is free).
 		// Capping the panel inside that band makes the header+rows readable
 		// WHILE the briefing is open; overflow beyond the cap is masked.
-		const float MAX_HEIGHT = 200f;
+		const float MAX_HEIGHT = 380f;
 
 		GameObject root, contentRoot;
 		bool geometryLogged;
@@ -460,10 +460,15 @@ namespace Saga
 				headerText.text = Utils.ReplaceGlyphs( title + " \u00b7 " + level + " \u00b7 " + deckLine
 					+ ( string.IsNullOrEmpty( info.OpenAgenda ) ? "" : "\n" + info.OpenAgenda ) );
 				// agenda line makes the header two rows tall - give the card
-				// list the measured room instead of a fixed 22px assumption
+				// list the measured room instead of a fixed 22px assumption.
+				// M13x: headH is ALSO the box-height input now (the old
+				// hardcoded 30f in the height formula was smaller than a
+				// two-line header -> content overflowed the dark box by
+				// exactly the difference; Thomas 30.10.: "Textinhalt größer
+				// als der sichtbare Bereich").
+				float headH = Mathf.Max( 22f, headerText.GetPreferredValues( headerText.text ).y + 4f );
 				{
 					var crt0 = contentRoot.GetComponent<RectTransform>();
-					float headH = Mathf.Max( 22f, headerText.GetPreferredValues( headerText.text ).y + 4f );
 					crt0.anchoredPosition = new Vector2( 10f, -headH );
 				}
 
@@ -476,11 +481,23 @@ namespace Saga
 					Destroy( contentRoot.transform.GetChild( i ).gameObject );
 
 				float y = 0f;
+				int shown = 0;
+				// M13x: stop stacking while a "+N more" line still fits, so a
+				// large deck degrades to an honest summary instead of a
+				// hard RectMask clip (Thomas: content bigger than visible).
+				float budget = MAX_HEIGHT - headH - 12f - 26f;
 				foreach ( var row in info.Rows )
-					y += AddCardRow( row, y ) + 4f;
+				{
+					if ( shown > 0 && y > budget ) break;
+					y += AddCardRow( row, y ) + 2f;   // M13x: 4f gap -> 2f, denser list
+					shown++;
+				}
+				if ( shown < info.Rows.Count )
+					y += AddMoreRow( info.Rows.Count - shown, y ) + 2f;
 
 				var rt = root.GetComponent<RectTransform>();
-				rt.sizeDelta = new Vector2( ROW_WIDTH, Mathf.Min( MAX_HEIGHT, 30f + y + 6f ) );
+				// M13x REAL height: header (measured) + stacked rows + padding.
+				rt.sizeDelta = new Vector2( ROW_WIDTH, Mathf.Min( MAX_HEIGHT, headH + y + 10f ) );
 			}
 			catch ( Exception e )
 			{
@@ -513,9 +530,9 @@ namespace Saga
 			catch ( Exception e ) { return "probe threw: " + e.Message; }
 		}
 
-		/// <summary>Panel bottom-left in parent space: clear of the
-		/// bottom-left HUD slot row. Measured from 'medpac button base'
-		/// (the "?" button takes over exactly that rect in tactical mode)
+		/// <summary>Panel bottom-left in parent space: clear of
+		/// the bottom-left HUD group. Measured from 'medpac button base'
+		/// (an empty 100x100 slot kept active exactly as the anchor)
 		/// through world space, so it is correct across canvases. M13u:
 		/// the Y is now derived from the SAME visible slot instead of the
 		/// hardcoded 12 - if the panel's parent is not screen-aligned the
@@ -523,7 +540,18 @@ namespace Saga
 		/// außerhalb des unteren sichtbaren Bereichs"). Falls back to the
 		/// canvas corner until the slot is measurable; re-evaluated every
 		/// refresh (M13p), so a zero-measurement self-heals within 0.5 s.
-		/// Returns (x, y).</summary>
+		/// M13x (Thomas screenshot: panel still overlapped the yellow "?"
+		/// help button): the "?" is instantiated at runtime by the help
+		/// overlay system - no scene name, no tooltip string to ride, and
+		/// guessing it would burn another playtest round. So the panel
+		/// stops GUESSING who stands there and MEASURES who stands there:
+		/// union of every active sibling's right edge that (a) overlaps the
+		/// slot's vertical band, (b) starts at or left of the slot's right
+		/// edge (the left-hand HUD group: tray, slot, "?") and (c) ends
+		/// within slotRight+200 - the cap keeps full-screen containers
+		/// (settings etc.) from flanking the panel across the screen. The
+		/// blue mission panel starts right of the slot, so it is excluded
+		/// by (b) and stays visible. Returns (x, y).</summary>
 		Vector2 SlotAnchor()
 		{
 			var rt = root != null ? root.GetComponent<RectTransform>() : null;
@@ -532,11 +560,34 @@ namespace Saga
 			var medGo = GameObject.Find( "medpac button base" );
 			var medRT = medGo != null ? medGo.transform as RectTransform : null;
 			if ( medRT == null || medRT.rect.width <= 0f ) return new Vector2( 12f, 12f );
-			var slotRight = parent.InverseTransformPoint(
-				medRT.TransformPoint( new Vector3( medRT.rect.xMax, medRT.rect.center.y, 0f ) ) );
+			// corner-origin numbers (see the M13w coord fix below):
+			// local coords MINUS the parent rect's min corner.
+			Vector3 c = parent.rect.min;   // Vector3: Vector3-Vector2 subtraction is ambiguous
+			var w = new Vector3[4];
+			medRT.GetWorldCorners( w );
+			var sl0 = parent.InverseTransformPoint( w[0] ) - c;   // bottom-left
+			var sl1 = parent.InverseTransformPoint( w[2] ) - c;   // top-right
+			var slotL = Mathf.Min( sl0.x, sl1.x );
+			var slotR = Mathf.Max( sl0.x, sl1.x );
+			var slotB = Mathf.Min( sl0.y, sl1.y );
+			var slotT = Mathf.Max( sl0.y, sl1.y );
+			var rightMost = slotR;
+			foreach ( Transform sib in parent )
+			{
+				if ( sib == root.transform || !sib.gameObject.activeInHierarchy ) continue;
+				var sr = sib as RectTransform;
+				if ( sr == null || sr.rect.width <= 0f || sr.rect.height <= 0f ) continue;
+				sr.GetWorldCorners( w );
+				var a = parent.InverseTransformPoint( w[0] ) - c;
+				var b = parent.InverseTransformPoint( w[2] ) - c;
+				var l = Mathf.Min( a.x, b.x ); var r = Mathf.Max( a.x, b.x );
+				var bt = Mathf.Min( a.y, b.y ); var tt = Mathf.Max( a.y, b.y );
+				if ( bt >= slotT || tt <= slotB ) continue;   // different vertical band
+				if ( l > slotR + 60f ) continue;             // not part of the left group
+				if ( r > slotR + 200f ) continue;             // giant container - ignore
+				if ( r > rightMost ) rightMost = r;
+			}
 			// bottom edge of the icon strip -> panel bottom sits flush with it
-			var slotBottom = parent.InverseTransformPoint(
-				medRT.TransformPoint( new Vector3( medRT.rect.center.x, medRT.rect.yMin, 0f ) ) );
 			// M13w CRITICAL COORD FIX (Player-12.log proof: geometry landed
 			// at x=-654 y=-495 -> off screen). InverseTransformPoint yields
 			// TRUE local coordinates, whose origin is the parent's PIVOT
@@ -545,10 +596,9 @@ namespace Saga
 			// an offset from the parent rect's BOTTOM-LEFT corner. Feeding
 			// one into the other double-offsets the panel by the full corner
 			// distance straight off the screen bottom-left - which is
-			// exactly Thomas' "außerhalb des unteren sichtbaren Bereichs",
-			// true since the M13p measurement first shipped. Convert:
-			return new Vector2( slotRight.x - parent.rect.xMin + 24f,
-			                    slotBottom.y - parent.rect.yMin );
+			// corner-origin already applied above (the M13w coordinate
+			// lesson: pivot-origin local minus rect.min = corner offset).
+			return new Vector2( rightMost + 24f, slotB );
 		}
 
 		/// <summary>M13w last-line-of-defence guard: SlotAnchor() returns
@@ -592,7 +642,7 @@ namespace Saga
 			var go = new GameObject( "card-" + row.CardId, typeof( RectTransform ) );
 			go.layer = UI_LAYER;   // M13v layer fix (its text child set in MakeText)
 			go.transform.SetParent( contentRoot.transform, false );
-			var t = MakeText( "t", go.transform, 12, 40f, 0f, contentRoot.GetComponent<RectTransform>().sizeDelta.x );
+			var t = MakeText( "t", go.transform, 11, 40f, 0f, contentRoot.GetComponent<RectTransform>().sizeDelta.x );
 			t.text = Utils.ReplaceGlyphs( line );
 			var pref = t.GetPreferredValues( line );
 			float h = Mathf.Max( 18f, pref.y );
@@ -619,9 +669,33 @@ namespace Saga
 		}
 
 		static string Fmt( string fmt, string fallback, params object[] args )
+	{
+		if ( string.IsNullOrEmpty( fmt ) ) fmt = fallback;
+		return string.Format( System.Globalization.CultureInfo.InvariantCulture, fmt, args );
+	}
+
+		/// <summary>M13x: honest overflow line when the deck is too long for
+		/// MAX_HEIGHT - same styling family as the card rows, no hover needed
+		/// (the full list is on the Imperial deck screen anyway).</summary>
+		float AddMoreRow( int remaining, float yTop )
 		{
-			if ( string.IsNullOrEmpty( fmt ) ) fmt = fallback;
-			return string.Format( System.Globalization.CultureInfo.InvariantCulture, fmt, args );
+			var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
+			var go = new GameObject( "more", typeof( RectTransform ) );
+			go.layer = UI_LAYER;
+			go.transform.SetParent( contentRoot.transform, false );
+			var t = MakeText( "t", go.transform, 11, 20f, 0f, contentRoot.GetComponent<RectTransform>().sizeDelta.x );
+			t.text = "<color=#B8C2CC><i>" + Fmt( tl != null ? tl.impMoreTag : null, "+{0} further cards", remaining ) + "</i></color>";
+			var tr = t.GetComponent<RectTransform>();
+			tr.anchoredPosition = new Vector2( 0f, -yTop - 18f );
+			tr.sizeDelta = new Vector2( contentRoot.GetComponent<RectTransform>().sizeDelta.x, 18f );
+			t.raycastTarget = false;
+			var grt = go.GetComponent<RectTransform>();
+			grt.anchorMin = new Vector2( 0f, 1f );
+			grt.anchorMax = new Vector2( 0f, 1f );
+			grt.pivot = new Vector2( 0f, 1f );
+			grt.anchoredPosition = new Vector2( 0f, -yTop );
+			grt.sizeDelta = new Vector2( contentRoot.GetComponent<RectTransform>().sizeDelta.x, 18f );
+			return 18f;
 		}
 
 		static TextMeshProUGUI MakeText( string name, Transform parent, int fontSize, float height, float x, float width )

@@ -353,7 +353,8 @@
     "impDeckLine": "{0} · {1} Karten",
     "impBasicTag": "Basis · gratis",
     "impXpTag": "{0} XP",
-    "impNoModelTag": "aktiv — ohne KI-Hebel",
+    "impNoModelTag": "aktiv — ohne KI-Hebel",    "impMoreTag": "+{0} weitere Karten",
+
     "impNoModelTip": "Diese Karte wird am Tisch wie aufgedruckt gespielt, ändert aber die Entscheidungen der taktischen KI nicht.",
     "impAttachTip": "Anhang: liegt auf der Deploy-Karte und wirkt auf alle Figuren der Gruppe; fällt die letzte Figur, zurück in die Spielablage — wieder ausleitbar.",
     "impBadgeDeckLine": "{0} · {1} Karten",

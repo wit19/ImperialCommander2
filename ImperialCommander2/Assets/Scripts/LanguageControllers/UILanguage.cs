@@ -90,7 +90,7 @@ public class UITacticalAI
 	// translated. impNoModelTag is the honest M12d(c) marker: card is played
 	// as printed but carries no model hook ("aktiv - ohne KI-Hebel").
 	public string impPanelTitle;
-	public string impDeckLine, impBasicTag, impXpTag, impNoModelTag, impNoModelTip;
+	public string impDeckLine, impBasicTag, impXpTag, impNoModelTag, impNoModelTip, impMoreTag;
 	public string impAttachTip;
 	public string impBadgeDeckLine, impAgendaLine;
 	public string impCampaignHeader, impCampaignXpLine;

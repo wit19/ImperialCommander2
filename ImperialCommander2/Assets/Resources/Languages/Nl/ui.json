@@ -353,7 +353,8 @@
     "impDeckLine": "{0} · {1} cards",
     "impBasicTag": "Basic · free",
     "impXpTag": "{0} XP",
-    "impNoModelTag": "active — no AI lever",
+    "impNoModelTag": "active — no AI lever",    "impMoreTag": "+{0} verdere kaarten",
+
     "impNoModelTip": "This card is played as printed at the table, but it does not change the tactical AI's decisions.",
     "impAttachTip": "Attachment: lies on its deploy card and acts on all its figures; when the last figure falls it returns to the play area and can be deployed again.",
     "impBadgeDeckLine": "{0} · {1} cards",
