@@ -266,9 +266,9 @@ namespace Saga
 			// bottom-left icon row (rules / medpac-or-"?" / settings) would bury
 			// it (Thomas playtest 29.10.: class-card and agenda rows were
 			// completely covered). M13p: the measurement runs through
-			// LeftEdgeClear() and is REPEATED on every refresh, so a not-yet
+			// SlotAnchor() and is REPEATED on every refresh, so a not-yet
 			// measurable slot at Start self-heals within 0.5 s.
-			rt.anchoredPosition = new Vector2( LeftEdgeClear(), 12f );
+			rt.anchoredPosition = SlotAnchor();
 			rt.sizeDelta = new Vector2( ROW_WIDTH, 60f );
 
 			var bg = root.AddComponent<Image>();
@@ -277,7 +277,17 @@ namespace Saga
 			// M13r: with the height capped at MAX_HEIGHT a long deck must not
 			// paint its overflow up into the briefing box area
 			root.AddComponent<UnityEngine.UI.RectMask2D>();
-			root.transform.SetAsFirstSibling();                   // HUD siblings stay on top (M11f lesson)
+			// M13u (Thomas 30.10., saga screenshot: IMPERIUM text STILL unseen):
+			// M11f's SetAsFirstSibling was the bug. Sibling order IS the paint
+			// order, so "first" paints the panel BEHIND every sibling - the
+			// opaque board/HUD background layers bury it completely, which is
+			// why no playtest screenshot ever showed a single panel pixel, no
+			// matter where we anchored it. Last sibling instead: above the
+			// backgrounds, and since the panel only occupies the HUD-proven
+			// free band it covers nothing that matters; windows opened AFTER
+			// the panel (card zoom, briefing popups, settings) are appended
+			// later and therefore paint over it - the M11f guarantee stays.
+			root.transform.SetAsLastSibling();                  // M11f lesson, corrected M13u
 
 			headerText = MakeText( "header", root.transform, 13, 15f, 0f, ROW_WIDTH - 20f );
 			headerText.fontStyle = FontStyles.Bold;
@@ -327,14 +337,17 @@ namespace Saga
 				// medpac slot is hidden in tactical mode and the "?" button
 				// sits in it - panel starts right of that, self-healing
 				var rt0 = root.GetComponent<RectTransform>();
-				var leftNow = LeftEdgeClear();
-				rt0.anchoredPosition = new Vector2( leftNow, rt0.anchoredPosition.y );
+				var slot = SlotAnchor();
+				rt0.anchoredPosition = slot;
 				if ( !geometryLogged )
 				{
 					// one breadcrumb so the next Player.log can prove WHERE
 					// the panel landed and whether the slot measurement worked
 					geometryLogged = true;
-					Debug.Log( $"ImperialPanel::geometry left={leftNow:F0} parent={rt0.parent.name} h={rt0.sizeDelta.y:F0}" );
+					var pr = rt0.parent as RectTransform;
+					Debug.Log( $"ImperialPanel::geometry x={slot.x:F0} y={slot.y:F0} parent={rt0.parent.name}"
+						+ $" parentSize={(pr != null ? pr.rect.width : 0):F0}x{(pr != null ? pr.rect.height : 0):F0}"
+						+ $" h={rt0.sizeDelta.y:F0} sibling={root.transform.GetSiblingIndex()}/{root.transform.parent.childCount}" );
 				}
 
 				var tl = DataStore.uiLanguage != null ? DataStore.uiLanguage.uiTacticalAI : null;
@@ -378,23 +391,31 @@ namespace Saga
 			return sp != null && sp.gameObject.activeInHierarchy;
 		}
 
-		/// <summary>Left start of the panel: clear of the bottom-left HUD
-		/// slot row. Measured from 'medpac button base' (the "?" button takes
-		/// over exactly that rect in tactical mode) through world space, so
-		/// it is correct across canvases; falls back to the canvas corner.
-		/// Re-evaluated every refresh (M13p) - a zero-measurement at Start
-		/// can no longer stick.</summary>
-		float LeftEdgeClear()
+		/// <summary>Panel bottom-left in parent space: clear of the
+		/// bottom-left HUD slot row. Measured from 'medpac button base'
+		/// (the "?" button takes over exactly that rect in tactical mode)
+		/// through world space, so it is correct across canvases. M13u:
+		/// the Y is now derived from the SAME visible slot instead of the
+		/// hardcoded 12 - if the panel's parent is not screen-aligned the
+		/// old constant landed outside the visible area (Thomas: "vermutlich
+		/// außerhalb des unteren sichtbaren Bereichs"). Falls back to the
+		/// canvas corner until the slot is measurable; re-evaluated every
+		/// refresh (M13p), so a zero-measurement self-heals within 0.5 s.
+		/// Returns (x, y).</summary>
+		Vector2 SlotAnchor()
 		{
 			var rt = root != null ? root.GetComponent<RectTransform>() : null;
 			var parent = rt != null ? rt.parent as RectTransform : null;
-			if ( parent == null ) return 12f;
+			if ( parent == null ) return new Vector2( 12f, 12f );
 			var medGo = GameObject.Find( "medpac button base" );
 			var medRT = medGo != null ? medGo.transform as RectTransform : null;
-			if ( medRT == null || medRT.rect.width <= 0f ) return 12f;
+			if ( medRT == null || medRT.rect.width <= 0f ) return new Vector2( 12f, 12f );
 			var slotRight = parent.InverseTransformPoint(
 				medRT.TransformPoint( new Vector3( medRT.rect.xMax, medRT.rect.center.y, 0f ) ) );
-			return slotRight.x + 24f;
+			// bottom edge of the icon strip -> panel bottom sits flush with it
+			var slotBottom = parent.InverseTransformPoint(
+				medRT.TransformPoint( new Vector3( medRT.rect.center.x, medRT.rect.yMin, 0f ) ) );
+			return new Vector2( slotRight.x + 24f, slotBottom.y );
 		}
 
 		/// <summary>One printed-card row: name + XP/basic tag + honest
