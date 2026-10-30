@@ -131,3 +131,23 @@ will. Dazu gehört zwingend der Ein-Zeilen-Fix am CM-Bar-Button
 - CampaignManager.cs:417-428 + Player.log „help button not found"
   (CM-Button-Ausfall, gleiche Namens-vs-Komponenten-Ursache wie „?",
   heute in M13aa diagnostiziert)
+
+## Umsetzung (Thomas wählt A, 30.10.)
+
+tools/mission_income_editor.py (im Repo-stamm ../tools/) hat in alle
+Saga-Missionen die CM1-Anker (Typ 24, xpToAdd>0 — sämtliche 279 liegen in
+Missionsend-/Kampagnenend-Events, keine Mid-Mission-Anker; geprüft) 1:1
+gespiegelt: 279× CM6 (xpToAdd = Autorenwert) + 279× CM7 (influenceToAdd =
+derselbe Wert), reason „mission-reward", neue GUIDs, keine Spieltexte →
+keine Übersetzungseinträge nötig (TranslationController überschreibt nur
+Texte per GUID). Run: 127 Dateien editiert (+ EMPIRE13-Sample; 10 Missionen
+ohne CM1-Anker bleiben unberührt). Validierung: alle 138 Dateien strikt
+parsebar, 279=279=279 CM1+/CM6/CM7, Idempotenz (Zweitlauf 0 Änderungen),
+Editor bricht je Datei ohne Teilschreibvorgang bei jeder Abweichung.
+Tempo: 1-2 XP + 1-2 Influence pro Missionsende → ~25 XP/~25 Influence pro
+Kampagne (Era-1-Deckkosten 36 XP; Agenda-Preise 1-4, 61 von 126 kosten 1).
+Damit: erste Karte typisch nach Mission 2-3, Agenda fast jede Mission.
+
+**Offen (folgend):** Imperium-Button in der Campaign-Manager-Leiste
+installiert nie (zeigt XP-Stand; Name-ohn-Button-Komponente, M13aa-Muster)
+und optionale Kauf-Auswahl-UI (Engine kauft greedy).

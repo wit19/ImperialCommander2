@@ -775,6 +775,20 @@
       "eventActions": [
         {
           "xpToAdd": 1,
+          "GUID": "31259e6c-14bb-4722-9865-16149296f6bb",
+          "eventActionType": 31,
+          "displayName": "Modify Imperial XP",
+          "reason": "mission-reward"
+        },
+        {
+          "influenceToAdd": 1,
+          "GUID": "24a26ee5-7fc0-4eff-8c6e-f483efb86cfd",
+          "eventActionType": 32,
+          "displayName": "Modify Imperial Influence",
+          "reason": "mission-reward"
+        },
+        {
+          "xpToAdd": 1,
           "GUID": "842c5557-055f-4c8f-95ef-67a0e8519e7b",
           "eventActionType": 24,
           "displayName": "Modify XP"
@@ -827,6 +841,20 @@
       "behaviorAll": false,
       "additionalTriggers": [],
       "eventActions": [
+        {
+          "xpToAdd": 1,
+          "GUID": "a0cc6137-8ef3-41af-a10e-18d4bd7f4131",
+          "eventActionType": 31,
+          "displayName": "Modify Imperial XP",
+          "reason": "mission-reward"
+        },
+        {
+          "influenceToAdd": 1,
+          "GUID": "1fb813a0-9b2a-4fb9-b440-0840a3403720",
+          "eventActionType": 32,
+          "displayName": "Modify Imperial Influence",
+          "reason": "mission-reward"
+        },
         {
           "xpToAdd": 1,
           "GUID": "d328ded2-d472-4e83-b198-37f9009b3c15",
