@@ -957,19 +957,16 @@ namespace Saga
 		void ApplyTacticalMedPacPolicy()
 		{
 			var tactical = TacticalAI.TacticalAIBridge.TacticalMissionActive();
-			// M13p (Thomas screenshot + Saga.unity ground truth): the bar is
-			// 'bottom button grid' (layout-group driven, bottom center) and
-			// 'medpac button base' (own bottom-left anchor) are SEPARATE -
-			// hiding medpac alone can never pull the "?" over, and M13o's
-			// attempt moved the Button's child Image out of the button,
-			// breaking the HUD ("verschoben"). The scene truth:
-			//   Canvas / medpac button base (100x100, anchor 0,0)
-			//     |- medpac button (95x95) <- TooltipHandler "MedPac"
-			//     |- medpac counter
-			//   Canvas / bottom button grid / dashboard Button / Image (=infoBtnTX, the yellow "?")
-			// The policy therefore re-parents the BUTTON ITSELF into the
-			// freed medpac base (leaving the grid re-flows its leftovers)
-			// and never touches the Image's own parentage.
+			// M13q final layout policy for tactical missions (supersedes the
+			// M13o/M13p button moves - those evicted the mission panel's "i",
+			// see Saga.unity truth below):
+			//   Canvas / bottom button grid  (the blue mission panel)
+			//     [settings | dashboard Button "i" | fame | debug | rules]
+			//   Canvas / activate imperial Button (big red cog)
+			//   Canvas / medpac button base / medpac button + counter
+			// ONLY the medpac icon and counter switch off (reference rules:
+			// wounded units stay wounded until mission end - nothing to
+			// medpac). Everything else in the HUD stays untouched.
 			GameObject medBase = GameObject.Find( "medpac button base" );
 			RectTransform medBtn = null;
 			foreach ( var th in Resources.FindObjectsOfTypeAll<TooltipHandler>() )
@@ -999,36 +996,38 @@ namespace Saga
 			// inactive base. Only the icon and the counter switch off.
 			if ( medBtn != null ) medBtn.gameObject.SetActive( false );
 
+			// M13q (Thomas screenshot): the "i" (tip[Dashboard]) belongs
+			// INSIDE the blue mission panel = 'bottom button grid'
+			// [settings | dashboard(i) | fame | debug | rules]. M13p evicted
+			// it into the medpac slot - wrong object, wrong idea. Restore it
+			// to the grid at its original sibling slot; the grid's layout
+			// group re-sizes/re-positions it exactly like its siblings, so
+			// the Ursprungszustand is re-established, not approximated.
 			var btnGO = GameObject.Find( "dashboard Button" );
 			var btnRT = btnGO != null ? btnGO.transform as RectTransform : null;
 			if ( infoBtnTX != null && btnRT != null && infoBtnTX.transform.parent != btnRT )
-				infoBtnTX.transform.SetParent( btnRT, false );   // undo any earlier image-level move
-			if ( btnRT == null )
+				infoBtnTX.transform.SetParent( btnRT, false );   // undo any image-level move
+			var grid = GameObject.Find( "bottom button grid" );
+			if ( btnRT == null || grid == null )
 			{
-				Debug.LogWarning( "SagaController()::TACTICAL mode - 'dashboard Button' not found; \"?\" stays in the grid" );
+				Debug.LogWarning( "SagaController()::TACTICAL mode - 'dashboard Button'/'bottom button grid' not found; only medpac icon/counter were switched off (M13q)" );
 				return;
 			}
-			if ( btnRT.parent != medBase.transform )
-				btnRT.SetParent( medBase.transform, false );
-			// occupy EXACTLY the medpac button's rect: same parent, so a 1:1
-			// copy of anchor/pivot/size/pos is mathematically exact - and
-			// works pre-layout because it only uses serialized anchor values
-			if ( medBtn != null )
+			if ( btnRT.parent != grid.transform )
 			{
-				btnRT.anchorMin = medBtn.anchorMin;
-				btnRT.anchorMax = medBtn.anchorMax;
-				btnRT.pivot = medBtn.pivot;
-				btnRT.sizeDelta = medBtn.sizeDelta;
-				btnRT.anchoredPosition = medBtn.anchoredPosition;
+				btnRT.SetParent( grid.transform, false );
+				btnRT.SetSiblingIndex( 1 );   // scene order: settings, dashboard, fame, debug, rules
+				var sib = grid.transform.GetChild( 0 ) as RectTransform;   // 'settings' - same layout regime
+				if ( sib != null )
+				{
+					btnRT.anchorMin = sib.anchorMin;
+					btnRT.anchorMax = sib.anchorMax;
+					btnRT.pivot = sib.pivot;
+					btnRT.sizeDelta = sib.sizeDelta;
+					btnRT.anchoredPosition = sib.anchoredPosition;
+				}
 			}
-			else
-			{
-				btnRT.anchorMin = btnRT.anchorMax = new Vector2( 0.5f, 0.5f );
-				btnRT.pivot = new Vector2( 0.5f, 0.5f );
-				btnRT.sizeDelta = new Vector2( 95f, 95f );
-				btnRT.anchoredPosition = Vector2.zero;
-			}
-			Debug.Log( "SagaController()::TACTICAL mode - medpac icon/counter off (reference rules: wounded until end of mission), \"?\" button re-seated into its slot (M13p)" );
+			Debug.Log( "SagaController()::TACTICAL mode - medpac icon/counter off (reference rules: wounded until end of mission), \"i\" back in the mission panel (M13q)" );
 		}
 
 		public void OnImperialPopup()
