@@ -213,6 +213,18 @@ namespace Saga
 	{
 		const float REFRESH_SECONDS = 0.5f;
 		const float ROW_WIDTH = 320f;
+		// M13v ROOT CAUSE (Thomas 30.10., "Text ist immer noch nicht
+		// sichtbar - prüfe gründlich"): the Saga scene has FOUR cameras; the
+		// "UI Camera" carries cullingMask bits=32 (bit 5 ONLY) and all three
+		// scene cameras exclude layer 5 (bits=215). Every UI GameObject the
+		// game itself creates at runtime sets go.layer = 5 for exactly this
+		// reason (EventPopup.cs:97, DiceRoller.cs:139, DynamicCardPrefab.cs,
+		// SagaEventPopup.cs:104 ...). Ours was built with new GameObject(),
+		// which defaults to layer 0 (Default) -> NOT a single camera in the
+		// scene ever rendered a single pixel of this panel, in ANY anchor or
+		// sibling variant. That is why every M13x position fix looked broken
+		// from the outside: the panel was never on screen, it was culled.
+		const int UI_LAYER = 5;
 		// M13r (Thomas: "da steht kein Imperium Text"): the briefing text
 		// box covers the bottom-left corner above y~240 (verified pixel-wise
 		// on his mission screenshot - the icon-strip band y=0..230 is free).
@@ -222,6 +234,11 @@ namespace Saga
 
 		GameObject root, contentRoot;
 		bool geometryLogged;
+		bool hiddenLogged;
+		bool buildAllowed;    // M13v: Update retries BuildPanel ONLY if Start's
+		                      // feature gates actually passed (a disabled
+		                      // feature must never be built by the retry loop)
+		bool parentLogged;    // M13v: build-attempt logs are once-per-session
 		TextMeshProUGUI headerText;
 		SagaCampaign campaign;
 		ImperialDisplay.Info info;
@@ -241,8 +258,15 @@ namespace Saga
 					?? SagaCampaign.LoadCampaignState( RunningCampaign.sagaCampaignGUID );
 				if ( !ImperialDisplay.FeatureActive( campaign ) ) return;
 
+				buildAllowed = true;   // gates passed -> Update may retry builds
 				BuildPanel();
-				Debug.Log( "ImperialPanel::installed (campaign " + RunningCampaign.sagaCampaignGUID + ")" );
+				// M13v: 'installed' must only ever print when the panel
+				// really exists - it did lie once already (printed while
+				// BuildPanel had silently failed), and we trusted it blind
+				// for a whole debug round.
+				Debug.Log( root != null
+					? "ImperialPanel::installed (campaign " + RunningCampaign.sagaCampaignGUID + ")"
+					: "ImperialPanel::gates ok, build pending (retries via Update)" );
 			}
 			catch ( Exception e )
 			{
@@ -253,10 +277,35 @@ namespace Saga
 		void BuildPanel()
 		{
 			var tooltip = GlowEngine.FindUnityObject<Tooltip>();
-			var canvas = tooltip != null ? tooltip.transform.parent : GameObject.Find( "Canvas" )?.transform;
-			if ( canvas == null ) return;
+			// M13v: only ride the Tooltip's container when it is actually part
+			// of the live screen. If it is an inactive popup layer (hidden until
+			// first hover) the panel would inherit activeInHierarchy=false,
+			// Update would never run and nothing would EVER show - no parent
+			// check used to exist. Prefer the plain Canvas root otherwise.
+			var canvas = tooltip != null && tooltip.transform.parent != null
+			             && tooltip.transform.parent.gameObject.activeInHierarchy
+			             ? tooltip.transform.parent : GameObject.Find( "Canvas" )?.transform;
+			if ( canvas == null )
+			{
+				// M13v: this silent return once hid a whole class of failures -
+				// a panel that never got a parent logs WHY, or the next bug
+				// report starts from zero again. Once per session (the M13v
+				// Update retry loop calls this every 0.5 s).
+				if ( !parentLogged )
+				{
+					parentLogged = true;
+					Debug.LogWarning( "ImperialPanel::BuildPanel: no parent (no Tooltip, no Canvas) -> retrying" );
+				}
+				return;
+			}
+			if ( !parentLogged )
+			{
+				parentLogged = true;
+				Debug.Log( "ImperialPanel::parent=" + canvas.name + " active=" + canvas.gameObject.activeInHierarchy );
+			}
 
 			root = new GameObject( "tacaiImperialPanel", typeof( RectTransform ) );
+			root.layer = UI_LAYER;      // M13v: THE render fix - see UI_LAYER
 			root.transform.SetParent( canvas, false );
 			var rt = root.GetComponent<RectTransform>();
 			rt.anchorMin = new Vector2( 0f, 0f );       // bottom-left corner, RIGHT of the HUD icon row
@@ -294,6 +343,7 @@ namespace Saga
 			headerText.color = new Color( 0.55f, 1f, 0.9f, 1f );
 
 			contentRoot = new GameObject( "cards", typeof( RectTransform ) );
+			contentRoot.layer = UI_LAYER;   // M13v layer fix
 			contentRoot.transform.SetParent( root.transform, false );
 			var crt = contentRoot.GetComponent<RectTransform>();
 			crt.anchorMin = new Vector2( 0f, 1f );
@@ -307,7 +357,23 @@ namespace Saga
 
 		void Update()
 		{
-			if ( root == null ) return;
+			if ( root == null )
+			{
+				// M13v self-heal: a too-early Start (Canvas/Tooltip not
+				// spawned yet) used to be PERMANENT - BuildPanel returned
+				// once, Update then idled on root==null for the whole
+				// session. Retry on the same 0.5 s clock until it works.
+				if ( !buildAllowed ) return;   // feature OFF -> never build
+				if ( Time.unscaledTime < nextRefresh ) return;
+				nextRefresh = Time.unscaledTime + REFRESH_SECONDS;
+				try { BuildPanel(); }
+				catch ( Exception e )
+				{
+					buildAllowed = false;   // one honest warning, no frame spam
+					Debug.LogWarning( "ImperialPanel::retry-build failed -> giving up: " + e.Message );
+				}
+				return;
+			}
 			if ( Time.unscaledTime < nextRefresh ) return;
 			nextRefresh = Time.unscaledTime + REFRESH_SECONDS;
 			Refresh( false );
@@ -323,14 +389,28 @@ namespace Saga
 				// permanently active (it is the persistent hero bar; only its
 				// misionInfo/fame/log child windows open and close). The rule
 				// therefore blocked the panel FOREVER. Overlay safety is
-				// already given: the panel is SetAsFirstSibling, so any opened
-				// window paints over it anyway - only the settings dialog,
-				// which lives outside this sibling stack, still blocks.
+				// already given: windows opened later than the panel are
+				// appended as LATER siblings and paint over it anyway (the
+				// panel itself is the last sibling, M13u) - only the
+				// settings dialog, which lives outside this sibling stack,
+				// still needs the explicit block.
 				bool blocked = IsSettingsOpen();
 				var infoNow = ImperialDisplay.Build( campaign );
 				bool show = !blocked && infoNow != null;
 				root.SetActive( show );
-				if ( !show ) return;
+				if ( !show )
+				{
+					// M13v: one loud diagnostic for the hidden state -
+					// previously every reason for show=false was silent and
+					// we debugged across four playtest rounds blind.
+					if ( !hiddenLogged )
+					{
+						hiddenLogged = true;
+						string why = blocked ? "settings open" : WhyInfoNull();
+						Debug.LogWarning( "ImperialPanel::hidden: " + why );
+					}
+					return;
+				}
 				info = infoNow;
 
 				// re-measure the HUD row's right edge every refresh: the
@@ -391,6 +471,25 @@ namespace Saga
 			return sp != null && sp.gameObject.activeInHierarchy;
 		}
 
+		/// <summary>M13v: why did ImperialDisplay.Build return null? Walks
+		/// the exact null-paths of Build() and names the FIRST broken stage -
+		/// Build itself stays silent (it may be probed every refresh), only
+		/// this one-shot diagnostic speaks.</summary>
+		string WhyInfoNull()
+		{
+			try
+			{
+				if ( campaign == null ) return "campaign null";
+				if ( campaign.imperialDeck == null ) return "campaign.imperialDeck null";
+				var decks = ImperialDecks.Load();
+				if ( decks == null ) return "ImperialDecks asset null (" + TacticalAIAssets.ImperialDecksRoot + ")";
+				var deck = decks.Find( campaign.imperialDeck.deckId );
+				if ( deck == null ) return "deck id '" + campaign.imperialDeck.deckId + "' not in asset";
+				return "unexpected (Build null despite found deck)";
+			}
+			catch ( Exception e ) { return "probe threw: " + e.Message; }
+		}
+
 		/// <summary>Panel bottom-left in parent space: clear of the
 		/// bottom-left HUD slot row. Measured from 'medpac button base'
 		/// (the "?" button takes over exactly that rect in tactical mode)
@@ -441,6 +540,7 @@ namespace Saga
 				tip += "\n<i>" + tl.impNoModelTip + "</i>";
 
 			var go = new GameObject( "card-" + row.CardId, typeof( RectTransform ) );
+			go.layer = UI_LAYER;   // M13v layer fix (its text child set in MakeText)
 			go.transform.SetParent( contentRoot.transform, false );
 			var t = MakeText( "t", go.transform, 12, 40f, 0f, contentRoot.GetComponent<RectTransform>().sizeDelta.x );
 			t.text = Utils.ReplaceGlyphs( line );
@@ -477,6 +577,7 @@ namespace Saga
 		static TextMeshProUGUI MakeText( string name, Transform parent, int fontSize, float height, float x, float width )
 		{
 			var go = new GameObject( name, typeof( RectTransform ) );
+			go.layer = UI_LAYER;   // M13v layer fix: header + every row text GO
 			go.transform.SetParent( parent, false );
 			var rt = go.GetComponent<RectTransform>();
 			rt.anchorMin = new Vector2( 0f, 1f );
