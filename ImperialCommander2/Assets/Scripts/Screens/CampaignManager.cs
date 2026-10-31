@@ -81,14 +81,16 @@ namespace Saga
 			float pixelHeightOfCurrentScreen = Screen.height;//.currentResolution.height;
 			float pixelWidthOfCurrentScreen = Screen.width;//.currentResolution.width;
 			aspect = pixelWidthOfCurrentScreen / pixelHeightOfCurrentScreen;
-			if ( aspect < 1.7f )//less than 16:9, such as 16:10 and 4:3
-			{
-				//switch to single view
-				switchButton.SetActive( true );
-				leftPanel.SetActive( false );
-			}
-			else
-				campaignHelpMockup.SetActive( true );
+			// M13c2 (Thomas 30.10.): the base game's small-screen single-view
+			// mode (mission list hidden, 'switch view button' shown whenever
+			// aspect < 1.7) is RETIRED for this screen: the mission list and
+			// the hero information are ALWAYS shown together, the switch
+			// button never appears. Campaign-manager dual layout exactly as
+			// the game showed it on wide screens before; the IMP bar button
+			// (Thomas: keep as is) is untouched.
+			if ( switchButton != null ) switchButton.SetActive( false );
+			leftPanel.SetActive( true );
+			campaignHelpMockup.SetActive( true );
 
 			FileManager.SetupDefaultFolders();
 
