@@ -116,7 +116,6 @@ namespace TacticalAiHarness
             Run("los.json", SecLos);
             Run("dice.json", SecDice);
             Run("threat.json", SecThreat);
-            Run("decks.json", SecDecks);
             Run("skill.json", SecSkill);
             Run("risk.json", SecRisk);
             Run("focus.json", SecFocus);
@@ -138,7 +137,6 @@ namespace TacticalAiHarness
             Run("imperial_purchases.json", SecImperialPurchases);
             Run("agenda.json", SecAgenda);
             Run("imperial_card_effects.json", SecImperialCardEffects);
-            Run("action_tree.json", SecActionTree);
             Run("optional_deploy.json", SecOptionalDeploy);
             Run("settings_load.json", SecSettingsLoad);
 
@@ -535,112 +533,4 @@ namespace TacticalAiHarness
             d.OrderBy(kv => kv.Key, StringComparer.Ordinal);
     }
 
-    /// CPython random.Random(seed) MT19937 replay (getrandbits +
-    /// _randbelow_with_getrandbits). Only used to reproduce the untraced
-    /// initial OrderDeck shuffle (random.Random(0)).
-    public sealed class PyRandom : IRandom
-    {
-        readonly uint[] _mt = new uint[624];
-        int _idx = 624;
-
-        public PyRandom(ulong seed)
-        {
-            // CPython Random(int): the seed is split into 30-bit words and
-            // fed to init_by_array (seed 0 -> key [0]). NOT plain
-            // init_genrand, and init_by_array uses >>30 (not the classic
-            // mt19937ar >>27) in both scrambles.
-            var key = new List<uint> { (uint)(seed & 0x3FFFFFFF) };
-            for (ulong s = seed >> 30; s > 0; s >>= 30) key.Add((uint)(s & 0x3FFFFFFF));
-            InitByArray(key);
-        }
-
-        void InitGenrand(uint s)
-        {
-            unchecked
-            {
-                _mt[0] = s;
-                for (int i = 1; i < 624; i++)
-                    _mt[i] = (uint)(1812433253UL * (_mt[i - 1] ^ (_mt[i - 1] >> 30)) + (ulong)i);
-            }
-            _idx = 624;
-        }
-
-        void InitByArray(List<uint> key)
-        {
-            InitGenrand(19650218);
-            unchecked
-            {
-                int i = 1, j = 0;
-                int k = Math.Max(624, key.Count);
-                for (; k > 0; k--)
-                {
-                    _mt[i] = (uint)((_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30)) * 1664525UL))
-                                    + key[j] + (ulong)j);
-                    i++; j++;
-                    if (i >= 624) { _mt[0] = _mt[623]; i = 1; }
-                    if (j >= key.Count) j = 0;
-                }
-                for (k = 623; k > 0; k--)
-                {
-                    _mt[i] = (uint)((_mt[i] ^ ((_mt[i - 1] ^ (_mt[i - 1] >> 30)) * 1566083941UL))
-                                    - (ulong)i);
-                    i++;
-                    if (i >= 624) { _mt[0] = _mt[623]; i = 1; }
-                }
-                _mt[0] = 0x80000000;
-            }
-        }
-
-        uint NextUInt32()
-        {
-            if (_idx >= 624) { Twist(); _idx = 0; }
-            uint y = _mt[_idx++];
-            y ^= y >> 11;
-            y ^= (y << 7) & 2636928640;
-            y ^= (y << 15) & 4022730752;
-            y ^= y >> 18;
-            return y;
-        }
-
-        void Twist()
-        {
-            for (int i = 0; i < 624; i++)
-            {
-                uint y = (_mt[i] & 0x80000000) + (_mt[(i + 1) % 624] & 0x7fffffff);
-                _mt[i] = _mt[(i + 397) % 624] ^ (y >> 1);
-                if ((y % 2) != 0) _mt[i] ^= 2567483615;
-            }
-        }
-
-        uint GetRandBits(int bits)
-        {
-            if (bits <= 0) return 0;
-            if (bits <= 32) return NextUInt32() >> (32 - bits);
-            uint v = 0;
-            int need = bits;
-            while (need > 0)
-            {
-                int take = Math.Min(32, need);
-                v = (v << take) | GetRandBits(take);
-                need -= take;
-            }
-            return v;
-        }
-
-        public int RandBelow(int n)
-        {
-            if (n <= 1) return 0;
-            int k = 0; int t = n; while (t > 0) { k++; t >>= 1; }
-            ulong r = GetRandBits(k);
-            while (r >= (ulong)n) r = GetRandBits(k);
-            return (int)r;
-        }
-
-        public double NextUnit()
-        {
-            ulong a = NextUInt32() >> 5;
-            ulong b = NextUInt32() >> 6;
-            return (a * 67108864.0 + b) / 9007199254740992.0;
-        }
-    }
 }

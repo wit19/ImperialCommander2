@@ -292,6 +292,33 @@ Bewegungsanteil herum). Deshalb:
   Aktivierung beide Aktionen; E-Web zeigt weiterhin gelegentlich nur eine
   (Stativ-Regel, Text erklärt es).
 
+## 4e. dev 38 — Order-Decks entfernt (M11): das Popup kommt jetzt direkt von der Figur
+
+Thomas-Frage 31.10.2026: „Jede Figur hat 2 Aktionen, definiert über die
+Aktionstexte — wir brauchen gar kein Deck. Das ist eine Konzeptleiche."
+Korrekt: nach dem RR-Deck-Gesetz (4d) mischten alle 89 Gruppen nur noch
+identische Karten, keine Karte verweigerte mehr eine Aktivierung, und die
+Reihenfolge steuerte ohnehin der Planner. Das Deck war eine leere Hülle aus
+Zeiten des gedruckten Vorgänger-Spiels. Deshalb:
+
+- **Kein Order-Deck mehr.** Das Popup zeigt pro Aktivierung direkt die
+  gedruckten Aktionen der Figur: Bewegung + Angriff (RR-Feldregel, ein
+  Angriffsfeld), gerendert als Wenn-Dann-Baum der Doktrin wie bisher.
+- **Stativ (E-Web DG007/DG008) bleibt regeltreu besonders:** gedruckte
+  Regel = Bewegung ODER Angriff, nie beides. Das Popup führt jetzt den
+  Angriff zuerst und der Bewegungstext sagt ausdrücklich, dass jede
+  Bewegung den Schuss kostet — regeltreuer als vorher (die alten
+  Misch-Karten erlaubten gelegentlich beides in einer Aktivierung).
+- **Im Spiel nichtsanders:** Offizier, Sturmtruppler, Bösewichte — alle
+  Popups, Nummern und Texte bleiben, nur die Quelle ist jetzt die Figur.
+  Custom-/Embedded-Importe (fremde Karten-IDs) laufen weiter auf dem
+  Legacy-Pfad.
+- **Sonderfähigkeiten der Bösewichte** (M11e-Renderer, dritter Block)
+  unverändert erreichbar.
+- **Im Spiel prüfen:** bei jeder imperialen Figur erscheinen beide
+  Aktionen; E-Web zeigt Angriff zuerst mit dem Stativ-Hinweis im
+  Bewegungstext; kein Popup verweist mehr auf Karten oder Mischstapel.
+
 ## 5. Bekannte Grenzen (bewusst so entschieden)
 
 - Die KI sieht keine Sichtlinien — Angriffe „durch Wände" verhindert sie über
@@ -306,13 +333,13 @@ Bewegungsanteil herum). Deshalb:
   durchgehend, was die KI wirklich nutzt.
 - **Nicht dieselbe Gegner-Karte zweimal als eigene Gruppe aufstellen** (z. B. zwei
   eigenständige Sturmtruppen-Gruppen mit identischer Karte): Planner-Status ist
-  pro Karten-ID geführt, die zweite Instanz zieht eine zweite Ordnerkarte (bekannt,
+  pro Karten-ID geführt, die zweite Instanz plant separat (bekannt,
   M5-Instanz-Keying). Gruppengröße 2+3 derselben Karte ist wie immer okay.
 - Master-Schalter **nicht mitten in einer laufenden Mission umschalten** — geplant
   wird ohnehin nur rundenweise, aber ein Umschalten ist kein sauberer Moduswechsel.
-- Die angezeigte Ordnerkarte zeigt abstrakte Blöcke (`move`/`attack`) statt des
-  gedruckten Instruktionstextes (Platzhalter-UX, vor dem PR gemappt).
-- Side-Missions ohne Order-Deck fallen auf die Zufallsreihenfolge zurück (dokumentiert).
+- Missionen, die nur Nicht-Standardkarten einsetzen (nicht auf der
+  Whitelist der ausgelieferten Karten), laufen komplett auf der
+  Zufallsreihenfolge zurück (dokumentiert; M11: Whitelist statt Order-Deck).
 - Custom-Missionen mit Embedded-Karten (eigene Karten-IDs): diese Gruppen laufen
-  automatisch auf dem Legacy-Pfad (kein Order-Deck = kein Plan), der Rest der Mission
+  automatisch auf dem Legacy-Pfad (nicht auf der Whitelist = kein Plan), der Rest der Mission
   bleibt taktisch.

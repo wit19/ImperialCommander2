@@ -33,11 +33,10 @@
 //       DG071 IG-88 - every En abilities entry literally named "Assault";
 //       Sentry Droids print "{A} Multi-Fire", a DIFFERENT keyword, out of
 //       scope): the printed text permits several attack actions per
-//       activation. NOT ENFORCED - documented ORD-schema limit: the deck
-//       schema and the concept-2 fairness law (OrderDeck.ValidateCard: at
-//       most ONE attack block per card, Profil-A budget; every deck in
-//       order_decks.json validates through it) cannot represent a second
-//       attack block without amending the fairness law itself, and no
+//       activation. NOT ENFORCED - the (M11-retired) deck schema and the
+//       concept-2 fairness law (OrderDeck.ValidateCard: at
+//       most ONE attack block per card, Profil-A budget) could not represent
+//       a second attack block without amending the fairness law itself, and no
 //       threat-budget lever for attack counts exists in ThreatEconomy
 //       (it budgets focus bids). Attacks therefore STAY at 1 for these
 //       figures; the keyword is carried so a future fairness-law decision

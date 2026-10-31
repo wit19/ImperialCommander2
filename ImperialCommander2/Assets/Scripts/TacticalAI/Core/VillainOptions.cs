@@ -18,8 +18,9 @@
 //
 // THE YARDSTICK (scope: "schlaegt den regulaeren Wuerfel-Angriff im
 // ThreatEconomy-Score - gleiche Score-Logik wie Bewegung vs. Angriff heute"):
-// the same printed-expectation calibration the ORD decks are calibrated with
-// (order_decks.json card_schema "cards_ev" = Dice.PrintedEv, the exact
+// the same printed-expectation calibration the (M11-retired) ORD decks were
+// calibrated with (order_decks.json card_schema "cards_ev" = Dice.PrintedEv,
+// the exact
 // rational dice-damage expectation WITHOUT defense/pairing - no RNG). The
 // regular attack contributes PrintedEv(card) when it is LEGAL at the
 // activation position, 0 when it is not; an option contributes its printed

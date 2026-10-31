@@ -14,12 +14,14 @@
 //                           which is the bit-identity proof for the
 //                           reference/S1..S3 ("legacy behaviour") side
 //   * assault schema cap .. an Assault (Sturm) figure keeps attack_actions
-//                           <= 1: the ORD card schema / concept-2 fairness
-//                           law (OrderDeck.ValidateCard: max ONE attack
-//                           block per card) cannot represent the printed
-//                           second attack, so MultiAttack/FocusFire are
-//                           carried in the table but NOT enforced
-//                           (documented M11c2 schema limit).
+//                           <= 1: the M11-retired ORD card schema / concept-2
+//                           fairness law (OrderDeck.ValidateCard: max ONE
+//                           attack block per card) could never represent the
+//                           printed second attack, so MultiAttack/FocusFire
+//                           are carried in the table but NOT enforced
+//                           (documented M11c2 schema limit, unchanged by the
+//                           deck removal - ThreatEconomy has no attack-count
+//                           lever and enforcement stays out of scope).
 //
 // Like world_feed.json / overlord_focus.json this is a C#-side canonical
 // vector file (the sim has no keyword layer); expect blocks were recorded

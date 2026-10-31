@@ -308,7 +308,8 @@ namespace TacticalAI.Core
         /// <summary>The deterministic setup choice: rank every legal set
         /// (total desc, id asc), take six; the 18 cards (set order = chosen
         /// order, card order = agenda1..3) are then shuffled with Python
-        /// OrderDeck shuffle semantics on the same seeded RNG - that list IS
+        /// random.shuffle semantics on the same seeded RNG (M11: the retired
+        /// OrderDeck used the identical semantics) - that list IS
         /// the campaign Agenda deck and is frozen into the store. Illegal
         /// sets appear in the score tuple flagged legal=false but are never
         /// chosen (full audit trail, same as M12b's ranked tuple).</summary>
@@ -373,7 +374,8 @@ namespace TacticalAI.Core
         }
 
         /// <summary>Canonical shuffle: for i=n-1..1: j = RandBelow(i+1), swap
-        /// (Python random.shuffle semantics, same as OrderDeck.Shuffle).</summary>
+        /// (Python random.shuffle semantics - the canonical form, identical to
+        /// the M11-retired OrderDeck.Shuffle).</summary>
         public static void Shuffle(List<string> list, DeterministicRandom rng)
         {
             for (int i = list.Count - 1; i >= 1; i--)

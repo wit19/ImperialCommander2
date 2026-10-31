@@ -8,8 +8,10 @@
 // What is faithful TODAY, inside this repo's runtime model:
 //  * round activation ORDER  -> Core OrderPlanner (initiative/elite/deterministic
 //    tiebreak, seeded DeterministicRandom, why-strings; never GlowEngine RNG),
-//  * per-round order DECK CARD (printed blocks) -> Core OrderDeckManager from
-//    the public Resources/TacticalAI/order_decks.json asset,
+//  * per-round activation blocks -> synthesized since M11 (Thomas 31.10.:
+//    the order DECKS were a concept corpse - RR gives every activation its
+//    printed actions (move + attack, one attack cap); the printed Stativ/
+//    Tripod exclusion lives on the figure (catalog IsTripod), not on a card),
 //  * deployment-point choice -> deterministic (no hidden RNG),
 //  * target selection        -> deterministic priority order, no hidden RNG.
 //
@@ -39,8 +41,8 @@ namespace TacticalAI
     /// activation. Null plan => the popup runs its untouched legacy path.</summary>
     public sealed class ActivationPlanData
     {
-        public string DeckCardId;
-        public string[] Blocks;         // printed order-card blocks (public text)
+        public string CardId;           // M11: the activating deployment card (was DeckCardId)
+        public string[] Blocks;         // action tokens pre-render (public text)
         public string TargetName;       // deterministic focus target
         public string TargetWhy;
         public string ExplainLine;      // printed why-string (ExplainLevel)
@@ -72,7 +74,27 @@ namespace TacticalAI
         static WorldEventsUnity _feedAdapter;
         static bool _feedTried;
 
-        static Tac.OrderDeckManager _deckMgr;
+        // M11 (Thomas 31.10.): order decks retired (concept corpse). The set
+        // below replaces the old deck-membership check as the tactical-support
+        // whitelist: it is the EXACT key set of the retired public
+        // order_decks.json artifact (89 shipped cards DG001-DG069 + the 20
+        // unique villains DG071-DG090; DG070 never shipped) - a printed-card
+        // fact, no hidden data. Custom/embedded imports stay outside and keep
+        // the legacy popup/activation path verbatim.
+        internal static readonly HashSet<string> TacticalShippedIds =
+            new HashSet<string>
+            {
+                "DG001","DG002","DG003","DG004","DG005","DG006","DG007","DG008","DG009","DG010",
+                "DG011","DG012","DG013","DG014","DG015","DG016","DG017","DG018","DG019","DG020",
+                "DG021","DG022","DG023","DG024","DG025","DG026","DG027","DG028","DG029","DG030",
+                "DG031","DG032","DG033","DG034","DG035","DG036","DG037","DG038","DG039","DG040",
+                "DG041","DG042","DG043","DG044","DG045","DG046","DG047","DG048","DG049","DG050",
+                "DG051","DG052","DG053","DG054","DG055","DG056","DG057","DG058","DG059","DG060",
+                "DG061","DG062","DG063","DG064","DG065","DG066","DG067","DG068","DG069",
+                "DG071","DG072","DG073","DG074","DG075","DG076","DG077","DG078","DG079","DG080",
+                "DG081","DG082","DG083","DG084","DG085","DG086","DG087","DG088","DG089","DG090",
+            };
+
         static Dictionary<string, Tac.DeploymentCard> _catalog;
         // dev 11: card id -> doctrine pattern for the CURRENT round (fed from
         // the Core Figure records; 'aggressive' everywhere until M4 assigns
@@ -100,7 +122,6 @@ namespace TacticalAI
 
         public static void ResetSession()
         {
-            _deckMgr = null;
             _catalog = null;
             _patternByCard = null;
             _planRound = -1;
@@ -360,7 +381,7 @@ namespace TacticalAI
 
         static void EnsureRound(int roundNo)
         {
-            if (_planRound == roundNo && _deckMgr != null) return;
+            if (_planRound == roundNo) return;
             // M5: fresh feed state BEFORE building this round's plan
             var feedView = PullFeedView();
             BuildGroups(out var facts, out var figures, feedView);
@@ -466,23 +487,9 @@ namespace TacticalAI
             _publicLine = plan.PublicLine(names);
             _planRound = roundNo;
 
-            // deck discipline: reap what died before activating, then deal
-            // EVERY living group's card for this round (canonical figure order)
-            EnsureDecks();
-            if (_deckMgr != null)
-            {
-                _deckMgr.ReapUnused(roundNo);
-                // custom/embedded cards (DataStore.AddEmbeddedImportsToPools) have no
-                // order deck: deal them nothing (their popup falls back to legacy) and
-                // never let a missing deck abort the round flow (KeyNotFound previously
-                // escaped into SagaController.IncreaseRound and hung the mission).
-                var dealt = figures.FindAll(f => f != null && _deckMgr.DecksByCard.ContainsKey(f.Card.Id));
-                try { _deckMgr.DrawRoundAll(roundNo, dealt, (int)(SessionSeed() & 0x7FFFFFFF)); }
-                catch (Exception e)
-                {
-                    Debug.LogError("TacticalAIBridge::deal failed - legacy this round: " + e.Message);
-                }
-            }
+            // M11 (Thomas 31.10.): the per-round order-card deal is GONE with
+            // the decks (concept corpse). Nothing to reap, nothing to deal -
+            // the round plan above is the only round-start state.
         }
 
         // ------------------------------------------------------ activation hook
@@ -551,33 +558,27 @@ namespace TacticalAI
             EnsureSessionFresh();
             if (!ActiveNow() || cd == null) return false;   // M8/F2: mission badge OFF => legacy popup
             EnsureRound(CurrentRound());
-            EnsureDecks();
-            if (_deckMgr == null) return false;    // asset failed -> legacy + error already logged
+            EnsureCatalog();
+            Tac.DeploymentCard catCard;
+            // M11 (Thomas 31.10.): the order decks are retired as a concept
+            // corpse - no assets to load, no cards to draw or finish. The
+            // catalog membership (printed-card whitelist, see
+            // TacticalShippedIds) alone decides tactical vs. legacy popup;
+            // custom/embedded imports are not shipped printed cards and keep
+            // the legacy path verbatim.
+            if (_catalog == null || !_catalog.TryGetValue(cd.id, out catCard)) return false;
 
-            if (!_deckMgr.RoundCards.TryGetValue(cd.id, out var card))
-            {
-                // group joined mid-round: it was not part of the round-start
-                // deal; draw its card now (documented reinforcements delta).
-                var fig = MakeFigure(cd, Math.Max(0, IndexOf(cd)));
-                if (fig != null && _deckMgr.DecksByCard.ContainsKey(cd.id))
-                {
-                    try
-                    {
-                        _deckMgr.DrawRoundAll(_planRound, new List<Tac.Figure> { fig },
-                                              (int)(SessionSeed() & 0x7FFFFFFF));
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogWarning("TacticalAIBridge::delta draw failed, legacy popup: " + e.Message);
-                        return false;
-                    }
-                }
-                if (!_deckMgr.RoundCards.TryGetValue(cd.id, out card)) return false;
-            }
-            var blocks = card.Blocks ?? Array.Empty<string>();
-            _deckMgr.FinishCard(cd.id);            // activation resolves the dealt card
-
-            plan = new ActivationPlanData { DeckCardId = card.Id, Blocks = blocks };
+            // RR gives EVERY activation its printed actions: one movement and
+            // one attack (two action slots, one attack cap - rendered per the
+            // doctrine pattern below). The ONLY printed exclusion is the
+            // Stativ/Tripod rule (movement OR attack, never both): its blocks
+            // lead with the attack and the M13t emplacement trees state the
+            // exclusion in the action text itself (moveGuardTripod: "leaving
+            // your space means no shot"). The figure's printed facts decide -
+            // never a drawn card.
+            plan = new ActivationPlanData { CardId = cd.id, Tripod = catCard.IsTripod };
+            var blocks = plan.Tripod ? new[] { "attack", "move" }
+                                     : new[] { "move", "attack" };
             if (TrySelectTarget(cd, out var targetName, out var why))
             {
                 plan.HasTarget = true;
@@ -595,14 +596,10 @@ namespace TacticalAI
             // blockers on the objective, hunt-missions run zero guards.
             // The renderer carries full action-tree text for all six
             // patterns, so no doctrine ever ships as bare tokens.
-            EnsureCatalog();
+            // (M11: the Tripod flag already rides on the plan from the same
+            // catalog record - see the block synthesis above.)
             plan.Pattern = _patternByCard != null && _patternByCard.TryGetValue(cd.id, out var pat)
                            && !string.IsNullOrEmpty(pat) ? pat : "aggressive";
-            // M13t: printed Stativ/Tripod flag for the renderer (see
-            // ActivationPlanData.Tripod; same catalog source as the pattern).
-            Tac.DeploymentCard tripodCard;
-            plan.Tripod = _catalog != null && _catalog.TryGetValue(cd.id, out tripodCard)
-                          && tripodCard.IsTripod;
             // Playtest 27.10 (Thomas): raw deck tokens ('move', 'attack') are
             // not an instruction a human Imperial player can execute. Render
             // every block as a concrete, localized order naming the focus
@@ -700,19 +697,16 @@ namespace TacticalAI
             var pat = plan.Pattern ?? "aggressive";
             bool priorAttack = false;   // one-attack-per-activation rule tracker
             outp.Add(TF(L.doctrineHeader, DoctrineName(pat, L)));
-            // M13a (playtest 28.10, Thomas): the numbers are a Wenn-Dann
-            // TREE, not a to-do list. Shipped decks genuinely print 1-action
-            // cards (mix keys A/M/R/S in order_decks.json, e.g. DG001-7/8
-            // ['attack']) - labelling such a lone block "Aktion 1" made
-            // players wait for a missing "Aktion 2". So: exactly ONE action
-            // block -> unnumbered solo label; >=2 -> keep "Aktion {n}" and
-            // state the RR slot rule (two action slots, one attack
-            // cap for non-heroes) right under the doctrine header.
-            // The count decision is Core-pure (OrderDeck.CountActionBlocks,
-            // harness action_tree.json + live ActionTreeGate); both strings
-            // live in ui.json (localization convention). Missing keys fall
-            // back to the old numbered rendering - never an empty line.
-            int actions = Tac.OrderDeck.CountActionBlocks(toks);
+            // Thomas 28.10: the numbers are a Wenn-Dann TREE, not a to-do
+            // list. Since M11 every shipped activation carries its printed
+            // action pair (solo labels only survive as a rendering fallback,
+            // e.g. a future one-action printed special case) - labelling a
+            // lone block "Aktion 1" would make players wait for a missing
+            // "Aktion 2". So: exactly ONE action block -> unnumbered solo
+            // label; >=2 -> keep "Aktion {n}". Both strings live in ui.json
+            // (localization convention); missing keys fall back to the old
+            // numbered rendering - never an empty line.
+            int actions = CountActionBlocks(toks);
             bool solo = actions <= 1 || string.IsNullOrEmpty(L.actionSoloFormat);
             // M13c (Thomas 30.10): the doctrineTreeLead lead-in ("Diese Karte
             // zeigt die Aktionen..." + standalone "Grundregel:" paragraph) is
@@ -832,6 +826,19 @@ namespace TacticalAI
                 }
             }
             return outp.ToArray();
+        }
+
+        /// <summary>Action-block count for the solo/numbered label decision.
+        /// M11: moved here from the retired Core OrderDeck (identical token
+        /// set; 'shuffle' and unknown tokens never count as actions).</summary>
+        internal static int CountActionBlocks(string[] blocks)
+        {
+            if (blocks == null) return 0;
+            int n = 0;
+            foreach (var b in blocks)
+                if (b == "move" || b == "attack" || b == "special" ||
+                    b == "rest" || b == "interact") n++;
+            return n;
         }
 
         /// Thomas 29.10 (playtest): decision trees are MULTI-LINE by design
@@ -1421,23 +1428,13 @@ namespace TacticalAI
             return h;
         }
 
-        static void EnsureDecks()
-        {
-            if (_deckMgr != null) return;
-            var root = TacticalAIAssets.OrderDecksRoot;
-            if (root == null) return;
-            try { _deckMgr = Tac.OrderDeckManager.Load(root); }
-            catch (Exception e)
-            {
-                Debug.LogError("TacticalAIBridge::order_decks load failed: " + e.Message);
-                _deckMgr = null;
-            }
-        }
+        // M11 (Thomas 31.10.): EnsureDecks/OrderDeckManager are GONE with the
+        // order decks - the activation blocks are synthesized from the
+        // figure's printed facts (see TryBuildActivationPlanInner).
 
         static void EnsureCatalog()
         {
             if (_catalog != null) return;
-            EnsureDecks();   // known-deck ids decide villain inclusion (DG071-DG090 ship decks)
             _catalog = new Dictionary<string, Tac.DeploymentCard>();
             // M4 (Thomas 29.10): doctrines are SITUATION-driven. The mission
             // posture decides whether anyone may guard AT ALL; the printed
@@ -1457,8 +1454,13 @@ namespace TacticalAI
             foreach (var cd in pools)
             {
                 if (cd.isDummy) continue;
-                bool hasDeck = _deckMgr != null && _deckMgr.DecksByCard.ContainsKey(cd.id);
-                if (cd.characterType != Saga.CharacterType.Imperial && !hasDeck) continue;
+                // M11: shipped-tactical-support membership (was: has an order
+                // deck). The unique villains (DG071-DG090) live in the app's
+                // SEPARATE villainCards list and are NOT characterType
+                // Imperial - the whitelist lets exactly the printed shipped
+                // roster in, custom imports stay legacy.
+                bool shipped = TacticalShippedIds.Contains(cd.id);
+                if (cd.characterType != Saga.CharacterType.Imperial && !shipped) continue;
                 if (_catalog.ContainsKey(cd.id)) continue;
                 try
                 {

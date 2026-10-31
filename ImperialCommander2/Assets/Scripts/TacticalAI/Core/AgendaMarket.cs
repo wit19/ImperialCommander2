@@ -17,7 +17,7 @@
 //
 // Determinism law: one stage is a PURE function of
 //   deckBefore (store order), influence, profile, seed, stageSeq.
-// Shuffle = canonical Python shuffle semantics (OrderDeck/AgendaCards.
+// Shuffle = canonical Python shuffle semantics (AgendaCards.
 // Shuffle) on DeterministicRandom(seed ^ Fnv1a64("agenda-market|" + stage)).
 // The RR shuffles the deck again before EVERY stage, so the physical return
 // order of unpurchased cards is mechanically dead - we still freeze the

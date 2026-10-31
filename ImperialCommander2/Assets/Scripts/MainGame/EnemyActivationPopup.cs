@@ -151,7 +151,7 @@ public class EnemyActivationPopup : MonoBehaviour
 			//replace the random instruction option - no random option pick, no
 			//GetModifiedRepositioning rewrite. Mission event instruction overrides
 			//still apply (they are scenario rules, not hidden enemy knowledge).
-			Debug.Log( $"ShowSaga()::TACTICAL order card {tacPlan.DeckCardId} ({tacPlan.Blocks.Length} blocks)" );
+			Debug.Log( $"ShowSaga()::TACTICAL activation {tacPlan.CardId} ({tacPlan.Blocks.Length} blocks)" );
 			// Thomas 29.10: reading order = FOCUS TARGET first, then the
 			// action blocks, then (only when the ERKLÄRUNG setting is on) the
 			// explanation last. '\n' splits every decision-tree branch onto
