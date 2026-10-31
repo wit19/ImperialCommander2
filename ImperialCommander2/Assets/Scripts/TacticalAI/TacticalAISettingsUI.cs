@@ -133,6 +133,13 @@ namespace TacticalAI
                 TacticalAISettings.ExplainLevel = Next(TacticalAISettings.ExplainLevel, TacticalAISettings.ExplainLevelValues);
                 Refresh();
             });
+            // M13c (Thomas 30.10): show/hide the general RR info block under
+            // the action texts - same row style as EXPLAIN, default ON.
+            MakeRow(go.transform, "info", () =>
+            {
+                TacticalAISettings.InfoText = !TacticalAISettings.InfoText;
+                Refresh();
+            });
             // M13h: the old non-clickable note line under the rows ("From S4 on
             // the AI plays the printed card abilities ...") is REMOVED by Thomas'
             // decision 28.10: it referenced internal 'S4' labels no player ever
@@ -290,6 +297,11 @@ namespace TacticalAI
                             ? Pick(tl != null ? tl.expFull : null, "FULL")
                             : Pick(tl != null ? tl.expPostHoc : null, "POST-HOC");
                     break;
+                case "info":
+                    value = TacticalAISettings.InfoText
+                        ? Pick(tl != null ? tl.setOn : null, "ON")
+                        : Pick(tl != null ? tl.setOff : null, "OFF");
+                    break;
                 default: return kind;
             }
             bool master = kind == "master";
@@ -297,7 +309,8 @@ namespace TacticalAI
             else if (master) heading = tl.setHeading;
             else if (kind == "mode") heading = tl.setMode;
             else if (kind == "skill") heading = tl.setSkill;
-            else heading = tl.setExplain;
+            else if (kind == "explain") heading = tl.setExplain;
+            else heading = tl.setInfo;   // M13c info-block row
             // dialog rows render in caps like the Rundenlimit neighbours
             return (tl != null ? tl.setRowFormat : "{0}:  {1}")
                    .Replace("{0}", heading).Replace("{1}", value.ToUpperInvariant());

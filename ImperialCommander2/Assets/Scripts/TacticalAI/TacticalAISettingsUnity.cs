@@ -28,7 +28,8 @@ namespace TacticalAI
             // the loader, so no migration is needed any more.
             Debug.Log($"TacticalAISettingsUnity::mode={TacticalAISettings.Mode}{(TacticalAISettings.HasModeOverride ? " (OVERRIDE)" : "")} enabled={TacticalAISettings.Enabled} " +
                       $"skill={TacticalAISettings.SkillLevel} " +
-                      $"explain={TacticalAISettings.ExplainLevel}");
+                      $"explain={TacticalAISettings.ExplainLevel}" +
+                     $" info={TacticalAISettings.InfoText}");
         }
 
         /// <summary>save-hook contract (see TacticalAISettings.SetSaveHook):

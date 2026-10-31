@@ -630,13 +630,23 @@ namespace TacticalAI
             // costs an action; it is never a free side-effect of movement.
             // Missing keys skip their line (never a blank row).
             var Li = UIx;
-            if (Li != null && (!string.IsNullOrEmpty(Li.ordInfoAttack)
-                               || !string.IsNullOrEmpty(Li.ordInfoDoor)))
+            // M13c (Thomas 30.10): ONE merged info paragraph at the door-law
+            // position - basic attack rule + attack line + door law - under
+            // the actions, BEFORE the gated explanation; hideable via the new
+            // settings row "Info-Text" (default ON). Missing keys skip their
+            // sentence (never a blank row / dangling separator).
+            if (TacticalAISettings.InfoText && Li != null)
             {
-                var withInfo = new List<string>(plan.Blocks ?? new string[0]);
-                if (!string.IsNullOrEmpty(Li.ordInfoAttack)) withInfo.Add(Li.ordInfoAttack);
-                if (!string.IsNullOrEmpty(Li.ordInfoDoor)) withInfo.Add(Li.ordInfoDoor);
-                plan.Blocks = withInfo.ToArray();
+                var infoLines = new List<string>();
+                if (!string.IsNullOrEmpty(Li.ordInfoRule)) infoLines.Add(Li.ordInfoRule);
+                if (!string.IsNullOrEmpty(Li.ordInfoAttack)) infoLines.Add(Li.ordInfoAttack);
+                if (!string.IsNullOrEmpty(Li.ordInfoDoor)) infoLines.Add(Li.ordInfoDoor);
+                if (infoLines.Count > 0)
+                {
+                    var withInfo = new List<string>(plan.Blocks ?? new string[0]);
+                    withInfo.Add(string.Join(" ", infoLines));   // internal ONE block
+                    plan.Blocks = withInfo.ToArray();
+                }
             }
             return true;
         }
@@ -704,9 +714,9 @@ namespace TacticalAI
             // back to the old numbered rendering - never an empty line.
             int actions = Tac.OrderDeck.CountActionBlocks(toks);
             bool solo = actions <= 1 || string.IsNullOrEmpty(L.actionSoloFormat);
-            if (actions >= 2 && !string.IsNullOrEmpty(L.doctrineTreeLead))
-                foreach (var lead in L.doctrineTreeLead.Split('\n'))
-                    if (!string.IsNullOrEmpty(lead)) outp.Add(lead);
+            // M13c (Thomas 30.10): the doctrineTreeLead lead-in ("Diese Karte
+            // zeigt die Aktionen..." + standalone "Grundregel:" paragraph) is
+            // REMOVED; the basic attack rule lives in the merged info block.
             for (int n = 0; n < toks.Length; n++)
             {
                 var tok = toks[n];
@@ -811,7 +821,10 @@ namespace TacticalAI
                         EmitBlock(outp, act, TF(L.interactLine));
                         break;
                     case "shuffle":
-                        outp.Add(TF(L.shuffleNote));
+                        // M13c (Thomas 30.10): the "(afterwards: shuffle this
+                        // group's deck)" note is DELETED - this app does not
+                        // hand-shuffle group decks, the line was not true.
+                        // The token stays consumed silently (never verbatim).
                         break;
                     default:
                         outp.Add(tok);   // unknown token: verbatim, never silently dropped
@@ -980,7 +993,7 @@ namespace TacticalAI
             var parts = new List<string>();
             if (Wounded(pick)) parts.Add(TF(L.focusWounded));
             parts.Add(TF(L.focusFirepower));
-            parts.Add(TF(L.focusNoChance));
+            // M13c (Thomas 30.10): the "kein Zufall / no chance" tail removed.
             heroName = pick.name;
             why = TF(L.focusPrefix) + heroName + " \u2014 " + string.Join("; ", parts);
             return true;
@@ -1328,8 +1341,8 @@ namespace TacticalAI
             else if (dec.StrainDruckUnscharf.HasValue && dec.StrainDruckUnscharf.Value > 0
                      && dec.StrainPriorRunden.HasValue && dec.StrainPriorDecke.HasValue)
                 parts.Add(TF(L.ordStrainFuzzy, dec.StrainPriorRunden.Value, dec.StrainPriorDecke.Value));
-            parts.Add(TF(L.ordRoundFocus));
-            parts.Add(TF(L.focusNoChance));
+            // M13c (Thomas 30.10): the "alle Gruppen richten sich auf
+            // dasselbe Fokusziel; kein Zufall" tail removed by Thomas.
             return TF(L.focusPrefix) + heroName + " — " + string.Join("; ", parts);
         }
 

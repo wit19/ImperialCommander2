@@ -278,8 +278,10 @@ namespace TacticalAI.Core
         /// renders WITHOUT a number, unknown tokens pass through verbatim
         /// (never numbered) - exactly the RenderBlocks taxonomy. The popup
         /// labels count==1 plans with the unnumbered solo line (ui.json
-        /// actionSoloFormat) and count>=2 plans with "Aktion {n}" plus the
-        /// tree-lead line (ui.json doctrineTreeLead); the strings themselves
+        /// actionSoloFormat) and count>=2 plans with "Aktion {n}"; the
+        /// former tree-lead line (doctrineTreeLead) was REMOVED in M13c
+        /// (Thomas 30.10) - the basic attack rule now rides in the merged
+        /// info block. The strings themselves
         /// stay in ui.json (localization convention), only this decision is
         /// Core-pure and pinned by the harness action_tree.json fixture +
         /// the live ActionTreeGate distribution check on the shipped asset.

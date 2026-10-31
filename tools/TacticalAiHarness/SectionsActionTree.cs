@@ -1,6 +1,8 @@
 // M13a activation-popup labelling section: the pure decision behind the
 // unnumbered solo line ("Anweisung: {0}") vs. the numbered Wenn-Dann tree
-// ("Aktion {n} - {1}" + doctrineTreeLead header). OrderDeck.CountActionBlocks
+// ("Aktion {n} - {1}"). The doctrineTreeLead header it mentions was REMOVED
+// in M13c (30.10); the COUNTING decision pinned here is unchanged.
+// OrderDeck.CountActionBlocks
 // is presentation-only (planning behaviour untouched, Canon vectors unmoved)
 // and has no sim counterpart, so the expect blocks are hand-pinned ground
 // truth - the same documented route as logger_extract.json, not --record.

@@ -34,6 +34,11 @@ namespace TacticalAI
         // M13h (Thomas 28.10): default is 'none' - explanations must be asked
         // for, not served unprompted. Post-hoc/full stay selectable per row.
         public const string DefaultExplainLevel = "none";
+        // M13c (Thomas 30.10): the general RR info block (attack/door/basic-
+        // attack rule) under the action blocks gets its own switch, like the
+        // explanation. DEFAULT ON: Thomas explicitly wants it visible by
+        // default; OFF renders the activation without the info block.
+        public const bool DefaultInfoText = true;
 
         static bool _enabled = DefaultEnabled;
         // Dev 20 (option A, Thomas): the procedural mode is DERIVED from the
@@ -44,6 +49,7 @@ namespace TacticalAI
         static string _modeOverride;
         static string _skillLevel = DefaultSkillLevel;
         static string _explainLevel = DefaultExplainLevel;
+        static bool _infoText = DefaultInfoText;
 
         static Func<string, string> _saveHook;   // (jsonToStore) -> storedJson|null
 
@@ -99,6 +105,15 @@ namespace TacticalAI
             set { _explainLevel = Validate(value, ExplainLevelValues, DefaultExplainLevel); Save(); }
         }
 
+        /// <summary>M13c: show/hide the general RR info block (one merged
+        /// paragraph: basic attack rule + attack line + door law) under the
+        /// action blocks. TRUE by default; independent of ExplainLevel.</summary>
+        public static bool InfoText
+        {
+            get { return _infoText; }
+            set { _infoText = value; Save(); }
+        }
+
         /// <summary>Injected by the Unity side: the hook receives the
         /// serialized settings, stores them, and returns the previously
         /// stored JSON (or null when nothing was stored yet).</summary>
@@ -136,6 +151,7 @@ namespace TacticalAI
                 // warning, no effect on any state. The harness pins this
                 // route in settings_load.json.
                 _explainLevel = Validate(Core.Json.AsStr(Core.Json.Get(d, "explain", DefaultExplainLevel)), ExplainLevelValues, DefaultExplainLevel);
+                _infoText = Core.Json.AsBool(Core.Json.Get(d, "info", (object)DefaultInfoText));
             }
             catch (Exception)
             {
@@ -149,6 +165,7 @@ namespace TacticalAI
             _modeOverride = null;
             _skillLevel = DefaultSkillLevel;
             _explainLevel = DefaultExplainLevel;
+            _infoText = DefaultInfoText;
         }
 
         /// <summary>Per-mission override resolution (concept 4.2.7): the
@@ -218,7 +235,8 @@ namespace TacticalAI
             sb.Append("\"enabled\":").Append(_enabled ? "true" : "false").Append(',');
             Kv(sb, "mode", Mode); Kv(sb, "skill", _skillLevel);
             if (_modeOverride != null) Kv(sb, "modeOverride", _modeOverride);
-            sb.Append("\"explain\":\"").Append(_explainLevel).Append('"');
+            sb.Append("\"explain\":\"").Append(_explainLevel).Append("\",");
+            sb.Append("\"info\":").Append(_infoText ? "true" : "false");
             sb.Append('}');
             return sb.ToString();
         }

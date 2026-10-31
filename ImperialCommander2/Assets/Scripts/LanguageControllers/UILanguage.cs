@@ -26,9 +26,11 @@ public class UITacticalAI
 	public string actionFormat, doctrineHeader, docAggressive, docGuard, docBlocker, docHunter, docSupport, docAmbusher;
 	// M13a (playtest 28.10): popup labelling of the Wenn-Dann tree. A plan
 	// with exactly ONE action block gets the unnumbered solo line
-	// (actionSoloFormat, {0} = block text); plans with >=2 keep "Aktion {n}"
-	// and print doctrineTreeLead directly under the doctrine header.
-	public string actionSoloFormat, doctrineTreeLead;
+	// (actionSoloFormat, {0} = block text); plans with >=2 keep "Aktion {n}".
+	// M13c (Thomas 30.10): the "Diese Karte zeigt..." lead and the standalone
+	// "Grundregel:" lead (doctrineTreeLead) are REMOVED - the basic attack
+	// rule now rides inside the merged info block (ordInfoRule).
+	public string actionSoloFormat;
 	public string moveFocus, moveFocusNoTarget, moveGuard, moveBlocker, moveSupport, moveAmbusher;
 	public string attackFocus, attackNoTarget, attackGuard, attackGuardNoTarget, attackAmbush, attackAmbushNoTarget, attackSupport, attackSupportNoTarget;
 	public string attack2Move, attack2MoveNoTarget, attack2MoveGuard, attack2MoveAmbush, attack2MoveBlocker;
@@ -39,10 +41,14 @@ public class UITacticalAI
 	public string moveGuardTripod, attackGuardTripod, attackGuardTripodNoTarget, attack2MoveGuardTripod;
 	public string attackSecondIntro, attackSecondTail;
 	public string overlordFallback;
-	public string specialAsPrinted, restLine, interactLine, shuffleNote;
-	public string focusPrefix, focusWounded, focusFirepower, focusNoChance;
-	// M6 overlord explain parts (public threat economy + aim marks + risk)
-	public string ordThreat, ordMarked, ordRoundFocus;
+	// M13c (Thomas 30.10): shuffleNote DELETED ("(afterwards: shuffle this
+	// group's deck)" does not exist in this app's flow - honest removal).
+	public string specialAsPrinted, restLine, interactLine;
+	public string focusPrefix, focusWounded, focusFirepower;
+	// M6 overlord explain parts (public threat economy + aim marks + risk).
+	// M13c (Thomas 30.10): ordRoundFocus + focusNoChance REMOVED from the
+	// focus-target WHY line (the "all groups converge...; no chance" tail).
+	public string ordThreat, ordMarked;
 	// M11d: light strain-pressure note in the round-focus WHY line
 	public string ordStrainPressure;
 	// M11h: fuzzy strain-usage prior in the round-focus WHY line - args
@@ -55,10 +61,12 @@ public class UITacticalAI
 	// blocks, BEFORE the gated explanation: attack = weapon/ability use, and
 	// the door law (RR DOORS: opening a door is an INTERACT - one of the five
 	// action types - so it costs an action; locked doors only per mission).
-	public string ordInfoAttack, ordInfoDoor;
+	// M13n + M13c: the general RR info block under the action blocks - ONE
+	// merged paragraph: basic attack rule, attack line, door law.
+	public string ordInfoRule, ordInfoAttack, ordInfoDoor;
 	public string ordRiskLabel, ordRiskPress, ordRiskHold, ordRiskGuardHold, ordRiskDisengage;
 	public string whyPrefix, whyRank;
-	public string setHeading, setMode, setSkill, setExplain, setOn, setOff, setRowFormat;
+	public string setHeading, setMode, setSkill, setExplain, setInfo, setOn, setOff, setRowFormat;
 	// M13h (Thomas 28.10): the setCardSkills note field is REMOVED - the note
 	// line it fed is gone from the settings screen (stale 'S4' wording).
 

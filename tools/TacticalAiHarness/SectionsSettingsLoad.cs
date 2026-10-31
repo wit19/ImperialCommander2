@@ -42,6 +42,9 @@ namespace TacticalAiHarness
                     Check("settings[" + name + "].enabled", Json.AsBool(exp["enabled"]), TacticalAISettings.Enabled);
                     Check("settings[" + name + "].skill", Json.AsStr(exp["skill"]), TacticalAISettings.SkillLevel);
                     Check("settings[" + name + "].explain", Json.AsStr(exp["explain"]), TacticalAISettings.ExplainLevel);
+                    // M13c: the info-block switch (absent in old saves ->
+                    // true; explicit false must round-trip).
+                    Check("settings[" + name + "].info", Json.AsBool(exp["info"]), TacticalAISettings.InfoText);
                     Check("settings[" + name + "].mode", Json.AsStr(exp["mode"]), TacticalAISettings.Mode);
                     Check("settings[" + name + "].mode_override", Json.AsBool(exp["mode_override"]), TacticalAISettings.HasModeOverride);
                     Check("settings[" + name + "].to_json", Json.AsStr(exp["to_json"]), TacticalAISettings.ToJson());
