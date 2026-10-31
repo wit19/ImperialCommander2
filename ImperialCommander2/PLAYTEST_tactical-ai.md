@@ -266,6 +266,32 @@ trauen („Truppenausbildung", „Konzentrierter Beschuss"). (3) Boba Fett hat g
 Fähigkeiten (Kampfpräsenz + Kampfdisziplin), keine Doppelung.
 
 
+## 4d. dev 37 — RR-Deck-Gesetz: jede Aktivierung zeigt beide Aktionen
+
+Thomas-Entscheidung 31.10.2026: „Wir spielen nach Referenz Regeln!" Die
+Referenz-Regeln geben jeder imperialen Figur pro Aktivierung Angriff UND
+Bewegung. Die kalibrierten Mischdecks (2-3 reine Angriffskarten =
+„Feuerstellung") erzeugten in 25-38 % der Aktivierungen Popups mit nur einer
+Aktion — im Spielgefühl eine kaputte Figur (Offizier DG004 stand ohne
+Bewegungsanteil herum). Deshalb:
+
+- **Alle 89 Standardeinheiten + alle Bösewichte: 8× Bewegen+Angriff** — jede
+  Aktivierung zeigt immer „Aktion 1" und „Aktion 2" (Nummerierung bleibt
+  erhalten).
+- **Stativ bleibt besonders (E-Web DG007):** die gedruckte Stativ-Regel macht
+  Bewegen und Angreifen gegenseitig ausgeschlossen — dort sind reine
+  Angriffskarten (3 von 8) die gedruckte Regel, der Overlord hält Stellung
+  oder rückt, wie's die Karte hergibt (M13t-Durchsetzung unverändert).
+- **Nichts Erfundenes, nichts Verlorenes:** Kartenwerte sind unverändert,
+  nur die Deck-Zusammensetzung ist jetzt die Referenzmischung (EV-Ratio 1.0
+  per Definition). Gedruckte Sonderfähigkeiten der Bösewichte bleiben als
+  dritter Block der Karte erreichbar (M11e-Renderer); die
+  Herkunftstexte der Deckkarten in order_decks.json dokumentieren die
+  Umstellung (`why`-Feld).
+- **Im Spiel prüfen:** Offizier/Sturmtruppler zeigen in JEDER
+  Aktivierung beide Aktionen; E-Web zeigt weiterhin gelegentlich nur eine
+  (Stativ-Regel, Text erklärt es).
+
 ## 5. Bekannte Grenzen (bewusst so entschieden)
 
 - Die KI sieht keine Sichtlinien — Angriffe „durch Wände" verhindert sie über

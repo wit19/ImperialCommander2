@@ -1,13 +1,16 @@
 // M13a live gate: the label classification (unnumbered "Anweisung:" solo vs.
 // numbered "Aktion {n}" + tree-lead header) must follow the ACTION count on
-// EVERY card of the SHIPPED order_decks.json - zero fixtures. The 28.10.
-// playtest finding (Stormtrooper popup showed only "Aktion 1" and players
-// waited for a missing "Aktion 2") is grounded here: the deck mix {'A':2,
-// 'MA':6} of DG001 prints single-action ['attack'] cards BY DESIGN (Feuer-
-// stellung), so the fix is presentation, never a planning change. Checks:
-// total card count, the solo/numbered distribution, that every dealt card is
-// labelable (1 or 2 actions - never 0, never >2 = Profil-A budget), and the
-// DG001 playtest shape 2 solo + 6 numbered.
+// EVERY card of the SHIPPED order_decks.json - zero fixtures. M10 update
+// (Thomas 31.10.2026, "Wir spielen nach Referenz Regeln!"): the RR deck law
+// makes every deck the uniform 8x[move,attack] reference deck - every normal
+// activation shows BOTH actions. The only legal single-action cards left are
+// the three pure-attack cards of DG007 (E-Web Engineer): its printed Stativ/
+// Tripod rule makes movement and attack mutually exclusive, so a one-action
+// activation is the printed rule there (exemption per Thomas' ruling).
+// Checks: total card count, the solo/numbered distribution, that every dealt
+// card is labelable (1 or 2 actions - never 0, never >2 = Profil-A budget),
+// zero solos outside the Stativ exemption, and the DG007 exemption shape 3
+// solo + 5 numbered.
 using System;
 using System.Collections.Generic;
 using TacticalAI.Core;
@@ -45,13 +48,15 @@ public static class ActionTreeGate
                 else other++;
             }
         Eq(712, total, "order_cards_total");
-        Eq(132, solo, "solo_labelled_cards");
-        Eq(580, numbered, "numbered_labelled_cards");
+        Eq(3, solo, "solo_labelled_cards");
+        Eq(709, numbered, "numbered_labelled_cards");
         Eq(0, other, "every_card_labelable_solo_or_tree");
 
-        // Playtest 28.10 (Thomas, screenshots 1+2): Stormtrooper DG001 carries
-        // mix {'A':2,'MA':6} - the ['attack'] cards DG001-7/8 are the popup
-        // that showed a lone "Aktion 1"; the move+attack cards stay numbered.
+        // RR deck law (Thomas 31.10.2026): Stormtrooper DG001 - the deck of
+        // the 28.10 playtest finding - now shows BOTH actions on every card;
+        // zero single-action cards. The Stativ exemption: DG007 (E-Web
+        // Engineer, printed Tripod rule) keeps 3 pure-attack + 5 move+attack
+        // cards - one action per activation IS its printed rule.
         int s1 = 0, m1 = 0;
         foreach (var raw in Json.AsList(Json.AsDict(decks["DG001"])["cards"]))
         {
@@ -59,8 +64,17 @@ public static class ActionTreeGate
             int a = OrderDeck.CountActionBlocks(blocks);
             if (a == 1) s1++; else m1++;
         }
-        Eq(2, s1, "DG001_stormtrooper_solo_cards");
-        Eq(6, m1, "DG001_stormtrooper_numbered_cards");
+        Eq(0, s1, "DG001_stormtrooper_solo_cards_RR_law");
+        Eq(8, m1, "DG001_stormtrooper_numbered_cards_RR_law");
+        int s7 = 0, m7 = 0;
+        foreach (var raw in Json.AsList(Json.AsDict(decks["DG007"])["cards"]))
+        {
+            var blocks = OrderDeck.StrArr(Json.AsList(Json.AsDict(raw)["blocks"]));
+            int a = OrderDeck.CountActionBlocks(blocks);
+            if (a == 1) s7++; else m7++;
+        }
+        Eq(3, s7, "DG007_eweb_stativ_solo_cards_printed_rule");
+        Eq(5, m7, "DG007_eweb_stativ_numbered_cards");
 
         Console.WriteLine(fails == 0 ? "ActionTreeGate: ALL PASS"
                                      : "ActionTreeGate: " + fails + " FAILURES");

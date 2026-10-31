@@ -737,12 +737,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG001-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG001-8"
@@ -750,9 +752,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -808,12 +810,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG002-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG002-8"
@@ -821,9 +825,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -954,12 +958,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG004-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG004-8"
@@ -967,9 +973,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1032,6 +1038,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG005-8"
@@ -1039,9 +1046,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1317,12 +1324,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG009-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG009-8"
@@ -1330,9 +1339,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1388,6 +1397,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -1395,6 +1405,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG010-8"
@@ -1402,9 +1413,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1460,6 +1471,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -1467,6 +1479,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG011-8"
@@ -1474,9 +1487,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1532,12 +1545,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG012-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG012-8"
@@ -1545,9 +1560,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1671,6 +1686,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -1678,12 +1694,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG014-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG014-8"
@@ -1691,9 +1709,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 3,
+     "A": 0,
      "M": 0,
-     "MA": 5,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -1757,6 +1775,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG015-8"
@@ -1764,9 +1783,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2045,12 +2064,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG019-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG019-8"
@@ -2058,9 +2079,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2198,6 +2219,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG021-8"
@@ -2205,9 +2227,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2271,6 +2293,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG022-8"
@@ -2278,9 +2301,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2336,12 +2359,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG023-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -2350,9 +2375,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2484,12 +2509,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG025-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG025-8"
@@ -2497,9 +2524,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2563,6 +2590,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG026-8"
@@ -2570,9 +2598,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2702,6 +2730,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -2709,6 +2738,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG028-8"
@@ -2716,9 +2746,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2775,12 +2805,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG029-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG029-8"
@@ -2788,9 +2820,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2847,12 +2879,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG030-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG030-8"
@@ -2860,9 +2894,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -2918,12 +2952,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG031-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG031-8"
@@ -2931,9 +2967,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3071,6 +3107,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG033-8"
@@ -3078,9 +3115,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3136,12 +3173,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG034-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG034-8"
@@ -3149,9 +3188,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3282,12 +3321,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG036-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG036-8"
@@ -3295,9 +3336,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3353,12 +3394,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG037-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG037-8"
@@ -3366,9 +3409,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3499,12 +3542,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG039-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG039-8"
@@ -3512,9 +3557,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3569,12 +3614,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG040-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -3583,9 +3630,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3640,6 +3687,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -3647,6 +3695,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -3655,9 +3704,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3714,12 +3763,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG042-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG042-8"
@@ -3727,9 +3778,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3784,12 +3835,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG043-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -3798,9 +3851,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3925,18 +3978,21 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG045-6"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG045-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG045-8"
@@ -3944,9 +4000,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 3,
+     "A": 0,
      "M": 0,
-     "MA": 5,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -3996,12 +4052,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG046-6"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -4009,6 +4067,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG046-8"
@@ -4016,9 +4075,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 3,
+     "A": 0,
      "M": 0,
-     "MA": 5,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4082,6 +4141,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG047-8"
@@ -4089,9 +4149,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4154,6 +4214,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG048-8"
@@ -4161,9 +4222,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4227,6 +4288,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG049-8"
@@ -4234,9 +4296,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4293,12 +4355,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG050-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG050-8"
@@ -4306,9 +4370,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4363,12 +4427,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG051-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -4377,9 +4443,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4509,12 +4575,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG053-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -4523,9 +4591,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4581,12 +4649,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG054-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG054-8"
@@ -4594,9 +4664,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4726,6 +4796,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -4733,6 +4804,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG056-8"
@@ -4740,9 +4812,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -4805,6 +4877,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG057-8"
@@ -4812,9 +4885,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5027,6 +5100,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG060-8"
@@ -5034,9 +5108,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5249,6 +5323,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG063-8"
@@ -5256,9 +5331,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5390,12 +5465,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG065-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG065-8"
@@ -5403,9 +5480,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5462,12 +5539,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG066-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG066-8"
@@ -5475,9 +5554,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5608,12 +5687,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG068-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG068-8"
@@ -5621,9 +5702,9 @@
     ],
     "is_elite": false,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5755,12 +5836,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG071-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG071-8"
@@ -5768,9 +5851,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5819,6 +5902,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -5827,23 +5911,25 @@
      {
       "blocks": [
        "move",
+       "attack",
        "shuffle"
       ],
       "id": "DG072-7"
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG072-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 5,
-     "R": 1,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -5892,6 +5978,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG073-6"
@@ -5899,22 +5986,24 @@
      {
       "blocks": [
        "move",
+       "attack",
        "shuffle"
       ],
       "id": "DG073-7"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG073-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 2,
-     "MA": 5,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -5979,6 +6068,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG074-8"
@@ -5986,9 +6076,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 7,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6046,22 +6136,24 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG075-7"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG075-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 6,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6119,22 +6211,24 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG076-7"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG076-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 6,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6192,12 +6286,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG077-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG077-8"
@@ -6205,9 +6301,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6263,6 +6359,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6270,6 +6367,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6278,9 +6376,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6330,19 +6428,22 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG079-6"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG079-7"
      },
      {
       "blocks": [
-       "rest",
+       "move",
+       "attack",
        "shuffle"
       ],
       "id": "DG079-8"
@@ -6350,10 +6451,10 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 5,
-     "R": 1,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6409,6 +6510,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6416,17 +6518,18 @@
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG080-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 6,
-     "R": 1,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6482,6 +6585,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6489,17 +6593,18 @@
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG081-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
+     "A": 0,
      "M": 0,
-     "MA": 6,
-     "R": 1,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6549,28 +6654,31 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG082-6"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG082-7"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG082-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
-     "M": 1,
-     "MA": 5,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6620,19 +6728,22 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG083-6"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG083-7"
      },
      {
       "blocks": [
-       "rest",
+       "move",
+       "attack",
        "shuffle"
       ],
       "id": "DG083-8"
@@ -6640,10 +6751,10 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 5,
-     "R": 1,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6700,12 +6811,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG084-7"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG084-8"
@@ -6713,9 +6826,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6765,12 +6878,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG085-6"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6778,16 +6893,17 @@
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG085-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
-     "M": 1,
-     "MA": 5,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -6837,6 +6953,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -6844,23 +6961,25 @@
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG086-7"
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG086-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 5,
-     "R": 1,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6910,29 +7029,32 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG087-6"
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG087-7"
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG087-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 5,
-     "R": 1,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
@@ -6988,12 +7110,14 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG088-7"
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -7002,9 +7126,9 @@
     ],
     "is_elite": true,
     "mix": {
-     "A": 2,
+     "A": 0,
      "M": 0,
-     "MA": 6,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -7061,6 +7185,7 @@
      },
      {
       "blocks": [
+       "move",
        "attack",
        "shuffle"
       ],
@@ -7068,16 +7193,17 @@
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG089-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 6,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
      "R": 0,
      "S": 0
     },
@@ -7128,29 +7254,32 @@
      },
      {
       "blocks": [
+       "move",
        "attack"
       ],
       "id": "DG090-6"
      },
      {
       "blocks": [
-       "move"
+       "move",
+       "attack"
       ],
       "id": "DG090-7"
      },
      {
       "blocks": [
-       "rest"
+       "move",
+       "attack"
       ],
       "id": "DG090-8"
      }
     ],
     "is_elite": true,
     "mix": {
-     "A": 1,
-     "M": 1,
-     "MA": 5,
-     "R": 1,
+     "A": 0,
+     "M": 0,
+     "MA": 8,
+     "R": 0,
      "S": 0
     },
     "shuffle_slots": [
