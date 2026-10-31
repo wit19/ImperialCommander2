@@ -257,8 +257,7 @@ namespace Saga
 
 		GameObject root, contentRoot;
 		int helpSeen = -1;   // M13z: # active 'Help Activation Button's the anchor scan saw (-1 = never measured) - logged once, proves the "?" was found from any resolution
-		bool geometryLogged;
-		string lastGeoLine;   // M13z: re-log the breadcrumb whenever it changes
+		string lastGeoLine;   // M13z: re-log the breadcrumb whenever it changes (M11-qa: the old geometryLogged once-flag was dead - CS0414 - removed; the lastGeoLine change-gate is the real logic)
 		bool hiddenLogged;
 		bool buildAllowed;    // M13v: Update retries BuildPanel ONLY if Start's
 		                      // feature gates actually passed (a disabled
@@ -458,7 +457,6 @@ namespace Saga
 				if ( geoLine != lastGeoLine )
 				{
 					lastGeoLine = geoLine;
-					geometryLogged = true;
 					Debug.Log( geoLine );
 				}
 
