@@ -283,7 +283,7 @@
   "uiTacticalAI": {
     "actionFormat": "Action {0} – {1}",
     "actionSoloFormat": "Action: {0}",
-    "doctrineHeader": "Doctrine: {0} — this rulebook governs your activation",
+    "doctrineHeader": "Doctrine: {0}",
     "docAggressive": "Advance (close into combat)",
     "docGuard": "Guard (hold the zone, never be lured out)",
     "docBlocker": "Blocker (hold the chokepoint)",

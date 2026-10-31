@@ -283,7 +283,7 @@
   "uiTacticalAI": {
     "actionFormat": "Aktion {0} – {1}",
     "actionSoloFormat": "Aktion: {0}",
-    "doctrineHeader": "Doktrin: {0} — nach dieser Vorschrift spielst du diese Aktivierung",
+    "doctrineHeader": "Doktrin: {0}",
     "docAggressive": "Vorstoß (zum Kampf vorrücken)",
     "docGuard": "Wachschutz (Zone halten, nie herauslocken)",
     "docBlocker": "Blockierer (Engstelle halten)",
